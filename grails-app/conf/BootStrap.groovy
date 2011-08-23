@@ -1,11 +1,32 @@
 import net.lmxm.carm.domains.Module
 import net.lmxm.carm.domains.ModuleType
 import net.lmxm.carm.domains.Project
+import net.lmxm.carm.domains.Role
 import net.lmxm.carm.domains.SourceControlServer
+import net.lmxm.carm.domains.User
+import net.lmxm.carm.domains.UserRole
 import net.lmxm.carm.enums.SourceControlServerType
 
 class BootStrap {
     def init = { servletContext ->
+        // 
+        // Configure Security
+        //
+        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+
+        def testUser = new User(username: 'me', enabled: true, password: 'password')
+        testUser.save(flush: true)
+
+        UserRole.create testUser, adminRole, true
+
+        assert User.count() == 1
+        assert Role.count() == 2
+        assert UserRole.count() == 1
+        
+        //
+        // Configure Domains
+        //
         def subversion = new SourceControlServer(name: "Subversion", type: SourceControlServerType.Subversion, 
             description: "Subversion server", url: "http://suafe.googlecode.com/svn/").save()
         
