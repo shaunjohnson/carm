@@ -1,6 +1,7 @@
 import net.lmxm.carm.domains.ModuleType
 import net.lmxm.carm.domains.Project
 import net.lmxm.carm.domains.SourceControlServer
+import net.lmxm.carm.enums.SourceControlServerType
 
 class BootStrap {
     def init = { servletContext ->
