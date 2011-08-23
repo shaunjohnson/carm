@@ -62,7 +62,7 @@ class ModuleTypeTests extends GrailsUnitTestCase {
         mockForConstraintsTests(ModuleType, [testModuleType])
 
         assertFalse 'Should not be valid', testModuleType.validate()
-        assertEquals 'Name is blank', 'nullable', testModuleType.errors['name']
+        assertEquals 'Name is null', 'nullable', testModuleType.errors['name']
     }
 
     void testNameUnique() {

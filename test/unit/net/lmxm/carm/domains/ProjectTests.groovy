@@ -62,7 +62,7 @@ class ProjectTests extends GrailsUnitTestCase {
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
-        assertEquals 'Name is blank', 'nullable', testProject.errors['name']
+        assertEquals 'Name is null', 'nullable', testProject.errors['name']
     }
 
     void testNameUnique() {

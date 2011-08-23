@@ -63,7 +63,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
-        assertEquals 'Name is blank', 'nullable', testServer.errors['name']
+        assertEquals 'Name is null', 'nullable', testServer.errors['name']
     }
 
     void testNameUnique() {
