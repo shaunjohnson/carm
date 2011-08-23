@@ -75,4 +75,9 @@ class ProjectTests extends GrailsUnitTestCase {
         project = new Project(name: 'Project2')
         assertTrue 'Should be valid', project.validate()
     }
+
+    void testToString() {
+        assertNotNull project.toString()
+        assertTrue project.toString() ==~ /.*Project.*/
+    }
 }
