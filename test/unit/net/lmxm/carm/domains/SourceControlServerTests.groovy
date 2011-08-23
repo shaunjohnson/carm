@@ -11,7 +11,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
 
         mockForConstraintsTests(SourceControlServer)
 
-        server = new SourceControlServer(name: 'Subversion', description: 'Subversion server', type: SourceControlServerType.Subversion)
+        server = new SourceControlServer(name: 'Subversion', type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [server])
     }
 
@@ -35,7 +35,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testNameBlank() {
-        def testServer = new SourceControlServer(name: '', description: 'Subversion server', type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: '', type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -43,7 +43,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testNameMinSize() {
-        def testServer = new SourceControlServer(name: 'a', description: 'Subversion server', type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: 'a', type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -51,7 +51,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testNameMaxSize() {
-        def testServer = new SourceControlServer(name: 'a' * 51, description: 'Subversion server', type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: 'a' * 51, type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -59,7 +59,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testNameNullable() {
-        def testServer = new SourceControlServer(name: null, description: 'Subversion server', type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: null, type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -67,26 +67,43 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testNameUnique() {
-        def testServer = new SourceControlServer(name: 'Subversion', description: 'Subversion server', type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: 'Subversion', type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', server.validate()
         assertEquals 'Name is not unique.', 'unique', server.errors['name']
 
-        server = new SourceControlServer(name: 'Subversion2', description: 'Subversion server', type: SourceControlServerType.Subversion)
+        server = new SourceControlServer(name: 'Subversion2', type: SourceControlServerType.Subversion)
         assertTrue 'Should be valid', server.validate()
     }
 
+    void testToString() {
+        assertNotNull server.toString()
+        assertTrue server.toString() ==~ /.*Subversion.*/
+    }
+
     void testTypeNullable() {
-        def testServer = new SourceControlServer(name: "Test", description: 'Subversion server', type: null)
+        def testServer = new SourceControlServer(name: "Test", type: null)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
         assertEquals 'Type is blank', 'nullable', testServer.errors['type']
     }
 
-    void testToString() {
-        assertNotNull server.toString()
-        assertTrue server.toString() ==~ /.*Subversion.*/
+    void testUrlNullable() {
+        def testServer = new SourceControlServer(name: "Test", type: SourceControlServerType.Subversion, url: null)
+        mockForConstraintsTests(SourceControlServer, [testServer])
+
+        assertTrue 'Should be valid', testServer.validate()
+        
+        testServer.url = "test"
+        assertFalse 'Should not be valid', testServer.validate()
+        assertEquals 'Name is blank', 'url', testServer.errors['url']
+                
+        testServer.url = "https://bitbucket.org/lmxm/carm"
+        assertTrue 'Should be valid', testServer.validate()
+        
+        testServer.url = "ssh://bitbucket.org/lmxm/carm"
+        assertTrue 'Should be valid', testServer.validate()
     }
 }
