@@ -8,6 +8,8 @@ class Project {
         name(minSize: 2, maxSize: 50, blank: false, unique: true)
         description(maxSize: 4000, nullable: true)
     }
+    
+    static hasMany = [modules:Module]
 
     public String toString() {
         return "Project [name='$name']";
