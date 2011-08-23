@@ -20,7 +20,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testDescriptionMaxSize() {
-        def testServer = new SourceControlServer(name: 'Name', description: "a" * 4001, type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: 'Test Server', description: "a" * 4001, type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -28,7 +28,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testDescriptionNullable() {
-        def testServer = new SourceControlServer(name: 'Name', description: null, type: SourceControlServerType.Subversion)
+        def testServer = new SourceControlServer(name: 'Test Server', description: null, type: SourceControlServerType.Subversion)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertTrue 'Should be valid', testServer.validate()
@@ -83,7 +83,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testTypeNullable() {
-        def testServer = new SourceControlServer(name: "Test", type: null)
+        def testServer = new SourceControlServer(name: "Test Server", type: null)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertFalse 'Should not be valid', testServer.validate()
@@ -91,7 +91,7 @@ class SourceControlServerTests extends GrailsUnitTestCase {
     }
 
     void testUrlNullable() {
-        def testServer = new SourceControlServer(name: "Test", type: SourceControlServerType.Subversion, url: null)
+        def testServer = new SourceControlServer(name: "Test Server", type: SourceControlServerType.Subversion, url: null)
         mockForConstraintsTests(SourceControlServer, [testServer])
 
         assertTrue 'Should be valid', testServer.validate()
