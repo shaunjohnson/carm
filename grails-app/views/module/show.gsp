@@ -57,6 +57,13 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="module.sourceControlServer.label" default="Source Control Server" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${moduleInstance?.sourceControlServer?.id}">${moduleInstance?.sourceControlServer?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
                     </tbody>
                 </table>
             </div>

@@ -64,6 +64,15 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="sourceControlServer"><g:message code="module.sourceControlServer.label" default="Source Control Server" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'sourceControlServer', 'errors')}">
+                                    <g:select name="sourceControlServer.id" from="${net.lmxm.carm.domains.SourceControlServer.list()}" optionKey="id" value="${moduleInstance?.sourceControlServer?.id}" noSelection="['null': '']" />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

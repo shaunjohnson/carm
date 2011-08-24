@@ -32,6 +32,8 @@
                         
                             <th><g:message code="module.project.label" default="Project" /></th>
                         
+                            <th><g:message code="module.sourceControlServer.label" default="Source Control Server" /></th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,8 @@
                             <td>${fieldValue(bean: moduleInstance, field: "type")}</td>
                         
                             <td>${fieldValue(bean: moduleInstance, field: "project")}</td>
+                        
+                            <td>${fieldValue(bean: moduleInstance, field: "sourceControlServer")}</td>
                         
                         </tr>
                     </g:each>

@@ -1,15 +1,18 @@
 package net.lmxm.carm.domains
 
 import grails.test.*
+import net.lmxm.carm.enums.SourceControlServerType
 
 class ModuleTests extends GrailsUnitTestCase {    
     def moduleType
     def project
+    def sourceControlServer
     
     protected void setUp() {
         super.setUp()
         
         moduleType = new ModuleType(name: "JSF Portlet", description: "JSF Portlet Application")
+        sourceControlServer = new SourceControlServer(name: 'Subversion', type: SourceControlServerType.Subversion)
         project = new Project(name: "Portal Project", description: "Generic Portal Project")
     }
 
@@ -78,6 +81,16 @@ class ModuleTests extends GrailsUnitTestCase {
 
         assertFalse 'Should not be valid', testModule.validate()
         assertEquals 'Type is null', 'nullable', testModule.errors['type']
+    }
+    
+    void testSourceControlNullable() {        
+        def testModule = new Module(name: "Test Module", type: moduleType, project: project)
+        mockForConstraintsTests(Module, [testModule])
+
+        assertTrue 'Should be valid', testModule.validate()
+        
+        testModule.sourceControlServer = sourceControlServer
+        assertTrue 'Should be valid', testModule.validate()
     }
 
     void testToString() {
