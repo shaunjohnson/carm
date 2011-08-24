@@ -12,6 +12,6 @@ class Project {
     static hasMany = [modules:Module]
 
     public String toString() {
-        return "Project [name='$name']";
+        return name
     }
 }

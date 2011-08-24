@@ -16,6 +16,6 @@ class SourceControlServer {
     }
 
     public String toString() {
-        return "SourceControlServer [name='$name', type='$type']";
+        return name
     }
 }

@@ -10,6 +10,6 @@ class ModuleType {
     }
 
     public String toString() {
-        return "ModuleType [name='$name']";
+        return name
     }
 }

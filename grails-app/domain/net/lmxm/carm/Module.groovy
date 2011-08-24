@@ -18,6 +18,6 @@ class Module {
     }
 
     public String toString() {
-        return "Module [name='$name', type='${type?.name}', project='${project?.name}']";
+        return name
     }
 }
