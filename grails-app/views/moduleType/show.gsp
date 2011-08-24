@@ -1,5 +1,5 @@
 
-<%@ page import="net.lmxm.carm.domains.ModuleType" %>
+<%@ page import="net.lmxm.carm.ModuleType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
