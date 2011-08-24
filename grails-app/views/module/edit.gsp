@@ -1,6 +1,6 @@
 
 
-<%@ page import="net.lmxm.carm.domains.Module" %>
+<%@ page import="net.lmxm.carm.Module" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -54,7 +54,7 @@
                                   <label for="type"><g:message code="module.type.label" default="Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
-                                    <g:select name="type.id" from="${net.lmxm.carm.domains.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"  />
+                                    <g:select name="type.id" from="${net.lmxm.carm.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"  />
                                 </td>
                             </tr>
                         
@@ -63,7 +63,7 @@
                                   <label for="project"><g:message code="module.project.label" default="Project" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'project', 'errors')}">
-                                    <g:select name="project.id" from="${net.lmxm.carm.domains.Project.list()}" optionKey="id" value="${moduleInstance?.project?.id}"  />
+                                    <g:select name="project.id" from="${net.lmxm.carm.Project.list()}" optionKey="id" value="${moduleInstance?.project?.id}"  />
                                 </td>
                             </tr>
                         
@@ -72,7 +72,16 @@
                                   <label for="sourceControlServer"><g:message code="module.sourceControlServer.label" default="Source Control Server" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'sourceControlServer', 'errors')}">
-                                    <g:select name="sourceControlServer.id" from="${net.lmxm.carm.domains.SourceControlServer.list()}" optionKey="id" value="${moduleInstance?.sourceControlServer?.id}" noSelection="['null': '']" />
+                                    <g:select name="sourceControlServer.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${moduleInstance?.sourceControlServer?.id}" noSelection="['null': '']" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="sourceControlPath"><g:message code="module.sourceControlPath.label" default="Source Control Path" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'sourceControlPath', 'errors')}">
+                                    <g:textField name="sourceControlPath" value="${moduleInstance?.sourceControlPath}" />
                                 </td>
                             </tr>
                         

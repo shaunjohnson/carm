@@ -6,6 +6,7 @@ class Module {
     ModuleType type
     Project project
     SourceControlServer sourceControlServer
+    String sourceControlPath
 
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false)
@@ -13,6 +14,7 @@ class Module {
         type(nullable: false)
         project(nullable: false)
         sourceControlServer(nullable: true)
+        sourceControlPath(maxSize: 200, nullable: true)
     }
 
     public String toString() {

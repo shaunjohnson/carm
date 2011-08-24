@@ -1,5 +1,5 @@
 
-<%@ page import="net.lmxm.carm.domains.Module" %>
+<%@ page import="net.lmxm.carm.Module" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -61,6 +61,13 @@
                             <td valign="top" class="name"><g:message code="module.sourceControlServer.label" default="Source Control Server" /></td>
                             
                             <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${moduleInstance?.sourceControlServer?.id}">${moduleInstance?.sourceControlServer?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="module.sourceControlPath.label" default="Source Control Path" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "sourceControlPath")}</td>
                             
                         </tr>
                     
