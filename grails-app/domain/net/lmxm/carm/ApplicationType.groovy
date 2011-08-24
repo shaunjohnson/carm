@@ -1,6 +1,6 @@
 package net.lmxm.carm
 
-class ModuleType {
+class ApplicationType {
     String name
     String description
     

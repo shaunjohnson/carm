@@ -1,10 +1,10 @@
 
-<%@ page import="net.lmxm.carm.ModuleType" %>
+<%@ page import="net.lmxm.carm.ApplicationType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'ModuleType')}" />
+        <g:set var="entityName" value="${message(code: 'applicationType.label', default: 'ApplicationType')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -23,23 +23,37 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="moduleType.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="applicationType.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: moduleTypeInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="moduleType.name.label" default="Name" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: moduleTypeInstance, field: "name")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: applicationTypeInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="moduleType.description.label" default="Description" /></td>
+                            <td valign="top" class="name"><g:message code="applicationType.name.label" default="Name" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: moduleTypeInstance, field: "description")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: applicationTypeInstance, field: "name")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="applicationType.description.label" default="Description" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationTypeInstance, field: "description")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="applicationType.dateCreated.label" default="Date Created" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${applicationTypeInstance?.dateCreated}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="applicationType.lastUpdated.label" default="Last Updated" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${applicationTypeInstance?.lastUpdated}" /></td>
                             
                         </tr>
                     
@@ -48,7 +62,7 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${moduleTypeInstance?.id}" />
+                    <g:hiddenField name="id" value="${applicationTypeInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
