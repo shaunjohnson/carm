@@ -7,6 +7,8 @@ class Module {
     Project project
     SourceControlServer sourceControlServer
     String sourceControlPath
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false)

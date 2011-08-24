@@ -7,6 +7,8 @@ class SourceControlServer {
     String description
     SourceControlServerType type
     String url
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false, unique: true)
