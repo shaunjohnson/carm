@@ -95,6 +95,17 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'net.lmxm.carm
 grails.plugins.springsecurity.authority.className = 'net.lmxm.carm.domains.Role'
 grails.plugins.springsecurity.rejectIfNoRule = true
 
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+    '/':                              ['permitAll'],
+    '/index.gsp':                     ['permitAll'],
+    '/js/**':                         ['permitAll'],
+    '/css/**':                        ['permitAll'],
+    '/images/**':                     ['permitAll'],
+    '/login/**':                      ['permitAll'],
+    '/j_spring_security_switch_user': ['ROLE_SUPERVISOR'],
+    '/**':                            ['ROLE_USER']
+]
+
 grails.plugins.springsecurity.secureChannel.definition = [
 //   '/login/**':         'REQUIRES_SECURE_CHANNEL'
 ]
