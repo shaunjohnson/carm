@@ -90,9 +90,9 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'net.lmxm.carm.domains.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'net.lmxm.carm.domains.UserRole'
-grails.plugins.springsecurity.authority.className = 'net.lmxm.carm.domains.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'net.lmxm.carm.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'net.lmxm.carm.UserRole'
+grails.plugins.springsecurity.authority.className = 'net.lmxm.carm.Role'
 grails.plugins.springsecurity.rejectIfNoRule = true
 
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [

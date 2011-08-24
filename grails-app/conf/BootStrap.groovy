@@ -1,10 +1,10 @@
-import net.lmxm.carm.domains.Module
-import net.lmxm.carm.domains.ModuleType
-import net.lmxm.carm.domains.Project
-import net.lmxm.carm.domains.Role
-import net.lmxm.carm.domains.SourceControlServer
-import net.lmxm.carm.domains.User
-import net.lmxm.carm.domains.UserRole
+import net.lmxm.carm.Module
+import net.lmxm.carm.ModuleType
+import net.lmxm.carm.Project
+import net.lmxm.carm.Role
+import net.lmxm.carm.SourceControlServer
+import net.lmxm.carm.User
+import net.lmxm.carm.UserRole
 import net.lmxm.carm.enums.SourceControlServerType
 
 class BootStrap {

@@ -1,4 +1,4 @@
-package net.lmxm.carm.domains
+package net.lmxm.carm
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
