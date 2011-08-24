@@ -7,6 +7,7 @@ class SourceControlServer {
     String description
     SourceControlServerType type
     String url
+    
     Date dateCreated
     Date lastUpdated
 

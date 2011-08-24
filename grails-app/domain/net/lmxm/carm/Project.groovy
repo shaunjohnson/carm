@@ -3,6 +3,7 @@ package net.lmxm.carm
 class Project {
     String name
     String description
+    
     Date dateCreated
     Date lastUpdated
 
@@ -11,7 +12,7 @@ class Project {
         description(maxSize: 4000, nullable: true)
     }
     
-    static hasMany = [modules:Module]
+    static hasMany = [applications: Application]
 
     public String toString() {
         return name

@@ -3,6 +3,7 @@ package net.lmxm.carm
 class ModuleType {
     String name
     String description
+    
     Date dateCreated
     Date lastUpdated
 

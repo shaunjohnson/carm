@@ -2,6 +2,7 @@ package net.lmxm.carm
 
 class Role {
     String authority
+    
     Date dateCreated
     Date lastUpdated
 
