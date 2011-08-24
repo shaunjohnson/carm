@@ -103,7 +103,9 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/images/**':                     ['permitAll'],
     '/login/**':                      ['permitAll'],
     '/j_spring_security_switch_user': ['ROLE_SUPERVISOR'],
-    '/**':                            ['ROLE_USER']
+    '/**':                            ['ROLE_USER'],
+    '/moduleType/**':                 ['ROLE_ADMIN'],
+    '/project/**':                    ['ROLE_ADMIN']
 ]
 
 grails.plugins.springsecurity.secureChannel.definition = [

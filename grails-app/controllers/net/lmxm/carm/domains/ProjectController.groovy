@@ -1,8 +1,5 @@
 package net.lmxm.carm.domains
 
-import grails.plugins.springsecurity.Secured
-
-@Secured(['ROLE_ADMIN'])
 class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
