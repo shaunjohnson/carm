@@ -1,5 +1,6 @@
+import net.lmxm.carm.Application
+import net.lmxm.carm.ApplicationType
 import net.lmxm.carm.Module
-import net.lmxm.carm.ModuleType
 import net.lmxm.carm.Project
 import net.lmxm.carm.Role
 import net.lmxm.carm.SourceControlServer
@@ -33,15 +34,15 @@ class BootStrap {
         def subversion = new SourceControlServer(name: "Subversion", type: SourceControlServerType.Subversion, 
             description: "Subversion server", url: "http://suafe.googlecode.com/svn/").save()
         
-        def coldFusionType = new ModuleType(name: "ColdFusion", description: "ColdFushion Web Application").save()
-        def ejbType = new ModuleType(name: "EJB", description: "Enterprise Java Bean Application").save()
-        def jsfPortletType = new ModuleType(name: "JSF Portlet", description: "JSF Portlet Application").save()
-        def jsfWebType = new ModuleType(name: "JSF Web App", description: "JSF Web Application").save()
-        def mdbType = new ModuleType(name: "MDB", description: "Message Driven Bean Application").save()
-        def standaloneType = new ModuleType(name: "Standalone JAR", description: "Standalone Java Application").save()
+        def coldFusionType = new ApplicationType(name: "ColdFusion", description: "ColdFushion Web Application").save()
+        def ejbType = new ApplicationType(name: "EJB", description: "Enterprise Java Bean Application").save()
+        def jsfPortletType = new ApplicationType(name: "JSF Portlet", description: "JSF Portlet Application").save()
+        def jsfWebType = new ApplicationType(name: "JSF Web App", description: "JSF Web Application").save()
+        def mdbType = new ApplicationType(name: "MDB", description: "Message Driven Bean Application").save()
+        def standaloneType = new ApplicationType(name: "Standalone JAR", description: "Standalone Java Application").save()
         
         def suafeProject = new Project(name: "Suafe", description: "Subversion User Authorization File Editor")       
-        suafeProject.addToModules(new Module(name: "Core", description: "Suafe Core", type: standaloneType))
+        suafeProject.addToApplications(new Application(name: "Core", description: "Suafe Core", type: standaloneType))
         suafeProject.save()
     }
 
