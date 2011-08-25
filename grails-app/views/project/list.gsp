@@ -27,6 +27,10 @@
 
                 <g:sortableColumn property="description" title="${message(code: 'project.description.label', default: 'Description')}"/>
 
+                <g:sortableColumn property="dateCreated" title="${message(code: 'project.dateCreated.label', default: 'Date Created')}"/>
+
+                <g:sortableColumn property="lastUpdated" title="${message(code: 'project.lastUpdated.label', default: 'Last Updated')}"/>
+
             </tr>
             </thead>
             <tbody>
@@ -38,6 +42,10 @@
                     <td>${fieldValue(bean: projectInstance, field: "name")}</td>
 
                     <td>${fieldValue(bean: projectInstance, field: "description")}</td>
+
+                    <td><g:formatDate date="${projectInstance.dateCreated}"/></td>
+
+                    <td><g:formatDate date="${projectInstance.lastUpdated}"/></td>
 
                 </tr>
             </g:each>

@@ -49,16 +49,16 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="modules"><g:message code="project.modules.label" default="Modules"/></label>
+                        <label for="applications"><g:message code="project.applications.label" default="Applications"/></label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'modules', 'errors')}">
+                    <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'applications', 'errors')}">
 
                         <ul>
-                            <g:each in="${projectInstance?.modules?}" var="m">
-                                <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                            <g:each in="${projectInstance?.applications?}" var="a">
+                                <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
-                        <g:link controller="module" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'module.label', default: 'Module')])}</g:link>
+                        <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'application.label', default: 'Application')])}</g:link>
 
                     </td>
                 </tr>

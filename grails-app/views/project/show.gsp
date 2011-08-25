@@ -43,15 +43,29 @@
             </tr>
 
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.modules.label" default="Modules"/></td>
+                <td valign="top" class="name"><g:message code="project.applications.label" default="Applications"/></td>
 
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${projectInstance.modules}" var="m">
-                            <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+                        <g:each in="${projectInstance.applications}" var="a">
+                            <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
                 </td>
+
+            </tr>
+
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>
+
+                <td valign="top" class="value"><g:formatDate date="${projectInstance?.dateCreated}"/></td>
+
+            </tr>
+
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
+
+                <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
 
             </tr>
 
