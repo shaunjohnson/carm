@@ -1,4 +1,4 @@
-package net.lmxm.carm
+package net.lmxm.carm.security
 
 class Role {
     String authority

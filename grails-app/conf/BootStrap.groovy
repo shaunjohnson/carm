@@ -2,11 +2,13 @@ import net.lmxm.carm.Application
 import net.lmxm.carm.ApplicationType
 import net.lmxm.carm.Module
 import net.lmxm.carm.Project
-import net.lmxm.carm.Role
+import net.lmxm.carm.security.Role
 import net.lmxm.carm.SourceControlServer
-import net.lmxm.carm.User
-import net.lmxm.carm.UserRole
+import net.lmxm.carm.security.User
+import net.lmxm.carm.security.UserRole
 import net.lmxm.carm.enums.SourceControlServerType
+import net.lmxm.carm.security.UserRole
+import net.lmxm.carm.security.User
 
 class BootStrap {
     def init = { servletContext ->

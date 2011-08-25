@@ -1,4 +1,4 @@
-package net.lmxm.carm
+package net.lmxm.carm.security
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
