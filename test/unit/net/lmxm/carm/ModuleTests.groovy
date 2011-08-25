@@ -1,19 +1,16 @@
 package net.lmxm.carm
 
 import grails.test.*
-import net.lmxm.carm.enums.SourceControlServerType
 
 class ModuleTests extends GrailsUnitTestCase {    
     def moduleType
-    def project
-    def sourceControlServer
+    def application
     
     protected void setUp() {
         super.setUp()
         
         moduleType = new ModuleType(name: "JSF Portlet", description: "JSF Portlet Application")
-        sourceControlServer = new SourceControlServer(name: 'Subversion', type: SourceControlServerType.Subversion)
-        project = new Project(name: "Portal Project", description: "Generic Portal Project")
+        application = new Application(name: "Portal Application", description: "Generic Portal Application")
     }
 
     protected void tearDown() {
@@ -21,7 +18,7 @@ class ModuleTests extends GrailsUnitTestCase {
     }
     
     void testDescriptionMaxSize() {
-        def testModule = new Module(name: 'Test Module', description: "a" * 4001, type: moduleType, project: project)
+        def testModule = new Module(name: 'Test Module', description: "a" * 4001, type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
@@ -29,14 +26,14 @@ class ModuleTests extends GrailsUnitTestCase {
     }
 
     void testDescriptionNullable() {
-        def testModule = new Module(name: 'Test Module', description: null, type: moduleType, project: project)
+        def testModule = new Module(name: 'Test Module', description: null, type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertTrue 'Should be valid', testModule.validate()
     }
 
     void testNameBlank() {
-        def testModule = new Module(name: '', type: moduleType, project: project)
+        def testModule = new Module(name: '', type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
@@ -44,7 +41,7 @@ class ModuleTests extends GrailsUnitTestCase {
     }
 
     void testNameMinSize() {
-        def testModule = new Module(name: 'a', type: moduleType, project: project)
+        def testModule = new Module(name: 'a', type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
@@ -52,7 +49,7 @@ class ModuleTests extends GrailsUnitTestCase {
     }
 
     void testNameMaxSize() {
-        def testModule = new Module(name: 'a' * 51, type: moduleType, project: project)
+        def testModule = new Module(name: 'a' * 51, type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
@@ -60,56 +57,29 @@ class ModuleTests extends GrailsUnitTestCase {
     }
 
     void testNameNullable() {
-        def testModule = new Module(name: null, type: moduleType, project: project)
+        def testModule = new Module(name: null, type: moduleType, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
         assertEquals 'Name is null', 'nullable', testModule.errors['name']
     }
 
-    void testProjectNullable() {
-        def testModule = new Module(name: "Test Module", type: moduleType, project: null)
+    void testApplicationNullable() {
+        def testModule = new Module(name: "Test Module", type: moduleType, application: null)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
-        assertEquals 'Project is null', 'nullable', testModule.errors['project']
+        assertEquals 'Application is null', 'nullable', testModule.errors['application']
     }
 
     void testTypeNullable() {
-        def testModule = new Module(name: "Test Module", type: null, project: project)
+        def testModule = new Module(name: "Test Module", type: null, application: application)
         mockForConstraintsTests(Module, [testModule])
 
         assertFalse 'Should not be valid', testModule.validate()
         assertEquals 'Type is null', 'nullable', testModule.errors['type']
     }
     
-    void testSourceControlNullable() {        
-        def testModule = new Module(name: "Test Module", type: moduleType, project: project)
-        mockForConstraintsTests(Module, [testModule])
-
-        assertTrue 'Should be valid', testModule.validate()
-        
-        testModule.sourceControlServer = sourceControlServer
-        assertTrue 'Should be valid', testModule.validate()
-    }
-    
-    void testSourceControlPathMaxSize() {
-        def testModule = new Module(name: 'Test Module', description: "description", type: moduleType, project: project,
-            sourceControlServer: sourceControlServer, sourceControlPath: "a" * 201)
-        mockForConstraintsTests(Module, [testModule])
-
-        assertFalse 'Should not be valid', testModule.validate()
-        assertEquals 'Source control path is too long', 'maxSize', testModule.errors['sourceControlPath']
-    }
-
-    void testSourceControlPathNullable() {
-        def testModule = new Module(name: 'Test Module', description: "description", type: moduleType, project: project,
-            sourceControlServer: sourceControlServer, sourceControlPath: null)
-        mockForConstraintsTests(Module, [testModule])
-
-        assertTrue 'Should be valid', testModule.validate()
-    }
-
     void testToString() {
         def module = new Module(name: "Foobar")
         
