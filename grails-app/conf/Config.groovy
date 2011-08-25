@@ -110,7 +110,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/project/**':                    ['ROLE_ADMIN'],
     '/application/**':                ['ROLE_ADMIN'],
     '/applicationType/**':            ['ROLE_ADMIN'],
-    '/module/**':                     ['ROLE_ADMIN']    
+    '/module/**':                     ['ROLE_ADMIN'],
+    '/moduleType/**':                 ['ROLE_ADMIN']
 ]
 
 grails.plugins.springsecurity.secureChannel.definition = [

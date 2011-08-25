@@ -44,7 +44,8 @@ class BootStrap {
         def standaloneType = new ApplicationType(name: "Standalone JAR", description: "Standalone Java Application").save()
         
         def suafeProject = new Project(name: "Suafe", description: "Subversion User Authorization File Editor")       
-        suafeProject.addToApplications(new Application(name: "Core", description: "Suafe Core", type: standaloneType))
+        def suafeApplication = new Application(name: "Core", description: "Suafe Core", type: standaloneType)
+        suafeProject.addToApplications(suafeApplication)
         suafeProject.save()
     }
 
