@@ -4,9 +4,9 @@
     <title><g:message code="springSecurity.login.title"/></title>
     <style type='text/css' media='screen'>
     #login {
-      margin: 15px 0px;
-      padding: 0px;
-      text-align: center;
+        margin: 15px 0px;
+        padding: 0px;
+        text-align: center;
     }
 
     #login .inner {
@@ -79,7 +79,7 @@
     }
 
     #login .inner .chk {
-      height: 12px;
+        height: 12px;
     }
     </style>
 </head>
@@ -118,7 +118,7 @@
 <script type='text/javascript'>
     <!--
     (function() {
-            document.forms['loginForm'].elements['j_username'].focus();
+        document.forms['loginForm'].elements['j_username'].focus();
     })();
     // -->
 </script>
