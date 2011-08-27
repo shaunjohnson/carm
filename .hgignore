@@ -4,3 +4,4 @@ syntax: glob
 out
 stacktrace.log
 target
+cobertura.ser
