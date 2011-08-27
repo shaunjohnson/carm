@@ -22,7 +22,7 @@ class Application {
         system(nullable: true)
     }
     
-    static hasMany = [modules: Module]
+    static hasMany = [applicationRoles: ApplicationRole, modules: Module]
 
     public String toString() {
         return name

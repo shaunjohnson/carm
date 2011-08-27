@@ -1,5 +1,7 @@
 package net.lmxm.carm.security
 
+import net.lmxm.carm.SourceControlUser
+
 class User {
     transient springSecurityService
 
@@ -9,7 +11,7 @@ class User {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
-    
+
     Date dateCreated
     Date lastUpdated
 
@@ -21,6 +23,8 @@ class User {
     static mapping = {
         password column: '`password`'
     }
+
+    static hasMany = [sourceControlUsers: SourceControlUser]
 
     Set<Role> getAuthorities() {
         UserRole.findAllByUser(this).collect { it.role } as Set
