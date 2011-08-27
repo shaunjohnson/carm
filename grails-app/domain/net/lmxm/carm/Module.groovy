@@ -5,6 +5,7 @@ class Module {
     String description
     ModuleType type
     Application application
+    SystemComponent systemComponent
     
     Date dateCreated
     Date lastUpdated
@@ -14,6 +15,7 @@ class Module {
         description(maxSize: 4000, nullable: true)
         type(nullable: false)
         application(nullable: false)
+        systemComponent(nullable: true)
     }
 
     public String toString() {

@@ -7,6 +7,7 @@ class Application {
     Project project
     SourceControlServer sourceControlServer
     String sourceControlPath
+    System system
     
     Date dateCreated
     Date lastUpdated
@@ -18,6 +19,7 @@ class Application {
         project(nullable: false)
         sourceControlServer(nullable: true)
         sourceControlPath(maxSize: 200, nullable: true)
+        system(nullable: true)
     }
     
     static hasMany = [modules: Module]

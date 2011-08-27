@@ -79,6 +79,17 @@ class ModuleTests extends GrailsUnitTestCase {
         assertFalse 'Should not be valid', testModule.validate()
         assertEquals 'Type is null', 'nullable', testModule.errors['type']
     }
+
+    void testSystemComponentNullable() {
+        def testModule = new Module(name: "Test Module", type: moduleType, application: application, systemComponent: null)
+        mockForConstraintsTests(Module, [testModule])
+
+        assertTrue 'Should be valid', testModule.validate()
+
+        testModule.systemComponent = new SystemComponent(name: "Name")
+
+        assertTrue 'Should be valid', testModule.validate()
+    }
     
     void testToString() {
         def module = new Module(name: "Foobar")
