@@ -2,7 +2,7 @@ package net.lmxm.carm
 
 import grails.test.*
 
-class SystemComponentComponentTests extends GrailsUnitTestCase {
+class SystemComponentTests extends GrailsUnitTestCase {
     def systemComponent
     def system
 
