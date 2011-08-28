@@ -21,27 +21,15 @@ import net.lmxm.carm.ApplicationRole
 
 class BootStrap {
     def init = { servletContext ->
-        // 
-        // Configure Security
         //
-        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-        def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+        // Configure static values
+        //
+        configureUserRoles()
 
-        def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
-        adminUser.save(flush: true)
-        UserRole.create adminUser, adminRole, true
-
-        def userUser = new User(username: 'user', enabled: true, password: 'user')
-        userUser.save(flush: true)
-        UserRole.create userUser, userRole, true
-
-        def shaunUser = new User(username: 'shaun', enabled: true, password: 'shaun')
-        shaunUser.save(flush: true)
-        UserRole.create shaunUser, adminRole, true
-
-        assert Role.count() == 2
-        assert User.count() == 3
-        assert UserRole.count() == 3
+        //
+        // Configure test values
+        //
+        configureUsers()
 
         //
         // Configure Systems
@@ -159,7 +147,8 @@ class BootStrap {
         // Configure source control security
         //
         def shaunScmUser = new SourceControlUser(name: 'shaun', description: 'Shaun user',
-                sourceControlServer: subversionServer, user: shaunUser).save()
+                sourceControlServer: subversionServer,
+                user: User.findByUsername('shaun')).save()
 
         def developerScmRole = new SourceControlRole(name: 'developer', description: 'Developer role').save()
 
@@ -171,6 +160,34 @@ class BootStrap {
                 sourceControlUser: shaunScmUser).save()
         new ApplicationRole(application: portalApplication, role: developerScmRole,
                 sourceControlUser: shaunScmUser).save()
+    }
+
+    def configureUserRoles = {
+        new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        new Role(authority: 'ROLE_USER').save(flush: true)
+
+        assert Role.count() == 2
+    }
+
+    def configureUsers = {
+        def adminRole = Role.findByAuthority('ROLE_ADMIN')
+        def userRole = Role.findByAuthority('ROLE_USER')
+
+        def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
+        adminUser.save(flush: true)
+        UserRole.create adminUser, adminRole, true
+
+        def userUser = new User(username: 'user', enabled: true, password: 'user')
+        userUser.save(flush: true)
+        UserRole.create userUser, userRole, true
+
+        def shaunUser = new User(username: 'shaun', enabled: true, password: 'shaun')
+        shaunUser.save(flush: true)
+        UserRole.create shaunUser, adminRole, true
+
+
+        assert User.count() == 3
+        assert UserRole.count() == 3
     }
 
     def destroy = {
