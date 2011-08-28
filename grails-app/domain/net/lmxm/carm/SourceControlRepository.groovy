@@ -3,7 +3,6 @@ package net.lmxm.carm
 class SourceControlRepository {
     String name
     String description
-    SourceControlServer server
     String path
 
     Date dateCreated
@@ -15,6 +14,8 @@ class SourceControlRepository {
         server(nullable: false)
         path(blank: false)
     }
+
+    static belongsTo = [server: SourceControlServer]
 
     public String toString() {
         return name

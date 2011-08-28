@@ -4,7 +4,6 @@ class Module {
     String name
     String description
     ModuleType type
-    Application application
     SystemComponent systemComponent
     
     Date dateCreated
@@ -17,6 +16,8 @@ class Module {
         application(nullable: false)
         systemComponent(nullable: true)
     }
+
+    static belongsTo = [application: Application]
 
     public String toString() {
         return name

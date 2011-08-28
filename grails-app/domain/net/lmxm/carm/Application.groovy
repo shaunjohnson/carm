@@ -4,7 +4,6 @@ class Application {
     String name
     String description
     ApplicationType type
-    Project project
     SourceControlRepository sourceControlRepository
     String sourceControlPath
     System system
@@ -21,7 +20,9 @@ class Application {
         sourceControlPath(maxSize: 200, nullable: true)
         system(nullable: true)
     }
-    
+
+    static belongsTo = [project: Project]
+
     static hasMany = [applicationRoles: ApplicationRole, modules: Module]
 
     public String toString() {

@@ -5,8 +5,6 @@ import net.lmxm.carm.security.User
 class SourceControlUser {
     String name
     String description
-    SourceControlServer sourceControlServer
-    User user
 
     Date dateCreated
     Date lastUpdated
@@ -17,6 +15,8 @@ class SourceControlUser {
         sourceControlServer(nullable: true)
         user(nullable: true)
     }
+
+    static belongsTo = [sourceControlServer: SourceControlServer, user: User]
 
     static hasMany = [applicationRoles: ApplicationRole]
 

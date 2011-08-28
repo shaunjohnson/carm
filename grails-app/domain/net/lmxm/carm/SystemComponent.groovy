@@ -3,7 +3,6 @@ package net.lmxm.carm
 class SystemComponent {
     String name
     String description
-    System system
 
     Date dateCreated
     Date lastUpdated
@@ -13,6 +12,8 @@ class SystemComponent {
         description(maxSize: 4000, nullable: true)
         system(nullable: false)
     }
+
+    static belongsTo = [system: System]
 
     public String toString() {
         return name
