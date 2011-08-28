@@ -1,6 +1,9 @@
 package net.lmxm.carm.enums
 
 public enum SourceControlServerType {
+    CVS("CVS"),
+    Git("Git"),
+    Mercurial("Mercurial"),
     Subversion("Subversion")
 
     private String value
