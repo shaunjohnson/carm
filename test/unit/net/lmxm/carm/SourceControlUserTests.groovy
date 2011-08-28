@@ -69,7 +69,7 @@ class SourceControlUserTests extends GrailsUnitTestCase {
         def testSourceControlUser = new SourceControlUser(name: 'Developer')
         mockForConstraintsTests(SourceControlUser, [testSourceControlUser])
 
-        assertFalse 'Should be valid', sourceControlUser.validate()
+        assertTrue 'Should be valid', sourceControlUser.validate()
     }
 
     void testToString() {

@@ -75,7 +75,7 @@ class SystemComponentTests extends GrailsUnitTestCase {
         assertFalse 'Should not be valid', systemComponent.validate()
         assertEquals 'Name is not unique.', 'unique', systemComponent.errors['name']
 
-        systemComponent = new SystemComponent(name: 'SystemComponent2')
+        systemComponent = new SystemComponent(name: 'SystemComponent2', system: system)
         assertTrue 'Should be valid', systemComponent.validate()
     }
 
