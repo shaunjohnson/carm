@@ -18,6 +18,8 @@ class SourceControlServer {
         url(maxSize: 200, nullable:true, url:true)
     }
 
+    static hasMany = [repositories: SourceControlRepository]
+
     public String toString() {
         return name
     }
