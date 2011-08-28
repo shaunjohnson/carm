@@ -31,7 +31,7 @@
 
                 <th><g:message code="application.project.label" default="Project"/></th>
 
-                <th><g:message code="application.sourceControlServer.label" default="Source Control Server"/></th>
+                <th><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></th>
 
             </tr>
             </thead>
@@ -49,7 +49,7 @@
 
                     <td>${fieldValue(bean: applicationInstance, field: "project")}</td>
 
-                    <td>${fieldValue(bean: applicationInstance, field: "sourceControlServer")}</td>
+                    <td>${fieldValue(bean: applicationInstance, field: "sourceControlRepository")}</td>
 
                 </tr>
             </g:each>

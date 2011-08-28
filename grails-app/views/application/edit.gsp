@@ -67,10 +67,10 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlServer"><g:message code="application.sourceControlServer.label" default="Source Control Server"/></label>
+                        <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlServer', 'errors')}">
-                        <g:select name="sourceControlServer.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${applicationInstance?.sourceControlServer?.id}" noSelection="['null': '']"/>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
+                        <g:select name="sourceControlRepository.id" from="${net.lmxm.carm.SourceControlRepository.list()}" optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
 
@@ -89,6 +89,22 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
                         <g:select name="system.id" from="${net.lmxm.carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
+                    </td>
+                </tr>
+
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="applicationRoles"><g:message code="application.applicationRoles.label" default="Application Roles"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationRoles', 'errors')}">
+
+                        <ul>
+                            <g:each in="${applicationInstance?.applicationRoles?}" var="a">
+                                <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                            </g:each>
+                        </ul>
+                        <g:link controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'applicationRole.label', default: 'ApplicationRole')])}</g:link>
+
                     </td>
                 </tr>
 

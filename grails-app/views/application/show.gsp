@@ -57,9 +57,9 @@
             </tr>
 
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.sourceControlServer.label" default="Source Control Server"/></td>
+                <td valign="top" class="name"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></td>
 
-                <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${applicationInstance?.sourceControlServer?.id}">${applicationInstance?.sourceControlServer?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value"><g:link controller="sourceControlRepository" action="show" id="${applicationInstance?.sourceControlRepository?.id}">${applicationInstance?.sourceControlRepository?.encodeAsHTML()}</g:link></td>
 
             </tr>
 
@@ -74,6 +74,19 @@
                 <td valign="top" class="name"><g:message code="application.system.label" default="System"/></td>
 
                 <td valign="top" class="value"><g:link controller="system" action="show" id="${applicationInstance?.system?.id}">${applicationInstance?.system?.encodeAsHTML()}</g:link></td>
+
+            </tr>
+
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="application.applicationRoles.label" default="Application Roles"/></td>
+
+                <td valign="top" style="text-align: left;" class="value">
+                    <ul>
+                        <g:each in="${applicationInstance.applicationRoles}" var="a">
+                            <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                        </g:each>
+                    </ul>
+                </td>
 
             </tr>
 
