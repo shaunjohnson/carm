@@ -15,6 +15,9 @@ import net.lmxm.carm.SystemComponent
 import net.lmxm.carm.SystemEnvironment
 import net.lmxm.carm.ModuleType
 import net.lmxm.carm.SourceControlRepository
+import net.lmxm.carm.SourceControlUser
+import net.lmxm.carm.SourceControlRole
+import net.lmxm.carm.ApplicationRole
 
 class BootStrap {
     def init = { servletContext ->
@@ -32,9 +35,13 @@ class BootStrap {
         userUser.save(flush: true)
         UserRole.create userUser, userRole, true
 
-        assert User.count() == 2
+        def shaunUser = new User(username: 'shaun', enabled: true, password: 'shaun')
+        shaunUser.save(flush: true)
+        UserRole.create shaunUser, adminRole, true
+
         assert Role.count() == 2
-        assert UserRole.count() == 2
+        assert User.count() == 3
+        assert UserRole.count() == 3
 
         //
         // Configure Systems
@@ -147,6 +154,23 @@ class BootStrap {
         portalApplication.addToModules(portletModule)
 
         myBigProject.save()
+
+        //
+        // Configure source control security
+        //
+        def shaunScmUser = new SourceControlUser(name: 'shaun', description: 'Shaun user',
+                sourceControlServer: subversionServer, user: shaunUser).save()
+
+        def developerScmRole = new SourceControlRole(name: 'developer', description: 'Developer role').save()
+
+        new ApplicationRole(application: dataApplication, role: developerScmRole,
+                sourceControlUser: shaunScmUser).save()
+        new ApplicationRole(application: earApplication, role: developerScmRole,
+                sourceControlUser: shaunScmUser).save()
+        new ApplicationRole(application: brokerApplication, role: developerScmRole,
+                sourceControlUser: shaunScmUser).save()
+        new ApplicationRole(application: portalApplication, role: developerScmRole,
+                sourceControlUser: shaunScmUser).save()
     }
 
     def destroy = {
