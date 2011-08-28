@@ -14,6 +14,7 @@ import net.lmxm.carm.security.User
 import net.lmxm.carm.SystemComponent
 import net.lmxm.carm.SystemEnvironment
 import net.lmxm.carm.ModuleType
+import net.lmxm.carm.SourceControlRepository
 
 class BootStrap {
     def init = { servletContext ->
@@ -78,8 +79,13 @@ class BootStrap {
         //
         // Configure Source Control Servers
         //
-        def subversion = new SourceControlServer(name: "Subversion", type: SourceControlServerType.Subversion,
-                description: "Subversion server", url: "http://mybig.com/svn/").save()
+        def subversionServer = new SourceControlServer(name: "My Big SVN Server",
+                type: SourceControlServerType.Subversion,
+                description: "Subversion server", url: "http://svn.mybig.com").save()
+
+        def subversionRepository = new SourceControlRepository(name: "My Big SVN Repository",
+                description: "Subversion repository", path: "/repository",
+                server: subversionServer).save()
 
         //
         // Configure Application Types
@@ -102,13 +108,13 @@ class BootStrap {
         def myBigProject = new Project(name: 'My Big Project', description: 'My big project').save()
 
         def dataApplication = new Application(name: "Database Scripts", description: "My Big Project db scripts",
-                type: dbScriptsAppType, sourceControlServer: subversion, sourceControlPath: '/database',
+                type: dbScriptsAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/database',
                 project: myBigProject, system: system).save()
         myBigProject.addToApplications(dataApplication)
 
 
         def earApplication = new Application(name: "My Big EAR", description: "My Big Project EAR",
-                type: earAppType, sourceControlServer: subversion, sourceControlPath: '/ear',
+                type: earAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/ear',
                 project: myBigProject, system: system).save()
         myBigProject.addToApplications(earApplication)
 
@@ -126,13 +132,13 @@ class BootStrap {
 
 
         def brokerApplication = new Application(name: "My Big Broker", description: "My Big Project broker",
-                type: brokerAppType, sourceControlServer: subversion, sourceControlPath: '/broker',
+                type: brokerAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/broker',
                 project: myBigProject, system: system).save()
         myBigProject.addToApplications(brokerApplication)
 
 
         def portalApplication = new Application(name: "My Portal App", description: "My Big Project portal application",
-                type: portalAppType, sourceControlServer: subversion, sourceControlPath: '/portal',
+                type: portalAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/portal',
                 project: myBigProject, system: system).save()
         myBigProject.addToApplications(portalApplication)
 
