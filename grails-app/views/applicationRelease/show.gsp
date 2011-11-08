@@ -20,6 +20,10 @@
                 <table>
                     <tbody>
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.project.label" default="Project" /></td>
+                            <td valign="top" class="value"><g:link controller="project" action="show" id="${applicationReleaseInstance?.application?.project?.id}">${applicationReleaseInstance?.application?.project?.encodeAsHTML()}</g:link></td>
+                        </tr>
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="applicationRelease.application.label" default="Application" /></td>
                             <td valign="top" class="value"><g:link controller="application" action="show" id="${applicationReleaseInstance?.application?.id}">${applicationReleaseInstance?.application?.encodeAsHTML()}</g:link></td>
                         </tr>
