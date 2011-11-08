@@ -31,6 +31,12 @@
                         <li><g:link controller="moduleType">Module Types</g:link></li>
                     </ul>
                 </li>
+                <li><a href="#">Security</a>
+                    <ul>
+                        <li><g:link controller="user">Users</g:link></li>
+                        <li><g:link controller="role">Roles</g:link></li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </sec:ifAllGranted>
