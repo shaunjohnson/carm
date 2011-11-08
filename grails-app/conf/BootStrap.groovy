@@ -18,6 +18,7 @@ import net.lmxm.carm.SourceControlRepository
 import net.lmxm.carm.SourceControlUser
 import net.lmxm.carm.SourceControlRole
 import net.lmxm.carm.ApplicationRole
+import net.lmxm.carm.ApplicationRelease
 
 class BootStrap {
     def init = { servletContext ->
@@ -160,6 +161,12 @@ class BootStrap {
                 sourceControlUser: shaunScmUser).save()
         new ApplicationRole(application: portalApplication, role: developerScmRole,
                 sourceControlUser: shaunScmUser).save()
+
+        //
+        // Configure application releases
+        //
+        new ApplicationRelease(application: brokerApplication, description: "Release broker application").save()
+        new ApplicationRelease(application: portalApplication, description: "Release portal application").save()
     }
 
     def configureUserRoles = {
