@@ -73,6 +73,7 @@
                             <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
+                    <g:link controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link>    
                 </td>
             </tr>
             </tbody>

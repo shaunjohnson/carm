@@ -35,6 +35,7 @@
                             <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
+                    <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
                 </td>
             </tr>
             <tr class="prop">

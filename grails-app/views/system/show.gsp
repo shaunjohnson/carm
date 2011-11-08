@@ -35,6 +35,7 @@
                             <li><g:link controller="systemComponent" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
+                    <g:link controller="systemComponent" action="create" params="['system.id': systemInstance?.id]">Add Component</g:link>
                 </td>
             </tr>
             <tr class="prop">
@@ -45,6 +46,7 @@
                             <li><g:link controller="systemEnvironment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
+                    <g:link controller="systemEnvironment" action="create" params="['system.id': systemInstance?.id]">Add Environment</g:link>
                 </td>
             </tr>
             <tr class="prop">

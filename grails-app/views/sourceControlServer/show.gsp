@@ -51,6 +51,7 @@
                             <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
+                    <g:link controller="sourceControlRepository" action="create" params="['server.id': sourceControlServerInstance?.id]">Add Repository</g:link>
                 </td>
             </tr>
             </tbody>
