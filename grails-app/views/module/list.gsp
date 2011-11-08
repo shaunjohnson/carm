@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
 <div class="body">
@@ -20,37 +19,21 @@
         <table>
             <thead>
             <tr>
-
-                <g:sortableColumn property="id" title="${message(code: 'module.id.label', default: 'Id')}"/>
-
                 <g:sortableColumn property="name" title="${message(code: 'module.name.label', default: 'Name')}"/>
-
                 <g:sortableColumn property="description" title="${message(code: 'module.description.label', default: 'Description')}"/>
-
                 <th><g:message code="module.type.label" default="Type"/></th>
-
                 <th><g:message code="module.application.label" default="Application"/></th>
-
                 <th><g:message code="module.systemComponent.label" default="System Component"/></th>
-
             </tr>
             </thead>
             <tbody>
             <g:each in="${moduleInstanceList}" status="i" var="moduleInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-                    <td><g:link action="show" id="${moduleInstance.id}">${fieldValue(bean: moduleInstance, field: "id")}</g:link></td>
-
-                    <td>${fieldValue(bean: moduleInstance, field: "name")}</td>
-
+                    <td><g:link action="show" id="${moduleInstance.id}">${fieldValue(bean: moduleInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: moduleInstance, field: "description")}</td>
-
                     <td>${fieldValue(bean: moduleInstance, field: "type")}</td>
-
                     <td>${fieldValue(bean: moduleInstance, field: "application")}</td>
-
                     <td>${fieldValue(bean: moduleInstance, field: "systemComponent")}</td>
-
                 </tr>
             </g:each>
             </tbody>

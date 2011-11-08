@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -20,42 +19,22 @@
     <div class="dialog">
         <table>
             <tbody>
-
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="sourceControlRole.id.label" default="Id"/></td>
-
-                <td valign="top" class="value">${fieldValue(bean: sourceControlRoleInstance, field: "id")}</td>
-
-            </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRole.name.label" default="Name"/></td>
-
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRoleInstance, field: "name")}</td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRole.description.label" default="Description"/></td>
-
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRoleInstance, field: "description")}</td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRole.dateCreated.label" default="Date Created"/></td>
-
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRoleInstance?.dateCreated}"/></td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRole.lastUpdated.label" default="Last Updated"/></td>
-
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRoleInstance?.lastUpdated}"/></td>
-
             </tr>
-
             </tbody>
         </table>
     </div>

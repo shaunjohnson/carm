@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -28,7 +27,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="sourceControlServer.name.label" default="Name"/></label>
@@ -37,7 +35,6 @@
                         <g:textField name="name" maxlength="50" value="${sourceControlServerInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="sourceControlServer.description.label" default="Description"/></label>
@@ -46,7 +43,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${sourceControlServerInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="type"><g:message code="sourceControlServer.type.label" default="Type"/></label>
@@ -55,7 +51,6 @@
                         <g:select name="type" from="${net.lmxm.carm.enums.SourceControlServerType?.values()}" keys="${net.lmxm.carm.enums.SourceControlServerType?.values()*.name()}" value="${sourceControlServerInstance?.type?.name()}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="url"><g:message code="sourceControlServer.url.label" default="Url"/></label>
@@ -64,23 +59,19 @@
                         <g:textField name="url" maxlength="200" value="${sourceControlServerInstance?.url}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="repositories"><g:message code="sourceControlServer.repositories.label" default="Repositories"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlServerInstance, field: 'repositories', 'errors')}">
-
                         <ul>
                             <g:each in="${sourceControlServerInstance?.repositories?}" var="r">
                                 <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
                         <g:link controller="sourceControlRepository" action="create" params="['sourceControlServer.id': sourceControlServerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository')])}</g:link>
-
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

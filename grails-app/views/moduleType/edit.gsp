@@ -1,5 +1,3 @@
-
-
 <%@ page import="net.lmxm.carm.ModuleType" %>
 <html>
     <head>
@@ -10,7 +8,6 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
@@ -30,7 +27,6 @@
                 <div class="dialog">
                     <table>
                         <tbody>
-                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="name"><g:message code="moduleType.name.label" default="Name" /></label>
@@ -39,7 +35,6 @@
                                     <g:textField name="name" maxlength="50" value="${moduleTypeInstance?.name}" />
                                 </td>
                             </tr>
-                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="description"><g:message code="moduleType.description.label" default="Description" /></label>
@@ -48,7 +43,6 @@
                                     <g:textArea name="description" cols="40" rows="5" value="${moduleTypeInstance?.description}" />
                                 </td>
                             </tr>
-                        
                         </tbody>
                     </table>
                 </div>

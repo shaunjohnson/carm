@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -28,7 +27,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="project.name.label" default="Name"/></label>
@@ -37,7 +35,6 @@
                         <g:textField name="name" maxlength="50" value="${projectInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="project.description.label" default="Description"/></label>
@@ -46,23 +43,19 @@
                         <g:textArea name="description" cols="40" rows="5" value="${projectInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="applications"><g:message code="project.applications.label" default="Applications"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'applications', 'errors')}">
-
                         <ul>
                             <g:each in="${projectInstance?.applications?}" var="a">
                                 <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
                         <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'application.label', default: 'Application')])}</g:link>
-
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

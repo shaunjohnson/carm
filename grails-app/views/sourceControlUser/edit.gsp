@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -28,7 +27,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="sourceControlUser.name.label" default="Name"/></label>
@@ -37,7 +35,6 @@
                         <g:textField name="name" maxlength="50" value="${sourceControlUserInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="sourceControlUser.description.label" default="Description"/></label>
@@ -46,7 +43,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${sourceControlUserInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="sourceControlServer"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></label>
@@ -55,7 +51,6 @@
                         <g:select name="sourceControlServer.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlUserInstance?.sourceControlServer?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="user"><g:message code="sourceControlUser.user.label" default="User"/></label>
@@ -64,23 +59,19 @@
                         <g:select name="user.id" from="${net.lmxm.carm.security.User.list()}" optionKey="id" value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="applicationRoles"><g:message code="sourceControlUser.applicationRoles.label" default="Application Roles"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'applicationRoles', 'errors')}">
-
                         <ul>
                             <g:each in="${sourceControlUserInstance?.applicationRoles?}" var="a">
                                 <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
                         <g:link controller="applicationRole" action="create" params="['sourceControlUser.id': sourceControlUserInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'applicationRole.label', default: 'ApplicationRole')])}</g:link>
-
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

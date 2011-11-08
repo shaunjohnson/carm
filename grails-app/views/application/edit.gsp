@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -28,7 +27,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="application.name.label" default="Name"/></label>
@@ -37,7 +35,6 @@
                         <g:textField name="name" maxlength="50" value="${applicationInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="application.description.label" default="Description"/></label>
@@ -46,7 +43,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${applicationInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="type"><g:message code="application.type.label" default="Type"/></label>
@@ -55,7 +51,6 @@
                         <g:select name="type.id" from="${net.lmxm.carm.ApplicationType.list()}" optionKey="id" value="${applicationInstance?.type?.id}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="project"><g:message code="application.project.label" default="Project"/></label>
@@ -64,7 +59,6 @@
                         <g:select name="project.id" from="${net.lmxm.carm.Project.list()}" optionKey="id" value="${applicationInstance?.project?.id}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
@@ -73,7 +67,6 @@
                         <g:select name="sourceControlRepository.id" from="${net.lmxm.carm.SourceControlRepository.list()}" optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="sourceControlPath"><g:message code="application.sourceControlPath.label" default="Source Control Path"/></label>
@@ -82,7 +75,6 @@
                         <g:textField name="sourceControlPath" maxlength="200" value="${applicationInstance?.sourceControlPath}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="system"><g:message code="application.system.label" default="System"/></label>
@@ -91,39 +83,32 @@
                         <g:select name="system.id" from="${net.lmxm.carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="applicationRoles"><g:message code="application.applicationRoles.label" default="Application Roles"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationRoles', 'errors')}">
-
                         <ul>
                             <g:each in="${applicationInstance?.applicationRoles?}" var="a">
                                 <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
                         <g:link controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'applicationRole.label', default: 'ApplicationRole')])}</g:link>
-
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="modules"><g:message code="application.modules.label" default="Modules"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'modules', 'errors')}">
-
                         <ul>
                             <g:each in="${applicationInstance?.modules?}" var="m">
                                 <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
                         <g:link controller="module" action="create" params="['application.id': applicationInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'module.label', default: 'Module')])}</g:link>
-
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

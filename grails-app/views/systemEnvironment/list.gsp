@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
 <div class="body">
@@ -20,37 +19,21 @@
         <table>
             <thead>
             <tr>
-
-                <g:sortableColumn property="id" title="${message(code: 'systemEnvironment.id.label', default: 'Id')}"/>
-
                 <g:sortableColumn property="name" title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
-
                 <g:sortableColumn property="description" title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
-
                 <th><g:message code="systemEnvironment.system.label" default="System"/></th>
-
                 <g:sortableColumn property="dateCreated" title="${message(code: 'systemEnvironment.dateCreated.label', default: 'Date Created')}"/>
-
                 <g:sortableColumn property="lastUpdated" title="${message(code: 'systemEnvironment.lastUpdated.label', default: 'Last Updated')}"/>
-
             </tr>
             </thead>
             <tbody>
             <g:each in="${systemEnvironmentInstanceList}" status="i" var="systemEnvironmentInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-                    <td><g:link action="show" id="${systemEnvironmentInstance.id}">${fieldValue(bean: systemEnvironmentInstance, field: "id")}</g:link></td>
-
-                    <td>${fieldValue(bean: systemEnvironmentInstance, field: "name")}</td>
-
+                    <td><g:link action="show" id="${systemEnvironmentInstance.id}">${fieldValue(bean: systemEnvironmentInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: systemEnvironmentInstance, field: "description")}</td>
-
                     <td>${fieldValue(bean: systemEnvironmentInstance, field: "system")}</td>
-
                     <td><g:formatDate date="${systemEnvironmentInstance.dateCreated}"/></td>
-
                     <td><g:formatDate date="${systemEnvironmentInstance.lastUpdated}"/></td>
-
                 </tr>
             </g:each>
             </tbody>

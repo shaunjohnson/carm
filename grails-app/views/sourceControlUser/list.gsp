@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
 <div class="body">
@@ -20,37 +19,21 @@
         <table>
             <thead>
             <tr>
-
-                <g:sortableColumn property="id" title="${message(code: 'sourceControlUser.id.label', default: 'Id')}"/>
-
                 <g:sortableColumn property="name" title="${message(code: 'sourceControlUser.name.label', default: 'Name')}"/>
-
                 <g:sortableColumn property="description" title="${message(code: 'sourceControlUser.description.label', default: 'Description')}"/>
-
                 <th><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></th>
-
                 <th><g:message code="sourceControlUser.user.label" default="User"/></th>
-
                 <g:sortableColumn property="dateCreated" title="${message(code: 'sourceControlUser.dateCreated.label', default: 'Date Created')}"/>
-
             </tr>
             </thead>
             <tbody>
             <g:each in="${sourceControlUserInstanceList}" status="i" var="sourceControlUserInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-                    <td><g:link action="show" id="${sourceControlUserInstance.id}">${fieldValue(bean: sourceControlUserInstance, field: "id")}</g:link></td>
-
-                    <td>${fieldValue(bean: sourceControlUserInstance, field: "name")}</td>
-
+                    <td><g:link action="show" id="${sourceControlUserInstance.id}">${fieldValue(bean: sourceControlUserInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "description")}</td>
-
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "sourceControlServer")}</td>
-
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "user")}</td>
-
                     <td><g:formatDate date="${sourceControlUserInstance.dateCreated}"/></td>
-
                 </tr>
             </g:each>
             </tbody>

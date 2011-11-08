@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -20,56 +19,30 @@
     <div class="dialog">
         <table>
             <tbody>
-
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="sourceControlRepository.id.label" default="Id"/></td>
-
-                <td valign="top" class="value">${fieldValue(bean: sourceControlRepositoryInstance, field: "id")}</td>
-
-            </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.name.label" default="Name"/></td>
-
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRepositoryInstance, field: "name")}</td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.description.label" default="Description"/></td>
-
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRepositoryInstance, field: "description")}</td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.server.label" default="Server"/></td>
-
                 <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${sourceControlRepositoryInstance?.server?.id}">${sourceControlRepositoryInstance?.server?.encodeAsHTML()}</g:link></td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.path.label" default="Path"/></td>
-
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRepositoryInstance, field: "path")}</td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.dateCreated.label" default="Date Created"/></td>
-
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRepositoryInstance?.dateCreated}"/></td>
-
             </tr>
-
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.lastUpdated.label" default="Last Updated"/></td>
-
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRepositoryInstance?.lastUpdated}"/></td>
-
             </tr>
-
             </tbody>
         </table>
     </div>

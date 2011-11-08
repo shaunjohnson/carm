@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
 </div>
 <div class="body">
@@ -25,7 +24,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="systemEnvironment.name.label" default="Name"/></label>
@@ -34,7 +32,6 @@
                         <g:textField name="name" maxlength="50" value="${systemEnvironmentInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="systemEnvironment.description.label" default="Description"/></label>
@@ -43,7 +40,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${systemEnvironmentInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="system"><g:message code="systemEnvironment.system.label" default="System"/></label>
@@ -52,7 +48,6 @@
                         <g:select name="system.id" from="${net.lmxm.carm.System.list()}" optionKey="id" value="${systemEnvironmentInstance?.system?.id}"/>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

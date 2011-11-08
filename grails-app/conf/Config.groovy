@@ -98,6 +98,7 @@ grails.plugins.springsecurity.rejectIfNoRule = true
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/':                              ['permitAll'],
     '/index.gsp':                     ['permitAll'],
+    '/home/**':                       ['permitAll'],
     '/js/**':                         ['permitAll'],
     '/css/**':                        ['permitAll'],
     '/images/**':                     ['permitAll'],

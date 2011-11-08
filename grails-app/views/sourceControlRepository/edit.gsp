@@ -8,7 +8,6 @@
 </head>
 <body>
 <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
     <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
@@ -28,7 +27,6 @@
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="name"><g:message code="sourceControlRepository.name.label" default="Name"/></label>
@@ -37,7 +35,6 @@
                         <g:textField name="name" maxlength="50" value="${sourceControlRepositoryInstance?.name}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="description"><g:message code="sourceControlRepository.description.label" default="Description"/></label>
@@ -46,7 +43,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${sourceControlRepositoryInstance?.description}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="server"><g:message code="sourceControlRepository.server.label" default="Server"/></label>
@@ -55,7 +51,6 @@
                         <g:select name="server.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlRepositoryInstance?.server?.id}"/>
                     </td>
                 </tr>
-
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="path"><g:message code="sourceControlRepository.path.label" default="Path"/></label>
@@ -64,7 +59,6 @@
                         <g:textField name="path" value="${sourceControlRepositoryInstance?.path}"/>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>

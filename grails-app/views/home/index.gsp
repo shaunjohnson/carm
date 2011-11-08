@@ -16,8 +16,6 @@
         You must <g:link controller='login' action='auth'>login</g:link> to use the system.
         </p>
     </sec:ifNotLoggedIn>
-
-
 </div>
 </body>
 </html>
