@@ -34,4 +34,10 @@
             </ul>
         </li>
     </sec:ifAllGranted>
+    <sec:ifLoggedIn>
+        <li><g:link controller='logout'>Logout</g:link></li>
+    </sec:ifLoggedIn>
+    <sec:ifNotLoggedIn>
+        <li><g:link controller='login'>Login</g:link></li>
+    </sec:ifNotLoggedIn>
 </ul>
