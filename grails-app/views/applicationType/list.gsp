@@ -21,8 +21,6 @@
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'applicationType.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description" title="${message(code: 'applicationType.description.label', default: 'Description')}"/>
-                <g:sortableColumn property="dateCreated" title="${message(code: 'applicationType.dateCreated.label', default: 'Date Created')}"/>
-                <g:sortableColumn property="lastUpdated" title="${message(code: 'applicationType.lastUpdated.label', default: 'Last Updated')}"/>
             </tr>
             </thead>
             <tbody>
@@ -30,8 +28,6 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td><g:link action="show" id="${applicationTypeInstance.id}">${fieldValue(bean: applicationTypeInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: applicationTypeInstance, field: "description")}</td>
-                    <td><g:formatDate date="${applicationTypeInstance.dateCreated}"/></td>
-                    <td><g:formatDate date="${applicationTypeInstance.lastUpdated}"/></td>
                 </tr>
             </g:each>
             </tbody>

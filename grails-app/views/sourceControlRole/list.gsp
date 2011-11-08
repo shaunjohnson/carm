@@ -21,8 +21,6 @@
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'sourceControlRole.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description" title="${message(code: 'sourceControlRole.description.label', default: 'Description')}"/>
-                <g:sortableColumn property="dateCreated" title="${message(code: 'sourceControlRole.dateCreated.label', default: 'Date Created')}"/>
-                <g:sortableColumn property="lastUpdated" title="${message(code: 'sourceControlRole.lastUpdated.label', default: 'Last Updated')}"/>
             </tr>
             </thead>
             <tbody>
@@ -30,8 +28,6 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td><g:link action="show" id="${sourceControlRoleInstance.id}">${fieldValue(bean: sourceControlRoleInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: sourceControlRoleInstance, field: "description")}</td>
-                    <td><g:formatDate date="${sourceControlRoleInstance.dateCreated}"/></td>
-                    <td><g:formatDate date="${sourceControlRoleInstance.lastUpdated}"/></td>
                 </tr>
             </g:each>
             </tbody>

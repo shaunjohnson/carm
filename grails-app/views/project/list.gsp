@@ -22,8 +22,6 @@
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description" title="${message(code: 'project.description.label', default: 'Description')}"/>
-                <g:sortableColumn property="dateCreated" title="${message(code: 'project.dateCreated.label', default: 'Date Created')}"/>
-                <g:sortableColumn property="lastUpdated" title="${message(code: 'project.lastUpdated.label', default: 'Last Updated')}"/>
             </tr>
             </thead>
             <tbody>
@@ -31,8 +29,6 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: projectInstance, field: "description")}</td>
-                    <td><g:formatDate date="${projectInstance.dateCreated}"/></td>
-                    <td><g:formatDate date="${projectInstance.lastUpdated}"/></td>
                 </tr>
             </g:each>
             </tbody>

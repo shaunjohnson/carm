@@ -23,7 +23,6 @@
                 <g:sortableColumn property="description" title="${message(code: 'sourceControlUser.description.label', default: 'Description')}"/>
                 <th><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></th>
                 <th><g:message code="sourceControlUser.user.label" default="User"/></th>
-                <g:sortableColumn property="dateCreated" title="${message(code: 'sourceControlUser.dateCreated.label', default: 'Date Created')}"/>
             </tr>
             </thead>
             <tbody>
@@ -33,7 +32,6 @@
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "description")}</td>
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "sourceControlServer")}</td>
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "user")}</td>
-                    <td><g:formatDate date="${sourceControlUserInstance.dateCreated}"/></td>
                 </tr>
             </g:each>
             </tbody>

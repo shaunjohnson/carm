@@ -22,8 +22,6 @@
                 <g:sortableColumn property="name" title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description" title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
                 <th><g:message code="systemEnvironment.system.label" default="System"/></th>
-                <g:sortableColumn property="dateCreated" title="${message(code: 'systemEnvironment.dateCreated.label', default: 'Date Created')}"/>
-                <g:sortableColumn property="lastUpdated" title="${message(code: 'systemEnvironment.lastUpdated.label', default: 'Last Updated')}"/>
             </tr>
             </thead>
             <tbody>
@@ -32,8 +30,6 @@
                     <td><g:link action="show" id="${systemEnvironmentInstance.id}">${fieldValue(bean: systemEnvironmentInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: systemEnvironmentInstance, field: "description")}</td>
                     <td>${fieldValue(bean: systemEnvironmentInstance, field: "system")}</td>
-                    <td><g:formatDate date="${systemEnvironmentInstance.dateCreated}"/></td>
-                    <td><g:formatDate date="${systemEnvironmentInstance.lastUpdated}"/></td>
                 </tr>
             </g:each>
             </tbody>

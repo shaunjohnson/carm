@@ -21,8 +21,8 @@
                 <li><a href="#">Systems</a>
                     <ul>
                         <li><g:link controller="system">Systems</g:link></li>
-                        <li><g:link controller="systemComponent">System Components</g:link></li>
-                        <li><g:link controller="systemEnvironment">System Environments</g:link></li>
+                        <li><g:link controller="systemComponent">Components</g:link></li>
+                        <li><g:link controller="systemEnvironment">Environments</g:link></li>
                     </ul>
                 </li>
                 <li><a href="#">Types</a>
