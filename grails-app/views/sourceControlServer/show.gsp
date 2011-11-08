@@ -47,7 +47,7 @@
                 <td valign="top" class="name"><g:message code="sourceControlServer.repositories.label" default="Repositories"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${sourceControlServerInstance.repositories}" var="r">
+                        <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="r">
                             <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>

@@ -31,7 +31,7 @@
                 <td valign="top" class="name"><g:message code="project.applications.label" default="Applications"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${projectInstance.applications}" var="a">
+                        <g:each in="${projectInstance.applications.sort { it.name }}" var="a">
                             <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>

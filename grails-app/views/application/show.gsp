@@ -69,7 +69,7 @@
                 <td valign="top" class="name"><g:message code="application.modules.label" default="Modules"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${applicationInstance.modules}" var="m">
+                        <g:each in="${applicationInstance.modules.sort { it.name }}" var="m">
                             <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>

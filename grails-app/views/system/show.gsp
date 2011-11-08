@@ -31,7 +31,7 @@
                 <td valign="top" class="name"><g:message code="system.components.label" default="Components"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${systemInstance.components}" var="c">
+                        <g:each in="${systemInstance.components.sort { it.name }}" var="c">
                             <li><g:link controller="systemComponent" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
@@ -42,7 +42,7 @@
                 <td valign="top" class="name"><g:message code="system.environments.label" default="Environments"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${systemInstance.environments}" var="e">
+                        <g:each in="${systemInstance.environments.sort { it.name }}" var="e">
                             <li><g:link controller="systemEnvironment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>
