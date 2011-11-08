@@ -1,12 +1,13 @@
-html * {
+* {
     margin: 0;
-    /*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
+    padding: 0; /* SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
 }
+
+
 
 /* GENERAL */
 
 .spinner {
-    padding: 5px;
     position: absolute;
     right: 0;
 }
@@ -15,6 +16,7 @@ body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
+    padding: 0;
 }
 #grailsLogo {
 	padding:20px;
@@ -60,6 +62,16 @@ input:focus, select:focus, textarea:focus {
 .body {
     float: left;
     margin: 0 15px 10px 15px;
+}
+
+.footer {
+    color: #999;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.clearing {
+    clear: both;
 }
 
 /* NAVIGATION MENU */
