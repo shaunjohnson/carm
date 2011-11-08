@@ -68,17 +68,6 @@ class SystemEnvironmentTests extends GrailsUnitTestCase {
         assertEquals 'Name is null', 'nullable', testSystemEnvironment.errors['name']
     }
 
-    void testNameUnique() {
-        def testSystemEnvironment = new SystemEnvironment(name: 'SystemEnvironment', system: system)
-        mockForConstraintsTests(SystemEnvironment, [testSystemEnvironment])
-
-        assertFalse 'Should not be valid', systemEnvironment.validate()
-        assertEquals 'Name is not unique.', 'unique', systemEnvironment.errors['name']
-
-        systemEnvironment = new SystemEnvironment(name: 'SystemEnvironment2', system: system)
-        assertTrue 'Should be valid', systemEnvironment.validate()
-    }
-
     void testSystemNullable() {
         def testSystemEnvironment = new SystemEnvironment(name: 'SystemEnvironment', system: null)
         mockForConstraintsTests(SystemEnvironment, [testSystemEnvironment])

@@ -8,7 +8,7 @@ class SystemEnvironment {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
+        name(minSize: 2, maxSize: 50, blank: false)
         description(maxSize: 4000, nullable: true)
         system(nullable: false)
     }
