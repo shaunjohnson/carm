@@ -188,7 +188,6 @@ class BootStrap {
         def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
         adminUser.save(flush: true)
         UserRole.create adminUser, adminRole, true
-        UserRole.create adminUser, userRole, true
 
         def userUser = new User(username: 'user', enabled: true, password: 'user')
         userUser.save(flush: true)
@@ -200,7 +199,7 @@ class BootStrap {
 
 
         assert User.count() == 3
-        assert UserRole.count() == 4
+        assert UserRole.count() == 3
     }
 
     def destroy = {

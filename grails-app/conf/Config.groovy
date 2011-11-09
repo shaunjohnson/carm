@@ -131,6 +131,11 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/systemEnvironment/**':          ['ROLE_ADMIN']
 ]
 
+// Grant ROLE_ADMIN the ROLE_USER role too
+grails.plugins.springsecurity.roleHierarchy = '''
+   ROLE_ADMIN > ROLE_USER
+'''
+
 grails.plugins.springsecurity.secureChannel.definition = [
 //   '/login/**':         'REQUIRES_SECURE_CHANNEL'
 ]
