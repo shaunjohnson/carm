@@ -1,5 +1,5 @@
-<%@ page import="net.lmxm.carm.Application" %>
-<%@ page import="net.lmxm.carm.ApplicationRelease" %>
+<%@ page import="carm.Application" %>
+<%@ page import="carm.ApplicationRelease" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

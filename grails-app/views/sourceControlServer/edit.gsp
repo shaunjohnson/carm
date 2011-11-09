@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SourceControlServer" %>
+<%@ page import="carm.SourceControlServer" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -48,7 +48,7 @@
                         <label for="type"><g:message code="sourceControlServer.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlServerInstance, field: 'type', 'errors')}">
-                        <g:select name="type" from="${net.lmxm.carm.enums.SourceControlServerType?.values()}" keys="${net.lmxm.carm.enums.SourceControlServerType?.values()*.name()}" value="${sourceControlServerInstance?.type?.name()}"/>
+                        <g:select name="type" from="${carm.enums.SourceControlServerType?.values()}" keys="${carm.enums.SourceControlServerType?.values()*.name()}" value="${sourceControlServerInstance?.type?.name()}"/>
                     </td>
                 </tr>
                 <tr class="prop">

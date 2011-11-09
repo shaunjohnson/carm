@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.ApplicationRelease" %>
+<%@ page import="carm.ApplicationRelease" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -29,7 +29,7 @@
                                     <label for="application"><g:message code="applicationRelease.application.label" default="Application" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                                    <g:select name="application.id" from="${net.lmxm.carm.Application.list()}" optionKey="id" value="${applicationReleaseInstance?.application?.id}" noSelection="['null': '']" />
+                                    <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${applicationReleaseInstance?.application?.id}" noSelection="['null': '']" />
                                 </td>
                             </tr>
                             <tr class="prop">

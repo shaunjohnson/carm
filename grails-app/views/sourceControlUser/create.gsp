@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SourceControlUser" %>
+<%@ page import="carm.SourceControlUser" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -45,7 +45,7 @@
                         <label for="sourceControlServer"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'sourceControlServer', 'errors')}">
-                        <g:select name="sourceControlServer.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlUserInstance?.sourceControlServer?.id}" noSelection="['null': '']"/>
+                        <g:select name="sourceControlServer.id" from="${carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlUserInstance?.sourceControlServer?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -53,7 +53,7 @@
                         <label for="user"><g:message code="sourceControlUser.user.label" default="User"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'user', 'errors')}">
-                        <g:select name="user.id" from="${net.lmxm.carm.security.User.list()}" optionKey="id" value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
+                        <g:select name="user.id" from="${carm.security.User.list()}" optionKey="id" value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 </tbody>

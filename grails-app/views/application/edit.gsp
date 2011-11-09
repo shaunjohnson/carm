@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.Application" %>
+<%@ page import="carm.Application" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -48,7 +48,7 @@
                         <label for="type"><g:message code="application.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${net.lmxm.carm.ApplicationType.list()}" optionKey="id" value="${applicationInstance?.type?.id}"/>
+                        <g:select name="type.id" from="${carm.ApplicationType.list()}" optionKey="id" value="${applicationInstance?.type?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -56,7 +56,7 @@
                         <label for="project"><g:message code="application.project.label" default="Project"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
-                        <g:select name="project.id" from="${net.lmxm.carm.Project.list()}" optionKey="id" value="${applicationInstance?.project?.id}"/>
+                        <g:select name="project.id" from="${carm.Project.list()}" optionKey="id" value="${applicationInstance?.project?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -64,7 +64,7 @@
                         <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
-                        <g:select name="sourceControlRepository.id" from="${net.lmxm.carm.SourceControlRepository.list()}" optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
+                        <g:select name="sourceControlRepository.id" from="${carm.SourceControlRepository.list()}" optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -80,7 +80,7 @@
                         <label for="system"><g:message code="application.system.label" default="System"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${net.lmxm.carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
+                        <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 <tr class="prop">

@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SourceControlRepository" %>
+<%@ page import="carm.SourceControlRepository" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -48,7 +48,7 @@
                         <label for="server"><g:message code="sourceControlRepository.server.label" default="Server"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlRepositoryInstance, field: 'server', 'errors')}">
-                        <g:select name="server.id" from="${net.lmxm.carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlRepositoryInstance?.server?.id}"/>
+                        <g:select name="server.id" from="${carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlRepositoryInstance?.server?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

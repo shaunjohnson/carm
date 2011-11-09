@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SystemComponent" %>
+<%@ page import="carm.SystemComponent" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

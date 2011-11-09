@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.Module" %>
+<%@ page import="carm.Module" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -45,7 +45,7 @@
                         <label for="type"><g:message code="module.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${net.lmxm.carm.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"/>
+                        <g:select name="type.id" from="${carm.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -53,7 +53,7 @@
                         <label for="application"><g:message code="module.application.label" default="Application"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
-                        <g:select name="application.id" from="${net.lmxm.carm.Application.list()}" optionKey="id" value="${moduleInstance?.application?.id}"/>
+                        <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${moduleInstance?.application?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -61,7 +61,7 @@
                         <label for="systemComponent"><g:message code="module.systemComponent.label" default="System Component"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponent', 'errors')}">
-                        <g:select name="systemComponent.id" from="${net.lmxm.carm.SystemComponent.list()}" optionKey="id" value="${moduleInstance?.systemComponent?.id}" noSelection="['null': '']"/>
+                        <g:select name="systemComponent.id" from="${carm.SystemComponent.list()}" optionKey="id" value="${moduleInstance?.systemComponent?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 </tbody>

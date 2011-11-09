@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SystemEnvironment" %>
+<%@ page import="carm.SystemEnvironment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -45,7 +45,7 @@
                         <label for="system"><g:message code="systemEnvironment.system.label" default="System"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${net.lmxm.carm.System.list()}" optionKey="id" value="${systemEnvironmentInstance?.system?.id}"/>
+                        <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${systemEnvironmentInstance?.system?.id}"/>
                     </td>
                 </tr>
                 </tbody>

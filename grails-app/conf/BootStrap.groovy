@@ -1,24 +1,24 @@
-import net.lmxm.carm.Application
-import net.lmxm.carm.ApplicationType
-import net.lmxm.carm.Module
-import net.lmxm.carm.Project
-import net.lmxm.carm.System
-import net.lmxm.carm.SystemComponent
-import net.lmxm.carm.security.Role
-import net.lmxm.carm.SourceControlServer
-import net.lmxm.carm.security.User
-import net.lmxm.carm.security.UserRole
-import net.lmxm.carm.enums.SourceControlServerType
-import net.lmxm.carm.security.UserRole
-import net.lmxm.carm.security.User
-import net.lmxm.carm.SystemComponent
-import net.lmxm.carm.SystemEnvironment
-import net.lmxm.carm.ModuleType
-import net.lmxm.carm.SourceControlRepository
-import net.lmxm.carm.SourceControlUser
-import net.lmxm.carm.SourceControlRole
-import net.lmxm.carm.ApplicationRole
-import net.lmxm.carm.ApplicationRelease
+import carm.Application
+import carm.ApplicationType
+import carm.Module
+import carm.Project
+import carm.System
+import carm.SystemComponent
+import carm.security.Role
+import carm.SourceControlServer
+import carm.security.User
+import carm.security.UserRole
+import carm.enums.SourceControlServerType
+import carm.security.UserRole
+import carm.security.User
+import carm.SystemComponent
+import carm.SystemEnvironment
+import carm.ModuleType
+import carm.SourceControlRepository
+import carm.SourceControlUser
+import carm.SourceControlRole
+import carm.ApplicationRole
+import carm.ApplicationRelease
 
 class BootStrap {
     def init = { servletContext ->

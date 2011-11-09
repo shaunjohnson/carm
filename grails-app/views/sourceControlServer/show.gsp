@@ -1,4 +1,4 @@
-<%@ page import="net.lmxm.carm.SourceControlServer" %>
+<%@ page import="carm.SourceControlServer" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
