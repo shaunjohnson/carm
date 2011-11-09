@@ -98,7 +98,6 @@ grails.plugins.springsecurity.rejectIfNoRule = true
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/':                              ['permitAll'],
     '/index.gsp':                     ['permitAll'],
-    '/home/**':                       ['permitAll'],
     '/js/**':                         ['permitAll'],
     '/css/**':                        ['permitAll'],
     '/images/**':                     ['permitAll'],
@@ -108,11 +107,16 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/j_spring_security_switch_user': ['ROLE_SUPERVISOR'],
 
     '/**':                            ['ROLE_USER'],
+
+    '/home/**':                       ['permitAll'],
+
     '/applicationRelease/**':         ['ROLE_USER'],
+    '/applicationRelease/index':      ['permitAll'],
+    '/applicationRelease/list':       ['permitAll'],
+    '/applicationRelease/show':       ['permitAll'],
 
     '/user/**':                       ['ROLE_ADMIN'],
     '/role/**':                       ['ROLE_ADMIN'],
-
     '/application/**':                ['ROLE_ADMIN'],
     '/applicationType/**':            ['ROLE_ADMIN'],
     '/module/**':                     ['ROLE_ADMIN'],

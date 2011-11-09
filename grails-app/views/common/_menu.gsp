@@ -1,5 +1,6 @@
 <ul id='multi-ddm'>
 	<li><a href="${createLink(uri: '/')}">Home</a></li>
+    <li><g:link controller="applicationRelease">App Releases</g:link></li>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li><a href="#">Administration</a>
             <ul>

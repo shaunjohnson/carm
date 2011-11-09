@@ -9,13 +9,15 @@
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
-    <div class="nav">
-        <span class="menuButton">
-            <g:link class="create" controller="applicationRelease" action="create" params="['application.id': applicationInstance?.id]">
-                <g:message code="default.new.label" args="[entityReleaseName]" />
-            </g:link>
-        </span>
-    </div>
+    <sec:ifLoggedIn>
+        <div class="nav">
+            <span class="menuButton">
+                <g:link class="create" controller="applicationRelease" action="create" params="['application.id': applicationInstance?.id]">
+                    <g:message code="default.new.label" args="[entityReleaseName]" />
+                </g:link>
+            </span>
+        </div>
+    </sec:ifLoggedIn>
     <div class="body">
         <h1><g:message code="default.show.label" args="[entityName]"/></h1>
         <g:if test="${flash.message}">
