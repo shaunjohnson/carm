@@ -121,7 +121,6 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/applicationType/**':            ['ROLE_ADMIN'],
     '/module/**':                     ['ROLE_ADMIN'],
     '/moduleType/**':                 ['ROLE_ADMIN'],
-    '/project/**':                    ['ROLE_ADMIN'],
     '/sourceControlRepository/**':    ['ROLE_ADMIN'],
     '/sourceControlRole/**':          ['ROLE_ADMIN'],
     '/sourceControlServer/**':        ['ROLE_ADMIN'],

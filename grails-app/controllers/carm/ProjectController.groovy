@@ -1,8 +1,13 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_ADMIN'])
 class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def projectService
 
     def index = {
         redirect(action: "list", params: params)
@@ -10,7 +15,7 @@ class ProjectController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [projectInstanceList: Project.list(params), projectInstanceTotal: Project.count()]
+        [projectInstanceList: projectService.list(params), projectInstanceTotal: projectService.count()]
     }
 
     def create = {
@@ -20,8 +25,8 @@ class ProjectController {
     }
 
     def save = {
-        def projectInstance = new Project(params)
-        if (projectInstance.save(flush: true)) {
+        def projectInstance = projectService.create(params)
+        if (!projectInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
             redirect(action: "show", id: projectInstance.id)
         }
@@ -31,7 +36,7 @@ class ProjectController {
     }
 
     def show = {
-        def projectInstance = Project.get(params.id)
+        def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
@@ -42,7 +47,7 @@ class ProjectController {
     }
 
     def edit = {
-        def projectInstance = Project.get(params.id)
+        def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
@@ -53,7 +58,7 @@ class ProjectController {
     }
 
     def update = {
-        def projectInstance = Project.get(params.id)
+        def projectInstance = projectService.get(params.id?.toLong())
         if (projectInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -64,7 +69,7 @@ class ProjectController {
                     return
                 }
             }
-            projectInstance.properties = params
+            projectService.update(projectInstance, params)
             if (!projectInstance.hasErrors() && projectInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
                 redirect(action: "show", id: projectInstance.id)
@@ -80,10 +85,10 @@ class ProjectController {
     }
 
     def delete = {
-        def projectInstance = Project.get(params.id)
+        def projectInstance = projectService.get(params.id?.toLong())
         if (projectInstance) {
             try {
-                projectInstance.delete(flush: true)
+                projectService.delete(projectInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
                 redirect(action: "list")
             }
