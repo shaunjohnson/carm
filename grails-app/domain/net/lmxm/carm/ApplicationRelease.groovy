@@ -1,14 +1,17 @@
 package net.lmxm.carm
 
 class ApplicationRelease {
-    Application application
+    String releaseNumber
     String description
 
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-        application(nullable: true)
+        releaseNumber(maxSize: 20, nullable: false, blank: false)
         description(maxSize: 4000, nullable: true)
+        application(nullable: true)
     }
+
+    static belongsTo = [application: Application]
 }

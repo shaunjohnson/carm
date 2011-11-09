@@ -15,26 +15,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <div class="list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th><g:message code="application.project.label" default="Project" /></th>
-                            <th><g:message code="applicationRelease.application.label" default="Application" /></th>
-                            <g:sortableColumn property="description" title="${message(code: 'applicationRelease.description.label', default: 'Description')}" />
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${applicationReleaseInstanceList}" status="i" var="applicationReleaseInstance">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td><g:link action="show" id="${applicationReleaseInstance.id}">${applicationReleaseInstance?.application?.project}</g:link></td>
-                            <td><g:link action="show" id="${applicationReleaseInstance.id}">${fieldValue(bean: applicationReleaseInstance, field: "application")}</g:link></td>
-                            <td>${fieldValue(bean: applicationReleaseInstance, field: "description")}</td>
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
+
+            <g:render template="applicationReleaseList" model="[applicationReleaseInstanceList: applicationReleaseInstanceList" />
+
             <div class="paginateButtons">
                 <g:paginate total="${applicationReleaseInstanceTotal}" />
             </div>

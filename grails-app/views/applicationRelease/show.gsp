@@ -28,6 +28,10 @@
                             <td valign="top" class="value"><g:link controller="home" action="showApplication" id="${applicationReleaseInstance?.application?.id}">${applicationReleaseInstance?.application?.encodeAsHTML()}</g:link></td>
                         </tr>
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="applicationRelease.releaseNumber.label" default="Release Number" /></td>
+                            <td valign="top" class="value">${fieldValue(bean: applicationReleaseInstance, field: "releaseNumber")}</td>
+                        </tr>
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="applicationRelease.description.label" default="Description" /></td>
                             <td valign="top" class="value">${fieldValue(bean: applicationReleaseInstance, field: "description")}</td>
                         </tr>

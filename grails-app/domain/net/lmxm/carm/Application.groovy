@@ -23,7 +23,7 @@ class Application {
 
     static belongsTo = [project: Project]
 
-    static hasMany = [applicationRoles: ApplicationRole, modules: Module]
+    static hasMany = [applicationRoles: ApplicationRole, modules: Module, releases: ApplicationRelease]
 
     public String toString() {
         return name

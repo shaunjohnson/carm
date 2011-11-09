@@ -165,8 +165,13 @@ class BootStrap {
         //
         // Configure application releases
         //
-        new ApplicationRelease(application: brokerApplication, description: "Release broker application").save()
-        new ApplicationRelease(application: portalApplication, description: "Release portal application").save()
+        def brokerRelease = new ApplicationRelease(application: brokerApplication, releaseNumber: "1.0.5",
+                description: "Release broker application").save()
+        brokerApplication.addToReleases(brokerRelease)
+
+        def portalRelease = new ApplicationRelease(application: portalApplication, releaseNumber: "2.1.0",
+                description: "Release portal application").save()
+        portalApplication.addToReleases(portalRelease)
     }
 
     def configureUserRoles = {
