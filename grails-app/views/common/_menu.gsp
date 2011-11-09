@@ -38,6 +38,7 @@
                         <li><g:link controller="role">Roles</g:link></li>
                     </ul>
                 </li>
+                <a href="${createLink(uri: '/index.gsp')}">About</a>
             </ul>
         </li>
     </sec:ifAllGranted>
