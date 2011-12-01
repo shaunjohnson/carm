@@ -1,4 +1,4 @@
-<%@ page import="carm.Project" %>
+<%@ page import="carm.Project; org.springframework.security.acls.domain.BasePermission" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -40,6 +40,20 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dialog">
+        <table>
+            <tbody>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
+                <td valign="top" class="value">
+                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}" />
+                </td>
+            </tr>
             </tr>
             </tbody>
         </table>

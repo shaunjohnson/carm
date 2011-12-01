@@ -26,7 +26,7 @@ class ProjectService {
     }
 
     @Transactional
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     Project create(Map params) {
         Project project = new Project(params)
         project.save()
@@ -37,13 +37,12 @@ class ProjectService {
         project
     }
 
-    @PreAuthorize("hasPermission(#id, 'carm.Project', read) or hasPermission(#id, 'carm.Project', admin)")
+    //@PreAuthorize("hasPermission(#id, 'carm.Project', read) or hasPermission(#id, 'carm.Project', admin)")
     Project get(long id) {
         Project.get id
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @PostFilter("hasPermission(filterObject, read) or hasPermission(filterObject, admin)")
+    //@PostFilter("hasPermission(filterObject, read) or hasPermission(filterObject, admin)")
     List<Project> list(Map params) {
         Project.list params
     }

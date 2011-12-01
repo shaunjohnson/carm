@@ -1,4 +1,4 @@
-<%@ page import="carm.Project" %>
+<%@ page import="carm.Project; org.springframework.security.acls.domain.BasePermission" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -49,13 +49,30 @@
             </tbody>
         </table>
     </div>
-    <div class="buttons">
-        <g:form>
-            <g:hiddenField name="id" value="${projectInstance?.id}"/>
-            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        </g:form>
+
+    <div class="dialog">
+        <table>
+            <tbody>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
+                <td valign="top" class="value">
+                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}" />
+                </td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+    <sec:permitted className='carm.Project' id='${projectInstance?.id}' permission='${BasePermission.ADMINISTRATION}'>
+        <div class="buttons">
+            <g:form>
+                <g:hiddenField name="id" value="${projectInstance?.id}"/>
+                <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+            </g:form>
+        </div>
+    </sec:permitted>
 </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package carm
 
 class HomeController {
+    def projectService
+    
     def index = {
         [applicationReleaseInstanceList: ApplicationRelease.listOrderByApplication(),
                 projectInstanceList: Project.listOrderByName()]
@@ -29,7 +31,7 @@ class HomeController {
     }
 
     def showProject = {
-        def projectInstance = Project.get(params.id)
+        def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "index")

@@ -239,6 +239,10 @@ th.desc a {
 
 /* DIALOG */
 
+.dialog {
+    margin-bottom: 2em;
+}
+
 .dialog table {
     padding: 5px 0;
 }

@@ -9,7 +9,7 @@
 <div class="body">
     <h1>${entityName}</h1>
 
-    <p>Welcome to the Change And Request Management system known as CARM.</p>
+    <p>Welcome to the <u>C</u>hange <u>A</u>nd <u>R</u>equest <u>M</u>anagement system known as CARM.</p>
 
     <sec:ifNotLoggedIn>
         <p>
