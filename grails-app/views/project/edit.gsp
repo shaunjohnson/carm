@@ -61,7 +61,7 @@
                         <label for="description"><g:message code="project.projectManagers.label" default="Project Managers"/></label>
                     </td>
                     <td valign="top" class="value">
-                        <g:select name="projectManagers" from="${projectManagerList}" value="${projectManagers}" multiple="true"/>
+                        <g:select name="projectManagers" from="${projectManagerList}" optionKey="username" value="${projectManagers}" multiple="true"/>
                     </td>
                 </tr>
                 </tbody>

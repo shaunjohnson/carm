@@ -1,4 +1,4 @@
-<%@ page import="carm.Project" %>
+<%@ page import="carm.security.User; carm.Project" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -45,7 +45,7 @@
                         <label for="description"><g:message code="project.projectManagers.label" default="Project Managers"/></label>
                     </td>
                     <td valign="top" class="value">
-                        <g:select name="projectManagers" from="${projectManagerList}" value="${projectManagers}" multiple="true"/>
+                        <g:select name="projectManagers" from="${projectManagerList}" optionKey="username" value="${projectManagers}" multiple="true"/>
                     </td>
                 </tr>
                 </tbody>

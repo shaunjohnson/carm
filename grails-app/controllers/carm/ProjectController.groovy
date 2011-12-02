@@ -11,6 +11,7 @@ class ProjectController {
 
     def carmSecurityService
     def projectService
+    def springSecurityService
 
     def index = {
         redirect(action: "list", params: params)
@@ -24,7 +25,8 @@ class ProjectController {
     def create = {
         def projectInstance = new Project()
         projectInstance.properties = params
-        return [projectInstance: projectInstance, projectManagerList: User.listOrderById()]
+        def projectManagers = [springSecurityService.authentication.name]
+        return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderByUsername()]
     }
 
     def save = {
@@ -34,7 +36,7 @@ class ProjectController {
             redirect(action: "show", id: projectInstance.id)
         }
         else {
-            render(view: "create", model: [projectInstance: projectInstance])
+            render(view: "create", model: [projectInstance: projectInstance, projectManagers: params.projectManagers, projectManagerList: User.listOrderByUsername()])
         }
     }
 
@@ -57,7 +59,7 @@ class ProjectController {
         }
         else {
             def projectManagers = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
-            return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderById()]
+            return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderByUsername()]
         }
     }
 
@@ -68,7 +70,7 @@ class ProjectController {
                 def version = params.version.toLong()
                 if (projectInstance.version > version) {
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
-                    render(view: "edit", model: [projectInstance: projectInstance])
+                    render(view: "edit", model: [projectInstance: projectInstance, projectManagerList: User.listOrderByUsername()])
                     return
                 }
             }
@@ -78,7 +80,7 @@ class ProjectController {
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
-                render(view: "edit", model: [projectInstance: projectInstance])
+                render(view: "edit", model: [projectInstance: projectInstance, projectManagerList: User.listOrderByUsername()])
             }
         }
         else {
