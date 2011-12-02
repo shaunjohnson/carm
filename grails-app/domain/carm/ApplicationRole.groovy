@@ -12,6 +12,6 @@ class ApplicationRole {
     }
 
     public String toString() {
-        return "$sourceControlUser : $role : $application"
+        return "$sourceControlUser ($role)"
     }
 }
