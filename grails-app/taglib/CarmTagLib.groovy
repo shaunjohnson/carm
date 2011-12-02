@@ -20,8 +20,6 @@ class CarmTagLib {
             def acl = aclUtilService.readAcl(domainObject)
             def principals = []
 
-            println acl.entries.size()
-
             acl.entries.eachWithIndex { entry, i ->
                 if (entry.permission.equals(permission)) {
                     principals.add entry.sid.principal
