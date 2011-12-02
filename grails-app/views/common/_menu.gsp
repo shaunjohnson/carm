@@ -4,14 +4,14 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <li><a href="#">Administration</a>
             <ul>
-                <li><a href="#">Projects</a>
+                <li><g:link controller="project">Projects</g:link>
                     <ul>
                         <li><g:link controller="project">Projects</g:link></li>
                         <li><g:link controller="application">Applications</g:link></li>
                         <li><g:link controller="module">Modules</g:link></li>
                     </ul>
                 </li>
-                <li><a href="#">Source Control</a>
+                <li><g:link controller="sourceControlServer">Source Control</g:link>
                     <ul>
                         <li><g:link controller="sourceControlServer">Servers</g:link></li>
                         <li><g:link controller="sourceControlRepository">Repositories</g:link></li>
@@ -19,7 +19,7 @@
                         <li><g:link controller="sourceControlRole">Roles</g:link></li>
                     </ul>
                 </li>
-                <li><a href="#">Systems</a>
+                <li><g:link controller="system">Systems</g:link>
                     <ul>
                         <li><g:link controller="system">Systems</g:link></li>
                         <li><g:link controller="systemComponent">Components</g:link></li>
@@ -32,7 +32,7 @@
                         <li><g:link controller="moduleType">Module Types</g:link></li>
                     </ul>
                 </li>
-                <li><a href="#">Security</a>
+                <li><g:link controller="user">Security</g:link>
                     <ul>
                         <li><g:link controller="user">Users</g:link></li>
                         <li><g:link controller="role">Roles</g:link></li>
