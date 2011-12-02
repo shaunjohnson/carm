@@ -251,6 +251,7 @@ th.desc a {
     padding: 5px;
 }
 .prop .name {
+    color: #888;
     text-align: left;
     width: 15%;
     white-space: nowrap;
