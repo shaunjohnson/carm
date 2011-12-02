@@ -40,6 +40,14 @@
                         <g:textArea name="description" cols="40" rows="5" value="${projectInstance?.description}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="description"><g:message code="project.projectManagers.label" default="Project Managers"/></label>
+                    </td>
+                    <td valign="top" class="value">
+                        <g:select name="projectManagers" from="${projectManagerList}" value="${projectManagers}" multiple="true"/>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

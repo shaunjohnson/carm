@@ -56,6 +56,15 @@
                         <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'application.label', default: 'Application')])}</g:link>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="description"><g:message code="project.projectManagers.label" default="Project Managers"/></label>
+                    </td>
+                    <td valign="top" class="value">
+                        <g:select name="projectManagers" from="${projectManagerList}" value="${projectManagers}" multiple="true"/>
+                    </td>
+                </tr>
+                </tbody>
                 </tbody>
             </table>
         </div>

@@ -1,7 +1,6 @@
-import org.springframework.security.acls.model.NotFoundException
 
 class CarmTagLib {
-    def aclUtilService
+    def carmSecurityService
 
     /**
      * Formats a SourceControlRepository as a link.
@@ -28,20 +27,7 @@ class CarmTagLib {
         def domainObject = attrs.domainObject
         def permission = attrs.permission
 
-        def principals = []
-
-        try {
-            def acl = aclUtilService.readAcl(domainObject)
-
-            acl.entries.eachWithIndex { entry, i ->
-                if (entry.permission.equals(permission)) {
-                    principals.add(entry.sid.principal)
-                }
-            }
-        }
-        catch (NotFoundException e) {
-            log.debug "listUsersWithPermission() : NotFoundException caught looking up users for domain object"
-        }
+        def principals = carmSecurityService.findAllPrincipalsByDomainAndPermission(domainObject, permission)
 
         if (principals.size()) {
             out << "<ul>"

@@ -1,12 +1,15 @@
 package carm
 
 import grails.plugins.springsecurity.Secured
+import carm.security.User
+import org.springframework.security.acls.domain.BasePermission
 
 @Secured(['ROLE_ADMIN'])
 class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def carmSecurityService
     def projectService
 
     def index = {
@@ -21,7 +24,7 @@ class ProjectController {
     def create = {
         def projectInstance = new Project()
         projectInstance.properties = params
-        return [projectInstance: projectInstance]
+        return [projectInstance: projectInstance, projectManagerList: User.listOrderById()]
     }
 
     def save = {
@@ -53,7 +56,8 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            return [projectInstance: projectInstance]
+            def projectManagers = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
+            return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderById()]
         }
     }
 
@@ -63,7 +67,6 @@ class ProjectController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (projectInstance.version > version) {
-                    
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
                     render(view: "edit", model: [projectInstance: projectInstance])
                     return

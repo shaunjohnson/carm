@@ -5,34 +5,40 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.security.acls.model.Permission
 import org.springframework.transaction.annotation.Transactional
+import carm.security.User
 
 class ProjectService {
-
     static transactional = false
 
-    def aclPermissionFactory
-    def aclService
+    def carmSecurityService
+//    def aclPermissionFactory
     def aclUtilService
-    def springSecurityService
 
-    void addPermission(Project project, String username, int permission) {
-        addPermission project, username, aclPermissionFactory.buildFromMask(permission)
-    }
-
-    @PreAuthorize("hasPermission(#project, admin)")
-    @Transactional
-    void addPermission(Project project, String username, Permission permission) {
-        aclUtilService.addPermission project, username, permission
-    }
+//    void addPermission(Project project, String username, int permission) {
+//        addPermission project, username, aclPermissionFactory.buildFromMask(permission)
+//    }
 
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     Project create(Map params) {
+        def prefix = "create() :"
+
+        log.debug "$prefix entered"
+
+        if (!params.projectManagers) {
+            log.error "$prefix At least one project manager must be selected"
+            throw new RuntimeException("At least one project manager must be selected")
+        }
+
         Project project = new Project(params)
         project.save()
 
-        // Grant the current principal administrative permission
-        addPermission project, springSecurityService.authentication.name, BasePermission.ADMINISTRATION
+        // Grant the list of project managers administration permission
+        if (!project.hasErrors()) {
+            carmSecurityService.createPermissions(project, params.projectManagers, BasePermission.ADMINISTRATION)
+        }
+
+        log.debug "$prefix returning $project"
 
         project
     }
@@ -54,7 +60,23 @@ class ProjectService {
     @Transactional
     @PreAuthorize("hasPermission(#project, write) or hasPermission(#project, admin)")
     void update(Project project, Map params) {
+        def prefix = "update() :"
+
+        log.debug "$prefix entered"
+
+        if (!params.projectManagers) {
+            log.error "$prefix At least one project manager must be selected"
+            throw new RuntimeException("At least one project manager must be selected")
+        }
+        
         project.properties = params
+
+        // Grant the list of project managers administration permission
+        if (!project.hasErrors()) {
+            carmSecurityService.updatePermissions(project, params.projectManagers, BasePermission.ADMINISTRATION)
+        }
+
+        log.debug "$prefix leaving"
     }
 
     @Transactional
@@ -64,20 +86,5 @@ class ProjectService {
 
         // Delete the ACL information as well
         aclUtilService.deleteAcl project
-    }
-
-    @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
-    void deletePermission(Project project, String username, Permission permission) {
-        def acl = aclUtilService.readAcl(project)
-
-        // Remove all permissions associated with this particular recipient (string equality to KISS)
-        acl.entries.eachWithIndex { entry, i ->
-            if (entry.sid.equals(recipient) && entry.permission.equals(permission)) {
-                acl.deleteAce i
-            }
-        }
-
-        aclService.updateAcl acl
     }
 }
