@@ -3,20 +3,16 @@ package carm
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
-import org.springframework.security.acls.model.Permission
 import org.springframework.transaction.annotation.Transactional
-import carm.security.User
 
 class ProjectService {
     static transactional = false
 
     def carmSecurityService
-//    def aclPermissionFactory
-    def aclUtilService
 
-//    void addPermission(Project project, String username, int permission) {
-//        addPermission project, username, aclPermissionFactory.buildFromMask(permission)
-//    }
+    int count() {
+        Project.count()
+    }
 
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -43,18 +39,20 @@ class ProjectService {
         project
     }
 
-    //@PreAuthorize("hasPermission(#id, 'carm.Project', read) or hasPermission(#id, 'carm.Project', admin)")
+    @Transactional
+    @PreAuthorize("hasPermission(#project, delete) or hasPermission(#project, admin)")
+    void delete(Project project) {
+        project.delete()
+
+        carmSecurityService.deleteAllPermissions(domainObject)
+    }
+
     Project get(long id) {
         Project.get id
     }
 
-    //@PostFilter("hasPermission(filterObject, read) or hasPermission(filterObject, admin)")
     List<Project> list(Map params) {
         Project.list params
-    }
-
-    int count() {
-        Project.count()
     }
 
     @Transactional
@@ -77,14 +75,5 @@ class ProjectService {
         }
 
         log.debug "$prefix leaving"
-    }
-
-    @Transactional
-    @PreAuthorize("hasPermission(#project, delete) or hasPermission(#project, admin)")
-    void delete(Project project) {
-        project.delete()
-
-        // Delete the ACL information as well
-        aclUtilService.deleteAcl project
     }
 }

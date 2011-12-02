@@ -14,6 +14,13 @@ class CarmSecurityService {
     def aclService
     def aclUtilService
 
+    /**
+     * Adds a new permission for the provided domain object.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param username User to be granted access
+     * @param permission Permission to grant user
+     */
     @PreAuthorize("hasPermission(#domainObject, admin)")
     @Transactional
     void addPermission(domainObject, String username, Permission permission) {
@@ -31,9 +38,16 @@ class CarmSecurityService {
         log.debug "$prefix permission added. leaving."
     }
 
+    /**
+     * Adds a new permission for the provided domain object.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param principals Users to be granted access
+     * @param permission Permission to grant user
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    def createPermissions(domainObject, principals, Permission permission) {
+    void createPermissions(domainObject, principals, Permission permission) {
         def prefix = "createPermissions() :"
 
         log.debug "$prefix entered. domainObject=$domainObject, principals=$principals, permission=$permission"
@@ -52,27 +66,29 @@ class CarmSecurityService {
         log.debug "$prefix leaving"
     }
 
-    @Transactional
+    /**
+     * Deletes all permissions for a domain object. Effectively removing the ACL for the domain object.
+     *
+     * @param domainObject Domain object to delete ACL.
+     */
     @PreAuthorize("hasPermission(#domainObject, admin)")
-    void deletePermission(domainObject, principal, Permission permission) {
-        def prefix = "deletePermission() :"
+    @Transactional
+    void deleteAllPermissions(domainObject) {
+        def prefix = "deleteAllPermissions() :"
 
-        log.debug "$prefix entered. domainObject=$domainObject, principal=$principal, permission=$permission"
+        log.debug "$prefix entered. domainObject=$domainObject"
 
-        def acl = aclUtilService.readAcl(domainObject)
-
-        // Remove all permissions associated with this particular recipient (string equality to KISS)
-        acl.entries.eachWithIndex { entry, i ->
-            if (entry.sid.equals(principal) && entry.permission.equals(permission)) {
-                acl.deleteAce i
-            }
-        }
-
-        aclService.updateAcl acl
+        aclUtilService.deleteAcl(domainObject)
 
         log.debug "$prefix leaving"
     }
 
+    /**
+     * Deletes all permissions for the provided domain object, filtered by the provided permission.
+     *
+     * @param domainObject Domain object to delete ACL
+     * @param permission Permission to be deleted
+     */
     @PreAuthorize("hasPermission(#domainObject, admin)")
     @Transactional
     void deleteAllPermissions(domainObject, Permission permission) {
@@ -94,25 +110,30 @@ class CarmSecurityService {
         log.debug "$prefix leaving"
     }
 
-    @PreAuthorize("hasPermission(#domainObject, admin)")
+    /**
+     * Deletes all permissions for the provided domain object, filtered by the provided permission.
+     *
+     * @param domainObject Domain object form which permissions are revoked
+     * @param username User to revoke access
+     * @param permission Permission to be revoked
+     */
     @Transactional
-    def updatePermissions(domainObject, principals, Permission permission) {
-        def prefix = "updatePermissions() :"
+    @PreAuthorize("hasPermission(#domainObject, admin)")
+    void deletePermission(domainObject, username, Permission permission) {
+        def prefix = "deletePermission() :"
 
-        log.debug "$prefix entered. domainObject=$domainObject, principals=$principals, permission=$permission"
+        log.debug "$prefix entered. domainObject=$domainObject, username=$username, permission=$permission"
 
-        if (principals) {
-            deleteAllPermissions(domainObject, permission)
+        def acl = aclUtilService.readAcl(domainObject)
 
-            if (principals instanceof String) {
-                addPermission domainObject, principals, BasePermission.ADMINISTRATION
-            }
-            else {
-                principals.each {
-                    addPermission domainObject, it, BasePermission.ADMINISTRATION
-                }
+        // Remove all permissions associated with this particular recipient (string equality to KISS)
+        acl.entries.eachWithIndex { entry, i ->
+            if (entry.sid.equals(username) && entry.permission.equals(permission)) {
+                acl.deleteAce i
             }
         }
+
+        aclService.updateAcl acl
 
         log.debug "$prefix leaving"
     }
@@ -149,5 +170,36 @@ class CarmSecurityService {
         log.debug "$prefix returning ${principals.size()} principals"
 
         principals
+    }
+
+    /**
+     * Replaces existing permissions with new ones for the provided principals.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param principals Users to be granted access
+     * @param permission Permission to grant user
+     * @return
+     */
+    @PreAuthorize("hasPermission(#domainObject, admin)")
+    @Transactional
+    def updatePermissions(domainObject, principals, Permission permission) {
+        def prefix = "updatePermissions() :"
+
+        log.debug "$prefix entered. domainObject=$domainObject, principals=$principals, permission=$permission"
+
+        if (principals) {
+            deleteAllPermissions(domainObject, permission)
+
+            if (principals instanceof String) {
+                addPermission domainObject, principals, permission
+            }
+            else {
+                principals.each {
+                    addPermission domainObject, it, permission
+                }
+            }
+        }
+
+        log.debug "$prefix leaving"
     }
 }
