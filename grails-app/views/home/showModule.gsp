@@ -29,11 +29,21 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.application.label" default="Application"/></td>
-                <td valign="top" class="value"><g:link controller="home" action="showApplication" id="${moduleInstance?.application?.id}">${moduleInstance?.application?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="home" action="showApplication"
+                            id="${moduleInstance?.application?.id}">${moduleInstance?.application?.encodeAsHTML()}</g:link>
+                    [<g:link controller="home" action="showProject"
+                            id="${moduleInstance?.application?.project?.id}">${moduleInstance?.application?.project?.encodeAsHTML()}</g:link>]
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.systemComponent.label" default="System Component"/></td>
-                <td valign="top" class="value"><g:link controller="home" action="showSystemComponent" id="${moduleInstance?.systemComponent?.id}">${moduleInstance?.systemComponent?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="home" action="showSystemComponent"
+                            id="${moduleInstance?.systemComponent?.id}">${moduleInstance?.systemComponent?.encodeAsHTML()}</g:link>
+                    [<g:link controller="home" action="showSystemComponent"
+                            id="${moduleInstance?.systemComponent?.system?.id}">${moduleInstance?.systemComponent?.system?.encodeAsHTML()}</g:link>]
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.dateCreated.label" default="Date Created"/></td>
