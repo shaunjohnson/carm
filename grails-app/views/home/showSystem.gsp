@@ -1,4 +1,4 @@
-<%@ page import="carm.System" %>
+<%@ page import="carm.Application; carm.System" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -53,6 +53,15 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <h2>Applications</h2>
+    <div class="dialog">
+        <ul>
+            <g:each in="${Application.findAllBySystem(systemInstance).sort { it.name } }" var="application">
+                <li><g:link controller="home" action="showApplication" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
+            </g:each>
+        </ul>
     </div>
 </div>
 </body>

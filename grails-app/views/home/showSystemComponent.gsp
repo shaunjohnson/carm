@@ -1,4 +1,4 @@
-<%@ page import="carm.SystemComponent" %>
+<%@ page import="carm.Module; carm.SystemComponent" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -37,6 +37,20 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <h2>Modules</h2>
+    <div class="dialog">
+        <ul>
+            <g:each in="${Module.findAllBySystemComponent(systemComponentInstance).sort { it.name } }" var="module">
+                <li>
+                    <g:link controller="home" action="showModule"
+                            id="${module.id}">${module?.encodeAsHTML()}</g:link>
+                    [<g:link controller="home" action="showApplication"
+                            id="${module.application.id}">${module?.application?.encodeAsHTML()}</g:link>]
+                </li>
+            </g:each>
+        </ul>
     </div>
 </div>
 </body>
