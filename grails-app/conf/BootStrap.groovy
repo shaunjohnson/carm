@@ -21,138 +21,108 @@ import carm.ApplicationRole
 import carm.ApplicationRelease
 
 class BootStrap {
+
+    def databaseAppType
+    def enterpriseAppType
+    def brokerAppType
+    def portalAppType
+    def standaloneAppType
+
+    def configModType
+    def ejbModType
+    def mdbModType
+    def portletModType
+
+    def subversionServer
+    def subversionRepository
+
+    def bigSystem
+    def dataLayer
+    def integrationLayer
+    def businessLayer
+    def presentationLayer
+
+    def sandboxEnv
+    def integrationEnv
+    def testEnv
+    def stageEnv
+    def trainEnv
+    def productionEnv
+
     def init = { servletContext ->
-        //
-        // Configure static values
-        //
         configureUserRoles()
-
-        //
-        // Configure test values
-        //
         configureUsers()
-
-        //
-        // Configure Systems
-        //
-        def system = new System(name: 'My Big System', description: 'My Big System').save()
-        def dataLayer = new SystemComponent(name: 'Data Layer', description: 'Big system data layer',
-                system: system).save()
-        system.addToComponents(dataLayer);
-
-        def integrationLayer = new SystemComponent(name: 'Integraion Layer', description: 'Big system integration layer',
-                system: system).save()
-        system.addToComponents(integrationLayer)
-
-        def businessLayer = new SystemComponent(name: 'Business Layer', description: 'Big system business layer',
-                system: system).save()
-        system.addToComponents(businessLayer)
-
-        def presentationLayer = new SystemComponent(name: 'Presentation Layer', description: 'Big system presentation layer',
-                system: system).save()
-        system.addToComponents(presentationLayer)
-
-        def sandboxEnv = new SystemEnvironment(name: "Sandbox", system: system).save()
-        system.addToEnvironments(sandboxEnv)
-
-        def integrationEnv = new SystemEnvironment(name: "Integration", system: system).save()
-        system.addToEnvironments(integrationEnv)
-
-        def testEnv = new SystemEnvironment(name: "Test", system: system).save()
-        system.addToEnvironments(testEnv)
-
-        def stageEnv = new SystemEnvironment(name: "Stage", system: system).save()
-        system.addToEnvironments(stageEnv)
-
-        def trainEnv = new SystemEnvironment(name: "Train", system: system).save()
-        system.addToEnvironments(trainEnv)
-
-        def productionEnv = new SystemEnvironment(name: "Production", system: system).save()
-        system.addToEnvironments(productionEnv)
-
-        system.save()
-
-        //
-        // Configure Source Control Servers
-        //
-        def subversionServer = new SourceControlServer(name: "My Big SVN Server",
-                type: SourceControlServerType.Subversion,
-                description: "Subversion server", url: "http://svn.mybig.com").save()
-
-        def subversionRepository = new SourceControlRepository(name: "My Big SVN Repository",
-                description: "Subversion repository", path: "/repository",
-                server: subversionServer).save()
-
-        //
-        // Configure Application Types
-        //
-        def dbScriptsAppType = new ApplicationType(name: "DB Scripts", description: "Database scripts").save()
-        def earAppType = new ApplicationType(name: "EAR App", description: "Enterprise Application").save()
-        def brokerAppType = new ApplicationType(name: "Broker App", description: "Broker Application").save()
-        def portalAppType = new ApplicationType(name: "Portal App", description: "Portal Application").save()
-
-        //
-        // Configure Module Types
-        //
-        def ejbModType = new ModuleType(name: 'EJB', description: 'Enterprise Java Bean').save()
-        def mdbModType = new ModuleType(name: 'MDB', description: 'Message Driven Bean').save()
-        def portletModType = new ModuleType(name: 'Portlet', description: 'Portlet').save()
+        configureApplicationTypes()
+        configureModuleTypes()
+        configureSourceControlsServers()
+        configureSystems()
 
         //
         // Configure Project with applications and modules
         //
-        def myBigProject = new Project(name: 'My Big Project', description: 'My big project').save()
+        def myBigProject = new Project(name: 'Big Project', description: 'Big project').save()
 
-        def dataApplication = new Application(name: "Database Scripts", description: "My Big Project db scripts",
-                type: dbScriptsAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/database',
-                project: myBigProject, system: system).save()
+        def dataApplication = new Application(name: 'Database Scripts', description: 'Big Project db scripts',
+                type: databaseAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/database',
+                project: myBigProject, system: bigSystem).save()
         myBigProject.addToApplications(dataApplication)
 
 
-        def earApplication = new Application(name: "My Big EAR", description: "My Big Project EAR",
-                type: earAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/ear',
-                project: myBigProject, system: system).save()
+        def earApplication = new Application(name: 'Business Services EAR', description: 'Big Project EAR application',
+                type: enterpriseAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/ear',
+                project: myBigProject, system: bigSystem).save()
         myBigProject.addToApplications(earApplication)
 
-        def bussEjbModule = new Module(name: 'Business Services EJB', description: 'Business Services EJB',
+        def bussEjbModule = new Module(name: 'Business Services EJB',
+                description: 'Business Services EJB module',
                 type: ejbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(bussEjbModule)
 
-        def transEjbModule = new Module(name: 'Transition EJB', description: 'Transition Services EJB',
+        def transEjbModule = new Module(name: 'Transition Services EJB',
+                description: 'Transition Services EJB module',
                 type: ejbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(transEjbModule)
 
-        def bussMdbModule = new Module(name: 'Business Services MDB', description: 'Business Services MDB',
+        def bussMdbModule = new Module(name: 'Business Services MDB',
+                description: 'Business Services MDB module',
                 type: mdbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(bussMdbModule)
 
 
-        def brokerApplication = new Application(name: "My Big Broker", description: "My Big Project broker",
+        def brokerApplication = new Application(name: 'Business Services Broker',
+                description: 'Big Project broker aplication',
                 type: brokerAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/broker',
-                project: myBigProject, system: system).save()
+                project: myBigProject, system: bigSystem).save()
         myBigProject.addToApplications(brokerApplication)
 
 
-        def portalApplication = new Application(name: "My Portal App", description: "My Big Project portal application",
+        def portalApplication = new Application(name: 'Portal Application',
+                description: 'My Big Project portal application',
                 type: portalAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/portal',
-                project: myBigProject, system: system).save()
+                project: myBigProject, system: bigSystem).save()
         myBigProject.addToApplications(portalApplication)
 
-        def portletModule = new Module(name: 'My Portlet', description: 'My Big Portlet application',
+        def userPortletModule = new Module(name: 'User Portlet',
+                description: 'Big Project User Portlet',
                 type: portletModType, application: portalApplication, systemComponent: presentationLayer).save()
-        portalApplication.addToModules(portletModule)
+        portalApplication.addToModules(userPortletModule)
+
+        def adminPortletModule = new Module(name: 'Admin Portlet',
+                description: 'Big Project Administration Portlet',
+                type: portletModType, application: portalApplication, systemComponent: presentationLayer).save()
+        portalApplication.addToModules(adminPortletModule)
 
         myBigProject.save()
 
         //
         // Configure source control security
         //
-        def shaunScmUser = new SourceControlUser(name: 'shaun', description: 'Shaun user',
+        def developerScmRole = new SourceControlRole(name: 'developer', description: 'Developer role').save()
+        def managerScmRole = new SourceControlRole(name: 'manager', description: 'Manager role').save()
+
+        def shaunScmUser = new SourceControlUser(name: 'shaun', description: 'The user named Shaun',
                 sourceControlServer: subversionServer,
                 user: User.findByUsername('shaun')).save()
-
-        def developerScmRole = new SourceControlRole(name: 'developer', description: 'Developer role').save()
-
         new ApplicationRole(application: dataApplication, role: developerScmRole,
                 sourceControlUser: shaunScmUser).save()
         new ApplicationRole(application: earApplication, role: developerScmRole,
@@ -162,44 +132,166 @@ class BootStrap {
         new ApplicationRole(application: portalApplication, role: developerScmRole,
                 sourceControlUser: shaunScmUser).save()
 
+        def susanScmUser = new SourceControlUser(name: 'susan', description: 'The user named Susan',
+                sourceControlServer: subversionServer,
+                user: User.findByUsername('susan')).save()
+        new ApplicationRole(application: dataApplication, role: developerScmRole,
+                sourceControlUser: susanScmUser).save()
+        new ApplicationRole(application: earApplication, role: developerScmRole,
+                sourceControlUser: susanScmUser).save()
+        new ApplicationRole(application: brokerApplication, role: developerScmRole,
+                sourceControlUser: susanScmUser).save()
+        new ApplicationRole(application: portalApplication, role: developerScmRole,
+                sourceControlUser: susanScmUser).save()
+
+        def scottScmUser = new SourceControlUser(name: 'scott', description: 'The user named Scott',
+                sourceControlServer: subversionServer,
+                user: User.findByUsername('scott')).save()
+        new ApplicationRole(application: dataApplication, role: managerScmRole,
+                sourceControlUser: scottScmUser).save()
+        new ApplicationRole(application: earApplication, role: managerScmRole,
+                sourceControlUser: scottScmUser).save()
+        new ApplicationRole(application: brokerApplication, role: managerScmRole,
+                sourceControlUser: scottScmUser).save()
+        new ApplicationRole(application: portalApplication, role: managerScmRole,
+                sourceControlUser: scottScmUser).save()
         //
         // Configure application releases
         //
-        def brokerRelease = new ApplicationRelease(application: brokerApplication, releaseNumber: "1.0.5",
-                description: "Release broker application").save()
+        def brokerRelease = new ApplicationRelease(application: brokerApplication, releaseNumber: '1.0.5',
+                description: 'Release broker application to fix message flow issue.').save()
         brokerApplication.addToReleases(brokerRelease)
 
-        def portalRelease = new ApplicationRelease(application: portalApplication, releaseNumber: "2.1.0",
-                description: "Release portal application").save()
+        def portalRelease = new ApplicationRelease(application: portalApplication, releaseNumber: '2.1.0',
+                description: 'Release portal application to update to latest jQuery version.').save()
         portalApplication.addToReleases(portalRelease)
     }
 
-    def configureUserRoles = {
+    def configureApplicationTypes() {
+        databaseAppType = new ApplicationType(name: 'Database Application',
+                description: 'Database application').save()
+        enterpriseAppType = new ApplicationType(name: 'Enterprise Application',
+                description: 'Enterprise application').save()
+        brokerAppType = new ApplicationType(name: 'Broker Application',
+                description: 'Broker application').save()
+        portalAppType = new ApplicationType(name: 'Portal Application',
+                description: 'Portal application').save()
+        standaloneAppType = new ApplicationType(name: 'Standalone Application',
+                description: 'Standalone application').save()
+    }
+
+    def configureModuleTypes() {
+        configModType = new ModuleType(name: 'Config', description: 'Configuration files').save()
+        ejbModType = new ModuleType(name: 'EJB', description: 'Enterprise Java Bean').save()
+        mdbModType = new ModuleType(name: 'MDB', description: 'Message Driven Bean').save()
+        portletModType = new ModuleType(name: 'Portlet', description: 'Portlet').save()
+    }
+
+    def configureSourceControlsServers() {
+        subversionServer = new SourceControlServer(name: 'Company SVN Server',
+                type: SourceControlServerType.Subversion,
+                description: 'Our company Subversion server.', url: 'http://svn.company.com').save()
+
+        subversionRepository = new SourceControlRepository(name: 'Big System SVN Repository',
+                description: 'Big System Subversion repository.', path: '/bigrepo',
+                server: subversionServer).save()
+    }
+
+    def configureSystems() {
+        bigSystem = new System(name: 'Big System', description: 'Big System').save()
+
+        dataLayer = new SystemComponent(name: 'Oracle 10g Database Server',
+                description: 'Oracle 10g database server that provides the data layer for Big System.',
+                system: bigSystem).save()
+        bigSystem.addToComponents(dataLayer);
+
+        integrationLayer = new SystemComponent(name: 'WebSphere Broker 7.0',
+                description: 'WebSphere Broker 7.0 is used for the Big System integration layer.',
+                system: bigSystem).save()
+        bigSystem.addToComponents(integrationLayer)
+
+        businessLayer = new SystemComponent(name: 'WebSphere Application Server 7.0',
+                description: 'The Big System business layer runs on WAS 7.0.',
+                system: bigSystem).save()
+        bigSystem.addToComponents(businessLayer)
+
+        presentationLayer = new SystemComponent(name: 'WebSphere Portal Server 7.0',
+                description: 'The Big System presentation layer is WebSphere Portal Server.',
+                system: bigSystem).save()
+        bigSystem.addToComponents(presentationLayer)
+
+        sandboxEnv = new SystemEnvironment(name: 'Sandbox',
+                description: 'Sandbox is where applications are initially tested.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(sandboxEnv)
+
+        integrationEnv = new SystemEnvironment(name: 'Integration',
+                description: 'Integration is where applications are tested together.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(integrationEnv)
+
+        testEnv = new SystemEnvironment(name: 'Test',
+                description: 'Application and user testing environment.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(testEnv)
+
+        stageEnv = new SystemEnvironment(name: 'Stage',
+                description: 'Stage mimics production and is used for performance testing.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(stageEnv)
+
+        trainEnv = new SystemEnvironment(name: 'Train',
+                description: 'Train is where users are trained to use the applications.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(trainEnv)
+
+        productionEnv = new SystemEnvironment(name: 'Production',
+                description: 'Production is the end goal.',
+                system: bigSystem).save()
+        bigSystem.addToEnvironments(productionEnv)
+
+        bigSystem.save()
+    }
+
+    def configureUserRoles() {
         new Role(authority: 'ROLE_ADMIN').save(flush: true)
         new Role(authority: 'ROLE_USER').save(flush: true)
 
         assert Role.count() == 2
     }
 
-    def configureUsers = {
+    def configureUsers() {
         def adminRole = Role.findByAuthority('ROLE_ADMIN')
         def userRole = Role.findByAuthority('ROLE_USER')
 
+        //
+        // Add users with ROLE_USER
+        //
         def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
         adminUser.save(flush: true)
         UserRole.create adminUser, adminRole, true
-
-        def userUser = new User(username: 'user', enabled: true, password: 'user')
-        userUser.save(flush: true)
-        UserRole.create userUser, userRole, true
 
         def shaunUser = new User(username: 'shaun', enabled: true, password: 'shaun')
         shaunUser.save(flush: true)
         UserRole.create shaunUser, adminRole, true
 
+        def scottUser = new User(username: 'scott', enabled: true, password: 'scott')
+        scottUser.save(flush: true)
+        UserRole.create scottUser, adminRole, true
 
-        assert User.count() == 3
-        assert UserRole.count() == 3
+        //
+        // Add users with ROLE_ADMIN
+        //
+        def susanUser = new User(username: 'susan', enabled: true, password: 'susan')
+        susanUser.save(flush: true)
+        UserRole.create susanUser, userRole, true
+
+        def userUser = new User(username: 'user', enabled: true, password: 'user')
+        userUser.save(flush: true)
+        UserRole.create userUser, userRole, true
+
+        assert User.count() == 5
+        assert UserRole.count() == 5
     }
 
     def destroy = {
