@@ -94,7 +94,22 @@
         </table>
     </div>
 
-    <h1><g:message code="default.list.label" args="[entityReleaseName]"/></h1>
+    <h2>Environments</h2>
+    <div class="dialog">
+        <table>
+            <tbody>
+            <g:each in="${applicationInstance.system.environments}" var="environment">
+                <tr>
+                    <td>${environment}</td>
+                    <td><a href="#">Latest release</a></td>
+                    <td>on ??/??/????</td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
+
+    <h2><g:message code="default.list.label" args="[entityReleaseName]"/></h2>
     <g:set var="applicationReleaseInstanceList" value="${ApplicationRelease.findAllByApplication(applicationInstance).sort{ it.releaseNumber }.reverse()}"/>
 
     <g:if test="${applicationReleaseInstanceList?.size()}">
