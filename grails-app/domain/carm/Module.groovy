@@ -5,6 +5,7 @@ class Module {
     String description
     ModuleType type
     SystemComponent systemComponent
+    String deployInstructions
     
     Date dateCreated
     Date lastUpdated
@@ -15,6 +16,7 @@ class Module {
         type(nullable: false)
         application(nullable: false)
         systemComponent(nullable: true)
+        deployInstructions(maxSize: 4000, nullable: true)
     }
 
     static belongsTo = [application: Application]

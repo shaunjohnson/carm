@@ -16,6 +16,21 @@ class ModuleTests extends GrailsUnitTestCase {
     protected void tearDown() {
         super.tearDown()
     }
+
+    void testDeployInstructionsMaxSize() {
+        def testModule = new Module(name: 'Test Module', deployInstructions: "a" * 4001, type: moduleType, application: application)
+        mockForConstraintsTests(Module, [testModule])
+
+        assertFalse 'Should not be valid', testModule.validate()
+        assertEquals 'Deploy instructions is too long', 'maxSize', testModule.errors['deployInstructions']
+    }
+
+    void testDeployInstructionsNullable() {
+        def testModule = new Module(name: 'Test Module', deployInstructions: null, type: moduleType, application: application)
+        mockForConstraintsTests(Module, [testModule])
+
+        assertTrue 'Should be valid', testModule.validate()
+    }
     
     void testDescriptionMaxSize() {
         def testModule = new Module(name: 'Test Module', description: "a" * 4001, type: moduleType, application: application)

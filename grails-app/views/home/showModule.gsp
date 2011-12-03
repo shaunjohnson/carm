@@ -41,9 +41,13 @@
                 <td valign="top" class="value">
                     <g:link controller="home" action="showSystemComponent"
                             id="${moduleInstance?.systemComponent?.id}">${moduleInstance?.systemComponent?.encodeAsHTML()}</g:link>
-                    [<g:link controller="home" action="showSystemComponent"
+                    [<g:link controller="home" action="showSystem"
                             id="${moduleInstance?.systemComponent?.system?.id}">${moduleInstance?.systemComponent?.system?.encodeAsHTML()}</g:link>]
                 </td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="module.deployInstructions.label" default="Deploy Instructions"/></td>
+                <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "deployInstructions")}</td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.dateCreated.label" default="Date Created"/></td>

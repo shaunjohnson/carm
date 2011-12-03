@@ -28,6 +28,7 @@ class BootStrap {
     def portalAppType
     def standaloneAppType
 
+    def barModuleType
     def configModType
     def ejbModType
     def mdbModType
@@ -75,16 +76,19 @@ class BootStrap {
 
         def bussEjbModule = new Module(name: 'Business Services EJB',
                 description: 'Business Services EJB module',
+                deployInstructions: 'Update existing application.\nRestart server.',
                 type: ejbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(bussEjbModule)
 
         def transEjbModule = new Module(name: 'Transition Services EJB',
                 description: 'Transition Services EJB module',
+                deployInstructions: 'Update existing application.\nRestart server.',
                 type: ejbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(transEjbModule)
 
         def bussMdbModule = new Module(name: 'Business Services MDB',
                 description: 'Business Services MDB module',
+                deployInstructions: 'Update existing application.\nRestart server.',
                 type: mdbModType, application: earApplication, systemComponent: businessLayer).save()
         earApplication.addToModules(bussMdbModule)
 
@@ -95,6 +99,12 @@ class BootStrap {
                 project: myBigProject, system: bigSystem).save()
         myBigProject.addToApplications(brokerApplication)
 
+        def brokerModule = new Module(name: 'Broker BAR',
+                description: 'Broker BAR module',
+                deployInstructions: 'Update existing BAR file.',
+                type: barModuleType, application: brokerApplication, systemComponent: integrationLayer).save()
+        brokerApplication.addToModules(brokerModule)
+
 
         def portalApplication = new Application(name: 'Portal Application',
                 description: 'My Big Project portal application',
@@ -104,11 +114,13 @@ class BootStrap {
 
         def userPortletModule = new Module(name: 'User Portlet',
                 description: 'Big Project User Portlet',
+                deployInstructions: 'Update existing application.',
                 type: portletModType, application: portalApplication, systemComponent: presentationLayer).save()
         portalApplication.addToModules(userPortletModule)
 
         def adminPortletModule = new Module(name: 'Admin Portlet',
                 description: 'Big Project Administration Portlet',
+                deployInstructions: 'Update existing application.',
                 type: portletModType, application: portalApplication, systemComponent: presentationLayer).save()
         portalApplication.addToModules(adminPortletModule)
 
@@ -181,6 +193,7 @@ class BootStrap {
     }
 
     def configureModuleTypes() {
+        barModuleType = new ModuleType(name: 'BAR', description: 'Broker archive').save()
         configModType = new ModuleType(name: 'Config', description: 'Configuration files').save()
         ejbModType = new ModuleType(name: 'EJB', description: 'Enterprise Java Bean').save()
         mdbModType = new ModuleType(name: 'MDB', description: 'Message Driven Bean').save()

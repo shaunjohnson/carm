@@ -50,7 +50,7 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="application"><g:message code="module.application.label" default="Application"/></label>
+                        <label for="application.id"><g:message code="module.application.label" default="Application"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
                         <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${moduleInstance?.application?.id}"/>
@@ -58,10 +58,18 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="systemComponent"><g:message code="module.systemComponent.label" default="System Component"/></label>
+                        <label for="systemComponent.id"><g:message code="module.systemComponent.label" default="System Component"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponent', 'errors')}">
                         <g:select name="systemComponent.id" from="${carm.SystemComponent.list()}" optionKey="id" value="${moduleInstance?.systemComponent?.id}" noSelection="['null': '']"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="deployInstructions"><g:message code="module.deployInstructions.label" default="Deploy Instructions"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'deployInstructions', 'errors')}">
+                        <g:textArea name="deployInstructions" cols="40" rows="5" value="${moduleInstance?.deployInstructions}"/>
                     </td>
                 </tr>
                 </tbody>
