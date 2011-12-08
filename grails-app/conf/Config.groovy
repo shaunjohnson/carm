@@ -95,7 +95,7 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'carm.security.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'carm.security.UserRole'
 grails.plugins.springsecurity.authority.className = 'carm.security.Role'
-grails.plugins.springsecurity.rejectIfNoRule = true
+//grails.plugins.springsecurity.rejectIfNoRule = true
 
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/':                              ['permitAll'],
@@ -119,17 +119,17 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 
     '/user/**':                       ['ROLE_ADMIN'],
     '/role/**':                       ['ROLE_ADMIN'],
-    '/application/**':                ['ROLE_ADMIN'],
+//    '/application/**':                ['ROLE_ADMIN'],
     '/applicationType/**':            ['ROLE_ADMIN'],
-    '/module/**':                     ['ROLE_ADMIN'],
+//    '/module/**':                     ['ROLE_ADMIN'],
     '/moduleType/**':                 ['ROLE_ADMIN'],
-    '/sourceControlRepository/**':    ['ROLE_ADMIN'],
-    '/sourceControlRole/**':          ['ROLE_ADMIN'],
-    '/sourceControlServer/**':        ['ROLE_ADMIN'],
-    '/sourceControlUser/**':          ['ROLE_ADMIN'],
-    '/system/**':                     ['ROLE_ADMIN'],
-    '/systemComponent/**':            ['ROLE_ADMIN'],
-    '/systemEnvironment/**':          ['ROLE_ADMIN']
+//    '/sourceControlRepository/**':    ['ROLE_ADMIN'],
+//    '/sourceControlRole/**':          ['ROLE_ADMIN'],
+//    '/sourceControlServer/**':        ['ROLE_ADMIN'],
+//    '/sourceControlUser/**':          ['ROLE_ADMIN'],
+//    '/system/**':                     ['ROLE_ADMIN'],
+//    '/systemComponent/**':            ['ROLE_ADMIN'],
+//    '/systemEnvironment/**':          ['ROLE_ADMIN']
 ]
 
 // Grant ROLE_ADMIN the ROLE_USER role too
