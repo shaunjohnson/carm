@@ -34,23 +34,33 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
                 <td valign="top" class="value">
-                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}" />
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.applications.label" default="Applications"/></td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <ul>
-                        <g:each in="${projectInstance.applications.sort { it.name }}" var="a">
-                            <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-                        </g:each>
-                    </ul>
-                    <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
+                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}"/>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <h2>Applications</h2>
+    <g:if test="${applicationsGrouped?.size()}">
+        <g:each in="${applicationsGrouped}" var="entry">
+            <h3>${entry.key}</h3>
+            <ul>
+                <g:each in="${entry.value}" var="application">
+                    <li><g:link controller="application" action="show" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
+                </g:each>
+            </ul>
+        </g:each>
+    </g:if>
+    <g:else>
+        <p>
+            This project does not have any applications.
+        </p>
+    </g:else>
+    <div style="margin: 1em 0;">
+        <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
+    </div>
+
 
     <sec:permitted className='carm.Project' id='${projectInstance?.id}' permission='${BasePermission.ADMINISTRATION}'>
         <div class="buttons">

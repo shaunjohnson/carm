@@ -1,6 +1,6 @@
 package carm
 
-class ApplicationType {
+class ApplicationType implements Comparable<ApplicationType> {
     String name
     String description
     
@@ -14,5 +14,9 @@ class ApplicationType {
 
     public String toString() {
         return name
+    }
+
+    int compareTo(ApplicationType o) {
+        return name.compareTo(o?.name)
     }
 }

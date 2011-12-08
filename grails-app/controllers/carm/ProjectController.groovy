@@ -47,7 +47,8 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            [projectInstance: projectInstance]
+            [projectInstance: projectInstance,
+                    applicationsGrouped: projectService.getApplicationsGroupedByType(projectInstance)]
         }
     }
 
