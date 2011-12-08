@@ -24,7 +24,7 @@
                 <h2>My Projects</h2>
                 <ul style="margin: 1em 0;">
                     <g:each in="${projectInstanceList}" var="projectInstance">
-                        <li><g:link controller="home" action="showProject" id="${projectInstance.id}">${projectInstance.name}</g:link></li>
+                        <li><g:link controller="project" action="show" id="${projectInstance.id}">${projectInstance.name}</g:link></li>
                     </g:each>
                 </ul>
             </td>
@@ -32,9 +32,9 @@
                 <h2>My Environments</h2>
                 <g:each in="${systemInstanceList}" var="systemInstance">
                     <div style="margin: 0.5em 0;">
-                        <h3><g:link controller="home" action="showSystem" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>
+                        <h3><g:link controller="system" action="show" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>
                         <g:each in="${systemInstance.environments}" var="systemEnvironment">
-                            <g:link controller="home" action="showSystemEnvironment" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link>,
+                            <g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link>,
                         </g:each>
                     </div>
                 </g:each>
