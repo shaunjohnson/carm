@@ -5,7 +5,8 @@ class HomeController {
     
     def index = {
         [applicationReleaseInstanceList: ApplicationRelease.listOrderByApplication(),
-                projectInstanceList: Project.listOrderByName()]
+                projectInstanceList: Project.listOrderByName(),
+                systemInstanceList: System.listOrderByName()]
     }
 
     def showApplication = {

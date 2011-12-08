@@ -7,9 +7,9 @@
 </head>
 <body>
 <div class="body">
-    <h1>${entityName}</h1>
+    <h1>Change And Release Management</h1>
 
-    <p>Welcome to the <u>C</u>hange <u>A</u>nd <u>R</u>equest <u>M</u>anagement system.</p>
+    <p></p>
 
     <sec:ifNotLoggedIn>
         <p>
@@ -17,25 +17,41 @@
         </p>
     </sec:ifNotLoggedIn>
 
-    <h2>Application Releases</h2>
-    <g:render template="/applicationRelease/applicationReleaseList"
-            model="[applicationReleaseInstanceList: applicationReleaseInstanceList"/>
-
-    <h2>Projects</h2>
-    <g:each in="${projectInstanceList}" var="projectInstance">
-        <h3><g:link controller="home" action="showProject" id="${projectInstance.id}">${projectInstance.name}</g:link></h3>
-
-        <g:if test="${projectInstance.applications.size()}">
-            <ol>
-                <g:each in="${projectInstance.applications.sort { it.name }}" var="applicationInstance">
-                    <li><g:link controller="home" action="showApplication" id="${applicationInstance.id}">${applicationInstance.name}</g:link></li>
+    <table style="width: 100%;">
+        <tbody>
+        <tr>
+            <td>
+                <h2>My Projects</h2>
+                <ul style="margin: 1em 0;">
+                    <g:each in="${projectInstanceList}" var="projectInstance">
+                        <li><g:link controller="home" action="showProject" id="${projectInstance.id}">${projectInstance.name}</g:link></li>
+                    </g:each>
+                </ul>
+            </td>
+            <td>
+                <h2>My Environments</h2>
+                <g:each in="${systemInstanceList}" var="systemInstance">
+                    <div style="margin: 0.5em 0;">
+                        <h3><g:link controller="home" action="showSystem" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>
+                        <g:each in="${systemInstance.environments}" var="systemEnvironment">
+                            <g:link controller="home" action="showSystemEnvironment" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link>,
+                        </g:each>
+                    </div>
                 </g:each>
-            </ol>
-        </g:if>
-        <g:else>
-            No applications
-        </g:else>
-    </g:each>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>
+                <g:link controller="project" action="list">Browse All Projects</g:link>
+            </td>
+            <td>
+                <g:link controller="system" action="list">Browse All Systems</g:link>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
 </div>
 </body>
 </html>
