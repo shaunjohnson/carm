@@ -55,10 +55,11 @@ class BootStrap {
     def productionEnv
 
     def init = { servletContext ->
-        SpringSecurityUtils.reauthenticate('admin', 'admin')
-        
         configureUserRoles()
         configureUsers()
+        
+        SpringSecurityUtils.reauthenticate('admin', 'admin')
+
         configureApplicationTypes()
         configureModuleTypes()
         configureSourceControlsServers()
