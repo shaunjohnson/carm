@@ -12,7 +12,7 @@
     <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
 </div>
 <div class="body">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1>${fieldValue(bean: projectInstance, field: "name")}</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -20,12 +20,22 @@
         <table>
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.name.label" default="Name"/></td>
-                <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "name")}</td>
-            </tr>
-            <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "description")}</td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>
+                <td valign="top" class="value"><g:formatDate date="${projectInstance?.dateCreated}"/></td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
+                <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
+                <td valign="top" class="value">
+                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}" />
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.applications.label" default="Applications"/></td>
@@ -37,28 +47,6 @@
                     </ul>
                     <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
                 </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>
-                <td valign="top" class="value"><g:formatDate date="${projectInstance?.dateCreated}"/></td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
-                <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="dialog">
-        <table>
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
-                <td valign="top" class="value">
-                    <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}" />
-                </td>
-            </tr>
             </tr>
             </tbody>
         </table>
