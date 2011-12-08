@@ -215,52 +215,52 @@ class BootStrap {
 
         dataLayer = new SystemComponent(name: 'Oracle 10g Database Server',
                 description: 'Oracle 10g database server that provides the data layer for Big System.',
-                system: bigSystem).save()
-        bigSystem.addToComponents(dataLayer);
+                system: bigSystem)
+        bigSystem.addToComponents(dataLayer)
 
         integrationLayer = new SystemComponent(name: 'WebSphere Broker 7.0',
                 description: 'WebSphere Broker 7.0 is used for the Big System integration layer.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToComponents(integrationLayer)
 
         businessLayer = new SystemComponent(name: 'WebSphere Application Server 7.0',
                 description: 'The Big System business layer runs on WAS 7.0.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToComponents(businessLayer)
 
         presentationLayer = new SystemComponent(name: 'WebSphere Portal Server 7.0',
                 description: 'The Big System presentation layer is WebSphere Portal Server.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToComponents(presentationLayer)
 
         sandboxEnv = new SystemEnvironment(name: 'Sandbox',
                 description: 'Sandbox is where applications are initially tested.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(sandboxEnv)
 
         integrationEnv = new SystemEnvironment(name: 'Integration',
                 description: 'Integration is where applications are tested together.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(integrationEnv)
 
         testEnv = new SystemEnvironment(name: 'Test',
                 description: 'Application and user testing environment.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(testEnv)
 
         stageEnv = new SystemEnvironment(name: 'Stage',
                 description: 'Stage mimics production and is used for performance testing.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(stageEnv)
 
         trainEnv = new SystemEnvironment(name: 'Train',
                 description: 'Train is where users are trained to use the applications.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(trainEnv)
 
         productionEnv = new SystemEnvironment(name: 'Production',
                 description: 'Production is the end goal.',
-                system: bigSystem).save()
+                system: bigSystem)
         bigSystem.addToEnvironments(productionEnv)
 
         bigSystem.save()

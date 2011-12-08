@@ -3,6 +3,7 @@ package carm
 class System {
     String name
     String description
+    List environments
 
     Date dateCreated
     Date lastUpdated
