@@ -19,8 +19,12 @@ import carm.SourceControlUser
 import carm.SourceControlRole
 import carm.ApplicationRole
 import carm.ApplicationRelease
+import org.springframework.security.acls.domain.BasePermission
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class BootStrap {
+
+    def aclUtilService
 
     def databaseAppType
     def enterpriseAppType
@@ -51,6 +55,8 @@ class BootStrap {
     def productionEnv
 
     def init = { servletContext ->
+        SpringSecurityUtils.reauthenticate('admin', 'admin')
+        
         configureUserRoles()
         configureUsers()
         configureApplicationTypes()
@@ -62,6 +68,7 @@ class BootStrap {
         // Configure Project with applications and modules
         //
         def myBigProject = new Project(name: 'Big Project', description: 'Big project').save()
+        aclUtilService.addPermission(myBigProject, 'shaun', BasePermission.ADMINISTRATION)
 
         def dataApplication = new Application(name: 'Database Scripts', description: 'Big Project db scripts',
                 type: databaseAppType, sourceControlRepository: subversionRepository, sourceControlPath: '/database',
