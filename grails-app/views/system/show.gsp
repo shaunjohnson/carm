@@ -42,7 +42,7 @@
                 <td valign="top" class="name"><g:message code="system.environments.label" default="Environments"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${systemInstance.environments.sort { it.name }}" var="e">
+                        <g:each in="${systemInstance.environments}" var="e">
                             <li><g:link controller="systemEnvironment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>

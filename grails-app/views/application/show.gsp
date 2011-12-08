@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
+    <g:set var="entityReleaseName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
