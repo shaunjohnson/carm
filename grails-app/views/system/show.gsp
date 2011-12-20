@@ -17,7 +17,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
     <div class="dialog">
-        <table>
+        <table class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="system.name.label" default="Name"/></td>
@@ -41,11 +41,30 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="system.environments.label" default="Environments"/></td>
                 <td valign="top" style="text-align: left;" class="value">
-                    <ul>
-                        <g:each in="${systemInstance.environments}" var="e">
-                            <li><g:link controller="systemEnvironment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
+                    <table class="ol">
+                        <tbody>
+                        <g:each in="${systemInstance.environments}" var="e" status="eindex">
+                            <tr>
+                                <td class="olIndex">${eindex + 1}.</td>
+                                <td class="olContent">
+                                    <g:link controller="systemEnvironment" action="show" id="${e?.id}">${e?.encodeAsHTML()}</g:link>
+                                </td>
+                                <td>
+                                    <g:if test="${eindex + 1 < systemInstance.environments.size()}">
+                                        <g:link class="reorderLink" controller="system" action="moveEnvDown" title="Move Down"
+                                                params="[systemId: systemInstance.id, index: eindex]">&#9660;</g:link>
+                                    </g:if>
+                                </td>
+                                <td>
+                                    <g:if test="${eindex > 0}">
+                                        <g:link class="reorderLink" controller="system" action="moveEnvUp" title="Move Up"
+                                                params="[systemId: systemInstance.id, index: eindex]" id="${e?.id}">&#9650;</g:link>
+                                    </g:if>
+                                </td>
+                            </tr>
                         </g:each>
-                    </ul>
+                        </tbody>
+                    </table>
                     <g:link controller="systemEnvironment" action="create" params="['system.id': systemInstance?.id]">Add Environment</g:link>
                 </td>
             </tr>

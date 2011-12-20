@@ -308,6 +308,9 @@ th.desc a {
     padding-left: 28px;
 }
 
+/*
+ * Home layout table
+ */
 table.homeLayout {
     width: 50em;
 }
@@ -315,4 +318,29 @@ table.homeLayout {
 table.homeLayout td {
     padding: 0;
     width: 50%;
+}
+
+/*
+ * Table that mimics an ordered list
+ */
+table.ol {
+    margin: 0;
+    padding: 0;
+}
+
+table.ol td {
+    margin: 0;
+    padding: 0;
+}
+
+table.ol td.olIndex {
+    padding-right: 0.5em;
+}
+
+table.ol td.olContent {
+    padding-right: 0.5em;
+}
+
+a.reorderLink {
+    text-decoration: none;
 }

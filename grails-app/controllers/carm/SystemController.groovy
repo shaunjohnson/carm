@@ -41,6 +41,48 @@ class SystemController {
         }
     }
 
+    def moveEnvDown = {
+        def systemInstance = System.get(params.systemId)
+        if (!systemInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def index = params.index?.toInteger()
+            def environments = systemInstance.environments
+
+            if (index != null && (index + 1) < environments.size()) {
+                def environment = environments[index]
+                environments.remove(index)
+                environments.add(index + 1, environment)
+                systemInstance.save()
+            }
+
+            redirect(action: "show", id: systemInstance.id)
+        }
+    }
+
+    def moveEnvUp = {
+        def systemInstance = System.get(params.systemId)
+        if (!systemInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def index = params.index?.toInteger()
+            def environments = systemInstance.environments
+
+            if (index != null && index > 0) {
+                def environment = environments[index]
+                environments.remove(index)
+                environments.add(index - 1, environment)
+                systemInstance.save()
+            }
+
+            redirect(action: "show", id: systemInstance.id)
+        }
+    }
+
     def edit = {
         def systemInstance = System.get(params.id)
         if (!systemInstance) {
@@ -58,7 +100,7 @@ class SystemController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (systemInstance.version > version) {
-                    
+
                     systemInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'system.label', default: 'System')] as Object[], "Another user has updated this System while you were editing")
                     render(view: "edit", model: [systemInstance: systemInstance])
                     return
