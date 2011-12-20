@@ -98,6 +98,14 @@
         </table>
     </div>
 
+    <div class="buttons">
+        <g:form>
+            <g:hiddenField name="id" value="${applicationInstance?.id}"/>
+            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+        </g:form>
+    </div>
+
     <h2>Environments</h2>
     <div class="dialog">
         <table>
@@ -113,20 +121,12 @@
         </table>
     </div>
 
-    <h2><g:message code="default.list.label" args="[entityReleaseName]"/></h2>
     <g:set var="applicationReleaseInstanceList" value="${ApplicationRelease.findAllByApplication(applicationInstance).sort{ it.releaseNumber }.reverse()}"/>
 
     <g:if test="${applicationReleaseInstanceList?.size()}">
+        <h2><g:message code="default.list.label" args="[entityReleaseName]"/></h2>
         <g:render template="/applicationRelease/applicationReleaseList" model="[applicationReleaseInstanceList: applicationReleaseInstanceList]"/>
     </g:if>
-
-    <div class="buttons">
-        <g:form>
-            <g:hiddenField name="id" value="${applicationInstance?.id}"/>
-            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        </g:form>
-    </div>
 </div>
 </body>
 </html>
