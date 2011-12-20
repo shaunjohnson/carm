@@ -23,7 +23,7 @@
         TODO
     </p>
 
-    <table style="width: 100%;">
+    <table class="homeLayout">
         <tbody>
         <tr>
             <td>
