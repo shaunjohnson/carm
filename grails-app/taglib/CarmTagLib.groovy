@@ -1,4 +1,3 @@
-
 class CarmTagLib {
     def carmSecurityService
 
@@ -37,5 +36,41 @@ class CarmTagLib {
         else {
             out << "No matching ACLs were found"
         }
+    }
+
+    /**
+     * Creates a "move down" link.
+     *
+     * attrs.controller - Controller to invoke
+     * attrs.action - Action to invoke
+     * attrs.id - ID of domain object
+     * attrs.params - Parameter map
+     */
+    def moveDown = { attrs ->
+        def controller = attrs.controller
+        def action = attrs.action
+        def id = attrs.id
+        def params = attrs.params
+
+        out << link(class: 'reorderLink', title: 'Move Down', id: id,
+                controller: controller, action: action, params: params) { '&#9660' }
+    }
+
+    /**
+     * Creates a "move Up" link.
+     *
+     * attrs.controller - Controller to invoke
+     * attrs.action - Action to invoke
+     * attrs.id - ID of domain object
+     * attrs.params - Parameter map
+     */
+    def moveUp = { attrs ->
+        def controller = attrs.controller
+        def action = attrs.action
+        def id = attrs.id
+        def params = attrs.params
+
+        out << link(class: 'reorderLink', title: 'Move Up', id: id,
+                controller: controller, action: action, params: params) { '&#9650' }
     }
 }

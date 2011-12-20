@@ -51,14 +51,14 @@
                                 </td>
                                 <td>
                                     <g:if test="${eindex + 1 < systemInstance.environments.size()}">
-                                        <g:link class="reorderLink" controller="system" action="moveEnvDown" title="Move Down"
-                                                params="[systemId: systemInstance.id, index: eindex]">&#9660;</g:link>
+                                        <g:moveDown controller="system" action="moveEnvDown" id="${e.id}"
+                                                params="[systemId: systemInstance.id, index: eindex]"/>
                                     </g:if>
                                 </td>
                                 <td>
                                     <g:if test="${eindex > 0}">
-                                        <g:link class="reorderLink" controller="system" action="moveEnvUp" title="Move Up"
-                                                params="[systemId: systemInstance.id, index: eindex]" id="${e?.id}">&#9650;</g:link>
+                                        <g:moveUp controller="system" action="moveEnvUp" id="${e.id}"
+                                                params="[systemId: systemInstance.id, index: eindex]" />
                                     </g:if>
                                 </td>
                             </tr>
