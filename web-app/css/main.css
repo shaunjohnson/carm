@@ -161,9 +161,14 @@ td.errors textarea {
 /* TABLES */
 
 table {
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     /*width: 100%*/
 }
+
+table.details {
+    border: 1px solid #ccc;
+}
+
 tr {
     border: 0;
 }

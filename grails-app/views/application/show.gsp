@@ -18,7 +18,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
     <div class="dialog">
-        <table>
+        <table class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.name.label" default="Name"/></td>

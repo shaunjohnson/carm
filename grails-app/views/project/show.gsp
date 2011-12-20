@@ -17,11 +17,15 @@
         <div class="message">${flash.message}</div>
     </g:if>
     <div class="dialog">
-        <table>
+        <table class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "description")}</td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.category.label" default="Category"/></td>
+                <td valign="top" class="value"><g:link controller="projectCategory" action="show" id="${projectInstance?.category?.id}">${fieldValue(bean: projectInstance, field: "category")}</g:link></td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>

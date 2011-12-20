@@ -21,6 +21,7 @@ import carm.ApplicationRole
 import carm.ApplicationRelease
 import org.springframework.security.acls.domain.BasePermission
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import carm.ProjectCategory
 
 class BootStrap {
 
@@ -37,6 +38,9 @@ class BootStrap {
     def ejbModType
     def mdbModType
     def portletModType
+
+    def generalProjectCategory
+    def otherProjectCategory
 
     def subversionServer
     def subversionRepository
@@ -62,13 +66,14 @@ class BootStrap {
 
         configureApplicationTypes()
         configureModuleTypes()
+        configureProjectCategories()
         configureSourceControlsServers()
         configureSystems()
 
         //
         // Configure Project with applications and modules
         //
-        def myBigProject = new Project(name: 'Big Project', description: 'Big project').save()
+        def myBigProject = new Project(name: 'Big Project', description: 'Big project', category: generalProjectCategory).save()
         aclUtilService.addPermission(myBigProject, 'shaun', BasePermission.ADMINISTRATION)
 
         def dataApplication = new Application(name: 'Database Scripts', description: 'Big Project db scripts',
@@ -206,6 +211,11 @@ class BootStrap {
         ejbModType = new ModuleType(name: 'EJB', description: 'Enterprise Java Bean').save()
         mdbModType = new ModuleType(name: 'MDB', description: 'Message Driven Bean').save()
         portletModType = new ModuleType(name: 'Portlet', description: 'Portlet').save()
+    }
+
+    def configureProjectCategories() {
+        generalProjectCategory = new ProjectCategory(name: 'General', description: 'General projects').save()
+        otherProjectCategory = new ProjectCategory(name: 'Other', description: 'Other projects').save()
     }
 
     def configureSourceControlsServers() {

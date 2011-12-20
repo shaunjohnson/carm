@@ -29,6 +29,7 @@
                 <ul>
                     <li><g:link controller="applicationType">Application Types</g:link></li>
                     <li><g:link controller="moduleType">Module Types</g:link></li>
+                    <li><g:link controller="projectCategory">Project Categories</g:link></li>
                 </ul>
             </li>
             <li><g:link controller="user">Security</g:link>

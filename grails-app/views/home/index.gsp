@@ -1,3 +1,4 @@
+<%@ page import="carm.Project" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -17,16 +18,29 @@
         </p>
     </sec:ifNotLoggedIn>
 
+    <h2>My Requests</h2>
+    <p>
+        TODO
+    </p>
+
     <table style="width: 100%;">
         <tbody>
         <tr>
             <td>
                 <h2>My Projects</h2>
-                <ul style="margin: 1em 0;">
-                    <g:each in="${projectInstanceList}" var="projectInstance">
-                        <li><g:link controller="project" action="show" id="${projectInstance.id}">${projectInstance.name}</g:link></li>
-                    </g:each>
-                </ul>
+                <g:each in="${projectCategoryList}" var="projectCategory">
+                    <g:set var="projects" value="${Project.findAllByCategory(projectCategory).sort { it.name } }"/>
+                    <g:if test="${projects.size()}">
+                        <div style="margin: 0.5em 0;">
+                            <h3><g:link controller="projectCategory" action="show" id="${projectCategory.id}">${projectCategory.name}</g:link></h3>
+                            <ul>
+                                <g:each in="${projects}" var="projectInstance">
+                                    <li><g:link controller="project" action="show" id="${projectInstance.id}">${projectInstance.name}</g:link></li>
+                                </g:each>
+                            </ul>
+                        </div>
+                    </g:if>
+                </g:each>
             </td>
             <td>
                 <h2>My Environments</h2>
