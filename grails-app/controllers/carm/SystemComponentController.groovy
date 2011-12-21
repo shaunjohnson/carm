@@ -89,10 +89,11 @@ class SystemComponentController {
     def delete = {
         def systemComponentInstance = SystemComponent.get(params.id)
         if (systemComponentInstance) {
+            def systemId = systemComponentInstance.system.id
             try {
                 systemComponentInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "system", action: "show", id: systemId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"

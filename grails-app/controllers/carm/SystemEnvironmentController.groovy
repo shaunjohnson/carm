@@ -89,10 +89,11 @@ class SystemEnvironmentController {
     def delete = {
         def systemEnvironmentInstance = SystemEnvironment.get(params.id)
         if (systemEnvironmentInstance) {
+            def systemId = systemEnvironmentInstance.system.id
             try {
                 systemEnvironmentInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "system", action: "show", id: systemId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"

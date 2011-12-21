@@ -89,10 +89,11 @@ class ApplicationController {
     def delete = {
         def applicationInstance = Application.get(params.id)
         if (applicationInstance) {
+            def projectId = applicationInstance.project.id
             try {
                 applicationInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "project", action: "show", id: projectId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"

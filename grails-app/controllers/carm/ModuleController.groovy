@@ -82,10 +82,11 @@ class ModuleController {
     def delete = {
         def moduleInstance = Module.get(params.id)
         if (moduleInstance) {
+            def applicationId = moduleInstance.application.id
             try {
                 moduleInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
