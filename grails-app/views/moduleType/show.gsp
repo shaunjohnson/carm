@@ -36,14 +36,20 @@
                             <td valign="top" class="value"><g:formatDate date="${moduleTypeInstance?.lastUpdated}" /></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <div class="buttons">
+                                <g:form>
+                                    <g:hiddenField name="id" value="${moduleTypeInstance?.id}" />
+                                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                                </g:form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
                 </table>
-            </div>
-            <div class="buttons">
-                <g:form>
-                    <g:hiddenField name="id" value="${moduleTypeInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                </g:form>
             </div>
         </div>
     </body>

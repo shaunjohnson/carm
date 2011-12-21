@@ -7,15 +7,13 @@
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
-<div class="nav">
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
-</div>
 <div class="body">
     <h1>${fieldValue(bean: projectInstance, field: "name")}</h1>
+
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
     <div class="dialog">
         <table class="details">
             <tbody>
@@ -42,6 +40,21 @@
                 </td>
             </tr>
             </tbody>
+            <sec:permitted className='carm.Project' id='${projectInstance?.id}' permission='${BasePermission.ADMINISTRATION}'>
+            <tfoot>
+            <tr>
+                <td colspan="2">
+                    <div class="buttons">
+                         <g:form>
+                            <g:hiddenField name="id" value="${projectInstance?.id}"/>
+                            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+                        </g:form>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+            </sec:permitted>
         </table>
     </div>
 
@@ -64,17 +77,6 @@
     <div style="margin: 1em 0;">
         <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
     </div>
-
-
-    <sec:permitted className='carm.Project' id='${projectInstance?.id}' permission='${BasePermission.ADMINISTRATION}'>
-        <div class="buttons">
-            <g:form>
-                <g:hiddenField name="id" value="${projectInstance?.id}"/>
-                <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-                <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-            </g:form>
-        </div>
-    </sec:permitted>
 </div>
 </body>
 </html>
