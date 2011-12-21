@@ -50,15 +50,15 @@
                                     <g:link controller="systemEnvironment" action="show" id="${e?.id}">${e?.encodeAsHTML()}</g:link>
                                 </td>
                                 <td>
-                                    <g:if test="${eindex + 1 < systemInstance.environments.size()}">
-                                        <g:moveDown controller="system" action="moveEnvDown" id="${e.id}"
-                                                params="[systemId: systemInstance.id, index: eindex]"/>
-                                    </g:if>
-                                </td>
-                                <td>
                                     <g:if test="${eindex > 0}">
                                         <g:moveUp controller="system" action="moveEnvUp" id="${e.id}"
                                                 params="[systemId: systemInstance.id, index: eindex]" />
+                                    </g:if>
+                                </td>
+                                <td>
+                                    <g:if test="${eindex + 1 < systemInstance.environments.size()}">
+                                        <g:moveDown controller="system" action="moveEnvDown" id="${e.id}"
+                                                params="[systemId: systemInstance.id, index: eindex]"/>
                                     </g:if>
                                 </td>
                             </tr>
