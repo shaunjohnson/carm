@@ -28,6 +28,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="project"><g:message code="application.project.label" default="Project"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
+                        ${applicationInstance?.project?.encodeAsHTML()}
+                        <g:hiddenField name="project.id" value="${applicationInstance?.project?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="application.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'name', 'errors')}">
@@ -52,14 +61,6 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="project"><g:message code="application.project.label" default="Project"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
-                        <g:select name="project.id" from="${carm.Project.list()}" optionKey="id" value="${applicationInstance?.project?.id}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
@@ -80,32 +81,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
                         <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="applicationRoles"><g:message code="application.applicationRoles.label" default="Application Roles"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationRoles', 'errors')}">
-                        <ul>
-                            <g:each in="${applicationInstance?.applicationRoles?}" var="a">
-                                <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'applicationRole.label', default: 'ApplicationRole')])}</g:link>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="modules"><g:message code="application.modules.label" default="Modules"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'modules', 'errors')}">
-                        <ul>
-                            <g:each in="${applicationInstance?.modules?}" var="m">
-                                <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="module" action="create" params="['application.id': applicationInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'module.label', default: 'Module')])}</g:link>
                     </td>
                 </tr>
                 </tbody>

@@ -52,11 +52,16 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.applicationRoles.label" default="Application Roles"/></td>
                 <td valign="top" style="text-align: left;" class="value">
-                    <ul>
-                        <g:each in="${applicationInstance.applicationRoles}" var="a">
-                            <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-                        </g:each>
-                    </ul>
+                    <g:if test="${applicationInstance.applicationRoles}">
+                        <ul>
+                            <g:each in="${applicationInstance.applicationRoles}" var="a">
+                                <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                            </g:each>
+                        </ul>
+                    </g:if>
+                    <g:else>
+                        <div>None</div>
+                    </g:else>
                     <div>
                         <g:link controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link>
                     </div>
@@ -105,20 +110,22 @@
         </table>
     </div>
 
-    <h2>Environments</h2>
-    <div class="dialog">
-        <table>
-            <tbody>
-            <g:each in="${applicationInstance.system.environments}" var="environment">
-                <tr>
-                    <td>${environment}</td>
-                    <td><a href="#">Latest release</a></td>
-                    <td>on ??/??/????</td>
-                </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
+    <g:if test="${applicationInstance?.system?.environments?.size()}">
+        <h2>Environments</h2>
+        <div class="dialog">
+            <table>
+                <tbody>
+                <g:each in="${applicationInstance.system.environments}" var="environment">
+                    <tr>
+                        <td>${environment}</td>
+                        <td><a href="#">Latest release</a></td>
+                        <td>on ??/??/????</td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
+    </g:if>
 
     <g:set var="applicationReleaseInstanceList" value="${ApplicationRelease.findAllByApplication(applicationInstance).sort{ it.releaseNumber }.reverse()}"/>
 

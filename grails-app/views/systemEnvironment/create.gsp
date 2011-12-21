@@ -26,6 +26,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="system"><g:message code="systemComponent.system.label" default="System"/></label>
+                    </td>
+                    <td valign="top" class="value">
+                        ${systemEnvironmentInstance?.system?.encodeAsHTML()}
+                        <g:hiddenField name="system.id" value="${systemEnvironmentInstance?.system?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="systemEnvironment.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'errors')}">
@@ -40,19 +49,15 @@
                         <g:textArea name="description" cols="40" rows="5" value="${systemEnvironmentInstance?.description}"/>
                     </td>
                 </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="system"><g:message code="systemEnvironment.system.label" default="System"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${systemEnvironmentInstance?.system?.id}"/>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><g:link class="list" action="list"><g:message code="default.button.cancel.label" default="Cancel"/></g:link></span>
+            <span class="button">
+                <g:link class="show" controller="system" action="show" id="${systemEnvironmentInstance.system.id}">
+                    <g:message code="default.button.cancel.label" default="Cancel"/>
+                </g:link>
+            </span>
             <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
         </div>
     </g:form>

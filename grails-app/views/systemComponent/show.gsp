@@ -8,17 +8,15 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1>${fieldValue(bean: systemComponentInstance, field: "name")}</h1>
+
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
     <div class="dialog">
         <table class="details">
             <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="systemComponent.name.label" default="Name"/></td>
-                <td valign="top" class="value">${fieldValue(bean: systemComponentInstance, field: "name")}</td>
-            </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="systemComponent.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: systemComponentInstance, field: "description")}</td>

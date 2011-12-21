@@ -14,9 +14,16 @@ class SystemEnvironmentController {
     }
 
     def create = {
-        def systemEnvironmentInstance = new SystemEnvironment()
-        systemEnvironmentInstance.properties = params
-        return [systemEnvironmentInstance: systemEnvironmentInstance]
+        def systemInstance = System.get(params.system.id)
+        if (!systemInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def systemEnvironmentInstance = new SystemEnvironment()
+            systemEnvironmentInstance.properties = params
+            return [systemEnvironmentInstance: systemEnvironmentInstance]
+        }
     }
 
     def save = {

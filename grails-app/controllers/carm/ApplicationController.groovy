@@ -14,9 +14,16 @@ class ApplicationController {
     }
 
     def create = {
-        def applicationInstance = new Application()
-        applicationInstance.properties = params
-        return [applicationInstance: applicationInstance]
+        def projectInstance = Project.get(params.project.id)
+        if (!projectInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def applicationInstance = new Application()
+            applicationInstance.properties = params
+            return [applicationInstance: applicationInstance]
+        }
     }
 
     def save = {

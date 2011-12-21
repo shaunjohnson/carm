@@ -28,6 +28,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="application.id"><g:message code="module.application.label" default="Application"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
+                        ${moduleInstance?.application?.encodeAsHTML()}
+                        <g:hiddenField name="application.id" value="${moduleInstance?.application?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="module.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'name', 'errors')}">
@@ -48,14 +57,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
                         <g:select name="type.id" from="${carm.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="application.id"><g:message code="module.application.label" default="Application"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
-                        <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${moduleInstance?.application?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

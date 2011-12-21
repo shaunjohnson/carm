@@ -14,9 +14,16 @@ class SystemComponentController {
     }
 
     def create = {
-        def systemComponentInstance = new SystemComponent()
-        systemComponentInstance.properties = params
-        return [systemComponentInstance: systemComponentInstance]
+        def systemInstance = System.get(params.system.id)
+        if (!systemInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def systemComponentInstance = new SystemComponent()
+            systemComponentInstance.properties = params
+            return [systemComponentInstance: systemComponentInstance]
+        }
     }
 
     def save = {

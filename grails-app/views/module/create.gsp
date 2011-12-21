@@ -26,6 +26,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="application.id"><g:message code="module.application.label" default="Application"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
+                        ${moduleInstance?.application?.encodeAsHTML()}
+                        <g:hiddenField name="application.id" value="${moduleInstance?.application?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="module.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'name', 'errors')}">
@@ -50,14 +59,6 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="application.id"><g:message code="module.application.label" default="Application"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
-                        <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${moduleInstance?.application?.id}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <label for="systemComponent.id"><g:message code="module.systemComponent.label" default="System Component"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponent', 'errors')}">
@@ -76,7 +77,11 @@
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><g:link class="list" action="list"><g:message code="default.button.cancel.label" default="Cancel"/></g:link></span>
+            <span class="button">
+                <g:link class="show" controller="application" action="show" id="${moduleInstance.application.id}">
+                    <g:message code="default.button.cancel.label" default="Cancel"/>
+                </g:link>
+            </span>
             <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
         </div>
     </g:form>

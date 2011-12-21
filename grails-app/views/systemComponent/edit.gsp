@@ -25,6 +25,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="system"><g:message code="systemComponent.system.label" default="System"/></label>
+                    </td>
+                    <td valign="top" class="value">
+                        ${systemComponentInstance?.system?.encodeAsHTML()}
+                        <g:hiddenField name="system.id" value="${systemComponentInstance?.system?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="systemComponent.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemComponentInstance, field: 'name', 'errors')}">
@@ -37,14 +46,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemComponentInstance, field: 'description', 'errors')}">
                         <g:textArea name="description" cols="40" rows="5" value="${systemComponentInstance?.description}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="system"><g:message code="systemComponent.system.label" default="System"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemComponentInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${systemComponentInstance?.system?.id}"/>
                     </td>
                 </tr>
                 </tbody>

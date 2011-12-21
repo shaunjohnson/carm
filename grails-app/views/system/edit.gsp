@@ -42,32 +42,6 @@
                         <g:textArea name="description" cols="40" rows="5" value="${systemInstance?.description}"/>
                     </td>
                 </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="components"><g:message code="system.components.label" default="Components"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'components', 'errors')}">
-                        <ul>
-                            <g:each in="${systemInstance?.components?}" var="c">
-                                <li><g:link controller="systemComponent" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="systemComponent" action="create" params="['system.id': systemInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'systemComponent.label', default: 'SystemComponent')])}</g:link>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="environments"><g:message code="system.environments.label" default="Environments"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'environments', 'errors')}">
-                        <ul>
-                            <g:each in="${systemInstance?.environments?}" var="e">
-                                <li><g:link controller="systemEnvironment" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="systemEnvironment" action="create" params="['system.id': systemInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment')])}</g:link>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>

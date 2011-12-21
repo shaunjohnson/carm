@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1>${fieldValue(bean: systemInstance, field: "name")}</h1>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -17,10 +17,6 @@
     <div class="dialog">
         <table class="details">
             <tbody>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="system.name.label" default="Name"/></td>
-                <td valign="top" class="value">${fieldValue(bean: systemInstance, field: "name")}</td>
-            </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="system.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: systemInstance, field: "description")}</td>
@@ -91,14 +87,17 @@
         </table>
     </div>
 
-    <h2>Applications</h2>
-    <div class="dialog">
-        <ul>
-            <g:each in="${Application.findAllBySystem(systemInstance).sort { it.name } }" var="application">
-                <li><g:link controller="application" action="show" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
-            </g:each>
-        </ul>
-    </div>
+    <g:set var="applications" value="${Application.findAllBySystem(systemInstance).sort { it.name } }"/>
+    <g:if test="${applications.size()}">
+        <h2>Applications</h2>
+        <div class="dialog">
+            <ul>
+                <g:each in="${applications}" var="application">
+                    <li><g:link controller="application" action="show" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
+                </g:each>
+            </ul>
+        </div>
+    </g:if>
 </div>
 </body>
 </html>
