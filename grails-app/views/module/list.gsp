@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
+    <g:header domain="${moduleInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

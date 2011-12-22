@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
+    <g:header domain="${projectInstance}" pageName="${message(code: 'default.edit.label', args: [entityName])}" />
+
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -17,6 +18,7 @@
             <g:renderErrors bean="${projectInstance}" as="list"/>
         </div>
     </g:hasErrors>
+
     <g:form method="post">
         <g:hiddenField name="id" value="${projectInstance?.id}"/>
         <g:hiddenField name="version" value="${projectInstance?.version}"/>
@@ -37,19 +39,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'description', 'errors')}">
                         <g:textArea name="description" cols="40" rows="5" value="${projectInstance?.description}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="applications"><g:message code="project.applications.label" default="Applications"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'applications', 'errors')}">
-                        <ul>
-                            <g:each in="${projectInstance?.applications?}" var="a">
-                                <li><g:link controller="application" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'application.label', default: 'Application')])}</g:link>
                     </td>
                 </tr>
                 <tr class="prop">

@@ -15,37 +15,9 @@ class CarmTagLib {
      */
     def header = { attrs, body ->
         def domain = attrs.domain
-        def spacer = '<span class="spacer"> > </span>'
+        def pageName = attrs.pageName
 
-        out << "<h1>${domain.name}</h1>"
-        out << '<div class="breadcrumbs">'
-        out << link(title: 'Home Page', uri: '/') { 'Home' }
-
-        if (domain instanceof Application) {
-            out << spacer << link(title: 'Show Project', id: domain.project.id, controller: 'project', action: 'show') {
-                domain.project.name
-            }
-        }
-        else if (domain instanceof Module) {
-            out << spacer << link(title: 'Show Project', id: domain.application.project.id, controller: 'project', action: 'show') {
-                domain.application.project.name
-            }
-            out << spacer << link(title: 'Show Application', id: domain.application.id, controller: 'application', action: 'show') {
-                domain.application.name
-            }
-        }
-        else if (domain instanceof SystemComponent || domain instanceof SystemEnvironment) {
-            out << spacer << link(title: 'Show System', id: domain.system.id, controller: 'system', action: 'show') {
-                domain.system.name
-            }
-        }
-        else  if (domain instanceof SourceControlRepository) {
-            out << spacer << link(title: 'Show Source Control Server', id: domain.server.id, controller: 'sourceControlServer', action: 'show') {
-                domain.server.name
-            }
-        }
-
-        out << spacer << domain.name << '</div>'
+        out << render(template: "/common/header", model: [domain: domain, pageName: pageName])
     }
 
     /**

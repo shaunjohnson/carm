@@ -8,8 +8,8 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-
+    <g:header domain="${projectInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}" />
+    
     <div class="nav">
         <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
     </div>
