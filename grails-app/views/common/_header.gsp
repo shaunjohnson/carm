@@ -17,7 +17,7 @@
                 Applications
             </g:link>
         </g:if>
-        <g:elseif test="${action == 'show'}">
+        <g:else>
             <span class="spacer"> &gt; </span>
             <g:link controller="project" action="list" title="Show All Projects">
                 Projects
@@ -26,39 +26,26 @@
             <g:link controller="project" action="show" id="${domain.project.id}" title="Show Project">
                 ${domain.project.encodeAsHTML()}
             </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="application" action="show" id="${domain.id}" title="Show Application">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-        </g:elseif>
-        <g:elseif test="${action == 'create'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="list" title="Show All Projects">
-                Projects
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="show" id="${domain.project.id}" title="Show Project">
-                ${domain.project.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="list" title="Show All Projects">
-                Projects
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="show" id="${domain.project.id}" title="Show Project">
-                ${domain.project.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="application" action="show" id="${domain.id}" title="Show Application">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
+
+            <g:if test="${action == 'show'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="application" action="show" id="${domain.id}" title="Show Application">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="application" action="show" id="${domain.id}" title="Show Application">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
     </div>
 </g:if>
 <g:elseif test="${controller == 'applicationType'}">
@@ -108,7 +95,7 @@
                 Modules
             </g:link>
         </g:if>
-        <g:elseif test="${action == 'show'}">
+        <g:else>
             <span class="spacer"> &gt; </span>
             <g:link controller="project" action="list" title="Show All Projects">
                 Projects
@@ -121,47 +108,26 @@
             <g:link controller="application" action="show" id="${domain.application.id}" title="Show Application">
                 ${domain.application.name.encodeAsHTML()}
             </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="module" action="show" id="${domain.id}" title="Show Module">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-        </g:elseif>
-        <g:elseif test="${action == 'create'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="list" title="Show All Projects">
-                Projects
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="show" id="${domain.application.project.id}" title="Show Project">
-                ${domain.application.project.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="application" action="show" id="${domain.application.id}" title="Show Application">
-                ${domain.application.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="list" title="Show All Projects">
-                Projects
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="project" action="show" id="${domain.application.project.id}" title="Show Project">
-                ${domain.application.project.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="application" action="show" id="${domain.application.id}" title="Show Application">
-                ${domain.application.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="module" action="show" id="${domain.id}" title="Show Module">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
+
+            <g:if test="${action == 'show'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="module" action="show" id="${domain.id}" title="Show Module">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="module" action="show" id="${domain.id}" title="Show Module">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
     </div>
 </g:if>
 <g:elseif test="${controller == 'moduleType'}">
@@ -276,7 +242,7 @@
                 Source Control Repositories
             </g:link>
         </g:if>
-        <g:elseif test="${action == 'show'}">
+        <g:else>
             <span class="spacer"> &gt; </span>
             <g:link controller="sourceControlServer" action="list" title="Show All Source Control Servers">
                 Source Control Servers
@@ -285,39 +251,26 @@
             <g:link controller="sourceControlServer" action="show" id="${domain.server.id}" title="Show Source Control Server">
                 ${domain.server.name.encodeAsHTML()}
             </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlRepository" action="show" id="${domain.id}" title="Show Source Control Repository">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-        </g:elseif>
-        <g:elseif test="${action == 'create'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlServer" action="list" title="Show All Source Control Servers">
-                Source Control Servers
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlServer" action="show" id="${domain.server.id}" title="Show Source Control Server">
-                ${domain.server.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlServer" action="list" title="Show All Source Control Servers">
-                Source Control Servers
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlServer" action="show" id="${domain.server.id}" title="Show Source Control Server">
-                ${domain.server.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="sourceControlRepository" action="show" id="${domain.id}" title="Show Source Control Repository">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
+
+            <g:if test="${action == 'show'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="sourceControlRepository" action="show" id="${domain.id}" title="Show Source Control Repository">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="sourceControlRepository" action="show" id="${domain.id}" title="Show Source Control Repository">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
     </div>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlServer'}">
@@ -400,7 +353,7 @@
                 Systems Components
             </g:link>
         </g:if>
-        <g:elseif test="${action == 'show'}">
+        <g:else>
             <span class="spacer"> &gt; </span>
             <g:link controller="system" action="list" title="Show All Systems">
                 Systems
@@ -409,39 +362,26 @@
             <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
                 ${domain.system.name.encodeAsHTML()}
             </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="systemComponent" action="show" id="${domain.id}" title="Show System Component">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-        </g:elseif>
-        <g:elseif test="${action == 'create'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="list" title="Show All Systems">
-                Systems
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
-                ${domain.system.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="list" title="Show All Systems">
-                Systems
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
-                ${domain.system.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="systemComponent" action="show" id="${domain.id}" title="Show System Component">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
+
+            <g:if test="${action == 'show'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="systemComponent" action="show" id="${domain.id}" title="Show System Component">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="systemComponent" action="show" id="${domain.id}" title="Show System Component">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
     </div>
 </g:elseif>
 <g:elseif test="${controller == 'systemEnvironment'}">
@@ -458,7 +398,7 @@
                 Systems Environments
             </g:link>
         </g:if>
-        <g:elseif test="${action == 'show'}">
+        <g:else>
             <span class="spacer"> &gt; </span>
             <g:link controller="system" action="list" title="Show All Systems">
                 Systems
@@ -467,38 +407,25 @@
             <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
                 ${domain.system.name.encodeAsHTML()}
             </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="systemEnvironment" action="show" id="${domain.id}" title="Show System Environment">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-        </g:elseif>
-        <g:elseif test="${action == 'create'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="list" title="Show All Systems">
-                Systems
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
-                ${domain.system.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="list" title="Show All Systems">
-                Systems
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="system" action="show" id="${domain.system.id}" title="Show System">
-                ${domain.system.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:link controller="systemEnvironment" action="show" id="${domain.id}" title="Show System Environment">
-                ${domain.name.encodeAsHTML()}
-            </g:link>
-            <span class="spacer"> &gt; </span>
-            <g:message code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
+
+            <g:if test="${action == 'show'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="systemEnvironment" action="show" id="${domain.id}" title="Show System Environment">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <span class="spacer"> &gt; </span>
+                <g:link controller="systemEnvironment" action="show" id="${domain.id}" title="Show System Environment">
+                    ${domain.name.encodeAsHTML()}
+                </g:link>
+                <span class="spacer"> &gt; </span>
+                <g:message code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
     </div>
 </g:elseif>
