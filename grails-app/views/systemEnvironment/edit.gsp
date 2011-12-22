@@ -8,12 +8,11 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
+    <g:header domain="${systemEnvironmentInstance}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-
     <g:hasErrors bean="${systemEnvironmentInstance}">
         <div class="errors">
             <g:renderErrors bean="${systemEnvironmentInstance}" as="list"/>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <g:header domain="${projectInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}" />
+    <g:header domain="${projectInstanceList}"/>
     
     <div class="nav">
         <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>

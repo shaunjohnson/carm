@@ -60,11 +60,17 @@
             <tr>
                 <td colspan="2">
                     <div class="buttons">
-                        <g:form>
-                            <g:hiddenField name="id" value="${moduleInstance?.id}"/>
-                            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-                            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-                        </g:form>
+                        <span class="button">
+                            <g:link class="edit" action="edit" id="${moduleInstance?.id}">
+                                <g:message code="default.button.edit.label" default="Edit"/>
+                            </g:link>
+                        </span>
+                        <span class="button">
+                            <g:link class="delete" action="delete" id="${moduleInstance?.id}"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
                     </div>
                 </td>
             </tr>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <g:header domain="${projectInstance}" pageName="${message(code: 'default.edit.label', args: [entityName])}" />
+    <g:header domain="${projectInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

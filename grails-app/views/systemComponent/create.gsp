@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
+    <g:header domain="${systemComponentInstance}" />
+
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -17,6 +18,7 @@
             <g:renderErrors bean="${systemComponentInstance}" as="list"/>
         </div>
     </g:hasErrors>
+
     <g:form action="save">
         <div class="dialog">
             <table>

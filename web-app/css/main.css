@@ -295,16 +295,17 @@ th.desc a {
 /* ACTION BUTTONS */
 
 .buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
+    /*background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;*/
+    /*border: 1px solid #ccc;*/
     color: #666;
     font-size: 10px;
-    margin-top: 5px;
-    overflow: hidden;
-    padding: 0;
+    /*height: 20px;*/
+    margin-top: 10px;
+    /*overflow: hidden;*/
+    /*padding: 0;*/
 }
 
-.buttons input {
+.buttons input, .buttons a {
     background: #fff;
     border: 0;
     color: #333;
@@ -315,11 +316,16 @@ th.desc a {
     overflow: visible;
     padding: 2px 6px;
 }
-.buttons input.delete {
+.buttons input {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.buttons a.delete, .buttons input.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
-.buttons input.edit {
+.buttons a.edit, .buttons input.edit {
     background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
@@ -333,6 +339,9 @@ th.desc a {
     margin-left: 3px
     padding: 2px 6px;
     text-decoration: none;
+}
+.buttons a:hover {
+    text-decoration: underline;
 }
 
 /*

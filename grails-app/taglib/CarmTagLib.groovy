@@ -20,6 +20,20 @@ class CarmTagLib {
         out << render(template: "/common/header", model: [domain: domain, pageName: pageName])
     }
 
+    def pageHeader = {attrs ->
+        def action = attrs.action
+        def entityName = attrs.entityName
+        def beanName = attrs.beanName
+
+        if (action == 'show') {
+            out << "<h1>$beanName</h1>"
+        }
+        else {
+            def headerText = message(code: "default.${action}.label", args: [entityName])
+            out << "<h1>$headerText</h1>"
+        }
+    }
+
     /**
      * Formats a SourceControlRepository as a link.
      *
