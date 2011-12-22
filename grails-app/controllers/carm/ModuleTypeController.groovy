@@ -14,16 +14,9 @@ class ModuleTypeController {
     }
 
     def create = {
-        def applicationInstance = Application.get(params.application.id)
-        if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
-            redirect(action: "list")
-        }
-        else {
-            def moduleTypeInstance = new ModuleType()
-            moduleTypeInstance.properties = params
-            return [moduleTypeInstance: moduleTypeInstance]
-        }
+        def moduleTypeInstance = new ModuleType()
+        moduleTypeInstance.properties = params
+        return [moduleTypeInstance: moduleTypeInstance]
     }
 
     def save = {
