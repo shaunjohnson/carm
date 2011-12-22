@@ -7,6 +7,11 @@ import carm.SystemEnvironment
 class CarmTagLib {
     def carmSecurityService
 
+    /**
+     * Outputs a page header and breadcrumbs.
+     *
+     * attrs.domain - Domain object being displayed
+     */
     def header = { attrs, body ->
         def domain = attrs.domain
         def spacer = '<span class="spacer"> > </span>'
@@ -37,11 +42,11 @@ class CarmTagLib {
         out << spacer << domain.name << '</div>'
     }
 
-/**
- * Formats a SourceControlRepository as a link.
- *
- * attrs.sourceControlRepository - SourceControlRespository instance
- */
+    /**
+     * Formats a SourceControlRepository as a link.
+     *
+     * attrs.sourceControlRepository - SourceControlRespository instance
+     */
     def formatSourceControlRepository = { attrs, body ->
         def sourceControlRepository = attrs.sourceControlRepository
 
@@ -53,13 +58,13 @@ class CarmTagLib {
         }
     }
 
-/**
- * Lists all users with specified permission for the provided domain object. Outputs a static message if there are
- * no users granted the permission to the provided domain object.
- *
- * attrs.domainObject - Domain object to lookup
- * attrs.permission - Permission used to locate permitted users
- */
+    /**
+     * Lists all users with specified permission for the provided domain object. Outputs a static message if there are
+     * no users granted the permission to the provided domain object.
+     *
+     * attrs.domainObject - Domain object to lookup
+     * attrs.permission - Permission used to locate permitted users
+     */
     def listUsersWithPermission = { attrs ->
         def domainObject = attrs.domainObject
         def permission = attrs.permission
@@ -76,14 +81,14 @@ class CarmTagLib {
         }
     }
 
-/**
- * Creates a "move down" link.
- *
- * attrs.controller - Controller to invoke
- * attrs.action - Action to invoke
- * attrs.id - ID of domain object
- * attrs.params - Parameter map
- */
+    /**
+     * Creates a "move down" link.
+     *
+     * attrs.controller - Controller to invoke
+     * attrs.action - Action to invoke
+     * attrs.id - ID of domain object
+     * attrs.params - Parameter map
+     */
     def moveDown = { attrs ->
         def controller = attrs.controller
         def action = attrs.action
@@ -94,14 +99,14 @@ class CarmTagLib {
                 controller: controller, action: action, params: params) { '&#9660' }
     }
 
-/**
- * Creates a "move Up" link.
- *
- * attrs.controller - Controller to invoke
- * attrs.action - Action to invoke
- * attrs.id - ID of domain object
- * attrs.params - Parameter map
- */
+    /**
+     * Creates a "move Up" link.
+     *
+     * attrs.controller - Controller to invoke
+     * attrs.action - Action to invoke
+     * attrs.id - ID of domain object
+     * attrs.params - Parameter map
+     */
     def moveUp = { attrs ->
         def controller = attrs.controller
         def action = attrs.action
