@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>${moduleInstance?.application?.encodeAsHTML()}: ${fieldValue(bean: moduleInstance, field: "name")}</h1>
+    <g:header domain="${moduleInstance}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

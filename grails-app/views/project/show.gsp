@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>${fieldValue(bean: projectInstance, field: "name")}</h1>
+    <g:header domain="${projectInstance}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -59,6 +59,10 @@
     </div>
 
     <h2>Applications</h2>
+    <div class="nav">
+        <span class="menuButton"><g:link class="create" controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link></span>
+    </div>
+
     <g:if test="${applicationsGrouped?.size()}">
         <g:each in="${applicationsGrouped}" var="entry">
             <h3>${entry.key}</h3>
@@ -74,9 +78,6 @@
             This project does not have any applications.
         </p>
     </g:else>
-    <div style="margin: 1em 0;">
-        <g:link controller="application" action="create" params="['project.id': projectInstance?.id]">Add Application</g:link>
-    </div>
 </div>
 </body>
 </html>

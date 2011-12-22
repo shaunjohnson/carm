@@ -90,11 +90,31 @@ p {
 
 /* NAVIGATION MENU */
 
+.breadcrumbs {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 0 1em;
+}
+
+.breadcrumbs a {
+    color: #888;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .spacer {
+    color: #BBB;
+}
+
 .nav {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;
-    margin-top: 5px;
+    /*background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;*/
+    /*border: 1px solid #ccc;*/
+    /*border-style: solid none solid none;*/
+    margin: 5px 0;
     padding: 7px 12px;
 }
 

@@ -9,7 +9,12 @@
 </head>
 <body>
 <div class="body">
-    <h1>${applicationInstance?.project?.encodeAsHTML()}: ${fieldValue(bean: applicationInstance, field: "name")}</h1>
+    <g:header domain="${applicationInstance}" />
+
+    <div class="nav">
+        <span class="menuButton"><g:link class="create" controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link></span>
+        <span class="menuButton"><g:link class="create" controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link></span>
+    </div>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -62,9 +67,6 @@
                     <g:else>
                         <div>None</div>
                     </g:else>
-                    <div>
-                        <g:link controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link>
-                    </div>
                 </td>
             </tr>
             <tr class="prop">
@@ -80,9 +82,6 @@
                     <g:else>
                         <div>None</div>
                     </g:else>
-                    <div>
-                        <g:link controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link>
-                    </div>
                 </td>
             </tr>
             <tr class="prop">

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>${fieldValue(bean: systemEnvironmentInstance, field: "name")}</h1>
+    <g:header domain="${systemEnvironmentInstance}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
