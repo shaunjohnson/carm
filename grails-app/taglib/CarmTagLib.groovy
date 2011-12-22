@@ -20,7 +20,54 @@ class CarmTagLib {
         out << render(template: "/common/header", model: [domain: domain, pageName: pageName])
     }
 
-    def pageHeader = {attrs ->
+    /**
+     * Renders a link within the page header prefixed by the default link separator. If isFirst is set to true then
+     * the link separator is suppressed.
+     *
+     * attrs.isFirst - Flag indicating whether the link is the first. Default is  false.
+     * attrs.controller - Name of controller
+     * attrs.action - Name of action
+     * attrs.title - Link title
+     * attrs.text - Link text. Will be encoded as HTML.
+     * attrs.uri - Link URI
+     */
+    def headerLink = { attrs ->
+        def isFirst = attrs.isFirst ?: false
+        def controller = attrs.controller
+        def action = attrs.action
+        def title = attrs.title
+        def text = attrs.text
+        def uri = attrs.uri
+
+        if (!isFirst) {
+            out << '<span class="spacer"> &gt; </span>'
+        }
+
+        out << link(uri: uri, controller: controller, action: action, title: title) { text.encodeAsHTML() }
+    }
+
+    /**
+     * Renders header text prefixed by the default link separator.
+     *
+     * attrs.code - Message code
+     * attrs.code - Message args
+     */
+    def headerText = { attrs ->
+        def code = attrs.code
+        def args = attrs.args
+
+        out << '<span class="spacer"> &gt; </span>' << message(code: code, args: args)
+    }
+
+    /**
+     * Renders a page header using the provided input. If the action is currently set to show then display the beanname,
+     * otherwise show the label text defined for the action.
+     *
+     * attrs.action - Action used for determining the label text
+     * attrs.entityName - Name of the domain/bean class
+     * attrs.beanName - Name of the bean displayed on the show view
+     */
+    def pageHeader = { attrs ->
         def action = attrs.action
         def entityName = attrs.entityName
         def beanName = attrs.beanName
