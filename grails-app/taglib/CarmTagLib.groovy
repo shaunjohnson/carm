@@ -3,6 +3,7 @@ import carm.Application
 import carm.Module
 import carm.SystemComponent
 import carm.SystemEnvironment
+import carm.SourceControlRepository
 
 class CarmTagLib {
     def carmSecurityService
@@ -36,6 +37,11 @@ class CarmTagLib {
         else if (domain instanceof SystemComponent || domain instanceof SystemEnvironment) {
             out << spacer << link(title: 'Show System', id: domain.system.id, controller: 'system', action: 'show') {
                 domain.system.name
+            }
+        }
+        else  if (domain instanceof SourceControlRepository) {
+            out << spacer << link(title: 'Show Source Control Server', id: domain.server.id, controller: 'sourceControlServer', action: 'show') {
+                domain.server.name
             }
         }
 

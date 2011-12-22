@@ -7,12 +7,14 @@
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 <body>
-<div class="nav">
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
-</div>
 <div class="body">
     <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
+
+    <div class="nav">
+        <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]"/></g:link></span>
+        <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
+    </div>
+
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -21,6 +23,7 @@
             <g:renderErrors bean="${sourceControlServerInstance}" as="list"/>
         </div>
     </g:hasErrors>
+
     <g:form method="post">
         <g:hiddenField name="id" value="${sourceControlServerInstance?.id}"/>
         <g:hiddenField name="version" value="${sourceControlServerInstance?.version}"/>
@@ -57,19 +60,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlServerInstance, field: 'url', 'errors')}">
                         <g:textField name="url" maxlength="200" value="${sourceControlServerInstance?.url}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="repositories"><g:message code="sourceControlServer.repositories.label" default="Repositories"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: sourceControlServerInstance, field: 'repositories', 'errors')}">
-                        <ul>
-                            <g:each in="${sourceControlServerInstance?.repositories?}" var="r">
-                                <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                        <g:link controller="sourceControlRepository" action="create" params="['sourceControlServer.id': sourceControlServerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository')])}</g:link>
                     </td>
                 </tr>
                 </tbody>
