@@ -23,7 +23,11 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="systemComponent.system.label" default="System"/></td>
-                <td valign="top" class="value"><g:link controller="system" action="show" id="${systemComponentInstance?.system?.id}">${systemComponentInstance?.system?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="system" action="show" id="${systemComponentInstance?.system?.id}">
+                        ${systemComponentInstance?.system?.encodeAsHTML()}
+                    </g:link>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="systemComponent.dateCreated.label" default="Date Created"/></td>

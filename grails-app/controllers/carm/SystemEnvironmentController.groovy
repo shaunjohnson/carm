@@ -28,6 +28,9 @@ class SystemEnvironmentController {
 
     def save = {
         def systemEnvironmentInstance = new SystemEnvironment(params)
+        def system = systemEnvironmentInstance.system
+        system.addToEnvironments(systemEnvironmentInstance)
+
         if (systemEnvironmentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.id])}"
             redirect(action: "show", id: systemEnvironmentInstance.id)

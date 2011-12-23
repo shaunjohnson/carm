@@ -25,7 +25,7 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="system"><g:message code="systemComponent.system.label" default="System"/></label>
+                        <label for="system"><g:message code="systemEnvironment.system.label" default="System"/></label>
                     </td>
                     <td valign="top" class="value">
                         ${systemEnvironmentInstance?.system?.encodeAsHTML()}
