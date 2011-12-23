@@ -41,7 +41,7 @@
         <g:headerLink controller="applicationType" action="list" title="Show All Application Types" text="Application Types"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="applicationType" action="show" title="Show Application Type"text="${domain.name}" id="${domain.id}"/>
+            <g:headerLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}" id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
