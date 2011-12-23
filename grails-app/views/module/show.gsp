@@ -38,7 +38,7 @@
                 <td valign="top" class="name"><g:message code="module.systemComponents.label" default="System Components" /></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                    <g:each in="${moduleInstance.systemComponents}" var="s">
+                    <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
                         <li>
                             <g:link controller="systemComponent" action="show"
                                 id="${s?.id}">${s?.encodeAsHTML()}</g:link>

@@ -54,7 +54,7 @@
                         <label for="type"><g:message code="module.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${carm.ModuleType.list()}" optionKey="id" value="${moduleInstance?.type?.id}"/>
+                        <g:select name="type.id" from="${carm.ModuleType.list().sort { it.name }}" optionKey="id" value="${moduleInstance?.type?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -62,7 +62,7 @@
                       <label for="systemComponents"><g:message code="module.systemComponents.label" default="System Components" /></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponents', 'errors')}">
-                        <g:select name="systemComponents" from="${carm.SystemComponent.list()}" multiple="yes" optionKey="id" size="5" value="${moduleInstance?.systemComponents*.id}" />
+                        <g:select name="systemComponents" from="${carm.SystemComponent.list().sort { it.name }}" multiple="yes" optionKey="id" size="5" value="${moduleInstance?.systemComponents*.id}" />
                     </td>
                 </tr>
                 <tr class="prop">

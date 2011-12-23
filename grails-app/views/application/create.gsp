@@ -54,7 +54,7 @@
                         <label for="type"><g:message code="application.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${carm.ApplicationType.list()}" optionKey="id" value="${applicationInstance?.type?.id}"/>
+                        <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.type?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -78,7 +78,7 @@
                         <label for="system"><g:message code="application.system.label" default="System"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${carm.System.list()}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
+                        <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 </tbody>

@@ -169,7 +169,7 @@ class CarmSecurityService {
 
         log.debug "$prefix returning ${principals.size()} principals"
 
-        principals
+        principals.sort()
     }
 
     /**

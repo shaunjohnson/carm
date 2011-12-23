@@ -59,7 +59,7 @@
                 <td valign="top" style="text-align: left;" class="value">
                     <g:if test="${applicationInstance.applicationRoles}">
                         <ul>
-                            <g:each in="${applicationInstance.applicationRoles}" var="a">
+                            <g:each in="${applicationInstance.applicationRoles.sort{ it.sourceControlUser.name }}" var="a">
                                 <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
                             </g:each>
                         </ul>
