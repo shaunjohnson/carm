@@ -4,13 +4,17 @@ import grails.test.*
 
 class ProjectTests extends GrailsUnitTestCase {
     def project
+    def projectCategory
     
     protected void setUp() {
         super.setUp()
         
         mockForConstraintsTests(Project)
 
-        project = new Project(name: 'Project')
+        projectCategory = new ProjectCategory(name: 'Project Category')
+        mockForConstraintsTests(ProjectCategory, [projectCategory])
+
+        project = new Project(name: 'Project', category: projectCategory)
         mockForConstraintsTests(Project, [project])
     }
 
@@ -19,7 +23,7 @@ class ProjectTests extends GrailsUnitTestCase {
     }
     
     void testDescriptionMaxSize() {
-        def testProject = new Project(name: 'Test Project', description: "a" * 4001)
+        def testProject = new Project(name: 'Test Project', category: projectCategory, description: "a" * 4001)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
@@ -27,14 +31,14 @@ class ProjectTests extends GrailsUnitTestCase {
     }
 
     void testDescriptionNullable() {
-        def testProject = new Project(name: 'Test Project', description: null)
+        def testProject = new Project(name: 'Test Project', category: projectCategory, description: null)
         mockForConstraintsTests(Project, [testProject])
 
         assertTrue 'Should be valid', testProject.validate()
     }
 
     void testNameBlank() {
-        def testProject = new Project(name: '')
+        def testProject = new Project(name: '', category: projectCategory)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
@@ -42,7 +46,7 @@ class ProjectTests extends GrailsUnitTestCase {
     }
 
     void testNameMinSize() {
-        def testProject = new Project(name: 'a')
+        def testProject = new Project(name: 'a', category: projectCategory)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
@@ -50,7 +54,7 @@ class ProjectTests extends GrailsUnitTestCase {
     }
 
     void testNameMaxSize() {
-        def testProject = new Project(name: 'a' * 51)
+        def testProject = new Project(name: 'a' * 51, category: projectCategory)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
@@ -58,7 +62,7 @@ class ProjectTests extends GrailsUnitTestCase {
     }
 
     void testNameNullable() {
-        def testProject = new Project(name: null)
+        def testProject = new Project(name: null, category: projectCategory)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', testProject.validate()
@@ -66,13 +70,13 @@ class ProjectTests extends GrailsUnitTestCase {
     }
 
     void testNameUnique() {
-        def testProject = new Project(name: 'Project')
+        def testProject = new Project(name: 'Project', category: projectCategory)
         mockForConstraintsTests(Project, [testProject])
 
         assertFalse 'Should not be valid', project.validate()
         assertEquals 'Name is not unique.', 'unique', project.errors['name']
 
-        project = new Project(name: 'Project2')
+        project = new Project(name: 'Project2', category: projectCategory)
         assertTrue 'Should be valid', project.validate()
     }
 
