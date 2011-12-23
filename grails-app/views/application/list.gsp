@@ -30,9 +30,15 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td><g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: applicationInstance, field: "description")}</td>
-                    <td>${fieldValue(bean: applicationInstance, field: "type")}</td>
-                    <td>${fieldValue(bean: applicationInstance, field: "project")}</td>
-                    <td>${fieldValue(bean: applicationInstance, field: "sourceControlRepository")}</td>
+                    <td><g:link controller="applicationType" action="show" id="${applicationInstance.type.id}">${fieldValue(bean: applicationInstance, field: "type")}</g:link></td>
+                    <td><g:link controller="project" action="show" id="${applicationInstance.project.id}">${fieldValue(bean: applicationInstance, field: "project")}</g:link></td>
+                    <td>
+                        <g:if test="${applicationInstance.sourceControlRepository}">
+                            <g:link controller="sourceControlRepository" action="show" id="${applicationInstance.sourceControlRepository.id}">
+                                ${fieldValue(bean: applicationInstance, field: "sourceControlRepository")}
+                            </g:link>
+                        </g:if>
+                    </td>
                 </tr>
             </g:each>
             </tbody>

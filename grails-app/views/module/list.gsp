@@ -29,8 +29,8 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td><g:link action="show" id="${moduleInstance.id}">${fieldValue(bean: moduleInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: moduleInstance, field: "description")}</td>
-                    <td>${fieldValue(bean: moduleInstance, field: "type")}</td>
-                    <td>${fieldValue(bean: moduleInstance, field: "application")}</td>
+                    <td><g:link controller="moduleType" action="show" id="${moduleInstance.type.id}">${fieldValue(bean: moduleInstance, field: "type")}</g:link></td>
+                    <td><g:link controller="application" action="show" id="${moduleInstance.application.id}">${fieldValue(bean: moduleInstance, field: "application")}</g:link></td>
                 </tr>
             </g:each>
             </tbody>
