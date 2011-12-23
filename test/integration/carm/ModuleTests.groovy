@@ -46,9 +46,9 @@ class ModuleTests extends CarmUnitTestCase {
     }
 
     void testToString() {
-        def module = Module.build(name: "Foobar")
+        def domain = Module.build(name: "Foobar")
 
-        assertNotNull(module.toString())
-        assertTrue(module.toString() ==~ /.*Foobar.*/)
+        assertNotNull(domain.toString())
+        assertTrue(domain.toString() ==~ /.*Foobar.*/)
     }
 }

@@ -10,7 +10,7 @@ class SourceControlUser {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false)
+        name(minSize: 2, maxSize: 50, blank: false, unique: true)
         description(maxSize: 4000, nullable: true)
         sourceControlServer(nullable: true)
         user(nullable: true)

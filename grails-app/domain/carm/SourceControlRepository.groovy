@@ -12,7 +12,7 @@ class SourceControlRepository {
         name(minSize: 2, maxSize: 50, blank: false)
         description(maxSize: 4000, nullable: true)
         server(nullable: false)
-        path(blank: false)
+        path(blank: false, maxSize: 200)
     }
 
     static belongsTo = [server: SourceControlServer]

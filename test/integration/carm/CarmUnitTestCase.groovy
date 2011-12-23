@@ -4,6 +4,7 @@ package carm
 import grails.test.*
 
 class CarmUnitTestCase extends GrailsUnitTestCase {
+    
     final static assertHasError(Object domain, String field, String errorCode) {
         assertFalse "Domain object should not be valid", domain.validate()
         assertTrue "Domain object should have error for field $field",
