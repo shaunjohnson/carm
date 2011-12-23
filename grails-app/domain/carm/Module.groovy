@@ -4,7 +4,6 @@ class Module {
     String name
     String description
     ModuleType type
-    SystemComponent systemComponent
     String deployInstructions
     
     Date dateCreated
@@ -15,11 +14,12 @@ class Module {
         description(maxSize: 4000, nullable: true)
         type(nullable: false)
         application(nullable: false)
-        systemComponent(nullable: true)
         deployInstructions(maxSize: 4000, nullable: true)
     }
 
     static belongsTo = [application: Application]
+
+    static hasMany = [systemComponents: SystemComponent]
 
     public String toString() {
         return name

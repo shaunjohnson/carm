@@ -37,10 +37,6 @@ class ModuleTests extends CarmUnitTestCase {
         assertHasError(Module.buildWithoutSave(name: null), 'name', 'nullable')
     }
 
-    void testSystemComponentNullable() {
-        assertTrue(Module.buildWithoutSave(systemComponent: null).validate())
-    }
-
     void testTypeNullable() {
         assertHasError(Module.buildWithoutSave(type: null), 'type', 'nullable')
     }

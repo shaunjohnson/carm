@@ -22,7 +22,6 @@
                 <g:sortableColumn property="description" title="${message(code: 'module.description.label', default: 'Description')}"/>
                 <th><g:message code="module.type.label" default="Type"/></th>
                 <th><g:message code="module.application.label" default="Application"/></th>
-                <th><g:message code="module.systemComponent.label" default="System Component"/></th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +31,6 @@
                     <td>${fieldValue(bean: moduleInstance, field: "description")}</td>
                     <td>${fieldValue(bean: moduleInstance, field: "type")}</td>
                     <td>${fieldValue(bean: moduleInstance, field: "application")}</td>
-                    <td>${fieldValue(bean: moduleInstance, field: "systemComponent")}</td>
                 </tr>
             </g:each>
             </tbody>

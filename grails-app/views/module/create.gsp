@@ -59,10 +59,10 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="systemComponent.id"><g:message code="module.systemComponent.label" default="System Component"/></label>
+                      <label for="systemComponents"><g:message code="module.systemComponents.label" default="System Components" /></label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponent', 'errors')}">
-                        <g:select name="systemComponent.id" from="${carm.SystemComponent.list()}" optionKey="id" value="${moduleInstance?.systemComponent?.id}" noSelection="['null': '']"/>
+                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponents', 'errors')}">
+                        <g:select name="systemComponents" from="${carm.SystemComponent.list()}" multiple="yes" optionKey="id" size="5" value="${moduleInstance?.systemComponents*.id}" />
                     </td>
                 </tr>
                 <tr class="prop">

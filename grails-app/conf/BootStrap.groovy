@@ -56,6 +56,7 @@ class BootStrap {
             // Application Types
             //
             databaseAppType(ApplicationType, name: 'Database Application', description: 'Database application')
+            configAppType(ApplicationType, name: 'Configuration', description: 'Configuration application')
             enterpriseAppType(ApplicationType, name: 'Enterprise Application', description: 'Enterprise application')
             brokerAppType(ApplicationType, name: 'Broker Application', description: 'Broker application')
             portalAppType(ApplicationType, name: 'Portal Application', description: 'Portal application')
@@ -65,7 +66,7 @@ class BootStrap {
             // Module Types
             //
             barModuleType(ModuleType, name: 'BAR', description: 'Broker archive')
-            configModType(ModuleType, name: 'Config', description: 'Configuration files')
+            configModType(ModuleType, name: 'Configuration Files', description: 'Configuration files')
             ejbModType(ModuleType, name: 'EJB', description: 'Enterprise Java Bean')
             mdbModType(ModuleType, name: 'MDB', description: 'Message Driven Bean')
             portletModType(ModuleType, name: 'Portlet', description: 'Portlet')
@@ -249,6 +250,27 @@ class BootStrap {
                             sourceControlPath = '/database'
                             system = bigSystem
                         },
+                        configApplication(Application) {
+                            name = 'Big Project Configuration'
+                            description = 'Big Project configuration files'
+                            project = myBigProject
+                            type = configAppType
+                            sourceControlRepository = subversionRepository
+                            sourceControlPath = '/config'
+                            system = bigSystem
+                            modules = [
+                                    configModule(Module) {
+                                        name = 'Configuration Files Module'
+                                        description = 'Configuration files for the Big Project'
+                                        application = configApplication
+                                        type = configModType
+                                        deployInstructions = 'Copy to file system.Restart server.'
+                                        systemComponents = [
+                                                businessLayer, integrationLayer, presentationLayer
+                                        ]
+                                    }
+                            ]
+                        },
                         earApplication(Application) {
                             name = 'Business Services EAR'
                             description = 'Big Project EAR application'
@@ -264,7 +286,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponent = businessLayer
+                                        systemComponents = [ businessLayer ]
                                     },
                                     transEjbModule(Module) {
                                         name = 'Transition Services EJB'
@@ -272,7 +294,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponent = businessLayer
+                                        systemComponents = [ businessLayer ]
                                     },
                                     bussMdbModule(Module) {
                                         name = 'Business Services MDB'
@@ -280,7 +302,7 @@ class BootStrap {
                                         application = earApplication
                                         type = mdbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponent = businessLayer
+                                        systemComponents = [ businessLayer ]
                                     }
                             ]
                         },
@@ -299,7 +321,7 @@ class BootStrap {
                                         application = brokerApplication
                                         type = barModuleType
                                         deployInstructions = 'Update existing BAR file.'
-                                        systemComponent = integrationLayer
+                                        systemComponents = [ integrationLayer ]
                                     }
                             ]
                             releases = [
@@ -325,7 +347,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemComponent = presentationLayer
+                                        systemComponents = [ presentationLayer ]
                                     },
                                     adminPortletModule(Module) {
                                         name = 'Admin Portlet'
@@ -333,7 +355,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemComponent = presentationLayer
+                                        systemComponents = [ presentationLayer ]
                                     }
                             ]
                             releases = [

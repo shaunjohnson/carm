@@ -35,12 +35,18 @@
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.systemComponent.label" default="System Component"/></td>
-                <td valign="top" class="value">
-                    <g:link controller="systemComponent" action="show"
-                            id="${moduleInstance?.systemComponent?.id}">${moduleInstance?.systemComponent?.encodeAsHTML()}</g:link>
-                    [<g:link controller="system" action="show"
-                            id="${moduleInstance?.systemComponent?.system?.id}">${moduleInstance?.systemComponent?.system?.encodeAsHTML()}</g:link>]
+                <td valign="top" class="name"><g:message code="module.systemComponents.label" default="System Components" /></td>
+                <td valign="top" style="text-align: left;" class="value">
+                    <ul>
+                    <g:each in="${moduleInstance.systemComponents}" var="s">
+                        <li>
+                            <g:link controller="systemComponent" action="show"
+                                id="${s?.id}">${s?.encodeAsHTML()}</g:link>
+                            [<g:link controller="system" action="show"
+                                    id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
+                        </li>
+                    </g:each>
+                    </ul>
                 </td>
             </tr>
             <tr class="prop">
