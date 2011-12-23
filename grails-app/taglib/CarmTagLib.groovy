@@ -35,6 +35,7 @@ class CarmTagLib {
         def isFirst = attrs.isFirst ?: false
         def controller = attrs.controller
         def action = attrs.action
+        def id = attrs.id
         def title = attrs.title
         def text = attrs.text
         def uri = attrs.uri
@@ -43,7 +44,7 @@ class CarmTagLib {
             out << '<span class="spacer"> &gt; </span>'
         }
 
-        out << link(uri: uri, controller: controller, action: action, title: title) { text.encodeAsHTML() }
+        out << link(uri: uri, controller: controller, action: action, id: id, title: title) { text.encodeAsHTML() }
     }
 
     /**
