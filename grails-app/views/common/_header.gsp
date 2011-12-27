@@ -15,7 +15,6 @@
             <g:headerLink controller="application" action="list" title="Show All Applications" text="Applications"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="list" title="Show All Projects" text="Projects"/>
             <g:headerLink controller="project" action="show" title="Show Project" text="${domain.project}" id="${domain.project.id}"/>
 
             <g:if test="${action == 'show'}">
@@ -64,7 +63,6 @@
             <g:headerLink controller="module" action="list" title="Show All Modules" text="Modules"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="list" title="Show All Projects" text="Projects"/>
             <g:headerLink controller="project" action="show" title="Show Project" text="${domain.application.project}" id="${domain.application.project.id}"/>
             <g:headerLink controller="application" action="show" title="Show Application" text="${domain.application.name}" id="${domain.application.id}"/>
 
@@ -156,7 +154,6 @@
             <g:headerLink controller="sourceControlRepository" action="list" title="Show All Source Control Repositories" text="Source Control Repositories"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="sourceControlServer" action="list" title="Show All Source Control Servers" text="Source Control Servers"/>
             <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.server.name}" id="${domain.server.id}"/>
 
             <g:if test="${action == 'show'}">
@@ -247,7 +244,6 @@
             <g:headerLink controller="systemComponent" action="list" title="Show All System Components" text="Systems Components"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="system" action="list" title="Show All Systems" text="Systems"/>
             <g:headerLink controller="system" action="show" title="Show System" text="${domain.system.name}" id="${domain.system.id}"/>
 
             <g:if test="${action == 'show'}">
@@ -275,7 +271,6 @@
             <g:headerLink controller="systemEnvironment" action="list" title="Show All System Environments" text="Systems Environments"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="system" action="list" title="Show All Systems" text="Systems"/>
             <g:headerLink controller="system" action="show" title="Show System" text="${domain.system.name}" id="${domain.system.id}"/>
 
             <g:if test="${action == 'show'}">
