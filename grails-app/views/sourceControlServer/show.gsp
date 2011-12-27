@@ -72,6 +72,27 @@
             </tfoot>
         </table>
     </div>
+
+    <h2>Users</h2>
+    <div class="nav">
+        <span class="menuButton">
+            <g:link class="create" controller="sourceControlUser" action="create"
+                    params="['sourceControlServer.id': sourceControlServerInstance?.id]">Add User</g:link>
+        </span>
+    </div>
+
+    <g:if test="${sourceControlServerInstance?.users?.size()}">
+        <ul>
+        <g:each in="${sourceControlServerInstance.users.sort { it.name }}" var="user">
+            <li><g:link controller="sourceControlUser" action="show" id="${user.id}">${user?.name?.encodeAsHTML()}</g:link></li>
+        </g:each>
+        </ul>
+    </g:if>
+    <g:else>
+        <p>
+            This project does not have any users.
+        </p>
+    </g:else>
 </div>
 </body>
 </html>
