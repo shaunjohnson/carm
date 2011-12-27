@@ -44,7 +44,7 @@ class ProjectService {
     void delete(Project project) {
         project.delete()
 
-        carmSecurityService.deleteAllPermissions(domainObject)
+        carmSecurityService.deleteAllPermissions(project)
     }
 
     Project get(long id) {
