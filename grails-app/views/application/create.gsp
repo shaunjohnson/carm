@@ -81,6 +81,14 @@
                         <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="deployInstructions"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'deployInstructions', 'errors')}">
+                        <g:textArea name="deployInstructions" cols="40" rows="5" value="${applicationInstance?.deployInstructions}"/>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

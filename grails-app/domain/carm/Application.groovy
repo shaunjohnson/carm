@@ -7,6 +7,7 @@ class Application {
     SourceControlRepository sourceControlRepository
     String sourceControlPath
     System system
+    String deployInstructions
     
     Date dateCreated
     Date lastUpdated
@@ -19,6 +20,7 @@ class Application {
         sourceControlRepository(nullable: true)
         sourceControlPath(maxSize: 200, nullable: true)
         system(nullable: true)
+        deployInstructions(maxSize: 4000, nullable: true)
     }
 
     static belongsTo = [project: Project]

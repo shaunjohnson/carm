@@ -85,6 +85,10 @@
                 </td>
             </tr>
             <tr class="prop">
+                <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
+                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions")}</td>
+            </tr>
+            <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${applicationInstance?.dateCreated}"/></td>
             </tr>
