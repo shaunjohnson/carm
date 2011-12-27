@@ -9,6 +9,8 @@ import carm.ProjectCategory
 import carm.ModuleType
 import carm.ApplicationType
 import carm.SourceControlServer
+import carm.SourceControlRole
+import carm.ApplicationRole
 
 class CarmTagLib {
     def carmSecurityService
@@ -128,6 +130,11 @@ class CarmTagLib {
         }
         else if (domain instanceof SourceControlRepository) {
             if (Application.findAllBySourceControlRepository(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof SourceControlRole) {
+            if (ApplicationRole.findAllByRole(domain).size() == 0) {
                 out << body()
             }
         }
