@@ -47,12 +47,14 @@
                                 <g:message code="default.button.edit.label" default="Edit"/>
                             </g:link>
                         </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${systemComponentInstance?.id}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
+                        <g:ifNotInUse domain="${systemComponentInstance}">
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${systemComponentInstance?.id}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </g:ifNotInUse>
                     </div>
                 </td>
             </tr>

@@ -4,6 +4,11 @@ import carm.Module
 import carm.SystemComponent
 import carm.SystemEnvironment
 import carm.SourceControlRepository
+import carm.System
+import carm.ProjectCategory
+import carm.ModuleType
+import carm.ApplicationType
+import carm.SourceControlServer
 
 class CarmTagLib {
     def carmSecurityService
@@ -95,6 +100,56 @@ class CarmTagLib {
             def url = "${sourceControlRepository.server.url}${sourceControlRepository.path}"
 
             out << "$name (<a href='$url' target='_blank'>$url</a>)"
+        }
+    }
+
+    /**
+     * Renders the body of the tag if the provided domain is not in use.
+     *
+     * attrs.domain - Domain to test for use
+     */
+    def ifNotInUse = { attrs, body ->
+        def domain = attrs.domain
+        
+        if (domain instanceof ApplicationType) {
+            if (Application.findAllByType(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof ModuleType) {
+            if (Module.findAllByType(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof ProjectCategory) {
+            if (Project.findAllByCategory(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof SourceControlRepository) {
+            if (Application.findAllBySourceControlRepository(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof SourceControlServer) {
+            def applicationCount = Application.executeQuery('select count(a) from Application a where a.sourceControlRepository.server = ?', [domain])[0]
+
+            if (applicationCount == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof System) {
+            if (Application.findAllBySystem(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof SystemComponent) {
+//            if (Module.findAllByComponent(domain).size() == 0) {
+                out << body()
+//            }
+        }
+        else {
+            out << '<span style="color: red;">Domain is not supported!</span>'
         }
     }
 
