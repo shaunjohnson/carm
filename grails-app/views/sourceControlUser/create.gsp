@@ -25,6 +25,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="sourceControlServer"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'sourceControlServer', 'errors')}">
+                        ${sourceControlUserInstance?.sourceControlServer?.name?.encodeAsHTML()}
+                        <g:hiddenField name="sourceControlServer.id" value="${sourceControlUserInstance?.sourceControlServer?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="sourceControlUser.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'name', 'errors')}">
@@ -41,18 +50,10 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlServer"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'sourceControlServer', 'errors')}">
-                        <g:select name="sourceControlServer.id" from="${carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlUserInstance?.sourceControlServer?.id}" noSelection="['null': '']"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <label for="user"><g:message code="sourceControlUser.user.label" default="User"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'user', 'errors')}">
-                        <g:select name="user.id" from="${carm.security.User.list()}" optionKey="id" value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
+                        <g:select name="user.id" from="${carm.security.User.list().sort { it.username }}" optionKey="id" value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 </tbody>

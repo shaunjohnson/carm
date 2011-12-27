@@ -27,6 +27,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="server"><g:message code="sourceControlRepositoryInstance.server.label" default="Source Control Server"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: sourceControlRepositoryInstance, field: 'server', 'errors')}">
+                        ${sourceControlRepositoryInstance?.server?.name?.encodeAsHTML()}
+                        <g:hiddenField name="server.id" value="${sourceControlRepositoryInstance?.server?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="name"><g:message code="sourceControlRepository.name.label" default="Name"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlRepositoryInstance, field: 'name', 'errors')}">
@@ -39,14 +48,6 @@
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: sourceControlRepositoryInstance, field: 'description', 'errors')}">
                         <g:textArea name="description" cols="40" rows="5" value="${sourceControlRepositoryInstance?.description}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="server"><g:message code="sourceControlRepository.server.label" default="Server"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: sourceControlRepositoryInstance, field: 'server', 'errors')}">
-                        <g:select name="server.id" from="${carm.SourceControlServer.list()}" optionKey="id" value="${sourceControlRepositoryInstance?.server?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

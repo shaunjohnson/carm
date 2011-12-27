@@ -14,9 +14,16 @@ class SourceControlRepositoryController {
     }
 
     def create = {
-        def sourceControlRepositoryInstance = new SourceControlRepository()
-        sourceControlRepositoryInstance.properties = params
-        return [sourceControlRepositoryInstance: sourceControlRepositoryInstance]
+        def serverInstance = SourceControlServer.get(params.server.id)
+        if (!serverInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def sourceControlRepositoryInstance = new SourceControlRepository()
+            sourceControlRepositoryInstance.properties = params
+            return [sourceControlRepositoryInstance: sourceControlRepositoryInstance]
+        }
     }
 
     def save = {

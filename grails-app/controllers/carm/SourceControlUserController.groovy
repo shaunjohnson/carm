@@ -14,9 +14,16 @@ class SourceControlUserController {
     }
 
     def create = {
-        def sourceControlUserInstance = new SourceControlUser()
-        sourceControlUserInstance.properties = params
-        return [sourceControlUserInstance: sourceControlUserInstance]
+        def serverInstance = SourceControlServer.get(params.sourceControlServer.id)
+        if (!serverInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.sourceControlServer.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def sourceControlUserInstance = new SourceControlUser()
+            sourceControlUserInstance.properties = params
+            return [sourceControlUserInstance: sourceControlUserInstance]
+        }
     }
 
     def save = {
