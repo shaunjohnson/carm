@@ -27,18 +27,30 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></td>
-                <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance?.sourceControlServer?.id}">${sourceControlUserInstance?.sourceControlServer?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance?.sourceControlServer?.id}">
+                        ${sourceControlUserInstance?.sourceControlServer?.encodeAsHTML()}
+                    </g:link>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlUser.user.label" default="User"/></td>
-                <td valign="top" class="value"><g:link controller="user" action="show" id="${sourceControlUserInstance?.user?.id}">${sourceControlUserInstance?.user?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="user" action="show" id="${sourceControlUserInstance?.user?.id}">
+                        ${sourceControlUserInstance?.user?.encodeAsHTML()}
+                    </g:link>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlUser.applicationRoles.label" default="Application Roles"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${sourceControlUserInstance.applicationRoles}" var="a">
-                            <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                        <g:each in="${sourceControlUserInstance.applicationRoles.sort { it.application.name }}" var="a">
+                            <li>
+                                <g:link controller="applicationRole" action="show" id="${a.id}">
+                                    ${a?.role?.encodeAsHTML()} - ${a?.application?.name?.encodeAsHTML()}
+                                </g:link>
+                            </li>
                         </g:each>
                     </ul>
                 </td>
