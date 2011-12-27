@@ -16,6 +16,10 @@ class Project {
     
     static hasMany = [applications: Application]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

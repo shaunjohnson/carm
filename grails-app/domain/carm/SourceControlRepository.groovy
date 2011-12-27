@@ -17,6 +17,10 @@ class SourceControlRepository {
 
     static belongsTo = [server: SourceControlServer]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

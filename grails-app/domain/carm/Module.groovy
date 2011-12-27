@@ -21,6 +21,10 @@ class Module {
 
     static hasMany = [systemComponents: SystemComponent]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

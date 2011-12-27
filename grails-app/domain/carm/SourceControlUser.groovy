@@ -20,6 +20,10 @@ class SourceControlUser {
 
     static hasMany = [applicationRoles: ApplicationRole]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

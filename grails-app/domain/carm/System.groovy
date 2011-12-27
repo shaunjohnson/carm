@@ -15,6 +15,10 @@ class System {
 
     static hasMany = [components: SystemComponent, environments: SystemEnvironment]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

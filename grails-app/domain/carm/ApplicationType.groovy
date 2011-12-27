@@ -12,6 +12,10 @@ class ApplicationType implements Comparable<ApplicationType> {
         description(maxSize: 4000, nullable: true)
     }
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

@@ -15,6 +15,10 @@ class SystemComponent {
 
     static belongsTo = [system: System]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

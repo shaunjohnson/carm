@@ -20,6 +20,10 @@ class SourceControlServer {
 
     static hasMany = [repositories: SourceControlRepository, users: SourceControlUser]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }

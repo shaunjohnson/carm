@@ -25,6 +25,10 @@ class Application {
 
     static hasMany = [applicationRoles: ApplicationRole, modules: Module, releases: ApplicationRelease]
 
+    static mapping = {
+        sort "name"
+    }
+
     public String toString() {
         return name
     }
