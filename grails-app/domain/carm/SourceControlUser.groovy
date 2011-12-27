@@ -12,11 +12,11 @@ class SourceControlUser {
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false, unique: true)
         description(maxSize: 4000, nullable: true)
-        sourceControlServer(nullable: true)
+        server(nullable: true)
         user(nullable: true)
     }
 
-    static belongsTo = [sourceControlServer: SourceControlServer, user: User]
+    static belongsTo = [server: SourceControlServer, user: User]
 
     static hasMany = [applicationRoles: ApplicationRole]
 

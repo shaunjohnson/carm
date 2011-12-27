@@ -109,21 +109,21 @@ class BootStrap {
             shaunScmUser(SourceControlUser) {
                 name = 'shaun'
                 description = 'The user named Shaun'
-                sourceControlServer = subversionServer
+                server = subversionServer
                 user = userFixture.shaunUser
             }
 
             susanScmUser(SourceControlUser) {
                 name = 'susan'
                 description = 'The user named Susan'
-                sourceControlServer = subversionServer
+                server = subversionServer
                 user = userFixture.susanUser
             }
 
             scottScmUser(SourceControlUser) {
                 name = 'scott'
                 description = 'The user named Scott'
-                sourceControlServer = subversionServer
+                server = subversionServer
                 user = userFixture.scottUser
             }
 

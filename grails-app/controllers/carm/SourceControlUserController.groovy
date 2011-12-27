@@ -14,9 +14,9 @@ class SourceControlUserController {
     }
 
     def create = {
-        def serverInstance = SourceControlServer.get(params.sourceControlServer.id)
+        def serverInstance = SourceControlServer.get(params.server.id)
         if (!serverInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.sourceControlServer.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server.id])}"
             redirect(action: "list")
         }
         else {

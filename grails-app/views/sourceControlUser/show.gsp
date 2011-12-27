@@ -26,10 +26,10 @@
                 <td valign="top" class="value">${fieldValue(bean: sourceControlUserInstance, field: "description")}</td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></td>
+                <td valign="top" class="name"><g:message code="sourceControlUser.server.label" default="Source Control Server"/></td>
                 <td valign="top" class="value">
-                    <g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance?.sourceControlServer?.id}">
-                        ${sourceControlUserInstance?.sourceControlServer?.encodeAsHTML()}
+                    <g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance?.server?.id}">
+                        ${sourceControlUserInstance?.server?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>

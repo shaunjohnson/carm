@@ -77,7 +77,7 @@
     <div class="nav">
         <span class="menuButton">
             <g:link class="create" controller="sourceControlUser" action="create"
-                    params="['sourceControlServer.id': sourceControlServerInstance?.id]">Add User</g:link>
+                    params="['server.id': sourceControlServerInstance?.id]">Add User</g:link>
         </span>
     </div>
 

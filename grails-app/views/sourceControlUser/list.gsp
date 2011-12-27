@@ -10,9 +10,6 @@
 <div class="body">
     <g:header domain="${sourceControlUserInstanceList}" />
 
-    <div class="nav">
-        <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
-    </div>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -33,8 +30,8 @@
                     <td><g:link action="show" id="${sourceControlUserInstance.id}">${fieldValue(bean: sourceControlUserInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "description")}</td>
                     <td>
-                        <g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance.sourceControlServer.id}">
-                            ${fieldValue(bean: sourceControlUserInstance, field: "sourceControlServer")}
+                        <g:link controller="sourceControlServer" action="show" id="${sourceControlUserInstance.server.id}">
+                            ${fieldValue(bean: sourceControlUserInstance, field: "server")}
                         </g:link>
                     </td>
                     <td>${fieldValue(bean: sourceControlUserInstance, field: "user")}</td>

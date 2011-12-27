@@ -191,31 +191,31 @@
 </div>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlUser'}">
-<g:set var="entityName" value="${message(code: 'sourceControlUser.label', default: 'Source Control User')}"/>
+    <g:set var="entityName" value="${message(code: 'sourceControlUser.label', default: 'Source Control User')}"/>
 
-<g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-<div class="breadcrumbs">
-    <g:headerLink uri="/" text="Home" isFirst="true"/>
+    <div class="breadcrumbs">
+        <g:headerLink uri="/" text="Home" isFirst="true"/>
 
-    <g:if test="${action == 'list'}">
-        <g:headerLink controller="sourceControlUser" action="list" title="Show All Source Control Users" text="Source Control Users"/>
-    </g:if>
-    <g:else>
-        <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.sourceControlServer.name}" id="${domain.sourceControlServer.id}"/>
-
-        <g:if test="${action == 'show'}">
-            <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+        <g:if test="${action == 'list'}">
+            <g:headerLink controller="sourceControlUser" action="list" title="Show All Source Control Users" text="Source Control Users"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
-        </g:elseif>
-        <g:elseif test="${action == 'edit'}">
-            <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
-        </g:elseif>
-    </g:else>
-</div>
+        <g:else>
+            <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.server.name}" id="${domain.server.id}"/>
+
+            <g:if test="${action == 'show'}">
+                <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+            </g:if>
+            <g:elseif test="${action == 'create'}">
+                <g:headerText code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit'}">
+                <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+                <g:headerText code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
+    </div>
 </g:elseif>
 <g:elseif test="${controller == 'system'}">
     <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>

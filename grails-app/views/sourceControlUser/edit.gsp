@@ -27,11 +27,11 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlServer"><g:message code="sourceControlUser.sourceControlServer.label" default="Source Control Server"/></label>
+                        <label for="server"><g:message code="sourceControlUser.server.label" default="Source Control Server"/></label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'sourceControlServer', 'errors')}">
-                        ${sourceControlUserInstance?.sourceControlServer?.name?.encodeAsHTML()}
-                        <g:hiddenField name="sourceControlServer.id" value="${sourceControlUserInstance?.sourceControlServer?.id}"/>
+                    <td valign="top" class="value ${hasErrors(bean: sourceControlUserInstance, field: 'server', 'errors')}">
+                        ${sourceControlUserInstance?.server?.name?.encodeAsHTML()}
+                        <g:hiddenField name="server.id" value="${sourceControlUserInstance?.server?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
