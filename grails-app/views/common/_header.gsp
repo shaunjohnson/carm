@@ -197,18 +197,24 @@
 
 <div class="breadcrumbs">
     <g:headerLink uri="/" text="Home" isFirst="true"/>
-    <g:headerLink controller="sourceControlUser" action="list" title="Show All Source Control Users" text="Source Control Users"/>
 
-    <g:if test="${action == 'show'}">
-        <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+    <g:if test="${action == 'list'}">
+        <g:headerLink controller="sourceControlUser" action="list" title="Show All Source Control Users" text="Source Control Users"/>
     </g:if>
-    <g:elseif test="${action == 'create'}">
-        <g:headerText code="default.create.label" args="[entityName]"/>
-    </g:elseif>
-    <g:elseif test="${action == 'edit'}">
-        <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
-        <g:headerText code="default.edit.label" args="[entityName]"/>
-    </g:elseif>
+    <g:else>
+        <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.sourceControlServer.name}" id="${domain.sourceControlServer.id}"/>
+
+        <g:if test="${action == 'show'}">
+            <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+        </g:if>
+        <g:elseif test="${action == 'create'}">
+            <g:headerText code="default.create.label" args="[entityName]"/>
+        </g:elseif>
+        <g:elseif test="${action == 'edit'}">
+            <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
+            <g:headerText code="default.edit.label" args="[entityName]"/>
+        </g:elseif>
+    </g:else>
 </div>
 </g:elseif>
 <g:elseif test="${controller == 'system'}">
