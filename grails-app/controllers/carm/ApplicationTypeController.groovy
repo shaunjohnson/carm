@@ -2,7 +2,7 @@ package carm
 
 class ApplicationTypeController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def index = {
         redirect(action: "list", params: params)
