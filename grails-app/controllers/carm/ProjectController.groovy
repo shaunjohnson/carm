@@ -7,7 +7,7 @@ import org.springframework.security.acls.domain.BasePermission
 @Secured(['ROLE_ADMIN'])
 class ProjectController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def carmSecurityService
     def projectService
