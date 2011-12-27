@@ -35,6 +35,14 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <label for="category"><g:message code="project.category.label" default="Category"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'category', 'errors')}">
+                        <g:select name="category.id" from="${carm.ProjectCategory.list().sort { it.name }}" optionKey="id" value="${projectInstance?.category?.id}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <label for="description"><g:message code="project.description.label" default="Description"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'description', 'errors')}">
