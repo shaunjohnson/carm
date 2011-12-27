@@ -18,22 +18,27 @@
         <table class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "description")}</td>
+                <td valign="top" class="name"><g:message code="module.application.label" default="Application"/></td>
+                <td valign="top" class="value">
+                    <g:link controller="application" action="show"
+                            id="${moduleInstance?.application?.id}">${moduleInstance?.application?.encodeAsHTML()}</g:link>
+                    [<g:link controller="project" action="show"
+                             id="${moduleInstance?.application?.project?.id}">${moduleInstance?.application?.project?.encodeAsHTML()}</g:link>]
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.type.label" default="Type"/></td>
                 <td valign="top" class="value"><g:link controller="moduleType" action="show" id="${moduleInstance?.type?.id}">${moduleInstance?.type?.encodeAsHTML()}</g:link></td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.application.label" default="Application"/></td>
-                <td valign="top" class="value">
-                    <g:link controller="application" action="show"
-                            id="${moduleInstance?.application?.id}">${moduleInstance?.application?.encodeAsHTML()}</g:link>
-                    [<g:link controller="project" action="show"
-                            id="${moduleInstance?.application?.project?.id}">${moduleInstance?.application?.project?.encodeAsHTML()}</g:link>]
-                </td>
+                <td valign="top" class="name"><g:message code="module.description.label" default="Description"/></td>
+                <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "description")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.systemComponents.label" default="System Components" /></td>
                 <td valign="top" style="text-align: left;" class="value">
@@ -53,6 +58,11 @@
                 <td valign="top" class="name"><g:message code="module.deployInstructions.label" default="Deploy Instructions"/></td>
                 <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "deployInstructions")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${moduleInstance?.dateCreated}"/></td>

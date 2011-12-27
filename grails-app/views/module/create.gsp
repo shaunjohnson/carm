@@ -43,20 +43,25 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description"><g:message code="module.description.label" default="Description"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${moduleInstance?.description}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <label for="type"><g:message code="module.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
                         <g:select name="type.id" from="${carm.ModuleType.list().sort { it.name }}" optionKey="id" value="${moduleInstance?.type?.id}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="description"><g:message code="module.description.label" default="Description"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'description', 'errors')}">
+                        <g:textArea name="description" cols="40" rows="5" value="${moduleInstance?.description}"/>
+                    </td>
+                </tr>
+
+                <tr class="prop">
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+
                 <tr class="prop">
                     <td valign="top" class="name">
                       <label for="systemComponents"><g:message code="module.systemComponents.label" default="System Components" /></label>

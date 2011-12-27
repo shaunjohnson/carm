@@ -11,11 +11,6 @@
 <div class="body">
     <g:header domain="${applicationInstance}" />
 
-    <div class="nav">
-        <span class="menuButton"><g:link class="create" controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link></span>
-        <span class="menuButton"><g:link class="create" controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link></span>
-    </div>
-
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -24,8 +19,10 @@
         <table class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "description")}</td>
+                <td valign="top" class="name"><g:message code="application.project.label" default="Project"/></td>
+                <td valign="top" class="value">
+                    <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">${applicationInstance?.project?.encodeAsHTML()}</g:link>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.type.label" default="Type"/></td>
@@ -34,11 +31,14 @@
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.project.label" default="Project"/></td>
-                <td valign="top" class="value">
-                    <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">${applicationInstance?.project?.encodeAsHTML()}</g:link>
-                </td>
+                <td valign="top" class="name"><g:message code="application.description.label" default="Description"/></td>
+                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "description")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></td>
                 <td valign="top" class="value">
@@ -50,10 +50,24 @@
                 <td valign="top" class="name"><g:message code="application.sourceControlPath.label" default="Source Control Path"/></td>
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "sourceControlPath")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.system.label" default="System"/></td>
                 <td valign="top" class="value"><g:link controller="system" action="show" id="${applicationInstance?.system?.id}">${applicationInstance?.system?.encodeAsHTML()}</g:link></td>
             </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
+                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions")}</td>
+            </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.applicationRoles.label" default="Application Roles"/></td>
                 <td valign="top" style="text-align: left;" class="value">
@@ -67,27 +81,16 @@
                     <g:else>
                         <div>None</div>
                     </g:else>
+                    <div class="nav">
+                        <span class="menuButton"><g:link class="create" controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link></span>
+                    </div>
                 </td>
             </tr>
+
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.modules.label" default="Modules"/></td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <g:if test="${applicationInstance.modules}">
-                        <ul>
-                            <g:each in="${applicationInstance.modules.sort { it.name }}" var="m">
-                                <li><g:link controller="module" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-                            </g:each>
-                        </ul>
-                    </g:if>
-                    <g:else>
-                        <div>None</div>
-                    </g:else>
-                </td>
+                <td colspan="2">&nbsp;</td>
             </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions")}</td>
-            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${applicationInstance?.dateCreated}"/></td>
@@ -116,6 +119,42 @@
                 </td>
             </tr>
             </tfoot>
+        </table>
+    </div>
+
+    <h2>Modules</h2>
+
+    <div class="nav">
+        <span class="menuButton"><g:link class="create" controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link></span>
+    </div>
+
+    <div class="list">
+        <table>
+            <thead>
+            <tr>
+                <th><g:message code="module.name.label" default="Name"/></th>
+                <th><g:message code="module.systemComponents.label" default="System Components"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
+                <tr>
+                    <td><g:link controller="module" action="show" id="${moduleInstance.id}">${moduleInstance?.encodeAsHTML()}</g:link></td>
+                    <td>
+                        <ul>
+                            <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
+                                <li>
+                                    <g:link controller="systemComponent" action="show"
+                                            id="${s?.id}">${s?.encodeAsHTML()}</g:link>
+                                    [<g:link controller="system" action="show"
+                                             id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
+                                </li>
+                            </g:each>
+                        </ul>
+                    </td>
+                </tr>
+            </g:each>
+            </tbody>
         </table>
     </div>
 

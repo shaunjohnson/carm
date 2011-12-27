@@ -18,13 +18,18 @@
         <table class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="project.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "description")}</td>
-            </tr>
-            <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.category.label" default="Category"/></td>
                 <td valign="top" class="value"><g:link controller="projectCategory" action="show" id="${projectInstance?.category?.id}">${fieldValue(bean: projectInstance, field: "category")}</g:link></td>
             </tr>
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="project.description.label" default="Description"/></td>
+                <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "description")}</td>
+            </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectInstance?.dateCreated}"/></td>
@@ -33,6 +38,11 @@
                 <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
                 <td valign="top" class="value">

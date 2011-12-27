@@ -43,20 +43,25 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description"><g:message code="application.description.label" default="Description"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${applicationInstance?.description}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <label for="type"><g:message code="application.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
                         <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.type?.id}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="description"><g:message code="application.description.label" default="Description"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'description', 'errors')}">
+                        <g:textArea name="description" cols="40" rows="5" value="${applicationInstance?.description}"/>
+                    </td>
+                </tr>
+
+                <tr class="prop">
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
@@ -73,6 +78,11 @@
                         <g:textField name="sourceControlPath" maxlength="200" value="${applicationInstance?.sourceControlPath}"/>
                     </td>
                 </tr>
+
+                <tr class="prop">
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+
                 <tr class="prop">
                     <td valign="top" class="name">
                         <label for="system"><g:message code="application.system.label" default="System"/></label>
