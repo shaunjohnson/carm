@@ -47,8 +47,10 @@
                     <ul>
                         <g:each in="${sourceControlUserInstance.applicationRoles.sort { it.application.name }}" var="a">
                             <li>
-                                <g:link controller="applicationRole" action="show" id="${a.id}">
-                                    ${a?.role?.encodeAsHTML()} - ${a?.application?.name?.encodeAsHTML()}
+                                <g:link controller="applicationRole" action="show" id="${a.id}">${a?.role?.encodeAsHTML()}</g:link>
+
+                                <g:link controller="application" action="show" id="${a?.application?.id}">
+                                    (${a?.application?.name?.encodeAsHTML()})
                                 </g:link>
                             </li>
                         </g:each>
