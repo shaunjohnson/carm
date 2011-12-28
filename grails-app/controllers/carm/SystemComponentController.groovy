@@ -4,6 +4,9 @@ class SystemComponentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def systemComponentService
+    def systemService
+
     def index = {
         redirect(action: "list", params: params)
     }
@@ -14,7 +17,7 @@ class SystemComponentController {
     }
 
     def create = {
-        def systemInstance = System.get(params.system.id)
+        def systemInstance = systemService.get(params.system.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
             redirect(action: "list")
@@ -27,8 +30,8 @@ class SystemComponentController {
     }
 
     def save = {
-        def systemComponentInstance = new SystemComponent(params)
-        if (systemComponentInstance.save(flush: true)) {
+        def systemComponentInstance = systemComponentService.create(params)
+        if (!systemComponentInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.id])}"
             redirect(action: "show", id: systemComponentInstance.id)
         }
@@ -38,7 +41,7 @@ class SystemComponentController {
     }
 
     def show = {
-        def systemComponentInstance = SystemComponent.get(params.id)
+        def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
             redirect(action: "list")
@@ -49,7 +52,7 @@ class SystemComponentController {
     }
 
     def edit = {
-        def systemComponentInstance = SystemComponent.get(params.id)
+        def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
             redirect(action: "list")
@@ -60,18 +63,17 @@ class SystemComponentController {
     }
 
     def update = {
-        def systemComponentInstance = SystemComponent.get(params.id)
+        def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
                 if (systemComponentInstance.version > version) {
-                    
                     systemComponentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemComponent.label', default: 'SystemComponent')] as Object[], "Another user has updated this SystemComponent while you were editing")
                     render(view: "edit", model: [systemComponentInstance: systemComponentInstance])
                     return
                 }
             }
-            systemComponentInstance.properties = params
+            systemComponentService.update(systemComponentInstance, params)
             if (!systemComponentInstance.hasErrors() && systemComponentInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.id])}"
                 redirect(action: "show", id: systemComponentInstance.id)
@@ -87,11 +89,11 @@ class SystemComponentController {
     }
 
     def delete = {
-        def systemComponentInstance = SystemComponent.get(params.id)
+        def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {
             def systemId = systemComponentInstance.system.id
             try {
-                systemComponentInstance.delete(flush: true)
+                systemComponentService.delete(systemComponentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }

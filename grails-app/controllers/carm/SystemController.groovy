@@ -4,13 +4,15 @@ class SystemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def systemService
+
     def index = {
         redirect(action: "list", params: params)
     }
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemInstanceList: System.list(params), systemInstanceTotal: System.count()]
+        [systemInstanceList: systemService.list(params), systemInstanceTotal: systemService.count()]
     }
 
     def create = {
@@ -20,8 +22,8 @@ class SystemController {
     }
 
     def save = {
-        def systemInstance = new System(params)
-        if (systemInstance.save(flush: true)) {
+        def systemInstance = systemService.create(params)
+        if (!systemInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'system.label', default: 'System'), systemInstance.id])}"
             redirect(action: "show", id: systemInstance.id)
         }
@@ -31,7 +33,7 @@ class SystemController {
     }
 
     def show = {
-        def systemInstance = System.get(params.id)
+        def systemInstance = systemService.get(params.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -41,6 +43,7 @@ class SystemController {
         }
     }
 
+    // TODO Move to System Service
     def moveEnvDown = {
         def systemInstance = System.get(params.systemId)
         if (!systemInstance) {
@@ -62,6 +65,7 @@ class SystemController {
         }
     }
 
+    // TODO Move to System Service
     def moveEnvUp = {
         def systemInstance = System.get(params.systemId)
         if (!systemInstance) {
@@ -84,7 +88,7 @@ class SystemController {
     }
 
     def edit = {
-        def systemInstance = System.get(params.id)
+        def systemInstance = systemService.get(params.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -95,7 +99,7 @@ class SystemController {
     }
 
     def update = {
-        def systemInstance = System.get(params.id)
+        def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -106,7 +110,7 @@ class SystemController {
                     return
                 }
             }
-            systemInstance.properties = params
+            systemService.update(systemInstance, params)
             if (!systemInstance.hasErrors() && systemInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'system.label', default: 'System'), systemInstance.id])}"
                 redirect(action: "show", id: systemInstance.id)
@@ -122,10 +126,10 @@ class SystemController {
     }
 
     def delete = {
-        def systemInstance = System.get(params.id)
+        def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             try {
-                systemInstance.delete(flush: true)
+                systemService.delete(systemInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
                 redirect(action: "list")
             }
