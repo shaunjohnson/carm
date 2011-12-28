@@ -20,10 +20,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="application" action="show" title="Show Application" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="application" action="show" title="Show Application" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
@@ -42,10 +42,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -69,10 +69,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="module" action="show" title="Show Module" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="module" action="show" title="Show Module" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
@@ -91,10 +91,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -112,10 +112,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="project" action="show" title="Show Project" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="project" action="show" title="Show Project" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -133,10 +133,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -159,10 +159,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="sourceControlRepository" action="show" title="Show Source Control Repository" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="sourceControlRepository" action="show" title="Show Source Control Repository" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
@@ -181,10 +181,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="sourceControlRole" action="show" title="Show Source Control Role" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="sourceControlRole" action="show" title="Show Source Control Role" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -202,10 +202,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -228,10 +228,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
@@ -250,10 +250,10 @@
         <g:if test="${action == 'show'}">
             <g:headerLink controller="system" action="show" title="Show System" text="${domain.name}" id="${domain.id}"/>
         </g:if>
-        <g:elseif test="${action == 'create'}">
+        <g:elseif test="${action == 'create' || action == 'save'}">
             <g:headerText code="default.create.label" args="[entityName]"/>
         </g:elseif>
-        <g:elseif test="${action == 'edit'}">
+        <g:elseif test="${action == 'edit' || action == 'update'}">
             <g:headerLink controller="system" action="show" title="Show System" text="${domain.name}" id="${domain.id}"/>
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
@@ -276,10 +276,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="systemComponent" action="show" title="Show System Component" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="systemComponent" action="show" title="Show System Component" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
@@ -303,10 +303,10 @@
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="systemEnvironment" action="show" title="Show System Environment" text="${domain.name}" id="${domain.id}"/>
             </g:if>
-            <g:elseif test="${action == 'create'}">
+            <g:elseif test="${action == 'create' || action == 'save'}">
                 <g:headerText code="default.create.label" args="[entityName]"/>
             </g:elseif>
-            <g:elseif test="${action == 'edit'}">
+            <g:elseif test="${action == 'edit' || action == 'update'}">
                 <g:headerLink controller="systemEnvironment" action="show" title="Show System Environment" text="${domain.name}" id="${domain.id}"/>
                 <g:headerText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
