@@ -1,5 +1,7 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class SystemComponentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -16,6 +18,7 @@ class SystemComponentController {
         [systemComponentInstanceList: SystemComponent.list(params), systemComponentInstanceTotal: SystemComponent.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def systemInstance = systemService.get(params.system.id?.toLong())
         if (!systemInstance) {
@@ -29,6 +32,7 @@ class SystemComponentController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
         def systemComponentInstance = systemComponentService.create(params)
         if (!systemComponentInstance.hasErrors()) {
@@ -51,6 +55,7 @@ class SystemComponentController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (!systemComponentInstance) {
@@ -62,6 +67,7 @@ class SystemComponentController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {
@@ -88,6 +94,7 @@ class SystemComponentController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {

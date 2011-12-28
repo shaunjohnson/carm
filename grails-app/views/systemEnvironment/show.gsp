@@ -25,6 +25,11 @@
                 <td valign="top" class="name"><g:message code="systemEnvironment.system.label" default="System"/></td>
                 <td valign="top" class="value"><g:link controller="system" action="show" id="${systemEnvironmentInstance?.system?.id}">${systemEnvironmentInstance?.system?.encodeAsHTML()}</g:link></td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="systemEnvironment.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${systemEnvironmentInstance?.dateCreated}"/></td>
@@ -34,25 +39,27 @@
                 <td valign="top" class="value"><g:formatDate date="${systemEnvironmentInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
     </div>
 </div>

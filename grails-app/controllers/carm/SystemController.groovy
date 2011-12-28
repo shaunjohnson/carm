@@ -1,5 +1,7 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class SystemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -15,12 +17,14 @@ class SystemController {
         [systemInstanceList: systemService.list(params), systemInstanceTotal: systemService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def systemInstance = new System()
         systemInstance.properties = params
         return [systemInstance: systemInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
         def systemInstance = systemService.create(params)
         if (!systemInstance.hasErrors()) {
@@ -43,6 +47,7 @@ class SystemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def moveEnvDown = {
         def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
@@ -56,6 +61,7 @@ class SystemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def moveEnvUp = {
         def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
@@ -69,6 +75,7 @@ class SystemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def systemInstance = systemService.get(params.id?.toLong())
         if (!systemInstance) {
@@ -80,6 +87,7 @@ class SystemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
@@ -107,6 +115,7 @@ class SystemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
