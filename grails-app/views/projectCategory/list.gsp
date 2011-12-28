@@ -8,11 +8,13 @@
 </head>
 <body>
 <div class="body">
-    <g:header domain="${projectCategoryInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}" />
+    <g:header domain="${projectCategoryInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
-    <div class="nav">
-        <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
-    </div>
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="nav">
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
+        </div>
+    </sec:ifAllGranted>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

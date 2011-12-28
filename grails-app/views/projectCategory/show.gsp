@@ -30,37 +30,30 @@
                 <td valign="top" class="value"><g:formatDate date="${projectCategoryInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${projectCategoryInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <g:ifNotInUse domain="${projectCategoryInstance}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
                             <span class="button">
-                                <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                <g:link class="edit" action="edit" id="${projectCategoryInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                        </g:ifNotInUse>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+                            <g:ifNotInUse domain="${projectCategoryInstance}">
+                                <span class="button">
+                                    <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <g:message code="default.button.delete.label" default="Delete"/>
+                                    </g:link>
+                                </span>
+                            </g:ifNotInUse>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
-    </div>
-
-    <h2>Projects</h2>
-    <div class="dialog">
-        <ul>
-            <g:each in="${Project.findAllByCategory(projectCategoryInstance).sort { it.name } }" var="project">
-                <li><g:link controller="project" action="show" id="${project.id}">${project?.encodeAsHTML()}</g:link></li>
-            </g:each>
-        </ul>
     </div>
 </div>
 </body>

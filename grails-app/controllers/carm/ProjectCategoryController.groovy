@@ -4,13 +4,15 @@ class ProjectCategoryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def projectCategoryService
+
     def index = {
         redirect(action: "list", params: params)
     }
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [projectCategoryInstanceList: ProjectCategory.list(params), projectCategoryInstanceTotal: ProjectCategory.count()]
+        [projectCategoryInstanceList: projectCategoryService.list(params), projectCategoryInstanceTotal: projectCategoryService.count()]
     }
 
     def create = {
@@ -20,7 +22,7 @@ class ProjectCategoryController {
     }
 
     def save = {
-        def projectCategoryInstance = new ProjectCategory(params)
+        def projectCategoryInstance =projectCategoryService.create(params)
         if (projectCategoryInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.id])}"
             redirect(action: "show", id: projectCategoryInstance.id)
@@ -31,7 +33,7 @@ class ProjectCategoryController {
     }
 
     def show = {
-        def projectCategoryInstance = ProjectCategory.get(params.id)
+        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
@@ -42,7 +44,7 @@ class ProjectCategoryController {
     }
 
     def edit = {
-        def projectCategoryInstance = ProjectCategory.get(params.id)
+        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
@@ -53,7 +55,7 @@ class ProjectCategoryController {
     }
 
     def update = {
-        def projectCategoryInstance = ProjectCategory.get(params.id)
+        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -64,7 +66,7 @@ class ProjectCategoryController {
                     return
                 }
             }
-            projectCategoryInstance.properties = params
+            projectCategoryService.update(projectCategoryInstance, params)
             if (!projectCategoryInstance.hasErrors() && projectCategoryInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.id])}"
                 redirect(action: "show", id: projectCategoryInstance.id)
@@ -80,10 +82,10 @@ class ProjectCategoryController {
     }
 
     def delete = {
-        def projectCategoryInstance = ProjectCategory.get(params.id)
+        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
             try {
-                projectCategoryInstance.delete(flush: true)
+                projectCategoryService.delete(projectCategoryInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
                 redirect(action: "list")
             }
