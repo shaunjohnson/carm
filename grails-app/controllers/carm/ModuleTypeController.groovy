@@ -1,8 +1,12 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class ModuleTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
+    
+    def moduleTypeService
 
     def index = {
         redirect(action: "list", params: params)
@@ -10,18 +14,20 @@ class ModuleTypeController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [moduleTypeInstanceList: ModuleType.list(params), moduleTypeInstanceTotal: ModuleType.count()]
+        [moduleTypeInstanceList: moduleTypeService.list(params), moduleTypeInstanceTotal: moduleTypeService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def moduleTypeInstance = new ModuleType()
         moduleTypeInstance.properties = params
         return [moduleTypeInstance: moduleTypeInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
-        def moduleTypeInstance = new ModuleType(params)
-        if (moduleTypeInstance.save(flush: true)) {
+        def moduleTypeInstance = moduleTypeService.create(params)
+        if (!moduleTypeInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.id])}"
             redirect(action: "show", id: moduleTypeInstance.id)
         }
@@ -31,7 +37,7 @@ class ModuleTypeController {
     }
 
     def show = {
-        def moduleTypeInstance = ModuleType.get(params.id)
+        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
             redirect(action: "list")
@@ -41,8 +47,9 @@ class ModuleTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
-        def moduleTypeInstance = ModuleType.get(params.id)
+        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
             redirect(action: "list")
@@ -52,8 +59,9 @@ class ModuleTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
-        def moduleTypeInstance = ModuleType.get(params.id)
+        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (moduleTypeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -64,7 +72,7 @@ class ModuleTypeController {
                     return
                 }
             }
-            moduleTypeInstance.properties = params
+            moduleTypeService.update(moduleTypeInstance, params)
             if (!moduleTypeInstance.hasErrors() && moduleTypeInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.id])}"
                 redirect(action: "show", id: moduleTypeInstance.id)
@@ -79,11 +87,12 @@ class ModuleTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
-        def moduleTypeInstance = ModuleType.get(params.id)
+        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (moduleTypeInstance) {
             try {
-                moduleTypeInstance.delete(flush: true)
+                moduleTypeService.delete(moduleTypeInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
                 redirect(action: "list")
             }
