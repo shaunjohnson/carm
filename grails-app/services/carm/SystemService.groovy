@@ -44,6 +44,32 @@ class SystemService {
 
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void moveEnvironmentDown(System system, int index) {
+        def environments = system.environments
+
+        if (index != null && (index + 1) < environments.size()) {
+            def environment = environments[index]
+            environments.remove(index)
+            environments.add(index + 1, environment)
+            system.save()
+        }
+    }
+
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void moveEnvironmentUp(System system, int index) {
+        def environments = system.environments
+
+        if (index != null && index > 0) {
+            def environment = environments[index]
+            environments.remove(index)
+            environments.add(index - 1, environment)
+            system.save()
+        }
+    }
+
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(System system, Map params) {
         def prefix = "update() :"
 

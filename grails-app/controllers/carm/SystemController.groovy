@@ -43,45 +43,27 @@ class SystemController {
         }
     }
 
-    // TODO Move to System Service
     def moveEnvDown = {
-        def systemInstance = System.get(params.systemId)
+        def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
         }
         else {
-            def index = params.index?.toInteger()
-            def environments = systemInstance.environments
-
-            if (index != null && (index + 1) < environments.size()) {
-                def environment = environments[index]
-                environments.remove(index)
-                environments.add(index + 1, environment)
-                systemInstance.save()
-            }
+            systemService.moveEnvironmentDown(systemInstance, params.index?.toInteger())
 
             redirect(action: "show", id: systemInstance.id)
         }
     }
 
-    // TODO Move to System Service
     def moveEnvUp = {
-        def systemInstance = System.get(params.systemId)
+        def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
         }
         else {
-            def index = params.index?.toInteger()
-            def environments = systemInstance.environments
-
-            if (index != null && index > 0) {
-                def environment = environments[index]
-                environments.remove(index)
-                environments.add(index - 1, environment)
-                systemInstance.save()
-            }
+            systemService.moveEnvironmentUp(systemInstance, params.index?.toInteger())
 
             redirect(action: "show", id: systemInstance.id)
         }
