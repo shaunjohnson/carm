@@ -4,7 +4,6 @@ import grails.plugins.springsecurity.Secured
 import carm.security.User
 import org.springframework.security.acls.domain.BasePermission
 
-@Secured(['ROLE_ADMIN'])
 class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
