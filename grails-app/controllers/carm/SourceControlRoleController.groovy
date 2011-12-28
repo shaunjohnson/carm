@@ -4,13 +4,15 @@ class SourceControlRoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def sourceControlRoleService
+
     def index = {
         redirect(action: "list", params: params)
     }
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [sourceControlRoleInstanceList: SourceControlRole.list(params), sourceControlRoleInstanceTotal: SourceControlRole.count()]
+        [sourceControlRoleInstanceList: sourceControlRoleService.list(params), sourceControlRoleInstanceTotal: sourceControlRoleService.count()]
     }
 
     def create = {
@@ -20,8 +22,8 @@ class SourceControlRoleController {
     }
 
     def save = {
-        def sourceControlRoleInstance = new SourceControlRole(params)
-        if (sourceControlRoleInstance.save(flush: true)) {
+        def sourceControlRoleInstance = sourceControlRoleService.create(params)
+        if (!sourceControlRoleInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.id])}"
             redirect(action: "show", id: sourceControlRoleInstance.id)
         }
@@ -31,7 +33,7 @@ class SourceControlRoleController {
     }
 
     def show = {
-        def sourceControlRoleInstance = SourceControlRole.get(params.id)
+        def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (!sourceControlRoleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
@@ -42,7 +44,7 @@ class SourceControlRoleController {
     }
 
     def edit = {
-        def sourceControlRoleInstance = SourceControlRole.get(params.id)
+        def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (!sourceControlRoleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
@@ -53,7 +55,7 @@ class SourceControlRoleController {
     }
 
     def update = {
-        def sourceControlRoleInstance = SourceControlRole.get(params.id)
+        def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -64,7 +66,7 @@ class SourceControlRoleController {
                     return
                 }
             }
-            sourceControlRoleInstance.properties = params
+            sourceControlRoleService.update(sourceControlRoleInstance, params)
             if (!sourceControlRoleInstance.hasErrors() && sourceControlRoleInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.id])}"
                 redirect(action: "show", id: sourceControlRoleInstance.id)
@@ -80,10 +82,10 @@ class SourceControlRoleController {
     }
 
     def delete = {
-        def sourceControlRoleInstance = SourceControlRole.get(params.id)
+        def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
             try {
-                sourceControlRoleInstance.delete(flush: true)
+                sourceControlRoleService.delete(sourceControlRoleInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
                 redirect(action: "list")
             }
