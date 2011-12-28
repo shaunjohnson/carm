@@ -1,5 +1,7 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class ApplicationTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -15,15 +17,17 @@ class ApplicationTypeController {
         [applicationTypeInstanceList: applicationTypeService.list(params), applicationTypeInstanceTotal: applicationTypeService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def applicationTypeInstance = new ApplicationType()
         applicationTypeInstance.properties = params
         return [applicationTypeInstance: applicationTypeInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
         def applicationTypeInstance = applicationTypeService.create(params)
-        if (applicationTypeInstance.save(flush: true)) {
+        if (!applicationTypeInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), applicationTypeInstance.id])}"
             redirect(action: "show", id: applicationTypeInstance.id)
         }
@@ -43,6 +47,7 @@ class ApplicationTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (!applicationTypeInstance) {
@@ -54,6 +59,7 @@ class ApplicationTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {
@@ -81,6 +87,7 @@ class ApplicationTypeController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {

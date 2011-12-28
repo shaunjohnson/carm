@@ -1,5 +1,7 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class ProjectCategoryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -15,15 +17,17 @@ class ProjectCategoryController {
         [projectCategoryInstanceList: projectCategoryService.list(params), projectCategoryInstanceTotal: projectCategoryService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def projectCategoryInstance = new ProjectCategory()
         projectCategoryInstance.properties = params
         return [projectCategoryInstance: projectCategoryInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
-        def projectCategoryInstance =projectCategoryService.create(params)
-        if (projectCategoryInstance.save(flush: true)) {
+        def projectCategoryInstance = projectCategoryService.create(params)
+        if (!projectCategoryInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.id])}"
             redirect(action: "show", id: projectCategoryInstance.id)
         }
@@ -43,6 +47,7 @@ class ProjectCategoryController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (!projectCategoryInstance) {
@@ -54,6 +59,7 @@ class ProjectCategoryController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
@@ -81,6 +87,7 @@ class ProjectCategoryController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
