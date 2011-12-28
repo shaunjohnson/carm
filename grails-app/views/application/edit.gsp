@@ -20,7 +20,7 @@
         </div>
     </g:hasErrors>
 
-    <g:form method="post">
+    <g:form action="update" method="post">
         <g:hiddenField name="id" value="${applicationInstance?.id}"/>
         <g:hiddenField name="version" value="${applicationInstance?.version}"/>
         <div class="dialog">
@@ -105,8 +105,14 @@
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><g:link class="show" action="show" id="${applicationInstance.id}"><g:message code="default.button.cancel.label" default="Cancel"/></g:link></span>
-            <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+            <span class="button">
+                <g:link class="show" action="show" id="${applicationInstance.id}">
+                    <g:message code="default.button.cancel.label" default="Cancel"/>
+                </g:link>
+            </span>
+            <span class="button">
+                <g:submitButton name="save" class="save" value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+            </span>
         </div>
     </g:form>
 </div>
