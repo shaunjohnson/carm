@@ -27,7 +27,11 @@
             <tbody>
             <g:each in="${sourceControlRepositoryInstanceList}" status="i" var="sourceControlRepositoryInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td><g:link action="show" id="${sourceControlRepositoryInstance.id}">${fieldValue(bean: sourceControlRepositoryInstance, field: "name")}</g:link></td>
+                    <td>
+                        <g:link action="show" id="${sourceControlRepositoryInstance.id}">
+                            ${fieldValue(bean: sourceControlRepositoryInstance, field: "name")}
+                        </g:link>
+                    </td>
                     <td>${fieldValue(bean: sourceControlRepositoryInstance, field: "description")}</td>
                     <td>
                         <g:link controller="sourceControlServer" action="show" id="${sourceControlRepositoryInstance.server.id}">

@@ -57,6 +57,11 @@
                     </ul>
                 </td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlUser.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlUserInstance?.dateCreated}"/></td>
@@ -66,25 +71,27 @@
                 <td valign="top" class="value"><g:formatDate date="${sourceControlUserInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${sourceControlUserInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${sourceControlUserInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
     </div>
 </div>

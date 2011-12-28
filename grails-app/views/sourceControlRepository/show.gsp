@@ -29,6 +29,11 @@
                 <td valign="top" class="name"><g:message code="sourceControlRepository.path.label" default="Path"/></td>
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRepositoryInstance, field: "path")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRepositoryInstance?.dateCreated}"/></td>
@@ -38,27 +43,29 @@
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRepositoryInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${sourceControlRepositoryInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <g:ifNotInUse domain="${sourceControlRepositoryInstance}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
                             <span class="button">
-                                <g:link class="delete" action="delete" id="${sourceControlRepositoryInstance?.id}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                <g:link class="edit" action="edit" id="${sourceControlRepositoryInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                        </g:ifNotInUse>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+                            <g:ifNotInUse domain="${sourceControlRepositoryInstance}">
+                                <span class="button">
+                                    <g:link class="delete" action="delete" id="${sourceControlRepositoryInstance?.id}"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <g:message code="default.button.delete.label" default="Delete"/>
+                                    </g:link>
+                                </span>
+                            </g:ifNotInUse>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
     </div>
 </div>

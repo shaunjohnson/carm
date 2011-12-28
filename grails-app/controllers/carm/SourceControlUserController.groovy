@@ -1,8 +1,13 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class SourceControlUserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
+
+    def sourceControlServerService
+    def sourceControlUserService
 
     def index = {
         redirect(action: "list", params: params)
@@ -10,11 +15,12 @@ class SourceControlUserController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [sourceControlUserInstanceList: SourceControlUser.list(params), sourceControlUserInstanceTotal: SourceControlUser.count()]
+        [sourceControlUserInstanceList: sourceControlUserService.list(params), sourceControlUserInstanceTotal: sourceControlUserService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
-        def serverInstance = SourceControlServer.get(params.server.id)
+        def serverInstance = sourceControlServerService.get(params.server?.id?.toLong())
         if (!serverInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server.id])}"
             redirect(action: "list")
@@ -26,9 +32,10 @@ class SourceControlUserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
-        def sourceControlUserInstance = new SourceControlUser(params)
-        if (sourceControlUserInstance.save(flush: true)) {
+        def sourceControlUserInstance = sourceControlUserService.create(params)
+        if (!sourceControlUserInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.id])}"
             redirect(action: "show", id: sourceControlUserInstance.id)
         }
@@ -38,7 +45,7 @@ class SourceControlUserController {
     }
 
     def show = {
-        def sourceControlUserInstance = SourceControlUser.get(params.id)
+        def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (!sourceControlUserInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
             redirect(action: "list")
@@ -48,8 +55,9 @@ class SourceControlUserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
-        def sourceControlUserInstance = SourceControlUser.get(params.id)
+        def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (!sourceControlUserInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
             redirect(action: "list")
@@ -59,19 +67,19 @@ class SourceControlUserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
-        def sourceControlUserInstance = SourceControlUser.get(params.id)
+        def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (sourceControlUserInstance) {
             if (params.version) {
                 def version = params.version.toLong()
                 if (sourceControlUserInstance.version > version) {
-                    
                     sourceControlUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'sourceControlUser.label', default: 'SourceControlUser')] as Object[], "Another user has updated this SourceControlUser while you were editing")
                     render(view: "edit", model: [sourceControlUserInstance: sourceControlUserInstance])
                     return
                 }
             }
-            sourceControlUserInstance.properties = params
+            sourceControlUserService.update(sourceControlUserInstance, params)
             if (!sourceControlUserInstance.hasErrors() && sourceControlUserInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.id])}"
                 redirect(action: "show", id: sourceControlUserInstance.id)
@@ -86,11 +94,12 @@ class SourceControlUserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
-        def sourceControlUserInstance = SourceControlUser.get(params.id)
+        def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (sourceControlUserInstance) {
             try {
-                sourceControlUserInstance.delete(flush: true)
+                sourceControlUserService.delete(sourceControlUserInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
                 redirect(action: "list")
             }
