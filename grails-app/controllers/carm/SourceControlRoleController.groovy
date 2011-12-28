@@ -1,5 +1,7 @@
 package carm
 
+import grails.plugins.springsecurity.Secured
+
 class SourceControlRoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -15,12 +17,14 @@ class SourceControlRoleController {
         [sourceControlRoleInstanceList: sourceControlRoleService.list(params), sourceControlRoleInstanceTotal: sourceControlRoleService.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def sourceControlRoleInstance = new SourceControlRole()
         sourceControlRoleInstance.properties = params
         return [sourceControlRoleInstance: sourceControlRoleInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save = {
         def sourceControlRoleInstance = sourceControlRoleService.create(params)
         if (!sourceControlRoleInstance.hasErrors()) {
@@ -43,6 +47,7 @@ class SourceControlRoleController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (!sourceControlRoleInstance) {
@@ -54,6 +59,7 @@ class SourceControlRoleController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
@@ -81,6 +87,7 @@ class SourceControlRoleController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
