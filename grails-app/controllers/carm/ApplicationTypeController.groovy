@@ -4,13 +4,15 @@ class ApplicationTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationTypeService
+
     def index = {
         redirect(action: "list", params: params)
     }
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationTypeInstanceList: ApplicationType.list(params), applicationTypeInstanceTotal: ApplicationType.count()]
+        [applicationTypeInstanceList: applicationTypeService.list(params), applicationTypeInstanceTotal: applicationTypeService.count()]
     }
 
     def create = {
@@ -20,7 +22,7 @@ class ApplicationTypeController {
     }
 
     def save = {
-        def applicationTypeInstance = new ApplicationType(params)
+        def applicationTypeInstance = applicationTypeService.create(params)
         if (applicationTypeInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), applicationTypeInstance.id])}"
             redirect(action: "show", id: applicationTypeInstance.id)
@@ -31,7 +33,7 @@ class ApplicationTypeController {
     }
 
     def show = {
-        def applicationTypeInstance = ApplicationType.get(params.id)
+        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
             redirect(action: "list")
@@ -42,7 +44,7 @@ class ApplicationTypeController {
     }
 
     def edit = {
-        def applicationTypeInstance = ApplicationType.get(params.id)
+        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
             redirect(action: "list")
@@ -53,7 +55,7 @@ class ApplicationTypeController {
     }
 
     def update = {
-        def applicationTypeInstance = ApplicationType.get(params.id)
+        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -64,7 +66,7 @@ class ApplicationTypeController {
                     return
                 }
             }
-            applicationTypeInstance.properties = params
+            applicationTypeService.update(applicationTypeInstance, params)
             if (!applicationTypeInstance.hasErrors() && applicationTypeInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), applicationTypeInstance.id])}"
                 redirect(action: "show", id: applicationTypeInstance.id)
@@ -80,10 +82,10 @@ class ApplicationTypeController {
     }
 
     def delete = {
-        def applicationTypeInstance = ApplicationType.get(params.id)
+        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {
             try {
-                applicationTypeInstance.delete(flush: true)
+                applicationTypeService.delete(applicationTypeInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
                 redirect(action: "list")
             }

@@ -30,27 +30,29 @@
                 <td valign="top" class="value"><g:formatDate date="${applicationTypeInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${applicationTypeInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <g:ifNotInUse domain="${applicationTypeInstance}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
                             <span class="button">
-                                <g:link class="delete" action="delete" id="${applicationTypeInstance?.id}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                <g:link class="edit" action="edit" id="${applicationTypeInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                        </g:ifNotInUse>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+                            <g:ifNotInUse domain="${applicationTypeInstance}">
+                                <span class="button">
+                                    <g:link class="delete" action="delete" id="${applicationTypeInstance?.id}"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <g:message code="default.button.delete.label" default="Delete"/>
+                                    </g:link>
+                                </span>
+                            </g:ifNotInUse>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
     </div>
 </div>

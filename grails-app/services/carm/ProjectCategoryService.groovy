@@ -22,7 +22,7 @@ class ProjectCategoryService {
         ProjectCategory projectCategory = new ProjectCategory(params)
         projectCategory.save()
 
-        log.debug "$prefix returning $ProjectCategory"
+        log.debug "$prefix returning $projectCategory"
 
         projectCategory
     }
