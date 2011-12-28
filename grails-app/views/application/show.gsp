@@ -175,6 +175,13 @@
                     </tr>
                 </g:each>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right;">
+                            <g:link action="showFullHistory">(Show Full History)</g:link>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </g:if>
