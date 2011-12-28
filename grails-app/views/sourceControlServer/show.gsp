@@ -29,6 +29,11 @@
                 <td valign="top" class="name"><g:message code="sourceControlServer.url.label" default="Url"/></td>
                 <td valign="top" class="value">${fieldValue(bean: sourceControlServerInstance, field: "url")}</td>
             </tr>
+
+            <tr class="prop">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlServer.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlServerInstance?.dateCreated}"/></td>
@@ -37,51 +42,63 @@
                 <td valign="top" class="name"><g:message code="sourceControlServer.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlServerInstance?.lastUpdated}"/></td>
             </tr>
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="sourceControlServer.repositories.label" default="Repositories"/></td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <ul>
-                        <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="r">
-                            <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-                        </g:each>
-                    </ul>
-                    <div class="nav">
-                        <span class="menuButton"><g:link class="create" controller="sourceControlRepository" action="create" params="['server.id': sourceControlServerInstance?.id]">Add Repository</g:link></span>
-                    </div>
-                </td>
-            </tr>
             </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${sourceControlServerInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <g:ifNotInUse domain="${sourceControlServerInstance}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
                             <span class="button">
-                                <g:link class="delete" action="delete" id="${sourceControlServerInstance?.id}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                <g:link class="edit" action="edit" id="${sourceControlServerInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                        </g:ifNotInUse>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+                            <g:ifNotInUse domain="${sourceControlServerInstance}">
+                                <span class="button">
+                                    <g:link class="delete" action="delete" id="${sourceControlServerInstance?.id}"
+                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                        <g:message code="default.button.delete.label" default="Delete"/>
+                                    </g:link>
+                                </span>
+                            </g:ifNotInUse>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </sec:ifAllGranted>
         </table>
     </div>
 
+
+    <h2><g:message code="sourceControlServer.repositories.label" default="Repositories"/></h2>
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="nav">
+            <span class="menuButton">
+                <g:link class="create" controller="sourceControlRepository" action="create" params="['server.id': sourceControlServerInstance?.id]">
+                    Add Repository
+                </g:link>
+            </span>
+        </div>
+    </sec:ifAllGranted>
+
+    <g:if test="${sourceControlServerInstance.repositories.size()}">
+        <ul>
+            <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="r">
+                <li><g:link controller="sourceControlRepository" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+            </g:each>
+        </ul>
+    </g:if>
+
+
     <h2>Users</h2>
-    <div class="nav">
-        <span class="menuButton">
-            <g:link class="create" controller="sourceControlUser" action="create"
-                    params="['server.id': sourceControlServerInstance?.id]">Add User</g:link>
-        </span>
-    </div>
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="nav">
+            <span class="menuButton">
+                <g:link class="create" controller="sourceControlUser" action="create"
+                        params="['server.id': sourceControlServerInstance?.id]">Add User</g:link>
+            </span>
+        </div>
+    </sec:ifAllGranted>
 
     <g:if test="${sourceControlServerInstance?.users?.size()}">
         <ul>

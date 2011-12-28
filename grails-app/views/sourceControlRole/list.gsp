@@ -12,7 +12,11 @@
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></span>
+            <span class="menuButton">
+                <g:link class="create" action="create">
+                    <g:message code="default.new.label" args="[entityName]"/>
+                </g:link>
+            </span>
         </div>
     </sec:ifAllGranted>
 
@@ -31,7 +35,11 @@
             <tbody>
             <g:each in="${sourceControlRoleInstanceList}" status="i" var="sourceControlRoleInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td><g:link action="show" id="${sourceControlRoleInstance.id}">${fieldValue(bean: sourceControlRoleInstance, field: "name")}</g:link></td>
+                    <td>
+                        <g:link action="show" id="${sourceControlRoleInstance.id}">
+                            ${fieldValue(bean: sourceControlRoleInstance, field: "name")}
+                        </g:link>
+                    </td>
                     <td>${fieldValue(bean: sourceControlRoleInstance, field: "description")}</td>
                 </tr>
             </g:each>
