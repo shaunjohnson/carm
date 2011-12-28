@@ -165,7 +165,11 @@
                 <tbody>
                 <g:each in="${applicationInstance.system.environments}" var="environment">
                     <tr>
-                        <td>${environment}</td>
+                        <td>
+                            <g:link controller="systemEnvironment" action="show" id="${environment.id}">
+                                ${environment.name.encodeAsHTML()}
+                            </g:link>
+                        </td>
                         <td><a href="#">Latest release</a></td>
                         <td>on ??/??/????</td>
                     </tr>
