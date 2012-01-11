@@ -42,7 +42,9 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></td>
                 <td valign="top" class="value">
-                    <g:link controller="sourceControlRepository" action="show" id="${applicationInstance?.sourceControlRepository?.id}">${applicationInstance?.sourceControlRepository?.encodeAsHTML()}</g:link>
+                    <g:link controller="sourceControlRepository" action="show" id="${applicationInstance?.sourceControlRepository?.id}">
+                        ${applicationInstance?.sourceControlRepository?.encodeAsHTML()}
+                    </g:link>
                     <g:formatSourceControlRepository sourceControlRepository="${applicationInstance?.sourceControlRepository}"/>
                 </td>
             </tr>
@@ -57,7 +59,11 @@
 
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.system.label" default="System"/></td>
-                <td valign="top" class="value"><g:link controller="system" action="show" id="${applicationInstance?.system?.id}">${applicationInstance?.system?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:link controller="system" action="show" id="${applicationInstance?.system?.id}">
+                        ${applicationInstance?.system?.encodeAsHTML()}
+                    </g:link>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
@@ -82,7 +88,10 @@
                         <div>None</div>
                     </g:else>
                     <div class="nav">
-                        <span class="menuButton"><g:link class="create" controller="applicationRole" action="create" params="['application.id': applicationInstance?.id]">Add Application Role</g:link></span>
+                        <span class="menuButton">
+                            <g:link class="create" controller="applicationRole" action="create"
+                                    params="['application.id': applicationInstance?.id]">Add Application Role</g:link>
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -128,35 +137,37 @@
         <span class="menuButton"><g:link class="create" controller="module" action="create" params="['application.id': applicationInstance?.id]">Add Module</g:link></span>
     </div>
 
-    <div class="list">
-        <table>
-            <thead>
-            <tr>
-                <th><g:message code="module.name.label" default="Name"/></th>
-                <th><g:message code="module.systemComponents.label" default="System Components"/></th>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
+    <g:if test="${applicationInstance?.modules?.size()}">
+        <div class="list">
+            <table>
+                <thead>
                 <tr>
-                    <td><g:link controller="module" action="show" id="${moduleInstance.id}">${moduleInstance?.encodeAsHTML()}</g:link></td>
-                    <td>
-                        <ul>
-                            <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
-                                <li>
-                                    <g:link controller="systemComponent" action="show"
-                                            id="${s?.id}">${s?.encodeAsHTML()}</g:link>
-                                    [<g:link controller="system" action="show"
-                                             id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
-                                </li>
-                            </g:each>
-                        </ul>
-                    </td>
+                    <th><g:message code="module.name.label" default="Name"/></th>
+                    <th><g:message code="module.systemComponents.label" default="System Components"/></th>
                 </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
+                    <tr>
+                        <td><g:link controller="module" action="show" id="${moduleInstance.id}">${moduleInstance?.encodeAsHTML()}</g:link></td>
+                        <td>
+                            <ul>
+                                <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
+                                    <li>
+                                        <g:link controller="systemComponent" action="show"
+                                                id="${s?.id}">${s?.encodeAsHTML()}</g:link>
+                                        [<g:link controller="system" action="show"
+                                                 id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
+    </g:if>
 
     <g:if test="${applicationInstance?.system?.environments?.size()}">
         <h2>Environments</h2>
