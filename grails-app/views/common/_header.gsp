@@ -30,6 +30,34 @@
         </g:else>
     </div>
 </g:if>
+<g:elseif test="${controller == 'applicationRelease'}">
+    <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
+
+    <g:pageHeader action="${action}" beanName="${domain?.releaseNumber}" entityName="${entityName}"/>
+
+    <div class="breadcrumbs">
+        <g:headerLink uri="/" text="Home" isFirst="true"/>
+
+        <g:if test="${action == 'list'}">
+            <g:headerLink controller="applicationRelease" action="list" title="Show All Application Releases" text="Application Releases"/>
+        </g:if>
+        <g:else>
+            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.application.project}" id="${domain.application.project.id}"/>
+            <g:headerLink controller="application" action="show" title="Show Application" text="${domain.application.name}" id="${domain.application.id}"/>
+
+            <g:if test="${action == 'show'}">
+                <g:headerLink controller="applicationRelease" action="show" title="Show Application Release" text="${domain.releaseNumber}" id="${domain.id}"/>
+            </g:if>
+            <g:elseif test="${action == 'create' || action == 'save'}">
+                <g:headerText code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit' || action == 'update'}">
+                <g:headerLink controller="applicationRelease" action="show" title="Show Application Release" text="${domain.releaseNumber}" id="${domain.id}"/>
+                <g:headerText code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
+    </div>
+</g:elseif>
 <g:elseif test="${controller == 'applicationReleaseTestState'}">
     <g:set var="entityName" value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>
 
@@ -72,7 +100,7 @@
         </g:elseif>
     </div>
 </g:elseif>
-<g:if test="${controller == 'module'}">
+<g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
 
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
@@ -99,7 +127,7 @@
             </g:elseif>
         </g:else>
     </div>
-</g:if>
+</g:elseif>
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 

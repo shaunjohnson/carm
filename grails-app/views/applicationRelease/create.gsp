@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+    <g:header domain="${applicationReleaseInstance}" />
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
