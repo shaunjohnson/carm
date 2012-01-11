@@ -18,7 +18,7 @@
     <div class="dialog">
         <table id="applicationDetails" class="details">
             <tbody>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.project.label" default="Project"/></td>
                 <td valign="top" class="value">
                     <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">${applicationInstance?.project?.encodeAsHTML()}</g:link>
@@ -35,7 +35,7 @@
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "description")}</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
