@@ -2,6 +2,7 @@ import carm.Application
 import carm.ApplicationReleaseTestState
 import carm.ApplicationType
 import carm.Module
+import carm.ModuleRelease
 import carm.Project
 import carm.System
 import carm.SystemComponent
@@ -339,6 +340,12 @@ class BootStrap {
                                         changeLog = 'Release broker application to fix message flow issue.'
                                         releaseState = 'Submitted'
                                         testState = notTestedAppReleaseTestState
+                                        moduleReleases = [
+                                                brokerModuleRelease105(ModuleRelease) {
+                                                    applicationRelease: brokerRelease105
+                                                    module: brokerModule
+                                                }
+                                        ]
                                     }
                             ]
                         },
@@ -351,17 +358,17 @@ class BootStrap {
                             sourceControlPath = '/portal'
                             system = bigSystem
                             modules = [
-                                    userPortletModule(Module) {
-                                        name = 'User Portlet'
-                                        description = 'Big Project User Portlet'
+                                    adminPortletModule(Module) {
+                                        name = 'Admin Portlet'
+                                        description = 'Big Project Administration Portlet'
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
                                         systemComponents = [ presentationLayer ]
                                     },
-                                    adminPortletModule(Module) {
-                                        name = 'Admin Portlet'
-                                        description = 'Big Project Administration Portlet'
+                                    userPortletModule(Module) {
+                                        name = 'User Portlet'
+                                        description = 'Big Project User Portlet'
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
@@ -375,6 +382,16 @@ class BootStrap {
                                         changeLog = 'Release portal application to update to latest jQuery version.'
                                         releaseState = 'Submitted'
                                         testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease210(ModuleRelease) {
+                                                    applicationRelease: portalRelease210
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease210(ModuleRelease) {
+                                                    applicationRelease: portalRelease210
+                                                    module: userPortletModule
+                                                }
+                                        ]
                                     }
                             ]
                         }
