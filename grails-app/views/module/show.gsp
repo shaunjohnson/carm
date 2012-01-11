@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="moduleDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="module.application.label" default="Application"/></td>
@@ -59,15 +59,15 @@
                 <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "deployInstructions")}</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="module.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${moduleInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="module.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${moduleInstance?.lastUpdated}"/></td>
             </tr>
@@ -92,6 +92,7 @@
             </tr>
             </tfoot>
         </table>
+        <g:showHideDetails sectionId="moduleDetails" entityName="$entityName"/>
     </div>
 </div>
 </body>

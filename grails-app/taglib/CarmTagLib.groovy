@@ -226,4 +226,17 @@ class CarmTagLib {
         out << link(class: 'reorderLink', title: 'Move Up', id: id,
                 controller: controller, action: action, params: params) { '&#9650' }
     }
+
+    /**
+     * Creates a "Show/Hide Details" link and hides details by default (on page load).
+     *
+     * attrs.sectionId - Client ID of the section to show/hide details within (optional)
+     * attrs.entityName - Name of the entity being shown (optional)
+     */
+    def showHideDetails = { attrs ->
+        def sectionId = attrs.sectionId
+        def entityName = attrs.entityName ?: ''
+
+        out << render(template: "/common/showHideDetails", model: [sectionId: sectionId, entityName: entityName])
+    }
 }

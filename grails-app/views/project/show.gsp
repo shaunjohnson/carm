@@ -15,9 +15,9 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="projectDetails" class="details">
             <tbody>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="project.category.label" default="Category"/></td>
                 <td valign="top" class="value"><g:link controller="projectCategory" action="show" id="${projectInstance?.category?.id}">${fieldValue(bean: projectInstance, field: "category")}</g:link></td>
             </tr>
@@ -26,24 +26,24 @@
                 <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "description")}</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="project.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="project.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectInstance?.lastUpdated}"/></td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="project.projectManagers.label" default="Project Managers"/></td>
                 <td valign="top" class="value">
                     <g:listUsersWithPermission domainObject="${projectInstance}" permission="${BasePermission.ADMINISTRATION}"/>
@@ -71,6 +71,7 @@
             </tfoot>
             </sec:permitted>
         </table>
+        <g:showHideDetails sectionId="projectDetails" entityName="$entityName"/>
     </div>
 
     <h2>Applications</h2>
@@ -94,5 +95,6 @@
         </p>
     </g:else>
 </div>
+
 </body>
 </html>

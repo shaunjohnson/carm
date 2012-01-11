@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="sourceControlUserDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlUser.name.label" default="Name"/></td>
@@ -58,15 +58,15 @@
                 </td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="sourceControlUser.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlUserInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="sourceControlUser.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlUserInstance?.lastUpdated}"/></td>
             </tr>
@@ -93,6 +93,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
+        <g:showHideDetails sectionId="sourceControlUserDetails" entityName="$entityName"/>
     </div>
 </div>
 </body>

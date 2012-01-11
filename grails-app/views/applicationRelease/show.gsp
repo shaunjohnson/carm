@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="applicationReleaseDetails" class="details">
         <tbody>
         <tr class="prop">
             <td valign="top" class="name"><g:message code="applicationRelease.application.label" default="Application"/></td>
@@ -31,15 +31,15 @@
             <td valign="top" class="value">${fieldValue(bean: applicationReleaseInstance, field: "changeLog")}</td>
         </tr>
 
-        <tr class="prop">
+        <tr class="prop detailProp">
             <td colspan="2">&nbsp;</td>
         </tr>
 
-        <tr class="prop">
+        <tr class="prop detailProp">
             <td valign="top" class="name"><g:message code="applicationRelease.dateCreated.label" default="Date Created" /></td>
             <td valign="top" class="value"><g:formatDate date="${applicationReleaseInstance?.dateCreated}" /></td>
         </tr>
-        <tr class="prop">
+        <tr class="prop detailProp">
             <td valign="top" class="name"><g:message code="applicationRelease.lastUpdated.label" default="Last Updated" /></td>
             <td valign="top" class="value"><g:formatDate date="${applicationReleaseInstance?.lastUpdated}" /></td>
         </tr>
@@ -64,6 +64,7 @@
         </tr>
         </tfoot>
         </table>
+        <g:showHideDetails sectionId="applicationReleaseDetails" entityName="$entityName"/>
     </div>
 </div>
 </body>

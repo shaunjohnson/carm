@@ -368,3 +368,8 @@ table.ol td.olContent {
 a.reorderLink {
     text-decoration: none;
 }
+
+a.showHideDetails {
+    display: inline-block;
+    margin: 0.5em;
+}

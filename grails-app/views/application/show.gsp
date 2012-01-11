@@ -16,7 +16,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="applicationDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.project.label" default="Project"/></td>
@@ -24,7 +24,7 @@
                     <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">${applicationInstance?.project?.encodeAsHTML()}</g:link>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.type.label" default="Type"/></td>
                 <td valign="top" class="value">
                     <g:link controller="applicationType" action="show" id="${applicationInstance?.type?.id}">${applicationInstance?.type?.encodeAsHTML()}</g:link>
@@ -53,11 +53,11 @@
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "sourceControlPath")}</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.system.label" default="System"/></td>
                 <td valign="top" class="value">
                     <g:link controller="system" action="show" id="${applicationInstance?.system?.id}">
@@ -65,16 +65,16 @@
                     </g:link>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions")}</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.applicationRoles.label" default="Application Roles"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <g:if test="${applicationInstance.applicationRoles}">
@@ -96,15 +96,15 @@
                 </td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${applicationInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${applicationInstance?.lastUpdated}"/></td>
             </tr>
@@ -129,6 +129,7 @@
             </tr>
             </tfoot>
         </table>
+        <g:showHideDetails sectionId="applicationDetails" entityName="$entityName"/>
     </div>
 
     <h2>Modules</h2>
@@ -144,6 +145,7 @@
                 <tr>
                     <th><g:message code="module.name.label" default="Name"/></th>
                     <th><g:message code="module.systemComponents.label" default="System Components"/></th>
+                    <th><g:message code="module.system.label" default="System"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -156,11 +158,14 @@
                                     <li>
                                         <g:link controller="systemComponent" action="show"
                                                 id="${s?.id}">${s?.encodeAsHTML()}</g:link>
-                                        [<g:link controller="system" action="show"
-                                                 id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
                                     </li>
                                 </g:each>
                             </ul>
+                        </td>
+                        <td>
+                            <g:link controller="system" action="show" id="${moduleInstance?.application?.system?.id}">
+                                ${moduleInstance?.application?.system?.encodeAsHTML()}
+                            </g:link>
                         </td>
                     </tr>
                 </g:each>
@@ -171,8 +176,15 @@
 
     <g:if test="${applicationInstance?.system?.environments?.size()}">
         <h2>Environments</h2>
-        <div class="dialog">
+        <div class="list">
             <table>
+                <thead>
+                <tr>
+                    <th><g:message code="systemEnvironment.label" default="System Environment"/></th>
+                    <th><g:message code="latestRelease.label" default="Latest Release"/></th>
+                    <th><g:message code="releasedOn.label" default="Released On"/></th>
+                </tr>
+                </thead>
                 <tbody>
                 <g:each in="${applicationInstance.system.environments}" var="environment">
                     <tr>

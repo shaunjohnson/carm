@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="systemEnvironmentDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="systemEnvironment.description.label" default="Description"/></td>
@@ -26,15 +26,15 @@
                 <td valign="top" class="value"><g:link controller="system" action="show" id="${systemEnvironmentInstance?.system?.id}">${systemEnvironmentInstance?.system?.encodeAsHTML()}</g:link></td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="systemEnvironment.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${systemEnvironmentInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="systemEnvironment.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${systemEnvironmentInstance?.lastUpdated}"/></td>
             </tr>
@@ -61,6 +61,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
+        <g:showHideDetails sectionId="systemEnvironmentDetails" entityName="$entityName"/>
     </div>
 </div>
 </body>

@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="systemDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="system.description.label" default="Description"/></td>
@@ -79,15 +79,15 @@
                 </td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="system.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${systemInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="system.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${systemInstance?.lastUpdated}"/></td>
             </tr>
@@ -116,6 +116,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
+        <g:showHideDetails sectionId="systemDetails" entityName="$entityName"/>
     </div>
 
     <g:set var="applications" value="${Application.findAllBySystem(systemInstance).sort { it.name } }"/>
