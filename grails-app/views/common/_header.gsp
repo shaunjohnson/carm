@@ -30,6 +30,27 @@
         </g:else>
     </div>
 </g:if>
+<g:elseif test="${controller == 'applicationReleaseTestState'}">
+    <g:set var="entityName" value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>
+
+    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+
+    <div class="breadcrumbs">
+        <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="applicationReleaseTestState" action="list" title="Show All Application Release Test States" text="Application Release Test States"/>
+
+        <g:if test="${action == 'show'}">
+            <g:headerLink controller="applicationReleaseTestState" action="show" title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
+        </g:if>
+        <g:elseif test="${action == 'create' || action == 'save'}">
+            <g:headerText code="default.create.label" args="[entityName]"/>
+        </g:elseif>
+        <g:elseif test="${action == 'edit' || action == 'update'}">
+            <g:headerLink controller="applicationReleaseTestState" action="show" title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
+            <g:headerText code="default.edit.label" args="[entityName]"/>
+        </g:elseif>
+    </div>
+</g:elseif>
 <g:elseif test="${controller == 'applicationType'}">
     <g:set var="entityName" value="${message(code: 'applicationType.label', default: 'Application Type')}"/>
 

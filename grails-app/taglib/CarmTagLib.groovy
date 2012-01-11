@@ -1,5 +1,7 @@
 import carm.Project
 import carm.Application
+import carm.ApplicationRelease
+import carm.ApplicationReleaseTestState
 import carm.Module
 import carm.SystemComponent
 import carm.SystemEnvironment
@@ -113,8 +115,13 @@ class CarmTagLib {
      */
     def ifNotInUse = { attrs, body ->
         def domain = attrs.domain
-        
-        if (domain instanceof ApplicationType) {
+
+        if (domain instanceof ApplicationReleaseTestState) {
+            if (ApplicationRelease.findAllByTestState(domain).size() == 0) {
+                out << body()
+            }
+        }
+        else if (domain instanceof ApplicationType) {
             if (Application.findAllByType(domain).size() == 0) {
                 out << body()
             }
@@ -157,7 +164,7 @@ class CarmTagLib {
 //            }
         }
         else {
-            out << '<span style="color: red;">Domain is not supported!</span>'
+            out << '<span style="color: red;">Domain is not supported by the ifNotInUse tag!</span>'
         }
     }
 

@@ -1,4 +1,5 @@
 import carm.Application
+import carm.ApplicationReleaseTestState
 import carm.ApplicationType
 import carm.Module
 import carm.Project
@@ -52,6 +53,13 @@ class BootStrap {
         SpringSecurityUtils.reauthenticate('admin', 'admin')
 
         def dataFixture = fixtureLoader.load {
+            //
+            // Application Release Test States
+            //
+            notTestedAppReleaseTestState(ApplicationReleaseTestState, name: 'Not Tested', description: 'Application release was not tested')
+            testedErrorsFoundAppReleaseTestState(ApplicationReleaseTestState, name: 'Tested, errors found', description: 'Application release tested and errors were found')
+            testedNoErrorsAppReleaseTestState(ApplicationReleaseTestState, name: 'Tested, no errors', description: 'Application release tested and no errors were found')
+
             //
             // Application Types
             //
@@ -328,7 +336,9 @@ class BootStrap {
                                     brokerRelease105(ApplicationRelease) {
                                         application = brokerApplication
                                         releaseNumber = '1.0.5'
-                                        description = 'Release broker application to fix message flow issue.'
+                                        changeLog = 'Release broker application to fix message flow issue.'
+                                        releaseState = 'Submitted'
+                                        testState = notTestedAppReleaseTestState
                                     }
                             ]
                         },
@@ -362,7 +372,9 @@ class BootStrap {
                                     portalRelease210(ApplicationRelease) {
                                         application = portalApplication
                                         releaseNumber = '2.1.0'
-                                        description = 'Release portal application to update to latest jQuery version.'
+                                        changeLog = 'Release portal application to update to latest jQuery version.'
+                                        releaseState = 'Submitted'
+                                        testState = testedNoErrorsAppReleaseTestState
                                     }
                             ]
                         }
