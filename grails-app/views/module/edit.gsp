@@ -69,7 +69,8 @@
                       <label for="systemComponents"><g:message code="module.systemComponents.label" default="System Components" /></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'systemComponents', 'errors')}">
-                        <g:select name="systemComponents" from="${carm.SystemComponent.list().sort { it.name }}" multiple="yes" optionKey="id" size="5" value="${moduleInstance?.systemComponents*.id}" />
+                        <g:select name="systemComponents" from="${carm.SystemComponent.findAllBySystem(moduleInstance.application.system).sort { it.name }}"
+                                  multiple="yes" optionKey="id" size="5" value="${moduleInstance?.systemComponents*.id}" />
                     </td>
                 </tr>
                 <tr class="prop">
