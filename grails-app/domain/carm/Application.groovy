@@ -17,7 +17,7 @@ class Application {
         description(maxSize: 4000, nullable: true)
         type(nullable: false)
         project(nullable: false)
-        sourceControlRepository(nullable: true)
+        sourceControlRepository(nullable: false)
         sourceControlPath(maxSize: 200, nullable: true)
         system(nullable: true)
         deployInstructions(maxSize: 4000, nullable: true)

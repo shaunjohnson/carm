@@ -105,7 +105,8 @@ class CarmTagLib {
         def server = attrs.server
 
         if (application) {
-            def url = "${application.sourceControlRepository.server.url}${application.sourceControlRepository.path}${application.sourceControlPath}"
+            def sourceControlRepository = application.sourceControlRepository
+            def url = "${sourceControlRepository.server.url}${sourceControlRepository.path}${application.sourceControlPath ?: ''}"
             out << "<a href='$url' target='_blank'>$url</a>"
         }
         else if (repository) {
