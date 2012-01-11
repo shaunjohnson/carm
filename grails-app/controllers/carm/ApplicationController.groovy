@@ -29,7 +29,7 @@ class ApplicationController {
     def save = {
         def applicationInstance = new Application(params)
         if (applicationInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
             redirect(action: "show", id: applicationInstance.id)
         }
         else {
@@ -73,7 +73,7 @@ class ApplicationController {
             }
             applicationInstance.properties = params
             if (!applicationInstance.hasErrors() && applicationInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
                 redirect(action: "show", id: applicationInstance.id)
             }
             else {
@@ -91,8 +91,9 @@ class ApplicationController {
         if (applicationInstance) {
             def projectId = applicationInstance.project.id
             try {
+                def name = applicationInstance.name
                 applicationInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
                 redirect(controller: "project", action: "show", id: projectId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
