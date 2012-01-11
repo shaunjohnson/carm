@@ -95,16 +95,33 @@ class CarmTagLib {
     /**
      * Formats a SourceControlRepository as a link.
      *
-     * attrs.sourceControlRepository - SourceControlRespository instance
+     * attrs.application - Application instance
+     * attrs.repository - Source Control Repository instance
+     * attrs.server - Source Control Server instance
      */
-    def formatSourceControlRepository = { attrs, body ->
-        def sourceControlRepository = attrs.sourceControlRepository
+    def formatSourceControl = { attrs, body ->
+        def application = attrs.application
+        def repository = attrs.repository
+        def server = attrs.server
 
-        if (sourceControlRepository) {
-            def name = sourceControlRepository.server.name
-            def url = "${sourceControlRepository.server.url}${sourceControlRepository.path}"
+        if (application) {
+            def url = "${application.sourceControlRepository.server.url}${application.sourceControlRepository.path}${application.sourceControlPath}"
+            out << "<a href='$url' target='_blank'>$url</a>"
+        }
+        else if (repository) {
+            out << link(controller: "sourceControlRepository", action: "show", id: repository.id) { repository.name.encodeAsHTML() }
 
-            out << "$name (<a href='$url' target='_blank'>$url</a>)"
+            def url = "${repository.server.url}${repository.path}"
+            out << " (<a href='$url' target='_blank'>$url</a>)"
+        }
+        else if (server) {
+            out << link(controller: "sourceControlServer", action: "show", id: server.id) { server.name.encodeAsHTML() }
+
+            def url = "${server.url}"
+            out << " (<a href='$url' target='_blank'>$url</a>)"
+        }
+        else {
+            out << '<span style="color: red;">You must specify application, repository or server for formatSourceControl!</span>'
         }
     }
 

@@ -39,18 +39,17 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></td>
                 <td valign="top" class="value">
-                    <g:link controller="sourceControlRepository" action="show" id="${applicationInstance?.sourceControlRepository?.id}">
-                        ${applicationInstance?.sourceControlRepository?.encodeAsHTML()}
-                    </g:link>
-                    <g:formatSourceControlRepository sourceControlRepository="${applicationInstance?.sourceControlRepository}"/>
+                    <g:formatSourceControl repository="${applicationInstance?.sourceControlRepository}"/>
                 </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="application.sourceControlPath.label" default="Source Control Path"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "sourceControlPath")}</td>
+                <td valign="top" class="value">
+                    <g:formatSourceControl application="${applicationInstance}"/>
+                </td>
             </tr>
 
             <tr class="prop detailProp">

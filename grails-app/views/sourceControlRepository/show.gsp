@@ -23,7 +23,9 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.server.label" default="Server"/></td>
-                <td valign="top" class="value"><g:link controller="sourceControlServer" action="show" id="${sourceControlRepositoryInstance?.server?.id}">${sourceControlRepositoryInstance?.server?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="value">
+                    <g:formatSourceControl server="${sourceControlRepositoryInstance?.server}"/>
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRepository.path.label" default="Path"/></td>
