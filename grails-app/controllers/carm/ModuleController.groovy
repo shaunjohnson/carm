@@ -23,7 +23,7 @@ class ModuleController {
         def moduleInstance = new Module(params)
         if (moduleInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
-            redirect(action: "show", id: moduleInstance.id)
+            redirect(controller: "application", action: "show", id: moduleInstance.application.id)
         }
         else {
             render(view: "create", model: [moduleInstance: moduleInstance])

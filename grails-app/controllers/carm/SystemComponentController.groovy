@@ -37,7 +37,7 @@ class SystemComponentController {
         def systemComponentInstance = systemComponentService.create(params)
         if (!systemComponentInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.name])}"
-            redirect(action: "show", id: systemComponentInstance.id)
+            redirect(controller: "system", action: "show", id: systemComponentInstance.system.id)
         }
         else {
             render(view: "create", model: [systemComponentInstance: systemComponentInstance])

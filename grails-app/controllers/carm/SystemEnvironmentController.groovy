@@ -37,7 +37,7 @@ class SystemEnvironmentController {
         def systemEnvironmentInstance = systemEnvironmentService.create(params)
         if (systemEnvironmentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
-            redirect(action: "show", id: systemEnvironmentInstance.id)
+            redirect(controller: "system", action: "show", id: systemEnvironmentInstance.system.id)
         }
         else {
             render(view: "create", model: [systemEnvironmentInstance: systemEnvironmentInstance])
