@@ -22,7 +22,7 @@ class ModuleController {
     def save = {
         def moduleInstance = new Module(params)
         if (moduleInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
             redirect(action: "show", id: moduleInstance.id)
         }
         else {
@@ -66,7 +66,7 @@ class ModuleController {
             }
             moduleInstance.properties = params
             if (!moduleInstance.hasErrors() && moduleInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
                 redirect(action: "show", id: moduleInstance.id)
             }
             else {
@@ -84,8 +84,9 @@ class ModuleController {
         if (moduleInstance) {
             def applicationId = moduleInstance.application.id
             try {
+                def name = moduleInstance.name
                 moduleInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), name])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

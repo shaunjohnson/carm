@@ -36,7 +36,7 @@ class SystemComponentController {
     def save = {
         def systemComponentInstance = systemComponentService.create(params)
         if (!systemComponentInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.name])}"
             redirect(action: "show", id: systemComponentInstance.id)
         }
         else {
@@ -81,7 +81,7 @@ class SystemComponentController {
             }
             systemComponentService.update(systemComponentInstance, params)
             if (!systemComponentInstance.hasErrors() && systemComponentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.name])}"
                 redirect(action: "show", id: systemComponentInstance.id)
             }
             else {
@@ -100,8 +100,9 @@ class SystemComponentController {
         if (systemComponentInstance) {
             def systemId = systemComponentInstance.system.id
             try {
+                def name = systemComponentInstance.name
                 systemComponentService.delete(systemComponentInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

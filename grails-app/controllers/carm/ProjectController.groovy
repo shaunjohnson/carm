@@ -31,7 +31,7 @@ class ProjectController {
     def save = {
         def projectInstance = projectService.create(params)
         if (!projectInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
             redirect(action: "show", id: projectInstance.id)
         }
         else {
@@ -76,7 +76,7 @@ class ProjectController {
             }
             projectService.update(projectInstance, params)
             if (!projectInstance.hasErrors() && projectInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
@@ -93,8 +93,9 @@ class ProjectController {
         def projectInstance = projectService.get(params.id?.toLong())
         if (projectInstance) {
             try {
+                def name = projectInstance.name
                 projectService.delete(projectInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

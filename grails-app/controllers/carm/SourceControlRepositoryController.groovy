@@ -32,7 +32,7 @@ class SourceControlRepositoryController {
     def save = {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.create(params)
         if (!sourceControlRepositoryInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.name])}"
             redirect(action: "show", id: sourceControlRepositoryInstance.id)
         }
         else {
@@ -76,7 +76,7 @@ class SourceControlRepositoryController {
             }
             sourceControlRepositoryService.update(sourceControlRepositoryInstance, params)
             if (!sourceControlRepositoryInstance.hasErrors() && sourceControlRepositoryInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.name])}"
                 redirect(action: "show", id: sourceControlRepositoryInstance.id)
             }
             else {
@@ -93,8 +93,9 @@ class SourceControlRepositoryController {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id?.toLong())
         if (sourceControlRepositoryInstance) {
             try {
+                def name = sourceControlRepositoryInstance.name
                 sourceControlRepositoryService.delete(sourceControlRepositoryInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

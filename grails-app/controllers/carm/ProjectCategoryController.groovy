@@ -28,7 +28,7 @@ class ProjectCategoryController {
     def save = {
         def projectCategoryInstance = projectCategoryService.create(params)
         if (!projectCategoryInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.name])}"
             redirect(action: "show", id: projectCategoryInstance.id)
         }
         else {
@@ -74,7 +74,7 @@ class ProjectCategoryController {
             }
             projectCategoryService.update(projectCategoryInstance, params)
             if (!projectCategoryInstance.hasErrors() && projectCategoryInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.name])}"
                 redirect(action: "show", id: projectCategoryInstance.id)
             }
             else {
@@ -92,8 +92,9 @@ class ProjectCategoryController {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
             try {
+                def name = projectCategoryInstance.name
                 projectCategoryService.delete(projectCategoryInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

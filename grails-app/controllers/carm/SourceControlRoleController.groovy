@@ -28,7 +28,7 @@ class SourceControlRoleController {
     def save = {
         def sourceControlRoleInstance = sourceControlRoleService.create(params)
         if (!sourceControlRoleInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.name])}"
             redirect(action: "show", id: sourceControlRoleInstance.id)
         }
         else {
@@ -74,7 +74,7 @@ class SourceControlRoleController {
             }
             sourceControlRoleService.update(sourceControlRoleInstance, params)
             if (!sourceControlRoleInstance.hasErrors() && sourceControlRoleInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.name])}"
                 redirect(action: "show", id: sourceControlRoleInstance.id)
             }
             else {
@@ -92,8 +92,9 @@ class SourceControlRoleController {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
             try {
+                def name = sourceControlRoleInstance.name
                 sourceControlRoleService.delete(sourceControlRoleInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

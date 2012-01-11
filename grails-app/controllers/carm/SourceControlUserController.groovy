@@ -36,7 +36,7 @@ class SourceControlUserController {
     def save = {
         def sourceControlUserInstance = sourceControlUserService.create(params)
         if (!sourceControlUserInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.name])}"
             redirect(action: "show", id: sourceControlUserInstance.id)
         }
         else {
@@ -81,7 +81,7 @@ class SourceControlUserController {
             }
             sourceControlUserService.update(sourceControlUserInstance, params)
             if (!sourceControlUserInstance.hasErrors() && sourceControlUserInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.name])}"
                 redirect(action: "show", id: sourceControlUserInstance.id)
             }
             else {
@@ -99,8 +99,9 @@ class SourceControlUserController {
         def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (sourceControlUserInstance) {
             try {
+                def name = sourceControlUserInstance.name
                 sourceControlUserService.delete(sourceControlUserInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

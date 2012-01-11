@@ -36,7 +36,7 @@ class SystemEnvironmentController {
     def save = {
         def systemEnvironmentInstance = systemEnvironmentService.create(params)
         if (systemEnvironmentInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
             redirect(action: "show", id: systemEnvironmentInstance.id)
         }
         else {
@@ -81,7 +81,7 @@ class SystemEnvironmentController {
             }
             systemEnvironmentService.update(systemEnvironmentInstance, params)
             if (!systemEnvironmentInstance.hasErrors() && systemEnvironmentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
                 redirect(action: "show", id: systemEnvironmentInstance.id)
             }
             else {
@@ -100,8 +100,9 @@ class SystemEnvironmentController {
         if (systemEnvironmentInstance) {
             def systemId = systemEnvironmentInstance.system.id
             try {
+                def name = systemEnvironmentInstance.name
                 systemEnvironmentService.delete(systemEnvironmentInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

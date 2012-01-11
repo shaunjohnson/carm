@@ -28,7 +28,7 @@ class ModuleTypeController {
     def save = {
         def moduleTypeInstance = moduleTypeService.create(params)
         if (!moduleTypeInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.name])}"
             redirect(action: "show", id: moduleTypeInstance.id)
         }
         else {
@@ -74,7 +74,7 @@ class ModuleTypeController {
             }
             moduleTypeService.update(moduleTypeInstance, params)
             if (!moduleTypeInstance.hasErrors() && moduleTypeInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.name])}"
                 redirect(action: "show", id: moduleTypeInstance.id)
             }
             else {
@@ -92,8 +92,9 @@ class ModuleTypeController {
         def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (moduleTypeInstance) {
             try {
+                def name = moduleTypeInstance.name
                 moduleTypeService.delete(moduleTypeInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

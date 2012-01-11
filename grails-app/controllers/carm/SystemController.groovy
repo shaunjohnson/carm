@@ -28,7 +28,7 @@ class SystemController {
     def save = {
         def systemInstance = systemService.create(params)
         if (!systemInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'system.label', default: 'System'), systemInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'system.label', default: 'System'), systemInstance.name])}"
             redirect(action: "show", id: systemInstance.id)
         }
         else {
@@ -102,7 +102,7 @@ class SystemController {
             }
             systemService.update(systemInstance, params)
             if (!systemInstance.hasErrors() && systemInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'system.label', default: 'System'), systemInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'system.label', default: 'System'), systemInstance.name])}"
                 redirect(action: "show", id: systemInstance.id)
             }
             else {
@@ -120,8 +120,9 @@ class SystemController {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             try {
+                def name = systemInstance.name
                 systemService.delete(systemInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'system.label', default: 'System'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

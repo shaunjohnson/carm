@@ -28,7 +28,7 @@ class SourceControlServerController {
     def save = {
         def sourceControlServerInstance = sourceControlServerService.create(params)
         if (!sourceControlServerInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), sourceControlServerInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), sourceControlServerInstance.name])}"
             redirect(action: "show", id: sourceControlServerInstance.id)
         }
         else {
@@ -73,7 +73,7 @@ class SourceControlServerController {
             }
             sourceControlServerService.update(sourceControlServerInstance, params)
             if (!sourceControlServerInstance.hasErrors() && sourceControlServerInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), sourceControlServerInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), sourceControlServerInstance.name])}"
                 redirect(action: "show", id: sourceControlServerInstance.id)
             }
             else {
@@ -91,8 +91,9 @@ class SourceControlServerController {
         def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
         if (sourceControlServerInstance) {
             try {
+                def name = sourceControlServerInstance.name
                 sourceControlServerService.delete(sourceControlServerInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
