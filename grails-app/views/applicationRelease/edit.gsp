@@ -13,7 +13,6 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-
     <g:hasErrors bean="${applicationReleaseInstance}">
         <div class="errors">
             <g:renderErrors bean="${applicationReleaseInstance}" as="list" />
@@ -44,10 +43,10 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
-                  <label for="description"><g:message code="applicationRelease.description.label" default="Description" /></label>
+                  <label for="changeLog"><g:message code="applicationRelease.changeLog.label" default="Change Log" /></label>
                 </td>
-                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'description', 'errors')}">
-                    <g:textArea name="description" cols="40" rows="5" value="${applicationReleaseInstance?.description}" />
+                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
+                    <g:textArea name="changeLog" cols="40" rows="5" value="${applicationReleaseInstance?.changeLog}" />
                 </td>
             </tr>
             </tbody>
