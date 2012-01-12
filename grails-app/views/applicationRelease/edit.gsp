@@ -27,10 +27,10 @@
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name">
-                  <label for="application"><g:message code="applicationRelease.application.label" default="Application" /></label>
+                    <label for="application"><g:message code="applicationRelease.application.label" default="Application" /></label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                    <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${applicationReleaseInstance?.application?.id}" noSelection="['null': '']" />
+                    ${applicationReleaseInstance?.application?.encodeAsHTML()}
                 </td>
             </tr>
             <tr class="prop">
@@ -54,7 +54,7 @@
         </div>
         <div class="buttons">
             <span class="button">
-                <g:link class="show" action="show" id="${applicationReleaseInstance.id}">
+                <g:link class="show" controller="application" action="show" id="${applicationReleaseInstance.application.id}">
                     <g:message code="default.button.cancel.label" default="Cancel"/>
                 </g:link>
             </span>

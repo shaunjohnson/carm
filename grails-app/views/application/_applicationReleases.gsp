@@ -22,8 +22,13 @@
                             ${applicationReleaseInstance.releaseNumber}
                         </g:link>
                     </div>
-                    <div style="text-align: right;">
+                    <div style="text-align: right; margin-bottom: 1em;">
                         <g:formatDate type="date" style="short" date="${applicationReleaseInstance.dateCreated}"/>
+                    </div>
+                    <div style="text-align: right;">
+                        <g:link class="edit" controller="applicationRelease" action="edit" id="${applicationReleaseInstance?.id}">
+                            (edit)
+                        </g:link>
                     </div>
                 </td>
                 <td style="padding-bottom: 1em;">

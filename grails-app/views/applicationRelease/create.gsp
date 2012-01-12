@@ -29,7 +29,8 @@
                     <label for="application"><g:message code="applicationRelease.application.label" default="Application" /></label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                    <g:select name="application.id" from="${carm.Application.list()}" optionKey="id" value="${applicationReleaseInstance?.application?.id}" noSelection="['null': '']" />
+                    ${applicationReleaseInstance?.application?.encodeAsHTML()}
+                    <g:hiddenField name="application.id" value="${applicationReleaseInstance?.application?.id}" />
                 </td>
             </tr>
             <tr class="prop">
@@ -52,8 +53,14 @@
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><g:link class="list" action="list"><g:message code="default.button.cancel.label" default="Cancel"/></g:link></span>
-            <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
+            <span class="button">
+                <g:link class="show" controller="application" action="show" id="${applicationReleaseInstance?.application?.id}">
+                    <g:message code="default.button.cancel.label" default="Cancel"/>
+                </g:link>
+            </span>
+            <span class="button">
+                <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+            </span>
         </div>
     </g:form>
 </div>

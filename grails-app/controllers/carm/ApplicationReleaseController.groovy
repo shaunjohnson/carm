@@ -14,16 +14,26 @@ class ApplicationReleaseController {
     }
 
     def create = {
-        def applicationReleaseInstance = new ApplicationRelease()
-        applicationReleaseInstance.properties = params
-        return [applicationReleaseInstance: applicationReleaseInstance]
+        def applicationInstance = Application.get(params.application.id)
+        if (!applicationInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def applicationReleaseInstance = new ApplicationRelease()
+            applicationReleaseInstance.properties = params
+            return [applicationReleaseInstance: applicationReleaseInstance]
+        }
     }
 
     def save = {
         def applicationReleaseInstance = new ApplicationRelease(params)
+
+        applicationReleaseInstance.releaseState = "Submitted"
+
         if (applicationReleaseInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationRelease.label', default: 'ApplicationRelease'), applicationReleaseInstance.id])}"
-            redirect(action: "show", id: applicationReleaseInstance.id)
+            redirect(controller: "application", action: "show", id: applicationReleaseInstance.application.id)
         }
         else {
             render(view: "create", model: [applicationReleaseInstance: applicationReleaseInstance])
@@ -67,7 +77,7 @@ class ApplicationReleaseController {
             applicationReleaseInstance.properties = params
             if (!applicationReleaseInstance.hasErrors() && applicationReleaseInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationRelease.label', default: 'ApplicationRelease'), applicationReleaseInstance.id])}"
-                redirect(action: "show", id: applicationReleaseInstance.id)
+                redirect(controller: "application", action: "show", id: applicationReleaseInstance.application.id)
             }
             else {
                 render(view: "edit", model: [applicationReleaseInstance: applicationReleaseInstance])
@@ -83,9 +93,10 @@ class ApplicationReleaseController {
         def applicationReleaseInstance = ApplicationRelease.get(params.id)
         if (applicationReleaseInstance) {
             try {
+                def applicationId = applicationReleaseInstance.application.id
                 applicationReleaseInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationRelease.label', default: 'ApplicationRelease'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationRelease.label', default: 'ApplicationRelease'), params.id])}"
