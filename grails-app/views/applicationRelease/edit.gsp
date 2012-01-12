@@ -43,6 +43,16 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
+                    <label for="buildPath"><g:message code="applicationRelease.buildPath.label" default="Build Path"/></label>
+                </td>
+                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildPath', 'errors')}">
+                    <g:textField name="buildPath" maxlength="20" value="${applicationReleaseInstance?.buildPath}"/>
+                    <br/>
+                    <g:formatSourceControl application="${applicationReleaseInstance.application}"/>
+                </td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name">
                   <label for="changeLog"><g:message code="applicationRelease.changeLog.label" default="Change Log" /></label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">

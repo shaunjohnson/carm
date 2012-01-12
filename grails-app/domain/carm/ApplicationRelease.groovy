@@ -3,6 +3,7 @@ package carm
 class ApplicationRelease {
     String releaseNumber
     String changeLog
+    String buildPath
     String releaseState
     ApplicationReleaseTestState testState
 
@@ -12,6 +13,7 @@ class ApplicationRelease {
     static constraints = {
         releaseNumber(maxSize: 20, nullable: false, blank: false)
         changeLog(maxSize: 4000, nullable: true)
+        buildPath(maxSize:  100, nullable: true)
         releaseState(maxSize: 50, nullable: false, blank: false)
         application(nullable: false)
         testState(nullable: true)
