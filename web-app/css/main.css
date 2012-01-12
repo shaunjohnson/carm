@@ -333,14 +333,14 @@ th.desc a {
 }
 
 /*
- * Home layout table
+ * Two column layout
  */
-table.homeLayout {
-    width: 50em;
+.twoColumnLayout {
+    min-width: 50em;
 }
 
-table.homeLayout td {
-    padding: 0;
+.twoColumnLayout .layoutColumn {
+    padding: 0 2em 0 0;
     width: 50%;
 }
 

@@ -23,10 +23,10 @@
         TODO
     </p>
 
-    <table class="homeLayout">
+    <table class="twoColumnLayout">
         <tbody>
         <tr>
-            <td>
+            <td class="layoutColumn">
                 <h2>My Projects</h2>
                 <g:each in="${projectCategoryList}" var="projectCategory">
                     <g:set var="projects" value="${Project.findAllByCategory(projectCategory).sort { it.name } }"/>
@@ -42,7 +42,7 @@
                     </g:if>
                 </g:each>
             </td>
-            <td>
+            <td class="layoutColumn">
                 <h2>My Environments</h2>
                 <g:each in="${systemInstanceList}" var="systemInstance">
                     <div style="margin: 0.5em 0;">

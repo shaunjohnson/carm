@@ -379,7 +379,9 @@ class BootStrap {
                                     portalRelease210(ApplicationRelease) {
                                         application = portalApplication
                                         releaseNumber = '2.1.0'
-                                        changeLog = 'Release portal application to update to latest jQuery version.'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
                                         releaseState = 'Submitted'
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
@@ -389,6 +391,101 @@ class BootStrap {
                                                 },
                                                 userPortletModuleRelease210(ModuleRelease) {
                                                     applicationRelease: portalRelease210
+                                                    module: userPortletModule
+                                                }
+                                        ]
+                                    },
+                                    portalRelease209(ApplicationRelease) {
+                                        application = portalApplication
+                                        releaseNumber = '2.0.9'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
+                                        releaseState = 'Completed'
+                                        testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease209(ModuleRelease) {
+                                                    applicationRelease: portalRelease209
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease209(ModuleRelease) {
+                                                    applicationRelease: portalRelease209
+                                                    module: userPortletModule
+                                                }
+                                        ]
+                                    },
+                                    portalRelease208(ApplicationRelease) {
+                                        application = portalApplication
+                                        releaseNumber = '2.0.8'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
+                                        releaseState = 'Completed'
+                                        testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease208(ModuleRelease) {
+                                                    applicationRelease: portalRelease208
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease208(ModuleRelease) {
+                                                    applicationRelease: portalRelease208
+                                                    module: userPortletModule
+                                                }
+                                        ]
+                                    },
+                                    portalRelease207(ApplicationRelease) {
+                                        application = portalApplication
+                                        releaseNumber = '2.0.7'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
+                                        releaseState = 'Completed'
+                                        testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease207(ModuleRelease) {
+                                                    applicationRelease: portalRelease207
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease207(ModuleRelease) {
+                                                    applicationRelease: portalRelease207
+                                                    module: userPortletModule
+                                                }
+                                        ]
+                                    },
+                                    portalRelease206(ApplicationRelease) {
+                                        application = portalApplication
+                                        releaseNumber = '2.0.6'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
+                                        releaseState = 'Completed'
+                                        testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease206(ModuleRelease) {
+                                                    applicationRelease: portalRelease206
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease206(ModuleRelease) {
+                                                    applicationRelease: portalRelease206
+                                                    module: userPortletModule
+                                                }
+                                        ]
+                                    },
+                                    portalRelease205(ApplicationRelease) {
+                                        application = portalApplication
+                                        releaseNumber = '2.0.5'
+                                        changeLog = 'Do your layouts deserve better than Lorem Ipsum? Apply as an art director and team up with the best copywriters at Jung von Matt: www.jvm.com/jobs/lipsum\n' +
+                                                '\n' +
+                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
+                                        releaseState = 'Completed'
+                                        testState = testedNoErrorsAppReleaseTestState
+                                        moduleReleases = [
+                                                adminPortletModuleRelease205(ModuleRelease) {
+                                                    applicationRelease: portalRelease205
+                                                    module: adminPortletModule
+                                                },
+                                                userPortletModuleRelease205(ModuleRelease) {
+                                                    applicationRelease: portalRelease205
                                                     module: userPortletModule
                                                 }
                                         ]
