@@ -33,7 +33,7 @@
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.releaseNumber}" entityName="${entityName}"/>
+    <g:pageHeader action="${action}" beanName="${domain?.application?.name} - Release ${domain?.releaseNumber}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:headerLink uri="/" text="Home" isFirst="true"/>
