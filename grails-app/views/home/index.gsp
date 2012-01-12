@@ -47,9 +47,11 @@
                 <g:each in="${systemInstanceList}" var="systemInstance">
                     <div style="margin: 0.5em 0;">
                         <h3><g:link controller="system" action="show" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>
+                        <ul>
                         <g:each in="${systemInstance.environments}" var="systemEnvironment">
-                            <g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link>,
+                            <li><g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link></li>
                         </g:each>
+                        </ul>
                     </div>
                 </g:each>
             </td>

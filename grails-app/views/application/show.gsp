@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
-    <g:set var="entityReleaseName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
@@ -135,140 +134,14 @@
         <tbody>
         <tr>
             <td class="layoutColumn">
-                <h2>Environments</h2>
-
-                <g:if test="${applicationInstance?.system?.environments?.size()}">
-                    <table style="width: 100%;">
-                        <tbody>
-                        <g:each in="${applicationInstance.system.environments}" var="environment">
-                            <tr>
-                                <td>
-                                    <g:link controller="systemEnvironment" action="show" id="${environment.id}">
-                                        ${environment.name.encodeAsHTML()}
-                                    </g:link>
-                                </td>
-                                <td>
-                                    <g:link controller="applicationRelease" action="show">
-                                        1.2.3
-                                    </g:link>
-                                </td>
-                                <td>
-                                    <g:formatDate type="date" style="short" date="${new Date()}"/>
-                                </td>
-                                <td>
-                                    <g:link controller="applicationRelease" action="showDeploymentSheet">Deployment Sheet</g:link>
-                                </td>
-                            </tr>
-                        </g:each>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="4" style="text-align: right;">
-                                <g:link action="showFullHistory">(Show Full History)</g:link>
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </g:if>
-                <g:else>
-                    Application not configured for a system
-                </g:else>
+                <g:render template="applicationEnvironments" model="['applicationInstance': applicationInstance]"/>
 
                 <div>&nbsp;</div>
 
-                <h2>Modules</h2>
-
-                <div class="nav">
-                    <span class="menuButton">
-                        <g:link class="create" controller="module" action="create"
-                                params="['application.id': applicationInstance?.id]">Add Module</g:link>
-                    </span>
-                </div>
-
-                <g:if test="${applicationInstance?.modules?.size()}">
-                    <div class="list">
-                        <table style="width: 100%;">
-                            <thead>
-                            <tr>
-                                <th><g:message code="module.name.label" default="Name"/></th>
-                                <th><g:message code="module.systemComponents.label" default="System Components"/></th>
-                                <th><g:message code="module.system.label" default="System"/></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
-                                <tr>
-                                    <td><g:link controller="module" action="show" id="${moduleInstance.id}">${moduleInstance?.encodeAsHTML()}</g:link></td>
-                                    <td>
-                                        <ul>
-                                            <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
-                                                <li>
-                                                    <g:link controller="systemComponent" action="show"
-                                                            id="${s?.id}">${s?.encodeAsHTML()}</g:link>
-                                                </li>
-                                            </g:each>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <g:link controller="system" action="show" id="${moduleInstance?.application?.system?.id}">
-                                            ${moduleInstance?.application?.system?.encodeAsHTML()}
-                                        </g:link>
-                                    </td>
-                                </tr>
-                            </g:each>
-                            </tbody>
-                        </table>
-                    </div>
-                </g:if>
+                <g:render template="applicationModules" model="['applicationInstance': applicationInstance]"/>
             </td>
             <td class="layoutColumn">
-                <h2><g:message code="default.list.label" args="[entityReleaseName]"/></h2>
-
-                <div class="nav">
-                    <span class="menuButton">
-                        <g:link class="create" controller="applicationRelease" action="create"
-                                params="['application.id': applicationInstance?.id]">Make a New Release</g:link>
-                    </span>
-                </div>
-
-                <g:set var="applicationReleaseInstanceList" value="${ApplicationRelease.findAllByApplication(applicationInstance).sort{ it.releaseNumber }.reverse()}"/>
-
-                <g:if test="${applicationReleaseInstanceList?.size()}">
-                    <table>
-                        <tbody>
-                        <g:each in="${applicationReleaseInstanceList}" status="i" var="applicationReleaseInstance">
-                            <tr>
-                                <td style="padding-bottom: 1em;">
-                                    <div style="font-weight: bold; text-align: right; margin-bottom: 1em;">
-                                        <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
-                                            ${applicationReleaseInstance.releaseNumber}
-                                        </g:link>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <g:formatDate type="date" style="short" date="${applicationReleaseInstance.dateCreated}"/>
-                                    </div>
-                                </td>
-                                <td style="padding-bottom: 1em;">
-                                    ${applicationReleaseInstance.changeLog}
-                                    <div class="buttons">
-                                        <span class="button">
-                                            <g:link controller="applicationRelease" action="deploy"
-                                                    id="${applicationReleaseInstance.id}">Deploy this Release</g:link>
-                                        </span>
-                                        <span class="button">
-                                            <g:link controller="applicationRelease" action="showDeploymentSheet"
-                                                    id="${applicationReleaseInstance.id}">Deployment Sheet</g:link>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </g:each>
-                        </tbody>
-                    </table>
-                </g:if>
-                <g:else>
-                    No releases recorded yet
-                </g:else>
+                <g:render template="applicationReleases" model="['applicationInstance': applicationInstance]"/>
             </td>
         </tr>
         </tbody>
