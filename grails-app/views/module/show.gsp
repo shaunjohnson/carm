@@ -72,7 +72,7 @@
                 <td valign="top" class="value"><g:formatDate date="${moduleInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
-            <tfoot>
+            <tfoot class="detailProp">
             <tr>
                 <td colspan="2">
                     <div class="buttons">

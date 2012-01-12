@@ -72,7 +72,7 @@
             </tr>
             </tbody>
             <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot>
+                <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
                         <div class="buttons">

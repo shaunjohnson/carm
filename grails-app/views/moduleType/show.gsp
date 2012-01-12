@@ -21,6 +21,11 @@
                 <td valign="top" class="name"><g:message code="moduleType.description.label" default="Description" /></td>
                 <td valign="top" class="value">${fieldValue(bean: moduleTypeInstance, field: "description")}</td>
             </tr>
+
+            <tr class="prop detailProp">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="moduleType.dateCreated.label" default="Date Created" /></td>
                 <td valign="top" class="value"><g:formatDate date="${moduleTypeInstance?.dateCreated}" /></td>

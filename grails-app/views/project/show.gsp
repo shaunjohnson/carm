@@ -51,7 +51,7 @@
             </tr>
             </tbody>
             <sec:permitted className='carm.Project' id='${projectInstance?.id}' permission='${BasePermission.ADMINISTRATION}'>
-            <tfoot>
+            <tfoot class="detailProp">
             <tr>
                 <td colspan="2">
                     <div class="buttons">

@@ -21,6 +21,11 @@
                 <td valign="top" class="name"><g:message code="sourceControlRole.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: sourceControlRoleInstance, field: "description")}</td>
             </tr>
+
+            <tr class="prop detailProp">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="sourceControlRole.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${sourceControlRoleInstance?.dateCreated}"/></td>
