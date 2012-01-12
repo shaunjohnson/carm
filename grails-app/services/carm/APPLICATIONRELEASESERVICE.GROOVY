@@ -21,7 +21,16 @@ class ApplicationReleaseService {
 
         ApplicationRelease applicationRelease = new ApplicationRelease(params)
         applicationRelease.releaseState = "Submitted"
+        
+        applicationRelease.application.modules.each { module ->
+            applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))
+        }
+        
         applicationRelease.save()
+
+        if (applicationRelease.hasErrors()) {
+            applicationRelease.moduleReleases.clear()
+        }
 
         log.debug "$prefix returning $applicationRelease"
 

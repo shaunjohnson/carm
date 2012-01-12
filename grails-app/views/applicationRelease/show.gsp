@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationRelease" %>
+<%@ page import="carm.ApplicationRelease; carm.ModuleRelease" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -74,6 +74,44 @@
         </table>
         <g:showHideDetails sectionId="applicationReleaseDetails" entityName="$entityName"/>
     </div>
+
+    <g:if test="${applicationReleaseInstance?.moduleReleases?.size()}">
+        <h2>Modules</h2>
+
+        <div class="list">
+            <table style="width: 100%;">
+                <thead>
+                <tr>
+                    <th><g:message code="module.name.label" default="Name"/></th>
+                    <th><g:message code="module.systemComponents.label" default="System Components"/></th>
+                    <th><g:message code="module.system.label" default="System"/></th>
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${applicationReleaseInstance?.moduleReleases.sort { it.name }}" var="moduleReleaseInstance">
+                    <tr>
+                        <td><g:link controller="module" action="show" id="${moduleReleaseInstance.module.id}">${moduleReleaseInstance.module?.encodeAsHTML()}</g:link></td>
+                        <td>
+                            <ul>
+                                <g:each in="${moduleReleaseInstance.module.systemComponents.sort { it.name }}" var="s">
+                                    <li>
+                                        <g:link controller="systemComponent" action="show"
+                                                id="${s?.id}">${s?.encodeAsHTML()}</g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </td>
+                        <td>
+                            <g:link controller="system" action="show" id="${moduleReleaseInstance.module?.application?.system?.id}">
+                                ${moduleReleaseInstance.module?.application?.system?.encodeAsHTML()}
+                            </g:link>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
+    </g:if>
 </div>
 </body>
 </html>
