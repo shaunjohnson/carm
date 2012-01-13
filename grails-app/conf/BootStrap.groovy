@@ -34,6 +34,8 @@ class BootStrap {
     def fixtureLoader
 
     def init = { servletContext ->
+        return
+
         def userFixture = fixtureLoader.load {
             adminRole(Role, authority: 'ROLE_ADMIN')
             userRole(Role, authority: 'ROLE_USER')
