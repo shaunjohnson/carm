@@ -10,8 +10,6 @@
 <div class="body">
     <h1>Change And Release Management</h1>
 
-    <p></p>
-
     <sec:ifNotLoggedIn>
         <p>
             You must <g:link controller='login' action='auth'>login</g:link> to use the system.

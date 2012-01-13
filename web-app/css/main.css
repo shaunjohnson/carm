@@ -1,4 +1,7 @@
 * {
+    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+    font-size: 12px;
+    line-height: 1.1em;
     margin: 0;
     padding: 0; /* SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
 }
@@ -32,7 +35,7 @@ a:hover {
 h1 {
     color: #48802c;
     font-size: 1.8em;
-    margin: .8em 0 .3em 0;
+    margin: 0.5em 0 0.3em 0;
 }
 
 h2 { 
@@ -52,7 +55,6 @@ ol, ul {
 input, select, textarea {
     background-color: #fcfcfc;
     border: 1px solid #ccc;
-    font: 11px verdana, arial, helvetica, sans-serif;
     margin: 2px 0;
     padding: 2px 4px;
 }
@@ -116,7 +118,7 @@ p {
 }
 
 .menuButton {
-    font-size: 10px;
+    font-size: 0.9em;
     padding: 0 5px;
 }
 .menuButton a {
@@ -196,7 +198,6 @@ td, th {
 th {
     background: #fff url(../images/skin/shadow.jpg);
     color: #666;
-    font-size: 11px;
     font-weight: bold;
     line-height: 17px;
     padding: 2px 6px;
@@ -204,7 +205,7 @@ th {
 th a:link, th a:visited, th a:hover {
     color: #333;
     display: block;
-    font-size: 10px;
+    font-size: 0.9em;
     text-decoration: none;
     width: 100%;
 }
@@ -245,7 +246,7 @@ th.desc a {
     border: 1px solid #ccc;
     border-top: 0;
     color: #666;
-    font-size: 10px;
+    font-size: 0.9em;
     overflow: hidden;
     padding: 10px 3px;
 }
@@ -291,7 +292,7 @@ th.desc a {
     /*background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;*/
     /*border: 1px solid #ccc;*/
     color: #666;
-    font-size: 10px;
+    font-size: 0.9em;
     /*height: 20px;*/
     margin-top: 10px;
     /*overflow: hidden;*/
@@ -302,7 +303,6 @@ th.desc a {
     background: #fff;
     border: 0;
     cursor: pointer;
-    font-size: 10px;
     margin-left: 3px;
     overflow: visible;
     padding: 2px 6px;
@@ -326,7 +326,6 @@ th.desc a {
     padding-left: 28px;
 }
 .buttons a {
-    font-size: 10px;
     margin-left: 3px
     padding: 2px 6px;
     text-decoration: none;
@@ -372,4 +371,105 @@ a.reorderLink {
 a.showHideDetails {
     display: inline-block;
     margin: 0.5em;
+}
+
+div#menuBlock {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #c5c5c5;
+    height: 23px;
+}
+
+/**
+ * Multi Level Drop Down Menu 3.0
+ * Corey Hart @ http://www.codenothing.com
+ */
+#multi-ddm {
+    clear: both;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+#multi-ddm * {
+
+}
+
+#multi-ddm li {
+    float: left;
+    margin: 0px;
+}
+
+#multi-ddm li li {
+	float: none;
+}
+
+#multi-ddm li a {
+	display: block;
+	width: 100px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-decoration: none;
+	color: #232323;
+	font-weight: bold;
+	background-color: #f1f1f1;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#multi-ddm li ul a {
+	width: 152px;
+	padding: 5px;
+	border: 1px solid #545454;
+	border-top: none;
+	background-color: #c5c5c5;
+	text-align: left;
+}
+
+#multi-ddm li a.parent-hover {
+	background-color: #c5c5c5;
+	border-left: 1px solid #545454;
+	border-right: 1px solid #545454;
+}
+
+#multi-ddm li ul {
+	display: none;
+	list-style: none;
+	position: absolute;
+	margin: 0;
+	z-index: 90;
+	padding: 0;
+}
+
+#multi-ddm li ul li a.first {
+	border-top: 1px solid #545454;
+}
+
+#multi-ddm li ul li a.child-hover1 {
+	background-color: #f1f1f1;
+}
+
+#multi-ddm li ul li a.child-hover2 {
+	background-color: black;
+	color: white;
+}
+
+#multi-ddm li ul li a.child-hover3 {
+	background-color: purple;
+	color: white;
+}
+
+#multi-ddm li ul li a.child-hover4 {
+	background-color: blue;
+	color: white;
+}
+
+#multi-ddm li ul li ul {
+	margin: -26px 0 0 163px;
+	position: absolute;
+}
+
+#multi-ddm span {
+	float: right;
 }
