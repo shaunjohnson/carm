@@ -10,9 +10,6 @@ class ModuleTests extends CarmUnitTestCase {
         assertHasError(module, 'application', 'nullable')
     }
 
-    void testDeployInstructionsMaxSize() {
-        assertHasError(Module.buildWithoutSave(deployInstructions: 'a' * 4001), 'deployInstructions', 'maxSize')
-    }
     void testDeployInstructionsNull() {
         assertTrue(Module.buildWithoutSave(deployInstructions: null).validate())
     }

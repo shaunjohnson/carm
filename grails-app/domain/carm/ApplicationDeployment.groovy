@@ -13,7 +13,7 @@ class ApplicationDeployment {
     static constraints = {
         applicationRelease(nullable: false)
         systemEnvironment(nullable: false)
-        deploymentInstructions(maxSize: 4000, nullable: true)
+        deploymentInstructions(nullable: true)
         requestedDeploymentDate(nullable: false)
         completedDeploymentDate(nullable: true)
         deploymentState(maxSize: 50, nullable: false, blank: false)
@@ -22,4 +22,8 @@ class ApplicationDeployment {
     static belongsTo = [applicationRelease: ApplicationRelease]
 
     static hasMany = [moduleDeployments: ModuleDeployment]
+
+    static mapping = {
+        deploymentInstructions type: 'text'
+    }
 }

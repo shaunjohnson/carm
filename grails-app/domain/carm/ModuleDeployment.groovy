@@ -11,10 +11,15 @@ class ModuleDeployment {
 
     static constraints = {
         applicationDeployment(nullable: false)
+        deploymentInstructions(nullable: true)
         moduleRelease(nullable: false)
         deploymentState(maxSize: 50, nullable: false, blank: false)
         testState(nullable: true)
     }
 
     static belongsTo = [applicationDeployment: ApplicationDeployment]
+    
+    static mapping = {
+        deploymentInstructions type: 'text'
+    }
 }

@@ -20,7 +20,7 @@ class Application {
         sourceControlRepository(nullable: false)
         sourceControlPath(maxSize: 200, nullable: true)
         system(nullable: true)
-        deployInstructions(maxSize: 4000, nullable: true)
+        deployInstructions(nullable: true)
     }
 
     static belongsTo = [project: Project]
@@ -29,6 +29,7 @@ class Application {
 
     static mapping = {
         sort "name"
+        deployInstructions type: 'text'
     }
 
     public String toString() {

@@ -14,7 +14,7 @@ class Module {
         description(maxSize: 4000, nullable: true)
         type(nullable: false)
         application(nullable: false)
-        deployInstructions(maxSize: 4000, nullable: true)
+        deployInstructions(nullable: true)
     }
 
     static belongsTo = [application: Application]
@@ -23,6 +23,7 @@ class Module {
 
     static mapping = {
         sort "name"
+        deployInstructions type: 'text'
     }
 
     public String toString() {

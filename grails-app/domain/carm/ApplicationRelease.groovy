@@ -12,7 +12,7 @@ class ApplicationRelease {
 
     static constraints = {
         releaseNumber(maxSize: 20, nullable: false, blank: false)
-        changeLog(maxSize: 4000, nullable: true)
+        changeLog(nullable: true)
         buildPath(maxSize:  100, nullable: true)
         releaseState(maxSize: 50, nullable: false, blank: false)
         application(nullable: false)
@@ -22,4 +22,8 @@ class ApplicationRelease {
     static belongsTo = [application: Application]
 
     static hasMany = [moduleReleases: ModuleRelease]
+
+    static mapping = {
+        changeLog type: 'text'
+    }
 }
