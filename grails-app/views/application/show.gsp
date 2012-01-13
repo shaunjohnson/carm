@@ -133,14 +133,14 @@
     <table class="twoColumnLayout">
         <tbody>
         <tr>
-            <td class="layoutColumn">
+            <td class="layoutColumnFirst">
                 <g:render template="applicationEnvironments" model="['applicationInstance': applicationInstance]"/>
 
                 <div>&nbsp;</div>
 
                 <g:render template="applicationModules" model="['applicationInstance': applicationInstance]"/>
             </td>
-            <td class="layoutColumn">
+            <td class="layoutColumnLast">
                 <g:render template="applicationReleases" model="['applicationInstance': applicationInstance]"/>
             </td>
         </tr>

@@ -1,4 +1,4 @@
-<h2>Modules</h2>
+<h2 class="sectionHeader">Modules</h2>
 
 <div class="nav">
     <span class="menuButton">

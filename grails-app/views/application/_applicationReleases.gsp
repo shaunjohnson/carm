@@ -1,6 +1,6 @@
 <%@ page import="carm.ApplicationRelease" %>
 
-<h2>Releases</h2>
+<h2 class="sectionHeader">Releases</h2>
 
 <div class="nav">
     <span class="menuButton">

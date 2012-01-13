@@ -1,4 +1,4 @@
-<h2>Environments</h2>
+<h2 class="sectionHeader">Environments</h2>
 
 <g:if test="${applicationInstance?.system?.environments?.size()}">
 <table style="width: 100%;">

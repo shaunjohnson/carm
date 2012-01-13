@@ -338,9 +338,16 @@ th.desc a {
     min-width: 50em;
 }
 
-.twoColumnLayout .layoutColumn {
-    padding: 0 2em 0 0;
+.twoColumnLayout .layoutColumnFirst, .twoColumnLayout .layoutColumnLast {
     width: 50%;
+}
+
+.layoutColumnFirst {
+    padding: 0 1em 0 0;
+}
+
+.layoutColumnLast {
+    padding: 0 0 1em;
 }
 
 /*
@@ -377,6 +384,15 @@ div#menuBlock {
     background-color: #f1f1f1;
     border-bottom: 1px solid #c5c5c5;
     height: 23px;
+}
+
+/**
+ * Other Elements
+ */
+h2.sectionHeader {
+    background-color: #F8F8F8;
+    border: 1px solid #c5c5c5;
+    padding: 0.7em 1.2em;
 }
 
 /**

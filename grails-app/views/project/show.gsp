@@ -77,10 +77,10 @@
     <table class="twoColumnLayout">
         <tbody>
         <tr>
-            <td class="layoutColumn">
+            <td class="layoutColumnFirst">
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
             </td>
-            <td class="layoutColumn">
+            <td class="layoutColumnLast">
                 <g:render template="projectRequests" model="['projectInstance': projectInstance]"/>
             </td>
         </tr>

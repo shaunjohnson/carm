@@ -16,7 +16,7 @@
         </p>
     </sec:ifNotLoggedIn>
 
-    <h2>My Requests</h2>
+    <h2 class="sectionHeader">My Requests</h2>
     <p>
         TODO
     </p>
@@ -24,8 +24,8 @@
     <table class="twoColumnLayout">
         <tbody>
         <tr>
-            <td class="layoutColumn">
-                <h2>My Projects</h2>
+            <td class="layoutColumnFirst">
+                <h2 class="sectionHeader">My Projects</h2>
                 <g:each in="${projectCategoryList}" var="projectCategory">
                     <g:set var="projects" value="${Project.findAllByCategory(projectCategory).sort { it.name } }"/>
                     <g:if test="${projects.size()}">
@@ -40,8 +40,8 @@
                     </g:if>
                 </g:each>
             </td>
-            <td class="layoutColumn">
-                <h2>My Environments</h2>
+            <td class="layoutColumnLast">
+                <h2 class="sectionHeader">My Environments</h2>
                 <g:each in="${systemInstanceList}" var="systemInstance">
                     <div style="margin: 0.5em 0;">
                         <h3><g:link controller="system" action="show" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>

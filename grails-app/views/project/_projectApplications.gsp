@@ -1,4 +1,4 @@
-<h2>Applications</h2>
+<h2 class="sectionHeader">Applications</h2>
 
 <div class="nav">
     <span class="menuButton">
