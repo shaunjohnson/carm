@@ -141,3 +141,12 @@ grails.plugins.springsecurity.roleHierarchy = '''
 grails.plugins.springsecurity.secureChannel.definition = [
 //   '/login/**':         'REQUIRES_SECURE_CHANNEL'
 ]
+
+// CARM UI configurable options
+ui {
+    richTextEditor {
+        type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
+        height = 400    // Height of editor in pixels
+        width = 600     // Width of editor in pixels
+    }
+}

@@ -65,7 +65,7 @@
             </tr>
             <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions")}</td>
+                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions").decodeHTML()}</td>
             </tr>
 
             <tr class="prop detailProp">

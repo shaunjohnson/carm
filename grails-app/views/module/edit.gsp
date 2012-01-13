@@ -5,6 +5,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}" />
 </head>
 <body>
 <div class="body">
@@ -78,7 +79,9 @@
                         <label for="deployInstructions"><g:message code="module.deployInstructions.label" default="Deploy Instructions"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'deployInstructions', 'errors')}">
-                        <g:textArea name="deployInstructions" cols="40" rows="5" value="${moduleInstance?.deployInstructions}"/>
+                        <richui:richTextEditor name="deployInstructions" value="${moduleInstance?.deployInstructions}"
+                                               height="${grailsApplication.config.ui.richTextEditor.height}"
+                                               width="${grailsApplication.config.ui.richTextEditor.width}" />
                     </td>
                 </tr>
                 </tbody>

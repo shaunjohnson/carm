@@ -5,6 +5,7 @@
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'ApplicationRelease')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
+    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}" />
 </head>
 <body>
 <div class="body">
@@ -56,7 +57,9 @@
                     <label for="changeLog"><g:message code="applicationRelease.changeLog.label" default="Change Log" /></label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
-                    <g:textArea name="changeLog" cols="40" rows="5" value="${applicationReleaseInstance?.changeLog}" />
+                    <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
+                                           height="${grailsApplication.config.ui.richTextEditor.height}"
+                                           width="${grailsApplication.config.ui.richTextEditor.width}" />
                 </td>
             </tr>
             </tbody>
