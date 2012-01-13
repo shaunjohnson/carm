@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>Change And Release Management</h1>
+    <g:header pageName="Home" />
 
     <sec:ifNotLoggedIn>
         <p>

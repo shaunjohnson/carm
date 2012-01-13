@@ -3,6 +3,8 @@
 <g:set var="action" value="${params.action}"/>
 <g:set var="controller" value="${params.controller}"/>
 
+<div class="applicationName">Change And Release Management</div>
+
 <g:if test="${controller == 'application'}">
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
 
@@ -99,6 +101,9 @@
             <g:headerText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
+</g:elseif>
+<g:elseif test="${controller ==~ /.*home/}">
+    <g:pageHeader action="show" beanName="${pageName}"/>
 </g:elseif>
 <g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
