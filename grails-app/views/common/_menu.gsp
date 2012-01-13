@@ -27,8 +27,10 @@
             </li>
             <li><a href="#">Types</a>
                 <ul>
+                    <li><g:link controller="applicationDeploymentTestState">Application Deployment Test States</g:link></li>
                     <li><g:link controller="applicationReleaseTestState">Application Release Test States</g:link></li>
                     <li><g:link controller="applicationType">Application Types</g:link></li>
+                    <li><g:link controller="moduleDeploymentTestState">Module Deployment Test States</g:link></li>
                     <li><g:link controller="moduleType">Module Types</g:link></li>
                     <li><g:link controller="projectCategory">Project Categories</g:link></li>
                 </ul>

@@ -1,6 +1,6 @@
 package carm
 
-class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestState> {
+class ModuleDeploymentTestState implements Comparable<ModuleDeploymentTestState> {
     String name
     String description
 
@@ -20,7 +20,7 @@ class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestSt
         return name
     }
 
-    int compareTo(ApplicationReleaseTestState o) {
+    int compareTo(ModuleDeploymentTestState o) {
         return name.compareTo(o?.name)
     }
 }
