@@ -33,7 +33,7 @@ class SourceControlRepositoryController {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.create(params)
         if (!sourceControlRepositoryInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.name])}"
-            redirect(action: "show", id: sourceControlRepositoryInstance.id)
+            redirect(controller: "sourceControlServer", action: "show", id: sourceControlRepositoryInstance.server.id)
         }
         else {
             render(view: "create", model: [sourceControlRepositoryInstance: sourceControlRepositoryInstance])
