@@ -45,11 +45,13 @@
                 <g:each in="${systemInstanceList}" var="systemInstance">
                     <div style="margin: 0.5em 0;">
                         <h3><g:link controller="system" action="show" id="${systemInstance.id}">${systemInstance.name}</g:link></h3>
-                        <ul>
-                        <g:each in="${systemInstance.environments}" var="systemEnvironment">
-                            <li><g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">${systemEnvironment.name}</g:link></li>
+                        <g:each in="${systemInstance.environments}" var="systemEnvironment" status="i">
+                            <g:link controller="systemEnvironment" action="show"
+                                    id="${systemEnvironment.id}">${systemEnvironment.name}</g:link><g:if test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
                         </g:each>
-                        </ul>
+                        <div>
+                            <a href="#">Upcoming Deployments</a>
+                        </div>
                     </div>
                 </g:each>
             </td>
