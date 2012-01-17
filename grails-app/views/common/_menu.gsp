@@ -6,7 +6,8 @@
                 <li><g:link controller="project">Projects</g:link></li>
                 <li><g:link controller="application">Applications</g:link></li>
                 <li><g:link controller="module">Modules</g:link></li>
-                <li><g:link controller="applicationRelease">App Releases</g:link></li>
+                <li><g:link controller="applicationRelease">Releases</g:link></li>
+                <li><g:link controller="applicationDeployment">Deployments</g:link></li>
             </ul>
         </li>
         <li><g:link controller="system">Systems</g:link>

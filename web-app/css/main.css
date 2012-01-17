@@ -220,7 +220,7 @@ tr {
     border: 0;
 }
 td, th {
-    font: 11px verdana, arial, helvetica, sans-serif;
+    /*font: 11px verdana, arial, helvetica, sans-serif;*/
     line-height: 12px;
     padding: 5px 6px;
     text-align: left;
@@ -228,15 +228,18 @@ td, th {
 }
 th {
     background: #fff url(../images/skin/shadow.jpg);
-    color: #666;
+    color: #333;
     font-weight: bold;
     line-height: 17px;
     padding: 2px 6px;
 }
+th * {
+    font-weight: bold;
+}
 th a:link, th a:visited, th a:hover {
     color: #333;
-    display: block;
-    font-size: 0.9em;
+    /*display: block;*/
+    /*font-size: 0.9em;*/
     text-decoration: none;
     width: 100%;
 }

@@ -166,7 +166,7 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
-			column(name: "system_environment_id", type: "BIGINT") {
+			column(name: "environment_id", type: "BIGINT") {
 				constraints(nullable: "false")
 			}
 		}

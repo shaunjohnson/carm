@@ -40,6 +40,34 @@
         </g:else>
     </div>
 </g:elseif>
+<g:elseif test="${controller == 'applicationDeployment'}">
+    <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
+
+    <g:pageHeader action="${action}" beanName="${domain?.applicationRelease?.application?.name} - Release ${domain?.applicationRelease?.releaseNumber}" entityName="${entityName}"/>
+
+    <div class="breadcrumbs">
+        <g:headerLink uri="/" text="Home" isFirst="true"/>
+
+        <g:if test="${action == 'list'}">
+            <g:headerLink controller="applicationDeployment" action="list" title="Show All Application Deployments" text="Application Deployments"/>
+        </g:if>
+        <g:else>
+            <g:headerLink controller="project" action="show" title="Show Project" text="${domain?.applicationRelease?.application?.project}" id="${domain?.applicationRelease?.application?.project?.id}"/>
+            <g:headerLink controller="application" action="show" title="Show Application" text="${domain?.applicationRelease?.application?.name}" id="${domain?.applicationRelease?.application?.id}"/>
+
+            <g:if test="${action == 'show'}">
+                <g:headerLink controller="applicationDeployment" action="show" title="Show Application Deployment" text="${domain.applicationRelease.releaseNumber}" id="${domain.id}"/>
+            </g:if>
+            <g:elseif test="${action == 'create' || action == 'save'}">
+                <g:headerText code="default.create.label" args="[entityName]"/>
+            </g:elseif>
+            <g:elseif test="${action == 'edit' || action == 'update'}">
+                <g:headerLink controller="applicationDeployment" action="show" title="Show Application Deployment" text="${domain.releaseNumber}" id="${domain.id}"/>
+                <g:headerText code="default.edit.label" args="[entityName]"/>
+            </g:elseif>
+        </g:else>
+    </div>
+</g:elseif>
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 

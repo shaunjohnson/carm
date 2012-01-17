@@ -1,7 +1,6 @@
 package carm
 
 class ApplicationDeployment {
-    SystemEnvironment systemEnvironment
     String deploymentInstructions
     Date requestedDeploymentDate
     Date completedDeploymentDate
@@ -12,14 +11,14 @@ class ApplicationDeployment {
 
     static constraints = {
         applicationRelease(nullable: false)
-        systemEnvironment(nullable: false)
+        environment(nullable: false)
         deploymentInstructions(nullable: true)
         requestedDeploymentDate(nullable: false)
         completedDeploymentDate(nullable: true)
         deploymentState(maxSize: 50, nullable: false, blank: false)
     }
 
-    static belongsTo = [applicationRelease: ApplicationRelease]
+    static belongsTo = [applicationRelease: ApplicationRelease, environment: SystemEnvironment]
 
     static hasMany = [moduleDeployments: ModuleDeployment]
 
