@@ -6,7 +6,8 @@
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <g:layoutHead />
         <g:javascript library="application" />
-        <g:javascript library="jquery" />
+        <g:javascript library="jquery" plugin="jquery" />
+        <jqui:resources />
         <script type="text/javascript" src="${resource(dir:'js',file:'jquery.multi-ddm.min.js')}" ></script>
         <script type='text/javascript'>
         $(document).ready(function(){
