@@ -89,6 +89,10 @@ select {
    padding: 2px 2px 2px 0;
 }
 
+strong {
+    font-weight: bold;
+}
+
 textarea {
 	width: 250px;
 	height: 150px;

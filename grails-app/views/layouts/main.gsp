@@ -46,7 +46,7 @@
         </div>
 
         <div id="delete-dialog" title="Delete this item?">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p>
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This item will be <strong>permanently deleted</strong> and cannot be recovered. Are you sure?</p>
         </div>
     </body>
 </html>
