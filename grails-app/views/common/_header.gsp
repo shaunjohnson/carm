@@ -5,7 +5,15 @@
 
 <div class="applicationName"><a href="${createLink(uri: '/')}">Change And Release Management</a></div>
 
-<g:if test="${controller == 'application'}">
+<g:if test="${controller == 'administration'}">
+    <g:pageHeader action="show" beanName="${pageName}"/>
+
+    <div class="breadcrumbs">
+        <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="administration" text="Administration"/>
+    </div>
+</g:if>
+<g:elseif test="${controller == 'application'}">
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
 
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
@@ -31,7 +39,7 @@
             </g:elseif>
         </g:else>
     </div>
-</g:if>
+</g:elseif>
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
@@ -67,6 +75,7 @@
 
     <div class="breadcrumbs">
         <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="administration" text="Administration"/>
         <g:headerLink controller="applicationReleaseTestState" action="list" title="Show All Application Release Test States" text="Application Release Test States"/>
 
         <g:if test="${action == 'show'}">
@@ -88,6 +97,7 @@
 
     <div class="breadcrumbs">
         <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="administration" text="Administration"/>
         <g:headerLink controller="applicationType" action="list" title="Show All Application Types" text="Application Types"/>
 
         <g:if test="${action == 'show'}">
@@ -140,6 +150,7 @@
 
     <div class="breadcrumbs">
         <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="administration" text="Administration"/>
         <g:headerLink controller="moduleType" action="list" title="Show All Module Types" text="Module Types"/>
 
         <g:if test="${action == 'show'}">
@@ -182,6 +193,7 @@
 
     <div class="breadcrumbs">
         <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:headerLink controller="administration" text="Administration"/>
         <g:headerLink controller="projectCategory" action="list" title="Show All Project Categories" text="Project Categories"/>
 
         <g:if test="${action == 'show'}">

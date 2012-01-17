@@ -16,7 +16,7 @@
                 <li><g:link controller="systemEnvironment">Environments</g:link></li>
             </ul>
         </li>
-        <li><a href="#">Administration</a>
+        <li><g:link controller="administration">Administration</g:link>
             <ul>
                 <li><g:link controller="sourceControlServer">Source Control</g:link>
                     <ul>
@@ -42,7 +42,7 @@
                         <li><g:link controller="role">Roles</g:link></li>
                     </ul>
                 </li>
-                <a href="${createLink(uri: '/index.gsp')}">About</a>
+                <li><a href="${createLink(uri: '/index.gsp')}">About</a></li>
             </ul>
         </li>
         <sec:ifLoggedIn>
