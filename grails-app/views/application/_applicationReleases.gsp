@@ -33,10 +33,6 @@
                             <g:link controller="applicationDeployment" action="create"
                                     params="['applicationRelease.id': applicationReleaseInstance.id]">Deploy this Release</g:link>
                         </span>
-                        <span class="button">
-                            <g:link controller="applicationRelease" action="showDeploymentSheet"
-                                    id="${applicationReleaseInstance.id}">Deployment Sheet</g:link>
-                        </span>
                     </div>
                 </td>
             </tr>

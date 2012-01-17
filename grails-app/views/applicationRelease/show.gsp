@@ -66,6 +66,12 @@
                             <g:message code="default.button.delete.label" default="Delete"/>
                         </g:link>
                     </span>
+                    <span class="button">
+                        <g:link controller="applicationDeployment" action="create"
+                                params="['applicationRelease.id': applicationReleaseInstance.id]">
+                            Deploy this Release
+                        </g:link>
+                    </span>
                 </div>
             </td>
         </tr>
