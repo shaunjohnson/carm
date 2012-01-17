@@ -47,8 +47,7 @@
                             </span>
                             <g:ifNotInUse domain="${applicationReleaseTestStateInstance}">
                                 <span class="button">
-                                    <g:link class="delete" action="delete" id="${applicationReleaseTestStateInstance?.id}"
-                                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                    <g:link class="delete" action="delete" id="${applicationReleaseTestStateInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
                                     </g:link>
                                 </span>

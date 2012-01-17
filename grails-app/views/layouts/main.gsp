@@ -10,9 +10,30 @@
         <jqui:resources />
         <script type="text/javascript" src="${resource(dir:'js',file:'jquery.multi-ddm.min.js')}" ></script>
         <script type='text/javascript'>
-        $(document).ready(function(){
-            $('#multi-ddm').dropDownMenu({timer: 500, parentMO: 'parent-hover', childMO: 'child-hover1'});
-        });
+            jQuery(document).ready(function(){
+                jQuery('#multi-ddm').dropDownMenu({timer: 500, parentMO: 'parent-hover', childMO: 'child-hover1'});
+
+                jQuery("#delete-dialog").dialog({
+                    autoOpen: false,
+                    resizable: false,
+                    height: 140,
+                    modal: true,
+                    buttons: {
+                        Cancel: function() {
+                            jQuery(this).dialog("close");
+                        },
+                        "Delete": function() {
+                            window.location = jQuery(this).dialog('close').data('link');
+                        }
+                    }
+                });
+
+                // Delete confirmation
+                jQuery("a.delete").click(function() {
+                    jQuery('#delete-dialog').data('link', this).dialog('open');
+                    return false;
+                });
+            });
         </script>
     </head>
     <body>
@@ -22,6 +43,10 @@
         <div class="footer">
             <hr style="margin: 0 1em;" />
             Change And Release Management 2011
+        </div>
+
+        <div id="delete-dialog" title="Delete this item?">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p>
         </div>
     </body>
 </html>

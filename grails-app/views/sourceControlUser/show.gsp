@@ -82,8 +82,7 @@
                                 </g:link>
                             </span>
                             <span class="button">
-                                <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}"
-                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                                <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}">
                                     <g:message code="default.button.delete.label" default="Delete"/>
                                 </g:link>
                             </span>
