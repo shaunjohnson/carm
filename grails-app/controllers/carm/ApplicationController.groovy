@@ -4,6 +4,8 @@ class ApplicationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationDeploymentService
+
     def index = {
         redirect(action: "list", params: params)
     }
@@ -44,7 +46,15 @@ class ApplicationController {
             redirect(action: "list")
         }
         else {
-            [applicationInstance: applicationInstance]
+            def deployments = [:]
+
+            applicationInstance.system.environments.each { environment ->
+                deployments[environment] = [
+                        lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
+                ]
+            }
+
+            [applicationInstance: applicationInstance, deployments: deployments]
         }
     }
 
