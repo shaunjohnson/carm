@@ -8,6 +8,7 @@ class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationService
     def carmSecurityService
     def projectService
     def springSecurityService
@@ -47,7 +48,7 @@ class ProjectController {
         }
         else {
             [projectInstance: projectInstance,
-                    applicationsGrouped: projectService.getApplicationsGroupedByType(projectInstance)]
+                    applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance)]
         }
     }
 

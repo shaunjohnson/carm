@@ -51,30 +51,6 @@ class ProjectService {
         Project.get id
     }
 
-    SortedMap<String, List<Application>> getApplicationsGroupedByType(Project project) {
-        def criteria = Application.createCriteria()
-        def applications = criteria.list {
-            eq('project', project)
-            and {
-                order('type', 'asc')
-                order('name', 'asc')
-            }
-        }
-
-        SortedMap<String, List<Application>> applicationsGrouped = new TreeMap<String, List<Application>>()
-        applications.each {
-            List<Application> group = applicationsGrouped[it.type]
-            if (!group) {
-                group = []
-                applicationsGrouped[it.type] = group
-            }
-
-            group.add(it)
-        }
-
-        return applicationsGrouped
-    }
-
     List<Project> list(Map params) {
         Project.list params
     }

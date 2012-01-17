@@ -21,7 +21,7 @@
                 <td valign="top" class="name"><g:message code="system.description.label" default="Description"/></td>
                 <td valign="top" class="value">${fieldValue(bean: systemInstance, field: "description")}</td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="system.components.label" default="Components"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
@@ -36,7 +36,7 @@
                     </sec:ifAllGranted>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="system.environments.label" default="Environments"/></td>
                 <td valign="top" style="text-align: left;" class="value">
                     <table class="ol">
@@ -118,17 +118,8 @@
         <g:showHideDetails sectionId="systemDetails" entityName="$entityName"/>
     </div>
 
-    <g:set var="applications" value="${Application.findAllBySystem(systemInstance).sort { it.name } }"/>
-    <g:if test="${applications.size()}">
-        <h2>Applications</h2>
-        <div class="dialog">
-            <ul>
-                <g:each in="${applications}" var="application">
-                    <li><g:link controller="application" action="show" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
-                </g:each>
-            </ul>
-        </div>
-    </g:if>
+    <g:render template="systemApplications"
+              model="['systemInstance': systemInstance, 'applicationsGrouped': applicationsGrouped]"/>
 </div>
 </body>
 </html>
