@@ -15,7 +15,7 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
+        <table id="projectCategoryDetails" class="details">
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="projectCategory.description.label" default="Description"/></td>
@@ -26,17 +26,17 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="projectCategory.dateCreated.label" default="Date Created"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectCategoryInstance?.dateCreated}"/></td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name"><g:message code="projectCategory.lastUpdated.label" default="Last Updated"/></td>
                 <td valign="top" class="value"><g:formatDate date="${projectCategoryInstance?.lastUpdated}"/></td>
             </tr>
             </tbody>
             <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot>
+                <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
                         <div class="buttons">
@@ -59,6 +59,23 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
+        <g:showHideDetails sectionId="projectCategoryDetails" entityName="$entityName"/>
+    </div>
+
+    <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name } }"/>
+
+    <h2>Projects</h2>
+    <div class="dialog">
+        <g:if test="${projects.size()}">
+            <ul>
+                <g:each in="${projects}" var="project">
+                    <li><g:link controller="project" action="show" id="${project.id}">${project?.encodeAsHTML()}</g:link></li>
+                </g:each>
+            </ul>
+        </g:if>
+        <g:else>
+            <p style="font-style: italic;">There are no projects in this category.</p>
+        </g:else>
     </div>
 </div>
 </body>
