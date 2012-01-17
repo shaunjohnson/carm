@@ -46,7 +46,7 @@
             </ul>
         </li>
         <sec:ifLoggedIn>
-            <li><g:link controller='logout'>Logout</g:link></li>
+            <li><g:link controller='logout'>Logout (<sec:loggedInUserInfo field="username"/>)</g:link></li>
         </sec:ifLoggedIn>
         <sec:ifNotLoggedIn>
             <li><g:link controller='login'>Login</g:link></li>
