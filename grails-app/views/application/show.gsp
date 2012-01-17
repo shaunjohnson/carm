@@ -130,6 +130,11 @@
         <g:showHideDetails sectionId="applicationDetails" entityName="$entityName"/>
     </div>
 
+    <h2 class="sectionHeader">Pending Tasks</h2>
+    <p>
+        TODO
+    </p>
+
     <table class="twoColumnLayout">
         <tbody>
         <tr>

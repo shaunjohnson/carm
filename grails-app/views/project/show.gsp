@@ -81,7 +81,7 @@
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="projectRequests" model="['projectInstance': projectInstance]"/>
+                <g:render template="pendingTasks" model="['projectInstance': projectInstance]"/>
             </td>
         </tr>
         </tbody>

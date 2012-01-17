@@ -17,11 +17,11 @@
         <g:each in="${applicationReleaseInstanceList}" status="i" var="applicationReleaseInstance">
             <tr>
                 <td style="padding-bottom: 1em;">
-                    <div style="font-weight: bold; text-align: right; margin-bottom: 1em;">
+                    <h4>
                         <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
                             ${applicationReleaseInstance.releaseNumber}
                         </g:link>
-                    </div>
+                    </h4>
                     <div style="text-align: right;">
                         <g:formatDate type="date" style="short" date="${applicationReleaseInstance.dateCreated}"/>
                     </div>

@@ -16,7 +16,7 @@
         </p>
     </sec:ifNotLoggedIn>
 
-    <h2 class="sectionHeader">My Requests</h2>
+    <h2 class="sectionHeader">My Open Tasks</h2>
     <p>
         TODO
     </p>

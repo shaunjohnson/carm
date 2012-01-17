@@ -1,4 +1,4 @@
-<h2 class="sectionHeader">Pending Requests</h2>
+<h2 class="sectionHeader">Pending Tasks</h2>
 
 <h3>Releases</h3>
 <p>

@@ -1,6 +1,7 @@
 * {
     font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
     font-size: 12px;
+    font-weight: normal;
     line-height: 1.1em;
     margin: 0;
     padding: 0; /* SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
@@ -34,18 +35,35 @@ a:hover {
 
 h1 {
     color: #48802c;
+    font-weight: bold;
     font-size: 1.8em;
     margin: 0.3em 0 0.3em 0;
 }
 
 h2 { 
     font-size: 1.5em;
+    font-weight: bold;
     margin: 0.8em 0 0.3em 0;
 }
 
 h3 {
     font-size: 1.3em;
+    font-weight: bold;
     margin: 0.8em 0 0.3em 0;
+}
+
+h3 * {
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.1 em;
+    font-weight: bold;
+    margin: 0.3em 0;
+}
+
+h4 * {
+    font-weight: bold;
 }
 
 h3 a {
@@ -417,6 +435,10 @@ div.applicationName a {
 
 div.applicationName a:hover {
     text-decoration: underline;
+}
+
+.detailProp {
+    display: none;
 }
 
 /**
