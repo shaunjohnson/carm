@@ -1,5 +1,6 @@
 import carm.Application
 import carm.ApplicationDeployment
+import carm.enums.ApplicationReleaseState
 import carm.ApplicationReleaseTestState
 import carm.ApplicationType
 import carm.Module
@@ -350,7 +351,7 @@ class BootStrap {
                                         application = brokerApplication
                                         releaseNumber = '1.0.5'
                                         changeLog = 'Release broker application to fix message flow issue.'
-                                        releaseState = 'Submitted'
+                                        releaseState = ApplicationReleaseState.SUBMITTED
                                         testState = notTestedAppReleaseTestState
                                         moduleReleases = [
                                                 brokerModuleRelease105(ModuleRelease) {
@@ -392,7 +393,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.1.0'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Submitted'
+                                        releaseState = ApplicationReleaseState.SUBMITTED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease210(ModuleRelease) {
@@ -409,7 +410,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.0.9'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Completed'
+                                        releaseState = ApplicationReleaseState.SUBMITTED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease209(ModuleRelease) {
@@ -426,7 +427,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.0.8'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Completed'
+                                        releaseState = ApplicationReleaseState.COMPLETED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease208(ModuleRelease) {
@@ -443,7 +444,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.0.7'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Completed'
+                                        releaseState = ApplicationReleaseState.COMPLETED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease207(ModuleRelease) {
@@ -460,7 +461,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.0.6'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Completed'
+                                        releaseState = ApplicationReleaseState.COMPLETED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease206(ModuleRelease) {
@@ -477,7 +478,7 @@ class BootStrap {
                                         application = portalApplication
                                         releaseNumber = '2.0.5'
                                         changeLog = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
-                                        releaseState = 'Completed'
+                                        releaseState = ApplicationReleaseState.COMPLETED
                                         testState = testedNoErrorsAppReleaseTestState
                                         moduleReleases = [
                                                 adminPortletModuleRelease205(ModuleRelease) {

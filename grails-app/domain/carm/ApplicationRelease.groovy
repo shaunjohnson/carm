@@ -1,10 +1,12 @@
 package carm
 
+import carm.enums.ApplicationReleaseState
+
 class ApplicationRelease {
     String releaseNumber
     String changeLog
     String buildPath
-    String releaseState
+    ApplicationReleaseState releaseState
     ApplicationReleaseTestState testState
 
     Date dateCreated

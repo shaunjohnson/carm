@@ -1,5 +1,7 @@
 package carm
 
+import carm.enums.ApplicationReleaseState
+
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
@@ -20,7 +22,7 @@ class ApplicationReleaseService {
         log.debug "$prefix entered"
 
         ApplicationRelease applicationRelease = new ApplicationRelease(params)
-        applicationRelease.releaseState = "Submitted"
+        applicationRelease.releaseState = ApplicationReleaseState.DRAFT
         
         applicationRelease.application.modules.each { module ->
             applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))
