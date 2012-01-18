@@ -210,6 +210,40 @@ databaseChangeLog = {
 		}
 	}
 
+    changeSet(author: "shaun (generated)", id: "1326918113937-8") {
+        createTable(tableName: "application_release_history") {
+            column(autoIncrement: "true", name: "id", type: "BIGINT") {
+                constraints(nullable: "false", primaryKey: "true")
+            }
+
+            column(name: "version", type: "BIGINT") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "application_release_id", type: "BIGINT") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "comments", type: "LONGTEXT")
+
+            column(name: "date_created", type: "DATETIME") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "last_updated", type: "DATETIME") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "summary", type: "VARCHAR(255)") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "username", type: "VARCHAR(255)") {
+                constraints(nullable: "false")
+            }
+        }
+    }
+
 	changeSet(author: "shaun (generated)", id: "1326468103517-8") {
 		createTable(tableName: "application_release_test_state") {
 			column(autoIncrement: "true", name: "id", type: "BIGINT") {

@@ -10,8 +10,18 @@ import org.springframework.transaction.annotation.Transactional
 class ApplicationReleaseService {
     static transactional = false
 
+    def springSecurityService
+
     int count() {
         ApplicationRelease.count()
+    }
+
+    private void addToHistories(ApplicationRelease applicationRelease, String summary, String comments) {
+        applicationRelease.addToHistories(new ApplicationReleaseHistory(
+                summary: summary,
+                username: springSecurityService.authentication.name,
+                comments:  comments ?: ""
+        ))
     }
 
     @Transactional
@@ -27,6 +37,8 @@ class ApplicationReleaseService {
         applicationRelease.application.modules.each { module ->
             applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))
         }
+        
+        addToHistories(applicationRelease, "Created", null);
         
         applicationRelease.save()
 
@@ -63,6 +75,8 @@ class ApplicationReleaseService {
         log.debug "$prefix entered"
 
         applicationRelease.properties = params
+
+        addToHistories(applicationRelease, "Updated", null);
 
         log.debug "$prefix leaving"
     }

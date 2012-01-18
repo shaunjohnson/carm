@@ -23,9 +23,10 @@ class ApplicationRelease {
 
     static belongsTo = [application: Application]
 
-    static hasMany = [moduleReleases: ModuleRelease, deployments: ApplicationDeployment]
+    static hasMany = [moduleReleases: ModuleRelease, deployments: ApplicationDeployment, histories: ApplicationReleaseHistory]
 
     static mapping = {
+        sort "dateCreated":"desc"
         changeLog type: 'text'
     }
 }

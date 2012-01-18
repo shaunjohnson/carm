@@ -97,7 +97,7 @@
             <g:render template="applicationReleaseDeployments" model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
         <div id="tabs-3">
-            <p>TODO</p>
+            <g:render template="applicationReleaseHistory" model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
     </div>
 
