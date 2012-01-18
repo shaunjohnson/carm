@@ -23,7 +23,7 @@ class ApplicationRelease {
 
     static belongsTo = [application: Application]
 
-    static hasMany = [moduleReleases: ModuleRelease]
+    static hasMany = [moduleReleases: ModuleRelease, deployments: ApplicationDeployment]
 
     static mapping = {
         changeLog type: 'text'

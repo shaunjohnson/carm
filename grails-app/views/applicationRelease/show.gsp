@@ -84,43 +84,28 @@
         <g:showHideDetails sectionId="applicationReleaseDetails" entityName="$entityName"/>
     </div>
 
-    <g:if test="${applicationReleaseInstance?.moduleReleases?.size()}">
-        <h2>Modules</h2>
-
-        <div class="list">
-            <table style="width: 100%;">
-                <thead>
-                <tr>
-                    <th><g:message code="module.name.label" default="Name"/></th>
-                    <th><g:message code="module.systemComponents.label" default="System Components"/></th>
-                    <th><g:message code="module.system.label" default="System"/></th>
-                </tr>
-                </thead>
-                <tbody>
-                <g:each in="${applicationReleaseInstance?.moduleReleases.sort { it.name }}" var="moduleReleaseInstance">
-                    <tr>
-                        <td><g:link controller="module" action="show" id="${moduleReleaseInstance.module.id}">${moduleReleaseInstance.module?.encodeAsHTML()}</g:link></td>
-                        <td>
-                            <ul>
-                                <g:each in="${moduleReleaseInstance.module.systemComponents.sort { it.name }}" var="s">
-                                    <li>
-                                        <g:link controller="systemComponent" action="show"
-                                                id="${s?.id}">${s?.encodeAsHTML()}</g:link>
-                                    </li>
-                                </g:each>
-                            </ul>
-                        </td>
-                        <td>
-                            <g:link controller="system" action="show" id="${moduleReleaseInstance.module?.application?.system?.id}">
-                                ${moduleReleaseInstance.module?.application?.system?.encodeAsHTML()}
-                            </g:link>
-                        </td>
-                    </tr>
-                </g:each>
-                </tbody>
-            </table>
+    <div id="applicationReleaseTabs">
+        <ul>
+            <li><a href="#tabs-1">Modules</a></li>
+            <li><a href="#tabs-2">Deployments</a></li>
+            <li><a href="#tabs-3">History</a></li>
+        </ul>
+        <div id="tabs-1">
+            <g:render template="applicationReleaseModules" model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
-    </g:if>
+        <div id="tabs-2">
+            <g:render template="applicationReleaseDeployments" model="['applicationReleaseInstance': applicationReleaseInstance]"/>
+        </div>
+        <div id="tabs-3">
+            <p>TODO</p>
+        </div>
+    </div>
+
+    <script type='text/javascript'>
+        jQuery(function(){
+            jQuery('#applicationReleaseTabs').tabs();
+        });
+    </script>
 </div>
 </body>
 </html>
