@@ -35,6 +35,10 @@
             </td>
         </tr>
         <tr class="prop">
+            <td valign="top" class="name"><g:message code="applicationRelease.releaseState.label" default="Release State" /></td>
+            <td valign="top" class="value">${fieldValue(bean: applicationReleaseInstance, field: "releaseState")}</td>
+        </tr>
+        <tr class="prop">
             <td valign="top" class="name"><g:message code="applicationRelease.changeLog.label" default="Change Log" /></td>
             <td valign="top" class="value">${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}</td>
         </tr>

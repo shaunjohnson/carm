@@ -23,6 +23,7 @@
                     <g:message code="applicationRelease.application.label" default="Application"/>
                 </th>
                 <th><g:message code="applicationRelease.releaseNumber.label" default="Release Number"/></th>
+                <th><g:message code="applicationRelease.releaseState.label" default="Release State"/></th>
                 <th><g:message code="applicationRelease.changeLog.label" default="Change Log"/></th>
             </tr>
             </thead>
@@ -34,7 +35,8 @@
                             ${fieldValue(bean: applicationReleaseInstance, field: "application")}</g:link>
                     </td>
                     <td>${fieldValue(bean: applicationReleaseInstance, field: "releaseNumber")}</td>
-                    <td>${fieldValue(bean: applicationReleaseInstance, field: "changeLog")}</td>
+                    <td>${fieldValue(bean: applicationReleaseInstance, field: "releaseState")}</td>
+                    <td>${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}</td>
                 </tr>
             </g:each>
             </tbody>
