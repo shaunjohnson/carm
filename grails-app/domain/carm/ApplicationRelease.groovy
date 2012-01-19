@@ -29,4 +29,8 @@ class ApplicationRelease {
         sort "dateCreated":"desc"
         changeLog type: 'text'
     }
+
+    public String toString() {
+        return "${releaseNumber} : ${application}"
+    }
 }
