@@ -178,7 +178,7 @@ class CarmTagLib {
         }
         else if (domain instanceof SystemComponent) {
 //            if (Module.findAllByComponent(domain).size() == 0) {
-                out << body()
+            out << body()
 //            }
         }
         else {
@@ -205,7 +205,7 @@ class CarmTagLib {
             out << "</ul>"
         }
         else {
-            out << "No matching ACLs were found"
+            out << message(code: "projectDoesNotHaveAnyOwners.message", default: "This project does not have any owners.")
         }
     }
 
