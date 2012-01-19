@@ -15,8 +15,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <g:each in="${entry.value}" var="application">
-                    <tr>
+                <g:each in="${entry.value}" var="application" status="i">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
                             <g:link controller="application" action="show" id="${application.id}">
                                 ${application?.encodeAsHTML()}

@@ -8,8 +8,9 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${applicationReleaseInstance?.moduleReleases?.sort { it.module.name }}" var="moduleReleaseInstance">
-            <tr>
+        <g:each in="${applicationReleaseInstance?.moduleReleases?.sort { it.module.name }}" var="moduleReleaseInstance"
+            status="i">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>
                     <g:link controller="module" action="show" id="${moduleReleaseInstance.module.id}">
                         ${moduleReleaseInstance.module?.encodeAsHTML()}

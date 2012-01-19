@@ -25,6 +25,14 @@ body {
 	padding:20px;
 }
 
+/* These two rules ensure that links in tabs have the correct coloring and not the jQuery UI theme colors. */
+div.tab a {
+    color: rgb(0, 0, 204);
+}
+div.tab a:visited {
+    color: rgb(128, 0, 128);
+}
+
 a:link, a:visited {
     text-decoration: none;
 }

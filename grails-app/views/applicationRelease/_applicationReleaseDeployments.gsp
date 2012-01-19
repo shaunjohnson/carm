@@ -21,8 +21,8 @@
             </thead>
             <tbody>
             <g:each in="${applicationReleaseInstance?.deployments?.sort { it.completedDeploymentDate }?.reverse()}"
-                    var="deploymentInstance">
-                <tr>
+                    var="deploymentInstance" status="i">
+                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link controller="applicationDeployment" action="show" id="${deploymentInstance.id}">
                             ${deploymentInstance.deploymentState?.encodeAsHTML()}

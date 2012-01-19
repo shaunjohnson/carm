@@ -9,8 +9,9 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${applicationReleaseInstance?.histories?.sort { it.dateCreated }.reverse()}" var="historyInstance">
-            <tr>
+        <g:each in="${applicationReleaseInstance?.histories?.sort { it.dateCreated }.reverse()}" var="historyInstance"
+            status="i">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>
                     <g:formatDate date="${historyInstance.dateCreated}"/>
                 </td>

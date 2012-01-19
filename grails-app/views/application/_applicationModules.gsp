@@ -22,8 +22,8 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
-            <tr>
+        <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance" status="i">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>
                     <g:link controller="module" action="show" id="${moduleInstance.id}">
                         ${moduleInstance?.encodeAsHTML()}

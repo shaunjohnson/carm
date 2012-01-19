@@ -123,17 +123,17 @@
             </li>
         </ul>
 
-        <div id="tabs-1">
+        <div id="tabs-1" class="tab">
             <g:render template="applicationReleaseModules"
                       model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
 
-        <div id="tabs-2">
+        <div id="tabs-2" class="tab">
             <g:render template="applicationReleaseDeployments"
                       model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
 
-        <div id="tabs-3">
+        <div id="tabs-3" class="tab">
             <g:render template="applicationReleaseHistory"
                       model="['applicationReleaseInstance': applicationReleaseInstance]"/>
         </div>
