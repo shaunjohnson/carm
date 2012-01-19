@@ -1,40 +1,47 @@
 <%@ page import="carm.ApplicationRelease" %>
 
-<h2 class="sectionHeader">Releases</h2>
+<h2 class="sectionHeader">
+    <g:message code="releases.label" default="Releases"/>
+</h2>
 
 <div class="nav">
     <span class="menuButton">
         <g:link class="create" controller="applicationRelease" action="create"
-                params="['application.id': applicationInstance?.id]">Make a New Release</g:link>
+                params="['application.id': applicationInstance?.id]">
+            <g:message code="makeNewRelease.label" default="Make a New Release"/>
+        </g:link>
     </span>
 </div>
 
-<g:set var="applicationReleaseInstanceList" value="${ApplicationRelease.findAllByApplication(applicationInstance).sort{ it.dateCreated }.reverse()}"/>
+<g:set var="applicationReleases"
+       value="${applicationInstance.releases.sort{ it.dateCreated }.reverse()}"/>
 
-<g:if test="${applicationReleaseInstanceList?.size()}">
+<g:if test="${applicationReleases.size()}">
     <table>
         <tbody>
-        <g:each in="${applicationReleaseInstanceList}" status="i" var="applicationReleaseInstance">
+        <g:each in="${applicationReleases}" var="applicationRelease">
             <tr>
                 <td style="padding-bottom: 1em;">
                     <h4 class="applicationReleaseNumber">
-                        <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
-                            ${applicationReleaseInstance.releaseNumber}
+                        <g:link controller="applicationRelease" action="show" id="${applicationRelease.id}">
+                            ${applicationRelease.releaseNumber.encodeAsHTML()}
                         </g:link>
                     </h4>
                     <div style="margin: 0.5em 0;">
-                        <g:formatDate type="date" style="short" date="${applicationReleaseInstance.dateCreated}"/>
+                        <g:formatDate type="date" style="short" date="${applicationRelease.dateCreated}"/>
                     </div>
                     <div>
-                        ${applicationReleaseInstance.releaseState}
+                        ${applicationRelease.releaseState.encodeAsHTML()}
                     </div>
                 </td>
                 <td style="padding-bottom: 1em;">
-                    ${applicationReleaseInstance.changeLog}
+                    ${applicationRelease.changeLog.decodeHTML()}
                     <div class="buttons">
                         <span class="button">
                             <g:link controller="applicationDeployment" action="create"
-                                    params="['applicationRelease.id': applicationReleaseInstance.id]">Deploy this Release</g:link>
+                                    params="['applicationRelease.id': applicationRelease.id]">
+                                <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                            </g:link>
                         </span>
                     </div>
                 </td>
@@ -44,5 +51,7 @@
     </table>
 </g:if>
 <g:else>
-    No releases recorded yet
+    <p class="emphasis">
+        <g:message code="applicationHasNotBeenReleased.message" default="This application has not been released."/>
+    </p>
 </g:else>

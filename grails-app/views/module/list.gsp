@@ -6,9 +6,10 @@
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
-    <g:header domain="${moduleInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}" />
+    <g:header domain="${moduleInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -19,7 +20,8 @@
             <thead>
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'module.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description" title="${message(code: 'module.description.label', default: 'Description')}"/>
+                <g:sortableColumn property="description"
+                                  title="${message(code: 'module.description.label', default: 'Description')}"/>
                 <th><g:message code="module.type.label" default="Type"/></th>
                 <th><g:message code="module.application.label" default="Application"/></th>
             </tr>
@@ -27,15 +29,30 @@
             <tbody>
             <g:each in="${moduleInstanceList}" status="i" var="moduleInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td><g:link action="show" id="${moduleInstance.id}">${fieldValue(bean: moduleInstance, field: "name")}</g:link></td>
-                    <td>${fieldValue(bean: moduleInstance, field: "description")}</td>
-                    <td><g:link controller="moduleType" action="show" id="${moduleInstance.type.id}">${fieldValue(bean: moduleInstance, field: "type")}</g:link></td>
-                    <td><g:link controller="application" action="show" id="${moduleInstance.application.id}">${fieldValue(bean: moduleInstance, field: "application")}</g:link></td>
+                    <td>
+                        <g:link action="show" id="${moduleInstance.id}">
+                            ${fieldValue(bean: moduleInstance, field: "name")}
+                        </g:link>
+                    </td>
+                    <td>
+                        ${fieldValue(bean: moduleInstance, field: "description")}
+                    </td>
+                    <td>
+                        <g:link controller="moduleType" action="show" id="${moduleInstance.type.id}">
+                            ${fieldValue(bean: moduleInstance, field: "type")}
+                        </g:link>
+                    </td>
+                    <td>
+                        <g:link controller="application" action="show" id="${moduleInstance.application.id}">
+                            ${fieldValue(bean: moduleInstance, field: "application")}
+                        </g:link>
+                    </td>
                 </tr>
             </g:each>
             </tbody>
         </table>
     </div>
+
     <div class="paginateButtons">
         <g:paginate total="${moduleInstanceTotal}"/>
     </div>

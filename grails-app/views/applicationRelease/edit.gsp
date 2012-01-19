@@ -1,78 +1,95 @@
 <%@ page import="carm.ApplicationRelease" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="main" />
-    <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'ApplicationRelease')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" /></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
+    <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
 </head>
+
 <body>
 <div class="body">
-    <g:header domain="${applicationReleaseInstance}" />
+    <g:header domain="${applicationReleaseInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
     <g:hasErrors bean="${applicationReleaseInstance}">
         <div class="errors">
-            <g:renderErrors bean="${applicationReleaseInstance}" as="list" />
+            <g:renderErrors bean="${applicationReleaseInstance}" as="list"/>
         </div>
     </g:hasErrors>
 
     <g:form action="update" method="post">
-        <g:hiddenField name="id" value="${applicationReleaseInstance?.id}" />
-        <g:hiddenField name="version" value="${applicationReleaseInstance?.version}" />
+        <g:hiddenField name="id" value="${applicationReleaseInstance?.id}"/>
+        <g:hiddenField name="version" value="${applicationReleaseInstance?.version}"/>
         <div class="dialog">
             <table>
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <label for="application"><g:message code="applicationRelease.application.label" default="Application" /></label>
-                </td>
-                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                    ${applicationReleaseInstance?.application?.encodeAsHTML()}
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <label for="releaseNumber"><g:message code="applicationRelease.releaseNumber.label" default="Release Number"/></label>
-                </td>
-                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'releaseNumber', 'errors')}">
-                    <g:textField name="releaseNumber" maxlength="20" value="${applicationReleaseInstance?.releaseNumber}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <label for="buildPath"><g:message code="applicationRelease.buildPath.label" default="Build Path"/></label>
-                </td>
-                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildPath', 'errors')}">
-                    <g:textField name="buildPath" maxlength="20" value="${applicationReleaseInstance?.buildPath}"/>
-                    <br/>
-                    <g:formatSourceControl application="${applicationReleaseInstance.application}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                  <label for="changeLog"><g:message code="applicationRelease.changeLog.label" default="Change Log" /></label>
-                </td>
-                <td valign="top" class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
-                    <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
-                                           height="${grailsApplication.config.ui.richTextEditor.height}"
-                                           width="${grailsApplication.config.ui.richTextEditor.width}" />
-                </td>
-            </tr>
-            </tbody>
+                <tbody>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label>
+                            <g:message code="applicationRelease.application.label" default="Application"/>
+                        </label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
+                        ${applicationReleaseInstance?.application?.encodeAsHTML()}
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="releaseNumber">
+                            <g:message code="applicationRelease.releaseNumber.label" default="Release Number"/>
+                        </label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'releaseNumber', 'errors')}">
+                        <g:textField name="releaseNumber" maxlength="20"
+                                     value="${applicationReleaseInstance?.releaseNumber}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="buildPath">
+                            <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
+                        </label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildPath', 'errors')}">
+                        <g:textField name="buildPath" maxlength="20" value="${applicationReleaseInstance?.buildPath}"/>
+                        <br/>
+                        <g:formatSourceControl application="${applicationReleaseInstance.application}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <label for="changeLog">
+                            <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
+                        </label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
+                        <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
+                                               height="${grailsApplication.config.ui.richTextEditor.height}"
+                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                    </td>
+                </tr>
+                </tbody>
             </table>
         </div>
+
         <div class="buttons">
             <span class="button">
-                <g:link class="show" controller="application" action="show" id="${applicationReleaseInstance.application.id}">
+                <g:link class="show" controller="application" action="show"
+                        id="${applicationReleaseInstance.application.id}">
                     <g:message code="default.button.cancel.label" default="Cancel"/>
                 </g:link>
             </span>
             <span class="button">
-                <g:submitButton name="save" class="save" value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                <g:submitButton name="save" class="save"
+                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
             </span>
         </div>
     </g:form>

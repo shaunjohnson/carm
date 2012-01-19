@@ -3,9 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'ApplicationReleaseTestState.label', default: 'ApplicationReleaseTestState')}"/>
+    <g:set var="entityName"
+           value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
     <g:header domain="${applicationReleaseTestStateInstance}"/>
@@ -18,8 +20,12 @@
         <table class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="ApplicationReleaseTestState.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}</td>
+                <td valign="top" class="name">
+                    <g:message code="applicationReleaseTestState.description.label" default="Description"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}
+                </td>
             </tr>
 
             <tr class="prop detailProp">
@@ -27,12 +33,20 @@
             </tr>
 
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="ApplicationReleaseTestState.dateCreated.label" default="Date Created"/></td>
-                <td valign="top" class="value"><g:formatDate date="${applicationReleaseTestStateInstance?.dateCreated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="applicationReleaseTestState.dateCreated.label" default="Date Created"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${applicationReleaseTestStateInstance?.dateCreated}"/>
+                </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="ApplicationReleaseTestState.lastUpdated.label" default="Last Updated"/></td>
-                <td valign="top" class="value"><g:formatDate date="${applicationReleaseTestStateInstance?.lastUpdated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="applicationReleaseTestState.lastUpdated.label" default="Last Updated"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${applicationReleaseTestStateInstance?.lastUpdated}"/>
+                </td>
             </tr>
             </tbody>
             <sec:ifAllGranted roles="ROLE_ADMIN">
@@ -47,7 +61,8 @@
                             </span>
                             <g:ifNotInUse domain="${applicationReleaseTestStateInstance}">
                                 <span class="button">
-                                    <g:link class="delete" action="delete" id="${applicationReleaseTestStateInstance?.id}">
+                                    <g:link class="delete" action="delete"
+                                            id="${applicationReleaseTestStateInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
                                     </g:link>
                                 </span>

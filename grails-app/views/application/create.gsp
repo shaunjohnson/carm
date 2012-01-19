@@ -14,7 +14,6 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-
     <g:hasErrors bean="${applicationInstance}">
         <div class="errors">
             <g:renderErrors bean="${applicationInstance}" as="list"/>
@@ -27,7 +26,7 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="project"><g:message code="application.project.label" default="Project"/></label>
+                        <label for="project.id"><g:message code="application.project.label" default="Project"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
                         ${applicationInstance?.project?.encodeAsHTML()}
@@ -44,10 +43,11 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="type"><g:message code="application.type.label" default="Type"/></label>
+                        <label for="type.id"><g:message code="application.type.label" default="Type"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.type?.id}"/>
+                        <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id"
+                                  value="${applicationInstance?.type?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -65,10 +65,11 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlRepository"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
+                        <label for="sourceControlRepository.id"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
-                        <g:select name="sourceControlRepository.id" from="${carm.SourceControlRepository.list()}" optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
+                        <g:select name="sourceControlRepository.id" from="${carm.SourceControlRepository.list()}"
+                                  optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -86,10 +87,11 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="system"><g:message code="application.system.label" default="System"/></label>
+                        <label for="system.id"><g:message code="application.system.label" default="System"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id" value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
+                        <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id"
+                                  value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -111,7 +113,9 @@
                     <g:message code="default.button.cancel.label" default="Cancel"/>
                 </g:link>
             </span>
-            <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+            <span class="button">
+                <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+            </span>
         </div>
     </g:form>
 </div>

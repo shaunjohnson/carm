@@ -1,9 +1,13 @@
-<h2 class="sectionHeader">Modules</h2>
+<h2 class="sectionHeader">
+    <g:message code="modules.label" default="Modules"/>
+</h2>
 
 <div class="nav">
     <span class="menuButton">
         <g:link class="create" controller="module" action="create"
-                params="['application.id': applicationInstance?.id]">Add Module</g:link>
+                params="['application.id': applicationInstance?.id]">
+            <g:message code="addModule.label" default="Add Module"/>
+        </g:link>
     </span>
 </div>
 
@@ -20,13 +24,18 @@
         <tbody>
         <g:each in="${applicationInstance.modules.sort { it.name }}" var="moduleInstance">
             <tr>
-                <td><g:link controller="module" action="show" id="${moduleInstance.id}">${moduleInstance?.encodeAsHTML()}</g:link></td>
+                <td>
+                    <g:link controller="module" action="show" id="${moduleInstance.id}">
+                        ${moduleInstance?.encodeAsHTML()}
+                    </g:link>
+                </td>
                 <td>
                     <ul>
-                        <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
+                        <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="systemComponent">
                             <li>
-                                <g:link controller="systemComponent" action="show"
-                                        id="${s?.id}">${s?.encodeAsHTML()}</g:link>
+                                <g:link controller="systemComponent" action="show" id="${systemComponent?.id}">
+                                    ${systemComponent?.encodeAsHTML()}
+                                </g:link>
                             </li>
                         </g:each>
                     </ul>

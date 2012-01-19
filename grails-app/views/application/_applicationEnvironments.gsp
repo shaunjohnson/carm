@@ -1,5 +1,7 @@
 <%@ page import="carm.ApplicationDeployment" %>
-<h2 class="sectionHeader">Environments</h2>
+<h2 class="sectionHeader">
+    <g:message code="environments.label" default="Environments"/>
+</h2>
 
 <g:if test="${applicationInstance?.system?.environments?.size()}">
 <table style="width: 100%;">
@@ -16,7 +18,7 @@
             <td>
                 <g:if test="${deployment}">
                     <g:link controller="applicationRelease" action="show" id="${deployment.applicationRelease.id}">
-                        ${deployment.applicationRelease.releaseNumber}
+                        ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
                     </g:link>
                 </g:if>
             </td>
@@ -27,7 +29,9 @@
             </td>
             <td>
                 <g:if test="${deployment}">
-                    <g:link controller="applicationDeployment" action="show" id="${deployment.id}">Deployment Sheet</g:link>
+                    <g:link controller="applicationDeployment" action="show" id="${deployment.id}">
+                        <g:message code="viewDeployment.label" default="View Deployment"/>
+                    </g:link>
                 </g:if>
             </td>
         </tr>
@@ -36,12 +40,15 @@
     <tfoot>
     <tr>
         <td colspan="4" style="text-align: right;">
-            <g:link action="showFullHistory">(Show Full History)</g:link>
+            <g:link action="showFullHistory">(<g:message code="showFullHistory.label" default="Show Full History"/>)</g:link>
         </td>
     </tr>
     </tfoot>
 </table>
 </g:if>
 <g:else>
-Application not configured for a system
+    <p class="emphasis">
+        <g:message code="applicationNotConfiguredForSystem.message"
+                   default="This application is not configured to work with a system."/>
+    </p>
 </g:else>

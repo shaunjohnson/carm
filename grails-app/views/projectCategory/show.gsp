@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'ProjectCategory')}"/>
+    <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'Project Category')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
     <g:header domain="${projectCategoryInstance}"/>
@@ -18,8 +19,12 @@
         <table id="projectCategoryDetails" class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="projectCategory.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: projectCategoryInstance, field: "description")}</td>
+                <td valign="top" class="name">
+                    <g:message code="projectCategory.description.label" default="Description"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: projectCategoryInstance, field: "description")}
+                </td>
             </tr>
 
             <tr class="prop detailProp">
@@ -27,12 +32,20 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="projectCategory.dateCreated.label" default="Date Created"/></td>
-                <td valign="top" class="value"><g:formatDate date="${projectCategoryInstance?.dateCreated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="projectCategory.dateCreated.label" default="Date Created"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${projectCategoryInstance?.dateCreated}"/>
+                </td>
             </tr>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="projectCategory.lastUpdated.label" default="Last Updated"/></td>
-                <td valign="top" class="value"><g:formatDate date="${projectCategoryInstance?.lastUpdated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="projectCategory.lastUpdated.label" default="Last Updated"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${projectCategoryInstance?.lastUpdated}"/>
+                </td>
             </tr>
             </tbody>
             <sec:ifAllGranted roles="ROLE_ADMIN">
@@ -58,22 +71,30 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="projectCategoryDetails" entityName="$entityName"/>
+        <g:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}"/>
     </div>
 
-    <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name } }"/>
+    <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name }}"/>
 
-    <h2>Projects</h2>
+    <h2><g:message code="projects.label" default="Projects"/></h2>
+
     <div class="dialog">
         <g:if test="${projects.size()}">
             <ul>
                 <g:each in="${projects}" var="project">
-                    <li><g:link controller="project" action="show" id="${project.id}">${project?.encodeAsHTML()}</g:link></li>
+                    <li>
+                        <g:link controller="project" action="show" id="${project.id}">
+                            ${project?.encodeAsHTML()}
+                        </g:link>
+                    </li>
                 </g:each>
             </ul>
         </g:if>
         <g:else>
-            <p style="font-style: italic;">There are no projects in this category.</p>
+            <p class="emphasis">
+                <g:message code="projectCategoryDoesNotHaveAnyProjects.message"
+                           default="There are no projects in this category."/>
+            </p>
         </g:else>
     </div>
 </div>

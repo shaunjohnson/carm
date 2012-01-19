@@ -1,9 +1,13 @@
-<h2 class="sectionHeader">Applications</h2>
+<h2 class="sectionHeader">
+    <g:message code="applications.label" default="Applications"/>
+</h2>
 
 <div class="nav">
     <span class="menuButton">
         <g:link class="create" controller="application" action="create"
-                params="['project.id': projectInstance?.id]">Add Application</g:link>
+                params="['project.id': projectInstance?.id]">
+            <g:message code="addApplication.label" default="Add Application"/>
+        </g:link>
     </span>
 </div>
 
@@ -12,13 +16,19 @@
         <h3>${entry.key}</h3>
         <ul>
             <g:each in="${entry.value}" var="application">
-                <li><g:link controller="application" action="show" id="${application.id}">${application?.encodeAsHTML()}</g:link></li>
+                <li>
+                    <g:link controller="application" action="show" id="${application.id}">
+                        ${application?.encodeAsHTML()}
+                    </g:link>
+                </li>
             </g:each>
         </ul>
     </g:each>
-    </g:if>
+</g:if>
 <g:else>
-    <p>
-        This project does not have any applications.
+    <p class="emphasis">
+        <g:message code="projectDoesNotHaveAnyApplications.maessage"
+                   default="This project does not have any applications."/>
+
     </p>
 </g:else>

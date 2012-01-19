@@ -3,7 +3,11 @@
 <g:set var="action" value="${params.action}"/>
 <g:set var="controller" value="${params.controller}"/>
 
-<div class="applicationName"><a href="${createLink(uri: '/')}">Change And Release Management</a></div>
+<div class="applicationName">
+    <g:link uri="/">
+        <g:message code="carm.fullName.label" default="Change And Release Management"/>
+    </g:link>
+</div>
 
 <g:if test="${controller == 'administration'}">
     <g:pageHeader action="show" beanName="${pageName}"/>

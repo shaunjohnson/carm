@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'sourceControlRole.label', default: 'SourceControlRole')}"/>
+    <g:set var="entityName" value="${message(code: 'sourceControlRole.label', default: 'Source Control Role')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
     <g:header domain="${sourceControlRoleInstanceList}"/>
@@ -28,8 +29,10 @@
         <table>
             <thead>
             <tr>
-                <g:sortableColumn property="name" title="${message(code: 'sourceControlRole.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description" title="${message(code: 'sourceControlRole.description.label', default: 'Description')}"/>
+                <g:sortableColumn property="name"
+                                  title="${message(code: 'sourceControlRole.name.label', default: 'Name')}"/>
+                <g:sortableColumn property="description"
+                                  title="${message(code: 'sourceControlRole.description.label', default: 'Description')}"/>
             </tr>
             </thead>
             <tbody>
@@ -40,12 +43,15 @@
                             ${fieldValue(bean: sourceControlRoleInstance, field: "name")}
                         </g:link>
                     </td>
-                    <td>${fieldValue(bean: sourceControlRoleInstance, field: "description")}</td>
+                    <td>
+                        ${fieldValue(bean: sourceControlRoleInstance, field: "description")}
+                    </td>
                 </tr>
             </g:each>
             </tbody>
         </table>
     </div>
+
     <div class="paginateButtons">
         <g:paginate total="${sourceControlRoleInstanceTotal}"/>
     </div>

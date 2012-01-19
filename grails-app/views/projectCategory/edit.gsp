@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'ProjectCategory')}"/>
+    <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'Project Category')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
     <g:header domain="${projectCategoryInstance}"/>
@@ -27,7 +28,9 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name"><g:message code="projectCategory.name.label" default="Name"/></label>
+                        <label for="name">
+                            <g:message code="projectCategory.name.label" default="Name"/>
+                        </label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectCategoryInstance, field: 'name', 'errors')}">
                         <g:textField name="name" maxlength="50" value="${projectCategoryInstance?.name}"/>
@@ -35,15 +38,20 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description"><g:message code="projectCategory.description.label" default="Description"/></label>
+                        <label for="description">
+                            <g:message code="projectCategory.description.label" default="Description"/>
+                        </label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: projectCategoryInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${projectCategoryInstance?.description}"/>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: projectCategoryInstance, field: 'description', 'errors')}">
+                        <g:textArea name="description" cols="40" rows="5"
+                                    value="${projectCategoryInstance?.description}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
         <div class="buttons">
             <span class="button">
                 <g:link class="show" action="show" id="${projectCategoryInstance.id}">
@@ -51,7 +59,8 @@
                 </g:link>
             </span>
             <span class="button">
-                <g:submitButton name="save" class="save" value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                <g:submitButton name="save" class="save"
+                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
             </span>
         </div>
     </g:form>

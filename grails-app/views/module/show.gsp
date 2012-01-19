@@ -6,9 +6,10 @@
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
-    <g:header domain="${moduleInstance}" />
+    <g:header domain="${moduleInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -18,21 +19,32 @@
         <table id="moduleDetails" class="details">
             <tbody>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.application.label" default="Application"/></td>
+                <td valign="top" class="name">
+                    <g:message code="module.application.label" default="Application"/>
+                </td>
                 <td valign="top" class="value">
-                    <g:link controller="application" action="show"
-                            id="${moduleInstance?.application?.id}">${moduleInstance?.application?.encodeAsHTML()}</g:link>
-                    [<g:link controller="project" action="show"
-                             id="${moduleInstance?.application?.project?.id}">${moduleInstance?.application?.project?.encodeAsHTML()}</g:link>]
+                    <g:link controller="application" action="show" id="${moduleInstance?.application?.id}">
+                        ${moduleInstance?.application?.encodeAsHTML()}
+                    </g:link>
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.type.label" default="Type"/></td>
-                <td valign="top" class="value"><g:link controller="moduleType" action="show" id="${moduleInstance?.type?.id}">${moduleInstance?.type?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="name">
+                    <g:message code="module.type.label" default="Type"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:link controller="moduleType" action="show" id="${moduleInstance?.type?.id}">
+                        ${fieldValue(bean: moduleInstance, field: "type")}
+                    </g:link>
+                </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "description")}</td>
+                <td valign="top" class="name">
+                    <g:message code="module.description.label" default="Description"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: moduleInstance, field: "description")}
+                </td>
             </tr>
 
             <tr class="prop">
@@ -40,23 +52,28 @@
             </tr>
 
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.systemComponents.label" default="System Components" /></td>
+                <td valign="top" class="name">
+                    <g:message code="module.systemComponents.label" default="System Components"/>
+                </td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                    <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="s">
-                        <li>
-                            <g:link controller="systemComponent" action="show"
-                                id="${s?.id}">${s?.encodeAsHTML()}</g:link>
-                            [<g:link controller="system" action="show"
-                                    id="${s?.system?.id}">${s?.system?.encodeAsHTML()}</g:link>]
-                        </li>
-                    </g:each>
+                        <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="systemComponent">
+                            <li>
+                                <g:link controller="systemComponent" action="show" id="${systemComponent?.id}">
+                                    ${systemComponent?.encodeAsHTML()}
+                                </g:link>
+                            </li>
+                        </g:each>
                     </ul>
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="module.deployInstructions.label" default="Deploy Instructions"/></td>
-                <td valign="top" class="value">${fieldValue(bean: moduleInstance, field: "deployInstructions").decodeHTML()}</td>
+                <td valign="top" class="name">
+                    <g:message code="module.deployInstructions.label" default="Deploy Instructions"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: moduleInstance, field: "deployInstructions").decodeHTML()}
+                </td>
             </tr>
 
             <tr class="prop detailProp">
@@ -64,12 +81,20 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="module.dateCreated.label" default="Date Created"/></td>
-                <td valign="top" class="value"><g:formatDate date="${moduleInstance?.dateCreated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="module.dateCreated.label" default="Date Created"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${moduleInstance?.dateCreated}"/>
+                </td>
             </tr>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="module.lastUpdated.label" default="Last Updated"/></td>
-                <td valign="top" class="value"><g:formatDate date="${moduleInstance?.lastUpdated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="module.lastUpdated.label" default="Last Updated"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${moduleInstance?.lastUpdated}"/>
+                </td>
             </tr>
             </tbody>
             <tfoot class="detailProp">
@@ -91,7 +116,7 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="moduleDetails" entityName="$entityName"/>
+        <g:showHideDetails sectionId="moduleDetails" entityName="${entityName}"/>
     </div>
 </div>
 </body>

@@ -6,9 +6,10 @@
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div class="body">
-    <g:header domain="${applicationInstance}" />
+    <g:header domain="${applicationInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -18,20 +19,31 @@
         <table id="applicationDetails" class="details">
             <tbody>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.project.label" default="Project"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.project.label" default="Project"/></td>
                 <td valign="top" class="value">
-                    <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">${applicationInstance?.project?.encodeAsHTML()}</g:link>
+                    <g:link controller="project" action="show" id="${applicationInstance?.project?.id}">
+                        ${applicationInstance?.project?.encodeAsHTML()}
+                    </g:link>
                 </td>
             </tr>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.type.label" default="Type"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.type.label" default="Type"/>
+                </td>
                 <td valign="top" class="value">
-                    <g:link controller="applicationType" action="show" id="${applicationInstance?.type?.id}">${applicationInstance?.type?.encodeAsHTML()}</g:link>
+                    <g:link controller="applicationType" action="show" id="${applicationInstance?.type?.id}">
+                        ${applicationInstance?.type?.encodeAsHTML()}
+                    </g:link>
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.description.label" default="Description"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "description")}</td>
+                <td valign="top" class="name">
+                    <g:message code="application.description.label" default="Description"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationInstance, field: "description")}
+                </td>
             </tr>
 
             <tr class="prop detailProp">
@@ -39,13 +51,17 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.sourceControlRepository.label" default="Source Control Repository"/>
+                </td>
                 <td valign="top" class="value">
                     <g:formatSourceControl repository="${applicationInstance?.sourceControlRepository}"/>
                 </td>
             </tr>
             <tr class="prop">
-                <td valign="top" class="name"><g:message code="application.sourceControlPath.label" default="Source Control Path"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.sourceControlPath.label" default="Source Control Path"/>
+                </td>
                 <td valign="top" class="value">
                     <g:formatSourceControl application="${applicationInstance}"/>
                 </td>
@@ -56,7 +72,9 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.system.label" default="System"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.system.label" default="System"/>
+                </td>
                 <td valign="top" class="value">
                     <g:link controller="system" action="show" id="${applicationInstance?.system?.id}">
                         ${applicationInstance?.system?.encodeAsHTML()}
@@ -64,8 +82,12 @@
                 </td>
             </tr>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></td>
-                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "deployInstructions").decodeHTML()}</td>
+                <td valign="top" class="name">
+                    <g:message code="application.deployInstructions.label" default="Deploy Instructions"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationInstance, field: "deployInstructions").decodeHTML()}
+                </td>
             </tr>
 
             <tr class="prop detailProp">
@@ -73,22 +95,34 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.applicationRoles.label" default="Application Roles"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.applicationRoles.label" default="Application Roles"/>
+                </td>
                 <td valign="top" style="text-align: left;" class="value">
                     <g:if test="${applicationInstance.applicationRoles}">
                         <ul>
-                            <g:each in="${applicationInstance.applicationRoles.sort{ it.sourceControlUser.name }}" var="a">
-                                <li><g:link controller="applicationRole" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                            <g:each in="${applicationInstance.applicationRoles.sort { it.sourceControlUser.name }}"
+                                    var="applicationRole">
+                                <li>
+                                    <g:link controller="applicationRole" action="show" id="${applicationRole.id}">
+                                        ${applicationRole?.encodeAsHTML()}
+                                    </g:link>
+                                </li>
                             </g:each>
                         </ul>
                     </g:if>
                     <g:else>
-                        <div>None</div>
+                        <p class="emphasis">
+                            <g:message code="applicationDoesNotHaveAnyAssignedUsers.message"
+                                       default="This application does not have any assigned users."/>
+                        </p>
                     </g:else>
                     <div class="nav">
                         <span class="menuButton">
                             <g:link class="create" controller="applicationRole" action="create"
-                                    params="['application.id': applicationInstance?.id]">Add Application Role</g:link>
+                                    params="['application.id': applicationInstance?.id]">
+                                <g:message code="addApplicationRole.label" default="Add Application Role"/>
+                            </g:link>
                         </span>
                     </div>
                 </td>
@@ -99,12 +133,20 @@
             </tr>
 
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created"/></td>
-                <td valign="top" class="value"><g:formatDate date="${applicationInstance?.dateCreated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.dateCreated.label" default="Date Created"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${applicationInstance?.dateCreated}"/>
+                </td>
             </tr>
             <tr class="prop detailProp">
-                <td valign="top" class="name"><g:message code="application.lastUpdated.label" default="Last Updated"/></td>
-                <td valign="top" class="value"><g:formatDate date="${applicationInstance?.lastUpdated}"/></td>
+                <td valign="top" class="name">
+                    <g:message code="application.lastUpdated.label" default="Last Updated"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:formatDate date="${applicationInstance?.lastUpdated}"/>
+                </td>
             </tr>
             </tbody>
             <tfoot class="detailProp">
@@ -126,10 +168,13 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationDetails" entityName="$entityName"/>
+        <g:showHideDetails sectionId="applicationDetails" entityName=" ${entityName}"/>
     </div>
 
-    <h2 class="sectionHeader">Pending Tasks</h2>
+    <h2 class="sectionHeader">
+        <g:message code="pendingTasks.label" default="Pending Tasks"/>
+    </h2>
+
     <p>
         TODO
     </p>
@@ -150,7 +195,6 @@
         </tr>
         </tbody>
     </table>
-
 </div>
 </body>
 </html>
