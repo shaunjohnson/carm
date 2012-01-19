@@ -171,13 +171,7 @@
         <g:showHideDetails sectionId="applicationDetails" entityName=" ${entityName}"/>
     </div>
 
-    <h2 class="sectionHeader">
-        <g:message code="pendingTasks.label" default="Pending Tasks"/>
-    </h2>
-
-    <p>
-        TODO
-    </p>
+    <g:render template="pendingTasks" model="['applicationInstance': applicationInstance]"/>
 
     <table class="twoColumnLayout">
         <tbody>
