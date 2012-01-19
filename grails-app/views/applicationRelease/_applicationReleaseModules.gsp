@@ -8,7 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${applicationReleaseInstance?.moduleReleases.sort { it.name }}" var="moduleReleaseInstance">
+        <g:each in="${applicationReleaseInstance?.moduleReleases?.sort { it.module.name }}" var="moduleReleaseInstance">
             <tr>
                 <td>
                     <g:link controller="module" action="show" id="${moduleReleaseInstance.module.id}">

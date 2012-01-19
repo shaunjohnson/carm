@@ -26,10 +26,6 @@
                     <g:link controller="application" action="show" id="${applicationReleaseInstance?.application?.id}">
                         ${applicationReleaseInstance?.application?.encodeAsHTML()}
                     </g:link>
-                    [<g:link controller="project" action="show"
-                             id="${applicationReleaseInstance?.application?.project?.id}">
-                        ${applicationReleaseInstance?.application?.project?.encodeAsHTML()}
-                    </g:link>]
                 </td>
             </tr>
             <tr class="prop">
