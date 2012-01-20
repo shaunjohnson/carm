@@ -18,7 +18,7 @@ environments {
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
             username = "root"
-            password = "CARM123"
+            password = "mUwRe9t9m"
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
             properties {
                 maxActive = 50
@@ -46,7 +46,7 @@ environments {
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
             username = "root"
-            password = "CARM123"
+            password = "mUwRe9t9m"
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
             properties {
                 maxActive = 50
