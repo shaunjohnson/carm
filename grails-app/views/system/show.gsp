@@ -26,7 +26,7 @@
                     ${fieldValue(bean: systemInstance, field: "description")}
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="system.components.label" default="Components"/>
                 </td>
@@ -52,7 +52,7 @@
                     </sec:ifAllGranted>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="system.environments.label" default="Environments"/>
                 </td>
