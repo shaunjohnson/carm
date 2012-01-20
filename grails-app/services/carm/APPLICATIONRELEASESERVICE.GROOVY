@@ -20,8 +20,23 @@ class ApplicationReleaseService {
         applicationRelease.addToHistories(new ApplicationReleaseHistory(
                 summary: summary,
                 username: springSecurityService.authentication.name,
-                comments:  comments ?: ""
+                comments: comments ?: ""
         ))
+    }
+
+    List<ApplicationRelease> findAllPendingReleasesByProject(Project project) {
+        def releaseStates = [
+                ApplicationReleaseState.DRAFT,
+                ApplicationReleaseState.REJECTED,
+                ApplicationReleaseState.COMPLETED,
+                ApplicationReleaseState.ARCHIVED
+        ]
+
+        def applicationReleases = ApplicationRelease.findAll(
+                "from ApplicationRelease where releaseState not in (:releaseStates) and application.project = :project order by dateCreated asc",
+                [releaseStates: releaseStates, project: project])
+
+        return applicationReleases
     }
 
     @Transactional
@@ -33,13 +48,13 @@ class ApplicationReleaseService {
 
         ApplicationRelease applicationRelease = new ApplicationRelease(params)
         applicationRelease.releaseState = ApplicationReleaseState.DRAFT
-        
+
         applicationRelease.application.modules.each { module ->
             applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))
         }
-        
+
         addToHistories(applicationRelease, "Created", null);
-        
+
         applicationRelease.save()
 
         if (applicationRelease.hasErrors()) {

@@ -8,6 +8,7 @@ class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationReleaseService
     def applicationService
     def carmSecurityService
     def projectService
@@ -47,8 +48,11 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            [projectInstance: projectInstance,
-                    applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance)]
+            [
+                    projectInstance: projectInstance,
+                    applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
+                    pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance)
+            ]
         }
     }
 
