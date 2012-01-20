@@ -4,7 +4,8 @@ public enum SourceControlServerType {
     CVS("CVS"),
     Git("Git"),
     Mercurial("Mercurial"),
-    Subversion("Subversion")
+    Subversion("Subversion"),
+    TFS("Team Foundation Server")
 
     private String value
 
