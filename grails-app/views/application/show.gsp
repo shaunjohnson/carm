@@ -86,7 +86,7 @@
                     <g:message code="application.deployInstructions.label" default="Deploy Instructions"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: applicationInstance, field: "deployInstructions").decodeHTML()}
+                    ${fieldValue(bean: applicationInstance, field: "deployInstructions")?.decodeHTML()}
                 </td>
             </tr>
 

@@ -35,7 +35,7 @@
                     </div>
                 </td>
                 <td style="padding-bottom: 1em;">
-                    ${applicationRelease.changeLog.decodeHTML()}
+                    ${applicationRelease.changeLog?.decodeHTML()}
                     <div class="buttons">
                         <span class="button">
                             <g:link controller="applicationDeployment" action="create"
