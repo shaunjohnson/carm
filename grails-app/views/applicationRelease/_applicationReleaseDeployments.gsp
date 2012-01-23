@@ -1,4 +1,4 @@
-<g:if test="">
+<g:if test="${applicationReleaseInstance?.deployments?.size()}">
     <div class="list">
         <table style="width: 100%;">
             <thead>
