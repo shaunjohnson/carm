@@ -150,7 +150,7 @@
     </div>
 
     <g:render template="systemApplications"
-              model="['systemInstance': systemInstance, 'applicationsGrouped': applicationsGrouped]"/>
+              model="['systemInstance': systemInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
 </div>
 </body>
 </html>

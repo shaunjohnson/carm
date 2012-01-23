@@ -16,6 +16,8 @@
                 </thead>
                 <tbody>
                 <g:each in="${entry.value}" var="application" status="i">
+                    <g:set var="applicationDeployments" value="${latestDeployments[application]}"/>
+                    
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
                             <g:link controller="application" action="show" id="${application.id}">
@@ -23,8 +25,14 @@
                             </g:link>
                         </td>
                         <g:each var="environment" in="${systemInstance.environments}">
+                            <g:set var="deployment" value="${applicationDeployments[environment.name]}"/>
+
                             <td>
-                                &nbsp;
+                                <g:if test="${deployment}">
+                                    <g:link controller="applicationDeployment" action="show" id="${deployment.applicationDeploymentId}">
+                                        ${deployment.releaseNumber}
+                                    </g:link>
+                                </g:if>
                             </td>
                         </g:each>
                     </tr>

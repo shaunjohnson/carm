@@ -6,6 +6,7 @@ class SystemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationDeploymentService
     def applicationService
     def systemService
 
@@ -44,7 +45,11 @@ class SystemController {
             redirect(action: "list")
         }
         else {
-            [systemInstance: systemInstance, applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance)]
+            [
+                    systemInstance: systemInstance,
+                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance),
+                    latestDeployments: applicationDeploymentService.findAllLatestDeploymentsBySystem(systemInstance)
+            ]
         }
     }
 
