@@ -11,7 +11,7 @@ class ApplicationDeploymentService {
             eq("environment", environment)
             eq("applicationRelease.application", application)
             maxResults(1)
-            order("dateCreated", "desc")
+            order("completedDeploymentDate", "desc")
         }
 
         return results.size() ? results[0] : null
