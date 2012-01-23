@@ -9,10 +9,10 @@
                     <th>
                         ${entry.key.encodeAsHTML()}
                     </th>
-                    <th>
+                    <th style="width: 5em;">
                         Deployed
                     </th>
-                    <th>
+                    <th style="width: 10em;">
                         Deployment Status
                     </th>
                 </tr>

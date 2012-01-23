@@ -10,14 +10,18 @@
                         ${entry.key.encodeAsHTML()}
                     </th>
                     <g:each var="environment" in="${systemInstance.environments}">
-                        <th>${environment.name.encodeAsHTML()}</th>
+                        <th style="text-align: center; width: 5em;">
+                            <g:link controller="systemEnvironment" action="show" id="${environment.id}">
+                                ${environment.name.encodeAsHTML()}
+                            </g:link>
+                        </th>
                     </g:each>
                 </tr>
                 </thead>
                 <tbody>
                 <g:each in="${entry.value}" var="application" status="i">
                     <g:set var="applicationDeployments" value="${latestDeployments[application]}"/>
-                    
+
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
                             <g:link controller="application" action="show" id="${application.id}">
@@ -27,9 +31,10 @@
                         <g:each var="environment" in="${systemInstance.environments}">
                             <g:set var="deployment" value="${applicationDeployments[environment.name]}"/>
 
-                            <td>
+                            <td class="centered">
                                 <g:if test="${deployment}">
-                                    <g:link controller="applicationDeployment" action="show" id="${deployment.applicationDeploymentId}">
+                                    <g:link controller="applicationDeployment" action="show"
+                                            id="${deployment.applicationDeploymentId}">
                                         ${deployment.releaseNumber}
                                     </g:link>
                                 </g:if>
