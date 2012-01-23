@@ -47,4 +47,35 @@ class ApplicationDeploymentService {
 
         return results
     }
+
+    def findAllLatestDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
+        def results = [:]
+
+        Application.listOrderByType().each { application ->
+            def deployments = ApplicationDeployment.executeQuery("""
+                select ad.applicationRelease.id, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate), ad.deploymentState
+                from ApplicationDeployment ad
+                where ad.environment = :systemEnvironment and ad.applicationRelease.application = :application
+                group by ad.environment
+            """, [systemEnvironment: systemEnvironment, application: application])
+
+            deployments.each {
+                def applicationReleaseId = it[0]
+                def applicationDeploymentId = it[1]
+                def releaseNumber = it[2]
+                def completedDeploymentDate = it[3]
+                def deploymentState = it[4]
+
+                results[application] = [
+                        "applicationReleaseId": applicationReleaseId,
+                        "applicationDeploymentId": applicationDeploymentId,
+                        "releaseNumber": releaseNumber,
+                        "completedDeploymentDate": completedDeploymentDate,
+                        "deploymentState": deploymentState
+                ]
+            }
+        }
+
+        return results
+    }
 }

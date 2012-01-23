@@ -6,6 +6,8 @@ class SystemEnvironmentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationService
+    def applicationDeploymentService
     def systemService
     def systemEnvironmentService
 
@@ -51,7 +53,11 @@ class SystemEnvironmentController {
             redirect(action: "list")
         }
         else {
-            [systemEnvironmentInstance: systemEnvironmentInstance]
+            [
+                    systemEnvironmentInstance: systemEnvironmentInstance,
+                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemEnvironmentInstance.system),
+                    latestDeployments: applicationDeploymentService.findAllLatestDeploymentsBySystemEnvironment(systemEnvironmentInstance)
+            ]
         }
     }
 

@@ -81,6 +81,9 @@
         </table>
         <g:showHideDetails sectionId="systemEnvironmentDetails" entityName="${entityName}"/>
     </div>
+
+    <g:render template="systemEnvironmentApplications"
+              model="['systemEnvironmentInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
 </div>
 </body>
 </html>
