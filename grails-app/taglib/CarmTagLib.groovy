@@ -93,6 +93,13 @@ class CarmTagLib {
     }
 
     /**
+     * Generates a link button using the same parameters that are used with links.
+     */
+    def button = { attrs, body ->
+        out << "<button class='button' onclick='window.location=\"" << createLink(attrs) << "\"'>" << body() << "</button>"
+    }
+
+    /**
      * Formats a Date using a short format. This ia a helper taglib that makes it possible to control the format of
      * dates (not date and time) from a central location.
      */

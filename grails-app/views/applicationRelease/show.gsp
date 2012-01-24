@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationRelease; carm.ModuleRelease" %>
+<%@ page import="carm.enums.ApplicationReleaseState; carm.ApplicationRelease; carm.ModuleRelease" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -14,6 +14,15 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
+    <div class="buttons">
+        <g:if test="${applicationReleaseInstance.releaseState == ApplicationReleaseState.COMPLETED}">
+            <g:button controller="applicationDeployment" action="create"
+                      params="['applicationRelease.id': applicationReleaseInstance.id]">
+                <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+            </g:button>
+        </g:if>
+    </div>
 
     <div class="dialog">
         <table id="applicationReleaseDetails" class="details">
@@ -90,18 +99,12 @@
                                 <g:message code="default.button.delete.label" default="Delete"/>
                             </g:link>
                         </span>
-                        <span class="button">
-                            <g:link controller="applicationDeployment" action="create"
-                                    params="['applicationRelease.id': applicationReleaseInstance.id]">
-                                <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-                            </g:link>
-                        </span>
                     </div>
                 </td>
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationReleaseDetails" entityName=" ${entityName}"/>
+        <g:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
     </div>
 
     <div id="applicationReleaseTabs">

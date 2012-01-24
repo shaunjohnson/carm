@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationRelease" %>
+<%@ page import="carm.enums.ApplicationReleaseState; carm.ApplicationRelease" %>
 
 <h2 class="sectionHeader">
     <g:message code="releases.label" default="Releases"/>
@@ -14,12 +14,12 @@
 </div>
 
 <g:set var="applicationReleases"
-       value="${applicationInstance.releases.sort{ it.dateCreated }.reverse()}"/>
+       value="${applicationInstance.releases.sort { it.dateCreated }.reverse()}"/>
 
 <g:if test="${applicationReleases.size()}">
     <table>
         <tbody>
-        <g:each in="${applicationReleases}" var="applicationRelease">
+        <g:each in="${applicationReleases}" var="applicationRelease" status="i">
             <tr>
                 <td style="padding-bottom: 1em;">
                     <h4 class="applicationReleaseNumber">
@@ -27,9 +27,11 @@
                             ${applicationRelease.releaseNumber.encodeAsHTML()}
                         </g:link>
                     </h4>
+
                     <div style="margin: 0.5em 0;">
                         <g:formatDateOnly date="${applicationRelease.dateCreated}"/>
                     </div>
+
                     <div>
                         ${applicationRelease.releaseState.encodeAsHTML()}
                     </div>
@@ -38,14 +40,21 @@
                     ${applicationRelease.changeLog?.decodeHTML()}
                     <div class="buttons">
                         <span class="button">
-                            <g:link controller="applicationDeployment" action="create"
-                                    params="['applicationRelease.id': applicationRelease.id]">
-                                <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-                            </g:link>
+                            <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
+                                <g:button controller="applicationDeployment" action="create"
+                                          params="['applicationRelease.id': applicationRelease.id]">
+                                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                                </g:button>
+                            </g:if>
                         </span>
                     </div>
                 </td>
             </tr>
+            <g:if test="${(i + 1) < applicationReleases.size()}">
+                <tr>
+                    <td colspan="2"><hr class="divider"/></td>
+                </tr>
+            </g:if>
         </g:each>
         </tbody>
     </table>

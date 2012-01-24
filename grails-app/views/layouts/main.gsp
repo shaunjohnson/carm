@@ -33,6 +33,8 @@
                 jQuery('#delete-dialog').data('link', this).dialog('open');
                 return false;
             });
+
+            jQuery("button.button").button();
         });
     </script>
 </head>
@@ -43,7 +45,7 @@
 <div class="clearing"></div>
 
 <div class="footer">
-    <hr style="margin: 0 1em;"/>
+    <hr class="divider" style="margin: 0 1em;"/>
     <g:message code="carm.copyright.label" default="Change And Release Management 2011"/>
 </div>
 
