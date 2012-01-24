@@ -51,7 +51,7 @@ class CarmTagLib {
         def uri = attrs.uri
 
         if (!isFirst) {
-            out << '<span class="spacer"> &gt; </span>'
+            out << '<span class="spacer"> &raquo; </span>'
         }
 
         out << link(uri: uri, controller: controller, action: action, id: id, title: title) { text.encodeAsHTML() }
