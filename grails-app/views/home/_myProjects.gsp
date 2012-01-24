@@ -1,6 +1,11 @@
 <%@ page import="carm.Project" %>
 <h2 class="sectionHeader">
     <g:message code="myProjects.label" default="My Projects"/>
+    <span class="actions">
+        <g:link controller="project" action="list">
+            <g:message code="browseAllProjects.label" default="Browse All Projects"/>
+        </g:link>
+    </span>
 </h2>
 
 <g:each in="${projectCategoryList}" var="projectCategory" status="projectCategoryIndex">

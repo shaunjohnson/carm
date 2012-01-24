@@ -1,6 +1,11 @@
 <%@ page import="carm.ApplicationDeployment" %>
 <h2 class="sectionHeader">
     <g:message code="environments.label" default="Environments"/>
+    <span class="actions">
+        <g:link action="showFullHistory">
+            <g:message code="showFullHistory.label" default="Show Full History"/>
+        </g:link>
+    </span>
 </h2>
 
 <g:if test="${applicationInstance?.system?.environments?.size()}">
@@ -37,13 +42,6 @@
         </tr>
     </g:each>
     </tbody>
-    <tfoot>
-    <tr>
-        <td colspan="4" style="text-align: right;">
-            <g:link action="showFullHistory">(<g:message code="showFullHistory.label" default="Show Full History"/>)</g:link>
-        </td>
-    </tr>
-    </tfoot>
 </table>
 </g:if>
 <g:else>

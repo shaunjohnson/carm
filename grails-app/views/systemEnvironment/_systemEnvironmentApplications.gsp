@@ -9,7 +9,7 @@
                     <th>
                         ${entry.key.encodeAsHTML()}
                     </th>
-                    <th style="width: 5em;">
+                    <th style="width: 7em;">
                         Deployed
                     </th>
                     <th style="width: 10em;">

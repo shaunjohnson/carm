@@ -1,15 +1,12 @@
 <h2 class="sectionHeader">
     <g:message code="applications.label" default="Applications"/>
-</h2>
-
-<div class="nav">
-    <span class="menuButton">
+    <span class="actions">
         <g:link class="create" controller="application" action="create"
                 params="['project.id': projectInstance?.id]">
             <g:message code="addApplication.label" default="Add Application"/>
         </g:link>
     </span>
-</div>
+</h2>
 
 <g:if test="${applicationsGrouped?.size()}">
     <g:each in="${applicationsGrouped}" var="entry">

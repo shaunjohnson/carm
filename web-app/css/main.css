@@ -495,6 +495,7 @@ a.showHideDetails {
     background: -o-linear-gradient(#FAFAFA, #EAEAEA);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
     background: linear-gradient(#FAFAFA, #EAEAEA);
+    background-color: #F8F8F8;
     height: 35px;
     position: relative;
     z-index: 10;
@@ -534,12 +535,17 @@ a.showHideDetails {
 /**
  * Other Elements
  */
-h2.sectionHeader {
+.sectionHeader {
     background-color: #F8F8F8;
     border: 1px solid #c5c5c5;
     border-radius: 5px;
     box-shadow: 2px 2px 3px #ccc;
     padding: 0.5em 0.7em;
+}
+
+.sectionHeader span.actions {
+    float: right;
+    padding-top: 2px;
 }
 
 .detailProp {

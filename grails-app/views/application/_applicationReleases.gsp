@@ -2,16 +2,13 @@
 
 <h2 class="sectionHeader">
     <g:message code="releases.label" default="Releases"/>
-</h2>
-
-<div class="nav">
-    <span class="menuButton">
+    <span class="actions">
         <g:link class="create" controller="applicationRelease" action="create"
                 params="['application.id': applicationInstance?.id]">
             <g:message code="makeNewRelease.label" default="Make a New Release"/>
         </g:link>
     </span>
-</div>
+</h2>
 
 <g:set var="applicationReleases"
        value="${applicationInstance.releases.sort { it.dateCreated }.reverse()}"/>

@@ -13,6 +13,11 @@
 
     <h2 class="sectionHeader">
         <g:message code="myOpenTasks.label" default="My Open Tasks"/>
+        <span class="actions">
+            <g:link controller="requests" action="list">
+                <g:message code="browseAllRequests.label" default="Browse All Requests"/>
+            </g:link>
+        </span>
     </h2>
 
     <p class="emphasis">
@@ -30,20 +35,6 @@
             </td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-            <td>
-                <g:link controller="project" action="list">
-                    <g:message code="browseAllProjects.label" default="Browse All Projects"/>
-                </g:link>
-            </td>
-            <td>
-                <g:link controller="system" action="list">
-                    <g:message code="browseAllSystems.label" default="Browse All Systems"/>
-                </g:link>
-            </td>
-        </tr>
-        </tfoot>
     </table>
 </div>
 </body>
