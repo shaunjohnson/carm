@@ -1,8 +1,9 @@
 * {
-    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", sans-serif;
-    font-size: 12px;
+    color: #333;
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    font-size: 13px;
     font-weight: normal;
-    line-height: 1.1em;
+    line-height: 1.4;
     margin: 0;
     padding: 0; /* SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
 }
@@ -22,13 +23,14 @@ body {
 }
 
 #grailsLogo {
-	padding:20px;
+    padding: 20px;
 }
 
 /* These two rules ensure that links in tabs have the correct coloring and not the jQuery UI theme colors. */
 div.tab a {
     color: rgb(0, 0, 204);
 }
+
 div.tab a:visited {
     color: rgb(128, 0, 128);
 }
@@ -37,19 +39,22 @@ a:link, a:visited {
     text-decoration: none;
 }
 
+a {
+    color: rgb(65, 131, 196);
+}
+
 a:hover {
     text-decoration: underline;
 }
 
 h1 {
-    color: #48802c;
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin: 0.3em 0 0.3em 0;
 }
 
-h2 { 
-    font-size: 1.5em;
+h2 {
+    font-size: 1.3em;
     font-weight: bold;
     margin: 0.8em 0 0.3em 0;
 }
@@ -97,8 +102,9 @@ input, select, textarea {
     margin: 2px 0;
     padding: 2px 4px;
 }
+
 select {
-   padding: 2px 2px 2px 0;
+    padding: 2px 2px 2px 0;
 }
 
 strong {
@@ -106,9 +112,9 @@ strong {
 }
 
 textarea {
-	width: 250px;
-	height: 150px;
-	vertical-align: top;
+    width: 250px;
+    height: 150px;
+    vertical-align: top;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -120,8 +126,11 @@ p {
 }
 
 .body {
-    float: left;
-    margin: 0 15px 10px 15px;
+    margin: 0 auto;
+    width: 900px;
+
+    /*float: left;*/
+    /*margin: 0 15px 10px 15px;*/
     min-height: 40em;
 }
 
@@ -142,10 +151,10 @@ p {
 hr.divider {
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 /* NAVIGATION MENU */
@@ -177,17 +186,21 @@ hr.divider {
     font-size: 0.9em;
     padding: 0 5px;
 }
+
 .menuButton a {
     padding: 4px 6px;
 }
+
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
     padding-left: 25px;
 }
+
 .menuButton a.list {
     background: url(../images/skin/database_table.png) center left no-repeat;
     padding-left: 25px;
 }
+
 .menuButton a.create {
     background: url(../images/skin/database_add.png) center left no-repeat;
     padding-left: 25px;
@@ -214,12 +227,14 @@ div.errors {
     margin: 10px 0 5px 0;
     padding: 5px 0 5px 0;
 }
+
 div.errors ul {
     list-style: none;
     padding: 0;
 }
+
 div.errors li {
-	background: url(../images/skin/exclamation.png) 8px 0 no-repeat;
+    background: url(../images/skin/exclamation.png) 8px 0 no-repeat;
     line-height: 16px;
     padding-left: 30px;
 }
@@ -227,9 +242,11 @@ div.errors li {
 td.errors select {
     border: 1px solid red;
 }
+
 td.errors input {
     border: 1px solid red;
 }
+
 td.errors textarea {
     border: 1px solid red;
 }
@@ -243,11 +260,13 @@ table {
 
 table.details {
     border: 1px solid #ccc;
+    width: 100%;
 }
 
 tr {
     border: 0;
 }
+
 td, th {
     /*font: 11px verdana, arial, helvetica, sans-serif;*/
     line-height: 12px;
@@ -255,6 +274,7 @@ td, th {
     text-align: left;
     vertical-align: top;
 }
+
 th {
     background: #fff url(../images/skin/shadow.jpg);
     color: #333;
@@ -262,9 +282,11 @@ th {
     line-height: 17px;
     padding: 2px 6px;
 }
+
 th * {
     font-weight: bold;
 }
+
 th a:link, th a:visited, th a:hover {
     color: #333;
     /*display: block;*/
@@ -272,12 +294,15 @@ th a:link, th a:visited, th a:hover {
     text-decoration: none;
     width: 100%;
 }
+
 th.asc a, th.desc a {
     background: no-repeat right;
 }
+
 th.asc a {
     background-image: url(../images/skin/sorted_asc.gif);
 }
+
 th.desc a {
     background-image: url(../images/skin/sorted_desc.gif);
 }
@@ -285,6 +310,7 @@ th.desc a {
 .odd {
     background: #f7f7f7;
 }
+
 .even {
     background: #fff;
 }
@@ -293,10 +319,13 @@ th.desc a {
 
 .list table {
     border-collapse: collapse;
+    width: 100%;
 }
+
 .list th, .list td {
     border-left: 1px solid #ddd;
 }
+
 .list th:hover, .list tr:hover {
     background: #b2d1ff;
 }
@@ -312,6 +341,7 @@ th.desc a {
     overflow: hidden;
     padding: 10px 3px;
 }
+
 .paginateButtons a {
     background: #fff;
     border: 1px solid #ccc;
@@ -323,6 +353,7 @@ th.desc a {
     margin: 0 3px;
     padding: 2px 6px;
 }
+
 .paginateButtons span {
     padding: 2px 3px;
 }
@@ -340,12 +371,14 @@ th.desc a {
 .prop {
     padding: 5px;
 }
+
 .prop .name {
     color: #888;
     text-align: left;
     width: 15%;
     white-space: nowrap;
 }
+
 .prop .value {
     text-align: left;
     width: 85%;
@@ -372,6 +405,7 @@ th.desc a {
     overflow: visible;
     padding: 2px 6px;
 }
+
 .buttons input {
     border: 1px solid #ccc;
     padding: 5px;
@@ -381,15 +415,18 @@ th.desc a {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+
 .buttons a.edit, .buttons input.edit {
     background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     font-weight: bold;
     padding-left: 28px;
 }
+
 .buttons a {
     margin-left: 3px;
     text-decoration: none;
@@ -399,7 +436,7 @@ th.desc a {
  * Two column layout
  */
 .twoColumnLayout {
-    min-width: 50em;
+    width: 100%;
 }
 
 .twoColumnLayout .layoutColumnFirst, .twoColumnLayout .layoutColumnLast {
@@ -444,10 +481,52 @@ a.showHideDetails {
     margin: 0.5em;
 }
 
-div#menuBlock {
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #c5c5c5;
-    height: 23px;
+/*
+ * Menu block
+ */
+#topMenu {
+    background: linear-gradient(#FAFAFA, #EAEAEA);
+    background: -moz-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -ms-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA), color-stop(100%, #EAEAEA));
+    background: -webkit-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -o-linear-gradient(#FAFAFA, #EAEAEA);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
+    background: linear-gradient(#FAFAFA, #EAEAEA);
+    height: 35px;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid #CACACA;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0;
+
+    padding-top: 8px;
+}
+
+#topMenu a {
+    color: rgb(34, 34, 34);
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 0;
+    text-decoration: none;
+}
+
+#topMenu a:hover {
+    color: rgb(65, 131, 196);
+}
+
+#topMenu ul {
+    float: left;
+    line-height: 26px;
+    list-style: outside none none;
+    margin: 0 0 0 20px;
+}
+
+#topMenu li {
+    float: left;
+    margin: 0 20px 0 0;
 }
 
 /**
@@ -458,119 +537,9 @@ h2.sectionHeader {
     border: 1px solid #c5c5c5;
     border-radius: 5px;
     box-shadow: 2px 2px 3px #ccc;
-    padding: 0.7em 1.2em;
-}
-
-div.applicationName {
-    color: #63934C;
-    font-size: 1.2em;
-    margin: 0.5em 0 0.3em 0;
-}
-
-div.applicationName a {
-    color: #63934C;
-    text-decoration: none;
-}
-
-div.applicationName a:hover {
-    text-decoration: underline;
+    padding: 0.5em 0.7em;
 }
 
 .detailProp {
     display: none;
-}
-
-/**
- * Multi Level Drop Down Menu 3.0
- * Corey Hart @ http://www.codenothing.com
- */
-#multi-ddm {
-    clear: both;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-}
-
-#multi-ddm * {
-
-}
-
-#multi-ddm li {
-    float: left;
-    margin: 0;
-}
-
-#multi-ddm li li {
-	float: none;
-}
-
-#multi-ddm li a {
-	display: block;
-	width: 100px;
-	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	text-decoration: none;
-	color: #232323;
-	font-weight: bold;
-	background-color: #f1f1f1;
-	border-left: 1px solid transparent;
-	border-right: 1px solid transparent;
-}
-
-#multi-ddm li ul a {
-	width: 152px;
-	padding: 5px;
-	border: 1px solid #545454;
-	border-top: none;
-	background-color: #c5c5c5;
-	text-align: left;
-}
-
-#multi-ddm li a.parent-hover {
-	background-color: #c5c5c5;
-	border-left: 1px solid #545454;
-	border-right: 1px solid #545454;
-}
-
-#multi-ddm li ul {
-	display: none;
-	list-style: none;
-	position: absolute;
-	margin: 0;
-	z-index: 90;
-	padding: 0;
-}
-
-#multi-ddm li ul li a.first {
-	border-top: 1px solid #545454;
-}
-
-#multi-ddm li ul li a.child-hover1 {
-	background-color: #f1f1f1;
-}
-
-#multi-ddm li ul li a.child-hover2 {
-	background-color: black;
-	color: white;
-}
-
-#multi-ddm li ul li a.child-hover3 {
-	background-color: purple;
-	color: white;
-}
-
-#multi-ddm li ul li a.child-hover4 {
-	background-color: blue;
-	color: white;
-}
-
-#multi-ddm li ul li ul {
-	margin: -26px 0 0 163px;
-	position: absolute;
-}
-
-#multi-ddm span {
-	float: right;
 }

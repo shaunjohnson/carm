@@ -8,11 +8,8 @@
     <g:javascript library="application"/>
     <g:javascript library="jquery" plugin="jquery"/>
     <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
-    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.multi-ddm.min.js')}"></script>
     <script type='text/javascript'>
         jQuery(function () {
-            jQuery('#multi-ddm').dropDownMenu({timer:500, parentMO:'parent-hover', childMO:'child-hover1'});
-
             jQuery("#delete-dialog").dialog({
                 autoOpen:false,
                 resizable:false,
