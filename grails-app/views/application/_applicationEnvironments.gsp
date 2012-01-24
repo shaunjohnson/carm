@@ -24,7 +24,7 @@
             </td>
             <td>
                 <g:if test="${deployment}">
-                    <g:formatDate type="date" style="short" date="${deployment.completedDeploymentDate}"/>
+                    <g:formatDateOnly date="${deployment.completedDeploymentDate}"/>
                 </g:if>
             </td>
             <td>

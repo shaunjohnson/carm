@@ -34,10 +34,10 @@
                         </g:link>
                     </td>
                     <td>
-                        <g:formatDate type="date" style="short" date="${deploymentInstance.requestedDeploymentDate}"/>
+                        <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
                     </td>
                     <td>
-                        <g:formatDate type="date" style="short" date="${deploymentInstance.completedDeploymentDate}"/>
+                        <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
                     </td>
                 </tr>
             </g:each>

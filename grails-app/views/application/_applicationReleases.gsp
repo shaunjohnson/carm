@@ -28,7 +28,7 @@
                         </g:link>
                     </h4>
                     <div style="margin: 0.5em 0;">
-                        <g:formatDate type="date" style="short" date="${applicationRelease.dateCreated}"/>
+                        <g:formatDateOnly date="${applicationRelease.dateCreated}"/>
                     </div>
                     <div>
                         ${applicationRelease.releaseState.encodeAsHTML()}

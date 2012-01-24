@@ -93,6 +93,16 @@ class CarmTagLib {
     }
 
     /**
+     * Formats a Date using a short format. This ia a helper taglib that makes it possible to control the format of
+     * dates (not date and time) from a central location.
+     */
+    def formatDateOnly = { attrs ->
+        def date = attrs.date
+
+        out << '<span style="white-space: nowrap;">' << formatDate(type: "date", style: "medium", date: date) << '</span>'
+    }
+
+    /**
      * Formats a SourceControlRepository as a link.
      *
      * attrs.application - Application instance

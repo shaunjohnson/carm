@@ -39,8 +39,7 @@
                             <g:if test="${applicationDeployment?.applicationDeploymentId}">
                                 <g:link controller="applicationDeployment" action="show"
                                         id="${applicationDeployment.applicationDeploymentId}">
-                                    <g:formatDate type="date" style="short"
-                                                  date="${applicationDeployment.completedDeploymentDate}"/>
+                                    <g:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
                                 </g:link>
                             </g:if>
                         </td>
