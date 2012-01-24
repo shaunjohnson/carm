@@ -7,7 +7,7 @@
     <g:layoutHead/>
     <g:javascript library="application"/>
     <g:javascript library="jquery" plugin="jquery"/>
-    <jqui:resources themeCss="/carm/jquery-ui/themes/south-street/jquery-ui-1.8.15.custom.css"/>
+    <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.multi-ddm.min.js')}"></script>
     <script type='text/javascript'>
         jQuery(function () {
