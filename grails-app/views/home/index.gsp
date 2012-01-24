@@ -23,57 +23,10 @@
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <h2 class="sectionHeader">
-                    <g:message code="myProjects.label" default="My Projects"/>
-                </h2>
-
-                <g:each in="${projectCategoryList}" var="projectCategory">
-                    <g:set var="projects" value="${Project.findAllByCategory(projectCategory).sort { it.name }}"/>
-
-                    <g:if test="${projects.size()}">
-                        <div style="margin: 0.5em 0;">
-                            <h3>
-                                <g:link controller="projectCategory" action="show" id="${projectCategory.id}">
-                                    ${projectCategory.encodeAsHTML()}
-                                </g:link>
-                            </h3>
-                            <ul>
-                                <g:each in="${projects}" var="projectInstance">
-                                    <li>
-                                        <g:link controller="project" action="show" id="${projectInstance.id}">
-                                            ${projectInstance.encodeAsHTML()}
-                                        </g:link>
-                                    </li>
-                                </g:each>
-                            </ul>
-                        </div>
-                    </g:if>
-                </g:each>
+                <g:render template="myProjects" model="[projectCategoryList: projectCategoryList"/>
             </td>
             <td class="layoutColumnLast">
-                <h2 class="sectionHeader">
-                    <g:message code="myEnvironments.label" default="My Environments"/>
-                </h2>
-                <g:each in="${systemInstanceList}" var="systemInstance">
-                    <div style="margin: 0.5em 0;">
-                        <h3>
-                            <g:link controller="system" action="show" id="${systemInstance.id}">
-                                ${systemInstance.encodeAsHTML()}
-                            </g:link>
-                        </h3>
-                        <g:each in="${systemInstance.environments}" var="systemEnvironment" status="i">
-                            <g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">
-                                ${systemEnvironment.encodeAsHTML()}
-                            </g:link><g:if test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
-                        </g:each>
-                        <div style="margin: 0.5em 0;">
-                            <g:link controller="applicationDeployment" action="upcomingDeployments"
-                                    params="[systemId: systemInstance.id]">
-                                <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
-                            </g:link>
-                        </div>
-                    </div>
-                </g:each>
+                <g:render template="mySystems" model="[systemInstanceList: systemInstanceList"/>
             </td>
         </tr>
         </tbody>
