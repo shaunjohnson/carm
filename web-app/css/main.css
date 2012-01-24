@@ -496,14 +496,13 @@ a.showHideDetails {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
     background: linear-gradient(#FAFAFA, #EAEAEA);
     background-color: #F8F8F8;
-    height: 35px;
-    position: relative;
-    z-index: 10;
     border-bottom: 1px solid #CACACA;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 0;
 
+    height: 35px;
+    margin: 0;
     padding-top: 8px;
+    position: relative;
 }
 
 #topMenu a {
@@ -536,10 +535,19 @@ a.showHideDetails {
  * Other Elements
  */
 .sectionHeader {
+    background: linear-gradient(#FAFAFA, #EAEAEA);
+    background: -moz-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -ms-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA), color-stop(100%, #EAEAEA));
+    background: -webkit-linear-gradient(#FAFAFA, #EAEAEA);
+    background: -o-linear-gradient(#FAFAFA, #EAEAEA);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
+    background: linear-gradient(#FAFAFA, #EAEAEA);
     background-color: #F8F8F8;
-    border: 1px solid #c5c5c5;
+    border: 1px solid #EAEAEA;
     border-radius: 5px;
-    box-shadow: 2px 2px 3px #ccc;
+    border-bottom: 1px solid #CACACA;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 0.5em 0.7em;
 }
 
