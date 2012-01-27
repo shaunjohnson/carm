@@ -5,11 +5,6 @@
 
 <g:if test="${controller == 'administration'}">
     <g:pageHeader action="show" beanName="${pageName}"/>
-
-    <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="administration" text="Administration"/>
-    </div>
 </g:if>
 <g:elseif test="${controller == 'application'}">
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
@@ -17,13 +12,11 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="application" action="list" title="Show All Applications" text="Applications"/>
+            <g:headerLink controller="application" action="list" title="Show All Applications" text="Applications" isFirst="true"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.project}" id="${domain.project.id}"/>
+            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.project}" id="${domain.project.id}" isFirst="true"/>
 
             <g:if test="${action == 'show'}">
                 <g:headerLink controller="application" action="show" title="Show Application" text="${domain.name}" id="${domain.id}"/>

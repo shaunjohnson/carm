@@ -2,6 +2,7 @@
     <div style="margin: 0 auto; width: 900px;">
         <div>
             <g:link uri="/" style="font-size: 1.5em;">
+                <img src="${resource(dir: 'images', file: 'CARM_29x20.gif')}" width="29" height="20" alt="Logo"/>
                 CARM
             </g:link>
         </div>
