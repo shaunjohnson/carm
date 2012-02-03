@@ -4,12 +4,12 @@
 <g:set var="controller" value="${params.controller}"/>
 
 <g:if test="${controller == 'administration'}">
-    <g:pageHeader action="show" beanName="${pageName}"/>
+    <g:pageHeaderLabel action="show" beanName="${pageName}"/>
 </g:if>
 <g:elseif test="${controller == 'application'}">
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:if test="${action == 'list'}">
@@ -40,7 +40,7 @@
 <g:elseif test="${controller == 'applicationDeployment'}">
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
 
-    <g:pageHeader action="${action}"
+    <g:pageHeaderLabel action="${action}"
                   beanName="${domain?.applicationRelease?.application?.name} - Release ${domain?.applicationRelease?.releaseNumber}"
                   entityName="${entityName}"/>
 
@@ -78,7 +78,7 @@
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.application?.name} - Release ${domain?.releaseNumber}"
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.application?.name} - Release ${domain?.releaseNumber}"
                   entityName="${entityName}"/>
 
     <div class="breadcrumbs">
@@ -114,7 +114,7 @@
     <g:set var="entityName"
            value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -139,7 +139,7 @@
 <g:elseif test="${controller == 'applicationType'}">
     <g:set var="entityName" value="${message(code: 'applicationType.label', default: 'Application Type')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -162,12 +162,12 @@
     </div>
 </g:elseif>
 <g:elseif test="${controller ==~ /.*home/}">
-    <g:pageHeader action="show" beanName="${pageName}"/>
+    <g:pageHeaderLabel action="show" beanName="${pageName}"/>
 </g:elseif>
 <g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:if test="${action == 'list'}">
@@ -197,7 +197,7 @@
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -221,7 +221,7 @@
 <g:elseif test="${controller == 'project'}">
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:if test="${action != 'list'}">
@@ -246,7 +246,7 @@
 <g:elseif test="${controller == 'projectCategory'}">
     <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'Project Category')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -270,9 +270,9 @@
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlRepository'}">
     <g:set var="entityName"
-           value="${message(code: 'sourceControlRepositorye.label', default: 'Source Control Repository')}"/>
+           value="${message(code: 'sourceControlRepository.label', default: 'Source Control Repository')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -303,7 +303,7 @@
 <g:elseif test="${controller == 'sourceControlRole'}">
     <g:set var="entityName" value="${message(code: 'sourceControlRole.label', default: 'Source Control Role')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -327,7 +327,7 @@
 <g:elseif test="${controller == 'sourceControlServer'}">
     <g:set var="entityName" value="${message(code: 'sourceControlServer.label', default: 'Source Control Server')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -351,7 +351,7 @@
 <g:elseif test="${controller == 'sourceControlUser'}">
     <g:set var="entityName" value="${message(code: 'sourceControlUser.label', default: 'Source Control User')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
@@ -382,7 +382,7 @@
 <g:elseif test="${controller == 'system'}">
     <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:if test="${action != 'list'}">
@@ -406,7 +406,7 @@
 <g:elseif test="${controller == 'systemComponent'}">
     <g:set var="entityName" value="${message(code: 'systemComponent.label', default: 'System Component')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
@@ -437,7 +437,7 @@
 <g:elseif test="${controller == 'systemEnvironment'}">
     <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'System Environment')}"/>
 
-    <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+    <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
         <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>

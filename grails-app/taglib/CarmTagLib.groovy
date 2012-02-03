@@ -78,7 +78,7 @@ class CarmTagLib {
      * attrs.entityName - Name of the domain/bean class
      * attrs.beanName - Name of the bean displayed on the show view
      */
-    def pageHeader = { attrs ->
+    def pageHeaderLabel = { attrs ->
         def action = attrs.action
         def entityName = attrs.entityName
         def beanName = attrs.beanName
