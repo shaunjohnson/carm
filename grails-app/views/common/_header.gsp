@@ -34,7 +34,8 @@
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
 
     <g:pageHeaderLabel action="${action}"
-                       beanName="${domain?.applicationRelease?.application?.name} - Release ${domain?.applicationRelease?.releaseNumber}"
+                       beanName="${message(code: 'pageHeader.applicationDeployment.label',
+                               args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.environment ])}"
                        entityName="${entityName}"/>
 
     <bc:breadcrumbs>
@@ -62,7 +63,8 @@
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
-    <g:pageHeaderLabel action="${action}" beanName="${domain?.application?.name} - Release ${domain?.releaseNumber}"
+    <g:pageHeaderLabel action="${action}"
+                       beanName="${message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber])}"
                        entityName="${entityName}"/>
 
     <bc:breadcrumbs>
