@@ -97,6 +97,9 @@
         <g:showHideDetails sectionId="projectDetails" entityName="${entityName}"/>
     </div>
 
+    <g:render template="pendingTasks"
+              model="[projectInstance: projectInstance, pendingReleases: pendingReleases]"/>
+
     <table class="twoColumnLayout">
         <tbody>
         <tr>
@@ -104,11 +107,6 @@
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="pendingTasks"
-                          model="[projectInstance: projectInstance, pendingReleases: pendingReleases]"/>
-
-                <div>&nbsp;</div>
-
                 <g:render template="projectActivity" model="[activityList: activityList]"/>
             </td>
         </tr>
