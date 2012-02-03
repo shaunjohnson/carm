@@ -4,7 +4,7 @@ import carm.ApplicationRelease
 import carm.ApplicationReleaseTestState
 import carm.Module
 import carm.SystemComponent
-import carm.SystemEnvironment
+
 import carm.SourceControlRepository
 import carm.System
 import carm.ProjectCategory
@@ -28,46 +28,6 @@ class CarmTagLib {
         def pageName = attrs.pageName
 
         out << render(template: "/common/header", model: [domain: domain, pageName: pageName])
-    }
-
-    /**
-     * Renders a link within the breadcrumbs prefixed by the default link separator. If isFirst is set to true then
-     * the link separator is suppressed.
-     *
-     * attrs.isFirst - Flag indicating whether the link is the first. Default is  false.
-     * attrs.controller - Name of controller
-     * attrs.action - Name of action
-     * attrs.title - Link title
-     * attrs.text - Link text. Will be encoded as HTML.
-     * attrs.uri - Link URI
-     */
-    def breadcrumbLink = { attrs ->
-        def isFirst = attrs.isFirst ?: false
-        def controller = attrs.controller
-        def action = attrs.action
-        def id = attrs.id
-        def title = attrs.title
-        def text = attrs.text
-        def uri = attrs.uri
-
-        if (!isFirst) {
-            out << '<span class="spacer"> &raquo; </span>'
-        }
-
-        out << link(uri: uri, controller: controller, action: action, id: id, title: title) { text.encodeAsHTML() }
-    }
-
-    /**
-     * Renders breadcrumb text prefixed by the default link separator.
-     *
-     * attrs.code - Message code
-     * attrs.code - Message args
-     */
-    def breadcrumbText = { attrs ->
-        def code = attrs.code
-        def args = attrs.args
-
-        out << '<span class="spacer"> &raquo; </span>' << message(code: code, args: args)
     }
 
     /**

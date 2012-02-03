@@ -11,104 +11,83 @@
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="application" action="list" title="Show All Applications" text="Applications"
-                          isFirst="true"/>
+            <bc:listApplications isFirst="true"/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
-
-            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.project}"
-                          id="${domain.project.id}"/>
+            <bc:listProjects isFirst="true"/>
+            <bc:showProject project="${domain.project}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="application" action="show" title="Show Application" text="${domain.name}"
-                              id="${domain.id}"/>
+                <bc:showApplication application="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="application" action="show" title="Show Application" text="${domain.name}"
-                              id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showApplication application="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationDeployment'}">
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
 
     <g:pageHeaderLabel action="${action}"
-                  beanName="${domain?.applicationRelease?.application?.name} - Release ${domain?.applicationRelease?.releaseNumber}"
-                  entityName="${entityName}"/>
+                       beanName="${domain?.applicationRelease?.application?.name} - Release ${domain?.applicationRelease?.releaseNumber}"
+                       entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="applicationDeployment" action="list" title="Show All Application Deployments"
-                          text="Application Deployments"/>
+            <bc:listApplicationDeployments isFirst="true"/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="project" action="show" title="Show Project"
-                          text="${domain?.applicationRelease?.application?.project}"
-                          id="${domain?.applicationRelease?.application?.project?.id}"/>
-
-            <g:breadcrumbLink controller="application" action="show" title="Show Application"
-                          text="${domain?.applicationRelease?.application?.name}"
-                          id="${domain?.applicationRelease?.application?.id}"/>
+            <bc:listProjects isFirst="true"/>
+            <bc:showProject project="${domain.applicationRelease.application.project}"/>
+            <bc:showApplication application="${domain.applicationRelease.application}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="applicationDeployment" action="show" title="Show Application Deployment"
-                              text="${domain.applicationRelease.releaseNumber}" id="${domain.id}"/>
+                <bc:showApplicationDeployment applicationDeployment="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="applicationDeployment" action="show" title="Show Application Deployment"
-                              text="${domain.releaseNumber}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showApplicationDeployment applicationDeployment="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationRelease'}">
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.application?.name} - Release ${domain?.releaseNumber}"
-                  entityName="${entityName}"/>
+                       entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="applicationRelease" action="list" title="Show All Application Releases"
-                          text="Application Releases" isFirst="true"/>
+            <bc:listApplicationReleases isFirst="true"/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
-
-            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
-                          id="${domain.application.project.id}"/>
-
-            <g:breadcrumbLink controller="application" action="show" title="Show Application"
-                          text="${domain.application.name}" id="${domain.application.id}"/>
+            <bc:listProjects isFirst="true"/>
+            <bc:showProject project="${domain.application.project}"/>
+            <bc:showApplication application="${domain.application}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="applicationRelease" action="show" title="Show Application Release"
-                              text="${domain.releaseNumber}" id="${domain.id}"/>
+                <bc:showApplicationRelease applicationRelease="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="applicationRelease" action="show" title="Show Application Release"
-                              text="${domain.releaseNumber}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showApplicationRelease applicationRelease="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationReleaseTestState'}">
     <g:set var="entityName"
@@ -116,50 +95,44 @@
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="administration" text="Administration"/>
-        <g:breadcrumbLink controller="applicationReleaseTestState" action="list"
-                      title="Show All Application Release Test States" text="Application Release Test States"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listApplicationReleaseTestStates/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="applicationReleaseTestState" action="show"
-                          title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
+            <bc:link controller="applicationReleaseTestState" action="show"
+                     title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="applicationReleaseTestState" action="show"
-                          title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:link controller="applicationReleaseTestState" action="show"
+                     title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationType'}">
     <g:set var="entityName" value="${message(code: 'applicationType.label', default: 'Application Type')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="administration" text="Administration"/>
-        <g:breadcrumbLink controller="applicationType" action="list" title="Show All Application Types"
-                      text="Application Types"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listApplicationTypes/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
-                          id="${domain.id}"/>
+            <bc:showApplicationType applicationType="${domain}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
-                          id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:showApplicationType applicationType="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller ==~ /.*home/}">
     <g:pageHeaderLabel action="show" beanName="${pageName}"/>
@@ -169,104 +142,91 @@
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="module" action="list" title="Show All Modules" text="Modules" isFirst="true"/>
+            <bc:listModules isFirst="true"/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
-                          id="${domain.application.project.id}" isFirst="true"/>
-            <g:breadcrumbLink controller="application" action="show" title="Show Application"
-                          text="${domain.application.name}" id="${domain.application.id}"/>
+            <bc:showProject project="${domain.application.project}" isFirst="true"/>
+            <bc:showApplication application="${domain.application}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="module" action="show" title="Show Module" text="${domain.name}"
-                              id="${domain.id}"/>
+                <bc:showModule module="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="module" action="show" title="Show Module" text="${domain.name}"
-                              id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showModule module="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="administration" text="Administration"/>
-        <g:breadcrumbLink controller="moduleType" action="list" title="Show All Module Types" text="Module Types"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listModuleTypes/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
-                          id="${domain.id}"/>
+            <bc:showModuleType moduleType="${domain}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
-                          id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:showModuleType moduleType="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'project'}">
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
+    <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
-            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
+            <bc:listProjects isFirst="true"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.name}"
-                              id="${domain.id}"/>
+                <bc:showProject project="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.name}"
-                              id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showProject project="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
 
         </g:if>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'projectCategory'}">
     <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'Project Category')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="administration" text="Administration"/>
-        <g:breadcrumbLink controller="projectCategory" action="list" title="Show All Project Categories"
-                      text="Project Categories"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listProjectCategories/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
-                          id="${domain.id}"/>
+            <bc:showProjectCategory projectCategory="${domain}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
-                          id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:showProjectCategory projectCategory="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlRepository'}">
     <g:set var="entityName"
@@ -274,194 +234,168 @@
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="sourceControlRepository" action="list"
-                          title="Show All Source Control Repositories" text="Source Control Repositories"/>
+            <bc:listSourceControlRepositories/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
-                          text="${domain.server.name}" id="${domain.server.id}"/>
+            <bc:showSourceControlServer sourceControlServer="${domain}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
-                              text="${domain.name}" id="${domain.id}"/>
+                <bc:showSourceControlRepository sourceControlRepository="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
-                              text="${domain.name}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showSourceControlRepository sourceControlRepository="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlRole'}">
     <g:set var="entityName" value="${message(code: 'sourceControlRole.label', default: 'Source Control Role')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="sourceControlRole" action="list" title="Show All Source Control Roles"
-                      text="Source Control Roles"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listSourceControlRoles/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="sourceControlRole" action="show" title="Show Source Control Role"
-                          text="${domain.name}" id="${domain.id}"/>
+            <bc:showSourceControlRole sourceControlRole="${domain}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="sourceControlRole" action="show" title="Show Source Control Role"
-                          text="${domain.name}" id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:showSourceControlRole sourceControlRole="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlServer'}">
     <g:set var="entityName" value="${message(code: 'sourceControlServer.label', default: 'Source Control Server')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
-        <g:breadcrumbLink controller="sourceControlServer" action="list" title="Show All Source Control Servers"
-                      text="Source Control Servers"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listSourceControlServers/>
 
         <g:if test="${action == 'show'}">
-            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
-                          text="${domain.name}" id="${domain.id}"/>
+            <bc:showSourceControlServer sourceControlServer="${domain}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+            <bc:createLabel entityName="${entityName}"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
-                          text="${domain.name}" id="${domain.id}"/>
-            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+            <bc:showSourceControlServer sourceControlServer="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
         </g:elseif>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'sourceControlUser'}">
     <g:set var="entityName" value="${message(code: 'sourceControlUser.label', default: 'Source Control User')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="sourceControlUser" action="list" title="Show All Source Control Users"
-                          text="Source Control Users"/>
+            <bc:listSourceControlUsers/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
-                          text="${domain.server.name}" id="${domain.server.id}"/>
+            <bc:showSourceControlServer sourceControlServer="${domain.server}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="sourceControlUser" action="show" title="Show Source Control User"
-                              text="${domain.name}" id="${domain.id}"/>
+                <bc:showSourceControlUser sourceControlUser="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="sourceControlUser" action="show" title="Show Source Control User"
-                              text="${domain.name}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showSourceControlUser sourceControlUser="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'system'}">
     <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
+    <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
-            <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
+            <bc:listSystems isFirst="true"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.name}"
-                              id="${domain.id}"/>
+                <bc:showSystem system="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.name}"
-                              id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showSystem system="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:if>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemComponent'}">
     <g:set var="entityName" value="${message(code: 'systemComponent.label', default: 'System Component')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
-
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="systemComponent" action="list" title="Show All System Components"
-                          text="Systems Components"/>
+            <bc:listSystemComponents/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.system.name}"
-                          id="${domain.system.id}"/>
+            <bc:listSystems isFirst="true"/>
+            <bc:showSystem system="${domain.system}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="systemComponent" action="show" title="Show System Component"
-                              text="${domain.name}" id="${domain.id}"/>
+                <bc:showSystemComponent systemComponent="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="systemComponent" action="show" title="Show System Component"
-                              text="${domain.name}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showSystemComponent systemComponent="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemEnvironment'}">
     <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'System Environment')}"/>
 
     <g:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
-    <div class="breadcrumbs">
-        <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
-
+    <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
-            <g:breadcrumbLink controller="systemEnvironment" action="list" title="Show All System Environments"
-                          text="Systems Environments"/>
+            <bc:listSystemEnvironments/>
         </g:if>
         <g:else>
-            <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.system.name}"
-                          id="${domain.system.id}"/>
+            <bc:listSystems isFirst="true"/>
+            <bc:showSystem system="${domain.system}"/>
 
             <g:if test="${action == 'show'}">
-                <g:breadcrumbLink controller="systemEnvironment" action="show" title="Show System Environment"
-                              text="${domain.name}" id="${domain.id}"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
+                <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:breadcrumbLink controller="systemEnvironment" action="show" title="Show System Environment"
-                              text="${domain.name}" id="${domain.id}"/>
-                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
         </g:else>
-    </div>
+    </bc:breadcrumbs>
 </g:elseif>
