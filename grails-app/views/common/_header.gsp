@@ -1,5 +1,3 @@
-<%@ page import="carm.Application; carm.ApplicationType; carm.Module; carm.ModuleType; carm.Project; carm.ProjectCategory; carm.SystemComponent; carm.SystemEnvironment; carm.SourceControlRepository; carm.SourceControlServer" %>
-
 <g:set var="action" value="${params.action}"/>
 <g:set var="controller" value="${params.controller}"/>
 

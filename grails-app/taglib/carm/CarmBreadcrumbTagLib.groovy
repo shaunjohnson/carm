@@ -3,11 +3,18 @@ package carm
 class CarmBreadcrumbTagLib {
     static namespace = 'bc'
 
+    /**
+     * Renders an Adminsitration link.
+     */
     def administration = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "administration", text: "Administration", isFirst: isFirst)
+        out << link(controller: "administration", isFirst: isFirst,
+                text: message(code: "administration.label"))
     }
 
+    /**
+     * Renders a breadcrumbs section.
+     */
     def breadcrumbs = { attrs, body ->
         out << '<div class="breadcrumbs">' << body() << '</div>'
     }
@@ -52,217 +59,350 @@ class CarmBreadcrumbTagLib {
         out << '<span class="spacer"> &raquo; </span>' << message(code: code, args: args)
     }
 
+    /**
+     * Renders a create link.
+     */
     def createLabel = { attrs ->
         def entityName = attrs.entityName
         def isFirst = attrs.isFirst
         out << text(code: "default.create.label", args: [entityName], isFirst: isFirst)
     }
 
+    /**
+     * Renders an edit link.
+     */
     def editLabel = { attrs ->
         def entityName = attrs.entityName
         def isFirst = attrs.isFirst
         out << text(code: "default.edit.label", args: [entityName], isFirst: isFirst)
     }
 
+    /**
+     * Renders a list applications link.
+     */
     def listApplications = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "application", action: "list", title: "Show All Applications", text: "Applications",
-                isFirst: isFirst)
+        out << link(controller: "application", action: "list", isFirst: isFirst,
+                title: message(code: "showAllApplications.label"),
+                text: message(code: "applications.label"))
     }
 
+    /**
+     * Renders a list application deployments link.
+     */
     def listApplicationDeployments = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationDeployment", action: "list", title: "Show All Application Deployments",
-                text: "Application Deployments", isFirst: isFirst)
+        out << link(controller: "applicationDeployment", action: "list", isFirst: isFirst,
+                title: message(code: "showAllApplicationDeployments.label"),
+                text: message(code: "applicationDeployments.label"))
     }
 
+    /**
+     * Renders a list application releases link.
+     */
     def listApplicationReleases = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationRelease", action: "list", title: "Show All Application Releases",
-                text: "Application Releases", isFirst: isFirst)
+        out << link(controller: "applicationRelease", action: "list", isFirst: isFirst,
+                title: message(code: "showAllApplicationReleases.label"),
+                text: message(code: "applicationReleases.label"))
     }
 
+    /**
+     * Renders a list application release test states link.
+     */
     def listApplicationReleaseTestStates = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationReleaseTestState", action: "list", title: "Show All Application Release Test States",
-                text: "Application Release Test States", isFirst: isFirst)
+        out << link(controller: "applicationReleaseTestState", action: "list", isFirst: isFirst,
+                title: message(code: "showAllApplicationReleaseTestStates.label"),
+                text: message(code: "applicationReleaseTestStates.label"))
     }
 
+    /**
+     * Renders a list application types link.
+     */
     def listApplicationTypes = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationType", action: "list", title: "Show All Application Types",
-                text: "Application Types", isFirst: isFirst)
+        out << link(controller: "applicationType", action: "list", isFirst: isFirst,
+                title: message(code: "showAllApplicationTypes.label"),
+                text: message(code: "applicationTypes.label"))
     }
 
+    /**
+     * Renders a list modules link.
+     */
     def listModules = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "module", action: "list", title: "Show All Modules", text: "Modules",
-                isFirst: isFirst)
+        out << link(controller: "module", action: "list", isFirst: isFirst,
+                title: message(code: "showAllModules.label"),
+                text: message(code: "modules.label"))
     }
 
+    /**
+     * Renders a list module types link.
+     */
     def listModuleTypes = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "moduleType", action: "list", title: "Show All Module Types", text: "Module Types",
-                isFirst: isFirst)
+        out << link(controller: "moduleType", action: "list", isFirst: isFirst,
+                title: message(code: "showAllModuleTypes.label"),
+                text: message(code: "moduleTypes.label"))
     }
 
+    /**
+     * Renders a list projects link.
+     */
     def listProjects = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "project", action: "list", title: "Show All Projects", text: "Projects",
-                isFirst: isFirst)
+        out << link(controller: "project", action: "list", isFirst: isFirst,
+                title: message(code: "showAllProjects.label"),
+                text: message(code: "projects.label"))
     }
 
+    /**
+     * Renders a list project categories link.
+     */
     def listProjectCategories = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "projectCategory", action: "list", title: "Show All Project Categories",
-                text: "Project Categories", isFirst: isFirst)
+        out << link(controller: "projectCategory", action: "list", isFirst: isFirst,
+                title: message(code: "showAllProjectCategories.label"),
+                text: message(code: "projectCategories.label"))
     }
 
+    /**
+     * Renders a list source control repositories link.
+     */
     def listSourceControlRepositories = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlRepository", action: "list", title: "Show All Source Control Repositories",
-                text: "Source Control Repositories", isFirst: isFirst)
+        out << link(controller: "sourceControlRepository", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSourceControlRepositories.label"),
+                text: message(code: "sourceControlRepositories.label"))
     }
 
+    /**
+     * Renders a list source control roles link.
+     */
     def listSourceControlRoles = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlRole", action: "list", title: "Show All Source Control Roles",
-                text: "Source Control Roles", isFirst: isFirst)
+        out << link(controller: "sourceControlRole", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSourceControlRoles.label"),
+                text: message(code: "sourceControlRoles.label"))
     }
 
+    /**
+     * Renders a list source control servers link.
+     */
     def listSourceControlServers = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlServer", action: "list", title: "Show All Source Control Servers",
-                text: "Source Control Servers", isFirst: isFirst)
+        out << link(controller: "sourceControlServer", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSourceControlServers.label"),
+                text: message(code: "sourceControlServers.label"))
     }
 
+    /**
+     * Renders a list source control users link.
+     */
     def listSourceControlUsers = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlUser", action: "list", title: "Show All Source Control Users",
-                text: "Source Control Users", isFirst: isFirst)
+        out << link(controller: "sourceControlUser", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSourceControlUsers.label"),
+                text: message(code: "sourceControlUsers.label"))
     }
 
+    /**
+     * Renders a list systems link.
+     */
     def listSystems = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "system", action: "list", title: "Show All Systems",
-                text: "Systems", isFirst: isFirst)
+        out << link(controller: "system", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSystems.label"),
+                text: message(code: "systems.label"))
     }
 
+    /**
+     * Renders a list system components link.
+     */
     def listSystemComponents = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "systemComponent", action: "list", title: "Show All System Components",
-                text: "System Components", isFirst: isFirst)
+        out << link(controller: "systemComponent", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSystemComponents.label"),
+                text: message(code: "systemComponents.label"))
     }
 
+    /**
+     * Renders a list system environments link.
+     */
     def listSystemEnvironments = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "systemEnvironment", action: "list", title: "Show All System Environments",
-                text: "System Environments", isFirst: isFirst)
+        out << link(controller: "systemEnvironment", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSystemEnvironments.label"),
+                text: message(code: "systemEnvironments.label"))
     }
 
+    /**
+     * Renders a show application link.
+     */
     def showApplication = { attrs ->
         def application = attrs.application
         def isFirst = attrs.isFirst
-        out << link(controller: "application", action: "show", title: "Show Application",
+        out << link(controller: "application", action: "show",
+                title: message(code: "showApplication.label"),
                 text: application.name, id: application.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show application deployment link.
+     */
     def showApplicationDeployment = { attrs ->
         def applicationDeployment = attrs.applicationDeployment
         def isFirst = attrs.isFirst
-        def text = "Release ${applicationDeployment.applicationRelease.releaseNumber} to ${applicationDeployment.environment.name}"
-        out << link(controller: "applicationDeployment", action: "show", title: "Show Application Deployment",
+        def text = message(code: "breadcrumbs.applicationDeployment.label",
+                args: [applicationDeployment.applicationRelease.releaseNumber, applicationDeployment.environment.name])
+        out << link(controller: "applicationDeployment", action: "show",
+                title: message(code: "showApplicationDeployment.label"),
                 text: text, id: applicationDeployment.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show application release link.
+     */
     def showApplicationRelease = { attrs ->
         def applicationRelease = attrs.applicationRelease
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationRelease", action: "show", title: "Show Application Release",
-                text: "Release ${applicationRelease.releaseNumber}", id: applicationRelease.id, isFirst: isFirst)
+        def text = message(code: "breadcrumbs.applicationRelease.label", args: [applicationRelease.releaseNumber])
+        out << link(controller: "applicationRelease", action: "show",
+                title: message(code: "showApplicationRelease.label"),
+                text: text, id: applicationRelease.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show application type link.
+     */
     def showApplicationType = { attrs ->
         def applicationType = attrs.applicationType
         def isFirst = attrs.isFirst
-        out << link(controller: "applicationType", action: "show", title: "Show Application Type",
+        out << link(controller: "applicationType", action: "show",
+                title: message(code: "showApplicationType.label"),
                 text: applicationType.name, id: applicationType.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show module link.
+     */
     def showModule = { attrs ->
         def module = attrs.module
         def isFirst = attrs.isFirst
-        out << link(controller: "module", action: "show", title: "Show Module",
+        out << link(controller: "module", action: "show",
+                title: message(code: "showModule.label"),
                 text: module.name, id: module.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show module type link.
+     */
     def showModuleType = { attrs ->
         def moduleType = attrs.moduleType
         def isFirst = attrs.isFirst
-        out << link(controller: "moduleType", action: "show", title: "Show Module Type",
+        out << link(controller: "moduleType", action: "show",
+                title: message(code: "showModuleType.label"),
                 text: moduleType.name, id: moduleType.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show project link.
+     */
     def showProject = { attrs ->
         def project = attrs.project
         def isFirst = attrs.isFirst
-        out << link(controller: "project", action: "show", title: "Show Project",
+        out << link(controller: "project", action: "show",
+                title: message(code: "showProject.label"),
                 text: project.name, id: project.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show project category link.
+     */
     def showProjectCategory = { attrs ->
         def projectCategory = attrs.projectCategory
         def isFirst = attrs.isFirst
-        out << link(controller: "projectCategory", action: "show", title: "Show Project Category",
+        out << link(controller: "projectCategory", action: "show",
+                title: message(code: "showProjectCategory.label"),
                 text: projectCategory.name, id: projectCategory.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show source control repository link.
+     */
     def showSourceControlRepository = { attrs ->
         def sourceControlRepository = attrs.sourceControlRepository
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlRepository", action: "show", title: "Show Source Control Repository",
+        out << link(controller: "sourceControlRepository", action: "show",
+                title: message(code: "showSourceControlRepository.label"),
                 text: sourceControlRepository.name, id: sourceControlRepository.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show source control role link.
+     */
     def showSourceControlRole = { attrs ->
         def sourceControlRole = attrs.sourceControlRole
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlRole", action: "show", title: "Show Source Control Role",
+        out << link(controller: "sourceControlRole", action: "show",
+                title: message(code: "showSourceControlRole.label"),
                 text: sourceControlRole.name, id: sourceControlRole.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show source control server link.
+     */
     def showSourceControlServer = { attrs ->
         def sourceControlServer = attrs.sourceControlServer
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlServer", action: "show", title: "Show Source Control Server",
+        out << link(controller: "sourceControlServer", action: "show",
+                title: message(code: "showSourceControlServer.label"),
                 text: sourceControlServer.name, id: sourceControlServer.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show source control user link.
+     */
     def showSourceControlUser = { attrs ->
         def sourceControlUser = attrs.sourceControlUser
         def isFirst = attrs.isFirst
-        out << link(controller: "sourceControlUser", action: "show", title: "Show Source Control User",
+        out << link(controller: "sourceControlUser", action: "show",
+                title: message(code: "showSourceControlUser.label"),
                 text: sourceControlUser.name, id: sourceControlUser.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show system link.
+     */
     def showSystem = { attrs ->
         def system = attrs.system
         def isFirst = attrs.isFirst
-        out << link(controller: "system", action: "show", title: "Show System",
+        out << link(controller: "system", action: "show",
+                title: message(code: "showSystem.label"),
                 text: system.name, id: system.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show system component link.
+     */
     def showSystemComponent = { attrs ->
         def systemComponent = attrs.systemComponent
         def isFirst = attrs.isFirst
-        out << link(controller: "systemComponent", action: "show", title: "Show System Component",
+        out << link(controller: "systemComponent", action: "show",
+                title: message(code: "showSystemComponent.label"),
                 text: systemComponent.name, id: systemComponent.id, isFirst: isFirst)
     }
 
+    /**
+     * Renders a show system environment link.
+     */
     def showSystemEnvironment = { attrs ->
         def systemEnvironment = attrs.systemEnvironment
         def isFirst = attrs.isFirst
-        out << link(controller: "systemEnvironment", action: "show", title: "Show System Environment",
-                text: systemEnvironment.name, id: systemEnvironment.id, isFirst: isFirst)
+        out << link(controller: "systemEnvironment", action: "show",
+                title: message(code: "showSystemEnvironment.label"),
+                text: systemEnvironment.name,
+                id: systemEnvironment.id, isFirst: isFirst)
     }
 }
