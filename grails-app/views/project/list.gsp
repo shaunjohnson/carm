@@ -30,6 +30,7 @@
             <thead>
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}"/>
+                <th><g:message code="project.category.label" default="Category"/></th>
                 <g:sortableColumn property="description"
                                   title="${message(code: 'project.description.label', default: 'Description')}"/>
             </tr>
@@ -40,6 +41,11 @@
                     <td><g:link action="show" id="${projectInstance.id}">
                         ${fieldValue(bean: projectInstance, field: "name")}
                     </g:link>
+                    </td>
+                    <td>
+                        <g:link controller="projectCategory" action="show" id="${projectInstance.category.id}">
+                            ${fieldValue(bean: projectInstance, field: "category")}
+                        </g:link>
                     </td>
                     <td>
                         ${fieldValue(bean: projectInstance, field: "description")}
