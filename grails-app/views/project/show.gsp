@@ -106,6 +106,10 @@
             <td class="layoutColumnLast">
                 <g:render template="pendingTasks"
                           model="[projectInstance: projectInstance, pendingReleases: pendingReleases]"/>
+
+                <div>&nbsp;</div>
+
+                <g:render template="projectActivity" model="[activityList: activityList]"/>
             </td>
         </tr>
         </tbody>

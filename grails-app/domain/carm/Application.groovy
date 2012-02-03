@@ -1,6 +1,8 @@
 package carm
 
 class Application {
+    def activityTraceService
+
     String name
     String description
     ApplicationType type
@@ -8,7 +10,7 @@ class Application {
     String sourceControlPath
     System system
     String deployInstructions
-    
+
     Date dateCreated
     Date lastUpdated
 
@@ -30,6 +32,18 @@ class Application {
     static mapping = {
         sort "name"
         deployInstructions type: 'text'
+    }
+
+    def afterInsert() {
+        activityTraceService.applicationCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService.applicationDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService.applicationUpdated(this)
     }
 
     public String toString() {

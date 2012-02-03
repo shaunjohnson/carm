@@ -4,6 +4,7 @@ class ApplicationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationDeploymentService
 
     def index = {
@@ -54,7 +55,11 @@ class ApplicationController {
                 ]
             }
 
-            [applicationInstance: applicationInstance, deployments: deployments]
+            [
+                    applicationInstance: applicationInstance,
+                    deployments: deployments,
+                    activityList: activityTraceService.listApplicationActivity(applicationInstance)
+            ]
         }
     }
 

@@ -177,14 +177,18 @@
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="applicationEnvironments" model="['applicationInstance': applicationInstance]"/>
+                <g:render template="applicationEnvironments" model="[applicationInstance: applicationInstance]"/>
 
                 <div>&nbsp;</div>
 
-                <g:render template="applicationModules" model="['applicationInstance': applicationInstance]"/>
+                <g:render template="applicationModules" model="[applicationInstance: applicationInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="applicationReleases" model="['applicationInstance': applicationInstance]"/>
+                <g:render template="applicationReleases" model="[applicationInstance: applicationInstance]"/>
+
+                <div>&nbsp;</div>
+
+                <g:render template="applicationActivity" model="[activityList: activityList]"/>
             </td>
         </tr>
         </tbody>

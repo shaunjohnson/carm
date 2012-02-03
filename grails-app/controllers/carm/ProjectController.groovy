@@ -8,6 +8,7 @@ class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationReleaseService
     def applicationService
     def carmSecurityService
@@ -51,7 +52,8 @@ class ProjectController {
             [
                     projectInstance: projectInstance,
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
-                    pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance)
+                    pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance),
+                    activityList: activityTraceService.listProjectActivity(projectInstance)
             ]
         }
     }
