@@ -31,7 +31,7 @@ class CarmTagLib {
     }
 
     /**
-     * Renders a link within the page header prefixed by the default link separator. If isFirst is set to true then
+     * Renders a link within the breadcrumbs prefixed by the default link separator. If isFirst is set to true then
      * the link separator is suppressed.
      *
      * attrs.isFirst - Flag indicating whether the link is the first. Default is  false.
@@ -41,7 +41,7 @@ class CarmTagLib {
      * attrs.text - Link text. Will be encoded as HTML.
      * attrs.uri - Link URI
      */
-    def headerLink = { attrs ->
+    def breadcrumbLink = { attrs ->
         def isFirst = attrs.isFirst ?: false
         def controller = attrs.controller
         def action = attrs.action
@@ -58,12 +58,12 @@ class CarmTagLib {
     }
 
     /**
-     * Renders header text prefixed by the default link separator.
+     * Renders breadcrumb text prefixed by the default link separator.
      *
      * attrs.code - Message code
      * attrs.code - Message args
      */
-    def headerText = { attrs ->
+    def breadcrumbText = { attrs ->
         def code = attrs.code
         def args = attrs.args
 

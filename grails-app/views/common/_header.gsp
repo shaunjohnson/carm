@@ -13,26 +13,26 @@
 
     <div class="breadcrumbs">
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="application" action="list" title="Show All Applications" text="Applications"
+            <g:breadcrumbLink controller="application" action="list" title="Show All Applications" text="Applications"
                           isFirst="true"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
+            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
 
-            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.project}"
+            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.project}"
                           id="${domain.project.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="application" action="show" title="Show Application" text="${domain.name}"
+                <g:breadcrumbLink controller="application" action="show" title="Show Application" text="${domain.name}"
                               id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="application" action="show" title="Show Application" text="${domain.name}"
+                <g:breadcrumbLink controller="application" action="show" title="Show Application" text="${domain.name}"
                               id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -45,32 +45,32 @@
                   entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="applicationDeployment" action="list" title="Show All Application Deployments"
+            <g:breadcrumbLink controller="applicationDeployment" action="list" title="Show All Application Deployments"
                           text="Application Deployments"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="show" title="Show Project"
+            <g:breadcrumbLink controller="project" action="show" title="Show Project"
                           text="${domain?.applicationRelease?.application?.project}"
                           id="${domain?.applicationRelease?.application?.project?.id}"/>
 
-            <g:headerLink controller="application" action="show" title="Show Application"
+            <g:breadcrumbLink controller="application" action="show" title="Show Application"
                           text="${domain?.applicationRelease?.application?.name}"
                           id="${domain?.applicationRelease?.application?.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="applicationDeployment" action="show" title="Show Application Deployment"
+                <g:breadcrumbLink controller="applicationDeployment" action="show" title="Show Application Deployment"
                               text="${domain.applicationRelease.releaseNumber}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="applicationDeployment" action="show" title="Show Application Deployment"
+                <g:breadcrumbLink controller="applicationDeployment" action="show" title="Show Application Deployment"
                               text="${domain.releaseNumber}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -83,29 +83,29 @@
 
     <div class="breadcrumbs">
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="applicationRelease" action="list" title="Show All Application Releases"
+            <g:breadcrumbLink controller="applicationRelease" action="list" title="Show All Application Releases"
                           text="Application Releases" isFirst="true"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
+            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
 
-            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
+            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
                           id="${domain.application.project.id}"/>
-            
-            <g:headerLink controller="application" action="show" title="Show Application"
+
+            <g:breadcrumbLink controller="application" action="show" title="Show Application"
                           text="${domain.application.name}" id="${domain.application.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="applicationRelease" action="show" title="Show Application Release"
+                <g:breadcrumbLink controller="applicationRelease" action="show" title="Show Application Release"
                               text="${domain.releaseNumber}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="applicationRelease" action="show" title="Show Application Release"
+                <g:breadcrumbLink controller="applicationRelease" action="show" title="Show Application Release"
                               text="${domain.releaseNumber}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -117,22 +117,22 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="administration" text="Administration"/>
-        <g:headerLink controller="applicationReleaseTestState" action="list"
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="administration" text="Administration"/>
+        <g:breadcrumbLink controller="applicationReleaseTestState" action="list"
                       title="Show All Application Release Test States" text="Application Release Test States"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="applicationReleaseTestState" action="show"
+            <g:breadcrumbLink controller="applicationReleaseTestState" action="show"
                           title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="applicationReleaseTestState" action="show"
+            <g:breadcrumbLink controller="applicationReleaseTestState" action="show"
                           title="Show Application Release Test State" text="${domain.name}" id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -142,22 +142,22 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="administration" text="Administration"/>
-        <g:headerLink controller="applicationType" action="list" title="Show All Application Types"
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="administration" text="Administration"/>
+        <g:breadcrumbLink controller="applicationType" action="list" title="Show All Application Types"
                       text="Application Types"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
+            <g:breadcrumbLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
                           id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
+            <g:breadcrumbLink controller="applicationType" action="show" title="Show Application Type" text="${domain.name}"
                           id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -171,25 +171,25 @@
 
     <div class="breadcrumbs">
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="module" action="list" title="Show All Modules" text="Modules" isFirst="true"/>
+            <g:breadcrumbLink controller="module" action="list" title="Show All Modules" text="Modules" isFirst="true"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
+            <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.application.project}"
                           id="${domain.application.project.id}" isFirst="true"/>
-            <g:headerLink controller="application" action="show" title="Show Application"
+            <g:breadcrumbLink controller="application" action="show" title="Show Application"
                           text="${domain.application.name}" id="${domain.application.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="module" action="show" title="Show Module" text="${domain.name}"
+                <g:breadcrumbLink controller="module" action="show" title="Show Module" text="${domain.name}"
                               id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="module" action="show" title="Show Module" text="${domain.name}"
+                <g:breadcrumbLink controller="module" action="show" title="Show Module" text="${domain.name}"
                               id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -200,21 +200,21 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="administration" text="Administration"/>
-        <g:headerLink controller="moduleType" action="list" title="Show All Module Types" text="Module Types"/>
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="administration" text="Administration"/>
+        <g:breadcrumbLink controller="moduleType" action="list" title="Show All Module Types" text="Module Types"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
+            <g:breadcrumbLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
                           id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
+            <g:breadcrumbLink controller="moduleType" action="show" title="Show Module Type" text="${domain.name}"
                           id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -225,19 +225,19 @@
 
     <div class="breadcrumbs">
         <g:if test="${action != 'list'}">
-            <g:headerLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
+            <g:breadcrumbLink controller="project" action="list" title="Show All Projects" text="Projects" isFirst="true"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="project" action="show" title="Show Project" text="${domain.name}"
+                <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.name}"
                               id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="project" action="show" title="Show Project" text="${domain.name}"
+                <g:breadcrumbLink controller="project" action="show" title="Show Project" text="${domain.name}"
                               id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
 
         </g:if>
@@ -249,22 +249,22 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="administration" text="Administration"/>
-        <g:headerLink controller="projectCategory" action="list" title="Show All Project Categories"
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="administration" text="Administration"/>
+        <g:breadcrumbLink controller="projectCategory" action="list" title="Show All Project Categories"
                       text="Project Categories"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
+            <g:breadcrumbLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
                           id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
+            <g:breadcrumbLink controller="projectCategory" action="show" title="Show Project Category" text="${domain.name}"
                           id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -275,27 +275,27 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="sourceControlRepository" action="list"
+            <g:breadcrumbLink controller="sourceControlRepository" action="list"
                           title="Show All Source Control Repositories" text="Source Control Repositories"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server"
+            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
                           text="${domain.server.name}" id="${domain.server.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
+                <g:breadcrumbLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
                               text="${domain.name}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
+                <g:breadcrumbLink controller="sourceControlRepository" action="show" title="Show Source Control Repository"
                               text="${domain.name}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -306,21 +306,21 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="sourceControlRole" action="list" title="Show All Source Control Roles"
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="sourceControlRole" action="list" title="Show All Source Control Roles"
                       text="Source Control Roles"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="sourceControlRole" action="show" title="Show Source Control Role"
+            <g:breadcrumbLink controller="sourceControlRole" action="show" title="Show Source Control Role"
                           text="${domain.name}" id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="sourceControlRole" action="show" title="Show Source Control Role"
+            <g:breadcrumbLink controller="sourceControlRole" action="show" title="Show Source Control Role"
                           text="${domain.name}" id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -330,21 +330,21 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
-        <g:headerLink controller="sourceControlServer" action="list" title="Show All Source Control Servers"
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink controller="sourceControlServer" action="list" title="Show All Source Control Servers"
                       text="Source Control Servers"/>
 
         <g:if test="${action == 'show'}">
-            <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server"
+            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
                           text="${domain.name}" id="${domain.id}"/>
         </g:if>
         <g:elseif test="${action == 'create' || action == 'save'}">
-            <g:headerText code="default.create.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.create.label" args="[entityName]"/>
         </g:elseif>
         <g:elseif test="${action == 'edit' || action == 'update'}">
-            <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server"
+            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
                           text="${domain.name}" id="${domain.id}"/>
-            <g:headerText code="default.edit.label" args="[entityName]"/>
+            <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
         </g:elseif>
     </div>
 </g:elseif>
@@ -354,27 +354,27 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink uri="/" text="Home" isFirst="true"/>
+        <g:breadcrumbLink uri="/" text="Home" isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="sourceControlUser" action="list" title="Show All Source Control Users"
+            <g:breadcrumbLink controller="sourceControlUser" action="list" title="Show All Source Control Users"
                           text="Source Control Users"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="sourceControlServer" action="show" title="Show Source Control Server"
+            <g:breadcrumbLink controller="sourceControlServer" action="show" title="Show Source Control Server"
                           text="${domain.server.name}" id="${domain.server.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User"
+                <g:breadcrumbLink controller="sourceControlUser" action="show" title="Show Source Control User"
                               text="${domain.name}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="sourceControlUser" action="show" title="Show Source Control User"
+                <g:breadcrumbLink controller="sourceControlUser" action="show" title="Show Source Control User"
                               text="${domain.name}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -386,19 +386,19 @@
 
     <div class="breadcrumbs">
         <g:if test="${action != 'list'}">
-            <g:headerLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
+            <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="system" action="show" title="Show System" text="${domain.name}"
+                <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.name}"
                               id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="system" action="show" title="Show System" text="${domain.name}"
+                <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.name}"
                               id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:if>
     </div>
@@ -409,27 +409,27 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
+        <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="systemComponent" action="list" title="Show All System Components"
+            <g:breadcrumbLink controller="systemComponent" action="list" title="Show All System Components"
                           text="Systems Components"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="system" action="show" title="Show System" text="${domain.system.name}"
+            <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.system.name}"
                           id="${domain.system.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="systemComponent" action="show" title="Show System Component"
+                <g:breadcrumbLink controller="systemComponent" action="show" title="Show System Component"
                               text="${domain.name}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="systemComponent" action="show" title="Show System Component"
+                <g:breadcrumbLink controller="systemComponent" action="show" title="Show System Component"
                               text="${domain.name}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
@@ -440,27 +440,27 @@
     <g:pageHeader action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <div class="breadcrumbs">
-        <g:headerLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
+        <g:breadcrumbLink controller="system" action="list" title="Show All Systems" text="Systems" isFirst="true"/>
 
         <g:if test="${action == 'list'}">
-            <g:headerLink controller="systemEnvironment" action="list" title="Show All System Environments"
+            <g:breadcrumbLink controller="systemEnvironment" action="list" title="Show All System Environments"
                           text="Systems Environments"/>
         </g:if>
         <g:else>
-            <g:headerLink controller="system" action="show" title="Show System" text="${domain.system.name}"
+            <g:breadcrumbLink controller="system" action="show" title="Show System" text="${domain.system.name}"
                           id="${domain.system.id}"/>
 
             <g:if test="${action == 'show'}">
-                <g:headerLink controller="systemEnvironment" action="show" title="Show System Environment"
+                <g:breadcrumbLink controller="systemEnvironment" action="show" title="Show System Environment"
                               text="${domain.name}" id="${domain.id}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
-                <g:headerText code="default.create.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.create.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <g:headerLink controller="systemEnvironment" action="show" title="Show System Environment"
+                <g:breadcrumbLink controller="systemEnvironment" action="show" title="Show System Environment"
                               text="${domain.name}" id="${domain.id}"/>
-                <g:headerText code="default.edit.label" args="[entityName]"/>
+                <g:breadcrumbText code="default.edit.label" args="[entityName]"/>
             </g:elseif>
         </g:else>
     </div>
