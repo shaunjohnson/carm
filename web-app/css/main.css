@@ -166,8 +166,8 @@ hr.divider {
     padding: 0 1em;
 }
 
-.breadcrumbs * {
-    font-size: 0.8em;
+.breadcrumbs, .breadcrumbs * {
+    font-size: 11px;
 }
 
 .breadcrumbs a {

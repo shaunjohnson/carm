@@ -67,7 +67,7 @@ class CarmTagLib {
         def code = attrs.code
         def args = attrs.args
 
-        out << '<span class="spacer"> &gt; </span>' << message(code: code, args: args)
+        out << '<span class="spacer"> &raquo; </span>' << message(code: code, args: args)
     }
 
     /**
