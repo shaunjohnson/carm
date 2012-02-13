@@ -49,7 +49,7 @@ class ApplicationController {
         else {
             def deployments = [:]
 
-            applicationInstance.system.environments.each { environment ->
+            applicationInstance?.system?.environments?.each { environment ->
                 deployments[environment] = [
                         lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
                 ]
