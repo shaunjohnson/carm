@@ -78,6 +78,16 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a basic label.
+     */
+    def label = { attrs ->
+        def code = attrs.code
+        def args = attrs.args
+        def isFirst = attrs.isFirst
+        out << text(code: code, args: args, isFirst: isFirst)
+    }
+
+    /**
      * Renders a list applications link.
      */
     def listApplications = { attrs ->

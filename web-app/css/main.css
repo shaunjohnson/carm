@@ -316,6 +316,10 @@ th.desc a {
     width: 100%;
 }
 
+.list th {
+    white-space: nowrap;
+}
+
 .list th, .list td {
     border-left: 1px solid #ddd;
 }
@@ -546,6 +550,10 @@ a.showHideDetails {
 .sectionHeader span.actions {
     float: right;
     padding-top: 2px;
+}
+
+.sectionHeader span.actions a {
+    padding-left: 1em;
 }
 
 .detailProp {

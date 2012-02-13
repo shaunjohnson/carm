@@ -145,6 +145,9 @@ grails.plugins.springsecurity.secureChannel.definition = [
 
 // CARM UI configurable options
 ui {
+    application {
+        maxReleases = 5
+    }
     richTextEditor {
         type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
         height = 400    // Height of editor in pixels

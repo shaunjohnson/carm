@@ -80,7 +80,7 @@ class ApplicationController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (applicationInstance.version > version) {
-                    
+
                     applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label', default: 'Application')] as Object[], "Another user has updated this Application while you were editing")
                     render(view: "edit", model: [applicationInstance: applicationInstance])
                     return
@@ -119,6 +119,23 @@ class ApplicationController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listReleases = {
+        def applicationInstance = Application.get(params.id)
+        if (!applicationInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+            [
+                    applicationInstance: applicationInstance,
+                    applicationReleaseInstanceList: ApplicationRelease.findAllByApplication(applicationInstance, params),
+                    applicationReleaseInstanceTotal: ApplicationRelease.countByApplication(applicationInstance)
+            ]
         }
     }
 }

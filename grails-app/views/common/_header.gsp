@@ -27,6 +27,10 @@
                 <bc:showApplication application="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listReleases'}">
+                <bc:showApplication application="${domain}"/>
+                <bc:label code="allReleases.label" args="[ entityName ]"/>
+            </g:elseif>
         </g:else>
     </bc:breadcrumbs>
 </g:elseif>

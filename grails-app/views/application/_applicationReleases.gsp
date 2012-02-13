@@ -7,11 +7,15 @@
                 params="['application.id': applicationInstance?.id]">
             <g:message code="makeNewRelease.label" default="Make a New Release"/>
         </g:link>
+        <g:link class="list" controller="application" action="listReleases"
+                params="['id': applicationInstance?.id]">
+            <g:message code="showAllReleases.label" default="Show All Releases"/>
+        </g:link>
     </span>
 </h2>
 
 <g:set var="applicationReleases"
-       value="${applicationInstance.releases.sort { it.dateCreated }.reverse()}"/>
+       value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, grailsApplication.config.ui.application.maxReleases)}"/>
 
 <g:if test="${applicationReleases.size()}">
     <table>

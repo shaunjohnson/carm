@@ -46,6 +46,10 @@ class CarmTagLib {
         if (action == 'show') {
             out << "<h1>$beanName</h1>"
         }
+        else if (action == 'listReleases') {
+            def headerText = message(code: "default.${action}.label", args: [beanName])
+            out << "<h1>$headerText</h1>"
+        }
         else {
             def headerText = message(code: "default.${action}.label", args: [entityName])
             out << "<h1>$headerText</h1>"
