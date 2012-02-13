@@ -141,6 +141,9 @@
 <g:elseif test="${controller ==~ /.*home/}">
     <g:pageHeaderLabel action="show" beanName="${pageName}"/>
 </g:elseif>
+<g:elseif test="${controller == 'login'}">
+    <g:pageHeaderLabel action="show" beanName="${pageName}"/>
+</g:elseif>
 <g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
 
