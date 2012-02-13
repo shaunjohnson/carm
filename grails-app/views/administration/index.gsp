@@ -25,16 +25,6 @@
                         </g:link>
                     </li>
                     <li>
-                        <g:link controller="sourceControlRepository">
-                            <g:message code="repositories.label" default="Repositories"/>
-                        </g:link>
-                    </li>
-                    <li>
-                        <g:link controller="sourceControlUser">
-                            <g:message code="users.label" default="Users"/>
-                        </g:link>
-                    </li>
-                    <li>
                         <g:link controller="sourceControlRole">
                             <g:message code="roles.label" default="Roles"/>
                         </g:link>
