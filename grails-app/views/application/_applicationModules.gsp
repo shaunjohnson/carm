@@ -34,3 +34,9 @@
         </tbody>
     </table>
 </g:if>
+<g:else>
+    <p class="emphasis">
+        <g:message code="applicationDoesNotHaveAnyModules.message"
+                   default="This application does not have any modules."/>
+    </p>
+</g:else>
