@@ -90,60 +90,18 @@
         <g:showHideDetails sectionId="sourceControlServerDetails" entityName="${entityName}"/>
     </div>
 
-    <h2><g:message code="sourceControlServer.repositories.label" default="Repositories"/></h2>
-    <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="nav">
-            <span class="menuButton">
-                <g:link class="create" controller="sourceControlRepository" action="create"
-                        params="['server.id': sourceControlServerInstance?.id]">
-                    <g:message code="addRepository.label" default="Add Repository"/>
-                </g:link>
-            </span>
-        </div>
-    </sec:ifAllGranted>
-
-    <g:if test="${sourceControlServerInstance.repositories.size()}">
-        <ul>
-            <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="repository">
-                <li>
-                    <g:link controller="sourceControlRepository" action="show" id="${repository.id}">
-                        ${repository?.encodeAsHTML()}
-                    </g:link>
-                </li>
-            </g:each>
-        </ul>
-    </g:if>
-
-
-    <h2><g:message code="sourceControlServer.users.label" default="Users"/></h2>
-    <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="nav">
-            <span class="menuButton">
-                <g:link class="create" controller="sourceControlUser" action="create"
-                        params="['server.id': sourceControlServerInstance?.id]">
-                    <g:message code="addUser.label" default="Add User"/>
-                </g:link>
-            </span>
-        </div>
-    </sec:ifAllGranted>
-
-    <g:if test="${sourceControlServerInstance?.users?.size()}">
-        <ul>
-            <g:each in="${sourceControlServerInstance.users.sort { it.name }}" var="user">
-                <li>
-                    <g:link controller="sourceControlUser" action="show" id="${user.id}">
-                        ${user?.name?.encodeAsHTML()}
-                    </g:link>
-                </li>
-            </g:each>
-        </ul>
-    </g:if>
-    <g:else>
-        <p class="emphasis">
-            <g:message code="sourceControlServerDoesNotHaveAnyUsers.message"
-                       default="This source control server does not have any users."/>
-        </p>
-    </g:else>
+    <table class="twoColumnLayout">
+        <tbody>
+        <tr>
+            <td class="layoutColumnFirst">
+                <g:render template="sourceControlRepositories" model="[sourceControlServerInstance: sourceControlServerInstance]"/>
+            </td>
+            <td class="layoutColumnLast">
+                <g:render template="sourceControlUsers" model="[sourceControlServerInstance: sourceControlServerInstance]"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
