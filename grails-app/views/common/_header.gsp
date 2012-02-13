@@ -245,6 +245,7 @@
             <bc:listSourceControlRepositories/>
         </g:if>
         <g:else>
+            <bc:listSourceControlServers/>
             <bc:showSourceControlServer sourceControlServer="${domain.server}"/>
 
             <g:if test="${action == 'show'}">
@@ -314,6 +315,7 @@
             <bc:listSourceControlUsers/>
         </g:if>
         <g:else>
+            <bc:listSourceControlServers/>
             <bc:showSourceControlServer sourceControlServer="${domain.server}"/>
 
             <g:if test="${action == 'show'}">
