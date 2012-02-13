@@ -94,9 +94,10 @@ class SourceControlRepositoryController {
         if (sourceControlRepositoryInstance) {
             try {
                 def name = sourceControlRepositoryInstance.name
+                def sourceControlServerId = sourceControlRepositoryInstance.server.id
                 sourceControlRepositoryService.delete(sourceControlRepositoryInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
-                redirect(action: "list")
+                redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"

@@ -100,9 +100,10 @@ class SourceControlUserController {
         if (sourceControlUserInstance) {
             try {
                 def name = sourceControlUserInstance.name
+                def sourceControlServerId = sourceControlUserInstance.server.id
                 sourceControlUserService.delete(sourceControlUserInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), name])}"
-                redirect(action: "list")
+                redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
