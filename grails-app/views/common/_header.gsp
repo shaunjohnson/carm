@@ -245,7 +245,7 @@
             <bc:listSourceControlRepositories/>
         </g:if>
         <g:else>
-            <bc:showSourceControlServer sourceControlServer="${domain}"/>
+            <bc:showSourceControlServer sourceControlServer="${domain.server}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showSourceControlRepository sourceControlRepository="${domain}"/>
