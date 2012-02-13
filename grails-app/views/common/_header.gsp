@@ -43,10 +43,7 @@
                        entityName="${entityName}"/>
 
     <bc:breadcrumbs>
-        <g:if test="${action == 'list'}">
-            <bc:listApplicationDeployments isFirst="true"/>
-        </g:if>
-        <g:else>
+        <g:if test="${action != 'list'}">
             <bc:listProjects isFirst="true"/>
             <bc:showProject project="${domain.applicationRelease.application.project}"/>
             <bc:showApplication application="${domain.applicationRelease.application}"/>
@@ -61,7 +58,7 @@
                 <bc:showApplicationDeployment applicationDeployment="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
-        </g:else>
+        </g:if>
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationRelease'}">
@@ -72,10 +69,7 @@
                        entityName="${entityName}"/>
 
     <bc:breadcrumbs>
-        <g:if test="${action == 'list'}">
-            <bc:listApplicationReleases isFirst="true"/>
-        </g:if>
-        <g:else>
+        <g:if test="${action != 'list'}">
             <bc:listProjects isFirst="true"/>
             <bc:showProject project="${domain.application.project}"/>
             <bc:showApplication application="${domain.application}"/>
@@ -90,7 +84,7 @@
                 <bc:showApplicationRelease applicationRelease="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
-        </g:else>
+        </g:if>
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'applicationReleaseTestState'}">
@@ -210,7 +204,6 @@
                 <bc:showProject project="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
-
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
