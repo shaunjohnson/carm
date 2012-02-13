@@ -1,3 +1,7 @@
+<h2 class="sectionHeader">
+    <g:message code="deployments.label" default="Deployments"/>
+</h2>
+
 <g:if test="${applicationReleaseInstance?.deployments?.size()}">
     <div class="list">
         <table style="width: 100%;">

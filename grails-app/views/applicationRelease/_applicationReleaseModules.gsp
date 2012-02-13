@@ -1,3 +1,7 @@
+<h2 class="sectionHeader">
+    <g:message code="modules.label" default="Modules"/>
+</h2>
+
 <div class="list">
     <table style="width: 100%;">
         <thead>

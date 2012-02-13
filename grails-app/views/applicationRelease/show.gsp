@@ -107,46 +107,25 @@
         <g:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
     </div>
 
-    <div id="applicationReleaseTabs">
-        <ul>
-            <li>
-                <a href="#tabs-1">
-                    <g:message code="modules.label" default="Modules"/>
-                </a>
-            </li>
-            <li>
-                <a href="#tabs-2">
-                    <g:message code="deployments.label" default="Deployments"/>
-                </a>
-            </li>
-            <li>
-                <a href="#tabs-3">
-                    <g:message code="history.label" default="History"/>
-                </a>
-            </li>
-        </ul>
+    <table class="twoColumnLayout">
+        <tbody>
+        <tr>
+            <td class="layoutColumnFirst">
+                <g:render template="applicationReleaseModules"
+                          model="['applicationReleaseInstance': applicationReleaseInstance]"/>
+            </td>
+            <td class="layoutColumnLast">
+                <g:render template="applicationReleaseDeployments"
+                          model="['applicationReleaseInstance': applicationReleaseInstance]"/>
 
-        <div id="tabs-1" class="tab">
-            <g:render template="applicationReleaseModules"
-                      model="['applicationReleaseInstance': applicationReleaseInstance]"/>
-        </div>
+                <div>&nbsp;</div>
 
-        <div id="tabs-2" class="tab">
-            <g:render template="applicationReleaseDeployments"
-                      model="['applicationReleaseInstance': applicationReleaseInstance]"/>
-        </div>
-
-        <div id="tabs-3" class="tab">
-            <g:render template="applicationReleaseHistory"
-                      model="['applicationReleaseInstance': applicationReleaseInstance]"/>
-        </div>
-    </div>
-
-    <script type='text/javascript'>
-        jQuery(function () {
-            jQuery('#applicationReleaseTabs').tabs();
-        });
-    </script>
+                <g:render template="applicationReleaseHistory"
+                          model="['applicationReleaseInstance': applicationReleaseInstance]"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
