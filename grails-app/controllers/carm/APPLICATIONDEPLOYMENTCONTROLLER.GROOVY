@@ -47,7 +47,13 @@ class ApplicationDeploymentController {
             redirect(action: "list")
         }
         else {
-            [applicationDeploymentInstance: applicationDeploymentInstance]
+            def otherApplicationReleaseDeployments = applicationDeploymentInstance.applicationRelease.deployments
+            otherApplicationReleaseDeployments.remove(applicationDeploymentInstance)
+
+            [
+                    applicationDeploymentInstance: applicationDeploymentInstance,
+                    otherApplicationReleaseDeployments: otherApplicationReleaseDeployments
+            ]
         }
     }
 
@@ -68,7 +74,7 @@ class ApplicationDeploymentController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (applicationDeploymentInstance.version > version) {
-                    
+
                     applicationDeploymentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment')] as Object[], "Another user has updated this ApplicationDeployment while you were editing")
                     render(view: "edit", model: [applicationDeploymentInstance: applicationDeploymentInstance])
                     return

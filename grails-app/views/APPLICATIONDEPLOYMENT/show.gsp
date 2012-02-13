@@ -71,7 +71,7 @@
                 <td valign="top"
                     class="value">${fieldValue(bean: applicationDeploymentInstance, field: "deploymentState")}</td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.dateCreated.label" default="Date Created"/>
                 </td>
@@ -79,7 +79,7 @@
                     <g:formatDate date="${applicationDeploymentInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -117,7 +117,7 @@
                 <g:render template="applicationDeploymentModules" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                &nbsp;
+                <g:render template="applicationReleaseDeployments" model="[applicationReleaseDeployments: otherApplicationReleaseDeployments]"/>
             </td>
         </tr>
         </tbody>

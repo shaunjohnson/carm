@@ -4,7 +4,6 @@ class ApplicationReleaseController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
-
     def applicationReleaseService
 
     def index = {
