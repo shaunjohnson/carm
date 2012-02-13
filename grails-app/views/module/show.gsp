@@ -118,6 +118,19 @@
         </table>
         <g:showHideDetails sectionId="moduleDetails" entityName="${entityName}"/>
     </div>
+
+    <table class="twoColumnLayout">
+        <tbody>
+        <tr>
+            <td class="layoutColumnFirst">
+                &nbsp;
+            </td>
+            <td class="layoutColumnLast">
+                <g:render template="moduleActivity" model="[activityList: activityList]"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

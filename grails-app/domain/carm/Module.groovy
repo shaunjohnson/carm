@@ -1,6 +1,8 @@
 package carm
 
 class Module {
+    def activityTraceService
+
     String name
     String description
     ModuleType type
@@ -28,5 +30,17 @@ class Module {
 
     public String toString() {
         return name
+    }
+
+    def afterInsert() {
+        activityTraceService.moduleCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService.moduleDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService.moduleUpdated(this)
     }
 }

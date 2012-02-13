@@ -4,6 +4,8 @@ class ModuleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
+
     def index = {
         redirect(action: "list", params: params)
     }
@@ -37,7 +39,10 @@ class ModuleController {
             redirect(action: "list")
         }
         else {
-            [moduleInstance: moduleInstance]
+            [
+                    moduleInstance: moduleInstance,
+                    activityList: activityTraceService.listModuleActivity(moduleInstance)
+            ]
         }
     }
 

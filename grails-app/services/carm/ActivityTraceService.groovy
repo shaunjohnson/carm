@@ -16,13 +16,14 @@ class ActivityTraceService implements ApplicationContextAware {
     MessageSource messageSource
 
     private static final String APPLICATION_TYPE = Application.class.name
+    private static final String MODULE_TYPE = Module.class.name
     private static final String PROJECT_TYPE = Project.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"
 
     /**
-     * Lists latest activity events for an application in reverse chronological order.
+     * Lists latest activity events for an Application in reverse chronological order.
      *
      * @param application Application used for query
      * @return List of ActivityTrace objects
@@ -33,7 +34,18 @@ class ActivityTraceService implements ApplicationContextAware {
     }
 
     /**
-     * Lists latest activity events for a project in reverse chronological order.
+     * Lists latest activity events for a Module in reverse chronological order.
+     *
+     * @param module Module used for query
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listModuleActivity(Module module) {
+        def oid = generateOid(MODULE_TYPE, module.id)
+        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+    }
+
+    /**
+     * Lists latest activity events for a Project in reverse chronological order.
      *
      * @param project Project used for query
      * @return List of ActivityTrace objects
@@ -74,8 +86,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return
      */
     def applicationDeleted(Application application) {
-        def oid = generateOid(PROJECT_TYPE, application.id)
-
+        def oid = generateOid(PROJECT_TYPE, application.project.id)
         insertActivityTrace(oid, APPLICATION_TYPE, DELETED, application.id, application.name)
     }
 
@@ -87,8 +98,43 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     def applicationUpdated(Application application) {
         def oid = generateOid(APPLICATION_TYPE, application.id)
-
         insertActivityTrace(oid, APPLICATION_TYPE, UPDATED, application.id, application.name)
+    }
+
+    /**
+     * Module object was created.
+     *
+     * @param module Module that was created
+     * @return
+     */
+    def moduleCreated(Module module) {
+        def applicationOid = generateOid(APPLICATION_TYPE, module.application.id)
+        insertActivityTrace(applicationOid, MODULE_TYPE, CREATED, module.id, module.name)
+
+        def moduleOid = generateOid(MODULE_TYPE, module.id)
+        insertActivityTrace(moduleOid, MODULE_TYPE, CREATED, module.id, module.name)
+    }
+
+    /**
+     * Module object was deleted.
+     *
+     * @param module Module that was deleted
+     * @return
+     */
+    def moduleDeleted(Module module) {
+        def oid = generateOid(APPLICATION_TYPE, module.id)
+        insertActivityTrace(oid, MODULE_TYPE, DELETED, module.id, module.name)
+    }
+
+    /**
+     * Module object was updated.
+     *
+     * @param module Module that was updated
+     * @return
+     */
+    def moduleUpdated(Module module) {
+        def oid = generateOid(MODULE_TYPE, module.id)
+        insertActivityTrace(oid, MODULE_TYPE, UPDATED, module.id, module.name)
     }
 
     /**
