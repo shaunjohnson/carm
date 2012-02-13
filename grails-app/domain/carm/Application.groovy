@@ -34,6 +34,10 @@ class Application {
         deployInstructions type: 'text'
     }
 
+    public String toString() {
+        return name
+    }
+
     def afterInsert() {
         activityTraceService.applicationCreated(this)
     }
@@ -44,9 +48,5 @@ class Application {
 
     def afterUpdate() {
         activityTraceService.applicationUpdated(this)
-    }
-
-    public String toString() {
-        return name
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
+import static carm.enums.ActivityAction.*
 import carm.enums.ActivityAction
 
 class ActivityTraceService implements ApplicationContextAware {
@@ -14,8 +15,11 @@ class ActivityTraceService implements ApplicationContextAware {
 
     MessageSource messageSource
 
-    private static final String APPLICAION_TYPE = Application.class.name
+    private static final String APPLICATION_TYPE = Application.class.name
     private static final String PROJECT_TYPE = Project.class.name
+
+    private static final Long ROOT_ID = 0L
+    private static final String ROOT_TYPE = "Root"
 
     /**
      * Lists latest activity events for an application in reverse chronological order.
@@ -24,8 +28,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listApplicationActivity(Application application) {
-        def oid = generateOid(APPLICAION_TYPE, application.id)
-
+        def oid = generateOid(APPLICATION_TYPE, application.id)
         ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
     }
 
@@ -37,7 +40,16 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     List<ActivityTrace> listProjectActivity(Project project) {
         def oid = generateOid(PROJECT_TYPE, project.id)
+        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+    }
 
+    /**
+     * Lists latest activity events for the CARM application in reverse chronological order.
+     *
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listRootActivity() {
+        def oid = generateOid(ROOT_TYPE, ROOT_ID)
         ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
     }
 
@@ -49,10 +61,10 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     def applicationCreated(Application application) {
         def projectOid = generateOid(PROJECT_TYPE, application.project.id)
-        insertActivityTrace(projectOid, ActivityAction.CREATED, application.id, application.name, APPLICAION_TYPE)
+        insertActivityTrace(projectOid, APPLICATION_TYPE, CREATED, application.id, application.name)
 
-        def applicationOid = generateOid(APPLICAION_TYPE, application.id)
-        insertActivityTrace(applicationOid, ActivityAction.CREATED, application.id, application.name, APPLICAION_TYPE)
+        def applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_TYPE, CREATED, application.id, application.name)
     }
 
     /**
@@ -64,7 +76,7 @@ class ActivityTraceService implements ApplicationContextAware {
     def applicationDeleted(Application application) {
         def oid = generateOid(PROJECT_TYPE, application.id)
 
-        insertActivityTrace(oid, ActivityAction.DELETED, application.id, application.name, APPLICAION_TYPE)
+        insertActivityTrace(oid, APPLICATION_TYPE, DELETED, application.id, application.name)
     }
 
     /**
@@ -74,9 +86,45 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return
      */
     def applicationUpdated(Application application) {
-        def oid = generateOid(APPLICAION_TYPE, application.id)
+        def oid = generateOid(APPLICATION_TYPE, application.id)
 
-        insertActivityTrace(oid, ActivityAction.UPDATED, application.id, application.name, APPLICAION_TYPE)
+        insertActivityTrace(oid, APPLICATION_TYPE, UPDATED, application.id, application.name)
+    }
+
+    /**
+     * Project object was created.
+     *
+     * @param project Project that was created
+     * @return
+     */
+    def projectCreated(Project project) {
+        def rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, PROJECT_TYPE, CREATED, project.id, project.name)
+
+        def projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, PROJECT_TYPE, CREATED, project.id, project.name)
+    }
+
+    /**
+     * Project object was deleted.
+     *
+     * @param project Project that was deleted
+     * @return
+     */
+    def projectDeleted(Project project) {
+        def oid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(oid, PROJECT_TYPE, DELETED, project.id, project.name)
+    }
+
+    /**
+     * Project object was updated.
+     *
+     * @param project Project that was updated
+     * @return
+     */
+    def projectUpdated(Project project) {
+        def oid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(oid, PROJECT_TYPE, UPDATED, project.id, project.name)
     }
 
     /**
@@ -86,7 +134,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param summary Summary of the event
      * @return
      */
-    private insertActivityTrace(String oid, ActivityAction action, Long objectId, String objectName, String objectType) {
+    private insertActivityTrace(String oid, String objectType, ActivityAction action, Long objectId, String objectName) {
         ActivityTrace.withNewSession {
             def trace = new ActivityTrace(oid: oid, action:  action, objectId: objectId, objectName: objectName,
                     objectType: objectType, dateOccurred: new Date(), username: getUsername())

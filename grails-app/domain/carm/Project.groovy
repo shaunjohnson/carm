@@ -1,6 +1,8 @@
 package carm
 
 class Project {
+    def activityTraceService
+
     String name
     String description
     ProjectCategory category
@@ -22,5 +24,17 @@ class Project {
 
     public String toString() {
         return name
+    }
+
+    def afterInsert() {
+        activityTraceService.projectCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService.projectDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService.projectUpdated(this)
     }
 }

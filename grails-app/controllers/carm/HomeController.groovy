@@ -1,6 +1,7 @@
 package carm
 
 class HomeController {
+    def activityTraceService
     def projectService
     
     def index = {
@@ -9,7 +10,8 @@ class HomeController {
         [
                 applicationReleaseInstanceList: ApplicationRelease.listOrderByApplication(),
                 projectCategoryList: categories,
-                systemInstanceList: System.listOrderByName()
+                systemInstanceList: System.listOrderByName(),
+                activityList: activityTraceService.listRootActivity()
         ]
     }
 }
