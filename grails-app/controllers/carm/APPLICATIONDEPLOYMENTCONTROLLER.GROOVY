@@ -47,13 +47,7 @@ class ApplicationDeploymentController {
             redirect(action: "list")
         }
         else {
-            def otherApplicationReleaseDeployments = applicationDeploymentInstance.applicationRelease.deployments
-            otherApplicationReleaseDeployments.remove(applicationDeploymentInstance)
-
-            [
-                    applicationDeploymentInstance: applicationDeploymentInstance,
-                    otherApplicationReleaseDeployments: otherApplicationReleaseDeployments
-            ]
+            [applicationDeploymentInstance: applicationDeploymentInstance]
         }
     }
 

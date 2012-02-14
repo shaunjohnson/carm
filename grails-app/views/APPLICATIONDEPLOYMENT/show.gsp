@@ -117,7 +117,7 @@
                 <g:render template="applicationDeploymentModules" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="applicationReleaseDeployments" model="[applicationReleaseDeployments: otherApplicationReleaseDeployments]"/>
+                <g:render template="applicationReleaseDeployments" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
             </td>
         </tr>
         </tbody>

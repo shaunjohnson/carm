@@ -1,6 +1,8 @@
 <h2 class="sectionHeader">
-    <g:message code="otherDeployments.label" default="Other Deployments"/>
+    <g:message code="allDeployments.label" default="All Deployments"/>
 </h2>
+
+<g:set var="applicationReleaseDeployments" value="${applicationDeploymentInstance.applicationRelease.deployments}"/>
 
 <g:if test="${applicationReleaseDeployments?.size()}">
     <div class="list">
