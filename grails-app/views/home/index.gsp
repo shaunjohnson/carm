@@ -29,6 +29,10 @@
         <tr>
             <td class="layoutColumnFirst">
                 <g:render template="myProjects" model="[projectCategoryList: projectCategoryList"/>
+
+                <div>&nbsp;</div>
+
+                <g:render template="/common/activity" model="[activityList: activityList]"/>
             </td>
             <td class="layoutColumnLast">
                 <g:render template="mySystems" model="[systemInstanceList: systemInstanceList"/>
