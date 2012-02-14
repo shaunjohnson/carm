@@ -107,7 +107,7 @@
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="projectActivity" model="[activityList: activityList]"/>
+                <g:render template="/common/activity" model="[activityList: activityList]"/>
             </td>
         </tr>
         </tbody>

@@ -126,7 +126,7 @@
                 &nbsp;
             </td>
             <td class="layoutColumnLast">
-                <g:render template="moduleActivity" model="[activityList: activityList]"/>
+                <g:render template="/common/activity" model="[activityList: activityList]"/>
             </td>
         </tr>
         </tbody>

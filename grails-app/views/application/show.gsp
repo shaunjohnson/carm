@@ -188,7 +188,7 @@
 
                 <div>&nbsp;</div>
 
-                <g:render template="applicationActivity" model="[activityList: activityList]"/>
+                <g:render template="/common/activity" model="[activityList: activityList]"/>
             </td>
         </tr>
         </tbody>

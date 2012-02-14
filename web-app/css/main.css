@@ -563,3 +563,16 @@ a.showHideDetails {
 .detailProp {
     display: none;
 }
+
+/*
+ * Activity styles.
+ */
+.activityDateOccurred {
+    color: #bbb;
+    font-size: 0.9em;
+}
+
+.activityUsername {
+    font-weight: bold;
+    padding-right: 1em;
+}
