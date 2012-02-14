@@ -32,7 +32,7 @@
 
                 <div>&nbsp;</div>
 
-                <g:render template="/common/activity" model="[activityList: activityList]"/>
+                <g:render template="/common/activity" model="[activityList: activityList, listActivityAction: 'listActivityAction']"/>
             </td>
             <td class="layoutColumnLast">
                 <g:render template="mySystems" model="[systemInstanceList: systemInstanceList"/>

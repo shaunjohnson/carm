@@ -14,9 +14,9 @@
     </span>
 </h2>
 
-<g:set var="maxReleases" value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxReleases)}"/>
+<g:set var="maxRecords" value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxRecords)}"/>
 <g:set var="applicationReleases"
-       value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxReleases)}"/>
+       value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxRecords)}"/>
 
 <g:if test="${applicationReleases.size()}">
     <table>

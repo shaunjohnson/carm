@@ -156,8 +156,11 @@ grails.plugins.springsecurity.secureChannel.definition = [
 
 // CARM UI configurable options
 ui {
+    activity {
+        maxRecords = 10
+    }
     application {
-        maxReleases = 5
+        maxRecords = 5
     }
     richTextEditor {
         type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
