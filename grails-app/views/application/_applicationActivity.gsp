@@ -1,4 +1,4 @@
-<%@ page import="carm.Module; carm.enums.ActivityAction; carm.Application" %>
+<%@ page import="org.joda.time.Period; org.joda.time.DateTime; carm.Module; carm.enums.ActivityAction; carm.Application" %>
 <h2 class="sectionHeader">
     <g:message code="activity.label" default="Activity"/>
 </h2>
@@ -21,8 +21,8 @@
             </g:else>
         </p>
 
-        <p style="color: #bbb; font-size: 0.9em;">
-            <g:formatDate date="${activity.dateOccurred}"/>
+        <p style="color: #bbb; font-size: 0.9em;" title='<joda:format value="${activity.dateOccurred}"/>'>
+            <joda:formatPeriod value="${new Period(activity.dateOccurred, new DateTime())}"/> ago
         </p>
     </g:each>
 </g:if>

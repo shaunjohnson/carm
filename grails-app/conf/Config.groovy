@@ -52,6 +52,18 @@ grails.spring.bean.packages = []
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
+grails.gorm.default.mapping = {
+    "user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
+    "user-type" type: org.jadira.usertype.dateandtime.joda.PersistentLocalDate, class: org.joda.time.LocalDate
+}
+
+jodatime {
+    periodpicker.default.fields = "years,months,days,hours,minutes"
+    format.org.joda.time.DateTime = "MM/dd/yyyy h:mm a"
+    format.org.joda.time.LocalDate = "MM/dd/yyyy"
+    format.org.joda.time.LocalTime = "h:mm a"
+}
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
@@ -63,7 +75,6 @@ environments {
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
     }
-
 }
 
 // log4j configuration

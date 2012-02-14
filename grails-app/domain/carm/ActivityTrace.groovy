@@ -1,6 +1,7 @@
 package carm
 
 import carm.enums.ActivityAction
+import org.joda.time.DateTime
 
 class ActivityTrace {
     String oid
@@ -9,7 +10,7 @@ class ActivityTrace {
     String objectName
     Long objectId
     String objectType
-    Date dateOccurred
+    DateTime dateOccurred
 
     static constraints = {
         oid(blank: false, maxSize: 100, minSize: 3, nullable: false)
