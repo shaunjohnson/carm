@@ -39,6 +39,16 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
+                    <g:message code="application.system.label" default="System"/>
+                </td>
+                <td valign="top" class="value">
+                    <g:link controller="system" action="show" id="${applicationReleaseInstance?.application?.system?.id}">
+                        ${applicationReleaseInstance?.application?.system?.encodeAsHTML()}
+                    </g:link>
+                </td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name">
                     <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
                 </td>
                 <td valign="top" class="value">
