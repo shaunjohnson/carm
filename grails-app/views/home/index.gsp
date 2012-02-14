@@ -11,31 +11,20 @@
 <div class="body">
     <g:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
-    <h2 class="sectionHeader">
-        <g:message code="myOpenTasks.label" default="My Open Tasks"/>
-        <span class="actions">
-            <g:link controller="requests" action="list">
-                <g:message code="allRequests.label" default="All Requests"/>
-            </g:link>
-        </span>
-    </h2>
-
-    <p class="emphasis">
-        <g:message code="youDontHaveAnyOpenTasks.message" default="You don't have any open tasks."/>
-    </p>
+    <g:render template="myOpenTasks" model="[]"/>
 
     <table class="twoColumnLayout">
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="myProjects" model="[projectCategoryList: projectCategoryList"/>
+                <g:render template="myProjects" model="[projectCategoryList: projectCategoryList]"/>
 
                 <div>&nbsp;</div>
 
                 <g:render template="/common/activity" model="[activityList: activityList, listActivityAction: 'listActivity']"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="mySystems" model="[systemInstanceList: systemInstanceList"/>
+                <g:render template="mySystems" model="[systemInstanceList: systemInstanceList]"/>
             </td>
         </tr>
         </tbody>
