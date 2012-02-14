@@ -13,6 +13,8 @@ import carm.ApplicationType
 import carm.SourceControlServer
 import carm.SourceControlRole
 import carm.ApplicationRole
+import org.joda.time.DateTime
+import org.joda.time.Period
 
 class CarmTagLib {
 
@@ -71,6 +73,18 @@ class CarmTagLib {
         def date = attrs.date
 
         out << '<span style="white-space: nowrap;">' << formatDate(type: "date", style: "medium", date: date) << '</span>'
+    }
+
+    /**
+     * Formats period of time from the provided DateTime to now.
+     */
+    def formatDateTimePeriod = { attrs ->
+        DateTime value = attrs.value
+        
+        out << '<span class="activityDateOccurred" title="' << joda.format(value: value) <<  '">'
+        out << joda.formatPeriod(value: new Period(value, new DateTime()))
+        out << message(code: "ago.label", default: "ago")
+        out << "</span>"
     }
 
     /**

@@ -23,6 +23,21 @@ class ActivityTraceService implements ApplicationContextAware {
     private static final String ROOT_TYPE = "Root"
 
     /**
+     * Builds a query parameter list based on the values provided. If a value is not provided then a sensible default
+     * is selected.
+     *
+     * @param params Map of parameters that may be set
+     * @return Query parameter map
+     */
+    private Map buildQueryParams(Map params) {
+        [
+                max: params.max ?: 10,
+                sort: "dateOccurred",
+                order: "desc"
+        ]
+    }
+
+    /**
      * Lists latest activity events for an Application in reverse chronological order.
      *
      * @param application Application used for query
@@ -30,7 +45,7 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     List<ActivityTrace> listApplicationActivity(Application application) {
         def oid = generateOid(APPLICATION_TYPE, application.id)
-        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+        ActivityTrace.findAllByOid(oid, [sort: "dateOccurred", order: "desc"])
     }
 
     /**
@@ -41,7 +56,7 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     List<ActivityTrace> listModuleActivity(Module module) {
         def oid = generateOid(MODULE_TYPE, module.id)
-        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+        ActivityTrace.findAllByOid(oid, [sort: "dateOccurred", order: "desc"])
     }
 
     /**
@@ -50,9 +65,20 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project used for query
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listProjectActivity(Project project) {
+    List<ActivityTrace> listProjectActivity(Project project, Map params) {
         def oid = generateOid(PROJECT_TYPE, project.id)
-        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+    }
+
+    /**
+     * Counts the total number of activity events for a Project.
+     *
+     * @param project Project used for query
+     * @return Number of ActivityTrace objects
+     */
+    def countProjectActivity(Project project) {
+        def oid = generateOid(PROJECT_TYPE, project.id)
+        ActivityTrace.countByOid(oid)
     }
 
     /**
@@ -182,7 +208,7 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     private insertActivityTrace(String oid, String objectType, ActivityAction action, Long objectId, String objectName) {
         ActivityTrace.withNewSession {
-            def trace = new ActivityTrace(oid: oid, action:  action, objectId: objectId, objectName: objectName,
+            def trace = new ActivityTrace(oid: oid, action: action, objectId: objectId, objectName: objectName,
                     objectType: objectType, dateOccurred: new Date(), username: getUsername())
             if (trace.save()) {
                 // println "Successful save"

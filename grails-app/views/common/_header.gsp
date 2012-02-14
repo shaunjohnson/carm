@@ -204,6 +204,10 @@
                 <bc:showProject project="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showProject project="${domain}"/>
+                <bc:label code="allActivity.label" args="[ entityName ]"/>
+            </g:elseif>
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>

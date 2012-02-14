@@ -1,4 +1,4 @@
-<%@ page import="carm.Module; org.joda.time.DateTime; org.joda.time.Period; carm.enums.ActivityAction; carm.Application" %>
+<%@ page import="org.joda.time.DateTime; org.joda.time.Period" %>
 
 <g:set var="size" value="${activityList?.size() ?: 0}"/>
 <g:set var="maxRecords" value="${Math.min(size, grailsApplication.config.ui.activity.maxRecords)}"/>
@@ -9,7 +9,7 @@
 
     <g:if test="${size > grailsApplication.config.ui.activity.maxRecords && listActivityAction}">
         <span class="actions">
-            <g:link action="${listActivityAction}">
+            <g:link action="${listActivityAction}" id="${domainId}">
                 <g:message code="allActivity.label" default="All Activity"/>
             </g:link>
         </span>
@@ -23,28 +23,11 @@
                 ${activity.username}
             </g:link>
 
-            <g:if test="${activity.objectType == Application.class.name && activity.action != ActivityAction.DELETED}">
-                <g:link controller="application" action="show" id="${activity.objectId}">
-                    <g:message code="activityTrace.${activity.objectType}.${activity.action}"
-                               args="[activity.objectName]"/>
-                </g:link>
-            </g:if>
-            <g:elseif test="${activity.objectType == Module.class.name && activity.action != ActivityAction.DELETED}">
-                <g:link controller="module" action="show" id="${activity.objectId}">
-                    <g:message code="activityTrace.${activity.objectType}.${activity.action}"
-                               args="[activity.objectName]"/>
-                </g:link>
-            </g:elseif>
-            <g:else>
-                <g:message code="activityTrace.${activity.objectType}.${activity.action}" args="[activity.objectName]"/>
-            </g:else>
+            <g:render template="/common/activityMessage" model="[activity: activity]"/>
 
             <br>
 
-            <span class="activityDateOccurred" title='<joda:format value="${activity.dateOccurred}"/>'>
-                <joda:formatPeriod value="${new Period(activity.dateOccurred, new DateTime())}"/>
-                <g:message code="ago.label" default="ago"/>
-            </span>
+            <g:formatDateTimePeriod value="${activity.dateOccurred}"/>
         </p>
     </g:each>
 </g:if>

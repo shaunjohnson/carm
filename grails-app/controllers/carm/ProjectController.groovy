@@ -53,7 +53,7 @@ class ProjectController {
                     projectInstance: projectInstance,
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance),
-                    activityList: activityTraceService.listProjectActivity(projectInstance)
+                    activityList: activityTraceService.listProjectActivity(projectInstance, [:])
             ]
         }
     }
@@ -113,6 +113,22 @@ class ProjectController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity = {
+        def projectInstance = projectService.get(params.id?.toLong())
+        if (!projectInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+            [
+                    projectInstance: projectInstance,
+                    activityList: activityTraceService.listProjectActivity(projectInstance, params),
+                    activityTotal: activityTraceService.countProjectActivity(projectInstance)
+            ]
         }
     }
 }
