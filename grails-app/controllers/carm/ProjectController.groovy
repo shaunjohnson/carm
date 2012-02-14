@@ -1,6 +1,5 @@
 package carm
 
-import grails.plugins.springsecurity.Secured
 import carm.security.User
 import org.springframework.security.acls.domain.BasePermission
 
@@ -53,7 +52,7 @@ class ProjectController {
                     projectInstance: projectInstance,
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance),
-                    activityList: activityTraceService.listProjectActivity(projectInstance, [:])
+                    activityList: activityTraceService.listActivityByProject(projectInstance, [:])
             ]
         }
     }
@@ -126,8 +125,8 @@ class ProjectController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
             [
                     projectInstance: projectInstance,
-                    activityList: activityTraceService.listProjectActivity(projectInstance, params),
-                    activityTotal: activityTraceService.countProjectActivity(projectInstance)
+                    activityList: activityTraceService.listActivityByProject(projectInstance, params),
+                    activityTotal: activityTraceService.countActivityByProject(projectInstance)
             ]
         }
     }

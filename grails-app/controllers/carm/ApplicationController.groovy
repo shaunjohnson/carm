@@ -58,7 +58,7 @@ class ApplicationController {
             [
                     applicationInstance: applicationInstance,
                     deployments: deployments,
-                    activityList: activityTraceService.listApplicationActivity(applicationInstance)
+                    activityList: activityTraceService.listActivityByApplication(applicationInstance, [:])
             ]
         }
     }
@@ -135,6 +135,23 @@ class ApplicationController {
                     applicationInstance: applicationInstance,
                     applicationReleaseInstanceList: ApplicationRelease.findAllByApplication(applicationInstance, params),
                     applicationReleaseInstanceTotal: ApplicationRelease.countByApplication(applicationInstance)
+            ]
+        }
+    }
+
+    def listActivity = {
+        def applicationInstance = Application.get(params.id)
+        if (!applicationInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+            [
+                    applicationInstance: applicationInstance,
+                    activityList: activityTraceService.listActivityByApplication(applicationInstance, params),
+                    activityTotal: activityTraceService.countActivityByApplication(applicationInstance)
             ]
         }
     }

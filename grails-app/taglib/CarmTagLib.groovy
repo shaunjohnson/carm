@@ -80,10 +80,11 @@ class CarmTagLib {
      */
     def formatDateTimePeriod = { attrs ->
         DateTime value = attrs.value
+        def styleClass = attrs.class
         
-        out << '<span class="activityDateOccurred" title="' << joda.format(value: value) <<  '">'
+        out << '<span class="' << styleClass << '" title="' << joda.format(value: value) <<  '">'
         out << joda.formatPeriod(value: new Period(value, new DateTime()))
-        out << message(code: "ago.label", default: "ago")
+        out << '&nbsp;' << message(code: "ago.label", default: "ago")
         out << "</span>"
     }
 

@@ -168,7 +168,7 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationDetails" entityName=" ${entityName}"/>
+        <g:showHideDetails sectionId="applicationDetails" entityName="${entityName}"/>
     </div>
 
     <g:render template="pendingTasks" model="['applicationInstance': applicationInstance]"/>
@@ -188,7 +188,8 @@
 
                 <div>&nbsp;</div>
 
-                <g:render template="/common/activity" model="[activityList: activityList, listActivityAction: 'listActivity']"/>
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationInstance.id]"/>
             </td>
         </tr>
         </tbody>

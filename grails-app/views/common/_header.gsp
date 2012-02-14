@@ -27,6 +27,10 @@
                 <bc:showApplication application="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showApplication application="${domain}"/>
+                <bc:label code="allActivity.label" args="[ entityName ]"/>
+            </g:elseif>
             <g:elseif test="${action == 'listReleases'}">
                 <bc:showApplication application="${domain}"/>
                 <bc:label code="allReleases.label" args="[ entityName ]"/>
@@ -134,9 +138,11 @@
 </g:elseif>
 <g:elseif test="${controller ==~ /.*home/}">
     <g:pageHeaderLabel action="show" beanName="${pageName}"/>
+    <bc:breadcrumbs/>
 </g:elseif>
 <g:elseif test="${controller == 'login'}">
     <g:pageHeaderLabel action="show" beanName="${pageName}"/>
+    <bc:breadcrumbs/>
 </g:elseif>
 <g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
@@ -160,6 +166,10 @@
             <g:elseif test="${action == 'edit' || action == 'update'}">
                 <bc:showModule module="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
+            </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showModule module="${domain}"/>
+                <bc:label code="allActivity.label" args="[ entityName ]"/>
             </g:elseif>
         </g:else>
     </bc:breadcrumbs>

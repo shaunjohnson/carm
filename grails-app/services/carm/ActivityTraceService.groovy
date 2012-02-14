@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import static carm.enums.ActivityAction.*
 import carm.enums.ActivityAction
+import org.joda.time.DateTime
 
 class ActivityTraceService implements ApplicationContextAware {
 
@@ -41,33 +42,69 @@ class ActivityTraceService implements ApplicationContextAware {
      * Lists latest activity events for an Application in reverse chronological order.
      *
      * @param application Application used for query
+     * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listApplicationActivity(Application application) {
+    List<ActivityTrace> listActivityByApplication(Application application, Map params) {
         def oid = generateOid(APPLICATION_TYPE, application.id)
-        ActivityTrace.findAllByOid(oid, [sort: "dateOccurred", order: "desc"])
+        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
     }
 
     /**
      * Lists latest activity events for a Module in reverse chronological order.
      *
      * @param module Module used for query
+     * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listModuleActivity(Module module) {
+    List<ActivityTrace> listActivityByModule(Module module, Map params) {
         def oid = generateOid(MODULE_TYPE, module.id)
-        ActivityTrace.findAllByOid(oid, [sort: "dateOccurred", order: "desc"])
+        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
     }
 
     /**
      * Lists latest activity events for a Project in reverse chronological order.
      *
      * @param project Project used for query
+     * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listProjectActivity(Project project, Map params) {
+    List<ActivityTrace> listActivityByProject(Project project, Map params) {
         def oid = generateOid(PROJECT_TYPE, project.id)
         ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+    }
+
+    /**
+     * Lists latest activity events for the CARM application in reverse chronological order.
+     *
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityByRoot(Map params) {
+        def oid = generateOid(ROOT_TYPE, ROOT_ID)
+        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+    }
+
+    /**
+     * Counts the total number of activity events for a Application.
+     *
+     * @param application Application used for query
+     * @return Number of ActivityTrace objects
+     */
+    def countActivityByApplication(Application application) {
+        def oid = generateOid(APPLICATION_TYPE, application.id)
+        ActivityTrace.countByOid(oid)
+    }
+
+    /**
+     * Counts the total number of activity events for a Module.
+     *
+     * @param module Module used for query
+     * @return Number of ActivityTrace objects
+     */
+    def countActivityByModule(Module module) {
+        def oid = generateOid(MODULE_TYPE, module.id)
+        ActivityTrace.countByOid(oid)
     }
 
     /**
@@ -76,19 +113,20 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project used for query
      * @return Number of ActivityTrace objects
      */
-    def countProjectActivity(Project project) {
+    def countActivityByProject(Project project) {
         def oid = generateOid(PROJECT_TYPE, project.id)
         ActivityTrace.countByOid(oid)
     }
 
     /**
-     * Lists latest activity events for the CARM application in reverse chronological order.
+     * Counts the total number of activity events for the CARM application.
      *
-     * @return List of ActivityTrace objects
+     * @param project Project used for query
+     * @return Number of ActivityTrace objects
      */
-    List<ActivityTrace> listRootActivity() {
+    def countActivityByRoot() {
         def oid = generateOid(ROOT_TYPE, ROOT_ID)
-        ActivityTrace.findAllByOid(oid, [max: 10, sort: "dateOccurred", order: "desc"])
+        ActivityTrace.countByOid(oid)
     }
 
     /**
@@ -209,7 +247,7 @@ class ActivityTraceService implements ApplicationContextAware {
     private insertActivityTrace(String oid, String objectType, ActivityAction action, Long objectId, String objectName) {
         ActivityTrace.withNewSession {
             def trace = new ActivityTrace(oid: oid, action: action, objectId: objectId, objectName: objectName,
-                    objectType: objectType, dateOccurred: new Date(), username: getUsername())
+                    objectType: objectType, dateOccurred: new DateTime(), username: getUsername())
             if (trace.save()) {
                 // println "Successful save"
             }
@@ -247,7 +285,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return Current username
      */
     private String getUsername() {
-        springSecurityService.getPrincipal()
+        springSecurityService.getPrincipal().username
     }
 
     /**

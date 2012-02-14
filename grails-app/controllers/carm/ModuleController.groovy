@@ -41,7 +41,7 @@ class ModuleController {
         else {
             [
                     moduleInstance: moduleInstance,
-                    activityList: activityTraceService.listModuleActivity(moduleInstance)
+                    activityList: activityTraceService.listActivityByModule(moduleInstance, [:])
             ]
         }
     }
@@ -102,6 +102,22 @@ class ModuleController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity = {
+        def moduleInstance = Module.get(params.id)
+        if (!moduleInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+            [
+                    moduleInstance: moduleInstance,
+                    activityList: activityTraceService.listActivityByModule(moduleInstance, params),
+                    activityTotal: activityTraceService.countActivityByModule(moduleInstance)
+            ]
         }
     }
 }

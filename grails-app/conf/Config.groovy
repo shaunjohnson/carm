@@ -157,7 +157,7 @@ grails.plugins.springsecurity.secureChannel.definition = [
 // CARM UI configurable options
 ui {
     activity {
-        maxRecords = 10
+        maxRecords = 1
     }
     application {
         maxRecords = 5

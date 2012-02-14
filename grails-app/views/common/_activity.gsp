@@ -8,8 +8,10 @@
     <g:message code="activity.label" default="Activity"/>
 
     <g:if test="${size > grailsApplication.config.ui.activity.maxRecords && listActivityAction}">
+        <g:set var="controller" value="${params.controller ==~ /.*home/ ? 'home' : params.controller}"/>
+
         <span class="actions">
-            <g:link action="${listActivityAction}" id="${domainId}">
+            <g:link controller="${controller}" action="${listActivityAction}" id="${domainId}">
                 <g:message code="allActivity.label" default="All Activity"/>
             </g:link>
         </span>
@@ -27,7 +29,7 @@
 
             <br>
 
-            <g:formatDateTimePeriod value="${activity.dateOccurred}"/>
+            <g:formatDateTimePeriod class="activityDateOccurred" value="${activity.dateOccurred}"/>
         </p>
     </g:each>
 </g:if>
