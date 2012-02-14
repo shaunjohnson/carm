@@ -71,7 +71,7 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="application.system.label" default="System"/>
                 </td>
