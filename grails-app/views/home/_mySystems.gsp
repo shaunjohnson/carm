@@ -2,7 +2,7 @@
     <g:message code="myEnvironments.label" default="My Environments"/>
     <span class="actions">
         <g:link controller="system" action="list">
-            <g:message code="browseAllSystems.label" default="Browse All Systems"/>
+            <g:message code="allSystems.label" default="All Systems"/>
         </g:link>
     </span>
 </h2>

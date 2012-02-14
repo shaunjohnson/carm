@@ -3,7 +3,7 @@
     <g:message code="myProjects.label" default="My Projects"/>
     <span class="actions">
         <g:link controller="project" action="list">
-            <g:message code="browseAllProjects.label" default="Browse All Projects"/>
+            <g:message code="allProjects.label" default="All Projects"/>
         </g:link>
     </span>
 </h2>

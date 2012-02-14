@@ -15,7 +15,7 @@
         <g:message code="myOpenTasks.label" default="My Open Tasks"/>
         <span class="actions">
             <g:link controller="requests" action="list">
-                <g:message code="browseAllRequests.label" default="Browse All Requests"/>
+                <g:message code="allRequests.label" default="All Requests"/>
             </g:link>
         </span>
     </h2>
