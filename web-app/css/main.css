@@ -131,6 +131,10 @@ p {
     margin-top: 1em;
 }
 
+tr.highlight {
+    background-color: #FFFFB2;
+}
+
 .centered {
     text-align: center;
 }

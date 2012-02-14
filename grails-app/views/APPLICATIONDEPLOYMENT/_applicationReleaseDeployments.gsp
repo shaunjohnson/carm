@@ -28,24 +28,43 @@
             <tbody>
             <g:each in="${applicationReleaseDeployments?.sort { it.completedDeploymentDate }?.reverse()}"
                     var="deploymentInstance" status="i">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>
-                        <g:link controller="applicationDeployment" action="show" id="${deploymentInstance.id}">
+                <g:if test="${applicationDeploymentInstance == deploymentInstance}">
+                    <tr class="highlight ${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <td>
                             ${deploymentInstance.deploymentState?.encodeAsHTML()}
-                        </g:link>
-                    </td>
-                    <td>
-                        <g:link controller="systemEnvironment" action="show" id="${deploymentInstance.environment.id}">
+                        </td>
+                        <td>
                             ${deploymentInstance.environment?.encodeAsHTML()}
-                        </g:link>
-                    </td>
-                    <td>
-                        <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
-                    </td>
-                    <td>
-                        <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
+                        </td>
+                        <td>
+                            <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
+                        </td>
+                    </tr>
+                </g:if>
+                <g:else>
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <td>
+                            <g:link controller="applicationDeployment" action="show" id="${deploymentInstance.id}">
+                                ${deploymentInstance.deploymentState?.encodeAsHTML()}
+                            </g:link>
+                        </td>
+                        <td>
+                            <g:link controller="systemEnvironment" action="show"
+                                    id="${deploymentInstance.environment.id}">
+                                ${deploymentInstance.environment?.encodeAsHTML()}
+                            </g:link>
+                        </td>
+                        <td>
+                            <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
+                        </td>
+                        <td>
+                            <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
+                        </td>
+                    </tr>
+                </g:else>
             </g:each>
             </tbody>
         </table>
