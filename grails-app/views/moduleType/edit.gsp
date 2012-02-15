@@ -28,31 +28,37 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="moduleType.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleTypeInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${moduleTypeInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${moduleTypeInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'moduleType.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="moduleType.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: moduleTypeInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${moduleTypeInstance?.description}"/>
+                                    value="${moduleTypeInstance?.description}"
+                                    title="${message(code: 'moduleType.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

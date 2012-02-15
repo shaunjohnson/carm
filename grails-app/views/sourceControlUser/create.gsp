@@ -26,56 +26,66 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="server.id">
+                        <carm:label for="server.id">
                             <g:message code="sourceControlUser.server.label" default="Source Control Server"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'server', 'errors')}">
-                        ${sourceControlUserInstance?.server?.name?.encodeAsHTML()}
+                        <g:link controller="sourceControlServer" action="show"
+                                id="${sourceControlUserInstance?.server?.id}">
+                            ${sourceControlUserInstance?.server?.name?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="server.id" value="${sourceControlUserInstance?.server?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="sourceControlUser.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${sourceControlUserInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     required="required"
+                                     value="${sourceControlUserInstance?.name}"
+                                     title="${message(code: 'sourceControlUser.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="sourceControlUser.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${sourceControlUserInstance?.description}"/>
+                                    value="${sourceControlUserInstance?.description}"
+                                    title="${message(code: 'sourceControlUser.description.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="user.id">
+                        <carm:label for="user.id">
                             <g:message code="sourceControlUser.user.label" default="User"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'user', 'errors')}">
                         <g:select name="user.id" from="${carm.security.User.list().sort { it.username }}" optionKey="id"
-                                  value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"/>
+                                  value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"
+                                  title="${message(code: 'sourceControlUser.user.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

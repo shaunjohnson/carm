@@ -28,32 +28,38 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="sourceControlRole.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlRoleInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${sourceControlRoleInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${sourceControlRoleInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'sourceControlRole.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="sourceControlRole.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlRoleInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${sourceControlRoleInstance?.description}"/>
+                                    value="${sourceControlRoleInstance?.description}"
+                                    title="${message(code: 'sourceControlRole.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

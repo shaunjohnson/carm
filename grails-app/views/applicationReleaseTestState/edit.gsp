@@ -11,7 +11,7 @@
 <body>
 <div class="body">
     <carm:header domain="${applicationReleaseTestStateInstance}"
-              pageName="${message(code: 'default.edit.label', args: [entityName])}"/>
+                 pageName="${message(code: 'default.edit.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -30,32 +30,38 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="applicationReleaseTestState.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseTestStateInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${applicationReleaseTestStateInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${applicationReleaseTestStateInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'applicationReleaseTestState.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="applicationReleaseTestState.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseTestStateInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${applicationReleaseTestStateInstance?.description}"/>
+                                    value="${applicationReleaseTestStateInstance?.description}"
+                                    title="${message(code: 'applicationReleaseTestState.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

@@ -27,46 +27,52 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="application.id">
+                        <carm:label for="application.id">
                             <g:message code="applicationRelease.application.label" default="Application"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                        ${applicationReleaseInstance?.application?.encodeAsHTML()}
+                        <g:link controller="application" action="show" id="${applicationReleaseInstance?.application?.id}">
+                            ${applicationReleaseInstance?.application?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="application.id" value="${applicationReleaseInstance?.application?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="releaseNumber">
+                        <carm:label for="releaseNumber" required="true">
                             <g:message code="applicationRelease.releaseNumber.label" default="Release Number"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'releaseNumber', 'errors')}">
-                        <g:textField name="releaseNumber" maxlength="20"
-                                     value="${applicationReleaseInstance?.releaseNumber}"/>
+                        <g:textField name="releaseNumber" maxlength="20" size="20"
+                                     value="${applicationReleaseInstance?.releaseNumber}"
+                                     required="required"
+                                     title="${message(code: 'applicationRelease.releaseNumber.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="buildPath">
+                        <carm:label for="buildPath">
                             <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildPath', 'errors')}">
-                        <g:textField name="buildPath" maxlength="20" value="${applicationReleaseInstance?.buildPath}"/>
+                        <g:textField name="buildPath" maxlength="20" size="20"
+                                     value="${applicationReleaseInstance?.buildPath}"
+                                     title="${message(code: 'applicationRelease.buildPath.help')}"/>
                         <br/>
                         <carm:formatSourceControl application="${applicationReleaseInstance.application}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="changeLog">
+                        <carm:label for="changeLog">
                             <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
@@ -78,6 +84,8 @@
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

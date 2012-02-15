@@ -27,47 +27,55 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="application.id">
+                        <carm:label for="application.id">
                             <g:message code="module.application.label" default="Application"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'application', 'errors')}">
-                        ${moduleInstance?.application?.encodeAsHTML()}
+                        <g:link controller="application" action="show" id="${moduleInstance?.application?.id}">
+                            ${moduleInstance?.application?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="application.id" value="${moduleInstance?.application?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="module.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${moduleInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${moduleInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'module.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="type.id">
+                        <carm:label for="type.id" required="true">
                             <g:message code="module.type.label" default="Type"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
                         <g:select name="type.id" from="${ModuleType.list().sort { it.name }}" optionKey="id"
-                                  value="${moduleInstance?.type?.id}"/>
+                                  noSelection="['null': '']" value="${moduleInstance?.type?.id}"
+                                  required="required"
+                                  title="${message(code: 'module.type.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="module.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${moduleInstance?.description}"/>
+                                    value="${moduleInstance?.description}"
+                                    title="${message(code: 'module.description.help')}"/>
                     </td>
                 </tr>
 
@@ -77,22 +85,23 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="systemComponents">
+                        <carm:label for="systemComponents">
                             <g:message code="module.systemComponents.label" default="System Components"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: moduleInstance, field: 'systemComponents', 'errors')}">
                         <g:select name="systemComponents" multiple="yes" optionKey="id" size="5"
                                   from="${moduleInstance.application.system.components.sort { it.name }}"
-                                  value="${moduleInstance?.systemComponents*.id}"/>
+                                  value="${moduleInstance?.systemComponents*.id}"
+                                  title="${message(code: 'module.systemComponents.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="deployInstructions">
+                        <carm:label for="deployInstructions">
                             <g:message code="module.deployInstructions.label" default="Deploy Instructions"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: moduleInstance, field: 'deployInstructions', 'errors')}">
@@ -104,6 +113,8 @@
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

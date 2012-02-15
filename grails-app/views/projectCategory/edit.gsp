@@ -28,31 +28,37 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="projectCategory.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectCategoryInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${projectCategoryInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${projectCategoryInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'projectCategory.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="projectCategory.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: projectCategoryInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${projectCategoryInstance?.description}"/>
+                                    value="${projectCategoryInstance?.description}"
+                                    title="${message(code: 'projectCategory.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">

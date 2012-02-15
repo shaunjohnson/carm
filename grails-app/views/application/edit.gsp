@@ -34,7 +34,9 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
-                        ${applicationInstance?.project?.encodeAsHTML()}
+                        <g:link controller="project" action="show" id="${applicationInstance.project.id}">
+                            ${applicationInstance?.project?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="project.id" value="${applicationInstance?.project?.id}"/>
                     </td>
                 </tr>
@@ -45,7 +47,9 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${applicationInstance?.name}" required="required"
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${applicationInstance?.name}"
+                                     required="required"
                                      title="${message(code: 'application.name.help')}"/>
                     </td>
                 </tr>
@@ -104,7 +108,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlPath', 'errors')}">
-                        <g:textField name="sourceControlPath" maxlength="200"
+                        <g:textField name="sourceControlPath" maxlength="200" size="50"
                                      value="${applicationInstance?.sourceControlPath}"
                                      title="${message(code: 'application.sourceControlPath.help')}"/>
                     </td>

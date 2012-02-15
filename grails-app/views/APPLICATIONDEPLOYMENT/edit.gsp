@@ -28,10 +28,10 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="applicationRelease.id">
+                        <carm:label for="applicationRelease.id">
                             <g:message code="applicationDeployment.applicationRelease.label"
                                        default="Application Release"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
@@ -41,9 +41,9 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="systemEnvironment.id">
+                        <carm:label for="systemEnvironment.id">
                             <g:message code="applicationDeployment.environment.label" default="Environment"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'systemEnvironment', 'errors')}">
@@ -53,10 +53,10 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="deploymentInstructions">
+                        <carm:label for="deploymentInstructions">
                             <g:message code="applicationDeployment.deploymentInstructions.label"
                                        default="Deployment Instructions"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'errors')}">
@@ -66,10 +66,10 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="requestedDeploymentDate">
+                        <carm:label for="requestedDeploymentDate">
                             <g:message code="applicationDeployment.requestedDeploymentDate.label"
                                        default="Requested Deployment Date"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'errors')}">
@@ -79,10 +79,10 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="completedDeploymentDate">
+                        <carm:label for="completedDeploymentDate">
                             <g:message code="applicationDeployment.completedDeploymentDate.label"
                                        default="Completed Deployment Date"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'completedDeploymentDate', 'errors')}">

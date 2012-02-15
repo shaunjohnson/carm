@@ -26,42 +26,50 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="system.id">
+                        <carm:label for="system.id">
                             <g:message code="systemComponent.system.label" default="System"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        ${systemComponentInstance?.system?.encodeAsHTML()}
+                        <g:link controller="system" action="show" id="${systemComponentInstance?.system?.id}">
+                            ${systemComponentInstance?.system?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="system.id" value="${systemComponentInstance?.system?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name">
+                        <carm:label for="name" required="true">
                             <g:message code="systemComponent.name.label" default="Name"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemComponentInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${systemComponentInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" size="50"
+                                     value="${systemComponentInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'systemComponent.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description">
+                        <carm:label for="description">
                             <g:message code="systemComponent.description.label" default="Description"/>
-                        </label>
+                        </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: systemComponentInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${systemComponentInstance?.description}"/>
+                                    value="${systemComponentInstance?.description}"
+                                    title="${message(code: 'systemComponent.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
 
         <div class="buttons">
             <span class="button">
