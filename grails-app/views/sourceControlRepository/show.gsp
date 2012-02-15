@@ -81,7 +81,7 @@
                                         <g:message code="default.button.delete.label" default="Delete"/>
                                     </g:link>
                                 </span>
-                            </g:ifNotInUse>
+                            </carm:ifNotInUse>
                         </div>
                     </td>
                 </tr>
