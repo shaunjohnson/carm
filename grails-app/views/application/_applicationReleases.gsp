@@ -5,11 +5,11 @@
     <span class="actions">
         <g:link class="create" controller="applicationRelease" action="create"
                 params="['application.id': applicationInstance?.id]">
-            <g:message code="makeNewRelease.label" default="Make a New Release"/>
+            <g:message code="newRelease.label" default="Make a New Release"/>
         </g:link>
         <g:link class="list" controller="application" action="listReleases"
                 params="['id': applicationInstance?.id]">
-            <g:message code="showAllReleases.label" default="Show All Releases"/>
+            <g:message code="allReleases.label" default="All Releases"/>
         </g:link>
     </span>
 </h2>
