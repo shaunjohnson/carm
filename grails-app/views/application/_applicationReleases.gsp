@@ -46,7 +46,7 @@
                                 <carm:button controller="applicationDeployment" action="create"
                                           params="['applicationRelease.id': applicationRelease.id]">
                                     <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-                                </g:button>
+                                </carm:button>
                             </g:if>
                         </span>
                     </div>
