@@ -1,3 +1,5 @@
+package carm
+
 import carm.Project
 import carm.Application
 import carm.ApplicationRelease
