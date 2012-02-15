@@ -1,7 +1,7 @@
 package carm
 
 class Project {
-    def activityTraceService
+    transient activityTraceService
 
     String name
     String description
