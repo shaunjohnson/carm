@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${projectInstanceList}"/>
+    <carm:header domain="${projectInstanceList}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">

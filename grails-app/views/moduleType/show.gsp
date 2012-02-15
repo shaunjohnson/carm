@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${moduleTypeInstance}"/>
+    <carm:header domain="${moduleTypeInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -58,7 +58,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${moduleTypeInstance}">
+                            <carm:ifNotInUse domain="${moduleTypeInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${moduleTypeInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>

@@ -20,7 +20,7 @@
                     <g:render template="/common/activityMessage" model="[activity: activity]"/>
                 </td>
                 <td>
-                    <g:formatDateTimePeriod value="${activity.dateOccurred}"/>
+                    <carm:formatDateTimePeriod value="${activity.dateOccurred}"/>
                 </td>
             </tr>
         </g:each>

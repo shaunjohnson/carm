@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationReleaseInstance}"/>
+    <carm:header domain="${applicationReleaseInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -17,7 +17,7 @@
 
     <div class="buttons">
         <g:if test="${applicationReleaseInstance.releaseState == ApplicationReleaseState.COMPLETED}">
-            <g:button controller="applicationDeployment" action="create"
+            <carm:button controller="applicationDeployment" action="create"
                       params="['applicationRelease.id': applicationReleaseInstance.id]">
                 <g:message code="deployThisRelease.label" default="Deploy this Release"/>
             </g:button>
@@ -54,7 +54,7 @@
                 <td valign="top" class="value">
                     ${fieldValue(bean: applicationReleaseInstance, field: "buildPath")}
                     <br/>
-                    <g:formatSourceControl application="${applicationReleaseInstance.application}"/>
+                    <carm:formatSourceControl application="${applicationReleaseInstance.application}"/>
                 </td>
             </tr>
             <tr class="prop">
@@ -114,7 +114,7 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
     </div>
 
     <table class="twoColumnLayout">

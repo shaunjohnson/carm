@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${systemInstance}"/>
+    <carm:header domain="${systemInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -72,7 +72,7 @@
                                 <td>
                                     <sec:ifAllGranted roles="ROLE_ADMIN">
                                         <g:if test="${eindex > 0}">
-                                            <g:moveUp controller="system" action="moveEnvUp" id="${environment.id}"
+                                            <carm:moveUp controller="system" action="moveEnvUp" id="${environment.id}"
                                                       params="[systemId: systemInstance.id, index: eindex]"/>
                                         </g:if>
                                     </sec:ifAllGranted>
@@ -80,7 +80,7 @@
                                 <td>
                                     <sec:ifAllGranted roles="ROLE_ADMIN">
                                         <g:if test="${eindex + 1 < systemInstance.environments.size()}">
-                                            <g:moveDown controller="system" action="moveEnvDown" id="${environment.id}"
+                                            <carm:moveDown controller="system" action="moveEnvDown" id="${environment.id}"
                                                         params="[systemId: systemInstance.id, index: eindex]"/>
                                         </g:if>
                                     </sec:ifAllGranted>
@@ -133,7 +133,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${systemInstance}">
+                            <carm:ifNotInUse domain="${systemInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${systemInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
@@ -146,7 +146,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="systemDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="systemDetails" entityName="${entityName}"/>
     </div>
 
     <g:render template="systemApplications"

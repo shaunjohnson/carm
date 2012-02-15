@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${systemInstanceList}"/>
+    <carm:header domain="${systemInstanceList}"/>
 
     <div class="nav">
         <span class="menuButton">

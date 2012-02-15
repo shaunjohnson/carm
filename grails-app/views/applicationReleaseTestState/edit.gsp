@@ -10,7 +10,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationReleaseTestStateInstance}"
+    <carm:header domain="${applicationReleaseTestStateInstance}"
               pageName="${message(code: 'default.edit.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">

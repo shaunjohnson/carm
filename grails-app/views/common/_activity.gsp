@@ -29,7 +29,7 @@
 
             <br>
 
-            <g:formatDateTimePeriod class="activityDateOccurred" value="${activity.dateOccurred}"/>
+            <carm:formatDateTimePeriod class="activityDateOccurred" value="${activity.dateOccurred}"/>
         </p>
     </g:each>
 </g:if>

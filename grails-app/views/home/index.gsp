@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header pageName="${message(code: 'home.label', default: 'Home')}"/>
+    <carm:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
     <g:render template="myOpenTasks" model="[]"/>
 

@@ -18,6 +18,8 @@ import org.joda.time.Period
 
 class CarmTagLib {
 
+    static namespace = "carm"
+
     def carmSecurityService
 
     /**

@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${systemComponentInstanceList}"/>
+    <carm:header domain="${systemComponentInstanceList}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${projectInstance}"/>
+    <carm:header domain="${projectInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -67,7 +67,7 @@
                     <g:message code="project.projectManagers.label" default="Project Managers"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:listUsersWithPermission domainObject="${projectInstance}"
+                    <carm:listUsersWithPermission domainObject="${projectInstance}"
                                                permission="${BasePermission.ADMINISTRATION}"/>
                 </td>
             </tr>
@@ -94,7 +94,7 @@
                 </tfoot>
             </sec:permitted>
         </table>
-        <g:showHideDetails sectionId="projectDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="projectDetails" entityName="${entityName}"/>
     </div>
 
     <g:render template="pendingTasks"

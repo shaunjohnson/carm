@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${sourceControlRoleInstance}"/>
+    <carm:header domain="${sourceControlRoleInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

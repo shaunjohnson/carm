@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationDeploymentInstance}"/>
+    <carm:header domain="${applicationDeploymentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -107,7 +107,7 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}"/>
     </div>
 
     <table class="twoColumnLayout">

@@ -39,7 +39,7 @@
                             <g:if test="${applicationDeployment?.applicationDeploymentId}">
                                 <g:link controller="applicationDeployment" action="show"
                                         id="${applicationDeployment.applicationDeploymentId}">
-                                    <g:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
+                                    <carm:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
                                 </g:link>
                             </g:if>
                         </td>

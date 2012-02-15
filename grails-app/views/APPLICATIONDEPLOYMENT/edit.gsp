@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationDeploymentInstance}"/>
+    <carm:header domain="${applicationDeploymentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

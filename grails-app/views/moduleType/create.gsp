@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${moduleTypeInstance}" pageName="${message(code: 'default.create.label', args: [entityName])}"/>
+    <carm:header domain="${moduleTypeInstance}" pageName="${message(code: 'default.create.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

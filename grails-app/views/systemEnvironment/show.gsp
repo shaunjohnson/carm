@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${systemEnvironmentInstance}"/>
+    <carm:header domain="${systemEnvironmentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -79,7 +79,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="systemEnvironmentDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="systemEnvironmentDetails" entityName="${entityName}"/>
     </div>
 
     <g:render template="systemEnvironmentApplications"

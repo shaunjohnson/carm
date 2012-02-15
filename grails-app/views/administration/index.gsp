@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header pageName="${message(code: 'administration.label', default: 'Administration')}"/>
+    <carm:header pageName="${message(code: 'administration.label', default: 'Administration')}"/>
 
     <table class="twoColumnLayout">
         <tbody>

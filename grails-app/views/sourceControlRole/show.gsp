@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${sourceControlRoleInstance}"/>
+    <carm:header domain="${sourceControlRoleInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -57,7 +57,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${sourceControlRoleInstance}">
+                            <carm:ifNotInUse domain="${sourceControlRoleInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${sourceControlRoleInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>

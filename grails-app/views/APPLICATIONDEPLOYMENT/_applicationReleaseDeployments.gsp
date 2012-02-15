@@ -37,10 +37,10 @@
                             ${deploymentInstance.environment?.encodeAsHTML()}
                         </td>
                         <td>
-                            <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
+                            <carm:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
                         </td>
                         <td>
-                            <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
+                            <carm:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
                         </td>
                     </tr>
                 </g:if>
@@ -58,10 +58,10 @@
                             </g:link>
                         </td>
                         <td>
-                            <g:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
+                            <carm:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
                         </td>
                         <td>
-                            <g:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
+                            <carm:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
                         </td>
                     </tr>
                 </g:else>

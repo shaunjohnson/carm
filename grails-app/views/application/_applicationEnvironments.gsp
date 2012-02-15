@@ -29,7 +29,7 @@
             </td>
             <td>
                 <g:if test="${deployment}">
-                    <g:formatDateOnly date="${deployment.completedDeploymentDate}"/>
+                    <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
                 </g:if>
             </td>
             <td>

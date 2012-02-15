@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationTypeInstanceList}"
+    <carm:header domain="${applicationTypeInstanceList}"
               pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">

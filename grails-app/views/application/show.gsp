@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationInstance}"/>
+    <carm:header domain="${applicationInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -55,7 +55,7 @@
                     <g:message code="application.sourceControlRepository.label" default="Source Control Repository"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatSourceControl repository="${applicationInstance?.sourceControlRepository}"/>
+                    <carm:formatSourceControl repository="${applicationInstance?.sourceControlRepository}"/>
                 </td>
             </tr>
             <tr class="prop">
@@ -63,7 +63,7 @@
                     <g:message code="application.sourceControlPath.label" default="Source Control Path"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatSourceControl application="${applicationInstance}"/>
+                    <carm:formatSourceControl application="${applicationInstance}"/>
                 </td>
             </tr>
 
@@ -168,7 +168,7 @@
             </tr>
             </tfoot>
         </table>
-        <g:showHideDetails sectionId="applicationDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="applicationDetails" entityName="${entityName}"/>
     </div>
 
     <g:render template="pendingTasks" model="['applicationInstance': applicationInstance]"/>

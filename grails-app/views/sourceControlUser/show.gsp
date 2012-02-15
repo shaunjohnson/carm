@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${sourceControlUserInstance}"/>
+    <carm:header domain="${sourceControlUserInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -118,7 +118,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="sourceControlUserDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="sourceControlUserDetails" entityName="${entityName}"/>
     </div>
 </div>
 </body>

@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header pageName="${message(code: 'allActivity.label', args: [entityName])}"/>
+    <carm:header pageName="${message(code: 'allActivity.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

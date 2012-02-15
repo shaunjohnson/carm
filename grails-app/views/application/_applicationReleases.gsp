@@ -31,7 +31,7 @@
                     </h4>
 
                     <div style="margin: 0.5em 0;">
-                        <g:formatDateOnly date="${applicationRelease.dateCreated}"/>
+                        <carm:formatDateOnly date="${applicationRelease.dateCreated}"/>
                     </div>
 
                     <div>
@@ -43,7 +43,7 @@
                     <div class="buttons">
                         <span class="button">
                             <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
-                                <g:button controller="applicationDeployment" action="create"
+                                <carm:button controller="applicationDeployment" action="create"
                                           params="['applicationRelease.id': applicationRelease.id]">
                                     <g:message code="deployThisRelease.label" default="Deploy this Release"/>
                                 </g:button>

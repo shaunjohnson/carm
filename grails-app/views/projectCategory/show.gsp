@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${projectCategoryInstance}"/>
+    <carm:header domain="${projectCategoryInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -58,7 +58,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${projectCategoryInstance}">
+                            <carm:ifNotInUse domain="${projectCategoryInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
@@ -71,7 +71,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}"/>
     </div>
 
     <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name }}"/>

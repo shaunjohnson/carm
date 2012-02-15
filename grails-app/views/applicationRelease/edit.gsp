@@ -10,7 +10,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationReleaseInstance}"/>
+    <carm:header domain="${applicationReleaseInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -60,7 +60,7 @@
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildPath', 'errors')}">
                         <g:textField name="buildPath" maxlength="20" value="${applicationReleaseInstance?.buildPath}"/>
                         <br/>
-                        <g:formatSourceControl application="${applicationReleaseInstance.application}"/>
+                        <carm:formatSourceControl application="${applicationReleaseInstance.application}"/>
                     </td>
                 </tr>
                 <tr class="prop">

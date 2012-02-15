@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${systemComponentInstance}"/>
+    <carm:header domain="${systemComponentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -68,7 +68,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${systemComponentInstance}">
+                            <carm:ifNotInUse domain="${systemComponentInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${systemComponentInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
@@ -81,7 +81,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="systemComponentDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="systemComponentDetails" entityName="${entityName}"/>
     </div>
 </div>
 </body>

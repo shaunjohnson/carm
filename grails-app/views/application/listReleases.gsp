@@ -9,7 +9,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${applicationInstance}" pageName="${message(code: 'default.listReleases.label', args: [entityName])}"/>
+    <carm:header domain="${applicationInstance}" pageName="${message(code: 'default.listReleases.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -37,7 +37,7 @@
                         ${fieldValue(bean: applicationReleaseInstance, field: "releaseState")}
                     </td>
                     <td>
-                        <g:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
+                        <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
                     </td>
                     <td>
                         ${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}

@@ -10,7 +10,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${moduleDeploymentTestStateInstance}"/>
+    <carm:header domain="${moduleDeploymentTestStateInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -59,7 +59,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${moduleDeploymentTestStateInstance}">
+                            <carm:ifNotInUse domain="${moduleDeploymentTestStateInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete"
                                             id="${moduleDeploymentTestStateInstance?.id}">

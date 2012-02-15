@@ -10,7 +10,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${moduleDeploymentTestStateInstanceList}"
+    <carm:header domain="${moduleDeploymentTestStateInstanceList}"
               pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">

@@ -10,7 +10,7 @@
 
 <body>
 <div class="body">
-    <g:header domain="${sourceControlRepositoryInstance}"/>
+    <carm:header domain="${sourceControlRepositoryInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -32,7 +32,7 @@
                     <g:message code="sourceControlRepository.server.label" default="Server"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatSourceControl server="${sourceControlRepositoryInstance?.server}"/>
+                    <carm:formatSourceControl server="${sourceControlRepositoryInstance?.server}"/>
                 </td>
             </tr>
             <tr class="prop">
@@ -75,7 +75,7 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <g:ifNotInUse domain="${sourceControlRepositoryInstance}">
+                            <carm:ifNotInUse domain="${sourceControlRepositoryInstance}">
                                 <span class="button">
                                     <g:link class="delete" action="delete" id="${sourceControlRepositoryInstance?.id}">
                                         <g:message code="default.button.delete.label" default="Delete"/>
@@ -88,7 +88,7 @@
                 </tfoot>
             </sec:ifAllGranted>
         </table>
-        <g:showHideDetails sectionId="sourceControlRepositoryDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="sourceControlRepositoryDetails" entityName="${entityName}"/>
     </div>
 </div>
 </body>
