@@ -52,7 +52,10 @@
                         </label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${projectInstance?.description}"/>
+                        <g:textArea name="description"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
+                                    value="${projectInstance?.description}"/>
                     </td>
                 </tr>
                 <tr class="prop">

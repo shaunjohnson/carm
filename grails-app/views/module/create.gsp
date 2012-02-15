@@ -64,7 +64,10 @@
                         </label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${moduleInstance?.description}"/>
+                        <g:textArea name="description"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
+                                    value="${moduleInstance?.description}"/>
                     </td>
                 </tr>
 

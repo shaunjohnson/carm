@@ -69,7 +69,9 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${applicationInstance?.description}"
+                        <g:textArea name="description" value="${applicationInstance?.description}"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
                                     title="${message(code: 'application.description.help')}"/>
                     </td>
                 </tr>

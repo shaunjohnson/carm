@@ -53,7 +53,9 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: systemComponentInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5"
+                        <g:textArea name="description"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
                                     value="${systemComponentInstance?.description}"/>
                     </td>
                 </tr>

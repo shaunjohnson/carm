@@ -55,7 +55,9 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5"
+                        <g:textArea name="description"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
                                     value="${sourceControlUserInstance?.description}"/>
                     </td>
                 </tr>
