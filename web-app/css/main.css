@@ -128,7 +128,7 @@ p {
 .footer {
     color: #999;
     text-align: center;
-    margin-top: 1em;
+    margin: 1em 0;
 }
 
 tr.highlight {
