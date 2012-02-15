@@ -5,11 +5,13 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}" />
+    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
 </head>
+
 <body>
 <div class="body">
-    <carm:header domain="${applicationInstance}" pageName="${message(code: 'default.create.label', args: [entityName])}" />
+    <carm:header domain="${applicationInstance}"
+                 pageName="${message(code: 'default.create.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -26,7 +28,9 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="project.id"><g:message code="application.project.label" default="Project"/></label>
+                        <carm:label for="project.id">
+                            <g:message code="application.project.label" default="Project"/>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'project', 'errors')}">
                         ${applicationInstance?.project?.encodeAsHTML()}
@@ -35,27 +39,41 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="name"><g:message code="application.name.label" default="Name"/></label>
+                        <carm:label for="name" required="true">
+                            <g:message code="application.name.label" default="Name"/>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" value="${applicationInstance?.name}"/>
+                        <g:textField name="name" maxlength="50" value="${applicationInstance?.name}"
+                                     required="required"
+                                     title="${message(code: 'application.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="type.id"><g:message code="application.type.label" default="Type"/></label>
+                        <carm:label for="type.id" required="true">
+                            <g:message code="application.type.label" default="Type"/>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
                         <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id"
-                                  value="${applicationInstance?.type?.id}"/>
+                                  noSelection="['null': '']" value="${applicationInstance?.type?.id}"
+                                  required="required"
+                                  title="${message(code: 'application.type.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="description"><g:message code="application.description.label" default="Description"/></label>
+                        <carm:label for="description">
+                            <g:message code="application.description.label" default="Description"/>
+                        </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description" cols="40" rows="5" value="${applicationInstance?.description}"/>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'description', 'errors')}">
+                        <g:textArea name="description" value="${applicationInstance?.description}"
+                                    cols="${grailsApplication.config.ui.textarea.cols}"
+                                    rows="${grailsApplication.config.ui.textarea.rows}"
+                                    title="${message(code: 'application.description.help')}"/>
                     </td>
                 </tr>
 
@@ -65,19 +83,30 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlRepository.id"><g:message code="application.sourceControlRepository.label" default="Source Control Repository"/></label>
+                        <carm:label for="sourceControlRepository.id" required="true">
+                            <g:message code="application.sourceControlRepository.label"
+                                       default="Source Control Repository"/>
+                        </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
                         <g:select name="sourceControlRepository.id" from="${carm.SourceControlRepository.list()}"
-                                  optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"/>
+                                  optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}"
+                                  noSelection="['null': '']" required="required"
+                                  title="${message(code: 'application.sourceControlRepository.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="sourceControlPath"><g:message code="application.sourceControlPath.label" default="Source Control Path"/></label>
+                        <carm:label for="sourceControlPath">
+                            <g:message code="application.sourceControlPath.label" default="Source Control Path"/>
+                        </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlPath', 'errors')}">
-                        <g:textField name="sourceControlPath" maxlength="200" value="${applicationInstance?.sourceControlPath}"/>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlPath', 'errors')}">
+                        <g:textField name="sourceControlPath" maxlength="200"
+                                     value="${applicationInstance?.sourceControlPath}"
+                                     title="${message(code: 'application.sourceControlPath.help')}"/>
                     </td>
                 </tr>
 
@@ -87,26 +116,36 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="system.id"><g:message code="application.system.label" default="System"/></label>
+                        <carm:label for="system.id">
+                            <g:message code="application.system.label" default="System"/>
+                        </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
                         <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id"
-                                  value="${applicationInstance?.system?.id}" noSelection="['null': '']"/>
+                                  value="${applicationInstance?.system?.id}" noSelection="['null': '']"
+                                  title="${message(code: 'application.system.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <label for="deployInstructions"><g:message code="application.deployInstructions.label" default="Deploy Instructions"/></label>
+                        <carm:label for="deployInstructions">
+                            <g:message code="application.deployInstructions.label" default="Deploy Instructions"/>
+                        </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'deployInstructions', 'errors')}">
-                        <richui:richTextEditor name="deployInstructions" value="${applicationInstance?.deployInstructions}"
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'deployInstructions', 'errors')}">
+                        <richui:richTextEditor name="deployInstructions"
+                                               value="${applicationInstance?.deployInstructions}"
                                                height="${grailsApplication.config.ui.richTextEditor.height}"
-                                               width="${grailsApplication.config.ui.richTextEditor.width}" />
+                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <carm:requiredLabelMessage/>
+
         <div class="buttons">
             <span class="button">
                 <g:link class="show" controller="project" action="show" id="${applicationInstance?.project?.id}">
@@ -114,7 +153,8 @@
                 </g:link>
             </span>
             <span class="button">
-                <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                <g:submitButton name="create" class="save"
+                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
             </span>
         </div>
     </g:form>

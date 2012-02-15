@@ -85,8 +85,8 @@ class CarmTagLib {
     def formatDateTimePeriod = { attrs ->
         DateTime value = attrs.value
         def styleClass = attrs.class
-        
-        out << '<span class="' << styleClass << '" title="' << joda.format(value: value) <<  '">'
+
+        out << '<span class="' << styleClass << '" title="' << joda.format(value: value) << '">'
         out << joda.formatPeriod(value: new Period(value, new DateTime()))
         out << '&nbsp;' << message(code: "ago.label", default: "ago")
         out << "</span>"
@@ -256,5 +256,28 @@ class CarmTagLib {
         def entityName = attrs.entityName ?: ''
 
         out << render(template: "/common/showHideDetails", model: [sectionId: sectionId, entityName: entityName])
+    }
+
+    private outputAttrs(attrs) {
+        def writer = getOut()
+        attrs.each { k, v ->
+            writer << " $k=\"${v.encodeAsHTML()}\""
+        }
+    }
+
+    def label = { attrs, body ->
+        out << '<label" ' << outputAttrs(attrs) << '>' << body()
+
+        if (attrs.required) {
+            out << '<img src="' << resource(dir: 'images', file: 'required_star.gif') << '" alt="required" />'
+        }
+
+        out << '</label>'
+    }
+
+    def requiredLabelMessage = { attrs, body ->
+        out << '<p class="requiredFieldsMessage">' << message(code: 'requiredFields.message')
+        out << '<img src="' << resource(dir: 'images', file: 'required_star.gif')
+        out << '" alt="required" /></p>'
     }
 }

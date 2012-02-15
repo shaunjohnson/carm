@@ -8,6 +8,10 @@
     <g:javascript library="application"/>
     <g:javascript library="jquery" plugin="jquery"/>
     <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
+
+    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css" />
+
     <script type='text/javascript'>
         jQuery(function () {
             jQuery("#delete-dialog").dialog({
@@ -32,6 +36,8 @@
             });
 
             jQuery("button.button").button();
+            jQuery(':input').tipsy({trigger: 'focus', gravity: 'w'});
+            jQuery(':input:visible').get(0).focus();
         });
     </script>
 </head>
