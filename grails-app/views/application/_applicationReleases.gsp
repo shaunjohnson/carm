@@ -20,7 +20,7 @@
        value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxRecords)}"/>
 
 <g:if test="${applicationReleases.size()}">
-    <table>
+    <table style="width: 100%;">
         <tbody>
         <g:each in="${applicationReleases}" var="applicationRelease" status="i">
             <tr>
