@@ -10,14 +10,15 @@
     <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
 
     <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css" />
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css"/>
 
     <script type='text/javascript'>
         jQuery(function () {
             jQuery("#delete-dialog").dialog({
                 autoOpen:false,
                 resizable:false,
-                height:140,
+                height:160,
+                width:360,
                 modal:true,
                 buttons:{
                     "${message(code: 'default.button.cancel.label', default: 'Cancel')}":function () {
@@ -36,7 +37,7 @@
             });
 
             jQuery("button.button").button();
-            jQuery(':input:visible').tipsy({trigger: 'focus', gravity: 'w'});
+            jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
             jQuery(':input:visible:first').focus();
         });
     </script>
@@ -52,11 +53,12 @@
     <g:message code="carm.copyright.label" default="Change And Release Management 2011"/>
 </div>
 
-<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}">
+<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
+     style="display: none;">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
         <g:message code="deleteThisItemExplanation.message"
-            default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
+                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
     </p>
 </div>
 </body>
