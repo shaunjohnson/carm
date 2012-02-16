@@ -6,14 +6,39 @@
 </div>
 
 <g:if test="${applicationDeploymentInstance?.moduleDeployments?.size()}">
-    <ul>
-        <g:each in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module }}"
-                var="moduleDeploymentInstance" status="i">
-            <li>
-                <g:link controller="moduleDeployment" action="show" id="${moduleDeploymentInstance.id}">
-                    ${moduleDeploymentInstance.moduleRelease.module.encodeAsHTML()}
-                </g:link>
-            </li>
-        </g:each>
-    </ul>
+    <div class="list">
+        <table style="width: 100%;">
+            <thead>
+            <tr>
+                <th>
+                    <g:message code="module.name.label" default="Name"/>
+                </th>
+                <th>
+                    <g:message code="moduleDeployment.deploymentState.label" default="Deployment State"/>
+                </th>
+                <th>
+                    <g:message code="moduleDeployment.testState.label" default="Test State"/>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module }}"
+                    var="moduleDeploymentInstance" status="i">
+                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                    <td>
+                        <g:link controller="moduleDeployment" action="show" id="${moduleDeploymentInstance.id}">
+                            ${moduleDeploymentInstance.moduleRelease.module.encodeAsHTML()}
+                        </g:link>
+                    </td>
+                    <td>
+                        ${fieldValue(bean: moduleDeploymentInstance, field: "deploymentState")}
+                    </td>
+                    <td>
+                        ${fieldValue(bean: moduleDeploymentInstance, field: "testState")}
+                    </td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
 </g:if>
