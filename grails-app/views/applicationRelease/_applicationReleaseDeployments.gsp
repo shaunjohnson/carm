@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="deployments.label" default="Deployments"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="deployments.label" default="Deployments"/>
+    </div>
+</div>
 
 <g:if test="${applicationReleaseInstance?.deployments?.size()}">
     <div class="list">

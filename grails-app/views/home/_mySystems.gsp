@@ -1,11 +1,14 @@
-<h2 class="sectionHeader">
-    <g:message code="myEnvironments.label" default="My Environments"/>
-    <span class="actions">
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="myEnvironments.label" default="My Environments"/>
+    </div>
+    <div class="actions">
         <g:link controller="system" action="list">
             <g:message code="allSystems.label" default="All Systems"/>
         </g:link>
-    </span>
-</h2>
+    </div>
+</div>
+
 <g:each in="${systemInstanceList}" var="systemInstance" status="systemIndex">
     <div style="margin: 0.5em 0;">
         <h3>

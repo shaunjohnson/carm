@@ -4,19 +4,20 @@
 <g:set var="maxRecords" value="${Math.min(size, grailsApplication.config.ui.activity.maxRecords)}"/>
 <g:set var="activitySubList" value="${activityList.subList(0, maxRecords)}"/>
 
-<h2 class="sectionHeader">
-    <g:message code="activity.label" default="Activity"/>
-
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="activity.label" default="Activity"/>
+    </div>
     <g:if test="${size > grailsApplication.config.ui.activity.maxRecords && listActivityAction}">
         <g:set var="controller" value="${params.controller ==~ /.*home/ ? 'home' : params.controller}"/>
 
-        <span class="actions">
+        <div class="actions">
             <g:link controller="${controller}" action="${listActivityAction}" id="${domainId}">
                 <g:message code="allActivity.label" default="All Activity"/>
             </g:link>
-        </span>
+        </div>
     </g:if>
-</h2>
+</div>
 
 <g:if test="${size}">
     <g:each in="${activitySubList}" var="activity" status="i">

@@ -1,12 +1,14 @@
 <%@ page import="carm.ApplicationDeployment" %>
-<h2 class="sectionHeader">
-    <g:message code="environments.label" default="Environments"/>
-    <span class="actions">
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="environments.label" default="Environments"/>
+    </div>
+    <div class="actions">
         <g:link action="showFullHistory">
             <g:message code="showFullHistory.label" default="Show Full History"/>
         </g:link>
-    </span>
-</h2>
+    </div>
+</div>
 
 <g:if test="${applicationInstance?.system?.environments?.size()}">
 <table style="width: 100%;">

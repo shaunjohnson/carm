@@ -1,12 +1,14 @@
-<h2 class="sectionHeader">
-    <g:message code="modules.label" default="Modules"/>
-    <span class="actions">
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="modules.label" default="Modules"/>
+    </div>
+    <div class="actions">
         <g:link class="create" controller="module" action="create"
                 params="['application.id': applicationInstance?.id]">
             <g:message code="addModule.label" default="Add Module"/>
         </g:link>
-    </span>
-</h2>
+    </div>
+</div>
 
 <g:if test="${applicationInstance?.modules?.size()}">
     <table style="width: 100%;">

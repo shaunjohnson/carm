@@ -1,12 +1,14 @@
 <%@ page import="carm.Project" %>
-<h2 class="sectionHeader">
-    <g:message code="myProjects.label" default="My Projects"/>
-    <span class="actions">
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="myProjects.label" default="My Projects"/>
+    </div>
+    <div class="actions">
         <g:link controller="project" action="list">
             <g:message code="allProjects.label" default="All Projects"/>
         </g:link>
-    </span>
-</h2>
+    </div>
+</div>
 
 <g:each in="${projectCategoryList}" var="projectCategory" status="projectCategoryIndex">
     <g:set var="projects" value="${Project.findAllByCategory(projectCategory).sort { it.name }}"/>

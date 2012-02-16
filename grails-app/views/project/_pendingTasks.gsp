@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="pendingTasks.label" default="Pending Tasks"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="pendingTasks.label" default="Pending Tasks"/>
+    </div>
+</div>
 
 <h3>
     <g:message code="releases.label" default="Releases"/>

@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="allDeployments.label" default="All Deployments"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="allDeployments.label" default="All Deployments"/>
+    </div>
+</div>
 
 <g:set var="applicationReleaseDeployments" value="${applicationDeploymentInstance.applicationRelease.deployments}"/>
 

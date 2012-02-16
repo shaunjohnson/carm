@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="pendingTasks.label" default="Pending Tasks"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="pendingTasks.label" default="Pending Tasks"/>
+    </div>
+</div>
 
 <p class="emphasis">
     <g:message code="applicationDoesNotHaveAnyPendingTasks.message"

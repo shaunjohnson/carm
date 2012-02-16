@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="history.label" default="History"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="history.label" default="History"/>
+    </div>
+</div>
 
 <div class="list">
     <table style="width: 100%;">

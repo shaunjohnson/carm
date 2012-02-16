@@ -15,9 +15,11 @@
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <h2 class="sectionHeader">
-                    <g:message code="sourceControl.label" default="Source Control"/>
-                </h2>
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="sourceControl.label" default="Source Control"/>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <g:link controller="sourceControlServer">
@@ -32,16 +34,22 @@
                 </ul>
             </td>
             <td class="layoutColumnLast">
-                <h2 class="sectionHeader">Types</h2>
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="types.label" default="Types"/>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <g:link controller="applicationDeploymentTestState">
-                            <g:message code="applicationDeploymentTestStates.label" default="Application Deployment Test States"/>
+                            <g:message code="applicationDeploymentTestStates.label"
+                                       default="Application Deployment Test States"/>
                         </g:link>
                     </li>
                     <li>
                         <g:link controller="applicationReleaseTestState">
-                            <g:message code="applicationReleaseTestStates.label" default="Application Release Test States"/>
+                            <g:message code="applicationReleaseTestStates.label"
+                                       default="Application Release Test States"/>
                         </g:link>
                     </li>
                     <li>
@@ -69,9 +77,11 @@
         </tr>
         <tr>
             <td class="layoutColumnFirst">
-                <h2 class="sectionHeader">
-                    <g:message code="security.label" default="Security"/>
-                </h2>
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="security.label" default="Security"/>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <g:link controller="user">
@@ -86,9 +96,11 @@
                 </ul>
             </td>
             <td class="layoutColumnLast">
-                <h2 class="sectionHeader">
-                    <g:message code="other.label" default="Other"/>
-                </h2>
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="other.label" default="Other"/>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <g:link uri="/index.gsp">

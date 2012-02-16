@@ -1,6 +1,8 @@
-<h2 class="sectionHeader">
-    <g:message code="modules.label" default="Modules"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="modules.label" default="Modules"/>
+    </div>
+</div>
 
 <table style="width: 100%;">
     <tbody>

@@ -1,8 +1,9 @@
 <%@ page import="carm.enums.ApplicationReleaseState; carm.ApplicationRelease" %>
-
-<h2 class="sectionHeader">
-    <g:message code="releases.label" default="Releases"/>
-    <span class="actions">
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="releases.label" default="Releases"/>
+    </div>
+    <div class="actions">
         <g:link class="create" controller="applicationRelease" action="create"
                 params="['application.id': applicationInstance?.id]">
             <g:message code="newRelease.label" default="Make a New Release"/>
@@ -11,8 +12,8 @@
                 params="['id': applicationInstance?.id]">
             <g:message code="allReleases.label" default="All Releases"/>
         </g:link>
-    </span>
-</h2>
+    </div>
+</div>
 
 <g:set var="maxRecords" value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxRecords)}"/>
 <g:set var="applicationReleases"

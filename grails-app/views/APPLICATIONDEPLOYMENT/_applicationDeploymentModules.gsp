@@ -1,7 +1,9 @@
 <%@ page import="carm.Module" %>
-<h2 class="sectionHeader">
-    <g:message code="modules.label" default="Modules"/>
-</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="modules.label" default="Modules"/>
+    </div>
+</div>
 
 <g:if test="${applicationDeploymentInstance?.moduleDeployments?.size()}">
     <ul>

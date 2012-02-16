@@ -1,14 +1,16 @@
-<h2 class="sectionHeader">
-    <g:message code="sourceControlServer.users.label" default="Users"/>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="sourceControlServer.users.label" default="Users"/>
+    </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <span class="actions">
+        <div class="actions">
             <g:link class="create" controller="sourceControlUser" action="create"
                     params="['server.id': sourceControlServerInstance?.id]">
                 <g:message code="addUser.label" default="Add User"/>
             </g:link>
-        </span>
+        </div>
     </sec:ifAllGranted>
-</h2>
+</div>
 
 <g:if test="${sourceControlServerInstance?.users?.size()}">
     <ul>

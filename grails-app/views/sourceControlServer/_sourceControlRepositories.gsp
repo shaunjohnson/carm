@@ -1,14 +1,16 @@
-<h2 class="sectionHeader">
-    <g:message code="sourceControlServer.repositories.label" default="Repositories"/>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="sourceControlServer.repositories.label" default="Repositories"/>
+    </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <span class="actions">
+        <div class="actions">
             <g:link class="create" controller="sourceControlRepository" action="create"
                     params="['server.id': sourceControlServerInstance?.id]">
                 <g:message code="addRepository.label" default="Add Repository"/>
             </g:link>
-        </span>
+        </div>
     </sec:ifAllGranted>
-</h2>
+</div>
 
 <g:if test="${sourceControlServerInstance.repositories.size()}">
     <ul>

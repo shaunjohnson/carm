@@ -1,4 +1,8 @@
-<h2 class="sectionHeader">Applications</h2>
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="applications.label" default="Applications"/>
+    </div>
+</div>
 
 <g:if test="${applicationsGrouped?.size()}">
     <g:each in="${applicationsGrouped}" var="entry">
