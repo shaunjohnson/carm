@@ -24,7 +24,7 @@
                     <g:message code="sourceControlRepository.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: sourceControlRepositoryInstance, field: "description")}
+                    <carm:plainText value="${sourceControlRepositoryInstance?.description}"/>
                 </td>
             </tr>
             <tr class="prop">

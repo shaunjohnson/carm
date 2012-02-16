@@ -24,7 +24,7 @@
                     <g:message code="moduleDeploymentTestState.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: moduleDeploymentTestStateInstance, field: "description")}
+                    <carm:plainText value="${moduleDeploymentTestStateInstance?.description}"/>
                 </td>
             </tr>
 

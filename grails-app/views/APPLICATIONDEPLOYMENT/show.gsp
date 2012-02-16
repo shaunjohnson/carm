@@ -34,8 +34,9 @@
                     <g:message code="applicationDeployment.environment.label" default="System Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show"
-                            id="${applicationDeploymentInstance?.environment?.id}">${applicationDeploymentInstance?.environment?.encodeAsHTML()}</g:link>
+                    <g:link controller="systemEnvironment" action="show" id="${applicationDeploymentInstance?.environment?.id}">
+                        ${applicationDeploymentInstance?.environment?.encodeAsHTML()}
+                    </g:link>
                 </td>
             </tr>
             <tr class="prop">
@@ -43,8 +44,9 @@
                     <g:message code="applicationDeployment.deploymentInstructions.label"
                                default="Deployment Instructions"/>
                 </td>
-                <td valign="top"
-                    class="value">${fieldValue(bean: applicationDeploymentInstance, field: "deploymentInstructions").decodeHTML()}</td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationDeploymentInstance, field: "deploymentInstructions").decodeHTML()}
+                </td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">

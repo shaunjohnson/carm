@@ -23,7 +23,7 @@
                     <g:message code="moduleType.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: moduleTypeInstance, field: "description")}
+                    <carm:plainText value="${moduleTypeInstance?.description}"/>
                 </td>
             </tr>
 

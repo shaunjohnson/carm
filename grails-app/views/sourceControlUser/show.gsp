@@ -31,7 +31,7 @@
                     <g:message code="sourceControlUser.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: sourceControlUserInstance, field: "description")}
+                    <carm:plainText value="${sourceControlUserInstance?.description}"/>
                 </td>
             </tr>
             <tr class="prop">

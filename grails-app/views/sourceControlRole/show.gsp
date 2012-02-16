@@ -23,7 +23,7 @@
                     <g:message code="sourceControlRole.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: sourceControlRoleInstance, field: "description")}
+                    <carm:plainText value="${sourceControlRoleInstance?.description}"/>
                 </td>
             </tr>
 

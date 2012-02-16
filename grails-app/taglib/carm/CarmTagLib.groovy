@@ -280,4 +280,15 @@ class CarmTagLib {
         out << '<img src="' << resource(dir: 'images', file: 'required_star.gif')
         out << '" alt="required" /></p>'
     }
+
+    /**
+     * Renders the provided text String preserving newlines by converting them to HTML breaks.
+     *
+     * attrs.value - Text string to render
+     */
+    def plainText = { attrs ->
+        def value = attrs.value
+
+        out << value?.encodeAsHTML()?.replace('\n', '<br/>\n')
+    }
 }
