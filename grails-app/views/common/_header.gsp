@@ -174,6 +174,27 @@
         </g:else>
     </bc:breadcrumbs>
 </g:elseif>
+<g:elseif test="${controller == 'moduleDeployment'}">
+    <g:set var="entityName" value="${message(code: 'moduleDeployment.label', default: 'Module Deployment')}"/>
+    <g:set var="applicationDeployment" value="${domain?.applicationDeployment}"/>
+    <g:set var="applicationRelease" value="${applicationDeployment?.applicationRelease}"/>
+
+    <carm:pageHeaderLabel action="${action}"
+                          beanName="${message(code: 'pageHeader.moduleDeployment.label',
+                                  args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.environment ])}"
+                          entityName="${entityName}"/>
+
+    <bc:breadcrumbs>
+        <g:if test="${action == 'show'}">
+            <bc:listProjects isFirst="true"/>
+            <bc:showProject project="${applicationRelease.application.project}"/>
+            <bc:showApplication application="${applicationRelease.application}"/>
+            <bc:showApplicationRelease applicationRelease="${applicationRelease}"/>
+            <bc:showApplicationDeployment applicationDeployment="${applicationDeployment}"/>
+            <bc:showModuleDeployment moduleDeployment="${domain}"/>
+        </g:if>
+    </bc:breadcrumbs>
+</g:elseif>
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 

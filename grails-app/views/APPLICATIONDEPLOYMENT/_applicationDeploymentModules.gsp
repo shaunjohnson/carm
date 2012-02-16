@@ -10,7 +10,7 @@
         <g:each in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module }}"
                 var="moduleDeploymentInstance" status="i">
             <li>
-                <g:link controller="module" action="show" id="${moduleDeploymentInstance.moduleRelease.module.id}">
+                <g:link controller="moduleDeployment" action="show" id="${moduleDeploymentInstance.id}">
                     ${moduleDeploymentInstance.moduleRelease.module.encodeAsHTML()}
                 </g:link>
             </li>

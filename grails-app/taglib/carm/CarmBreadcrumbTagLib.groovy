@@ -306,6 +306,17 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a show module deployment link.
+     */
+    def showModuleDeployment = { attrs ->
+        def moduleDeployment = attrs.moduleDeployment
+        def isFirst = attrs.isFirst
+        out << link(controller: "moduleDeployment", action: "show",
+                title: message(code: "showModuleDeployment.label"),
+                text: moduleDeployment.moduleRelease.module.name, id: moduleDeployment.id, isFirst: isFirst)
+    }
+
+    /**
      * Renders a show module type link.
      */
     def showModuleType = { attrs ->

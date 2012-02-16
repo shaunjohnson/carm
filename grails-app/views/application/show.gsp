@@ -42,7 +42,7 @@
                     <g:message code="application.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${applicationInstance?.description}"/>
+                    <carm:plainText value="${applicationInstance.description}"/>
                 </td>
             </tr>
 
