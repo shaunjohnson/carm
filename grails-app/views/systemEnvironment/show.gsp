@@ -23,7 +23,7 @@
                     <g:message code="systemEnvironment.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: systemEnvironmentInstance, field: "description")}
+                    <carm:plainText value="${systemEnvironmentInstance?.description}"/>
                 </td>
             </tr>
             <tr class="prop">
