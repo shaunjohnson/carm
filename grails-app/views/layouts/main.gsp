@@ -36,7 +36,7 @@
             });
 
             jQuery("button.button").button();
-            jQuery(':input').tipsy({trigger: 'focus', gravity: 'w'});
+            jQuery(':input:visible').tipsy({trigger: 'focus', gravity: 'w'});
             jQuery(':input:visible:first').focus();
         });
     </script>
