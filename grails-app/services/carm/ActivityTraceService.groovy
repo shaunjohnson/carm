@@ -285,7 +285,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return Current username
      */
     private String getUsername() {
-        springSecurityService.getPrincipal().username
+        springSecurityService?.getPrincipal()?.username ?: "Unknown"
     }
 
     /**

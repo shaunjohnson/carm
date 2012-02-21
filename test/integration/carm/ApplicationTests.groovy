@@ -24,15 +24,12 @@ class ApplicationTests extends CarmUnitTestCase {
         assertHasError(Application.buildWithoutSave(name: null), 'name', 'nullable')
     }
 
-    void testSourceControlPathMaxSize() {
-        assertHasError(Application.buildWithoutSave(sourceControlPath: 'a' * 201), 'sourceControlPath', 'maxSize')
-    }
-    void testSourceControlPathNullable() {
-        assertHasError(Application.buildWithoutSave(sourceControlPath: null), 'sourceControlRepository', 'nullable')
+    void testSourceControlRepositoryNullable() {
+        assertHasError(Application.buildWithoutSave(sourceControlRepository: null), 'sourceControlRepository', 'nullable')
     }
 
-    void testSourceControlRepositoryNullable() {
-        assertTrue(Application.buildWithoutSave(sourceControlRepository: null).validate())
+    void testSourceControlPathMaxSize() {
+        assertHasError(Application.buildWithoutSave(sourceControlPath: 'a' * 201), 'sourceControlPath', 'maxSize')
     }
 
     void testSystemNullable() {
