@@ -1,16 +1,10 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
 
-class SourceControlUserControllerTests extends ControllerUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(SourceControlUserController)
+class SourceControlUserControllerTests {
     void testSomething() {
 
     }

@@ -1,16 +1,10 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
 
-class SystemControllerTests extends ControllerUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(SystemController)
+class SystemControllerTests {
     void testSomething() {
 
     }

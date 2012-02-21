@@ -1,16 +1,10 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
 
-class ProjectServiceTests extends GrailsUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(ProjectService)
+class ProjectServiceTests {
     void testSomething() {
 
     }

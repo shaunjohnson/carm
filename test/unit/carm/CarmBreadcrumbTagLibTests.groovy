@@ -1,16 +1,10 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
 
-class CarmBreadcrumbTagLibTests extends TagLibUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(CarmBreadcrumbTagLib)
+class CarmBreadcrumbTagLibTests {
     void testSomething() {
 
     }
