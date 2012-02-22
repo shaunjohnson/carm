@@ -7,15 +7,15 @@ class SourceControlServer {
     String description
     SourceControlServerType type
     String url
-    
+
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
+        name(blank: false, minSize: 2, maxSize: 50, nullable: false, unique: true)
         description(maxSize: 4000, nullable: true)
         type(null: false)
-        url(maxSize: 200, nullable:true, url:true)
+        url(maxSize: 200, nullable: false, blank: false)
     }
 
     static hasMany = [repositories: SourceControlRepository, users: SourceControlUser]

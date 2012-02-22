@@ -70,13 +70,13 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="url">
+                        <carm:label for="url" required="true">
                             <g:message code="sourceControlServer.url.label" default="URL"/>
                         </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlServerInstance, field: 'url', 'errors')}">
-                        <g:textField name="url" maxlength="200" size="50"
+                        <g:textField name="url" maxlength="200" size="50" required="required"
                                      value="${sourceControlServerInstance?.url}"
                                      title="${message(code: 'sourceControlServer.url.help')}"/>
                     </td>

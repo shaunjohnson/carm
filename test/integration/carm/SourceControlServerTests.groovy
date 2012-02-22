@@ -42,14 +42,14 @@ class SourceControlServerTests {
         assert SourceControlServer.buildWithoutSave(url: 'https://bitbucket.org/lmxm/carm').validate()
         assert SourceControlServer.buildWithoutSave(url: 'ssh://bitbucket.org/lmxm/carm').validate()
     }
+    void testUrlBlank() {
+        assertHasError(SourceControlServer.buildWithoutSave(url: ''), 'url', 'blank')
+    }
     void testUrlMaxSize() {
         assertHasError(SourceControlServer.buildWithoutSave(url: 'a' * 201), 'url', 'maxSize')
     }
     void testUrlNullable() {
-        assert SourceControlServer.buildWithoutSave(url: null).validate()
-    }
-    void testUrlUrl() {
-        assertHasError(SourceControlServer.buildWithoutSave(url: 'test'), 'url', 'url')
+        assertHasError(SourceControlServer.buildWithoutSave(url: null), 'url', 'nullable')
     }
 
     void testToString() {

@@ -704,7 +704,9 @@ databaseChangeLog = {
                 constraints(nullable: "false")
             }
 
-            column(name: "url", type: "varchar(200)")
+            column(name: "url", type: "varchar(200)") {
+                constraints(nullable: "false")
+            }
         }
     }
 
