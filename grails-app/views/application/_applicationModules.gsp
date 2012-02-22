@@ -2,12 +2,14 @@
     <div class="text">
         <g:message code="modules.label" default="Modules"/>
     </div>
-    <div class="actions">
-        <g:link class="create" controller="module" action="create"
-                params="['application.id': applicationInstance?.id]">
-            <g:message code="addModule.label" default="Add Module"/>
-        </g:link>
-    </div>
+    <carm:isProjectOwner application="${applicationInstance}">
+        <div class="actions">
+            <g:link class="create" controller="module" action="create"
+                    params="['application.id': applicationInstance?.id]">
+                <g:message code="addModule.label" default="Add Module"/>
+            </g:link>
+        </div>
+    </carm:isProjectOwner>
 </div>
 
 <g:if test="${applicationInstance?.modules?.size()}">

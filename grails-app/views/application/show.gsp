@@ -117,14 +117,17 @@
                                        default="This application does not have any assigned users."/>
                         </p>
                     </g:else>
-                    <div class="nav">
-                        <span class="menuButton">
-                            <g:link class="create" controller="applicationRole" action="create"
-                                    params="['application.id': applicationInstance?.id]">
-                                <g:message code="addApplicationRole.label" default="Add Application Role"/>
-                            </g:link>
-                        </span>
-                    </div>
+
+                    <carm:isProjectOwner application="${applicationInstance}">
+                        <div class="nav">
+                            <span class="menuButton">
+                                <g:link class="create" controller="applicationRole" action="create"
+                                        params="['application.id': applicationInstance?.id]">
+                                    <g:message code="addApplicationRole.label" default="Add Application Role"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </carm:isProjectOwner>
                 </td>
             </tr>
 
@@ -149,24 +152,27 @@
                 </td>
             </tr>
             </tbody>
-            <tfoot class="detailProp">
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${applicationInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${applicationInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+
+            <carm:isProjectOwner application="${applicationInstance}">
+                <tfoot class="detailProp">
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${applicationInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${applicationInstance?.id}">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </carm:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationDetails" entityName="${entityName}"/>
     </div>

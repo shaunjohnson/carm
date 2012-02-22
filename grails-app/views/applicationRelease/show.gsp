@@ -15,14 +15,16 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="buttons">
-        <g:if test="${applicationReleaseInstance.releaseState == ApplicationReleaseState.COMPLETED}">
-            <carm:button controller="applicationDeployment" action="create"
-                      params="['applicationRelease.id': applicationReleaseInstance.id]">
-                <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-            </carm:button>
-        </g:if>
-    </div>
+    <carm:isProjectOwner applicationRelease="${applicationReleaseInstance}">
+        <div class="buttons">
+            <g:if test="${applicationReleaseInstance.releaseState == ApplicationReleaseState.COMPLETED}">
+                <carm:button controller="applicationDeployment" action="create"
+                             params="['applicationRelease.id': applicationReleaseInstance.id]">
+                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                </carm:button>
+            </g:if>
+        </div>
+    </carm:isProjectOwner>
 
     <div class="dialog">
         <table id="applicationReleaseDetails" class="details">
@@ -42,7 +44,8 @@
                     <g:message code="application.system.label" default="System"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="system" action="show" id="${applicationReleaseInstance?.application?.system?.id}">
+                    <g:link controller="system" action="show"
+                            id="${applicationReleaseInstance?.application?.system?.id}">
                         ${applicationReleaseInstance?.application?.system?.encodeAsHTML()}
                     </g:link>
                 </td>
@@ -95,24 +98,27 @@
                 </td>
             </tr>
             </tbody>
-            <tfoot class="detailProp">
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${applicationReleaseInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${applicationReleaseInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+
+            <carm:isProjectOwner applicationRelease="${applicationReleaseInstance}">
+                <tfoot class="detailProp">
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${applicationReleaseInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${applicationReleaseInstance?.id}">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </carm:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
     </div>

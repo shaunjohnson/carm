@@ -68,12 +68,12 @@
                 </td>
                 <td valign="top" class="value">
                     <carm:listUsersWithPermission domainObject="${projectInstance}"
-                                               permission="${BasePermission.ADMINISTRATION}"/>
+                                                  permission="${BasePermission.ADMINISTRATION}"/>
                 </td>
             </tr>
             </tbody>
-            <sec:permitted className='carm.Project' id='${projectInstance?.id}'
-                           permission='${BasePermission.ADMINISTRATION}'>
+
+            <carm:isProjectOwner project="${projectInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -92,7 +92,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </sec:permitted>
+            </carm:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="projectDetails" entityName="${entityName}"/>
     </div>

@@ -97,24 +97,27 @@
                 </td>
             </tr>
             </tbody>
-            <tfoot class="detailProp">
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${moduleInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${moduleInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+
+            <carm:isProjectOwner module="${moduleInstance}">
+                <tfoot class="detailProp">
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${moduleInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${moduleInstance?.id}">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </carm:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="moduleDetails" entityName="${entityName}"/>
     </div>

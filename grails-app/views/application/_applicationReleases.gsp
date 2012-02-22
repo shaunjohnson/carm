@@ -3,19 +3,26 @@
     <div class="text">
         <g:message code="releases.label" default="Releases"/>
     </div>
+
     <div class="actions">
-        <g:link class="create" controller="applicationRelease" action="create"
-                params="['application.id': applicationInstance?.id]">
-            <g:message code="newRelease.label" default="Make a New Release"/>
-        </g:link>
-        <g:link class="list" controller="application" action="listReleases"
-                params="['id': applicationInstance?.id]">
-            <g:message code="allReleases.label" default="All Releases"/>
-        </g:link>
+        <carm:isProjectOwner application="${applicationInstance}">
+            <g:link class="create" controller="applicationRelease" action="create"
+                    params="['application.id': applicationInstance?.id]">
+                <g:message code="newRelease.label" default="Make a New Release"/>
+            </g:link>
+        </carm:isProjectOwner>
+
+        <g:if test="${applicationReleases?.size()}">
+            <g:link class="list" controller="application" action="listReleases"
+                    params="['id': applicationInstance?.id]">
+                <g:message code="allReleases.label" default="All Releases"/>
+            </g:link>
+        </g:if>
     </div>
 </div>
 
-<g:set var="maxRecords" value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxRecords)}"/>
+<g:set var="maxRecords"
+       value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxRecords)}"/>
 <g:set var="applicationReleases"
        value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxRecords)}"/>
 
@@ -41,16 +48,19 @@
                 </td>
                 <td style="padding-bottom: 1em;">
                     ${applicationRelease.changeLog?.decodeHTML()}
-                    <div class="buttons">
-                        <span class="button">
-                            <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
-                                <carm:button controller="applicationDeployment" action="create"
-                                          params="['applicationRelease.id': applicationRelease.id]">
-                                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-                                </carm:button>
-                            </g:if>
-                        </span>
-                    </div>
+
+                    <carm:isProjectOwner application="${applicationInstance}">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
+                                    <carm:button controller="applicationDeployment" action="create"
+                                                 params="['applicationRelease.id': applicationRelease.id]">
+                                        <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                                    </carm:button>
+                                </g:if>
+                            </span>
+                        </div>
+                    </carm:isProjectOwner>
                 </td>
             </tr>
             <g:if test="${(i + 1) < applicationReleases.size()}">
