@@ -41,12 +41,6 @@
                 </div>
                 <ul>
                     <li>
-                        <g:link controller="applicationDeploymentTestState">
-                            <g:message code="applicationDeploymentTestStates.label"
-                                       default="Application Deployment Test States"/>
-                        </g:link>
-                    </li>
-                    <li>
                         <g:link controller="applicationReleaseTestState">
                             <g:message code="applicationReleaseTestStates.label"
                                        default="Application Release Test States"/>
