@@ -11,7 +11,7 @@
 <body>
 <div class="body">
     <carm:header domain="${applicationReleaseTestStateInstanceList}"
-              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
+                 pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">
@@ -27,37 +27,45 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="list">
-        <table>
-            <thead>
-            <tr>
-                <g:sortableColumn property="name"
-                                  title="${message(code: 'applicationReleaseTestState.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description"
-                                  title="${message(code: 'applicationReleaseTestState.description.label', default: 'Description')}"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${applicationReleaseTestStateInstanceList}" status="i"
-                    var="applicationReleaseTestStateInstance">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>
-                        <g:link action="show" id="${applicationReleaseTestStateInstance.id}">
-                            ${fieldValue(bean: applicationReleaseTestStateInstance, field: "name")}
-                        </g:link>
-                    </td>
-                    <td>
-                        ${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}
-                    </td>
+    <g:if test="${applicationReleaseTestStateInstanceTotal}">
+        <div class="list">
+            <table>
+                <thead>
+                <tr>
+                    <g:sortableColumn property="name"
+                                      title="${message(code: 'applicationReleaseTestState.name.label', default: 'Name')}"/>
+                    <g:sortableColumn property="description"
+                                      title="${message(code: 'applicationReleaseTestState.description.label', default: 'Description')}"/>
                 </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <g:each in="${applicationReleaseTestStateInstanceList}" status="i"
+                        var="applicationReleaseTestStateInstance">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <td>
+                            <g:link action="show" id="${applicationReleaseTestStateInstance.id}">
+                                ${fieldValue(bean: applicationReleaseTestStateInstance, field: "name")}
+                            </g:link>
+                        </td>
+                        <td>
+                            ${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="paginateButtons">
-        <g:paginate total="${applicationReleaseTestStateInstanceTotal}"/>
-    </div>
+        <div class="paginateButtons">
+            <g:paginate total="${applicationReleaseTestStateInstanceTotal}"/>
+        </div>
+    </g:if>
+    <g:else>
+        <p class="emphasis">
+            <g:message code="carmNoApplicationReleaseTestStates.message"
+                       default="There are no application release test states."/>
+        </p>
+    </g:else>
 </div>
 </body>
 </html>

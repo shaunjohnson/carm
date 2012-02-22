@@ -9,7 +9,8 @@
 
 <body>
 <div class="body">
-    <carm:header domain="${moduleTypeInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}"/>
+    <carm:header domain="${moduleTypeInstanceList}"
+                 pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">
@@ -25,35 +26,43 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="list">
-        <table>
-            <thead>
-            <tr>
-                <g:sortableColumn property="name" title="${message(code: 'moduleType.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description"
-                                  title="${message(code: 'moduleType.description.label', default: 'Description')}"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${moduleTypeInstanceList}" status="i" var="moduleTypeInstance">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>
-                        <g:link action="show" id="${moduleTypeInstance.id}">
-                            ${fieldValue(bean: moduleTypeInstance, field: "name")}
-                        </g:link>
-                    </td>
-                    <td>
-                        ${fieldValue(bean: moduleTypeInstance, field: "description")}
-                    </td>
+    <g:if test="${moduleTypeInstanceTotal}">
+        <div class="list">
+            <table>
+                <thead>
+                <tr>
+                    <g:sortableColumn property="name"
+                                      title="${message(code: 'moduleType.name.label', default: 'Name')}"/>
+                    <g:sortableColumn property="description"
+                                      title="${message(code: 'moduleType.description.label', default: 'Description')}"/>
                 </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <g:each in="${moduleTypeInstanceList}" status="i" var="moduleTypeInstance">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <td>
+                            <g:link action="show" id="${moduleTypeInstance.id}">
+                                ${fieldValue(bean: moduleTypeInstance, field: "name")}
+                            </g:link>
+                        </td>
+                        <td>
+                            ${fieldValue(bean: moduleTypeInstance, field: "description")}
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="paginateButtons">
-        <g:paginate total="${moduleTypeInstanceTotal}"/>
-    </div>
+        <div class="paginateButtons">
+            <g:paginate total="${moduleTypeInstanceTotal}"/>
+        </div>
+    </g:if>
+    <g:else>
+        <p class="emphasis">
+            <g:message code="carmNoModuleTypes.message" default="There are no module types."/>
+        </p>
+    </g:else>
 </div>
 </body>
 </html>

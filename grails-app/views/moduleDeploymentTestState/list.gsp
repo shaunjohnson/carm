@@ -11,7 +11,7 @@
 <body>
 <div class="body">
     <carm:header domain="${moduleDeploymentTestStateInstanceList}"
-              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
+                 pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">
@@ -25,36 +25,45 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="list">
-        <table>
-            <thead>
-            <tr>
-                <g:sortableColumn property="name"
-                                  title="${message(code: 'moduleDeploymentTestState.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description"
-                                  title="${message(code: 'moduleDeploymentTestState.description.label', default: 'Description')}"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${moduleDeploymentTestStateInstanceList}" status="i" var="moduleDeploymentTestStateInstance">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>
-                        <g:link action="show" id="${moduleDeploymentTestStateInstance.id}">
-                            ${fieldValue(bean: moduleDeploymentTestStateInstance, field: "name")}
-                        </g:link>
-                    </td>
-                    <td>
-                        ${fieldValue(bean: moduleDeploymentTestStateInstance, field: "description")}
-                    </td>
+    <g:if test="${moduleDeploymentTestStateInstanceTotal}">
+        <div class="list">
+            <table>
+                <thead>
+                <tr>
+                    <g:sortableColumn property="name"
+                                      title="${message(code: 'moduleDeploymentTestState.name.label', default: 'Name')}"/>
+                    <g:sortableColumn property="description"
+                                      title="${message(code: 'moduleDeploymentTestState.description.label', default: 'Description')}"/>
                 </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <g:each in="${moduleDeploymentTestStateInstanceList}" status="i"
+                        var="moduleDeploymentTestStateInstance">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <td>
+                            <g:link action="show" id="${moduleDeploymentTestStateInstance.id}">
+                                ${fieldValue(bean: moduleDeploymentTestStateInstance, field: "name")}
+                            </g:link>
+                        </td>
+                        <td>
+                            ${fieldValue(bean: moduleDeploymentTestStateInstance, field: "description")}
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="paginateButtons">
-        <g:paginate total="${moduleDeploymentTestStateInstanceTotal}"/>
-    </div>
+        <div class="paginateButtons">
+            <g:paginate total="${moduleDeploymentTestStateInstanceTotal}"/>
+        </div>
+    </g:if>
+    <g:else>
+        <p class="emphasis">
+            <g:message code="carmNoModuleDeploymentTestStates.message"
+                       default="There are no module deployment test states."/>
+        </p>
+    </g:else>
 </div>
 </body>
 </html>
