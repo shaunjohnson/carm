@@ -1,14 +1,19 @@
 package carm
 
+import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class SourceControlRepositoryTests extends CarmUnitTestCase {
+@TestFor(SourceControlRepository)
+@Build(SourceControlRepository)
+class SourceControlRepositoryTests {
 
     void testDescriptionMaxSize() {
         assertHasError(SourceControlRepository.buildWithoutSave(description: 'a' * 4001), 'description', 'maxSize')
     }
     void testDescriptionNullable() {
-        assertTrue(SourceControlRepository.buildWithoutSave(description: null).validate())
+        assert SourceControlRepository.buildWithoutSave(description: null).validate()
     }
 
     void testNameBlank() {
@@ -40,7 +45,7 @@ class SourceControlRepositoryTests extends CarmUnitTestCase {
     void testToString() {
         def domain = SourceControlRepository.build(name: "Foobar")
 
-        assertNotNull(domain.toString())
-        assertTrue(domain.toString() ==~ /.*Foobar.*/)
+        assert domain.toString() != null
+        assert domain.toString() ==~ /.*Foobar.*/
     }
 }

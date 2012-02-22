@@ -1,9 +1,13 @@
 package carm
 
+import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class ModuleTests extends CarmUnitTestCase {
-
+@TestFor(Module)
+@Build(Module)
+class ModuleTests {
     void testApplicationNullable() {
         def module = Module.buildWithoutSave()
         module.application = null
@@ -11,25 +15,29 @@ class ModuleTests extends CarmUnitTestCase {
     }
 
     void testDeployInstructionsNull() {
-        assertTrue(Module.buildWithoutSave(deployInstructions: null).validate())
+        assert Module.buildWithoutSave(deployInstructions: null).validate()
     }
 
     void testDescriptionMaxSize() {
         assertHasError(Module.buildWithoutSave(description: 'a' * 4001), 'description', 'maxSize')
     }
+
     void testDescriptionNullable() {
-        assertTrue(Module.buildWithoutSave(description: null).validate())
+        assert Module.buildWithoutSave(description: null).validate()
     }
 
     void testNameBlank() {
         assertHasError(Module.buildWithoutSave(name: ''), 'name', 'blank')
     }
+
     void testNameMinSize() {
         assertHasError(Module.buildWithoutSave(name: 'a'), 'name', 'minSize')
     }
+
     void testNameMaxSize() {
         assertHasError(Module.buildWithoutSave(name: 'a' * 51), 'name', 'maxSize')
     }
+
     void testNameNullable() {
         assertHasError(Module.buildWithoutSave(name: null), 'name', 'nullable')
     }
@@ -41,7 +49,7 @@ class ModuleTests extends CarmUnitTestCase {
     void testToString() {
         def domain = Module.build(name: "Foobar")
 
-        assertNotNull(domain.toString())
-        assertTrue(domain.toString() ==~ /.*Foobar.*/)
+        assert domain.toString() != null
+        assert domain.toString() ==~ /.*Foobar.*/
     }
 }

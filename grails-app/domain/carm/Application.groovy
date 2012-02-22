@@ -1,7 +1,7 @@
 package carm
 
 class Application {
-    transient activityTraceService
+    def activityTraceService
 
     String name
     String description
@@ -39,14 +39,14 @@ class Application {
     }
 
     def afterInsert() {
-        activityTraceService.applicationCreated(this)
+        activityTraceService?.applicationCreated(this)
     }
 
     def beforeDelete() {
-        activityTraceService.applicationDeleted(this)
+        activityTraceService?.applicationDeleted(this)
     }
 
     def afterUpdate() {
-        activityTraceService.applicationUpdated(this)
+        activityTraceService?.applicationUpdated(this)
     }
 }

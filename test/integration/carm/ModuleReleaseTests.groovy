@@ -1,16 +1,12 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class ModuleReleaseTests extends GrailsUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(ModuleRelease)
+@Build(ModuleRelease)
+class ModuleReleaseTests {
     void testSomething() {
 
     }

@@ -1,15 +1,20 @@
 package carm
 
+import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*
 import carm.enums.SourceControlServerType
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class SourceControlServerTests extends CarmUnitTestCase {
+@TestFor(SourceControlServer)
+@Build(SourceControlServer)
+class SourceControlServerTests {
 
     void testDescriptionMaxSize() {
         assertHasError(SourceControlServer.buildWithoutSave(description: 'a' * 4001), 'description', 'maxSize')
     }
     void testDescriptionNullable() {
-        assertTrue(SourceControlServer.buildWithoutSave(description: null).validate())
+        assert SourceControlServer.buildWithoutSave(description: null).validate()
     }
 
     void testNameBlank() {
@@ -34,14 +39,14 @@ class SourceControlServerTests extends CarmUnitTestCase {
     }
 
     void testUrl() {
-        assertTrue(SourceControlServer.buildWithoutSave(url: 'https://bitbucket.org/lmxm/carm').validate())
-        assertTrue(SourceControlServer.buildWithoutSave(url: 'ssh://bitbucket.org/lmxm/carm').validate())
+        assert SourceControlServer.buildWithoutSave(url: 'https://bitbucket.org/lmxm/carm').validate()
+        assert SourceControlServer.buildWithoutSave(url: 'ssh://bitbucket.org/lmxm/carm').validate()
     }
     void testUrlMaxSize() {
         assertHasError(SourceControlServer.buildWithoutSave(url: 'a' * 201), 'url', 'maxSize')
     }
     void testUrlNullable() {
-        assertTrue(SourceControlServer.buildWithoutSave(url: null).validate())
+        assert SourceControlServer.buildWithoutSave(url: null).validate()
     }
     void testUrlUrl() {
         assertHasError(SourceControlServer.buildWithoutSave(url: 'test'), 'url', 'url')
@@ -50,7 +55,7 @@ class SourceControlServerTests extends CarmUnitTestCase {
     void testToString() {
         def domain = SourceControlServer.build(name: "Foobar")
 
-        assertNotNull(domain.toString())
-        assertTrue(domain.toString() ==~ /.*Foobar.*/)
+        assert domain.toString() != null
+        assert domain.toString() ==~ /.*Foobar.*/
     }
 }

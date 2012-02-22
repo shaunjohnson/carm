@@ -1,14 +1,18 @@
 package carm
 
-import grails.test.GrailsUnitTestCase
+import static carm.CarmUnitTestCase.assertHasError
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class ApplicationReleaseTestStateTests extends CarmUnitTestCase {
+@TestFor(ApplicationReleaseTestState)
+@Build(ApplicationReleaseTestState)
+class ApplicationReleaseTestStateTests {
 
     void testDescriptionMaxSize() {
         assertHasError(ApplicationReleaseTestState.buildWithoutSave(description: 'a' * 4001), 'description', 'maxSize')
     }
     void testDescriptionNullable() {
-        assertTrue(ApplicationReleaseTestState.buildWithoutSave(description: null).validate())
+        assert ApplicationReleaseTestState.buildWithoutSave(description: null).validate()
     }
 
     void testNameBlank() {
@@ -31,7 +35,7 @@ class ApplicationReleaseTestStateTests extends CarmUnitTestCase {
     void testToString() {
         def domain = ApplicationReleaseTestState.build(name: "Foobar")
 
-        assertNotNull(domain.toString())
-        assertTrue(domain.toString() ==~ /.*Foobar.*/)
+        assert domain.toString() != null
+        assert domain.toString() ==~ /.*Foobar.*/
     }
 }

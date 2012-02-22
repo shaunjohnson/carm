@@ -1,16 +1,12 @@
 package carm
 
 import grails.test.*
+import grails.test.mixin.TestFor
+import grails.buildtestdata.mixin.Build
 
-class ApplicationRoleTests extends GrailsUnitTestCase {
-    protected void setUp() {
-        super.setUp()
-    }
-
-    protected void tearDown() {
-        super.tearDown()
-    }
-
+@TestFor(ApplicationRole)
+@Build(ApplicationRole)
+class ApplicationRoleTests {
     void testSomething() {
 
     }
