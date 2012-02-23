@@ -204,6 +204,9 @@ class CarmTagLib {
         else if (attrs.application) {
             project = attrs.application?.project
         }
+        else if (attrs.applicationDeployment) {
+            project = attrs.applicationDeployment?.applicationRelease?.application?.project
+        }
         else if (attrs.applicationRelease) {
             project = attrs.applicationRelease?.application?.project
         }

@@ -34,7 +34,8 @@
                     <g:message code="applicationDeployment.sysEnvironment.label" default="System Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show" id="${applicationDeploymentInstance?.sysEnvironment?.id}">
+                    <g:link controller="systemEnvironment" action="show"
+                            id="${applicationDeploymentInstance?.sysEnvironment?.id}">
                         ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
@@ -90,24 +91,27 @@
                 </td>
             </tr>
             </tbody>
-            <tfoot class="detailProp">
-            <tr>
-                <td colspan="2">
-                    <div class="buttons">
-                        <span class="button">
-                            <g:link class="edit" action="edit" id="${applicationDeploymentInstance?.id}">
-                                <g:message code="default.button.edit.label" default="Edit"/>
-                            </g:link>
-                        </span>
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${applicationDeploymentInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
+
+            <carm:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
+                <tfoot class="detailProp">
+                <tr>
+                    <td colspan="2">
+                        <div class="buttons">
+                            <span class="button">
+                                <g:link class="edit" action="edit" id="${applicationDeploymentInstance?.id}">
+                                    <g:message code="default.button.edit.label" default="Edit"/>
+                                </g:link>
+                            </span>
+                            <span class="button">
+                                <g:link class="delete" action="delete" id="${applicationDeploymentInstance?.id}">
+                                    <g:message code="default.button.delete.label" default="Delete"/>
+                                </g:link>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </carm:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}"/>
     </div>
@@ -116,10 +120,12 @@
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="applicationDeploymentModules" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
+                <g:render template="applicationDeploymentModules"
+                          model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="applicationReleaseDeployments" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
+                <g:render template="applicationReleaseDeployments"
+                          model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
             </td>
         </tr>
         </tbody>
