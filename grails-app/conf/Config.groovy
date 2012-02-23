@@ -67,13 +67,16 @@ jodatime {
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.changeme.com"
+        // grails.serverURL = "http://www.changeme.com"
+        grails.logging.jul.usebridge = false
     }
     development {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        // grails.serverURL = "http://localhost:8080/${appName}"
+        grails.logging.jul.usebridge = true
     }
     test {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        // grails.serverURL = "http://localhost:8080/${appName}"
+        grails.logging.jul.usebridge = true
     }
 }
 
