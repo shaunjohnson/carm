@@ -52,8 +52,6 @@
             jQuery(':input:visible:first').focus();
         });
     </script>
-
-    <r:layoutResources/>
 </head>
 
 <body>
@@ -75,6 +73,5 @@
     </p>
 </div>
 
-<r:layoutResources/>
 </body>
 </html>
