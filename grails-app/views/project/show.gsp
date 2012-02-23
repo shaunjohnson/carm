@@ -73,7 +73,7 @@
             </tr>
             </tbody>
 
-            <carm:isProjectOwner project="${projectInstance}">
+            <carmsec:isProjectOwner project="${projectInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -92,7 +92,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </carm:isProjectOwner>
+            </carmsec:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="projectDetails" entityName="${entityName}"/>
     </div>

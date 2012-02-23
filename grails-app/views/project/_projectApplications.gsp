@@ -2,14 +2,14 @@
     <div class="text">
         <g:message code="applications.label" default="Applications"/>
     </div>
-    <carm:isProjectOwner project="${projectInstance}">
+    <carmsec:isProjectOwner project="${projectInstance}">
         <div class="actions">
             <g:link class="create" controller="application" action="create"
                     params="['project.id': projectInstance?.id]">
                 <g:message code="addApplication.label" default="Add Application"/>
             </g:link>
         </div>
-    </carm:isProjectOwner>
+    </carmsec:isProjectOwner>
 </div>
 
 <g:if test="${applicationsGrouped?.size()}">

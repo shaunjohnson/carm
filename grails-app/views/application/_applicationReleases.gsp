@@ -5,12 +5,12 @@
     </div>
 
     <div class="actions">
-        <carm:isProjectOwner application="${applicationInstance}">
+        <carmsec:isProjectOwner application="${applicationInstance}">
             <g:link class="create" controller="applicationRelease" action="create"
                     params="['application.id': applicationInstance?.id]">
                 <g:message code="newRelease.label" default="Make a New Release"/>
             </g:link>
-        </carm:isProjectOwner>
+        </carmsec:isProjectOwner>
 
         <g:if test="${applicationReleases?.size()}">
             <g:link class="list" controller="application" action="listReleases"
@@ -49,7 +49,7 @@
                 <td style="padding-bottom: 1em;">
                     ${applicationRelease.changeLog?.decodeHTML()}
 
-                    <carm:isProjectOwner application="${applicationInstance}">
+                    <carmsec:isProjectOwner application="${applicationInstance}">
                         <div class="buttons">
                             <span class="button">
                                 <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
@@ -60,7 +60,7 @@
                                 </g:if>
                             </span>
                         </div>
-                    </carm:isProjectOwner>
+                    </carmsec:isProjectOwner>
                 </td>
             </tr>
             <g:if test="${(i + 1) < applicationReleases.size()}">

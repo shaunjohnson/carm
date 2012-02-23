@@ -118,7 +118,7 @@
                         </p>
                     </g:else>
 
-                    <carm:isProjectOwner application="${applicationInstance}">
+                    <carmsec:isProjectOwner application="${applicationInstance}">
                         <div class="nav">
                             <span class="menuButton">
                                 <g:link class="create" controller="applicationRole" action="create"
@@ -127,7 +127,7 @@
                                 </g:link>
                             </span>
                         </div>
-                    </carm:isProjectOwner>
+                    </carmsec:isProjectOwner>
                 </td>
             </tr>
 
@@ -153,7 +153,7 @@
             </tr>
             </tbody>
 
-            <carm:isProjectOwner application="${applicationInstance}">
+            <carmsec:isProjectOwner application="${applicationInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -172,7 +172,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </carm:isProjectOwner>
+            </carmsec:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationDetails" entityName="${entityName}"/>
     </div>

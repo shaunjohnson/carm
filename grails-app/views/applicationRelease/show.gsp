@@ -15,7 +15,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <carm:isProjectOwner applicationRelease="${applicationReleaseInstance}">
+    <carmsec:isProjectOwner applicationRelease="${applicationReleaseInstance}">
         <div class="buttons">
             <g:if test="${applicationReleaseInstance.releaseState == ApplicationReleaseState.COMPLETED}">
                 <carm:button controller="applicationDeployment" action="create"
@@ -24,7 +24,7 @@
                 </carm:button>
             </g:if>
         </div>
-    </carm:isProjectOwner>
+    </carmsec:isProjectOwner>
 
     <div class="dialog">
         <table id="applicationReleaseDetails" class="details">
@@ -99,7 +99,7 @@
             </tr>
             </tbody>
 
-            <carm:isProjectOwner applicationRelease="${applicationReleaseInstance}">
+            <carmsec:isProjectOwner applicationRelease="${applicationReleaseInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -118,7 +118,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </carm:isProjectOwner>
+            </carmsec:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationReleaseDetails" entityName="${entityName}"/>
     </div>

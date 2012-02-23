@@ -98,7 +98,7 @@
             </tr>
             </tbody>
 
-            <carm:isProjectOwner module="${moduleInstance}">
+            <carmsec:isProjectOwner module="${moduleInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -117,7 +117,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </carm:isProjectOwner>
+            </carmsec:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="moduleDetails" entityName="${entityName}"/>
     </div>

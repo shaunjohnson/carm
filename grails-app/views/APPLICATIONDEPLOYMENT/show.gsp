@@ -103,7 +103,7 @@
             </tr>
             </tbody>
 
-            <carm:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
+            <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
                 <tfoot class="detailProp">
                 <tr>
                     <td colspan="2">
@@ -122,7 +122,7 @@
                     </td>
                 </tr>
                 </tfoot>
-            </carm:isProjectOwner>
+            </carmsec:isProjectOwner>
         </table>
         <carm:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}"/>
     </div>
