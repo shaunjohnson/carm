@@ -31,15 +31,24 @@
                     <g:message code="system.components.label" default="Components"/>
                 </td>
                 <td valign="top" style="text-align: left;" class="value">
-                    <ul>
-                        <g:each in="${systemInstance.components.sort { it.name }}" var="component">
-                            <li>
-                                <g:link controller="systemComponent" action="show" id="${component.id}">
-                                    ${component?.encodeAsHTML()}
-                                </g:link>
-                            </li>
-                        </g:each>
-                    </ul>
+                    <g:if test="${systemInstance.components.size()}">
+                        <ul>
+                            <g:each in="${systemInstance.components.sort { it.name }}" var="component">
+                                <li>
+                                    <g:link controller="systemComponent" action="show" id="${component.id}">
+                                        ${component?.encodeAsHTML()}
+                                    </g:link>
+                                </li>
+                            </g:each>
+                        </ul>
+                    </g:if>
+                    <g:else>
+                        <p class="emphasis">
+                            <g:message code="systemDoesNotHaveAnyComponents.message"
+                                       default="This system does not have any components."/>
+                        </p>
+                    </g:else>
+
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <div class="nav">
                             <span class="menuButton">
@@ -57,38 +66,49 @@
                     <g:message code="system.environments.label" default="Environments"/>
                 </td>
                 <td valign="top" style="text-align: left;" class="value">
-                    <table class="ol">
-                        <tbody>
-                        <g:each in="${systemInstance.environments}" var="environment" status="eindex">
-                            <tr>
-                                <td class="olIndex">
-                                    ${eindex + 1}.
-                                </td>
-                                <td class="olContent">
-                                    <g:link controller="systemEnvironment" action="show" id="${environment?.id}">
-                                        ${environment?.encodeAsHTML()}
-                                    </g:link>
-                                </td>
-                                <td>
-                                    <sec:ifAllGranted roles="ROLE_ADMIN">
-                                        <g:if test="${eindex > 0}">
-                                            <carm:moveUp controller="system" action="moveEnvUp" id="${environment.id}"
-                                                      params="[systemId: systemInstance.id, index: eindex]"/>
-                                        </g:if>
-                                    </sec:ifAllGranted>
-                                </td>
-                                <td>
-                                    <sec:ifAllGranted roles="ROLE_ADMIN">
-                                        <g:if test="${eindex + 1 < systemInstance.environments.size()}">
-                                            <carm:moveDown controller="system" action="moveEnvDown" id="${environment.id}"
-                                                        params="[systemId: systemInstance.id, index: eindex]"/>
-                                        </g:if>
-                                    </sec:ifAllGranted>
-                                </td>
-                            </tr>
-                        </g:each>
-                        </tbody>
-                    </table>
+                    <g:if test="${systemInstance.environments.size()}">
+                        <table class="ol">
+                            <tbody>
+                            <g:each in="${systemInstance.environments}" var="environment" status="eindex">
+                                <tr>
+                                    <td class="olIndex">
+                                        ${eindex + 1}.
+                                    </td>
+                                    <td class="olContent">
+                                        <g:link controller="systemEnvironment" action="show" id="${environment?.id}">
+                                            ${environment?.encodeAsHTML()}
+                                        </g:link>
+                                    </td>
+                                    <td>
+                                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                                            <g:if test="${eindex > 0}">
+                                                <carm:moveUp controller="system" action="moveEnvUp"
+                                                             id="${environment.id}"
+                                                             params="[systemId: systemInstance.id, index: eindex]"/>
+                                            </g:if>
+                                        </sec:ifAllGranted>
+                                    </td>
+                                    <td>
+                                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                                            <g:if test="${eindex + 1 < systemInstance.environments.size()}">
+                                                <carm:moveDown controller="system" action="moveEnvDown"
+                                                               id="${environment.id}"
+                                                               params="[systemId: systemInstance.id, index: eindex]"/>
+                                            </g:if>
+                                        </sec:ifAllGranted>
+                                    </td>
+                                </tr>
+                            </g:each>
+                            </tbody>
+                        </table>
+                    </g:if>
+                    <g:else>
+                        <p class="emphasis">
+                            <g:message code="systemDoesNotHaveAnyEnvironments.message"
+                                       default="This system does not have any environments."/>
+                        </p>
+                    </g:else>
+
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <div class="nav">
                             <span class="menuButton">
