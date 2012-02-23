@@ -145,6 +145,11 @@ class CarmTagLib {
                 out << body()
             }
         }
+        else if (domain instanceof ModuleDeploymentTestState) {
+            if (ModuleDeployment.findAllByTestState(domain).size() == 0) {
+                out << body()
+            }
+        }
         else if (domain instanceof ModuleType) {
             if (Module.findAllByType(domain).size() == 0) {
                 out << body()
