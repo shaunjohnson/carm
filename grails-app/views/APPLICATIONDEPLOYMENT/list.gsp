@@ -23,7 +23,7 @@
                                   title="${message(code: 'applicationDeployment.deploymentState.label', default: 'Deployment State')}"/>
                 <th><g:message code="applicationDeployment.applicationRelease.label"
                                default="Application Release"/></th>
-                <th><g:message code="applicationDeployment.environment.label" default="Environment"/></th>
+                <th><g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/></th>
                 <g:sortableColumn property="requestedDeploymentDate"
                                   title="${message(code: 'applicationDeployment.requestedDeploymentDate.label', default: 'Requested Deployment Date')}"/>
                 <g:sortableColumn property="completedDeploymentDate"
@@ -42,7 +42,7 @@
                         ${fieldValue(bean: applicationDeploymentInstance, field: "applicationRelease")}
                     </td>
                     <td>
-                        ${fieldValue(bean: applicationDeploymentInstance, field: "environment")}
+                        ${fieldValue(bean: applicationDeploymentInstance, field: "sysEnvironment")}
                     </td>
                     <td>
                         <g:formatDate date="${applicationDeploymentInstance.requestedDeploymentDate}"/>

@@ -11,14 +11,14 @@ class ApplicationDeployment {
 
     static constraints = {
         applicationRelease(nullable: false)
-        environment(nullable: false)
+        sysEnvironment(nullable: false)
         deploymentInstructions(nullable: true)
         requestedDeploymentDate(nullable: false)
         completedDeploymentDate(nullable: true)
         deploymentState(maxSize: 50, nullable: false, blank: false)
     }
 
-    static belongsTo = [applicationRelease: ApplicationRelease, environment: SystemEnvironment]
+    static belongsTo = [applicationRelease: ApplicationRelease, sysEnvironment: SystemEnvironment]
 
     static hasMany = [moduleDeployments: ModuleDeployment]
 

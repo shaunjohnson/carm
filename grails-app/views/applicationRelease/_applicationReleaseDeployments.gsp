@@ -13,7 +13,7 @@
                     <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
                 </th>
                 <th>
-                    <g:message code="applicationDeployment.environment.label" default="Environment"/>
+                    <g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/>
                 </th>
                 <th>
                     <g:message code="applicationDeployment.requestedDeploymentDate.label"
@@ -35,8 +35,8 @@
                         </g:link>
                     </td>
                     <td>
-                        <g:link controller="systemEnvironment" action="show" id="${deploymentInstance.environment.id}">
-                            ${deploymentInstance.environment?.encodeAsHTML()}
+                        <g:link controller="systemEnvironment" action="show" id="${deploymentInstance.sysEnvironment.id}">
+                            ${deploymentInstance.sysEnvironment?.encodeAsHTML()}
                         </g:link>
                     </td>
                     <td>

@@ -31,11 +31,11 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="applicationDeployment.environment.label" default="System Environment"/>
+                    <g:message code="applicationDeployment.sysEnvironment.label" default="System Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show" id="${applicationDeploymentInstance?.environment?.id}">
-                        ${applicationDeploymentInstance?.environment?.encodeAsHTML()}
+                    <g:link controller="systemEnvironment" action="show" id="${applicationDeploymentInstance?.sysEnvironment?.id}">
+                        ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>

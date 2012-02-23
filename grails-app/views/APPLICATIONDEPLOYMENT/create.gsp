@@ -42,15 +42,15 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="environment.id">
-                            <g:message code="applicationDeployment.environment.label" default="Environment"/>
+                        <carm:label for="sysEnvironment.id">
+                            <g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/>
                         </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'environment', 'errors')}">
-                        <g:select name="environment.id"
+                        <g:select name="sysEnvironment.id"
                                   from="${applicationDeploymentInstance?.applicationRelease?.application?.system?.environments}"
-                                  optionKey="id" value="${applicationDeploymentInstance?.environment?.id}"/>
+                                  optionKey="id" value="${applicationDeploymentInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
