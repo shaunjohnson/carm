@@ -123,7 +123,7 @@
 <script type="text/javascript">
     jQuery(function () {
         function updateFullPath() {
-            var fullUrl = "${sourceControlRepositoryInstance.server.url}" + jQuery(this).val();
+            var fullUrl = "${sourceControlRepositoryInstance.server.url}" + jQuery("#path").val();
 
             <g:if test="${sourceControlRepositoryInstance.server.type == SourceControlServerType.Subversion}">
                 jQuery("#fullPath").html('<a href="' + fullUrl + '" target="_blank">' + fullUrl + '</a>');
@@ -132,6 +132,8 @@
                 jQuery("#fullPath").text(fullUrl);
             </g:else>
         }
+
+        updateFullPath();
 
         jQuery("#path").keydown(updateFullPath).keyup(updateFullPath);
     });

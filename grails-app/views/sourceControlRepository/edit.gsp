@@ -1,4 +1,4 @@
-<%@ page import="carm.SourceControlRepository" %>
+<%@ page import="carm.enums.SourceControlServerType; carm.SourceControlRepository" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -124,15 +124,17 @@
 <script type="text/javascript">
     jQuery(function () {
         function updateFullPath() {
-            var fullUrl = "${sourceControlRepositoryInstance.server.url}" + jQuery(this).val();
+            var fullUrl = "${sourceControlRepositoryInstance.server.url}" + jQuery("#path").val();
 
-        <g:if test="${sourceControlRepositoryInstance.server.type == SourceControlServerType.Subversion}">
-            jQuery("#fullPath").html('<a href="' + fullUrl + '" target="_blank">' + fullUrl + '</a>');
-        </g:if>
-        <g:else>
-            jQuery("#fullPath").text(fullUrl);
-        </g:else>
+            <g:if test="${sourceControlRepositoryInstance.server.type == SourceControlServerType.Subversion}">
+                jQuery("#fullPath").html('<a href="' + fullUrl + '" target="_blank">' + fullUrl + '</a>');
+            </g:if>
+            <g:else>
+                jQuery("#fullPath").text(fullUrl);
+            </g:else>
         }
+
+        updateFullPath();
 
         jQuery("#path").keydown(updateFullPath).keyup(updateFullPath);
     });
