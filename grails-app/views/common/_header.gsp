@@ -195,6 +195,27 @@
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
+<g:elseif test="${controller == 'moduleDeploymentTestState'}">
+    <g:set var="entityName" value="${message(code: 'moduleDeploymentTestState.label', default: 'Module Deployment Test State')}"/>
+
+    <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
+
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+        <bc:listModuleDeploymentTestStates/>
+
+        <g:if test="${action == 'show'}">
+            <bc:showModuleDeploymentTestState moduleDeploymentTestState="${domain}"/>
+        </g:if>
+        <g:elseif test="${action == 'create' || action == 'save'}">
+            <bc:createLabel entityName="${entityName}"/>
+        </g:elseif>
+        <g:elseif test="${action == 'edit' || action == 'update'}">
+            <bc:showModuleDeploymentTestState moduleDeploymentTestState="${domain}"/>
+            <bc:editLabel entityName="${entityName}"/>
+        </g:elseif>
+    </bc:breadcrumbs>
+</g:elseif>
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 

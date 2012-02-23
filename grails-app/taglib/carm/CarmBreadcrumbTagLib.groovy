@@ -148,6 +148,16 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a list module deployment test states link.
+     */
+    def listModuleDeploymentTestStates = { attrs ->
+        def isFirst = attrs.isFirst
+        out << link(controller: "moduleDeploymentTestState", action: "list", isFirst: isFirst,
+                title: message(code: "showAllModuleDeploymentTestStates.label"),
+                text: message(code: "moduleDeploymentTestState.label"))
+    }
+
+    /**
      * Renders a list module types link.
      */
     def listModuleTypes = { attrs ->
@@ -314,6 +324,17 @@ class CarmBreadcrumbTagLib {
         out << link(controller: "moduleDeployment", action: "show",
                 title: message(code: "showModuleDeployment.label"),
                 text: moduleDeployment.moduleRelease.module.name, id: moduleDeployment.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders a show module deployment test state link.
+     */
+    def showModuleDeploymentTestState = { attrs ->
+        def moduleDeploymentTestState = attrs.moduleDeploymentTestState
+        def isFirst = attrs.isFirst
+        out << link(controller: "moduleDeploymentTestState", action: "show",
+                title: message(code: "showModuleDeploymentTestState.label"),
+                text: moduleDeploymentTestState.name, id: moduleDeploymentTestState.id, isFirst: isFirst)
     }
 
     /**
