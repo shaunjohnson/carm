@@ -26,8 +26,8 @@ class ProjectController {
     def create = {
         def projectInstance = new Project()
         projectInstance.properties = params
-        def projectManagers = [springSecurityService.authentication.name]
-        return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderByUsername()]
+        def projectOwners = [springSecurityService.authentication.name]
+        return [projectInstance: projectInstance, projectOwners: projectOwners, projectOwnerList: User.listOrderByUsername()]
     }
 
     def save = {
@@ -37,7 +37,7 @@ class ProjectController {
             redirect(action: "show", id: projectInstance.id)
         }
         else {
-            render(view: "create", model: [projectInstance: projectInstance, projectManagers: params.projectManagers, projectManagerList: User.listOrderByUsername()])
+            render(view: "create", model: [projectInstance: projectInstance, projectOwners: params.projectOwners, projectOwnerList: User.listOrderByUsername()])
         }
     }
 
@@ -64,8 +64,8 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            def projectManagers = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
-            return [projectInstance: projectInstance, projectManagers: projectManagers, projectManagerList: User.listOrderByUsername()]
+            def projectOwners = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
+            return [projectInstance: projectInstance, projectOwners: projectOwners, projectOwnerList: User.listOrderByUsername()]
         }
     }
 
@@ -76,7 +76,7 @@ class ProjectController {
                 def version = params.version.toLong()
                 if (projectInstance.version > version) {
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
-                    render(view: "edit", model: [projectInstance: projectInstance, projectManagerList: User.listOrderByUsername()])
+                    render(view: "edit", model: [projectInstance: projectInstance, projectOwnerList: User.listOrderByUsername()])
                     return
                 }
             }
@@ -86,7 +86,7 @@ class ProjectController {
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
-                render(view: "edit", model: [projectInstance: projectInstance, projectManagerList: User.listOrderByUsername()])
+                render(view: "edit", model: [projectInstance: projectInstance, projectOwnerList: User.listOrderByUsername()])
             }
         }
         else {

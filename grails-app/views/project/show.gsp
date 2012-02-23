@@ -64,7 +64,7 @@
 
             <tr class="prop detailProp">
                 <td valign="top" class="name">
-                    <g:message code="project.projectManagers.label" default="Project Managers"/>
+                    <g:message code="project.projectOwners.label" default="Project Owners"/>
                 </td>
                 <td valign="top" class="value">
                     <carm:listUsersWithPermission domainObject="${projectInstance}"

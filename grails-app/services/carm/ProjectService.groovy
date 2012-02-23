@@ -21,7 +21,7 @@ class ProjectService {
 
         log.debug "$prefix entered"
 
-        if (!params.projectManagers) {
+        if (!params.projectOwners) {
             log.error "$prefix At least one project manager must be selected"
             throw new RuntimeException("At least one project manager must be selected")
         }
@@ -29,9 +29,9 @@ class ProjectService {
         Project project = new Project(params)
         project.save()
 
-        // Grant the list of project managers administration permission
+        // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.createPermissions(project, params.projectManagers, BasePermission.ADMINISTRATION)
+            carmSecurityService.createPermissions(project, params.projectOwners, BasePermission.ADMINISTRATION)
         }
 
         log.debug "$prefix returning $project"
@@ -62,16 +62,16 @@ class ProjectService {
 
         log.debug "$prefix entered"
 
-        if (!params.projectManagers) {
-            log.error "$prefix At least one project manager must be selected"
-            throw new RuntimeException("At least one project manager must be selected")
+        if (!params.projectOwners) {
+            log.error "$prefix At least one project owner must be selected"
+            throw new RuntimeException("At least one project owner must be selected")
         }
 
         project.properties = params
 
-        // Grant the list of project managers administration permission
+        // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.updatePermissions(project, params.projectManagers, BasePermission.ADMINISTRATION)
+            carmSecurityService.updatePermissions(project, params.projectOwners, BasePermission.ADMINISTRATION)
         }
 
         log.debug "$prefix leaving"

@@ -66,15 +66,15 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="projectManagers" required="true">
-                            <g:message code="project.projectManagers.label" default="Project Managers"/>
+                        <carm:label for="projectOwners" required="true">
+                            <g:message code="project.projectOwners.label" default="Project Owners"/>
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:select name="projectManagers" from="${projectManagerList}" optionKey="username"
-                                  value="${projectManagers}" multiple="true"
+                        <g:select name="projectOwners" from="${projectOwnerList}" optionKey="username"
+                                  value="${projectOwners}" multiple="true"
                                   required="required"
-                                  title="${message(code: 'project.projectManagers.help')}"/>
+                                  title="${message(code: 'project.projectOwners.help')}"/>
                     </td>
                 </tr>
                 </tbody>
