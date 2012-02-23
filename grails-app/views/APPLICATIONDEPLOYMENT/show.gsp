@@ -29,6 +29,7 @@
                     </g:link>
                 </td>
             </tr>
+
             <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.sysEnvironment.label" default="System Environment"/>
@@ -40,6 +41,7 @@
                     </g:link>
                 </td>
             </tr>
+
             <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.deploymentInstructions.label"
@@ -49,6 +51,7 @@
                     ${fieldValue(bean: applicationDeploymentInstance, field: "deploymentInstructions").decodeHTML()}
                 </td>
             </tr>
+
             <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.requestedDeploymentDate.label"
@@ -58,6 +61,7 @@
                     <g:formatDate date="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
                 </td>
             </tr>
+
             <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.completedDeploymentDate.label"
@@ -67,6 +71,7 @@
                     <g:formatDate date="${applicationDeploymentInstance?.completedDeploymentDate}"/>
                 </td>
             </tr>
+
             <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
@@ -74,6 +79,11 @@
                 <td valign="top"
                     class="value">${fieldValue(bean: applicationDeploymentInstance, field: "deploymentState")}</td>
             </tr>
+
+            <tr class="prop detailProp">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
             <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.dateCreated.label" default="Date Created"/>
@@ -82,6 +92,7 @@
                     <g:formatDate date="${applicationDeploymentInstance?.dateCreated}"/>
                 </td>
             </tr>
+
             <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.lastUpdated.label" default="Last Updated"/>
