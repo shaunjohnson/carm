@@ -1,4 +1,4 @@
-<%@ page import="carm.SourceControlRepository" %>
+<%@ page import="carm.enums.SourceControlServerType; carm.SourceControlRepository" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -83,6 +83,22 @@
                                      title="${message(code: 'sourceControlRepository.path.help')}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <carm:label>
+                            <g:message code="sourceControlRepository.fullPath.label" default="Full Path"/>
+                        </carm:label>
+                    </td>
+                    <td id="fullPath" valign="top">
+                        <g:if test="${sourceControlRepositoryInstance.server.type == SourceControlServerType.Subversion}">
+                            <a href="${sourceControlRepositoryInstance.server.url}"
+                               target="_blank">${sourceControlRepositoryInstance.server.url}</a>
+                        </g:if>
+                        <g:else>
+                            ${sourceControlRepositoryInstance.server.url}
+                        </g:else>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -103,5 +119,23 @@
         </div>
     </g:form>
 </div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        function updateFullPath() {
+            var fullUrl = "${sourceControlRepositoryInstance.server.url}" + jQuery(this).val();
+
+            <g:if test="${sourceControlRepositoryInstance.server.type == SourceControlServerType.Subversion}">
+                jQuery("#fullPath").html('<a href="' + fullUrl + '" target="_blank">' + fullUrl + '</a>');
+            </g:if>
+            <g:else>
+                jQuery("#fullPath").text(fullUrl);
+            </g:else>
+        }
+
+        jQuery("#path").keydown(updateFullPath).keyup(updateFullPath);
+    });
+</script>
+
 </body>
 </html>
