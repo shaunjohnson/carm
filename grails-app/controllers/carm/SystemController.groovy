@@ -48,7 +48,7 @@ class SystemController {
             [
                     systemInstance: systemInstance,
                     applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance),
-                    latestDeployments: applicationDeploymentService.findAllLatestDeploymentsBySystem(systemInstance)
+                    latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystem(systemInstance)
             ]
         }
     }

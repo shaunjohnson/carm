@@ -33,14 +33,18 @@
                             </g:link>
                         </td>
                         <g:each var="environment" in="${systemInstance.environments}">
-                            <g:set var="deployment" value="${applicationDeployments[environment.name]}"/>
+                            <g:set var="applicationDeployment" value="${applicationDeployments[environment.name]}"/>
 
                             <td class="centered">
-                                <g:if test="${deployment}">
-                                    <g:link controller="applicationDeployment" action="show"
-                                            id="${deployment.applicationDeploymentId}">
-                                        ${deployment.releaseNumber}
-                                    </g:link>
+                                <g:if test="${applicationDeployment}">
+                                    <span title="<g:message code="applicationDeployedOn.message"
+                                                            default="Deployed on {0}"
+                                                            args="[formatDate(date: applicationDeployment.completedDeploymentDate)]"/>">
+                                        <g:link controller="applicationDeployment" action="show"
+                                                id="${applicationDeployment.applicationDeploymentId}">
+                                            ${applicationDeployment.releaseNumber}
+                                        </g:link>
+                                    </span>
                                 </g:if>
                             </td>
                         </g:each>

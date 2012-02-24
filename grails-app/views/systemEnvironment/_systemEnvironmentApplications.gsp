@@ -41,14 +41,21 @@
                         </td>
                         <td>
                             <g:if test="${applicationDeployment?.applicationDeploymentId}">
-                                <g:link controller="applicationDeployment" action="show"
-                                        id="${applicationDeployment.applicationDeploymentId}">
-                                    <carm:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
-                                </g:link>
+                                <span title="<g:message code="applicationDeployedOn.message"
+                                                        default="Deployed on {0}"
+                                                        args="[formatDate(date: applicationDeployment.completedDeploymentDate)]"/>">
+                                    <g:link controller="applicationDeployment" action="show"
+                                            id="${applicationDeployment.applicationDeploymentId}">
+                                        <carm:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
+                                    </g:link>
+                                </span>
                             </g:if>
                         </td>
                         <td>
-                            ${applicationDeployment?.deploymentState}
+                            <g:link controller="applicationDeployment" action="show"
+                                    id="${applicationDeployment?.applicationDeploymentId}">
+                                ${applicationDeployment?.deploymentState}
+                            </g:link>
                         </td>
                     </tr>
                 </g:each>

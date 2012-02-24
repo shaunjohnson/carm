@@ -1,5 +1,7 @@
 package carm
 
+import carm.enums.ApplicationDeploymentState
+
 class ApplicationDeploymentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -29,7 +31,7 @@ class ApplicationDeploymentController {
     def save = {
         def applicationDeploymentInstance = new ApplicationDeployment(params)
 
-        applicationDeploymentInstance.deploymentState = "Created"
+        applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
 
         if (applicationDeploymentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"

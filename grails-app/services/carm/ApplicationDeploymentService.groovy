@@ -1,5 +1,7 @@
 package carm
 
+import carm.enums.ApplicationDeploymentState
+
 class ApplicationDeploymentService {
 
     static transactional = false
@@ -18,16 +20,22 @@ class ApplicationDeploymentService {
         return null;
     }
 
-    def findAllLatestDeploymentsBySystem(System system) {
+    def findAllLatestCompletedDeploymentsBySystem(System system) {
         def results = [:]
 
         Application.listOrderByType().each { application ->
             def deployments = ApplicationDeployment.executeQuery("""
-                select ad.sysEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate)
-                from ApplicationDeployment ad
-                where ad.sysEnvironment.system = :system and ad.applicationRelease.application = :application
-                group by ad.sysEnvironment
-            """, [system: system, application: application])
+                select
+                    ad.sysEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate)
+                from
+                    ApplicationDeployment ad
+                where
+                    ad.deploymentState = :deploymentState
+                    and ad.sysEnvironment.system = :system
+                    and ad.applicationRelease.application = :application
+                group by
+                    ad.sysEnvironment
+            """, [deploymentState: ApplicationDeploymentState.COMPLETED, system: system, application: application])
 
             def applicationDeployments = [:]
 
@@ -50,16 +58,22 @@ class ApplicationDeploymentService {
         return results
     }
 
-    def findAllLatestDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
+    def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
         def results = [:]
 
         Application.listOrderByType().each { application ->
             def deployments = ApplicationDeployment.executeQuery("""
-                select ad.applicationRelease.id, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate), ad.deploymentState
-                from ApplicationDeployment ad
-                where ad.sysEnvironment = :systemEnvironment and ad.applicationRelease.application = :application
-                group by ad.sysEnvironment
-            """, [systemEnvironment: systemEnvironment, application: application])
+                select
+                    ad.applicationRelease.id, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate), ad.deploymentState
+                from
+                    ApplicationDeployment ad
+                where
+                    ad.deploymentState = :deploymentState
+                    and ad.sysEnvironment = :systemEnvironment
+                    and ad.applicationRelease.application = :application
+                group by
+                    ad.sysEnvironment
+            """, [deploymentState: ApplicationDeploymentState.COMPLETED, systemEnvironment: systemEnvironment, application: application])
 
             deployments.each {
                 def applicationReleaseId = it[0]

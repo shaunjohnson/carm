@@ -56,7 +56,7 @@ class SystemEnvironmentController {
             [
                     systemEnvironmentInstance: systemEnvironmentInstance,
                     applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemEnvironmentInstance.system),
-                    latestDeployments: applicationDeploymentService.findAllLatestDeploymentsBySystemEnvironment(systemEnvironmentInstance)
+                    latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemEnvironment(systemEnvironmentInstance)
             ]
         }
     }

@@ -1,10 +1,12 @@
 package carm
 
+import carm.enums.ApplicationDeploymentState
+
 class ApplicationDeployment {
     String deploymentInstructions
     Date requestedDeploymentDate
     Date completedDeploymentDate
-    String deploymentState
+    ApplicationDeploymentState deploymentState
 
     Date dateCreated
     Date lastUpdated
