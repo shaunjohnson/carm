@@ -37,14 +37,11 @@
 
                             <td class="centered">
                                 <g:if test="${applicationDeployment}">
-                                    <span title="<g:message code="applicationDeployedOn.message"
-                                                            default="Deployed on {0}"
-                                                            args="[formatDate(date: applicationDeployment.completedDeploymentDate)]"/>">
-                                        <g:link controller="applicationDeployment" action="show"
-                                                id="${applicationDeployment.applicationDeploymentId}">
-                                            ${applicationDeployment.releaseNumber}
-                                        </g:link>
-                                    </span>
+                                    <g:link controller="applicationDeployment" action="show"
+                                            id="${applicationDeployment.applicationDeploymentId}"
+                                            title="${message(code: "applicationDeployedOn.message", args: [formatDate(date: applicationDeployment.completedDeploymentDate)])}">
+                                        ${applicationDeployment.releaseNumber}
+                                    </g:link>
                                 </g:if>
                             </td>
                         </g:each>
