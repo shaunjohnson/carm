@@ -23,6 +23,7 @@ class CarmTagLib {
 
     static namespace = "carm"
 
+    def applicationReleaseService
     def carmSecurityService
 
     /**
@@ -296,5 +297,16 @@ class CarmTagLib {
         def value = attrs.value
 
         out << value?.encodeAsHTML()?.replace('\n', '<br/>\n')
+    }
+
+    /**
+     * Renders the tag body if the current user is a project owner for the provided object.
+     */
+    def isDeployable = { attrs, body ->
+        ApplicationRelease applicationRelease = attrs.applicationRelease
+
+        if (applicationReleaseService.isDeployable(applicationRelease)) {
+            out << body()
+        }
     }
 }

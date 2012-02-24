@@ -13,6 +13,20 @@ class SystemService {
         System.count()
     }
 
+    /**
+     * Determines if the provided system can be deployed to. A system that has at least one component and at least one
+     * environment can be deployed to.
+     *
+     * @param system System object to test.
+     * @return True if the system can be deployed to.
+     */
+    boolean canBeDeployedTo(System system) {
+        boolean hasComponents = (system?.components?.size() ?: 0) > 0
+        boolean hasEnvironments = (system?.environments?.size() ?: 0) > 0
+
+        return hasComponents && hasEnvironments
+    }
+
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     System create(Map params) {

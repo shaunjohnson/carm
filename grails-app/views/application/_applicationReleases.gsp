@@ -29,35 +29,35 @@
 <g:if test="${applicationReleases.size()}">
     <table style="width: 100%;">
         <tbody>
-        <g:each in="${applicationReleases}" var="applicationRelease" status="i">
+        <g:each in="${applicationReleases}" var="applicationReleaseInstance" status="i">
             <tr>
                 <td style="padding-bottom: 1em;">
                     <h4 class="applicationReleaseNumber">
-                        <g:link controller="applicationRelease" action="show" id="${applicationRelease.id}">
-                            ${applicationRelease.releaseNumber.encodeAsHTML()}
+                        <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
+                            ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
                         </g:link>
                     </h4>
 
                     <div style="margin: 0.5em 0;">
-                        <carm:formatDateOnly date="${applicationRelease.dateCreated}"/>
+                        <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
                     </div>
 
                     <div>
-                        ${applicationRelease.releaseState.encodeAsHTML()}
+                        ${applicationReleaseInstance.releaseState.encodeAsHTML()}
                     </div>
                 </td>
                 <td style="padding-bottom: 1em;">
-                    ${applicationRelease.changeLog?.decodeHTML()}
+                    ${applicationReleaseInstance.changeLog?.decodeHTML()}
 
                     <carmsec:isProjectOwner application="${applicationInstance}">
                         <div class="buttons">
                             <span class="button">
-                                <g:if test="${applicationRelease.releaseState == ApplicationReleaseState.COMPLETED}">
+                                <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
                                     <carm:button controller="applicationDeployment" action="create"
-                                                 params="['applicationRelease.id': applicationRelease.id]">
+                                                 params="['applicationRelease.id': applicationReleaseInstance.id]">
                                         <g:message code="deployThisRelease.label" default="Deploy this Release"/>
                                     </carm:button>
-                                </g:if>
+                                </carm:isDeployable>
                             </span>
                         </div>
                     </carmsec:isProjectOwner>

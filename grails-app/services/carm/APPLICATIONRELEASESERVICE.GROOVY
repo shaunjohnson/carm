@@ -10,7 +10,28 @@ import org.springframework.transaction.annotation.Transactional
 class ApplicationReleaseService {
     static transactional = false
 
+    def applicationService
     def springSecurityService
+
+    /**
+     * Determines if the application release is deployable. A release can be deployed if the release is in a completed
+     * state and the application is deployable. Refer to the ApplicationService.isDeployable(app) method for info on
+     * the logic used to determine if an application can be deployed.
+     *
+     * @param applicationRelease Application release object to test
+     * @return True if the release can be deployed
+     */
+    boolean isDeployable(ApplicationRelease applicationRelease) {
+        if (applicationRelease?.releaseState != ApplicationReleaseState.COMPLETED) {
+            return false
+        }
+
+        if (!applicationRelease?.moduleReleases?.size()) {
+            return false
+        }
+
+        return applicationService.isDeployable(applicationRelease?.application)
+    }
 
     int count() {
         ApplicationRelease.count()

@@ -11,7 +11,7 @@ class CarmSecurityTagLib {
      * Renders the tag body if the current user is a project owner for the provided object.
      */
     def isProjectOwner = { attrs, body ->
-        def project = null
+        Project project = null
 
         if (attrs.project) {
             project = attrs.project

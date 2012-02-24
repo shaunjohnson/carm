@@ -4,6 +4,19 @@ class ApplicationService {
 
     static transactional = false
 
+    def systemService
+
+    /**
+     * Determines if the application is deployable. An application must be associated with a system that can be
+     * deployed to.
+     *
+     * @param application Application to test
+     * @return True if the application can be deployed
+     */
+    boolean isDeployable(Application application) {
+        return systemService.canBeDeployedTo(application?.system)
+    }
+
     SortedMap<String, List<Application>> findAllBySystemGroupedByType(System system) {
         def criteria = Application.createCriteria()
         def applications = criteria.list {
