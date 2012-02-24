@@ -15,7 +15,8 @@
                     </th>
                     <g:each var="environment" in="${systemInstance.environments}">
                         <th style="text-align: center; width: 5em;">
-                            <g:link controller="systemEnvironment" action="show" id="${environment.id}">
+                            <g:link controller="systemEnvironment" action="show" id="${environment.id}"
+                                title="${message(code: 'showSystemEnvironment.label')}">
                                 ${environment.name.encodeAsHTML()}
                             </g:link>
                         </th>
@@ -28,7 +29,8 @@
 
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
-                            <g:link controller="application" action="show" id="${application.id}">
+                            <g:link controller="application" action="show" id="${application.id}"
+                                    title="${message(code: 'showApplication.label')}">
                                 ${application?.encodeAsHTML()}
                             </g:link>
                         </td>

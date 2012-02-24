@@ -27,13 +27,15 @@
 
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
-                            <g:link controller="application" action="show" id="${application.id}">
+                            <g:link controller="application" action="show" id="${application.id}"
+                                    title="${message(code: 'showApplication.label')}">
                                 ${application?.encodeAsHTML()}
                             </g:link>
                             <g:if test="${applicationDeployment?.releaseNumber}">
                                 (
                                 <g:link controller="applicationRelease" action="show"
-                                        id="${applicationDeployment.applicationReleaseId}">
+                                        id="${applicationDeployment.applicationReleaseId}"
+                                        title="${message(code: 'showApplicationRelease.label')}">
                                     ${applicationDeployment.releaseNumber}
                                 </g:link>
                                 )
@@ -42,14 +44,16 @@
                         <td>
                             <g:if test="${applicationDeployment?.applicationDeploymentId}">
                                 <g:link controller="applicationDeployment" action="show"
-                                        id="${applicationDeployment.applicationDeploymentId}">
+                                        id="${applicationDeployment.applicationDeploymentId}"
+                                        title="${message(code: 'showApplicationDeployment.label')}">
                                     <carm:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
                                 </g:link>
                             </g:if>
                         </td>
                         <td>
                             <g:link controller="applicationDeployment" action="show"
-                                    id="${applicationDeployment?.applicationDeploymentId}">
+                                    id="${applicationDeployment?.applicationDeploymentId}"
+                                    title="${message(code: 'showApplicationDeployment.label')}">
                                 ${applicationDeployment?.deploymentState}
                             </g:link>
                         </td>
