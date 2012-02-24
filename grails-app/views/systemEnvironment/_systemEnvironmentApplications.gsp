@@ -11,7 +11,10 @@
                 <thead>
                 <tr>
                     <th>
-                        ${entry.key.encodeAsHTML()}
+                        <g:link controller="applicationType" action="show" id="${entry.key.id}"
+                                title="${message(code: 'showApplicationType.label')}">
+                            ${entry.key.encodeAsHTML()}
+                        </g:link>
                     </th>
                     <th style="width: 7em;">
                         Deployed

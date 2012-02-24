@@ -17,7 +17,7 @@ class ApplicationService {
         return systemService.canBeDeployedTo(application?.system)
     }
 
-    SortedMap<String, List<Application>> findAllBySystemGroupedByType(System system) {
+    SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(System system) {
         def criteria = Application.createCriteria()
         def applications = criteria.list {
             eq('system', system)
@@ -27,7 +27,7 @@ class ApplicationService {
             }
         }
 
-        SortedMap<String, List<Application>> applicationsGrouped = new TreeMap<String, List<Application>>()
+        SortedMap<ApplicationType, List<Application>> applicationsGrouped = new TreeMap<ApplicationType, List<Application>>()
         applications.each {
             List<Application> group = applicationsGrouped[it.type]
             if (!group) {
@@ -41,7 +41,7 @@ class ApplicationService {
         return applicationsGrouped
     }
 
-    SortedMap<String, List<Application>> findAllByProjectGroupedByType(Project project) {
+    SortedMap<ApplicationType, List<Application>> findAllByProjectGroupedByType(Project project) {
         def criteria = Application.createCriteria()
         def applications = criteria.list {
             eq('project', project)
@@ -51,7 +51,7 @@ class ApplicationService {
             }
         }
 
-        SortedMap<String, List<Application>> applicationsGrouped = new TreeMap<String, List<Application>>()
+        SortedMap<ApplicationType, List<Application>> applicationsGrouped = new TreeMap<ApplicationType, List<Application>>()
         applications.each {
             List<Application> group = applicationsGrouped[it.type]
             if (!group) {

@@ -11,7 +11,10 @@
                 <thead>
                 <tr>
                     <th>
-                        ${entry.key.encodeAsHTML()}
+                        <g:link controller="applicationType" action="show" id="${entry.key.id}"
+                                title="${message(code: 'showApplicationType.label')}">
+                            ${entry.key.encodeAsHTML()}
+                        </g:link>
                     </th>
                     <g:each var="environment" in="${systemInstance.environments}">
                         <th style="text-align: center; width: 5em;">

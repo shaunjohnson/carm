@@ -26,7 +26,7 @@
                     <carm:plainText value="${systemEnvironmentInstance?.description}"/>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="systemEnvironment.system.label" default="System"/>
                 </td>
