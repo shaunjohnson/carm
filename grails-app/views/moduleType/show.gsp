@@ -23,7 +23,9 @@
                     <g:message code="moduleType.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${moduleTypeInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${moduleTypeInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 

@@ -31,7 +31,9 @@
                     <g:message code="sourceControlUser.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${sourceControlUserInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${sourceControlUserInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
             <tr class="prop">

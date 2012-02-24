@@ -23,7 +23,9 @@
                     <g:message code="systemComponent.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${systemComponentInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${systemComponentInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
             <tr class="prop detailProp">

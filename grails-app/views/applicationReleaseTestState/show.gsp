@@ -24,7 +24,9 @@
                     <g:message code="applicationReleaseTestState.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${applicationReleaseTestStateInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${applicationReleaseTestStateInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 

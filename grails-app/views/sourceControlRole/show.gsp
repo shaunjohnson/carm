@@ -23,7 +23,9 @@
                     <g:message code="sourceControlRole.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${sourceControlRoleInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${sourceControlRoleInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 

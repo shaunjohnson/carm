@@ -47,7 +47,9 @@
                     </div>
                 </td>
                 <td style="padding-bottom: 1em;">
-                    ${applicationReleaseInstance.changeLog?.decodeHTML()}
+                    <div class="expander">
+                        ${applicationReleaseInstance.changeLog?.decodeHTML()}
+                    </div>
 
                     <carmsec:isProjectOwner application="${applicationInstance}">
                         <div class="buttons">

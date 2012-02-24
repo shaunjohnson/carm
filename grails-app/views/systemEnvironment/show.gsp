@@ -23,7 +23,9 @@
                     <g:message code="systemEnvironment.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${systemEnvironmentInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${systemEnvironmentInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
             <tr class="prop detailProp">

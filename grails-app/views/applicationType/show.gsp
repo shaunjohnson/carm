@@ -23,7 +23,9 @@
                     <g:message code="applicationType.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${applicationTypeInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${applicationTypeInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 

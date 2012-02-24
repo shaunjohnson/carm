@@ -23,7 +23,9 @@
                     <g:message code="sourceControlServer.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${sourceControlServerInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${sourceControlServerInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
             <tr class="prop">

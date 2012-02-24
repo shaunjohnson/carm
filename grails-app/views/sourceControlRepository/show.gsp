@@ -24,7 +24,9 @@
                     <g:message code="sourceControlRepository.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${sourceControlRepositoryInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${sourceControlRepositoryInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
             <tr class="prop">

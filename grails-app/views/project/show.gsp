@@ -33,7 +33,9 @@
                     <g:message code="project.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${projectInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${projectInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 

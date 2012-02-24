@@ -24,7 +24,9 @@
                     <g:message code="moduleDeploymentTestState.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:plainText value="${moduleDeploymentTestStateInstance?.description}"/>
+                    <div class="expander">
+                        <carm:plainText value="${moduleDeploymentTestStateInstance?.description}"/>
+                    </div>
                 </td>
             </tr>
 
