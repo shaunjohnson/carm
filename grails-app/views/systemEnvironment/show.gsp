@@ -68,11 +68,13 @@
                                     <g:message code="default.button.edit.label" default="Edit"/>
                                 </g:link>
                             </span>
-                            <span class="button">
-                                <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
-                                </g:link>
-                            </span>
+                            <carm:ifNotInUse domain="${systemEnvironmentInstance}">
+                                <span class="button">
+                                    <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
+                                        <g:message code="default.button.delete.label" default="Delete"/>
+                                    </g:link>
+                                </span>
+                            </carm:ifNotInUse>
                         </div>
                     </td>
                 </tr>
