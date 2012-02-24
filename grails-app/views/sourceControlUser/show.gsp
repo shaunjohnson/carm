@@ -97,28 +97,23 @@
                 </td>
             </tr>
             </tbody>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${sourceControlUserInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <span class="button">
-                                <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
-                                </g:link>
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </sec:ifAllGranted>
         </table>
-        <carm:showHideDetails sectionId="sourceControlUserDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="sourceControlUserDetails" entityName="${entityName}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${sourceControlUserInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <span class="button">
+                        <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}">
+                            <g:message code="default.button.delete.label" default="Delete"/>
+                        </g:link>
+                    </span>
+                </div>
+            </sec:ifAllGranted>
+        </carm:showHideDetails>
     </div>
 </div>
 </body>

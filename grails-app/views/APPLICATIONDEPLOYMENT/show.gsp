@@ -102,29 +102,23 @@
                 </td>
             </tr>
             </tbody>
-
-            <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${applicationDeploymentInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <span class="button">
-                                <g:link class="delete" action="delete" id="${applicationDeploymentInstance?.id}">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
-                                </g:link>
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </carmsec:isProjectOwner>
         </table>
-        <carm:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="applicationDeploymentDetails" entityName="${entityName}">
+            <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${applicationDeploymentInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <span class="button">
+                        <g:link class="delete" action="delete" id="${applicationDeploymentInstance?.id}">
+                            <g:message code="default.button.delete.label" default="Delete"/>
+                        </g:link>
+                    </span>
+                </div>
+            </carmsec:isProjectOwner>
+        </carm:showHideDetails>
     </div>
 
     <table class="twoColumnLayout">

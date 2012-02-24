@@ -97,29 +97,23 @@
                 </td>
             </tr>
             </tbody>
-
-            <carmsec:isProjectOwner module="${moduleInstance}">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${moduleInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <span class="button">
-                                <g:link class="delete" action="delete" id="${moduleInstance?.id}">
-                                    <g:message code="default.button.delete.label" default="Delete"/>
-                                </g:link>
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </carmsec:isProjectOwner>
         </table>
-        <carm:showHideDetails sectionId="moduleDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="moduleDetails" entityName="${entityName}">
+            <carmsec:isProjectOwner module="${moduleInstance}">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${moduleInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <span class="button">
+                        <g:link class="delete" action="delete" id="${moduleInstance?.id}">
+                            <g:message code="default.button.delete.label" default="Delete"/>
+                        </g:link>
+                    </span>
+                </div>
+            </carmsec:isProjectOwner>
+        </carm:showHideDetails>
     </div>
 
     <table class="twoColumnLayout">

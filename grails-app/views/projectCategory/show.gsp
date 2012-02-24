@@ -48,30 +48,25 @@
                 </td>
             </tr>
             </tbody>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${projectCategoryInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <carm:ifNotInUse domain="${projectCategoryInstance}">
-                                <span class="button">
-                                    <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}">
-                                        <g:message code="default.button.delete.label" default="Delete"/>
-                                    </g:link>
-                                </span>
-                            </carm:ifNotInUse>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </sec:ifAllGranted>
         </table>
-        <carm:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${projectCategoryInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <carm:ifNotInUse domain="${projectCategoryInstance}">
+                        <span class="button">
+                            <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
+                    </carm:ifNotInUse>
+                </div>
+            </sec:ifAllGranted>
+        </carm:showHideDetails>
     </div>
 
     <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name }}"/>

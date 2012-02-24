@@ -256,11 +256,23 @@ class CarmTagLib {
      * attrs.sectionId - Client ID of the section to show/hide details within (optional)
      * attrs.entityName - Name of the entity being shown (optional)
      */
-    def showHideDetails = { attrs ->
+    def showHideDetails = { attrs, body ->
         def sectionId = attrs.sectionId
         def entityName = attrs.entityName ?: ''
 
+        out << '<div style="height: 1.5em;">'
+
+        out << '<div style="float: left; width: 50%;">'
         out << render(template: "/common/showHideDetails", model: [sectionId: sectionId, entityName: entityName])
+        out << '</div>'
+
+        out << '<div style="float: left; text-align: right; width: 50%;">'
+        out << body()
+        out << '</div>'
+
+        out << '<div class="clearning"></div>'
+        
+        out << '</div>'
     }
 
     private outputAttrs(attrs) {

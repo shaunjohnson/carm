@@ -58,30 +58,25 @@
                 </td>
             </tr>
             </tbody>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <carm:ifNotInUse domain="${systemEnvironmentInstance}">
-                                <span class="button">
-                                    <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
-                                        <g:message code="default.button.delete.label" default="Delete"/>
-                                    </g:link>
-                                </span>
-                            </carm:ifNotInUse>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </sec:ifAllGranted>
         </table>
-        <carm:showHideDetails sectionId="systemEnvironmentDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="systemEnvironmentDetails" entityName="${entityName}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <carm:ifNotInUse domain="${systemEnvironmentInstance}">
+                        <span class="button">
+                            <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
+                    </carm:ifNotInUse>
+                </div>
+            </sec:ifAllGranted>
+        </carm:showHideDetails>
     </div>
 
     <g:render template="systemEnvironmentApplications"

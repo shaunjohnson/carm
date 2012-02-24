@@ -64,40 +64,37 @@
                 </td>
             </tr>
             </tbody>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot class="detailProp">
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${sourceControlServerInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <carm:ifNotInUse domain="${sourceControlServerInstance}">
-                                <span class="button">
-                                    <g:link class="delete" action="delete" id="${sourceControlServerInstance?.id}">
-                                        <g:message code="default.button.delete.label" default="Delete"/>
-                                    </g:link>
-                                </span>
-                            </carm:ifNotInUse>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </sec:ifAllGranted>
         </table>
-        <carm:showHideDetails sectionId="sourceControlServerDetails" entityName="${entityName}"/>
+        <carm:showHideDetails sectionId="sourceControlServerDetails" entityName="${entityName}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${sourceControlServerInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <carm:ifNotInUse domain="${sourceControlServerInstance}">
+                        <span class="button">
+                            <g:link class="delete" action="delete" id="${sourceControlServerInstance?.id}">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
+                    </carm:ifNotInUse>
+                </div>
+            </sec:ifAllGranted>
+        </carm:showHideDetails>
     </div>
 
     <table class="twoColumnLayout">
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="sourceControlRepositories" model="[sourceControlServerInstance: sourceControlServerInstance]"/>
+                <g:render template="sourceControlRepositories"
+                          model="[sourceControlServerInstance: sourceControlServerInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="sourceControlUsers" model="[sourceControlServerInstance: sourceControlServerInstance]"/>
+                <g:render template="sourceControlUsers"
+                          model="[sourceControlServerInstance: sourceControlServerInstance]"/>
             </td>
         </tr>
         </tbody>

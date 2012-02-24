@@ -16,7 +16,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="dialog">
+    <div id="moduleDeploymentTestStateDetails" class="dialog">
         <table class="details">
             <tbody>
             <tr class="prop">
@@ -32,7 +32,7 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="moduleDeploymentTestState.dateCreated.label" default="Date Created"/>
                 </td>
@@ -40,7 +40,7 @@
                     <g:formatDate date="${moduleDeploymentTestStateInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop">
+            <tr class="prop detailProp">
                 <td valign="top" class="name">
                     <g:message code="moduleDeploymentTestState.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -49,30 +49,26 @@
                 </td>
             </tr>
             </tbody>
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <tfoot>
-                <tr>
-                    <td colspan="2">
-                        <div class="buttons">
-                            <span class="button">
-                                <g:link class="edit" action="edit" id="${moduleDeploymentTestStateInstance?.id}">
-                                    <g:message code="default.button.edit.label" default="Edit"/>
-                                </g:link>
-                            </span>
-                            <carm:ifNotInUse domain="${moduleDeploymentTestStateInstance}">
-                                <span class="button">
-                                    <g:link class="delete" action="delete"
-                                            id="${moduleDeploymentTestStateInstance?.id}">
-                                        <g:message code="default.button.delete.label" default="Delete"/>
-                                    </g:link>
-                                </span>
-                            </carm:ifNotInUse>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </sec:ifAllGranted>
         </table>
+        <carm:showHideDetails sectionId="moduleDeploymentTestStateDetails" entityName="${entityName}">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="buttons">
+                    <span class="button">
+                        <g:link class="edit" action="edit" id="${moduleDeploymentTestStateInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit"/>
+                        </g:link>
+                    </span>
+                    <carm:ifNotInUse domain="${moduleDeploymentTestStateInstance}">
+                        <span class="button">
+                            <g:link class="delete" action="delete"
+                                    id="${moduleDeploymentTestStateInstance?.id}">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
+                    </carm:ifNotInUse>
+                </div>
+            </sec:ifAllGranted>
+        </carm:showHideDetails>
     </div>
 </div>
 </body>
