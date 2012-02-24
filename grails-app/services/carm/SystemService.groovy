@@ -9,6 +9,16 @@ class SystemService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided system is in use.
+     *
+     * @param system System to test
+     * @return True if the system is in use
+     */
+    boolean isInUse(System system) {
+        Application.findAllBySystem(system).size() > 0
+    }
+
     int count() {
         System.count()
     }

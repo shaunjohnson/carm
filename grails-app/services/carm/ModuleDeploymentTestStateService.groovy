@@ -9,6 +9,16 @@ class ModuleDeploymentTestStateService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided test state is in use.
+     *
+     * @param testState Test state to test
+     * @return True if the test state is in use
+     */
+    boolean isInUse(ModuleDeploymentTestState testState) {
+        ModuleDeployment.findAllByTestState(testState).size() > 0
+    }
+
     int count() {
         ModuleDeploymentTestState.count()
     }

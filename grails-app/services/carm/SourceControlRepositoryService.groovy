@@ -9,6 +9,16 @@ class SourceControlRepositoryService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided repository is in use.
+     *
+     * @param repository Repository to test
+     * @return True if the repository is in use
+     */
+    boolean isInUse(SourceControlRepository repository) {
+        Application.findAllBySourceControlRepository(repository).size() > 0
+    }
+
     int count() {
         SourceControlRepository.count()
     }

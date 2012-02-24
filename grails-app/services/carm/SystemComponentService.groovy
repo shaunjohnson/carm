@@ -4,10 +4,25 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
+import grails.gorm.DetachedCriteria
 
 class SystemComponentService {
 
     static transactional = false
+
+    /**
+     * Determines if the provided component is in use.
+     *
+     * @param component Component to test
+     * @return True if the component is in use
+     */
+    boolean isInUse(SystemComponent component) {
+        def moduleCount = Module.executeQuery(
+                'select count(m) from Module m where :component in elements(m.systemComponents)',
+                [component: component])[0]
+
+        moduleCount > 0
+    }
 
     int count() {
         SystemComponent.count()

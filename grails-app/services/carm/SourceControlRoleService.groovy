@@ -9,6 +9,16 @@ class SourceControlRoleService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided role is in use.
+     *
+     * @param role Role to test
+     * @return True if the role is in use
+     */
+    boolean isInUse(SourceControlRole role) {
+        ApplicationRole.findAllByRole(role).size() > 0
+    }
+
     int count() {
         SourceControlRole.count()
     }

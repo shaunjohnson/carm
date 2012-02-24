@@ -9,6 +9,16 @@ class ApplicationTypeService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided type is in use.
+     *
+     * @param type Type to test
+     * @return True if the type is in use
+     */
+    boolean isInUse(ApplicationType type) {
+        Application.findAllByType(type).size() > 0
+    }
+
     int count() {
         ApplicationType.count()
     }

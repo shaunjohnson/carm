@@ -24,7 +24,18 @@ class CarmTagLib {
     static namespace = "carm"
 
     def applicationReleaseService
+    def applicationReleaseTestStateService
+    def applicationTypeService
     def carmSecurityService
+    def moduleDeploymentTestStateService
+    def moduleTypeService
+    def projectCategoryService
+    def sourceControlRepositoryService
+    def sourceControlRoleService
+    def sourceControlServerService
+    def systemComponentService
+    def systemEnvironmentService
+    def systemService
 
     /**
      * Outputs a page header and breadcrumbs.
@@ -135,61 +146,48 @@ class CarmTagLib {
      */
     def ifNotInUse = { attrs, body ->
         def domain = attrs.domain
+        def isInUse = true
 
         if (domain instanceof ApplicationReleaseTestState) {
-            if (ApplicationRelease.findAllByTestState(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = applicationReleaseTestStateService.isInUse(domain)
         }
         else if (domain instanceof ApplicationType) {
-            if (Application.findAllByType(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = applicationTypeService.isInUse(domain)
         }
         else if (domain instanceof ModuleDeploymentTestState) {
-            if (ModuleDeployment.findAllByTestState(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = moduleDeploymentTestStateService.isInUse(domain)
         }
         else if (domain instanceof ModuleType) {
-            if (Module.findAllByType(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = moduleTypeService.isInUse(domain)
         }
         else if (domain instanceof ProjectCategory) {
-            if (Project.findAllByCategory(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = projectCategoryService.isInUse(domain)
         }
         else if (domain instanceof SourceControlRepository) {
-            if (Application.findAllBySourceControlRepository(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = sourceControlRepositoryService.isInUse(domain)
         }
         else if (domain instanceof SourceControlRole) {
-            if (ApplicationRole.findAllByRole(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = sourceControlRoleService.isInUse(domain)
         }
         else if (domain instanceof SourceControlServer) {
-            def applicationCount = Application.executeQuery('select count(a) from Application a where a.sourceControlRepository.server = ?', [domain])[0]
-
-            if (applicationCount == 0) {
-                out << body()
-            }
+            isInUse = sourceControlServerService.isInUse(domain)
         }
         else if (domain instanceof System) {
-            if (Application.findAllBySystem(domain).size() == 0) {
-                out << body()
-            }
+            isInUse = systemService.isInUse(domain)
         }
         else if (domain instanceof SystemComponent) {
-//            if (Module.findAllByComponent(domain).size() == 0) {
-            out << body()
-//            }
+            isInUse = systemComponentService.isInUse(domain)
+        }
+        else if (domain instanceof SystemEnvironment) {
+            isInUse = systemEnvironmentService.isInUse(domain)
         }
         else {
             out << '<span style="color: red;">Domain is not supported by the ifNotInUse tag!</span>'
+            return
+        }
+
+        if (!isInUse) {
+            out << body()
         }
     }
 

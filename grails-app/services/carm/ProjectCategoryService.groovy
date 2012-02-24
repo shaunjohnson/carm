@@ -8,6 +8,16 @@ class ProjectCategoryService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided category is in use.
+     *
+     * @param category Category to test
+     * @return True if the category is in use
+     */
+    boolean isInUse(ProjectCategory category) {
+        Project.findAllByCategory(category).size() > 0
+    }
+
     int count() {
         ProjectCategory.count()
     }

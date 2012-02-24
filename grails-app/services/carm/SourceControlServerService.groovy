@@ -9,6 +9,20 @@ class SourceControlServerService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided server is in use.
+     *
+     * @param server Server to test
+     * @return True if the server is in use
+     */
+    boolean isInUse(SourceControlServer server) {
+        def applicationCount = Application.executeQuery(
+                'select count(a) from Application a where a.sourceControlRepository.server = ?',
+                [server])[0]
+
+        applicationCount > 0
+    }
+
     int count() {
         SourceControlServer.count()
     }

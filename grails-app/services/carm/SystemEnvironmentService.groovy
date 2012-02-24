@@ -9,6 +9,17 @@ class SystemEnvironmentService {
 
     static transactional = false
 
+    /**
+     * Determines if the provided environment is in use.
+     *
+     * @param environment Environment to test
+     * @return True if the environment is in use
+     */
+    boolean isInUse(SystemEnvironment environment) {
+        ApplicationDeployment.findAllBySysEnvironment(environment).size() > 0
+        return false
+    }
+
     int count() {
         SystemEnvironment.count()
     }
