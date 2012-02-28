@@ -5,6 +5,8 @@ class ModuleController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def activityTraceService
+    def applicationService
+    def moduleService
 
     def index = {
         redirect(action: "list", params: params)
@@ -12,28 +14,42 @@ class ModuleController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [moduleInstanceList: Module.list(params), moduleInstanceTotal: Module.count()]
+        [moduleInstanceList: moduleService.list(params), moduleInstanceTotal: moduleService.count()]
     }
 
     def create = {
-        def moduleInstance = new Module()
-        moduleInstance.properties = params
-        return [moduleInstance: moduleInstance]
+        def applicationInstance = applicationService.get(params.application.id?.toLong())
+        if (!applicationInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def moduleInstance = new Module()
+            moduleInstance.properties = params
+            return [moduleInstance: moduleInstance]
+        }
     }
 
     def save = {
-        def moduleInstance = new Module(params)
-        if (moduleInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
-            redirect(controller: "application", action: "show", id: moduleInstance.application.id)
+        def applicationInstance = applicationService.get(params.application.id?.toLong())
+        if (!applicationInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+            redirect(action: "list")
         }
         else {
-            render(view: "create", model: [moduleInstance: moduleInstance])
+            def moduleInstance = moduleService.create(applicationInstance.project, params)
+            if (!moduleInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
+                redirect(controller: "application", action: "show", id: moduleInstance.application.id)
+            }
+            else {
+                render(view: "create", model: [moduleInstance: moduleInstance])
+            }
         }
     }
 
     def show = {
-        def moduleInstance = Module.get(params.id)
+        def moduleInstance = moduleService.get(params.id?.toLong())
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
@@ -47,7 +63,7 @@ class ModuleController {
     }
 
     def edit = {
-        def moduleInstance = Module.get(params.id)
+        def moduleInstance = moduleService.get(params.id?.toLong())
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
@@ -58,7 +74,7 @@ class ModuleController {
     }
 
     def update = {
-        def moduleInstance = Module.get(params.id)
+        def moduleInstance = moduleService.get(params.id?.toLong())
         if (moduleInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -69,13 +85,21 @@ class ModuleController {
                     return
                 }
             }
-            moduleInstance.properties = params
-            if (!moduleInstance.hasErrors() && moduleInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
-                redirect(action: "show", id: moduleInstance.id)
+
+            def applicationInstance = applicationService.get(params.application.id?.toLong())
+            if (!applicationInstance) {
+                flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+                redirect(action: "list")
             }
             else {
-                render(view: "edit", model: [moduleInstance: moduleInstance])
+                moduleService.update(applicationInstance.project, moduleInstance, params)
+                if (!moduleInstance.hasErrors() && moduleInstance.save(flush: true)) {
+                    flash.message = "${message(code: 'default.updated.message', args: [message(code: 'module.label', default: 'Module'), moduleInstance.name])}"
+                    redirect(action: "show", id: moduleInstance.id)
+                }
+                else {
+                    render(view: "edit", model: [moduleInstance: moduleInstance])
+                }
             }
         }
         else {
@@ -85,12 +109,12 @@ class ModuleController {
     }
 
     def delete = {
-        def moduleInstance = Module.get(params.id)
+        def moduleInstance = moduleService.get(params.id?.toLong())
         if (moduleInstance) {
             def applicationId = moduleInstance.application.id
             try {
                 def name = moduleInstance.name
-                moduleInstance.delete(flush: true)
+                moduleService.delete(moduleInstance.application.project, moduleInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), name])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
@@ -106,7 +130,7 @@ class ModuleController {
     }
 
     def listActivity = {
-        def moduleInstance = Module.get(params.id)
+        def moduleInstance = moduleService.get(params.id?.toLong())
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
