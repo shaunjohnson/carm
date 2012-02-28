@@ -1,5 +1,9 @@
 package carm
 
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.acls.domain.BasePermission
+
 class ApplicationService {
 
     static transactional = false
@@ -15,6 +19,51 @@ class ApplicationService {
      */
     boolean isDeployable(Application application) {
         return systemService.canBeDeployedTo(application?.system)
+    }
+
+    int count() {
+        Application.count()
+    }
+
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    Application create(Project project, Map params) {
+        def prefix = "create() :"
+
+        log.debug "$prefix entered"
+
+        Application application = new Application(params)
+        application.save()
+
+        log.debug "$prefix returning $application"
+
+        application
+    }
+
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    void delete(Project project, Application application) {
+        application.delete()
+    }
+
+    Application get(long id) {
+        Application.get id
+    }
+
+    List<Application> list(Map params) {
+        Application.list params
+    }
+
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    void update(Project project, Application application, Map params) {
+        def prefix = "update() :"
+
+        log.debug "$prefix entered"
+
+        application.properties = params
+
+        log.debug "$prefix leaving"
     }
 
     SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(System system) {
