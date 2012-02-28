@@ -11,6 +11,7 @@ class ApplicationReleaseService {
     static transactional = false
 
     def applicationService
+    def moduleService
     def springSecurityService
 
     /**
@@ -22,14 +23,30 @@ class ApplicationReleaseService {
      * @return True if the release can be deployed
      */
     boolean isDeployable(ApplicationRelease applicationRelease) {
+        // Release has to be in a completed state
         if (applicationRelease?.releaseState != ApplicationReleaseState.COMPLETED) {
             return false
         }
 
+        // Release must have at least one module release
         if (!applicationRelease?.moduleReleases?.size()) {
             return false
         }
 
+        // At least one module must be deployable
+        def moduleReleasesAreDeployable = false
+        applicationRelease.moduleReleases.each { ModuleRelease moduleRelease ->
+            if (moduleService.isDeployable(moduleRelease.module)) {
+                moduleReleasesAreDeployable = true
+                return
+            }
+        }
+
+        if (!moduleReleasesAreDeployable) {
+            return false;
+        }
+
+        // The application must be deployable
         return applicationService.isDeployable(applicationRelease?.application)
     }
 
