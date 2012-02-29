@@ -23,6 +23,10 @@ class ApplicationReleaseController {
         }
         else {
             def applicationReleaseInstance = new ApplicationRelease()
+
+            // Attempt to predict the next release number
+            applicationReleaseInstance.releaseNumber = applicationReleaseService.inferNextRelease(applicationInstance)
+
             applicationReleaseInstance.properties = params
             return [applicationReleaseInstance: applicationReleaseInstance]
         }

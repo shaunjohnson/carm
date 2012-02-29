@@ -6,6 +6,8 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
+import org.semver.Version
+import org.semver.Delta
 
 class ApplicationReleaseService {
     static transactional = false
@@ -132,5 +134,43 @@ class ApplicationReleaseService {
         addToHistories(applicationRelease, "Updated", null);
 
         log.debug "$prefix leaving"
+    }
+
+    /**
+     * Infer what the next release number is going to be based on existing releases. If there are no existing releases
+     * or the last release number used is does not match Semantic Versioning expectations null is returned.
+     *
+     * @param application Application used to search application releases
+     * @return Next release number or null if one cannot be inferred
+     */
+    String inferNextRelease(Application application) {
+        def releases = ApplicationRelease.where {
+            eq("application", application)
+            order("dateCreated", "desc")
+            max(1)
+        }.list()
+
+        def nextReleaseNumber = null
+
+        if (releases?.size() > 0) {
+            try {
+                Version version = Version.parse(releases.get(0).releaseNumber)
+
+                // Loop until we find an unused release number (incrementing bug-fix number only)
+                Version nextVersion = Delta.inferNextVersion(version, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
+                nextReleaseNumber = nextVersion.toString()
+
+                while (ApplicationRelease.countByReleaseNumber(nextReleaseNumber) > 0) {
+                    nextVersion = Delta.inferNextVersion(version, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
+                    nextReleaseNumber = nextVersion.toString()
+                }
+            }
+            catch (IllegalArgumentException e) {
+                // Not a semantic version number
+                nextReleaseNumber = null
+            }
+        }
+
+        return nextReleaseNumber
     }
 }
