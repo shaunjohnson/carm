@@ -30,6 +30,6 @@ grails.project.dependency.resolution = {
 
         compile "org.jadira.usertype:usertype.jodatime:1.9"
         compile "org.grails.plugins:webxml:1.4.1"
-        compile "org.semver:enforcer-rule:0.9.12"
+        compile "org.semver:api:0.9.12"
     }
 }
