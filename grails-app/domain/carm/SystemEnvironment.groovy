@@ -1,5 +1,7 @@
 package carm
 
+import org.apache.commons.lang.builder.EqualsBuilder
+
 class SystemEnvironment {
     String name
     String description
@@ -21,5 +23,13 @@ class SystemEnvironment {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(def o) {
+        if (is(o)) return true
+        if (o instanceof SystemEnvironment) {
+            return id == o.id
+        }
+        return false
     }
 }

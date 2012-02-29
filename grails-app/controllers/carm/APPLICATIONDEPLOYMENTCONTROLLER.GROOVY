@@ -6,6 +6,8 @@ class ApplicationDeploymentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationDeploymentService
+
     def index = {
         redirect(action: "list", params: params)
     }
@@ -23,6 +25,10 @@ class ApplicationDeploymentController {
         }
         else {
             def applicationDeploymentInstance = new ApplicationDeployment()
+
+            // Attempt to predict the next release number
+            applicationDeploymentInstance.sysEnvironment = applicationDeploymentService.inferNextEnvironment(applicationReleaseInstance)
+
             applicationDeploymentInstance.properties = params
             return [applicationDeploymentInstance: applicationDeploymentInstance]
         }

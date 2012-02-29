@@ -6,6 +6,37 @@ class ApplicationDeploymentService {
 
     static transactional = false
 
+    /**
+     * Infers the next System Environment to deploy a release to. This determines the next environment by analyzing
+     * existing deployments of the same release. The environment returned will be the next environment that can be
+     * deployed to. If null is returned then the last environment has been deployed to.
+     *
+     * @param applicationRelease Application release used for querying
+     * @return Next environment that can be used to deploy this release
+     */
+    SystemEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
+        def releases = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
+        def nextEnvironment = null
+
+        println "releases = $releases"
+        
+        // Start at last environment and work back towards the first
+        applicationRelease.application.system.environments.reverse().each { environment ->
+            if (releases.find { it.sysEnvironment == environment }) {
+                println "releases contains $environment"
+                return
+            }
+
+            println "releases does not contain $environment"
+
+            nextEnvironment = environment
+        }
+
+        println "nextEnvironment = $nextEnvironment"
+
+        return nextEnvironment
+    }
+
     def findLatestDeployment(Application application, SystemEnvironment environment) {
         def results = ApplicationDeployment.createCriteria().list {
             createAlias("applicationRelease", "applicationRelease")
@@ -16,8 +47,6 @@ class ApplicationDeploymentService {
         }
 
         return results.size() ? results[0] : null
-
-        return null;
     }
 
     def findAllLatestCompletedDeploymentsBySystem(System system) {
