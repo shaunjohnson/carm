@@ -27,6 +27,7 @@ class ApplicationDeploymentController {
             def applicationDeploymentInstance = new ApplicationDeployment()
 
             // Attempt to predict the next release number
+            applicationDeploymentInstance.requestedDeploymentDate = applicationDeploymentService.inferNextDeploymentDate()
             applicationDeploymentInstance.sysEnvironment = applicationDeploymentService.inferNextEnvironment(applicationReleaseInstance)
 
             applicationDeploymentInstance.properties = params

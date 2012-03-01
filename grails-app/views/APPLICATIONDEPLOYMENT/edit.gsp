@@ -41,13 +41,14 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="sysEnvironment.id">
+                        <carm:label for="sysEnvironment.id" required="true">
                             <g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/>
                         </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'sysEnvironment', 'errors')}">
                         <g:select name="sysEnvironment.id" from="${carm.SystemEnvironment.list()}" optionKey="id"
+                                  noSelection="['null': '']" required="required"
                                   value="${applicationDeploymentInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>

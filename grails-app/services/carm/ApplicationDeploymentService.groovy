@@ -1,10 +1,28 @@
 package carm
 
 import carm.enums.ApplicationDeploymentState
+import org.joda.time.LocalDate
+import org.joda.time.DateTimeConstants
 
 class ApplicationDeploymentService {
 
     static transactional = false
+
+    /**
+     * Infers the next deployment date. Returns today unless today is Friday-Sunday. If Friday-Sunday return next
+     * Monday.
+     *
+     * @return Next deployment date
+     */
+    Date inferNextDeploymentDate() {
+        LocalDate localDate = new LocalDate().plusDays(1)
+
+        if (localDate.dayOfWeek > DateTimeConstants.FRIDAY) {
+            localDate = localDate.plusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY)
+        }
+
+        return localDate.toDate()
+    }
 
     /**
      * Infers the next System Environment to deploy a release to. This determines the next environment by analyzing
@@ -18,21 +36,14 @@ class ApplicationDeploymentService {
         def releases = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
         def nextEnvironment = null
 
-        println "releases = $releases"
-        
         // Start at last environment and work back towards the first
         applicationRelease.application.system.environments.reverse().each { environment ->
             if (releases.find { it.sysEnvironment == environment }) {
-                println "releases contains $environment"
                 return
             }
 
-            println "releases does not contain $environment"
-
             nextEnvironment = environment
         }
-
-        println "nextEnvironment = $nextEnvironment"
 
         return nextEnvironment
     }
