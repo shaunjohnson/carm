@@ -161,7 +161,7 @@ class ApplicationReleaseService {
                 nextReleaseNumber = nextVersion.toString()
 
                 while (ApplicationRelease.countByReleaseNumber(nextReleaseNumber) > 0) {
-                    nextVersion = Delta.inferNextVersion(version, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
+                    nextVersion = Delta.inferNextVersion(nextVersion, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
                     nextReleaseNumber = nextVersion.toString()
                 }
             }
