@@ -1,4 +1,4 @@
-<%@ page import="carm.Application" %>
+<%@ page import="carm.Application,carm.system.System" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -125,7 +125,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${carm.System.list().sort { it.name }}" optionKey="id"
+                        <g:select name="system.id" from="${System.list().sort { it.name }}" optionKey="id"
                                   value="${applicationInstance?.system?.id}" noSelection="['null': '']"
                                   title="${message(code: 'application.system.help')}"/>
                     </td>

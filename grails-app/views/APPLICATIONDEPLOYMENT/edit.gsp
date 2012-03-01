@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationDeployment" %>
+<%@ page import="carm.ApplicationDeployment.carm.system.SystemEnvironment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -47,7 +47,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'sysEnvironment', 'errors')}">
-                        <g:select name="sysEnvironment.id" from="${carm.SystemEnvironment.list()}" optionKey="id"
+                        <g:select name="sysEnvironment.id" from="${SystemEnvironment.list()}" optionKey="id"
                                   noSelection="['null': '']" required="required"
                                   value="${applicationDeploymentInstance?.sysEnvironment?.id}"/>
                     </td>

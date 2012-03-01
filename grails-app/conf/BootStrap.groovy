@@ -8,8 +8,8 @@ import carm.ModuleDeployment
 import carm.ModuleDeploymentTestState
 import carm.ModuleRelease
 import carm.Project
-import carm.System
-import carm.SystemComponent
+import carm.system.System
+import carm.system.SystemComponent
 import carm.security.Role
 import carm.SourceControlServer
 import carm.security.User
@@ -17,8 +17,8 @@ import carm.security.UserRole
 import carm.enums.SourceControlServerType
 import carm.security.UserRole
 import carm.security.User
-import carm.SystemComponent
-import carm.SystemEnvironment
+import carm.system.SystemComponent
+import carm.system.SystemEnvironment
 import carm.ModuleType
 import carm.SourceControlRepository
 import carm.SourceControlUser

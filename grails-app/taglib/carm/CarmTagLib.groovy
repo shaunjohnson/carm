@@ -5,10 +5,10 @@ import carm.Application
 import carm.ApplicationRelease
 import carm.ApplicationReleaseTestState
 import carm.Module
-import carm.SystemComponent
+import carm.system.SystemComponent
 
 import carm.SourceControlRepository
-import carm.System
+import carm.system.System
 import carm.ProjectCategory
 import carm.ModuleType
 import carm.ApplicationType

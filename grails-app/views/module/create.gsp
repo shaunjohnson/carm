@@ -1,4 +1,4 @@
-<%@ page import="carm.ModuleType; carm.SystemComponent; carm.Module" %>
+<%@ page import="carm.ModuleType; carm.system.SystemComponent; carm.Module" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
