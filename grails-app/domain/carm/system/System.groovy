@@ -1,4 +1,4 @@
-package carm
+package carm.system
 
 class System {
     String name

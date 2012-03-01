@@ -1,8 +1,6 @@
-package carm
+package carm.system
 
-import org.apache.commons.lang.builder.EqualsBuilder
-
-class SystemEnvironment {
+class SystemComponent {
     String name
     String description
 
@@ -10,7 +8,7 @@ class SystemEnvironment {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false)
+        name(minSize: 2, maxSize: 50, blank: false, unique: true)
         description(maxSize: 4000, nullable: true)
         system(nullable: false)
     }
@@ -23,13 +21,5 @@ class SystemEnvironment {
 
     public String toString() {
         return name
-    }
-
-    boolean equals(def o) {
-        if (is(o)) return true
-        if (o instanceof SystemEnvironment) {
-            return id == o.id
-        }
-        return false
     }
 }
