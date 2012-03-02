@@ -1,4 +1,4 @@
-<%@ page import="carm.Project; carm.ProjectCategory" %>
+<%@ page import="carm.project.Project; carm.project.ProjectCategory" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

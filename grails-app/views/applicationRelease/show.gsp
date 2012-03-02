@@ -1,4 +1,4 @@
-<%@ page import="carm.enums.ApplicationReleaseState; carm.ApplicationRelease; carm.ModuleRelease" %>
+<%@ page import="carm.release.ApplicationReleaseState; carm.release.ApplicationRelease; carm.release.ModuleRelease" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

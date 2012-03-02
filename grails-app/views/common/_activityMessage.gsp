@@ -1,4 +1,4 @@
-<%@ page import="carm.Application; carm.Module; carm.enums.ActivityAction" %>
+<%@ page import="carm.application.Application; carm.module.Module; carm.activity.ActivityAction" %>
 <g:if test="${activity.objectType == Application.class.name && activity.action != ActivityAction.DELETED}">
     <g:link controller="application" action="show" id="${activity.objectId}">
         <g:message code="activityTrace.${activity.objectType}.${activity.action}"

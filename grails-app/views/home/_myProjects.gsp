@@ -1,4 +1,4 @@
-<%@ page import="carm.Project" %>
+<%@ page import="carm.project.Project" %>
 <div class="sectionHeader">
     <div class="text">
         <g:message code="myProjects.label" default="My Projects"/>

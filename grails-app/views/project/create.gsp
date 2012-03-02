@@ -1,4 +1,4 @@
-<%@ page import="carm.security.User; carm.Project" %>
+<%@ page import="carm.security.User; carm.project.Project" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

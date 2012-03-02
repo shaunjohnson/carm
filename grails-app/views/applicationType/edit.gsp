@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationType" %>
+<%@ page import="carm.application.ApplicationType" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

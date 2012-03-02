@@ -1,4 +1,4 @@
-<%@ page import="carm.SourceControlRole" %>
+<%@ page import="carm.so.SourceControlRole" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

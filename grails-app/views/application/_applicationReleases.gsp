@@ -1,4 +1,4 @@
-<%@ page import="carm.enums.ApplicationReleaseState; carm.ApplicationRelease" %>
+<%@ page import="carm.release.ApplicationReleaseState; carm.release.ApplicationRelease" %>
 <div class="sectionHeader">
     <div class="text">
         <g:message code="releases.label" default="Releases"/>

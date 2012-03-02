@@ -1,6 +1,7 @@
 package carm.application
 
 import carm.sourcecontrol.SourceControlRepository
+import carm.project.Project
 import carm.system.System
 import carm.module.Module
 import carm.release.ApplicationRelease

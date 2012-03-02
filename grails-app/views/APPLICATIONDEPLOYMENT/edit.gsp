@@ -1,4 +1,4 @@
-<%@ page import="carm.ApplicationDeployment.carm.system.SystemEnvironment" %>
+<%@ page import="carm.deployment.ApplicationDeployment; carm.system.SystemEnvironment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

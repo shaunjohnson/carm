@@ -1,4 +1,4 @@
-<%@ page import="carm.enums.SourceControlServerType; carm.SourceControlServer" %>
+<%@ page import="carm.sourcecontrol.SourceControlServerType; carm.sourcecontrol.SourceControlServer" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
