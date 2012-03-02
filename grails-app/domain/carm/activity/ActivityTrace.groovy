@@ -1,6 +1,5 @@
-package carm
+package carm.activity
 
-import carm.enums.ActivityAction
 import org.joda.time.DateTime
 
 class ActivityTrace {

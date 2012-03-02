@@ -1,4 +1,4 @@
-package carm
+package carm.application
 
 class ApplicationController {
 

@@ -1,4 +1,4 @@
-package carm
+package carm.release
 
 import static carm.CarmUnitTestCase.assertHasError
 import grails.test.mixin.TestFor

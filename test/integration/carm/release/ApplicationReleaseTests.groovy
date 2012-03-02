@@ -1,4 +1,4 @@
-package carm
+package carm.release
 
 import grails.test.*
 import grails.test.mixin.TestFor

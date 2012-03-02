@@ -1,4 +1,4 @@
-package carm
+package carm.deployment
 
 class ModuleDeploymentTestState implements Comparable<ModuleDeploymentTestState> {
     String name

@@ -1,4 +1,4 @@
-package carm
+package carm.project
 
 import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*

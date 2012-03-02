@@ -1,4 +1,6 @@
-package carm
+package carm.deployment
+
+import carm.release.ModuleRelease
 
 class ModuleDeployment {
     ModuleRelease moduleRelease

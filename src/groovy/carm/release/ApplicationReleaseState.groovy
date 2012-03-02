@@ -1,4 +1,4 @@
-package carm.enums
+package carm.release
 
 public enum ApplicationReleaseState {
     DRAFT("Draft"),

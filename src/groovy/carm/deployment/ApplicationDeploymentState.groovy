@@ -1,4 +1,4 @@
-package carm.enums
+package carm.deployment
 
 public enum ApplicationDeploymentState {
     DRAFT("Draft"),

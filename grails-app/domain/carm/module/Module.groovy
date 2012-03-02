@@ -1,5 +1,6 @@
-package carm
+package carm.module
 
+import carm.application.Application
 import carm.system.SystemComponent
 
 class Module {

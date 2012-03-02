@@ -1,4 +1,4 @@
-package carm.enums
+package carm.activity
 
 public enum ActivityAction {
     CREATED,

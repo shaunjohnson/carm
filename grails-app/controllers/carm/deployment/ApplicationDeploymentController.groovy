@@ -1,6 +1,6 @@
-package carm
+package carm.deployment
 
-import carm.enums.ApplicationDeploymentState
+import carm.release.ApplicationRelease
 
 class ApplicationDeploymentController {
 

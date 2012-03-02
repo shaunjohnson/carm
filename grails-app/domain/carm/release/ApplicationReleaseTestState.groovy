@@ -1,4 +1,4 @@
-package carm
+package carm.release
 
 class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestState> {
     String name

@@ -1,4 +1,4 @@
-package carm
+package carm.application
 
 import carm.sourcecontrol.SourceControlRole
 import carm.sourcecontrol.SourceControlUser

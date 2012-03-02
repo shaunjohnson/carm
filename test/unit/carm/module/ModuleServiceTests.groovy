@@ -1,6 +1,4 @@
-package carm
-
-
+package carm.module
 
 import grails.test.mixin.*
 import org.junit.*

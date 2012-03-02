@@ -1,4 +1,4 @@
-package carm
+package carm.project
 
 class ProjectCategory {
     String name

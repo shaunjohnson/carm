@@ -1,4 +1,4 @@
-package carm
+package carm.activity
 
 import grails.test.*
 import grails.test.mixin.TestFor

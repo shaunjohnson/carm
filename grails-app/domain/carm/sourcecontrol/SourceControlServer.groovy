@@ -1,7 +1,5 @@
 package carm.sourcecontrol
 
-import carm.enums.SourceControlServerType
-
 class SourceControlServer {
     String name
     String description

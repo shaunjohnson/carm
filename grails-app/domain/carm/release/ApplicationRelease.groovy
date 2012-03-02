@@ -1,6 +1,7 @@
-package carm
+package carm.release
 
-import carm.enums.ApplicationReleaseState
+import carm.application.Application
+import carm.deployment.ApplicationDeployment
 
 class ApplicationRelease {
     String releaseNumber

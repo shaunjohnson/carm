@@ -1,4 +1,4 @@
-package carm
+package carm.project
 
 import carm.security.User
 import org.springframework.security.acls.domain.BasePermission

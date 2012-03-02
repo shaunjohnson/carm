@@ -1,4 +1,4 @@
-package carm.enums
+package carm.sourcecontrol
 
 public enum SourceControlServerType {
     CVS("CVS"),

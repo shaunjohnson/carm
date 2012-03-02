@@ -1,7 +1,5 @@
 package carm.system
 
-import org.apache.commons.lang.builder.EqualsBuilder
-
 class SystemEnvironment {
     String name
     String description

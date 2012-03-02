@@ -1,4 +1,6 @@
-package carm
+package carm.project
+
+import carm.application.Application
 
 class Project {
     def activityTraceService
