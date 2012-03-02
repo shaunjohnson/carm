@@ -1,5 +1,7 @@
 package carm
 
+import carm.system.System
+
 class HomeController {
     def activityTraceService
     def projectService

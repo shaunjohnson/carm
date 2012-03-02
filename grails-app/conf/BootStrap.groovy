@@ -11,7 +11,7 @@ import carm.Project
 import carm.system.System
 import carm.system.SystemComponent
 import carm.security.Role
-import carm.SourceControlServer
+import carm.sourcecontrol.SourceControlServer
 import carm.security.User
 import carm.security.UserRole
 import carm.enums.SourceControlServerType
@@ -20,9 +20,9 @@ import carm.security.User
 import carm.system.SystemComponent
 import carm.system.SystemEnvironment
 import carm.ModuleType
-import carm.SourceControlRepository
-import carm.SourceControlUser
-import carm.SourceControlRole
+import carm.sourcecontrol.SourceControlRepository
+import carm.sourcecontrol.SourceControlUser
+import carm.sourcecontrol.SourceControlRole
 import carm.ApplicationRole
 import carm.ApplicationRelease
 import org.springframework.security.acls.domain.BasePermission

@@ -1,5 +1,8 @@
 package carm
 
+import carm.sourcecontrol.SourceControlRole
+import carm.sourcecontrol.SourceControlUser
+
 class ApplicationRole {
     SourceControlRole role
 

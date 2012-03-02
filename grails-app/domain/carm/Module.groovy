@@ -1,5 +1,7 @@
 package carm
 
+import carm.system.SystemComponent
+
 class Module {
     def activityTraceService
 

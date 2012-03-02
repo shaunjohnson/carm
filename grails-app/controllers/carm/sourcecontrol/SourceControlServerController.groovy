@@ -1,4 +1,4 @@
-package carm
+package carm.sourcecontrol
 
 import grails.plugins.springsecurity.Secured
 

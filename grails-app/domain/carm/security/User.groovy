@@ -1,6 +1,6 @@
 package carm.security
 
-import carm.SourceControlUser
+import carm.sourcecontrol.SourceControlUser
 
 class User {
     transient springSecurityService

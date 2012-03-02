@@ -7,17 +7,18 @@ import carm.ApplicationReleaseTestState
 import carm.Module
 import carm.system.SystemComponent
 
-import carm.SourceControlRepository
+import carm.sourcecontrol.SourceControlRepository
 import carm.system.System
 import carm.ProjectCategory
 import carm.ModuleType
 import carm.ApplicationType
-import carm.SourceControlServer
-import carm.SourceControlRole
+import carm.sourcecontrol.SourceControlServer
+import carm.sourcecontrol.SourceControlRole
 import carm.ApplicationRole
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.springframework.security.acls.domain.BasePermission
+import carm.system.SystemEnvironment
 
 class CarmTagLib {
 

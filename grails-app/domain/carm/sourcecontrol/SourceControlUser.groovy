@@ -1,6 +1,7 @@
-package carm
+package carm.sourcecontrol
 
 import carm.security.User
+import carm.ApplicationRole
 
 class SourceControlUser {
     String name

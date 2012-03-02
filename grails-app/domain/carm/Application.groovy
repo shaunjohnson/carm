@@ -1,5 +1,8 @@
 package carm
 
+import carm.sourcecontrol.SourceControlRepository
+import carm.system.System
+
 class Application {
     def activityTraceService
 

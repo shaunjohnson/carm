@@ -1,5 +1,7 @@
 package carm
 
+import carm.system.System
+
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission

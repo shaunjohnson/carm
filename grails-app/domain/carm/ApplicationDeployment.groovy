@@ -1,6 +1,7 @@
 package carm
 
 import carm.enums.ApplicationDeploymentState
+import carm.system.SystemEnvironment
 
 class ApplicationDeployment {
     String deploymentInstructions
