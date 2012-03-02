@@ -152,6 +152,11 @@ class ApplicationDeploymentService {
                 ad.deploymentState = :deploymentState
                 and ad.completedDeploymentDate is null
                 and ad.sysEnvironment.system = :system
+            order by
+                ad.requestedDeploymentDate asc,
+                ad.sysEnvironment.name asc,
+                ad.applicationRelease.application.type asc,
+                ad.applicationRelease.application.name asc
         """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: system])
     }
 }

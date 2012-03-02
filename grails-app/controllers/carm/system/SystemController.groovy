@@ -145,8 +145,33 @@ class SystemController {
     def upcomingDeployments = {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
+            def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystem(systemInstance)
+
+            def applicationDeploymentsGrouped = [:]
+            applicationDeploymentInstanceList.each { deployment ->
+                def dateGroup = applicationDeploymentsGrouped[deployment.requestedDeploymentDate]
+                if (!dateGroup) {
+                    dateGroup = [:]
+                    applicationDeploymentsGrouped[deployment.requestedDeploymentDate] = dateGroup
+                }
+
+                def envGroup = dateGroup[deployment.sysEnvironment]
+                if (!envGroup) {
+                    envGroup = [:]
+                    dateGroup[deployment.sysEnvironment] = envGroup
+                }
+
+                def typeList = envGroup[deployment.applicationRelease.application.type]
+                if (!typeList) {
+                    typeList = []
+                    envGroup[deployment.applicationRelease.application.type] = typeList
+                }
+
+                typeList.add(deployment)
+            }
+
             [
-                    applicationDeploymentInstanceList: applicationDeploymentService.findAllUpcomingBySystem(systemInstance),
+                    applicationDeploymentsGrouped: applicationDeploymentsGrouped,
                     systemInstance: systemInstance
             ]
         }
