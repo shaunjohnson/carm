@@ -6,8 +6,6 @@ import org.springframework.security.acls.domain.BasePermission
 class CarmSecurityTagLib {
     static namespace = "carmsec"
 
-    def carmSecurityService
-
     /**
      * Renders the tag body if the current user is a project owner for the provided object.
      */
@@ -31,7 +29,7 @@ class CarmSecurityTagLib {
         }
 
         if (project) {
-            out << sec.permitted(className: 'carm.Project', id: project.id, permission: BasePermission.ADMINISTRATION) {
+            out << sec.permitted(className: Project.class.name, id: project.id, permission: BasePermission.ADMINISTRATION) {
                 body()
             }
         }
