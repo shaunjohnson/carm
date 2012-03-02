@@ -1,5 +1,6 @@
 package carm
 
+import carm.project.Project
 import org.springframework.security.acls.domain.BasePermission
 
 class CarmSecurityTagLib {
