@@ -1,4 +1,4 @@
-package carm
+package carm.project
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize

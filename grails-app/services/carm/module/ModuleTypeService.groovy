@@ -1,4 +1,4 @@
-package carm
+package carm.module
 
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize

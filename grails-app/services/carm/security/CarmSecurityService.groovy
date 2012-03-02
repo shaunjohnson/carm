@@ -1,4 +1,4 @@
-package carm
+package carm.security
 
 import org.springframework.security.acls.model.NotFoundException
 import org.springframework.security.acls.model.Permission

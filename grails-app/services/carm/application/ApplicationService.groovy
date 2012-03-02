@@ -1,10 +1,11 @@
-package carm
+package carm.application
 
 import carm.system.System
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
+import carm.project.Project
 
 class ApplicationService {
 

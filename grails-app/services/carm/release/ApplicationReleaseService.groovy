@@ -1,6 +1,4 @@
-package carm
-
-import carm.enums.ApplicationReleaseState
+package carm.release
 
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
@@ -8,6 +6,8 @@ import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import org.semver.Version
 import org.semver.Delta
+import carm.project.Project
+import carm.application.Application
 
 class ApplicationReleaseService {
     static transactional = false

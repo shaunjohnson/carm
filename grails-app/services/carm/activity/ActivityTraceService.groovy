@@ -1,12 +1,14 @@
-package carm
+package carm.activity
 
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
-import static carm.enums.ActivityAction.*
-import carm.enums.ActivityAction
+import static carm.activity.ActivityAction.*
 import org.joda.time.DateTime
+import carm.project.Project
+import carm.module.Module
+import carm.application.Application
 
 class ActivityTraceService implements ApplicationContextAware {
 

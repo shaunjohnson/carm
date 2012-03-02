@@ -1,7 +1,8 @@
-package carm
+package carm.module
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
+import carm.project.Project
 
 class ModuleService {
     

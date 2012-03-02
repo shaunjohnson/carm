@@ -4,7 +4,7 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
-import carm.Application
+import carm.application.Application
 
 class SystemService {
 

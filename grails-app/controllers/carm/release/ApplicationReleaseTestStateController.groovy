@@ -1,4 +1,4 @@
-package carm
+package carm.release
 
 import grails.plugins.springsecurity.Secured
 

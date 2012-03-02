@@ -1,10 +1,11 @@
-package carm
+package carm.deployment
 
-import carm.enums.ApplicationDeploymentState
 import org.joda.time.LocalDate
 import org.joda.time.DateTimeConstants
 import carm.system.System
 import carm.system.SystemEnvironment
+import carm.release.ApplicationRelease
+import carm.application.Application
 
 class ApplicationDeploymentService {
 
