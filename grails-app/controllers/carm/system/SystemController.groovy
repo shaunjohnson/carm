@@ -141,4 +141,18 @@ class SystemController {
             redirect(action: "list")
         }
     }
+
+    def upcomingDeployments = {
+        def systemInstance = systemService.get(params.id?.toLong())
+        if (systemInstance) {
+            [
+                    applicationDeploymentInstanceList: applicationDeploymentService.findAllUpcomingBySystem(systemInstance),
+                    systemInstance: systemInstance
+            ]
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
+            redirect(action: "list")
+        }
+    }
 }

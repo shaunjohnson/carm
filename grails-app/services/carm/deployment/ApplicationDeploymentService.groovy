@@ -137,4 +137,21 @@ class ApplicationDeploymentService {
 
         return results
     }
+
+    /**
+     * Finds all application deployments that are upcoming for a provided system.
+     *
+     * @param system System used to filter deployments
+     * @return List of ApplicationDeployment objects
+     */
+    def findAllUpcomingBySystem(System system) {
+        ApplicationDeployment.executeQuery("""
+            from
+                ApplicationDeployment ad
+            where
+                ad.deploymentState = :deploymentState
+                and ad.completedDeploymentDate is null
+                and ad.sysEnvironment.system = :system
+        """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: system])
+    }
 }

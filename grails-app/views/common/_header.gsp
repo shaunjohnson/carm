@@ -402,6 +402,10 @@
                 <bc:showSystem system="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'upcomingDeployments'}">
+                <bc:showSystem system="${domain}"/>
+                <bc:upcomingDeploymentsLabel entityName="${entityName}"/>
+            </g:elseif>
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>

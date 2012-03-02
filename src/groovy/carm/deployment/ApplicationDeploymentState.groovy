@@ -5,7 +5,7 @@ public enum ApplicationDeploymentState {
     SUBMITTED("Submitted"),
     ASSIGNED("Assigned"),
     REJECTED("Rejected"),
-    RELEASED("Released"),
+    DEPLOYED("Deployed"),
     COMPLETED("Completed"),
     ARCHIVED("Archived")
 

@@ -69,7 +69,7 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
-     * Renders an edit link.
+     * Renders an edit label.
      */
     def editLabel = { attrs ->
         def entityName = attrs.entityName
@@ -446,5 +446,14 @@ class CarmBreadcrumbTagLib {
                 title: message(code: "showSystemEnvironment.label"),
                 text: systemEnvironment.name,
                 id: systemEnvironment.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders an upcoming deployments label.
+     */
+    def upcomingDeploymentsLabel = { attrs ->
+        def entityName = attrs.entityName
+        def isFirst = attrs.isFirst
+        out << text(code: "default.upcomingDeployments.label", args: [entityName], isFirst: isFirst)
     }
 }
