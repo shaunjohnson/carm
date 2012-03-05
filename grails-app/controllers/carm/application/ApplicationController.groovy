@@ -6,6 +6,7 @@ class ApplicationController {
 
     def activityTraceService
     def applicationDeploymentService
+    def applicationReleaseService
     def applicationService
     def projectService
 
@@ -142,8 +143,8 @@ class ApplicationController {
 
             [
                     applicationInstance: applicationInstance,
-                    applicationReleaseInstanceList: ApplicationRelease.findAllByApplication(applicationInstance, params),
-                    applicationReleaseInstanceTotal: ApplicationRelease.countByApplication(applicationInstance)
+                    applicationReleaseInstanceList: applicationReleaseService.findAllByApplication(applicationInstance, params),
+                    applicationReleaseInstanceTotal: applicationReleaseService.countByApplication(applicationInstance)
             ]
         }
     }

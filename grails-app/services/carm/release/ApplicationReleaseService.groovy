@@ -64,6 +64,27 @@ class ApplicationReleaseService {
         ))
     }
 
+    /**
+     * Find all ApplicationRelease objects by Application instance.
+     *
+     * @param application Application object used for filtering
+     * @param params Query params
+     * @return List of ApplicationRelease objects
+     */
+    List<ApplicationRelease> findAllByApplication(Application application, Map params) {
+        return ApplicationRelease.findAllByApplication(application, params)
+    }
+
+    /**
+     * Count all ApplicationRelease objects byt Application instance.
+     *
+     * @param application Application object used for filtering
+     * @return Count of ApplicationRelease objects associated with the Application
+     */
+    int countByApplication(Application application) {
+        return ApplicationRelease.countByApplication(application)
+    }
+
     List<ApplicationRelease> findAllPendingReleasesByProject(Project project) {
         def releaseStates = [
                 ApplicationReleaseState.DRAFT,
