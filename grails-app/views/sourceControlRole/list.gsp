@@ -45,7 +45,9 @@
                             </g:link>
                         </td>
                         <td>
-                            ${fieldValue(bean: sourceControlRoleInstance, field: "description")}
+                            <div class="expander">
+                                ${fieldValue(bean: sourceControlRoleInstance, field: "description")}
+                            </div>
                         </td>
                     </tr>
                 </g:each>

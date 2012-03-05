@@ -48,7 +48,9 @@
                             </g:link>
                         </td>
                         <td>
-                            ${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}
+                            <div class="expander">
+                                ${fieldValue(bean: applicationReleaseTestStateInstance, field: "description")}
+                            </div>
                         </td>
                     </tr>
                 </g:each>

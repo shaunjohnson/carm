@@ -35,7 +35,11 @@
                             ${fieldValue(bean: sourceControlUserInstance, field: "name")}
                         </g:link>
                     </td>
-                    <td>${fieldValue(bean: sourceControlUserInstance, field: "description")}</td>
+                    <td>
+                        <div class="expander">
+                            ${fieldValue(bean: sourceControlUserInstance, field: "description")}
+                        </div>
+                    </td>
                     <td>
                         <g:link controller="sourceControlServer" action="show"
                                 id="${sourceControlUserInstance.server.id}">

@@ -28,7 +28,9 @@
                     ${historyInstance.summary.encodeAsHTML()}
                 </td>
                 <td>
-                    ${(historyInstance.comments ?: "").decodeHTML()}
+                    <div class="expander">
+                        ${(historyInstance.comments ?: "").decodeHTML()}
+                    </div>
                 </td>
             </tr>
         </g:each>

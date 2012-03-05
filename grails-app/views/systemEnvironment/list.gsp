@@ -35,7 +35,9 @@
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: systemEnvironmentInstance, field: "description")}
+                        <div class="expander">
+                            ${fieldValue(bean: systemEnvironmentInstance, field: "description")}
+                        </div>
                     </td>
                     <td>
                         <g:link controller="system" action="show" id="${systemEnvironmentInstance.system.id}">

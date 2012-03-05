@@ -49,7 +49,9 @@
                             </g:link>
                         </td>
                         <td>
-                            ${fieldValue(bean: sourceControlServerInstance, field: "description")}
+                            <div class="expander">
+                                ${fieldValue(bean: sourceControlServerInstance, field: "description")}
+                            </div>
                         </td>
                         <td>
                             ${fieldValue(bean: sourceControlServerInstance, field: "type")}

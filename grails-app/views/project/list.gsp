@@ -49,7 +49,9 @@
                             </g:link>
                         </td>
                         <td>
-                            ${fieldValue(bean: projectInstance, field: "description")}
+                            <div class="expander">
+                                ${fieldValue(bean: projectInstance, field: "description")}
+                            </div>
                         </td>
                     </tr>
                 </g:each>

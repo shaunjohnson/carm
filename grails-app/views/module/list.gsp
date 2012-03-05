@@ -35,7 +35,9 @@
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: moduleInstance, field: "description")}
+                        <div class="expander">
+                            ${fieldValue(bean: moduleInstance, field: "description")}
+                        </div>
                     </td>
                     <td>
                         <g:link controller="moduleType" action="show" id="${moduleInstance.type.id}">

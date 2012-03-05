@@ -10,7 +10,7 @@
 <body>
 <div class="body">
     <carm:header domain="${applicationInstanceList}"
-              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
+                 pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -38,7 +38,9 @@
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: applicationInstance, field: "description")}
+                        <div class="expander">
+                            ${fieldValue(bean: applicationInstance, field: "description")}
+                        </div>
                     </td>
                     <td>
                         <g:link controller="applicationType" action="show" id="${applicationInstance.type.id}">
