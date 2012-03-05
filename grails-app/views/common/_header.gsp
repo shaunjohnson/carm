@@ -91,6 +91,26 @@
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
+<g:elseif test="${controller == 'applicationReleaseHistory'}">
+    <g:set var="entityName" value="${message(code: 'applicationReleaseHistory.label', default: 'Application Release History')}"/>
+
+    <carm:pageHeaderLabel action="${action}"
+                          beanName="${formatDate(date: domain.dateCreated)}"
+                          entityName="${entityName}"/>
+
+    <bc:breadcrumbs>
+        <g:if test="${action != 'list'}">
+            <bc:listProjects isFirst="true"/>
+            <bc:showProject project="${domain.applicationRelease.application.project}"/>
+            <bc:showApplication application="${domain.applicationRelease.application}"/>
+            <bc:showApplicationRelease applicationRelease="${domain.applicationRelease}"/>
+
+            <g:if test="${action == 'show'}">
+                <bc:showApplicationReleaseHistory applicationReleaseHistory="${domain}"/>
+            </g:if>
+        </g:if>
+    </bc:breadcrumbs>
+</g:elseif>
 <g:elseif test="${controller == 'applicationReleaseTestState'}">
     <g:set var="entityName"
            value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>

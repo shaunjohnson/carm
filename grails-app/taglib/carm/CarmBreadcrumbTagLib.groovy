@@ -294,6 +294,18 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a show application release link.
+     */
+    def showApplicationReleaseHistory = { attrs ->
+        def applicationReleaseHistory = attrs.applicationReleaseHistory
+        def isFirst = attrs.isFirst
+        def text = formatDate(date: applicationReleaseHistory.dateCreated)
+        out << link(controller: "applicationReleaseHistory", action: "show",
+                title: message(code: "showApplicationReleaseHistory.label"),
+                text: text, id: applicationReleaseHistory.id, isFirst: isFirst)
+    }
+
+    /**
      * Renders a show application type link.
      */
     def showApplicationType = { attrs ->

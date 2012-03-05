@@ -8,10 +8,9 @@
     <table style="width: 100%;">
         <thead>
         <tr>
-            <th><g:message code="applicationReleaseHistory.dateCreated.label" default="Date Created"/></th>
-            <th><g:message code="applicationReleaseHistory.username.label" default="Username"/></th>
             <th><g:message code="applicationReleaseHistory.summary.label" default="Summary"/></th>
-            <th><g:message code="applicationReleaseHistory.comments.label" default="Comments"/></th>
+            <th><g:message code="applicationReleaseHistory.username.label" default="Username"/></th>
+            <th><g:message code="applicationReleaseHistory.dateCreated.label" default="Date Created"/></th>
         </tr>
         </thead>
         <tbody>
@@ -19,18 +18,16 @@
             status="i">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>
-                    <g:formatDate date="${historyInstance.dateCreated}"/>
+                    <g:link controller="applicationReleaseHistory" action="show" id="${historyInstance.id}"
+                            title="${message(code: 'showApplicationReleaseHistory.label', default: 'Show Application Release History')}">
+                        ${historyInstance.summary.encodeAsHTML()}
+                    </g:link>
                 </td>
                 <td>
                     ${historyInstance.username.encodeAsHTML()}
                 </td>
                 <td>
-                    ${historyInstance.summary.encodeAsHTML()}
-                </td>
-                <td>
-                    <div class="expander">
-                        ${(historyInstance.comments ?: "").decodeHTML()}
-                    </div>
+                    <g:formatDate date="${historyInstance.dateCreated}"/>
                 </td>
             </tr>
         </g:each>
