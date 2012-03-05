@@ -1,8 +1,7 @@
 package carm.release
 
-import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.acls.domain.BasePermission
+
 import org.springframework.transaction.annotation.Transactional
 import org.semver.Version
 import org.semver.Delta
@@ -100,6 +99,22 @@ class ApplicationReleaseService {
         return applicationReleases
     }
 
+    /**
+     * Finds the last ApplicationRelease created for the provided application.
+     *
+     * @param application Application used for filtering
+     * @return Last ApplicationRelease or null if there are no releases of the application
+     */
+    private ApplicationRelease findLastApplicationRelease(Application application) {
+        def releases = ApplicationRelease.where {
+            eq("application", application)
+            order("dateCreated", "desc")
+            max(1)
+        }.list()
+
+        return releases?.size() ? releases.get(0) : null
+    }
+
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ApplicationRelease create(Map params) {
@@ -158,40 +173,55 @@ class ApplicationReleaseService {
     }
 
     /**
+     * Creates a new ApplicationRelease instance with prefilled fields:
+     * <ul>
+     * <li>application - Passed in Application</li>
+     * <li>buildInstructions - Build instructions from Application</li>
+     * <li>buildPath - Build path from last release</li>
+     * <li>releaseNumber - Next maintenance release number or null</li>
+     * </ul>
+     *
+     * @param application Application this release is associated with
+     * @return new ApplicationRelease instance
+     */
+    ApplicationRelease newApplicationRelease(Application application) {
+        ApplicationRelease lastApplicationRelease = findLastApplicationRelease(application)
+
+        String nextReleaseNumber = inferNextRelease(application, lastApplicationRelease?.releaseNumber)
+        String buildPath = lastApplicationRelease?.buildPath
+
+        new ApplicationRelease(application: application, buildInstructions: application.buildInstructions,
+                buildPath: buildPath, releaseNumber: nextReleaseNumber)
+    }
+
+    /**
      * Infer what the next release number is going to be based on existing releases. If there are no existing releases
-     * or the last release number used is does not match Semantic Versioning expectations null is returned.
+     * then 1.0.0 will be returned. If the last release number used does not match Semantic Versioning expectations then
+     * null is returned.
      *
      * @param application Application used to search application releases
+     * @param releaseNumber Current release number
      * @return Next release number or null if one cannot be inferred
      */
-    String inferNextRelease(Application application) {
-        def releases = ApplicationRelease.where {
-            eq("application", application)
-            order("dateCreated", "desc")
-            max(1)
-        }.list()
-
-        def nextReleaseNumber = null
-
-        if (releases?.size() > 0) {
-            try {
-                Version version = Version.parse(releases.get(0).releaseNumber)
-
-                // Loop until we find an unused release number (incrementing bug-fix number only)
-                Version nextVersion = Delta.inferNextVersion(version, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
-                nextReleaseNumber = nextVersion.toString()
-
-                while (ApplicationRelease.countByReleaseNumber(nextReleaseNumber) > 0) {
-                    nextVersion = Delta.inferNextVersion(nextVersion, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
-                    nextReleaseNumber = nextVersion.toString()
-                }
-            }
-            catch (IllegalArgumentException e) {
-                // Not a semantic version number
-                nextReleaseNumber = null
-            }
+    private String inferNextRelease(Application application, String releaseNumber) {
+        if (!releaseNumber) {
+            return "1.0.0"
         }
 
-        return nextReleaseNumber
+        try {
+            Version nextVersion = Delta.inferNextVersion(Version.parse(releaseNumber),
+                    Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
+
+            // Loop until we find an unused release number (incrementing bug-fix number only)
+            while (ApplicationRelease.countByApplicationAndReleaseNumber(application, nextVersion.toString()) > 0) {
+                nextVersion = Delta.inferNextVersion(nextVersion, Delta.CompatibilityType.BACKWARD_COMPATIBLE_IMPLEMENTER)
+            }
+
+            return nextVersion.toString()
+        }
+        catch (IllegalArgumentException e) {
+            // Not a semantic version number
+            return null
+        }
     }
 }

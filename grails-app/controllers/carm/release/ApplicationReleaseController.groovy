@@ -14,7 +14,10 @@ class ApplicationReleaseController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationReleaseInstanceList: applicationReleaseService.list(params), applicationReleaseInstanceTotal: applicationReleaseService.count()]
+        [
+                applicationReleaseInstanceList: applicationReleaseService.list(params),
+                applicationReleaseInstanceTotal: applicationReleaseService.count()
+        ]
     }
 
     def create = {
@@ -24,16 +27,9 @@ class ApplicationReleaseController {
             redirect(action: "list")
         }
         else {
-            def applicationReleaseInstance = new ApplicationRelease()
-
-            // Pre-fill build instructions from the Application domain
-            applicationReleaseInstance.buildInstructions = applicationInstance.buildInstructions
-
-            // Attempt to predict the next release number
-            applicationReleaseInstance.releaseNumber = applicationReleaseService.inferNextRelease(applicationInstance)
-
-            applicationReleaseInstance.properties = params
-            return [applicationReleaseInstance: applicationReleaseInstance]
+            [
+                    applicationReleaseInstance: applicationReleaseService.newApplicationRelease(applicationInstance)
+            ]
         }
     }
 
