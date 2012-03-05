@@ -56,6 +56,24 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <carm:label for="changeLog">
+                            <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
+                        <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
+                                               height="${grailsApplication.config.ui.richTextEditor.height}"
+                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                    </td>
+                </tr>
+
+                <tr class="prop">
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <carm:label for="buildPath">
                             <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
                         </carm:label>
@@ -71,13 +89,13 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="changeLog">
-                            <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
+                        <carm:label for="buildInstructions">
+                            <g:message code="applicationRelease.buildInstructions.label" default="Build Instructions"/>
                         </carm:label>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'changeLog', 'errors')}">
-                        <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
+                        class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildInstructions', 'errors')}">
+                        <richui:richTextEditor name="buildInstructions" value="${applicationReleaseInstance?.buildInstructions}"
                                                height="${grailsApplication.config.ui.richTextEditor.height}"
                                                width="${grailsApplication.config.ui.richTextEditor.width}"/>
                     </td>

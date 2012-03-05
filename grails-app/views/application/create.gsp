@@ -112,6 +112,20 @@
                                      title="${message(code: 'application.sourceControlPath.help')}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <carm:label for="buildInstructions">
+                            <g:message code="application.buildInstructions.label" default="Build Instructions"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'buildInstructions', 'errors')}">
+                        <richui:richTextEditor name="buildInstructions"
+                                               value="${applicationInstance?.buildInstructions}"
+                                               height="${grailsApplication.config.ui.richTextEditor.height}"
+                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                    </td>
+                </tr>
 
                 <tr class="prop">
                     <td colspan="2">&nbsp;</td>

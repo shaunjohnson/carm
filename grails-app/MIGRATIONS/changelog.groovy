@@ -134,6 +134,8 @@ databaseChangeLog = {
                 constraints(nullable: "false")
             }
 
+            column(name: "build_instructions", type: "longtext")
+
             column(name: "date_created", type: "datetime") {
                 constraints(nullable: "false")
             }
@@ -221,6 +223,8 @@ databaseChangeLog = {
             column(name: "application_id", type: "bigint") {
                 constraints(nullable: "false")
             }
+
+            column(name: "build_instructions", type: "longtext")
 
             column(name: "build_path", type: "varchar(100)")
 

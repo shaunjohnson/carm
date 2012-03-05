@@ -8,6 +8,14 @@ import grails.buildtestdata.mixin.Build
 @TestFor(Application)
 @Build(Application)
 class ApplicationTests {
+    void testBuildInstructionsNullable() {
+        assert Application.buildWithoutSave(buildInstructions: null).validate()
+    }
+
+    void testDeployInstructionsNullable() {
+        assert Application.buildWithoutSave(deployInstructions: null).validate()
+    }
+
     void testDescriptionMaxSize() {
         assertHasError(Application.buildWithoutSave(description: 'a' * 4001), 'description', 'maxSize')
     }

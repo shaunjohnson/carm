@@ -70,6 +70,14 @@
                     <carm:formatSourceControl application="${applicationInstance}"/>
                 </td>
             </tr>
+            <tr class="prop detailProp">
+                <td valign="top" class="name">
+                    <g:message code="application.buildInstructions.label" default="Build Instructions"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationInstance, field: "buildInstructions")?.decodeHTML()}
+                </td>
+            </tr>
 
             <tr class="prop detailProp">
                 <td colspan="2">&nbsp;</td>

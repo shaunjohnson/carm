@@ -15,6 +15,7 @@ class Application {
     SourceControlRepository sourceControlRepository
     String sourceControlPath
     System system
+    String buildInstructions
     String deployInstructions
 
     Date dateCreated
@@ -28,6 +29,7 @@ class Application {
         sourceControlRepository(nullable: false)
         sourceControlPath(maxSize: 200, nullable: true)
         system(nullable: true)
+        buildInstructions(nullable: true)
         deployInstructions(nullable: true)
     }
 
@@ -37,6 +39,7 @@ class Application {
 
     static mapping = {
         sort "name"
+        buildInstructions type: 'text'
         deployInstructions type: 'text'
     }
 

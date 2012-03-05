@@ -6,6 +6,7 @@ import carm.deployment.ApplicationDeployment
 class ApplicationRelease {
     String releaseNumber
     String changeLog
+    String buildInstructions
     String buildPath
     ApplicationReleaseState releaseState
     ApplicationReleaseTestState testState
@@ -16,7 +17,8 @@ class ApplicationRelease {
     static constraints = {
         releaseNumber(maxSize: 20, nullable: false, blank: false)
         changeLog(nullable: true)
-        buildPath(maxSize:  100, nullable: true)
+        buildInstructions(nullable: true)
+        buildPath(maxSize: 100, nullable: true)
         releaseState(maxSize: 50, nullable: false, blank: false)
         application(nullable: false)
         testState(nullable: true)
@@ -27,7 +29,8 @@ class ApplicationRelease {
     static hasMany = [moduleReleases: ModuleRelease, deployments: ApplicationDeployment, histories: ApplicationReleaseHistory]
 
     static mapping = {
-        sort "dateCreated":"desc"
+        sort "dateCreated": "desc"
+        buildInstructions type: 'text'
         changeLog type: 'text'
     }
 

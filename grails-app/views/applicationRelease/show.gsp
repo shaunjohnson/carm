@@ -52,16 +52,6 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
-                </td>
-                <td valign="top" class="value">
-                    ${fieldValue(bean: applicationReleaseInstance, field: "buildPath")}
-                    <br/>
-                    <carm:formatSourceControl application="${applicationReleaseInstance.application}"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
                     <g:message code="applicationRelease.releaseState.label" default="Release State"/>
                 </td>
                 <td valign="top" class="value">
@@ -74,6 +64,29 @@
                 </td>
                 <td valign="top" class="value">
                     ${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}
+                </td>
+            </tr>
+
+            <tr class="prop detailProp">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
+            <tr class="prop">
+                <td valign="top" class="name">
+                    <g:message code="applicationRelease.buildPath.label" default="Build Path"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationReleaseInstance, field: "buildPath")}
+                    <br/>
+                    <carm:formatSourceControl application="${applicationReleaseInstance.application}"/>
+                </td>
+            </tr>
+            <tr class="prop">
+                <td valign="top" class="name">
+                    <g:message code="applicationRelease.buildInstructions.label" default="Build Instructions"/>
+                </td>
+                <td valign="top" class="value">
+                    ${fieldValue(bean: applicationReleaseInstance, field: "buildInstructions").decodeHTML()}
                 </td>
             </tr>
 

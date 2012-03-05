@@ -26,6 +26,9 @@ class ApplicationReleaseController {
         else {
             def applicationReleaseInstance = new ApplicationRelease()
 
+            // Pre-fill build instructions from the Application domain
+            applicationReleaseInstance.buildInstructions = applicationInstance.buildInstructions
+
             // Attempt to predict the next release number
             applicationReleaseInstance.releaseNumber = applicationReleaseService.inferNextRelease(applicationInstance)
 
