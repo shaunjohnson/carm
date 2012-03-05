@@ -17,7 +17,7 @@ class SystemEnvironmentController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemEnvironmentInstanceList: SystemEnvironment.list(params), systemEnvironmentInstanceTotal: SystemEnvironment.count()]
+        [systemEnvironmentInstanceList: systemEnvironmentService.list(params), systemEnvironmentInstanceTotal: systemEnvironmentService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])

@@ -15,7 +15,7 @@ class SystemComponentController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemComponentInstanceList: SystemComponent.list(params), systemComponentInstanceTotal: SystemComponent.count()]
+        [systemComponentInstanceList: systemComponentService.list(params), systemComponentInstanceTotal: systemComponentService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
