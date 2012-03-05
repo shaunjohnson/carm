@@ -1,4 +1,4 @@
-<%@ page import="carm.module.ModuleDeployment" %>
+<%@ page import="carm.deployment.ModuleDeployment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
