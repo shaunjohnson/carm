@@ -1,4 +1,4 @@
-<%@ page import="carm.application.Application; carm.system.System" %>
+<%@ page import="carm.sourcecontrol.SourceControlRepository; carm.application.ApplicationType; carm.application.Application; carm.system.System" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -60,7 +60,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${carm.ApplicationType.list().sort { it.name }}" optionKey="id"
+                        <g:select name="type.id" from="${ApplicationType.list().sort { it.name }}" optionKey="id"
                                   value="${applicationInstance?.type?.id}" required="required"
                                   title="${message(code: 'application.type.help')}"/>
                     </td>
@@ -93,7 +93,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
-                        <g:select name="sourceControlRepository.id" from="${carm.SourceControlRepository.list()}"
+                        <g:select name="sourceControlRepository.id" from="${SourceControlRepository.list()}"
                                   optionKey="id"
                                   value="${applicationInstance?.sourceControlRepository?.id}" noSelection="['null': '']"
                                   required="required"
