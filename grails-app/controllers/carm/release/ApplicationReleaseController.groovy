@@ -85,7 +85,7 @@ class ApplicationReleaseController {
             applicationReleaseService.update(applicationReleaseInstance, params)
             if (!applicationReleaseInstance.hasErrors() && applicationReleaseInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationRelease.label', default: 'ApplicationRelease'), applicationReleaseInstance.releaseNumber])}"
-                redirect(controller: "application", action: "show", id: applicationReleaseInstance.application.id)
+                redirect(controller: "applicationRelease", action: "show", id: applicationReleaseInstance.id)
             }
             else {
                 render(view: "edit", model: [applicationReleaseInstance: applicationReleaseInstance])
