@@ -1,4 +1,4 @@
-<%@ page import="carm.deployment.ApplicationDeployment; carm.system.SystemEnvironment" %>
+<%@ page import="carm.release.ApplicationRelease; carm.deployment.ApplicationDeployment; carm.system.SystemEnvironment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -35,7 +35,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        <g:select name="applicationRelease.id" from="${carm.ApplicationRelease.list()}" optionKey="id"
+                        <g:select name="applicationRelease.id" from="${ApplicationRelease.list()}" optionKey="id"
                                   value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
                     </td>
                 </tr>
