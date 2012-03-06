@@ -40,7 +40,9 @@
                         <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
                     </td>
                     <td>
-                        ${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}
+                        <div class="expander">
+                            ${fieldValue(bean: applicationReleaseInstance, field: "changeLog").decodeHTML()}
+                        </div>
                     </td>
                 </tr>
             </g:each>
