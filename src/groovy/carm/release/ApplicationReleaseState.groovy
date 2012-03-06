@@ -9,6 +9,8 @@ public enum ApplicationReleaseState {
     COMPLETED("Completed"),
     ARCHIVED("Archived")
 
+    static List<ApplicationReleaseState> pendingStates = [ ARCHIVED, COMPLETED ]
+
     private String value
 
     ApplicationReleaseState(String value) {

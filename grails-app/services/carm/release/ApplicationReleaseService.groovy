@@ -92,16 +92,13 @@ class ApplicationReleaseService {
      * @return List of ApplicationRelease objects
      */
     List<ApplicationRelease> findAllPendingReleasesByApplication(Application application) {
-        def releaseStates = [
-                ApplicationReleaseState.ARCHIVED,
-                ApplicationReleaseState.COMPLETED
-        ]
-
-        def applicationReleases = ApplicationRelease.findAll(
-                "from ApplicationRelease where releaseState not in :releaseStates and application = :application",
-                [releaseStates: releaseStates, application: application])
-
-        return applicationReleases
+        ApplicationRelease.executeQuery(
+                """ from
+                        ApplicationRelease
+                    where
+                        releaseState not in :releaseStates
+                        and application = :application""",
+                [releaseStates: ApplicationReleaseState.pendingStates, application: application])
     }
 
     /**
@@ -111,16 +108,13 @@ class ApplicationReleaseService {
      * @return List of ApplicationRelease objects
      */
     List<ApplicationRelease> findAllPendingReleasesByProject(Project project) {
-        def releaseStates = [
-                ApplicationReleaseState.ARCHIVED,
-                ApplicationReleaseState.COMPLETED
-        ]
-
-        def applicationReleases = ApplicationRelease.findAll(
-                "from ApplicationRelease where releaseState not in (:releaseStates) and application.project = :project order by dateCreated asc",
-                [releaseStates: releaseStates, project: project])
-
-        return applicationReleases
+        ApplicationRelease.executeQuery(
+                """ from
+                        ApplicationRelease
+                    where
+                        releaseState not in (:releaseStates)
+                        and application.project = :project""",
+                [releaseStates: ApplicationReleaseState.pendingStates, project: project])
     }
 
     /**

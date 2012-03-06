@@ -168,16 +168,13 @@ class ApplicationDeploymentService {
      * @return List of ApplicationDeployment objects
      */
     List<ApplicationDeployment> findAllPendingDeploymentsByApplication(Application application) {
-        def deploymentStates = [
-                ApplicationDeploymentState.ARCHIVED,
-                ApplicationDeploymentState.COMPLETED
-        ]
-
-        def applicationDeployments = ApplicationDeployment.findAll(
-                "from ApplicationDeployment where deploymentState not in :deploymentStates and applicationRelease.application = :application",
-                [deploymentStates: deploymentStates, application: application])
-
-        return applicationDeployments
+        ApplicationDeployment.executeQuery(
+                """ from
+                        ApplicationDeployment
+                    where
+                        deploymentState not in :deploymentStates
+                        and applicationRelease.application = :application""",
+                [deploymentStates: ApplicationDeploymentState.pendingStates, application: application])
     }
 
     /**
@@ -187,15 +184,12 @@ class ApplicationDeploymentService {
      * @return List of ApplicationDeployment objects
      */
     List<ApplicationDeployment> findAllPendingDeploymentsByProject(Project project) {
-        def deploymentStates = [
-                ApplicationDeploymentState.ARCHIVED,
-                ApplicationDeploymentState.COMPLETED
-        ]
-
-        def applicationDeployments = ApplicationDeployment.findAll(
-                "from ApplicationDeployment where deploymentState not in :deploymentStates and applicationRelease.application.project = :project",
-                [deploymentStates: deploymentStates, project: project])
-
-        return applicationDeployments
+        ApplicationDeployment.executeQuery(
+                """ from
+                        ApplicationDeployment
+                    where
+                        deploymentState not in :deploymentStates
+                        and applicationRelease.application.project = :project""",
+                [deploymentStates: ApplicationDeploymentState.pendingStates, project: project])
     }
 }
