@@ -4,10 +4,13 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
+import carm.application.Application
 
 class ProjectService {
     static transactional = false
 
+    def applicationDeploymentService
+    def applicationReleaseService
     def carmSecurityService
 
     int count() {
@@ -75,5 +78,20 @@ class ProjectService {
         }
 
         log.debug "$prefix leaving"
+    }
+
+    /**
+     * Finds all pending deployments and releases for the provided Project.
+     *
+     * @param project Project used for filtering
+     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated descending
+     */
+    List findAllPendingTasks(Project project) {
+        def pendingTasks = []
+
+        pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByProject(project)
+        pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByProject(project)
+
+        pendingTasks.sort { it.dateCreated }.reverse()
     }
 }

@@ -68,7 +68,8 @@ class ApplicationController {
             [
                     applicationInstance: applicationInstance,
                     deployments: deployments,
-                    activityList: activityTraceService.listActivityByApplication(applicationInstance, [:])
+                    activityList: activityTraceService.listActivityByApplication(applicationInstance, [:]),
+                    pendingTasks: applicationService.findAllPendingTasks(applicationInstance)
             ]
         }
     }

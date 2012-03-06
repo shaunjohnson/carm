@@ -6,6 +6,7 @@ import carm.system.System
 import carm.system.SystemEnvironment
 import carm.release.ApplicationRelease
 import carm.application.Application
+import carm.project.Project
 
 class ApplicationDeploymentService {
 
@@ -158,5 +159,43 @@ class ApplicationDeploymentService {
                 ad.applicationRelease.application.type asc,
                 ad.applicationRelease.application.name asc
         """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: system])
+    }
+
+    /**
+     * Finds all pending (not completed) application deployments for the provided application.
+     *
+     * @param application Application used for filtering
+     * @return List of ApplicationDeployment objects
+     */
+    List<ApplicationDeployment> findAllPendingDeploymentsByApplication(Application application) {
+        def deploymentStates = [
+                ApplicationDeploymentState.ARCHIVED,
+                ApplicationDeploymentState.COMPLETED
+        ]
+
+        def applicationDeployments = ApplicationDeployment.findAll(
+                "from ApplicationDeployment where deploymentState not in :deploymentStates and applicationRelease.application = :application",
+                [deploymentStates: deploymentStates, application: application])
+
+        return applicationDeployments
+    }
+
+    /**
+     * Finds all pending (not completed) application deployments for the provided project.
+     *
+     * @param project Project used for filtering
+     * @return List of ApplicationDeployment objects
+     */
+    List<ApplicationDeployment> findAllPendingDeploymentsByProject(Project project) {
+        def deploymentStates = [
+                ApplicationDeploymentState.ARCHIVED,
+                ApplicationDeploymentState.COMPLETED
+        ]
+
+        def applicationDeployments = ApplicationDeployment.findAll(
+                "from ApplicationDeployment where deploymentState not in :deploymentStates and applicationRelease.application.project = :project",
+                [deploymentStates: deploymentStates, project: project])
+
+        return applicationDeployments
     }
 }

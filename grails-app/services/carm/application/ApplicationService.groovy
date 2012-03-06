@@ -6,12 +6,25 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import carm.project.Project
+import carm.release.ApplicationRelease
+import carm.release.ApplicationReleaseState
+import carm.deployment.ApplicationDeployment
+import carm.deployment.ApplicationDeploymentState
 
 class ApplicationService {
 
     static transactional = false
 
+    def applicationDeploymentService
+    def grailsApplication
     def systemService
+
+    // Deferred service reference
+    protected applicationReleaseService
+
+    def initialize() {
+        applicationReleaseService = grailsApplication.mainContext.applicationReleaseService
+    }
 
     /**
      * Determines if the application is deployable. An application must be associated with a system that can be
@@ -115,5 +128,20 @@ class ApplicationService {
         }
 
         return applicationsGrouped
+    }
+
+    /**
+     * Finds all pending deployments and releases for the provided Application.
+     *
+     * @param application Application used for filtering
+     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated descending
+     */
+    List findAllPendingTasks(Application application) {
+        def pendingTasks = []
+        
+        pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByApplication(application)
+        pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByApplication(application)
+        
+        pendingTasks.sort { it.dateCreated }.reverse()
     }
 }

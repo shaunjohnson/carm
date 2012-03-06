@@ -183,7 +183,7 @@
         </carm:showHideDetails>
     </div>
 
-    <g:render template="pendingTasks" model="['applicationInstance': applicationInstance]"/>
+    <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
 
     <table class="twoColumnLayout">
         <tbody>

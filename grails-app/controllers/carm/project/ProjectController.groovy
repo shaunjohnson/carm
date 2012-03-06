@@ -51,7 +51,7 @@ class ProjectController {
             [
                     projectInstance: projectInstance,
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
-                    pendingReleases: applicationReleaseService.findAllPendingReleasesByProject(projectInstance),
+                    pendingTasks: projectService.findAllPendingTasks(projectInstance),
                     activityList: activityTraceService.listActivityByProject(projectInstance, [:])
             ]
         }

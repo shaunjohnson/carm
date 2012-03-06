@@ -9,6 +9,7 @@ import carm.project.Project
 import carm.application.Application
 
 class ApplicationReleaseService {
+
     static transactional = false
 
     def applicationService
@@ -84,12 +85,35 @@ class ApplicationReleaseService {
         return ApplicationRelease.countByApplication(application)
     }
 
+    /**
+     * Finds all pending (not completed) application releases for the provided application.
+     *
+     * @param application Application used for filtering
+     * @return List of ApplicationRelease objects
+     */
+    List<ApplicationRelease> findAllPendingReleasesByApplication(Application application) {
+        def releaseStates = [
+                ApplicationReleaseState.ARCHIVED,
+                ApplicationReleaseState.COMPLETED
+        ]
+
+        def applicationReleases = ApplicationRelease.findAll(
+                "from ApplicationRelease where releaseState not in :releaseStates and application = :application",
+                [releaseStates: releaseStates, application: application])
+
+        return applicationReleases
+    }
+
+    /**
+     * Finds all pending (not completed) application releases for applications in the provided project.
+     *
+     * @param project Project used for filtering
+     * @return List of ApplicationRelease objects
+     */
     List<ApplicationRelease> findAllPendingReleasesByProject(Project project) {
         def releaseStates = [
-                ApplicationReleaseState.DRAFT,
-                ApplicationReleaseState.REJECTED,
-                ApplicationReleaseState.COMPLETED,
-                ApplicationReleaseState.ARCHIVED
+                ApplicationReleaseState.ARCHIVED,
+                ApplicationReleaseState.COMPLETED
         ]
 
         def applicationReleases = ApplicationRelease.findAll(
@@ -107,9 +131,9 @@ class ApplicationReleaseService {
      */
     private ApplicationRelease findLastApplicationRelease(Application application) {
         def releases = ApplicationRelease.where {
-            eq("application", application)
-            order("dateCreated", "desc")
-            max(1)
+            "application" == application
+            order "dateCreated", "desc"
+            max 1
         }.list()
 
         return releases?.size() ? releases.get(0) : null

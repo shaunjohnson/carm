@@ -2,6 +2,7 @@ package carm.release
 
 import carm.application.Application
 import carm.deployment.ApplicationDeployment
+import carm.security.User
 
 class ApplicationRelease {
     String releaseNumber
@@ -10,6 +11,12 @@ class ApplicationRelease {
     String buildPath
     ApplicationReleaseState releaseState
     ApplicationReleaseTestState testState
+    Date dateSubmitted
+    User submittedBy
+    Date dateAssigned
+    User assignedTo
+    Date dateTested
+    User testedBy
 
     Date dateCreated
     Date lastUpdated
@@ -22,6 +29,12 @@ class ApplicationRelease {
         releaseState(maxSize: 50, nullable: false, blank: false)
         application(nullable: false)
         testState(nullable: true)
+        dateSubmitted(nullable: true)
+        submittedBy(nullable: true)
+        dateAssigned(nullable: true)
+        assignedTo(nullable: true)
+        dateTested(nullable: true)
+        testedBy(nullable: true)
     }
 
     static belongsTo = [application: Application]

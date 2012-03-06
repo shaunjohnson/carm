@@ -93,8 +93,7 @@
         </carm:showHideDetails>
     </div>
 
-    <g:render template="pendingTasks"
-              model="[projectInstance: projectInstance, pendingReleases: pendingReleases]"/>
+    <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
 
     <table class="twoColumnLayout">
         <tbody>

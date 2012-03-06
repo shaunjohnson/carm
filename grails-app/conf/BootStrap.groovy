@@ -33,8 +33,13 @@ class BootStrap {
 
     def aclUtilService
     def fixtureLoader
+    def applicationService
 
     def init = { servletContext ->
+        // Initialize deferred references
+        applicationService.initialize()
+
+        // Return immediately to disable bootstrapping data
         return
 
         def userFixture = fixtureLoader.load {
