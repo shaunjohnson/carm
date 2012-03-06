@@ -3,21 +3,33 @@ package carm
 import carm.system.System
 import carm.project.Project
 import carm.release.ApplicationRelease
+import carm.project.ProjectCategory
+import carm.application.Application
 
 class HomeController {
     def activityTraceService
     def projectService
-    def springSecurityService
+    def systemService
 
     def index = {
-        def categories = Project.executeQuery("select distinct p.category from Project p order by p.category.name")
+        List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
+
+        def projectCategoryList = [:]
+        myProjects.each { project ->
+            if (projectCategoryList[project.category]) {
+                projectCategoryList[project.category] << project
+            }
+            else {
+                projectCategoryList[project.category] = [ project ]
+            }
+        }
 
         [
                 applicationReleaseInstanceList: ApplicationRelease.listOrderByApplication(),
-                projectCategoryList: categories,
-                systemInstanceList: System.listOrderByName(),
+                projectCategoryList: projectCategoryList,
+                systemInstanceList: systemService.findAllByProject(myProjects),
                 activityList: activityTraceService.listActivityByRoot([:]),
-                pendingTasks: projectService.findAllPendingTasks(projectService.getAllProjectsWhereOwner())
+                pendingTasks: projectService.findAllPendingTasks(myProjects)
         ]
     }
 

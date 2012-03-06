@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.application.Application
+import carm.project.Project
 
 class SystemService {
 
@@ -103,5 +104,27 @@ class SystemService {
         system.properties = params
 
         log.debug "$prefix leaving"
+    }
+
+    /**
+     * Finds all System objects associated with the provided List of Project objects.
+     *
+     * @param projects List of Projects used for querying
+     * @return List of System objects
+     */
+    List<System> findAllByProject(List<Project> projects) {
+        if (!projects?.size()) {
+            return []
+        }
+
+        return Application.executeQuery("""
+            select distinct a.system
+            from
+                Application a
+            where
+                a.project in :projects
+                and a.system is not null
+            order by a.system.name
+        """, [projects: projects]) as List<System>
     }
 }
