@@ -135,11 +135,13 @@ class ApplicationReleaseService {
      * @return Last ApplicationRelease or null if there are no releases of the application
      */
     private ApplicationRelease findLastApplicationRelease(Application application) {
-        def releases = ApplicationRelease.where {
-            "application" == application
-            order "dateCreated", "desc"
-            max 1
-        }.list()
+        def releases = ApplicationRelease.executeQuery(
+                """ from
+                        ApplicationRelease
+                    where
+                        application = :application
+                    order by dateCreated desc""",
+                [application: application], [max: 1])
 
         return releases?.size() ? releases.get(0) : null
     }
