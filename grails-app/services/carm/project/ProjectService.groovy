@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.application.Application
+import carm.security.User
 
 class ProjectService {
     static transactional = false
@@ -84,7 +85,7 @@ class ProjectService {
      * Finds all pending deployments and releases for the provided Project.
      *
      * @param project Project used for filtering
-     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated descending
+     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated ascending
      */
     List findAllPendingTasks(Project project) {
         def pendingTasks = []
@@ -92,6 +93,33 @@ class ProjectService {
         pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByProject(project)
         pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByProject(project)
 
-        pendingTasks.sort { it.dateCreated }.reverse()
+        pendingTasks.sort { it.dateCreated }
+    }
+
+    @PostFilter("hasPermission(filterObject, admin)")
+    List<Project> getAllProjectsWhereOwner(Map params) {
+        Project.list params
+    }
+
+    List findAllPendingTasks(List<Project> projects) {
+        def pendingTasks = []
+
+        projects.each { project ->
+            pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByProject(project)
+            pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByProject(project)
+        }
+
+        pendingTasks.sort { it.dateCreated }
+    }
+
+    List findAllPendingTasks() {
+        def pendingTasks = []
+
+        Project.list().each { project ->
+            pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByProject(project)
+            pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByProject(project)
+        }
+
+        pendingTasks.sort { it.dateCreated }
     }
 }

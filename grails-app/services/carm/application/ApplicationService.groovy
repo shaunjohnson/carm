@@ -134,7 +134,7 @@ class ApplicationService {
      * Finds all pending deployments and releases for the provided Application.
      *
      * @param application Application used for filtering
-     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated descending
+     * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated ascending
      */
     List findAllPendingTasks(Application application) {
         def pendingTasks = []
@@ -142,6 +142,6 @@ class ApplicationService {
         pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByApplication(application)
         pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByApplication(application)
         
-        pendingTasks.sort { it.dateCreated }.reverse()
+        pendingTasks.sort { it.dateCreated }
     }
 }
