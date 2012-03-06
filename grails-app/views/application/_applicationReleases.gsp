@@ -1,4 +1,11 @@
 <%@ page import="carm.release.ApplicationReleaseState; carm.release.ApplicationRelease" %>
+<g:set var="applicationReleasesTotal" value="${applicationInstance.releases.size()}"/>
+<g:set var="maxRecordsAllowed" value="${grailsApplication.config.ui.application.maxRecords}"/>
+<g:set var="maxRecordsToDisplay"
+       value="${Math.min(applicationReleasesTotal, maxRecordsAllowed)}"/>
+<g:set var="applicationReleases"
+       value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxRecordsToDisplay)}"/>
+
 <div class="sectionHeader">
     <div class="text">
         <g:message code="releases.label" default="Releases"/>
@@ -12,7 +19,7 @@
             </g:link>
         </carmsec:isProjectOwner>
 
-        <g:if test="${applicationReleases?.size()}">
+        <g:if test="${applicationReleasesTotal > maxRecordsAllowed}">
             <g:link class="list" controller="application" action="listReleases"
                     params="['id': applicationInstance?.id]">
                 <g:message code="allReleases.label" default="All Releases"/>
@@ -20,11 +27,6 @@
         </g:if>
     </div>
 </div>
-
-<g:set var="maxRecords"
-       value="${Math.min(applicationInstance.releases.size(), grailsApplication.config.ui.application.maxRecords)}"/>
-<g:set var="applicationReleases"
-       value="${applicationInstance.releases.sort { it.dateCreated }.reverse().subList(0, maxRecords)}"/>
 
 <g:if test="${applicationReleases.size()}">
     <table style="width: 100%;">
