@@ -21,6 +21,21 @@
                 <g:elseif test="${task.deploymentState == ApplicationDeploymentState.SUBMITTED}">
                     was submitted, but not yet deloyed.
                 </g:elseif>
+                <g:elseif test="${task.deploymentState == ApplicationDeploymentState.ASSIGNED}">
+                    is assigned, but not yet deloyed.
+                </g:elseif>
+                <g:elseif test="${task.deploymentState == ApplicationDeploymentState.REJECTED}">
+                    was rejected.
+                </g:elseif>
+                <g:elseif test="${task.deploymentState == ApplicationDeploymentState.DEPLOYED}">
+                    was deployed, but not yet tested.
+                </g:elseif>
+                <g:elseif test="${task.deploymentState == ApplicationDeploymentState.COMPLETED}">
+                    was completed.
+                </g:elseif>
+                <g:elseif test="${task.deploymentState == ApplicationDeploymentState.ARCHIVED}">
+                    was archived.
+                </g:elseif>
             </g:if>
             <g:elseif test="${task instanceof ApplicationRelease}">
                 <g:link controller="applicationRelease" action="show" id="${task.id}"
@@ -34,6 +49,22 @@
                 </g:if>
                 <g:elseif test="${task.releaseState == ApplicationReleaseState.SUBMITTED}">
                     was submitted, but not yet built.
+                </g:elseif>
+                <g:elseif test="${task.releaseState == ApplicationReleaseState.ASSIGNED}">
+                    is assigned to
+                    <g:link controller="user" action="show" id="tasks.assignedTo.id">${tasks.assignedTo}</g:link>.
+                </g:elseif>
+                <g:elseif test="${task.releaseState == ApplicationReleaseState.REJECTED}">
+                    was rejected.
+                </g:elseif>
+                <g:elseif test="${task.releaseState == ApplicationReleaseState.RELEASED}">
+                    was released, but not yet tested.
+                </g:elseif>
+                <g:elseif test="${task.releaseState == ApplicationReleaseState.COMPLETED}">
+                    was completed.
+                </g:elseif>
+                <g:elseif test="${task.releaseState == ApplicationReleaseState.ARCHIVED}">
+                    was archived.
                 </g:elseif>
             </g:elseif>
             <g:else>
