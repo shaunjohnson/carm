@@ -1,22 +1,22 @@
 <%@ page import="carm.project.Project; carm.application.Application; carm.module.Module; carm.activity.ActivityAction" %>
-<g:if test="${activity.objectType == Application.class.name && activity.action != ActivityAction.DELETED}">
+
+<g:set var="activityMessage" value="${message(code: "activityTrace.${activity.objectType}.${activity.action}", args: [activity.objectName])}"/>
+
+<g:if test="${activity.objectType == Application.class.name && activity.action != ActivityAction.DELETED && Application.exists(activity.objectId)}">
     <g:link controller="application" action="show" id="${activity.objectId}">
-        <g:message code="activityTrace.${activity.objectType}.${activity.action}"
-                   args="[activity.objectName]"/>
+        ${activityMessage.encodeAsHTML()}
     </g:link>
 </g:if>
-<g:elseif test="${activity.objectType == Module.class.name && activity.action != ActivityAction.DELETED}">
+<g:elseif test="${activity.objectType == Module.class.name && activity.action != ActivityAction.DELETED && Module.exists(activity.objectId)}">
     <g:link controller="module" action="show" id="${activity.objectId}">
-        <g:message code="activityTrace.${activity.objectType}.${activity.action}"
-                   args="[activity.objectName]"/>
+        ${activityMessage.encodeAsHTML()}
     </g:link>
 </g:elseif>
-<g:elseif test="${activity.objectType == Project.class.name && activity.action != ActivityAction.DELETED}">
+<g:elseif test="${activity.objectType == Project.class.name && activity.action != ActivityAction.DELETED && Project.exists(activity.objectId)}">
     <g:link controller="project" action="show" id="${activity.objectId}">
-        <g:message code="activityTrace.${activity.objectType}.${activity.action}"
-                   args="[activity.objectName]"/>
+        ${activityMessage.encodeAsHTML()}
     </g:link>
 </g:elseif>
 <g:else>
-    <g:message code="activityTrace.${activity.objectType}.${activity.action}" args="[activity.objectName]"/>
+    ${activityMessage.encodeAsHTML()}
 </g:else>
