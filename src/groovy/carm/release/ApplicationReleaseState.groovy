@@ -10,6 +10,7 @@ public enum ApplicationReleaseState {
     ARCHIVED("Archived")
 
     static List<ApplicationReleaseState> pendingStates = [ ARCHIVED, COMPLETED ]
+    static List<ApplicationReleaseState> submittableStates = [ DRAFT, REJECTED ]
 
     private String value
 

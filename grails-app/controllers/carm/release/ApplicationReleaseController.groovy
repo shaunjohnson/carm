@@ -113,4 +113,18 @@ class ApplicationReleaseController {
             redirect(action: "list")
         }
     }
+
+    def submit = {
+        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        if (applicationReleaseInstance) {
+            applicationReleaseService.submit(applicationReleaseInstance)
+
+            flash.message = "${message(code: 'default.submitted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), applicationReleaseInstance.releaseNumber])}"
+            redirect(controller: "applicationRelease", action: "show", id: applicationReleaseInstance.id)
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            redirect(action: "list")
+        }
+    }
 }

@@ -52,6 +52,17 @@ class ApplicationReleaseService {
         return applicationService.isDeployable(applicationRelease?.application)
     }
 
+    /**
+     * Determines if the application release is submittable. A release can be submitted if it is in DRAFT or REJECTED
+     * state.
+     *
+     * @param applicationRelease ApplicationRelease object to test
+     * @return True if the release can be submitted
+     */
+    boolean isSubmittable(ApplicationRelease applicationRelease) {
+        ApplicationReleaseState.submittableStates.contains(applicationRelease?.releaseState)
+    }
+
     int count() {
         ApplicationRelease.count()
     }
@@ -241,5 +252,14 @@ class ApplicationReleaseService {
             // Not a semantic version number
             return null
         }
+    }
+
+    def submit(ApplicationRelease applicationRelease) {
+        applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
+        applicationRelease.submittedBy = springSecurityService.currentUser
+        applicationRelease.dateSubmitted = new Date()
+        applicationRelease.save()
+
+        addToHistories(applicationRelease, "Submitted", null);
     }
 }

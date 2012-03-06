@@ -307,12 +307,23 @@ class CarmTagLib {
     }
 
     /**
-     * Renders the tag body if the current user is a project owner for the provided object.
+     * Renders the tag body if the application release can be deployed
      */
     def isDeployable = { attrs, body ->
         ApplicationRelease applicationRelease = attrs.applicationRelease
 
         if (applicationReleaseService.isDeployable(applicationRelease)) {
+            out << body()
+        }
+    }
+
+    /**
+     * Renders the tag body if the application release can be submitted
+     */
+    def isSubmittable = { attrs, body ->
+        ApplicationRelease applicationRelease = attrs.applicationRelease
+
+        if (applicationReleaseService.isSubmittable(applicationRelease)) {
             out << body()
         }
     }
