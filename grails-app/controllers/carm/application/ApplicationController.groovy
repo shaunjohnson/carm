@@ -1,5 +1,7 @@
 package carm.application
 
+import carm.exceptions.DomainInUseException
+
 class ApplicationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -123,6 +125,10 @@ class ApplicationController {
                 redirect(controller: "project", action: "show", id: projectId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

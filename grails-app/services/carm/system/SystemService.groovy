@@ -6,6 +6,7 @@ import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.application.Application
 import carm.project.Project
+import carm.exceptions.DomainInUseException
 
 class SystemService {
 
@@ -73,6 +74,10 @@ class SystemService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(System system) {
+        if (isInUse(system)) {
+            throw new DomainInUseException()
+        }
+
         system.delete()
     }
 

@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
+import carm.exceptions.DomainInUseException
 
 class ModuleTypeService {
 
@@ -57,6 +58,10 @@ class ModuleTypeService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ModuleType moduleType) {
+        if (isInUse(moduleType)) {
+            throw new DomainInUseException()
+        }
+
         moduleType.delete()
     }
 

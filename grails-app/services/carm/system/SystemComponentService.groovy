@@ -6,6 +6,7 @@ import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import grails.gorm.DetachedCriteria
 import carm.module.Module
+import carm.exceptions.DomainInUseException
 
 class SystemComponentService {
 
@@ -63,6 +64,10 @@ class SystemComponentService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SystemComponent systemComponent) {
+        if (isInUse(systemComponent)) {
+            throw new DomainInUseException()
+        }
+
         systemComponent.delete()
     }
 

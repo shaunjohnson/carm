@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.application.Application
+import carm.exceptions.DomainInUseException
 
 class SourceControlRepositoryService {
 
@@ -58,6 +59,10 @@ class SourceControlRepositoryService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlRepository sourceControlRepository) {
+        if (isInUse(sourceControlRepository)) {
+            throw new DomainInUseException()
+        }
+
         sourceControlRepository.delete()
     }
 

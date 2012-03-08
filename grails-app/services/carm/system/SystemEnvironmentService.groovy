@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.deployment.ApplicationDeployment
+import carm.exceptions.DomainInUseException
 
 class SystemEnvironmentService {
 
@@ -64,6 +65,10 @@ class SystemEnvironmentService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SystemEnvironment systemEnvironment) {
+        if (isInUse(systemEnvironment)) {
+            throw new DomainInUseException()
+        }
+
         systemEnvironment.delete()
     }
 

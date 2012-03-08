@@ -1,6 +1,7 @@
 package carm.sourcecontrol
 
 import grails.plugins.springsecurity.Secured
+import carm.exceptions.DomainInUseException
 
 class SourceControlRoleController {
 
@@ -98,6 +99,10 @@ class SourceControlRoleController {
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

@@ -1,6 +1,7 @@
 package carm.module
 
 import grails.plugins.springsecurity.Secured
+import carm.exceptions.DomainInUseException
 
 class ModuleTypeController {
 
@@ -98,6 +99,10 @@ class ModuleTypeController {
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

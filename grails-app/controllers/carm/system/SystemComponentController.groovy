@@ -1,6 +1,7 @@
 package carm.system
 
 import grails.plugins.springsecurity.Secured
+import carm.exceptions.DomainInUseException
 
 class SystemComponentController {
 
@@ -106,6 +107,10 @@ class SystemComponentController {
                 redirect(controller: "system", action: "show", id: systemId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

@@ -1,5 +1,7 @@
 package carm.sourcecontrol
 
+import carm.exceptions.DomainInUseException
+
 class SourceControlRepositoryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -100,6 +102,10 @@ class SourceControlRepositoryController {
                 redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

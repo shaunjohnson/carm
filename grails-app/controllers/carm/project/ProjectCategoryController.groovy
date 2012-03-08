@@ -1,6 +1,7 @@
 package carm.project
 
 import grails.plugins.springsecurity.Secured
+import carm.exceptions.DomainInUseException
 
 class ProjectCategoryController {
 
@@ -98,6 +99,10 @@ class ProjectCategoryController {
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
