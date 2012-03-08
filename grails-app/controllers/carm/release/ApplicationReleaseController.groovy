@@ -2,6 +2,7 @@ package carm.release
 
 import carm.application.Application
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class ApplicationReleaseController {
 
@@ -104,7 +105,7 @@ class ApplicationReleaseController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), releaseNumber])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

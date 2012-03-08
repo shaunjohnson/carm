@@ -1,6 +1,7 @@
 package carm.sourcecontrol
 
 import grails.plugins.springsecurity.Secured
+import org.springframework.dao.DataIntegrityViolationException
 
 class SourceControlUserController {
 
@@ -105,7 +106,7 @@ class SourceControlUserController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), name])}"
                 redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

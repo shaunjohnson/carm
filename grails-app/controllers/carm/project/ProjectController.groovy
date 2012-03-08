@@ -2,6 +2,7 @@ package carm.project
 
 import carm.security.User
 import org.springframework.security.acls.domain.BasePermission
+import org.springframework.dao.DataIntegrityViolationException
 
 class ProjectController {
 
@@ -104,7 +105,7 @@ class ProjectController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), name])}"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

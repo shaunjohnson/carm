@@ -1,6 +1,7 @@
 package carm.sourcecontrol
 
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class SourceControlRepositoryController {
 
@@ -101,7 +102,7 @@ class SourceControlRepositoryController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
                 redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

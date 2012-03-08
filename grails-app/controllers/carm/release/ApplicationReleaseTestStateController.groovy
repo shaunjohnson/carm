@@ -2,6 +2,7 @@ package carm.release
 
 import grails.plugins.springsecurity.Secured
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class ApplicationReleaseTestStateController {
 
@@ -98,7 +99,7 @@ class ApplicationReleaseTestStateController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), name])}"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

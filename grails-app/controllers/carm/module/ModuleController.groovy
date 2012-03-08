@@ -1,5 +1,7 @@
 package carm.module
 
+import org.springframework.dao.DataIntegrityViolationException
+
 class ModuleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -118,7 +120,7 @@ class ModuleController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), name])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

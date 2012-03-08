@@ -2,6 +2,7 @@ package carm.deployment
 
 import carm.release.ApplicationRelease
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class ApplicationDeploymentController {
 
@@ -110,7 +111,7 @@ class ApplicationDeploymentController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

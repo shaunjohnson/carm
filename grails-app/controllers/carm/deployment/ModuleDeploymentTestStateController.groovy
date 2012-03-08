@@ -2,6 +2,7 @@ package carm.deployment
 
 import grails.plugins.springsecurity.Secured
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class ModuleDeploymentTestStateController {
 
@@ -98,7 +99,7 @@ class ModuleDeploymentTestStateController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), name])}"
                 redirect(action: "list")
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
                 redirect(action: "show", id: params.id)
             }

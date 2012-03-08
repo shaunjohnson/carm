@@ -1,6 +1,7 @@
 package carm.application
 
 import carm.exceptions.DomainInUseException
+import org.springframework.dao.DataIntegrityViolationException
 
 class ApplicationController {
 
@@ -124,7 +125,7 @@ class ApplicationController {
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
                 redirect(controller: "project", action: "show", id: projectId)
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
