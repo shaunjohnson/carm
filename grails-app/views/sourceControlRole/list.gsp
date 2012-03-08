@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <div class="expander">
-                                ${fieldValue(bean: sourceControlRoleInstance, field: "description")}
+                                <carm:plainText value="${sourceControlRoleInstance.description}"/>
                             </div>
                         </td>
                     </tr>

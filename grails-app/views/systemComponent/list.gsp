@@ -36,7 +36,7 @@
                     </td>
                     <td>
                         <div class="expander">
-                            ${fieldValue(bean: systemComponentInstance, field: "description")}
+                            <carm:plainText value="${systemComponentInstance.description}"/>
                         </div>
                     </td>
                     <td>

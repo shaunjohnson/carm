@@ -47,7 +47,7 @@
                         </td>
                         <td>
                             <div class="expander">
-                                ${fieldValue(bean: projectCategoryInstance, field: "description")}
+                                <carm:plainText value="${projectCategoryInstance.description}"/>
                             </div>
                         </td>
                     </tr>
