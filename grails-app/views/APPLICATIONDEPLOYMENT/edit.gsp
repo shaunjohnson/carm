@@ -5,6 +5,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
 </head>
 
 <body>
@@ -35,8 +36,13 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        <g:select name="applicationRelease.id" from="${ApplicationRelease.list()}" optionKey="id"
-                                  value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
+                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                            ${message(code: 'pageHeader.applicationRelease.label', args: [
+                                    applicationDeploymentInstance?.applicationRelease?.application?.name,
+                                    applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
+                        </g:link>
+                        <g:hiddenField name="applicationRelease.id"
+                                       value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -54,19 +60,6 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="deploymentInstructions">
-                            <g:message code="applicationDeployment.deploymentInstructions.label"
-                                       default="Deployment Instructions"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'errors')}">
-                        <g:textField name="deploymentInstructions"
-                                     value="${applicationDeploymentInstance?.deploymentInstructions}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
                         <carm:label for="requestedDeploymentDate">
                             <g:message code="applicationDeployment.requestedDeploymentDate.label"
                                        default="Requested Deployment Date"/>
@@ -80,16 +73,17 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="completedDeploymentDate">
-                            <g:message code="applicationDeployment.completedDeploymentDate.label"
-                                       default="Completed Deployment Date"/>
+                        <carm:label for="deploymentInstructions">
+                            <g:message code="applicationDeployment.deploymentInstructions.label"
+                                       default="Deployment Instructions"/>
                         </carm:label>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'completedDeploymentDate', 'errors')}">
-                        <g:datePicker name="completedDeploymentDate" precision="day"
-                                      value="${applicationDeploymentInstance?.completedDeploymentDate}"
-                                      default="none" noSelection="['': '']"/>
+                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'errors')}">
+                        <richui:richTextEditor name="deploymentInstructions"
+                                               value="${applicationDeploymentInstance?.deploymentInstructions}"
+                                               height="${grailsApplication.config.ui.richTextEditor.height}"
+                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
                     </td>
                 </tr>
                 </tbody>

@@ -34,8 +34,11 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        ${applicationDeploymentInstance?.applicationRelease?.application?.encodeAsHTML()} :
-                        ${applicationDeploymentInstance?.applicationRelease?.releaseNumber?.encodeAsHTML()}
+                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                            ${message(code: 'pageHeader.applicationRelease.label', args: [
+                                    applicationDeploymentInstance?.applicationRelease?.application?.name,
+                                    applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
+                        </g:link>
                         <g:hiddenField name="applicationRelease.id"
                                        value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
                     </td>
