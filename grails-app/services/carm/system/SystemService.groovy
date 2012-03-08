@@ -21,6 +21,11 @@ class SystemService {
         Application.findAllBySystem(system).size() > 0
     }
 
+    /**
+     * Returns a count of all System objects.
+     *
+     * @return Total number of System objects.
+     */
     int count() {
         System.count()
     }
@@ -39,6 +44,12 @@ class SystemService {
         return hasComponents && hasEnvironments
     }
 
+    /**
+     * Creates and saves a new System instance.
+     *
+     * @param params System properties
+     * @return newly created System object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     System create(Map params) {
@@ -54,26 +65,49 @@ class SystemService {
         system
     }
 
+    /**
+     * Deletes the provided System object.
+     *
+     * @param system System object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(System system) {
         system.delete()
     }
 
+    /**
+     * Gets the System object with the provided ID.
+     *
+     * @param id ID of System object
+     * @return Matching System object
+     */
     System get(long id) {
-        System.get id
+        System.get(id)
     }
 
+    /**
+     * Gets a list of all System objects.
+     *
+     * @param params Query parameters
+     * @return List of System objects
+     */
     List<System> list(Map params) {
-        System.list params
+        System.list(params)
     }
 
+    /**
+     * Moves the SystemEnvironment at the specific index for the provided System down in the list, if possible.
+     *
+     * @param system System to edit
+     * @param index Index of SystemEnvironment to move down
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void moveEnvironmentDown(System system, int index) {
         def environments = system.environments
 
-        if (index != null && (index + 1) < environments.size()) {
+        if ((index + 1) < environments.size()) {
             def environment = environments[index]
             environments.remove(index)
             environments.add(index + 1, environment)
@@ -81,12 +115,18 @@ class SystemService {
         }
     }
 
+    /**
+     * Moves the SystemEnvironment at the specified index for the provided System up in the list, if possible.
+     *
+     * @param system System to edit
+     * @param index Index of SystemEnvironment to move up
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void moveEnvironmentUp(System system, int index) {
         def environments = system.environments
 
-        if (index != null && index > 0) {
+        if (index > 0) {
             def environment = environments[index]
             environments.remove(index)
             environments.add(index - 1, environment)
@@ -94,6 +134,12 @@ class SystemService {
         }
     }
 
+    /**
+     * Updates the provided System object with the new properties.
+     *
+     * @param system System to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(System system, Map params) {

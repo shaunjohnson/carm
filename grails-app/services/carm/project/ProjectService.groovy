@@ -14,10 +14,21 @@ class ProjectService {
     def applicationReleaseService
     def carmSecurityService
 
+    /**
+     * Returns a count of all Project objects.
+     *
+     * @return Total number of Project objects.
+     */
     int count() {
         Project.count()
     }
 
+    /**
+     * Creates and saves a new Project instance.
+     *
+     * @param params Project properties
+     * @return newly created Project object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     Project create(Map params) {
@@ -43,6 +54,11 @@ class ProjectService {
         project
     }
 
+    /**
+     * Deletes the provided Project object.
+     *
+     * @param project Project object to delete
+     */
     @Transactional
     @PreAuthorize("hasPermission(#project, delete) or hasPermission(#project, admin)")
     void delete(Project project) {
@@ -51,14 +67,32 @@ class ProjectService {
         carmSecurityService.deleteAllPermissions(project)
     }
 
+    /**
+     * Gets the Project object with the provided ID.
+     *
+     * @param id ID of Project object
+     * @return Matching Project object
+     */
     Project get(long id) {
-        Project.get id
+        Project.get(id)
     }
 
+    /**
+     * Gets a list of all Project objects.
+     *
+     * @param params Query parameters
+     * @return List of Project objects
+     */
     List<Project> list(Map params) {
-        Project.list params
+        Project.list(params)
     }
 
+    /**
+     * Updates the provided Project object with the new properties.
+     *
+     * @param project Project to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasPermission(#project, write) or hasPermission(#project, admin)")
     void update(Project project, Map params) {
@@ -96,11 +130,24 @@ class ProjectService {
         pendingTasks.sort { it.dateCreated }
     }
 
+
+    /**
+     * Gets a list of all Project objects where the current user is a project owner.
+     *
+     * @param params Query parameters
+     * @return List of matching Project objects
+     */
     @PostFilter("hasPermission(filterObject, admin)")
     List<Project> getAllProjectsWhereOwner(Map params) {
         Project.list params
     }
 
+    /**
+     * Finds all pending deployments and releases for all applications in the provided projects.
+     *
+     * @param projects List of projects used for querying
+     * @return List of ApplicationDeployment and ApplicationRelease objects
+     */
     List findAllPendingTasks(List<Project> projects) {
         def pendingTasks = []
 
@@ -112,6 +159,11 @@ class ProjectService {
         pendingTasks.sort { it.dateCreated }
     }
 
+    /**
+     * Finds all pending deployments and releases for all projects.
+     *
+     * @return List of ApplicationDeployment and ApplicationRelease objects
+     */
     List findAllPendingTasks() {
         def pendingTasks = []
 

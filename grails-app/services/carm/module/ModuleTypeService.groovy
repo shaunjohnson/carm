@@ -19,10 +19,21 @@ class ModuleTypeService {
         Module.findAllByType(type).size() > 0
     }
 
+    /**
+     * Returns a count of all ModuleType objects.
+     *
+     * @return Total number of ModuleType objects.
+     */
     int count() {
         ModuleType.count()
     }
 
+    /**
+     * Creates and saves a new ModuleType instance.
+     *
+     * @param params ModuleType properties
+     * @return newly created Module object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ModuleType create(Map params) {
@@ -38,20 +49,43 @@ class ModuleTypeService {
         moduleType
     }
 
+    /**
+     * Deletes the provided ModuleType object.
+     *
+     * @param moduleType ModuleType object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ModuleType moduleType) {
         moduleType.delete()
     }
 
+    /**
+     * Gets the ModuleType object with the provided ID.
+     *
+     * @param id ID of ModuleType object
+     * @return Matching ModuleType object
+     */
     ModuleType get(long id) {
-        ModuleType.get id
+        ModuleType.get(id)
     }
 
+    /**
+     * Gets a list of all ModuleType objects.
+     *
+     * @param params Query parameters
+     * @return List of ModuleType objects
+     */
     List<ModuleType> list(Map params) {
-        ModuleType.list params
+        ModuleType.list(params)
     }
 
+    /**
+     * Updates the provided ModuleType object with the new properties.
+     *
+     * @param moduleType ModuleType to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(ModuleType moduleType, Map params) {

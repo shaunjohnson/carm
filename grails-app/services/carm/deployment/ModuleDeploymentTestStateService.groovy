@@ -19,10 +19,21 @@ class ModuleDeploymentTestStateService {
         ModuleDeployment.findAllByTestState(testState).size() > 0
     }
 
+    /**
+     * Returns a count of all ModuleDeploymentTestState objects.
+     *
+     * @return Total number of ModuleDeploymentTestState objects.
+     */
     int count() {
         ModuleDeploymentTestState.count()
     }
 
+    /**
+     * Creates and saves a new ModuleDeploymentTestState instance.
+     *
+     * @param params ModuleDeploymentTestState properties
+     * @return newly created Module object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ModuleDeploymentTestState create(Map params) {
@@ -38,20 +49,43 @@ class ModuleDeploymentTestStateService {
         moduleDeploymentTestState
     }
 
+    /**
+     * Deletes the provided ModuleDeploymentTestState object.
+     *
+     * @param moduleDeploymentTestState ModuleDeploymentTestState object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ModuleDeploymentTestState moduleDeploymentTestState) {
         moduleDeploymentTestState.delete()
     }
 
+    /**
+     * Gets the ModuleDeploymentTestState object with the provided ID.
+     *
+     * @param id ID of ModuleDeploymentTestState object
+     * @return Matching ModuleDeploymentTestState object
+     */
     ModuleDeploymentTestState get(long id) {
-        ModuleDeploymentTestState.get id
+        ModuleDeploymentTestState.get(id)
     }
 
+    /**
+     * Gets a list of all ModuleDeploymentTestState objects.
+     *
+     * @param params Query parameters
+     * @return List of ModuleDeploymentTestState objects
+     */
     List<ModuleDeploymentTestState> list(Map params) {
-        ModuleDeploymentTestState.list params
+        ModuleDeploymentTestState.list(params)
     }
 
+    /**
+     * Updates the provided ModuleDeploymentTestState object with the new properties.
+     *
+     * @param moduleDeploymentTestState ModuleDeploymentTestState to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(ModuleDeploymentTestState moduleDeploymentTestState, Map params) {

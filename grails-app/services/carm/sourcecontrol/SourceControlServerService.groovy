@@ -24,10 +24,21 @@ class SourceControlServerService {
         applicationCount > 0
     }
 
+    /**
+     * Returns a count of all SourceControlServer objects.
+     *
+     * @return Total number of SourceControlServer objects.
+     */
     int count() {
         SourceControlServer.count()
     }
 
+    /**
+     * Creates and saves a new SourceControlServer instance.
+     *
+     * @param params SourceControlServer properties
+     * @return newly created SourceControlServer object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     SourceControlServer create(Map params) {
@@ -43,20 +54,43 @@ class SourceControlServerService {
         sourceControlServer
     }
 
+    /**
+     * Deletes the provided SourceControlServer object.
+     *
+     * @param sourceControlServer SourceControlServer object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlServer sourceControlServer) {
         sourceControlServer.delete()
     }
 
+    /**
+     * Gets the SourceControlServer object with the provided ID.
+     *
+     * @param id ID of SourceControlServer object
+     * @return Matching SourceControlServer object
+     */
     SourceControlServer get(long id) {
-        SourceControlServer.get id
+        SourceControlServer.get(id)
     }
 
+    /**
+     * Gets a list of all SourceControlServer objects.
+     *
+     * @param params Query parameters
+     * @return List of SourceControlServer objects
+     */
     List<SourceControlServer> list(Map params) {
-        SourceControlServer.list params
+        SourceControlServer.list(params)
     }
 
+    /**
+     * Updates the provided SourceControlServer object with the new properties.
+     *
+     * @param sourceControlServer SourceControlServer to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(SourceControlServer sourceControlServer, Map params) {

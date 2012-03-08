@@ -37,10 +37,22 @@ class ApplicationService {
         return systemService.canBeDeployedTo(application?.system)
     }
 
+    /**
+     * Returns a count of all Application objects.
+     *
+     * @return Total number of Application objects.
+     */
     int count() {
         Application.count()
     }
 
+    /**
+     * Creates and saves a new Application instance.
+     *
+     * @param project Parent project used for security
+     * @param params Application properties
+     * @return newly created Module object
+     */
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     Application create(Project project, Map params) {
@@ -56,20 +68,45 @@ class ApplicationService {
         application
     }
 
+    /**
+     * Deletes the provided Application object.
+     *
+     * @param project Parent project used for security
+     * @param application Application object to delete
+     */
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void delete(Project project, Application application) {
         application.delete()
     }
 
+    /**
+     * Gets the Application object with the provided ID.
+     *
+     * @param id ID of Application object
+     * @return Matching Application object
+     */
     Application get(long id) {
-        Application.get id
+        Application.get(id)
     }
 
+    /**
+     * Gets a list of all Application objects.
+     *
+     * @param params Query parameters
+     * @return List of Application objects
+     */
     List<Application> list(Map params) {
-        Application.list params
+        Application.list(params)
     }
 
+    /**
+     * Updates the provided Application object with the new properties.
+     *
+     * @param project Parent project used for security
+     * @param application Application to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void update(Project project, Application application, Map params) {
@@ -82,9 +119,14 @@ class ApplicationService {
         log.debug "$prefix leaving"
     }
 
+    /**
+     * Finds all Application objects, grouped by ApplicationType using the provided System.
+     *
+     * @param system System used for querying
+     * @return Map with key of ApplicationType and value of List of Application objects
+     */
     SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(System system) {
-        def criteria = Application.createCriteria()
-        def applications = criteria.list {
+        def applications = Application.createCriteria().list {
             eq('system', system)
             and {
                 order('type', 'asc')
@@ -106,9 +148,14 @@ class ApplicationService {
         return applicationsGrouped
     }
 
+    /**
+     * Finds all Application Objects, grouped by Application type using the provided Project.
+     *
+     * @param project Project used for querying
+     * @return Map with key of ApplicationType and value of List of Application objects
+     */
     SortedMap<ApplicationType, List<Application>> findAllByProjectGroupedByType(Project project) {
-        def criteria = Application.createCriteria()
-        def applications = criteria.list {
+        def applications = Application.createCriteria().list {
             eq('project', project)
             and {
                 order('type', 'asc')

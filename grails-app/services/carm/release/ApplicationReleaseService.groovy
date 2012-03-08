@@ -63,10 +63,22 @@ class ApplicationReleaseService {
         ApplicationReleaseState.submittableStates.contains(applicationRelease?.releaseState)
     }
 
+    /**
+     * Returns a count of all ApplicationRelease objects.
+     *
+     * @return Total number of ApplicationRelease objects.
+     */
     int count() {
         ApplicationRelease.count()
     }
 
+    /**
+     * Adds new ApplicationReleaseHistory record for the provided ApplicationRelease.
+     *
+     * @param applicationRelease ApplicationRelease to associate with the history record
+     * @param summary Summary text
+     * @param comments Comments text
+     */
     private void addToHistories(ApplicationRelease applicationRelease, String summary, String comments) {
         applicationRelease.addToHistories(new ApplicationReleaseHistory(
                 summary: summary,
@@ -146,6 +158,12 @@ class ApplicationReleaseService {
         return releases?.size() ? releases.get(0) : null
     }
 
+    /**
+     * Creates and saves a new ApplicationRelease instance.
+     *
+     * @param params ApplicationRelease properties
+     * @return newly created ApplicationRelease object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ApplicationRelease create(Map params) {
@@ -176,23 +194,44 @@ class ApplicationReleaseService {
         applicationRelease
     }
 
+    /**
+     * Deletes the provided ApplicationRelease object.
+     *
+     * @param applicationRelease ApplicationRelease object to delete
+     */
     @Transactional
-    // @PreAuthorize("hasPermission(#applicationRelease, delete) or hasPermission(#applicationRelease, admin)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ApplicationRelease applicationRelease) {
         applicationRelease.delete()
     }
 
+    /**
+     * Gets the ApplicationRelease object with the provided ID.
+     *
+     * @param id ID of ApplicationRelease object
+     * @return Matching ApplicationRelease object
+     */
     ApplicationRelease get(long id) {
-        ApplicationRelease.get id
+        ApplicationRelease.get(id)
     }
 
+    /**
+     * Gets a list of all ApplicationRelease objects.
+     *
+     * @param params Query parameters
+     * @return List of ApplicationRelease objects
+     */
     List<ApplicationRelease> list(Map params) {
-        ApplicationRelease.list params
+        ApplicationRelease.list(params)
     }
 
+    /**
+     * Updates the provided ApplicationRelease object with the new properties.
+     *
+     * @param applicationRelease ApplicationRelease to update
+     * @param params New property values
+     */
     @Transactional
-    // @PreAuthorize("hasPermission(#applicationRelease, write) or hasPermission(#applicationRelease, admin)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(ApplicationRelease applicationRelease, Map params) {
         def prefix = "update() :"
@@ -259,6 +298,12 @@ class ApplicationReleaseService {
         }
     }
 
+    /**
+     * Changes and saves the provided ApplicationRelease to be in submitted state and set the dateSubmitted and
+     * submittedBy fields.
+     *
+     * @param applicationRelease ApplicationRelease to submit
+     */
     def submit(ApplicationRelease applicationRelease) {
         applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
         applicationRelease.submittedBy = springSecurityService.currentUser

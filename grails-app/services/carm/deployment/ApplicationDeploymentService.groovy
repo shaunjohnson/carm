@@ -52,6 +52,13 @@ class ApplicationDeploymentService {
         return nextEnvironment
     }
 
+    /**
+     * Finds the latest ApplicationDeployment of the provided Application to the provided SystemEnvironment.
+     *
+     * @param application Application used for querying
+     * @param environment SystemEnvironment for querying
+     * @return Matching ApplicationDeployment object
+     */
     def findLatestDeployment(Application application, SystemEnvironment environment) {
         def results = ApplicationDeployment.createCriteria().list {
             createAlias("applicationRelease", "applicationRelease")
@@ -64,6 +71,12 @@ class ApplicationDeploymentService {
         return results.size() ? results[0] : null
     }
 
+    /**
+     * Finds latest completed ApplicationDeployment objects for the provided System.
+     *
+     * @param system System used for querying
+     * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
+     */
     def findAllLatestCompletedDeploymentsBySystem(System system) {
         def results = [:]
 
@@ -102,6 +115,12 @@ class ApplicationDeploymentService {
         return results
     }
 
+    /**
+     * Finds latest completed ApplicationDeployment objects for the provided SystemEnvironment.
+     *
+     * @param systemEnvironment SystemEnvironment used for querying
+     * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
+     */
     def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
         def results = [:]
 

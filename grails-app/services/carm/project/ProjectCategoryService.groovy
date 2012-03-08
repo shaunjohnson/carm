@@ -18,10 +18,21 @@ class ProjectCategoryService {
         Project.findAllByCategory(category).size() > 0
     }
 
+    /**
+     * Returns a count of all ProjectCategory objects.
+     *
+     * @return Total number of ProjectCategory objects.
+     */
     int count() {
         ProjectCategory.count()
     }
 
+    /**
+     * Creates and saves a new ProjectCategory instance.
+     *
+     * @param params ProjectCategory properties
+     * @return newly created ProjectCategory object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ProjectCategory create(Map params) {
@@ -37,20 +48,43 @@ class ProjectCategoryService {
         projectCategory
     }
 
+    /**
+     * Deletes the provided ProjectCategory object.
+     *
+     * @param projectCategory ProjectCategory object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ProjectCategory projectCategory) {
         projectCategory.delete()
     }
 
+    /**
+     * Gets the ProjectCategory object with the provided ID.
+     *
+     * @param id ID of ProjectCategory object
+     * @return Matching ProjectCategory object
+     */
     ProjectCategory get(long id) {
-        ProjectCategory.get id
+        ProjectCategory.get(id)
     }
 
+    /**
+     * Gets a list of all ProjectCategory objects.
+     *
+     * @param params Query parameters
+     * @return List of ProjectCategory objects
+     */
     List<ProjectCategory> list(Map params) {
-        ProjectCategory.list params
+        ProjectCategory.list(params)
     }
 
+    /**
+     * Updates the provided ProjectCategory object with the new properties.
+     *
+     * @param projectCategory ProjectCategory to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(ProjectCategory projectCategory, Map params) {

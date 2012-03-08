@@ -20,10 +20,21 @@ class SourceControlRepositoryService {
         Application.findAllBySourceControlRepository(repository).size() > 0
     }
 
+    /**
+     * Returns a count of all SourceControlRepository objects.
+     *
+     * @return Total number of SourceControlRepository objects.
+     */
     int count() {
         SourceControlRepository.count()
     }
 
+    /**
+     * Creates and saves a new SourceControlRepository instance.
+     *
+     * @param params SourceControlRepository properties
+     * @return newly created SourceControlRepository object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     SourceControlRepository create(Map params) {
@@ -39,20 +50,43 @@ class SourceControlRepositoryService {
         sourceControlRepository
     }
 
+    /**
+     * Deletes the provided SourceControlRepository object.
+     *
+     * @param sourceControlRepository SourceControlRepository object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlRepository sourceControlRepository) {
         sourceControlRepository.delete()
     }
 
+    /**
+     * Gets the SourceControlRepository object with the provided ID.
+     *
+     * @param id ID of SourceControlRepository object
+     * @return Matching SourceControlRepository object
+     */
     SourceControlRepository get(long id) {
-        SourceControlRepository.get id
+        SourceControlRepository.get(id)
     }
 
+    /**
+     * Gets a list of all SourceControlRepository objects.
+     *
+     * @param params Query parameters
+     * @return List of SourceControlRepository objects
+     */
     List<SourceControlRepository> list(Map params) {
-        SourceControlRepository.list params
+        SourceControlRepository.list(params)
     }
 
+    /**
+     * Updates the provided SourceControlRepository object with the new properties.
+     *
+     * @param sourceControlRepository SourceControlRepository to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(SourceControlRepository sourceControlRepository, Map params) {

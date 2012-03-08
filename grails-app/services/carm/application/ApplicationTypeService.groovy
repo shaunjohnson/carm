@@ -19,10 +19,21 @@ class ApplicationTypeService {
         Application.findAllByType(type).size() > 0
     }
 
+    /**
+     * Returns a count of all ApplicationType objects.
+     *
+     * @return Total number of ApplicationType objects.
+     */
     int count() {
         ApplicationType.count()
     }
 
+    /**
+     * Creates and saves a new ApplicationType instance.
+     *
+     * @param params ApplicationType properties
+     * @return newly created Module object
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ApplicationType create(Map params) {
@@ -38,20 +49,43 @@ class ApplicationTypeService {
         applicationType
     }
 
+    /**
+     * Deletes the provided ApplicationType object.
+     *
+     * @param applicationType ApplicationType object to delete
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ApplicationType applicationType) {
         applicationType.delete()
     }
 
+    /**
+     * Gets the ApplicationType object with the provided ID.
+     *
+     * @param id ID of ApplicationType object
+     * @return Matching ApplicationType object
+     */
     ApplicationType get(long id) {
-        ApplicationType.get id
+        ApplicationType.get(id)
     }
 
+    /**
+     * Gets a list of all ApplicationType objects.
+     *
+     * @param params Query parameters
+     * @return List of ApplicationType objects
+     */
     List<ApplicationType> list(Map params) {
-        ApplicationType.list params
+        ApplicationType.list(params)
     }
 
+    /**
+     * Updates the provided ApplicationType object with the new properties.
+     *
+     * @param applicationType ApplicationType to update
+     * @param params New property values
+     */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void update(ApplicationType applicationType, Map params) {
