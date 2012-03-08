@@ -14,23 +14,23 @@ class ProjectController {
     def projectService
     def springSecurityService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [projectInstanceList: projectService.list(params), projectInstanceTotal: projectService.count()]
     }
 
-    def create = {
+    def create() {
         def projectInstance = new Project()
         projectInstance.properties = params
         def projectOwners = [springSecurityService.authentication.name]
         return [projectInstance: projectInstance, projectOwners: projectOwners, projectOwnerList: User.listOrderByUsername()]
     }
 
-    def save = {
+    def save() {
         def projectInstance = projectService.create(params)
         if (!projectInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
@@ -41,7 +41,7 @@ class ProjectController {
         }
     }
 
-    def show = {
+    def show() {
         def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
@@ -57,7 +57,7 @@ class ProjectController {
         }
     }
 
-    def edit = {
+    def edit() {
         def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
@@ -69,7 +69,7 @@ class ProjectController {
         }
     }
 
-    def update = {
+    def update() {
         def projectInstance = projectService.get(params.id?.toLong())
         if (projectInstance) {
             if (params.version) {
@@ -95,7 +95,7 @@ class ProjectController {
         }
     }
 
-    def delete = {
+    def delete() {
         def projectInstance = projectService.get(params.id?.toLong())
         if (projectInstance) {
             try {
@@ -115,7 +115,7 @@ class ProjectController {
         }
     }
 
-    def listActivity = {
+    def listActivity() {
         def projectInstance = projectService.get(params.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"

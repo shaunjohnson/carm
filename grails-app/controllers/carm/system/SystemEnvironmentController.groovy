@@ -11,17 +11,17 @@ class SystemEnvironmentController {
     def systemService
     def systemEnvironmentService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [systemEnvironmentInstanceList: systemEnvironmentService.list(params), systemEnvironmentInstanceTotal: systemEnvironmentService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def systemInstance = systemService.get(params.system.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
@@ -35,7 +35,7 @@ class SystemEnvironmentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def systemEnvironmentInstance = systemEnvironmentService.create(params)
         if (systemEnvironmentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
@@ -46,7 +46,7 @@ class SystemEnvironmentController {
         }
     }
 
-    def show = {
+    def show() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
@@ -62,7 +62,7 @@ class SystemEnvironmentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
@@ -74,7 +74,7 @@ class SystemEnvironmentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
         if (systemEnvironmentInstance) {
             if (params.version) {
@@ -101,7 +101,7 @@ class SystemEnvironmentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
         if (systemEnvironmentInstance) {
             def systemId = systemEnvironmentInstance.system.id

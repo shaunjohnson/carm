@@ -9,17 +9,17 @@ class SystemComponentController {
     def systemComponentService
     def systemService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [systemComponentInstanceList: systemComponentService.list(params), systemComponentInstanceTotal: systemComponentService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def systemInstance = systemService.get(params.system.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
@@ -33,7 +33,7 @@ class SystemComponentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def systemComponentInstance = systemComponentService.create(params)
         if (!systemComponentInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), systemComponentInstance.name])}"
@@ -44,7 +44,7 @@ class SystemComponentController {
         }
     }
 
-    def show = {
+    def show() {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
@@ -56,7 +56,7 @@ class SystemComponentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
@@ -68,7 +68,7 @@ class SystemComponentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {
             if (params.version) {
@@ -95,7 +95,7 @@ class SystemComponentController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def systemComponentInstance = systemComponentService.get(params.id?.toLong())
         if (systemComponentInstance) {
             def systemId = systemComponentInstance.system.id

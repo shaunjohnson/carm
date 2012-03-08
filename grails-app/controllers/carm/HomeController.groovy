@@ -11,7 +11,7 @@ class HomeController {
     def projectService
     def systemService
 
-    def index = {
+    def index() {
         List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
 
         def projectCategoryList = [:]
@@ -33,7 +33,7 @@ class HomeController {
         ]
     }
 
-    def listActivity = {
+    def listActivity() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 activityList: activityTraceService.listActivityByRoot(params),

@@ -8,24 +8,24 @@ class ProjectCategoryController {
 
     def projectCategoryService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [projectCategoryInstanceList: projectCategoryService.list(params), projectCategoryInstanceTotal: projectCategoryService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def projectCategoryInstance = new ProjectCategory()
         projectCategoryInstance.properties = params
         return [projectCategoryInstance: projectCategoryInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def projectCategoryInstance = projectCategoryService.create(params)
         if (!projectCategoryInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), projectCategoryInstance.name])}"
@@ -36,7 +36,7 @@ class ProjectCategoryController {
         }
     }
 
-    def show = {
+    def show() {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
@@ -48,7 +48,7 @@ class ProjectCategoryController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
@@ -60,7 +60,7 @@ class ProjectCategoryController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class ProjectCategoryController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
         if (projectCategoryInstance) {
             try {

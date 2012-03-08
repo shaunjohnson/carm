@@ -8,16 +8,16 @@ class ApplicationDeploymentController {
 
     def applicationDeploymentService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [applicationDeploymentInstanceList: ApplicationDeployment.list(params), applicationDeploymentInstanceTotal: ApplicationDeployment.count()]
     }
 
-    def create = {
+    def create() {
         def applicationReleaseInstance = ApplicationRelease.get(params.applicationRelease.id)
         if (!applicationReleaseInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease.id])}"
@@ -35,7 +35,7 @@ class ApplicationDeploymentController {
         }
     }
 
-    def save = {
+    def save() {
         def applicationDeploymentInstance = new ApplicationDeployment(params)
 
         // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
@@ -51,7 +51,7 @@ class ApplicationDeploymentController {
         }
     }
 
-    def show = {
+    def show() {
         def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
         if (!applicationDeploymentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
@@ -62,7 +62,7 @@ class ApplicationDeploymentController {
         }
     }
 
-    def edit = {
+    def edit() {
         def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
         if (!applicationDeploymentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
@@ -73,7 +73,7 @@ class ApplicationDeploymentController {
         }
     }
 
-    def update = {
+    def update() {
         def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
         if (applicationDeploymentInstance) {
             if (params.version) {
@@ -100,7 +100,7 @@ class ApplicationDeploymentController {
         }
     }
 
-    def delete = {
+    def delete() {
         def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
         if (applicationDeploymentInstance) {
             try {

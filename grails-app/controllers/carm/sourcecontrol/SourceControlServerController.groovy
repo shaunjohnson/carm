@@ -8,24 +8,24 @@ class SourceControlServerController {
 
     def sourceControlServerService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [sourceControlServerInstanceList: sourceControlServerService.list(params), sourceControlServerInstanceTotal: sourceControlServerService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def sourceControlServerInstance = new SourceControlServer()
         sourceControlServerInstance.properties = params
         return [sourceControlServerInstance: sourceControlServerInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def sourceControlServerInstance = sourceControlServerService.create(params)
         if (!sourceControlServerInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), sourceControlServerInstance.name])}"
@@ -36,7 +36,7 @@ class SourceControlServerController {
         }
     }
 
-    def show = {
+    def show() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
         if (!sourceControlServerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
@@ -48,7 +48,7 @@ class SourceControlServerController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
         if (!sourceControlServerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
@@ -60,7 +60,7 @@ class SourceControlServerController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
         if (sourceControlServerInstance) {
             if (params.version) {
@@ -87,7 +87,7 @@ class SourceControlServerController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
         if (sourceControlServerInstance) {
             try {

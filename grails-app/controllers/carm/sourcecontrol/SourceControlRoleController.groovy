@@ -8,24 +8,24 @@ class SourceControlRoleController {
 
     def sourceControlRoleService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [sourceControlRoleInstanceList: sourceControlRoleService.list(params), sourceControlRoleInstanceTotal: sourceControlRoleService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def sourceControlRoleInstance = new SourceControlRole()
         sourceControlRoleInstance.properties = params
         return [sourceControlRoleInstance: sourceControlRoleInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def sourceControlRoleInstance = sourceControlRoleService.create(params)
         if (!sourceControlRoleInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), sourceControlRoleInstance.name])}"
@@ -36,7 +36,7 @@ class SourceControlRoleController {
         }
     }
 
-    def show = {
+    def show() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (!sourceControlRoleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
@@ -48,7 +48,7 @@ class SourceControlRoleController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (!sourceControlRoleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
@@ -60,7 +60,7 @@ class SourceControlRoleController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class SourceControlRoleController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id?.toLong())
         if (sourceControlRoleInstance) {
             try {

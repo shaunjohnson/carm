@@ -8,24 +8,24 @@ class ApplicationTypeController {
 
     def applicationTypeService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [applicationTypeInstanceList: applicationTypeService.list(params), applicationTypeInstanceTotal: applicationTypeService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def applicationTypeInstance = new ApplicationType()
         applicationTypeInstance.properties = params
         return [applicationTypeInstance: applicationTypeInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def applicationTypeInstance = applicationTypeService.create(params)
         if (!applicationTypeInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), applicationTypeInstance.name])}"
@@ -36,7 +36,7 @@ class ApplicationTypeController {
         }
     }
 
-    def show = {
+    def show() {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
@@ -48,7 +48,7 @@ class ApplicationTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
@@ -60,7 +60,7 @@ class ApplicationTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class ApplicationTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
         if (applicationTypeInstance) {
             try {

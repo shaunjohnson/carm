@@ -8,24 +8,24 @@ class ModuleDeploymentTestStateController {
 
     def moduleDeploymentTestStateService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [moduleDeploymentTestStateInstanceList: moduleDeploymentTestStateService.list(params), moduleDeploymentTestStateInstanceTotal: moduleDeploymentTestStateService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def moduleDeploymentTestStateInstance = new ModuleDeploymentTestState()
         moduleDeploymentTestStateInstance.properties = params
         return [moduleDeploymentTestStateInstance: moduleDeploymentTestStateInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.create(params)
         if (!moduleDeploymentTestStateInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), moduleDeploymentTestStateInstance.name])}"
@@ -36,7 +36,7 @@ class ModuleDeploymentTestStateController {
         }
     }
 
-    def show = {
+    def show() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
         if (!moduleDeploymentTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
@@ -48,7 +48,7 @@ class ModuleDeploymentTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
         if (!moduleDeploymentTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
@@ -60,7 +60,7 @@ class ModuleDeploymentTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
         if (moduleDeploymentTestStateInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class ModuleDeploymentTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
         if (moduleDeploymentTestStateInstance) {
             try {

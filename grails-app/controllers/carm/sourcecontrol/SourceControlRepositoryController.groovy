@@ -7,16 +7,16 @@ class SourceControlRepositoryController {
     def sourceControlRepositoryService
     def sourceControlServerService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [sourceControlRepositoryInstanceList: sourceControlRepositoryService.list(params), sourceControlRepositoryInstanceTotal: sourceControlRepositoryService.count()]
     }
 
-    def create = {
+    def create() {
         def serverInstance = sourceControlServerService.get(params.server?.id?.toLong())
         if (!serverInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server.id])}"
@@ -29,7 +29,7 @@ class SourceControlRepositoryController {
         }
     }
 
-    def save = {
+    def save() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.create(params)
         if (!sourceControlRepositoryInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), sourceControlRepositoryInstance.name])}"
@@ -40,7 +40,7 @@ class SourceControlRepositoryController {
         }
     }
 
-    def show = {
+    def show() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id?.toLong())
         if (!sourceControlRepositoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
@@ -51,7 +51,7 @@ class SourceControlRepositoryController {
         }
     }
 
-    def edit = {
+    def edit() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id?.toLong())
         if (!sourceControlRepositoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
@@ -62,7 +62,7 @@ class SourceControlRepositoryController {
         }
     }
 
-    def update = {
+    def update() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id?.toLong())
         if (sourceControlRepositoryInstance) {
             if (params.version) {
@@ -89,7 +89,7 @@ class SourceControlRepositoryController {
         }
     }
 
-    def delete = {
+    def delete() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id?.toLong())
         if (sourceControlRepositoryInstance) {
             try {

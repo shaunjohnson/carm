@@ -10,16 +10,16 @@ class ApplicationController {
     def applicationService
     def projectService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [applicationInstanceList: applicationService.list(params), applicationInstanceTotal: applicationService.count()]
     }
 
-    def create = {
+    def create() {
         def projectInstance = projectService.get(params.project.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
@@ -32,7 +32,7 @@ class ApplicationController {
         }
     }
 
-    def save = {
+    def save() {
         def projectInstance = projectService.get(params.project.id?.toLong())
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
@@ -50,7 +50,7 @@ class ApplicationController {
         }
     }
 
-    def show = {
+    def show() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
@@ -74,7 +74,7 @@ class ApplicationController {
         }
     }
 
-    def edit = {
+    def edit() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
@@ -85,7 +85,7 @@ class ApplicationController {
         }
     }
 
-    def update = {
+    def update() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (applicationInstance) {
             if (params.version) {
@@ -112,7 +112,7 @@ class ApplicationController {
         }
     }
 
-    def delete = {
+    def delete() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (applicationInstance) {
             def projectId = applicationInstance.project.id
@@ -133,7 +133,7 @@ class ApplicationController {
         }
     }
 
-    def listReleases = {
+    def listReleases() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
@@ -150,7 +150,7 @@ class ApplicationController {
         }
     }
 
-    def listActivity = {
+    def listActivity() {
         def applicationInstance = applicationService.get(params.id?.toLong())
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"

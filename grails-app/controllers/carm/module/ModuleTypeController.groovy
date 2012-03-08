@@ -8,24 +8,24 @@ class ModuleTypeController {
     
     def moduleTypeService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [moduleTypeInstanceList: moduleTypeService.list(params), moduleTypeInstanceTotal: moduleTypeService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def moduleTypeInstance = new ModuleType()
         moduleTypeInstance.properties = params
         return [moduleTypeInstance: moduleTypeInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def moduleTypeInstance = moduleTypeService.create(params)
         if (!moduleTypeInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), moduleTypeInstance.name])}"
@@ -36,7 +36,7 @@ class ModuleTypeController {
         }
     }
 
-    def show = {
+    def show() {
         def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
@@ -48,7 +48,7 @@ class ModuleTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
@@ -60,7 +60,7 @@ class ModuleTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (moduleTypeInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class ModuleTypeController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
         if (moduleTypeInstance) {
             try {

@@ -10,24 +10,24 @@ class SystemController {
     def applicationService
     def systemService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [systemInstanceList: systemService.list(params), systemInstanceTotal: systemService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def systemInstance = new System()
         systemInstance.properties = params
         return [systemInstance: systemInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def systemInstance = systemService.create(params)
         if (!systemInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'system.label', default: 'System'), systemInstance.name])}"
@@ -38,7 +38,7 @@ class SystemController {
         }
     }
 
-    def show = {
+    def show() {
         def systemInstance = systemService.get(params.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
@@ -54,7 +54,7 @@ class SystemController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def moveEnvDown = {
+    def moveEnvDown() {
         def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
@@ -68,7 +68,7 @@ class SystemController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def moveEnvUp = {
+    def moveEnvUp() {
         def systemInstance = systemService.get(params.systemId?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
@@ -82,7 +82,7 @@ class SystemController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def systemInstance = systemService.get(params.id?.toLong())
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
@@ -94,7 +94,7 @@ class SystemController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             if (params.version) {
@@ -122,7 +122,7 @@ class SystemController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             try {
@@ -142,7 +142,7 @@ class SystemController {
         }
     }
 
-    def upcomingDeployments = {
+    def upcomingDeployments() {
         def systemInstance = systemService.get(params.id?.toLong())
         if (systemInstance) {
             def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystem(systemInstance)

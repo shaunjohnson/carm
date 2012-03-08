@@ -9,17 +9,17 @@ class SourceControlUserController {
     def sourceControlServerService
     def sourceControlUserService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [sourceControlUserInstanceList: sourceControlUserService.list(params), sourceControlUserInstanceTotal: sourceControlUserService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def serverInstance = sourceControlServerService.get(params.server?.id?.toLong())
         if (!serverInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server.id])}"
@@ -33,7 +33,7 @@ class SourceControlUserController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def sourceControlUserInstance = sourceControlUserService.create(params)
         if (!sourceControlUserInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.name])}"
@@ -44,7 +44,7 @@ class SourceControlUserController {
         }
     }
 
-    def show = {
+    def show() {
         def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (!sourceControlUserInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
@@ -56,7 +56,7 @@ class SourceControlUserController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (!sourceControlUserInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
@@ -68,7 +68,7 @@ class SourceControlUserController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (sourceControlUserInstance) {
             if (params.version) {
@@ -95,7 +95,7 @@ class SourceControlUserController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def sourceControlUserInstance = sourceControlUserService.get(params.id?.toLong())
         if (sourceControlUserInstance) {
             try {

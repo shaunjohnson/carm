@@ -8,24 +8,24 @@ class ApplicationReleaseTestStateController {
 
     def applicationReleaseTestStateService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [applicationReleaseTestStateInstanceList: applicationReleaseTestStateService.list(params), applicationReleaseTestStateInstanceTotal: applicationReleaseTestStateService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def create = {
+    def create() {
         def applicationReleaseTestStateInstance = new ApplicationReleaseTestState()
         applicationReleaseTestStateInstance.properties = params
         return [applicationReleaseTestStateInstance: applicationReleaseTestStateInstance]
     }
 
     @Secured(['ROLE_ADMIN'])
-    def save = {
+    def save() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.create(params)
         if (!applicationReleaseTestStateInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), applicationReleaseTestStateInstance.name])}"
@@ -36,7 +36,7 @@ class ApplicationReleaseTestStateController {
         }
     }
 
-    def show = {
+    def show() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
         if (!applicationReleaseTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
@@ -48,7 +48,7 @@ class ApplicationReleaseTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def edit = {
+    def edit() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
         if (!applicationReleaseTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
@@ -60,7 +60,7 @@ class ApplicationReleaseTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def update = {
+    def update() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
         if (applicationReleaseTestStateInstance) {
             if (params.version) {
@@ -88,7 +88,7 @@ class ApplicationReleaseTestStateController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def delete = {
+    def delete() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
         if (applicationReleaseTestStateInstance) {
             try {

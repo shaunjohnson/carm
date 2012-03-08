@@ -8,11 +8,11 @@ class ApplicationReleaseController {
 
     def applicationReleaseService
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 applicationReleaseInstanceList: applicationReleaseService.list(params),
@@ -20,7 +20,7 @@ class ApplicationReleaseController {
         ]
     }
 
-    def create = {
+    def create() {
         def applicationInstance = Application.get(params.application.id)
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
@@ -33,7 +33,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def save = {
+    def save() {
         def applicationReleaseInstance = applicationReleaseService.create(params)
 
         if (!applicationReleaseInstance.hasErrors()) {
@@ -45,7 +45,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def show = {
+    def show() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
         if (!applicationReleaseInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
@@ -56,7 +56,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def edit = {
+    def edit() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
         if (!applicationReleaseInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
@@ -67,7 +67,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def update = {
+    def update() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
         if (applicationReleaseInstance) {
             if (params.version) {
@@ -93,7 +93,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
         if (applicationReleaseInstance) {
             try {
@@ -114,7 +114,7 @@ class ApplicationReleaseController {
         }
     }
 
-    def submit = {
+    def submit() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
         if (applicationReleaseInstance) {
             applicationReleaseService.submit(applicationReleaseInstance)
