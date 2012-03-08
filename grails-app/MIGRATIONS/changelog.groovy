@@ -184,11 +184,19 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
+            column(name: "assigned_to_id", type: "bigint")
+
 			column(name: "completed_deployment_date", type: "datetime")
+
+            column(name: "date_assigned", type: "datetime")
 
 			column(name: "date_created", type: "datetime") {
 				constraints(nullable: "false")
 			}
+
+            column(name: "date_submitted", type: "datetime")
+
+            column(name: "date_tested", type: "datetime")
 
 			column(name: "deployment_instructions", type: "longtext")
 
@@ -207,6 +215,12 @@ databaseChangeLog = {
 			column(name: "sys_environment_id", type: "bigint") {
 				constraints(nullable: "false")
 			}
+
+            column(name: "submitted_by_id", type: "bigint")
+
+            column(name: "test_state_id", type: "bigint")
+
+            column(name: "tested_by_id", type: "bigint")
 		}
 	}
 

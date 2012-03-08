@@ -11,10 +11,16 @@ class ApplicationRelease {
     String buildPath
     ApplicationReleaseState releaseState
     ApplicationReleaseTestState testState
+
+    // Submitted
     Date dateSubmitted
     User submittedBy
+
+    // Assigned
     Date dateAssigned
     User assignedTo
+
+    // Tested
     Date dateTested
     User testedBy
 
