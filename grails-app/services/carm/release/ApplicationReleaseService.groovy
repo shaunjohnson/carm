@@ -154,7 +154,10 @@ class ApplicationReleaseService {
         log.debug "$prefix entered"
 
         ApplicationRelease applicationRelease = new ApplicationRelease(params)
-        applicationRelease.releaseState = ApplicationReleaseState.DRAFT
+
+        // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
+        //applicationRelease.releaseState = ApplicationReleaseState.DRAFT
+        applicationRelease.releaseState = ApplicationReleaseState.COMPLETED
 
         applicationRelease.application.modules.each { module ->
             applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))

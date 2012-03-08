@@ -38,7 +38,9 @@ class ApplicationDeploymentController {
     def save = {
         def applicationDeploymentInstance = new ApplicationDeployment(params)
 
-        applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
+        // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
+        // applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
+        applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.COMPLETED
 
         if (applicationDeploymentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"

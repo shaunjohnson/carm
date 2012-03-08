@@ -24,6 +24,7 @@
                 </carm:button>
             </carm:isDeployable>
 
+            <%--
             <carm:isSubmittable applicationRelease="${applicationReleaseInstance}">
                 <g:form action="submit">
                     <g:hiddenField name="id" value="${applicationReleaseInstance?.id}"/>
@@ -31,6 +32,7 @@
                                     value="${message(code: 'default.button.submit.label', default: 'Submit')}"/>
                 </g:form>
             </carm:isSubmittable>
+            --%>
         </div>
     </carmsec:isProjectOwner>
 
