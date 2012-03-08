@@ -35,6 +35,10 @@ class ApplicationTests {
     void testNameNullable() {
         assertHasError(Application.buildWithoutSave(name: null), 'name', 'nullable')
     }
+    void testNameUnique() {
+        Application.build(name: 'TestApplication')
+        assertHasError(Application.buildWithoutSave(name: 'TestApplication'), 'name', 'unique')
+    }
 
     void testSourceControlRepositoryNullable() {
         assertHasError(Application.buildWithoutSave(sourceControlRepository: null), 'sourceControlRepository', 'nullable')

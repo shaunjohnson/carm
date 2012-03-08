@@ -22,7 +22,7 @@ class Application {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, nullable: false)
+        name(minSize: 2, maxSize: 50, blank: false, nullable: false, unique: true)
         description(maxSize: 4000, nullable: true)
         type(nullable: false)
         project(nullable: false)

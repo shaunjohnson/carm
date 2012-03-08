@@ -149,7 +149,7 @@ databaseChangeLog = {
 			}
 
 			column(name: "name", type: "varchar(50)") {
-				constraints(nullable: "false")
+                constraints(nullable: "false", unique: "true")
 			}
 
 			column(name: "project_id", type: "bigint") {
