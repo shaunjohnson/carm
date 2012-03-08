@@ -72,7 +72,7 @@ class SourceControlRepositoryService {
      * @param id ID of SourceControlRepository object
      * @return Matching SourceControlRepository object
      */
-    SourceControlRepository get(long id) {
+    SourceControlRepository get(Serializable id) {
         SourceControlRepository.get(id)
     }
 

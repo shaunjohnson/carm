@@ -38,7 +38,7 @@ class ApplicationReleaseTestStateController {
     }
 
     def show() {
-        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
+        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (!applicationReleaseTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class ApplicationReleaseTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
+        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (!applicationReleaseTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class ApplicationReleaseTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
+        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (applicationReleaseTestStateInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -90,7 +90,7 @@ class ApplicationReleaseTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id?.toLong())
+        def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (applicationReleaseTestStateInstance) {
             try {
                 def name = applicationReleaseTestStateInstance.name

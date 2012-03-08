@@ -38,7 +38,7 @@ class ModuleDeploymentTestStateController {
     }
 
     def show() {
-        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
+        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (!moduleDeploymentTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class ModuleDeploymentTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
+        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (!moduleDeploymentTestStateInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class ModuleDeploymentTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
+        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (moduleDeploymentTestStateInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -90,7 +90,7 @@ class ModuleDeploymentTestStateController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id?.toLong())
+        def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (moduleDeploymentTestStateInstance) {
             try {
                 def name = moduleDeploymentTestStateInstance.name

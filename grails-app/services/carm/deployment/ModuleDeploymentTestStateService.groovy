@@ -71,7 +71,7 @@ class ModuleDeploymentTestStateService {
      * @param id ID of ModuleDeploymentTestState object
      * @return Matching ModuleDeploymentTestState object
      */
-    ModuleDeploymentTestState get(long id) {
+    ModuleDeploymentTestState get(Serializable id) {
         ModuleDeploymentTestState.get(id)
     }
 

@@ -23,9 +23,9 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        def systemInstance = systemService.get(params.system.id?.toLong())
+        def systemInstance = systemService.get(params.system?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system?.id])}"
             redirect(action: "list")
         }
         else {
@@ -48,7 +48,7 @@ class SystemEnvironmentController {
     }
 
     def show() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
@@ -64,7 +64,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
@@ -76,7 +76,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -103,7 +103,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id?.toLong())
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
             def systemId = systemEnvironmentInstance.system.id
             try {

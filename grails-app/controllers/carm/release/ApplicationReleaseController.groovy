@@ -47,7 +47,7 @@ class ApplicationReleaseController {
     }
 
     def show() {
-        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
@@ -58,7 +58,7 @@ class ApplicationReleaseController {
     }
 
     def edit() {
-        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
@@ -69,7 +69,7 @@ class ApplicationReleaseController {
     }
 
     def update() {
-        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (applicationReleaseInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -95,7 +95,7 @@ class ApplicationReleaseController {
     }
 
     def delete() {
-        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (applicationReleaseInstance) {
             try {
                 def applicationId = applicationReleaseInstance.application.id
@@ -120,7 +120,7 @@ class ApplicationReleaseController {
     }
 
     def submit() {
-        def applicationReleaseInstance = applicationReleaseService.get(params.id?.toLong())
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (applicationReleaseInstance) {
             applicationReleaseService.submit(applicationReleaseInstance)
 

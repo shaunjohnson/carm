@@ -78,7 +78,7 @@ class SystemEnvironmentService {
      * @param id ID of SystemEnvironment to load.
      * @return Matching SystemEnvironment object
      */
-    SystemEnvironment get(long id) {
+    SystemEnvironment get(Serializable id) {
         SystemEnvironment.get(id)
     }
 

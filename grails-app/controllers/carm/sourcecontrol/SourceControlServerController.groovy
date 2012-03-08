@@ -38,7 +38,7 @@ class SourceControlServerController {
     }
 
     def show() {
-        def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
+        def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (!sourceControlServerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class SourceControlServerController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
+        def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (!sourceControlServerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class SourceControlServerController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
+        def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (sourceControlServerInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -89,7 +89,7 @@ class SourceControlServerController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def sourceControlServerInstance = sourceControlServerService.get(params.id?.toLong())
+        def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (sourceControlServerInstance) {
             try {
                 def name = sourceControlServerInstance.name

@@ -72,7 +72,7 @@ class SourceControlRoleService {
      * @param id ID of SourceControlRole object
      * @return Matching SourceControlRole object
      */
-    SourceControlRole get(long id) {
+    SourceControlRole get(Serializable id) {
         SourceControlRole.get(id)
     }
 

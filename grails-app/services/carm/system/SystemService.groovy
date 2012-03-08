@@ -87,7 +87,7 @@ class SystemService {
      * @param id ID of System object
      * @return Matching System object
      */
-    System get(long id) {
+    System get(Serializable id) {
         System.get(id)
     }
 

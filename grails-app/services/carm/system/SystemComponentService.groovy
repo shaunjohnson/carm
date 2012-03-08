@@ -77,7 +77,7 @@ class SystemComponentService {
      * @param id ID of the SystemComponent to get
      * @return Matching SystemComponent
      */
-    SystemComponent get(long id) {
+    SystemComponent get(Serializable id) {
         SystemComponent.get(id)
     }
 

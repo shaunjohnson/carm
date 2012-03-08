@@ -86,7 +86,7 @@ class ApplicationService {
      * @param id ID of Application object
      * @return Matching Application object
      */
-    Application get(long id) {
+    Application get(Serializable id) {
         Application.get(id)
     }
 

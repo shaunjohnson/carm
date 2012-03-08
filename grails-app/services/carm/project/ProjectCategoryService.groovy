@@ -70,7 +70,7 @@ class ProjectCategoryService {
      * @param id ID of ProjectCategory object
      * @return Matching ProjectCategory object
      */
-    ProjectCategory get(long id) {
+    ProjectCategory get(Serializable id) {
         ProjectCategory.get(id)
     }
 

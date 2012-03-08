@@ -42,7 +42,7 @@ class ProjectController {
     }
 
     def show() {
-        def projectInstance = projectService.get(params.id?.toLong())
+        def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
@@ -58,7 +58,7 @@ class ProjectController {
     }
 
     def edit() {
-        def projectInstance = projectService.get(params.id?.toLong())
+        def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
@@ -70,7 +70,7 @@ class ProjectController {
     }
 
     def update() {
-        def projectInstance = projectService.get(params.id?.toLong())
+        def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -96,7 +96,7 @@ class ProjectController {
     }
 
     def delete() {
-        def projectInstance = projectService.get(params.id?.toLong())
+        def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             try {
                 def name = projectInstance.name
@@ -116,7 +116,7 @@ class ProjectController {
     }
 
     def listActivity() {
-        def projectInstance = projectService.get(params.id?.toLong())
+        def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")

@@ -38,7 +38,7 @@ class ApplicationTypeController {
     }
 
     def show() {
-        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
+        def applicationTypeInstance = applicationTypeService.get(params.id)
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class ApplicationTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
+        def applicationTypeInstance = applicationTypeService.get(params.id)
         if (!applicationTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class ApplicationTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
+        def applicationTypeInstance = applicationTypeService.get(params.id)
         if (applicationTypeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -90,7 +90,7 @@ class ApplicationTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def applicationTypeInstance = applicationTypeService.get(params.id?.toLong())
+        def applicationTypeInstance = applicationTypeService.get(params.id)
         if (applicationTypeInstance) {
             try {
                 def name = applicationTypeInstance.name

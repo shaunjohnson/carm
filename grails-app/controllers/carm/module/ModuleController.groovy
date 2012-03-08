@@ -18,9 +18,9 @@ class ModuleController {
     }
 
     def create() {
-        def applicationInstance = applicationService.get(params.application.id?.toLong())
+        def applicationInstance = applicationService.get(params.application?.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application?.id])}"
             redirect(action: "list")
         }
         else {
@@ -31,7 +31,7 @@ class ModuleController {
     }
 
     def save() {
-        def applicationInstance = applicationService.get(params.application.id?.toLong())
+        def applicationInstance = applicationService.get(params.application.id)
         if (!applicationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
             redirect(action: "list")
@@ -49,7 +49,7 @@ class ModuleController {
     }
 
     def show() {
-        def moduleInstance = moduleService.get(params.id?.toLong())
+        def moduleInstance = moduleService.get(params.id)
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
@@ -63,7 +63,7 @@ class ModuleController {
     }
 
     def edit() {
-        def moduleInstance = moduleService.get(params.id?.toLong())
+        def moduleInstance = moduleService.get(params.id)
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")
@@ -74,7 +74,7 @@ class ModuleController {
     }
 
     def update() {
-        def moduleInstance = moduleService.get(params.id?.toLong())
+        def moduleInstance = moduleService.get(params.id)
         if (moduleInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -86,7 +86,7 @@ class ModuleController {
                 }
             }
 
-            def applicationInstance = applicationService.get(params.application.id?.toLong())
+            def applicationInstance = applicationService.get(params.application.id)
             if (!applicationInstance) {
                 flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
                 redirect(action: "list")
@@ -109,7 +109,7 @@ class ModuleController {
     }
 
     def delete() {
-        def moduleInstance = moduleService.get(params.id?.toLong())
+        def moduleInstance = moduleService.get(params.id)
         if (moduleInstance) {
             def applicationId = moduleInstance.application.id
             try {
@@ -130,7 +130,7 @@ class ModuleController {
     }
 
     def listActivity() {
-        def moduleInstance = moduleService.get(params.id?.toLong())
+        def moduleInstance = moduleService.get(params.id)
         if (!moduleInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
             redirect(action: "list")

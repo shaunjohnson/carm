@@ -40,7 +40,7 @@ class SystemController {
     }
 
     def show() {
-        def systemInstance = systemService.get(params.id?.toLong())
+        def systemInstance = systemService.get(params.id)
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -56,7 +56,7 @@ class SystemController {
 
     @Secured(['ROLE_ADMIN'])
     def moveEnvDown() {
-        def systemInstance = systemService.get(params.systemId?.toLong())
+        def systemInstance = systemService.get(params.systemId)
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -70,7 +70,7 @@ class SystemController {
 
     @Secured(['ROLE_ADMIN'])
     def moveEnvUp() {
-        def systemInstance = systemService.get(params.systemId?.toLong())
+        def systemInstance = systemService.get(params.systemId)
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -84,7 +84,7 @@ class SystemController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemInstance = systemService.get(params.id?.toLong())
+        def systemInstance = systemService.get(params.id)
         if (!systemInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
@@ -96,7 +96,7 @@ class SystemController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemInstance = systemService.get(params.id?.toLong())
+        def systemInstance = systemService.get(params.id)
         if (systemInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -124,7 +124,7 @@ class SystemController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemInstance = systemService.get(params.id?.toLong())
+        def systemInstance = systemService.get(params.id)
         if (systemInstance) {
             try {
                 def name = systemInstance.name
@@ -148,7 +148,7 @@ class SystemController {
     }
 
     def upcomingDeployments() {
-        def systemInstance = systemService.get(params.id?.toLong())
+        def systemInstance = systemService.get(params.id)
         if (systemInstance) {
             def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystem(systemInstance)
 

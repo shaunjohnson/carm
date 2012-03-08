@@ -76,7 +76,7 @@ class SourceControlServerService {
      * @param id ID of SourceControlServer object
      * @return Matching SourceControlServer object
      */
-    SourceControlServer get(long id) {
+    SourceControlServer get(Serializable id) {
         SourceControlServer.get(id)
     }
 

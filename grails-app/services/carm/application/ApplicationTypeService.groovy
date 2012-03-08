@@ -71,7 +71,7 @@ class ApplicationTypeService {
      * @param id ID of ApplicationType object
      * @return Matching ApplicationType object
      */
-    ApplicationType get(long id) {
+    ApplicationType get(Serializable id) {
         ApplicationType.get(id)
     }
 

@@ -38,7 +38,7 @@ class ModuleTypeController {
     }
 
     def show() {
-        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
+        def moduleTypeInstance = moduleTypeService.get(params.id)
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class ModuleTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
+        def moduleTypeInstance = moduleTypeService.get(params.id)
         if (!moduleTypeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class ModuleTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
+        def moduleTypeInstance = moduleTypeService.get(params.id)
         if (moduleTypeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -90,7 +90,7 @@ class ModuleTypeController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def moduleTypeInstance = moduleTypeService.get(params.id?.toLong())
+        def moduleTypeInstance = moduleTypeService.get(params.id)
         if (moduleTypeInstance) {
             try {
                 def name = moduleTypeInstance.name

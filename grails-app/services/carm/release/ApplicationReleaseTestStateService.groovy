@@ -71,7 +71,7 @@ class ApplicationReleaseTestStateService {
      * @param id ID of ApplicationReleaseTestState object
      * @return Matching ApplicationReleaseTestState object
      */
-    ApplicationReleaseTestState get(long id) {
+    ApplicationReleaseTestState get(Serializable id) {
         ApplicationReleaseTestState.get(id)
     }
 

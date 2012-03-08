@@ -211,7 +211,7 @@ class ApplicationReleaseService {
      * @param id ID of ApplicationRelease object
      * @return Matching ApplicationRelease object
      */
-    ApplicationRelease get(long id) {
+    ApplicationRelease get(Serializable id) {
         ApplicationRelease.get(id)
     }
 

@@ -73,7 +73,7 @@ class ProjectService {
      * @param id ID of Project object
      * @return Matching Project object
      */
-    Project get(long id) {
+    Project get(Serializable id) {
         Project.get(id)
     }
 

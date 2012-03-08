@@ -71,7 +71,7 @@ class ModuleTypeService {
      * @param id ID of ModuleType object
      * @return Matching ModuleType object
      */
-    ModuleType get(long id) {
+    ModuleType get(Serializable id) {
         ModuleType.get(id)
     }
 

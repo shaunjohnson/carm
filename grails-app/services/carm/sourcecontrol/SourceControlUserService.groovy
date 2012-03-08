@@ -56,7 +56,7 @@ class SourceControlUserService {
      * @param id ID of SourceControlUser object
      * @return Matching SourceControlUser object
      */
-    SourceControlUser get(long id) {
+    SourceControlUser get(Serializable id) {
         SourceControlUser.get(id)
     }
 

@@ -38,7 +38,7 @@ class ProjectCategoryController {
     }
 
     def show() {
-        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
+        def projectCategoryInstance = projectCategoryService.get(params.id)
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
@@ -50,7 +50,7 @@ class ProjectCategoryController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
+        def projectCategoryInstance = projectCategoryService.get(params.id)
         if (!projectCategoryInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
@@ -62,7 +62,7 @@ class ProjectCategoryController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
+        def projectCategoryInstance = projectCategoryService.get(params.id)
         if (projectCategoryInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -90,7 +90,7 @@ class ProjectCategoryController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def projectCategoryInstance = projectCategoryService.get(params.id?.toLong())
+        def projectCategoryInstance = projectCategoryService.get(params.id)
         if (projectCategoryInstance) {
             try {
                 def name = projectCategoryInstance.name

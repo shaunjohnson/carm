@@ -22,7 +22,7 @@ class ApplicationReleaseHistoryService {
      * @param id ID of ApplicationReleaseHistory object to load
      * @return ApplicationReleaseHistory with the provided ID
      */
-    ApplicationReleaseHistory get(Long id) {
+    ApplicationReleaseHistory get(Serializable id) {
         ApplicationReleaseHistory.get(id)
     }
 
