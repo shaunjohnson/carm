@@ -1,4 +1,4 @@
-<%@ page import="carm.module.Module" %>
+<%@ page import="carm.module.ModuleType; carm.module.Module" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -60,7 +60,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: moduleInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${carm.ModuleType.list().sort { it.name }}" optionKey="id"
+                        <g:select name="type.id" from="${ModuleType.list().sort { it.name }}" optionKey="id"
                                   noSelection="['null': '']" value="${moduleInstance?.type?.id}"
                                   required="required"
                                   title="${message(code: 'module.type.help')}"/>
