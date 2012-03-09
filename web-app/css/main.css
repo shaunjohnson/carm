@@ -573,7 +573,7 @@ div.sectionHeader div.actions {
     float: right;
 }
 
-div.sectionHeader span.actions a {
+div.sectionHeader div.actions a {
     line-height: 1em;
     padding-left: 1em;
 }
