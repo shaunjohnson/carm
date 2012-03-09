@@ -5,7 +5,7 @@ import carm.release.ModuleRelease
 class ModuleDeployment {
     ModuleRelease moduleRelease
     String deploymentInstructions
-    String deploymentState
+    ModuleDeploymentState deploymentState
     ModuleDeploymentTestState testState
 
     Date dateCreated
