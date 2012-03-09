@@ -173,12 +173,13 @@ class ApplicationReleaseService {
     /**
      * Creates and saves a new ApplicationRelease instance.
      *
+     * @param project Parent project used for security
      * @param params ApplicationRelease properties
      * @return newly created ApplicationRelease object
      */
     @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    ApplicationRelease create(Map params) {
+    @PreAuthorize("hasPermission(#project, admin)")
+    ApplicationRelease create(Project project, Map params) {
         def prefix = "create() :"
 
         log.debug "$prefix entered"
@@ -209,11 +210,12 @@ class ApplicationReleaseService {
     /**
      * Deletes the provided ApplicationRelease object.
      *
+     * @param project Parent project used for security
      * @param applicationRelease ApplicationRelease object to delete
      */
     @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(ApplicationRelease applicationRelease) {
+    @PreAuthorize("hasPermission(#project, admin)")
+    void delete(Project project, ApplicationRelease applicationRelease) {
         if (isInUse(applicationRelease)) {
             throw new DomainInUseException()
         }
@@ -244,12 +246,13 @@ class ApplicationReleaseService {
     /**
      * Updates the provided ApplicationRelease object with the new properties.
      *
+     * @param project Parent project used for security
      * @param applicationRelease ApplicationRelease to update
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(ApplicationRelease applicationRelease, Map params) {
+    @PreAuthorize("hasPermission(#project, admin)")
+    void update(Project project, ApplicationRelease applicationRelease, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"
@@ -318,9 +321,12 @@ class ApplicationReleaseService {
      * Changes and saves the provided ApplicationRelease to be in submitted state and set the dateSubmitted and
      * submittedBy fields.
      *
+     * @param project Parent project used for security
      * @param applicationRelease ApplicationRelease to submit
      */
-    def submit(ApplicationRelease applicationRelease) {
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    def submit(Project project, ApplicationRelease applicationRelease) {
         applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
         applicationRelease.submittedBy = springSecurityService.currentUser
         applicationRelease.dateSubmitted = new Date()

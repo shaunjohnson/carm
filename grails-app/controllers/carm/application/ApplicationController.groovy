@@ -2,6 +2,7 @@ package carm.application
 
 import carm.exceptions.DomainInUseException
 import org.springframework.dao.DataIntegrityViolationException
+import carm.system.SystemEnvironment
 
 class ApplicationController {
 
@@ -36,7 +37,7 @@ class ApplicationController {
     }
 
     def save() {
-        def projectInstance = projectService.get(params.project.id)
+        def projectInstance = projectService.get(params.project?.id)
         if (!projectInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
             redirect(action: "list")
@@ -62,7 +63,7 @@ class ApplicationController {
         else {
             def deployments = [:]
 
-            applicationInstance?.system?.environments?.each { environment ->
+            applicationInstance?.system?.environments?.each { SystemEnvironment environment ->
                 deployments[environment] = [
                         lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
                 ]
