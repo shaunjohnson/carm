@@ -21,7 +21,7 @@
         </div>
     </g:hasErrors>
 
-    <g:form method="post">
+    <g:form action="update" method="post">
         <g:hiddenField name="id" value="${applicationDeploymentInstance?.id}"/>
         <g:hiddenField name="version" value="${applicationDeploymentInstance?.version}"/>
         <div class="dialog">
