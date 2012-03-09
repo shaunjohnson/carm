@@ -7,6 +7,8 @@ import org.semver.Version
 import org.semver.Delta
 import carm.project.Project
 import carm.application.Application
+import carm.deployment.ApplicationDeployment
+import carm.exceptions.DomainInUseException
 
 class ApplicationReleaseService {
 
@@ -50,6 +52,16 @@ class ApplicationReleaseService {
 
         // The application must be deployable
         return applicationService.isDeployable(applicationRelease?.application)
+    }
+
+    /**
+     * Determines if the provided release is in use.
+     *
+     * @param applicationRelease ApplicationRelease to test
+     * @return True if the release is in use
+     */
+    boolean isInUse(ApplicationRelease applicationRelease) {
+        ApplicationDeployment.countByApplicationRelease(applicationRelease) > 0
     }
 
     /**
@@ -202,6 +214,10 @@ class ApplicationReleaseService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ApplicationRelease applicationRelease) {
+        if (isInUse(applicationRelease)) {
+            throw new DomainInUseException()
+        }
+
         applicationRelease.delete()
     }
 

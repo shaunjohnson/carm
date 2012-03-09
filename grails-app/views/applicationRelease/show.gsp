@@ -130,11 +130,14 @@
                             <g:message code="default.button.edit.label" default="Edit"/>
                         </g:link>
                     </span>
-                    <span class="button">
-                        <g:link class="delete" action="delete" id="${applicationReleaseInstance?.id}">
-                            <g:message code="default.button.delete.label" default="Delete"/>
-                        </g:link>
-                    </span>
+
+                    <carm:ifNotInUse domain="${applicationReleaseInstance}">
+                        <span class="button">
+                            <g:link class="delete" action="delete" id="${applicationReleaseInstance?.id}">
+                                <g:message code="default.button.delete.label" default="Delete"/>
+                            </g:link>
+                        </span>
+                    </carm:ifNotInUse>
                 </div>
             </carmsec:isProjectOwner>
         </carm:showHideDetails>

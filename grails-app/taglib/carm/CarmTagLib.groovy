@@ -148,6 +148,9 @@ class CarmTagLib {
         if (domain instanceof ApplicationReleaseTestState) {
             isInUse = applicationReleaseTestStateService.isInUse(domain)
         }
+        else if (domain instanceof ApplicationRelease) {
+            isInUse = applicationReleaseService.isInUse(domain)
+        }
         else if (domain instanceof ApplicationType) {
             isInUse = applicationTypeService.isInUse(domain)
         }
