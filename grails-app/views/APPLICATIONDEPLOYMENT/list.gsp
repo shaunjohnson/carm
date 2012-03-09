@@ -39,10 +39,17 @@
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: applicationDeploymentInstance, field: "applicationRelease")}
+                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                            ${message(code: 'pageHeader.applicationRelease.label', args: [
+                                    applicationDeploymentInstance?.applicationRelease?.application?.name,
+                                    applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
+                        </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: applicationDeploymentInstance, field: "sysEnvironment")}
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${applicationDeploymentInstance?.sysEnvironment?.id}">
+                            ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
+                        </g:link>
                     </td>
                     <td>
                         <g:formatDate date="${applicationDeploymentInstance.requestedDeploymentDate}"/>

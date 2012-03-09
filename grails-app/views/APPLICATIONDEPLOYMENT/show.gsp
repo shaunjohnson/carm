@@ -23,9 +23,10 @@
                     <g:message code="applicationDeployment.applicationRelease.label" default="Application Release"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="applicationRelease" action="show"
-                            id="${applicationDeploymentInstance?.applicationRelease?.id}">
-                        ${applicationDeploymentInstance?.applicationRelease?.releaseNumber?.encodeAsHTML()}
+                    <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                        ${message(code: 'pageHeader.applicationRelease.label', args: [
+                                applicationDeploymentInstance?.applicationRelease?.application?.name,
+                                applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>
