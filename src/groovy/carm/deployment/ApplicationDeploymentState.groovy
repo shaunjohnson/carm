@@ -9,7 +9,8 @@ public enum ApplicationDeploymentState {
     COMPLETED("Completed"),
     ARCHIVED("Archived")
 
-    static List<ApplicationDeploymentState> pendingStates = [ ARCHIVED, COMPLETED ]
+    static List<ApplicationDeploymentState> deployedStates = [ DEPLOYED, COMPLETED, ARCHIVED ]
+    static List<ApplicationDeploymentState> pendingStates = [ COMPLETED, ARCHIVED ]
 
     private String value
 

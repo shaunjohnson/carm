@@ -191,6 +191,7 @@ class ApplicationDeploymentService {
             createAlias("applicationRelease", "applicationRelease")
             eq("sysEnvironment", environment)
             eq("applicationRelease.application", application)
+            inList("deploymentState", ApplicationDeploymentState.deployedStates)
             maxResults(1)
             order("completedDeploymentDate", "desc")
         }
