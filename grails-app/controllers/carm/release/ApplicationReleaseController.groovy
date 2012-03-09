@@ -39,7 +39,7 @@ class ApplicationReleaseController {
     def save() {
         Application applicationInstance = applicationService.get(params.application?.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.project.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application?.id])}"
             redirect(action: "list")
         }
         else {

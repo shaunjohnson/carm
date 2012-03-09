@@ -7,10 +7,137 @@ import carm.system.SystemEnvironment
 import carm.release.ApplicationRelease
 import carm.application.Application
 import carm.project.Project
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.security.access.prepost.PreAuthorize
+import carm.release.ModuleRelease
+import carm.exceptions.DomainInUseException
 
 class ApplicationDeploymentService {
 
     static transactional = false
+
+    /**
+     * Returns a count of all ApplicationDeployment objects.
+     *
+     * @return Total number of ApplicationDeployment objects.
+     */
+    int count() {
+        ApplicationDeployment.count()
+    }
+
+    /**
+     * Gets the ApplicationDeployment object with the provided ID.
+     *
+     * @param id ID of ApplicationDeployment object
+     * @return Matching ApplicationDeployment object
+     */
+    ApplicationDeployment get(Serializable id) {
+        ApplicationDeployment.get(id)
+    }
+
+    /**
+     * Gets a list of all ApplicationDeployment objects.
+     *
+     * @param params Query parameters
+     * @return List of ApplicationDeployment objects
+     */
+    List<ApplicationDeployment> list(Map params) {
+        ApplicationDeployment.list(params)
+    }
+
+    /**
+     * Creates a new ApplicationDeployment instance with prefilled fields:
+     * <ul>
+     * <li>applicationRelease - Passed in ApplicationRelease object</li>
+     * <li>requestedDeploymentDate - Next business (week) day</li>
+     * <li>sysEnvironment - Next system environment to be deployed to</li>
+     * </ul>
+     *
+     * @param applicationRelease ApplicationRelease this deployment is associated with
+     * @return new ApplicationDeployment instance
+     */
+    ApplicationDeployment newApplicationDeployment(ApplicationRelease applicationRelease) {
+        Date requestedDeploymentDate = inferNextDeploymentDate()
+        SystemEnvironment sysEnvironment = inferNextEnvironment(applicationRelease)
+
+        new ApplicationDeployment(applicationRelease: applicationRelease,
+                requestedDeploymentDate: requestedDeploymentDate, sysEnvironment: sysEnvironment)
+    }
+
+    /**
+     * Creates and saves a new ApplicationRelease instance.
+     *
+     * @param project Parent project used for security
+     * @param params ApplicationRelease properties
+     * @return newly created ApplicationRelease object
+     */
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    ApplicationDeployment create(Project project, Map params) {
+        def prefix = "create() :"
+
+        log.debug "$prefix entered"
+
+        ApplicationDeployment applicationDeployment = new ApplicationDeployment(params)
+
+        // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
+        // applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
+        applicationDeployment.deploymentState = ApplicationDeploymentState.COMPLETED
+        applicationDeployment.completedDeploymentDate = new Date()
+
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        applicationRelease.application.modules.each { module ->
+            ModuleRelease moduleRelease = applicationRelease.moduleReleases.find { it.module == module }
+            ModuleDeployment moduleDeployment = new ModuleDeployment(applicationDeployment: applicationDeployment,
+                    moduleRelease: moduleRelease)
+            applicationDeployment.addToModuleDeployments(moduleDeployment)
+        }
+
+        applicationDeployment.save()
+
+        if (applicationDeployment.hasErrors()) {
+            applicationDeployment.moduleDeployments.clear()
+        }
+
+        log.debug "$prefix returning $applicationDeployment"
+
+        applicationDeployment
+    }
+
+    /**
+     * Deletes the provided ApplicationDeployment object.
+     *
+     * @param project Parent project used for security
+     * @param applicationDeployment ApplicationDeployment object to delete
+     */
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    void delete(Project project, ApplicationDeployment applicationDeployment) {
+//        if (isInUse(applicationDeployment)) {
+//            throw new DomainInUseException()
+//        }
+
+        applicationDeployment.delete()
+    }
+
+    /**
+     * Updates the provided ApplicationDeployment object with the new properties.
+     *
+     * @param project Parent project used for security
+     * @param applicationDeployment ApplicationDeployment to update
+     * @param params New property values
+     */
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    void update(Project project, ApplicationDeployment applicationDeployment, Map params) {
+        def prefix = "update() :"
+
+        log.debug "$prefix entered"
+
+        applicationDeployment.properties = params
+
+        log.debug "$prefix leaving"
+    }
 
     /**
      * Infers the next deployment date. Returns today unless today is Friday-Sunday. If Friday-Sunday return next

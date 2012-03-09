@@ -9,6 +9,7 @@ class ApplicationDeploymentController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def applicationDeploymentService
+    def applicationReleaseService
 
     def index() {
         redirect(action: "list", params: params)
@@ -16,46 +17,46 @@ class ApplicationDeploymentController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationDeploymentInstanceList: ApplicationDeployment.list(params), applicationDeploymentInstanceTotal: ApplicationDeployment.count()]
+        [
+                applicationDeploymentInstanceList: applicationDeploymentService.list(params),
+                applicationDeploymentInstanceTotal: applicationDeploymentService.count()
+        ]
     }
 
     def create() {
-        def applicationReleaseInstance = ApplicationRelease.get(params.applicationRelease.id)
+        def applicationReleaseInstance = applicationReleaseService.get(params.applicationRelease?.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
             redirect(action: "list")
         }
         else {
-            def applicationDeploymentInstance = new ApplicationDeployment()
-
-            // Attempt to predict the next release number
-            applicationDeploymentInstance.requestedDeploymentDate = applicationDeploymentService.inferNextDeploymentDate()
-            applicationDeploymentInstance.sysEnvironment = applicationDeploymentService.inferNextEnvironment(applicationReleaseInstance)
-
-            applicationDeploymentInstance.properties = params
-            return [applicationDeploymentInstance: applicationDeploymentInstance]
+            [
+                    applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance)
+            ]
         }
     }
 
     def save() {
-        def applicationDeploymentInstance = new ApplicationDeployment(params)
-
-        // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
-        // applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
-        applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.COMPLETED
-        applicationDeploymentInstance.completedDeploymentDate = new Date()
-
-        if (applicationDeploymentInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
-            redirect(action: "show", id: applicationDeploymentInstance.id)
+        ApplicationRelease applicationReleaseInstance = applicationReleaseService.get(params.applicationRelease?.id)
+        if (!applicationReleaseInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
+            redirect(action: "list")
         }
         else {
-            render(view: "create", model: [applicationDeploymentInstance: applicationDeploymentInstance])
+            def applicationDeploymentInstance = applicationDeploymentService.create(applicationReleaseInstance.application.project, params)
+            if (!applicationDeploymentInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
+                redirect(action: "show", id: applicationDeploymentInstance.id)
+            }
+            else {
+                render(view: "create", model: [applicationDeploymentInstance: applicationDeploymentInstance])
+            }
         }
     }
 
+
     def show() {
-        def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
@@ -66,7 +67,7 @@ class ApplicationDeploymentController {
     }
 
     def edit() {
-        def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
@@ -77,7 +78,7 @@ class ApplicationDeploymentController {
     }
 
     def update() {
-        def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (applicationDeploymentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -88,7 +89,7 @@ class ApplicationDeploymentController {
                     return
                 }
             }
-            applicationDeploymentInstance.properties = params
+            applicationDeploymentService.update(applicationDeploymentInstance.applicationRelease.application.project, applicationDeploymentInstance, params)
             if (!applicationDeploymentInstance.hasErrors() && applicationDeploymentInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
                 redirect(action: "show", id: applicationDeploymentInstance.id)
@@ -104,10 +105,10 @@ class ApplicationDeploymentController {
     }
 
     def delete() {
-        def applicationDeploymentInstance = ApplicationDeployment.get(params.id)
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (applicationDeploymentInstance) {
             try {
-                applicationDeploymentInstance.delete(flush: true)
+                applicationDeploymentService.delete(applicationDeploymentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
                 redirect(action: "list")
             }
