@@ -17,7 +17,7 @@ class ApplicationReleaseTestStateService {
      * @return True if the test state is in use
      */
     boolean isInUse(ApplicationReleaseTestState testState) {
-         ApplicationRelease.findAllByTestState(testState).size() > 0
+         ApplicationRelease.countByTestState(testState) > 0
     }
 
     /**

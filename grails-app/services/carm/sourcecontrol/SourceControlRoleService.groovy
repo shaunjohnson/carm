@@ -18,7 +18,7 @@ class SourceControlRoleService {
      * @return True if the role is in use
      */
     boolean isInUse(SourceControlRole role) {
-        ApplicationRole.findAllByRole(role).size() > 0
+        ApplicationRole.countByRole(role) > 0
     }
 
     /**

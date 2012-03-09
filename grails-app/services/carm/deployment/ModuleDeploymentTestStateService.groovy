@@ -17,7 +17,7 @@ class ModuleDeploymentTestStateService {
      * @return True if the test state is in use
      */
     boolean isInUse(ModuleDeploymentTestState testState) {
-        ModuleDeployment.findAllByTestState(testState).size() > 0
+        ModuleDeployment.countByTestState(testState) > 0
     }
 
     /**

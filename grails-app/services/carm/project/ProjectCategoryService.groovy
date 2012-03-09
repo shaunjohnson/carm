@@ -16,7 +16,7 @@ class ProjectCategoryService {
      * @return True if the category is in use
      */
     boolean isInUse(ProjectCategory category) {
-        Project.findAllByCategory(category).size() > 0
+        Project.countByCategory(category) > 0
     }
 
     /**

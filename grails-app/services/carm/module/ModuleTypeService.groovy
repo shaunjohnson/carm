@@ -17,7 +17,7 @@ class ModuleTypeService {
      * @return True if the type is in use
      */
     boolean isInUse(ModuleType type) {
-        Module.findAllByType(type).size() > 0
+        Module.countByType(type) > 0
     }
 
     /**

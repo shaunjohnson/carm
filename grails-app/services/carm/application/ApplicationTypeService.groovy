@@ -17,7 +17,7 @@ class ApplicationTypeService {
      * @return True if the type is in use
      */
     boolean isInUse(ApplicationType type) {
-        Application.findAllByType(type).size() > 0
+        Application.countByType(type) > 0
     }
 
     /**

@@ -18,7 +18,7 @@ class SourceControlRepositoryService {
      * @return True if the repository is in use
      */
     boolean isInUse(SourceControlRepository repository) {
-        Application.findAllBySourceControlRepository(repository).size() > 0
+        Application.countBySourceControlRepository(repository) > 0
     }
 
     /**

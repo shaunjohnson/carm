@@ -18,8 +18,7 @@ class SystemEnvironmentService {
      * @return True if the environment is in use
      */
     boolean isInUse(SystemEnvironment environment) {
-        ApplicationDeployment.findAllBySysEnvironment(environment).size() > 0
-        return false
+        ApplicationDeployment.countBySysEnvironment(environment) > 0
     }
 
     /**

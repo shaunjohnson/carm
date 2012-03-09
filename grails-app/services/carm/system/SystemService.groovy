@@ -19,7 +19,7 @@ class SystemService {
      * @return True if the system is in use
      */
     boolean isInUse(System system) {
-        Application.findAllBySystem(system).size() > 0
+        Application.countBySystem(system) > 0
     }
 
     /**
