@@ -1,4 +1,3 @@
-<%@ page import="carm.sourcecontrol.SourceControlRepository; carm.application.ApplicationType; carm.application.Application; carm.system.System" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -59,7 +58,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'type', 'errors')}">
-                        <g:select name="type.id" from="${ApplicationType.list().sort { it.name }}" optionKey="id"
+                        <g:select name="type.id" from="${applicationTypeList}" optionKey="id"
                                   noSelection="['null': '']" value="${applicationInstance?.type?.id}"
                                   required="required"
                                   title="${message(code: 'application.type.help')}"/>
@@ -93,7 +92,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationInstance, field: 'sourceControlRepository', 'errors')}">
-                        <g:select name="sourceControlRepository.id" from="${SourceControlRepository.list()}"
+                        <g:select name="sourceControlRepository.id" from="${sourceControlRepositoryList}"
                                   optionKey="id" value="${applicationInstance?.sourceControlRepository?.id}"
                                   noSelection="['null': '']" required="required"
                                   title="${message(code: 'application.sourceControlRepository.help')}"/>
@@ -138,7 +137,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${System.list().sort { it.name }}" optionKey="id"
+                        <g:select name="system.id" from="${systemList}" optionKey="id"
                                   value="${applicationInstance?.system?.id}" noSelection="['null': '']"
                                   title="${message(code: 'application.system.help')}"/>
                     </td>

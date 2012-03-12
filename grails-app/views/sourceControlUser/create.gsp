@@ -1,4 +1,3 @@
-<%@ page import="carm.sourcecontrol.SourceControlUser" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -76,7 +75,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: sourceControlUserInstance, field: 'user', 'errors')}">
-                        <g:select name="user.id" from="${carm.security.User.list().sort { it.username }}" optionKey="id"
+                        <g:select name="user.id" from="${userList}" optionKey="id"
                                   value="${sourceControlUserInstance?.user?.id}" noSelection="['null': '']"
                                   title="${message(code: 'sourceControlUser.user.help')}"/>
                     </td>

@@ -1,5 +1,3 @@
-<%@ page import="org.joda.time.DateTime; org.joda.time.Period" %>
-
 <g:set var="size" value="${activityList?.size() ?: 0}"/>
 <g:set var="maxRecords" value="${Math.min(size, grailsApplication.config.ui.activity.maxRecords)}"/>
 <g:set var="activitySubList" value="${activityList.subList(0, maxRecords)}"/>

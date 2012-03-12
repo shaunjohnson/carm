@@ -9,6 +9,7 @@ class ModuleController {
     def activityTraceService
     def applicationService
     def moduleService
+    def moduleTypeService
 
     def index() {
         redirect(action: "list", params: params)
@@ -28,7 +29,11 @@ class ModuleController {
         else {
             def moduleInstance = new Module()
             moduleInstance.properties = params
-            return [moduleInstance: moduleInstance]
+
+            [
+                    moduleInstance: moduleInstance,
+                    moduleTypeList: moduleTypeService.list()
+            ]
         }
     }
 
@@ -45,7 +50,11 @@ class ModuleController {
                 redirect(controller: "application", action: "show", id: moduleInstance.application.id)
             }
             else {
-                render(view: "create", model: [moduleInstance: moduleInstance])
+                render(view: "create", model:
+                        [
+                                moduleInstance: moduleInstance,
+                                moduleTypeList: moduleTypeService.list()
+                        ])
             }
         }
     }
@@ -71,7 +80,10 @@ class ModuleController {
             redirect(action: "list")
         }
         else {
-            return [moduleInstance: moduleInstance]
+            [
+                    moduleInstance: moduleInstance,
+                    moduleTypeList: moduleTypeService.list()
+            ]
         }
     }
 
@@ -80,10 +92,13 @@ class ModuleController {
         if (moduleInstance) {
             if (params.version) {
                 def version = params.version.toLong()
+
                 if (moduleInstance.version > version) {
-                    
                     moduleInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'module.label', default: 'Module')] as Object[], "Another user has updated this Module while you were editing")
-                    render(view: "edit", model: [moduleInstance: moduleInstance])
+                    render(view: "edit", model: [
+                            moduleInstance: moduleInstance,
+                            moduleTypeList: moduleTypeService.list()
+                    ])
                     return
                 }
             }
@@ -100,7 +115,10 @@ class ModuleController {
                     redirect(action: "show", id: moduleInstance.id)
                 }
                 else {
-                    render(view: "edit", model: [moduleInstance: moduleInstance])
+                    render(view: "edit", model: [
+                            moduleInstance: moduleInstance,
+                            moduleTypeList: moduleTypeService.list()
+                    ])
                 }
             }
         }
@@ -139,6 +157,7 @@ class ModuleController {
         }
         else {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
             [
                     moduleInstance: moduleInstance,
                     activityList: activityTraceService.listActivityByModule(moduleInstance, params),

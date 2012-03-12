@@ -1,4 +1,3 @@
-<%@ page import="carm.project.Project" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,7 +10,7 @@
 <div class="body">
     <carm:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
-    <g:render template="myOpenTasks" model="[]"/>
+    <g:render template="myOpenTasks" model="[pendingTasks: pendingTasks]"/>
 
     <table class="twoColumnLayout">
         <tbody>
@@ -21,7 +20,8 @@
 
                 <div>&nbsp;</div>
 
-                <g:render template="/common/activity" model="[activityList: activityList, listActivityAction: 'listActivity']"/>
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, listActivityAction: 'listActivity']"/>
             </td>
             <td class="layoutColumnLast">
                 <g:render template="mySystems" model="[systemInstanceList: systemInstanceList]"/>

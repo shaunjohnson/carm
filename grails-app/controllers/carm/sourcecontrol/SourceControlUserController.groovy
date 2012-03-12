@@ -2,6 +2,7 @@ package carm.sourcecontrol
 
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import carm.security.User
 
 class SourceControlUserController {
 
@@ -29,7 +30,11 @@ class SourceControlUserController {
         else {
             def sourceControlUserInstance = new SourceControlUser()
             sourceControlUserInstance.properties = params
-            return [sourceControlUserInstance: sourceControlUserInstance]
+
+            [
+                    sourceControlUserInstance: sourceControlUserInstance,
+                    userList: User.list().sort { it.username }
+            ]
         }
     }
 
@@ -64,7 +69,10 @@ class SourceControlUserController {
             redirect(action: "list")
         }
         else {
-            return [sourceControlUserInstance: sourceControlUserInstance]
+            [
+                    sourceControlUserInstance: sourceControlUserInstance,
+                    userList: User.list().sort { it.username }
+            ]
         }
     }
 

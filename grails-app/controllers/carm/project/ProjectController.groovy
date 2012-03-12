@@ -13,6 +13,7 @@ class ProjectController {
     def applicationService
     def carmSecurityService
     def projectService
+    def projectCategoryService
     def springSecurityService
 
     def index() {
@@ -28,7 +29,13 @@ class ProjectController {
         def projectInstance = new Project()
         projectInstance.properties = params
         def projectOwners = [springSecurityService.authentication.name]
-        return [projectInstance: projectInstance, projectOwners: projectOwners, projectOwnerList: User.listOrderByUsername()]
+
+        [
+                projectCategoryList: projectCategoryService.list(),
+                projectInstance: projectInstance,
+                projectOwners: projectOwners,
+                projectOwnerList: User.listOrderByUsername()
+        ]
     }
 
     def save() {
@@ -66,7 +73,13 @@ class ProjectController {
         }
         else {
             def projectOwners = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
-            return [projectInstance: projectInstance, projectOwners: projectOwners, projectOwnerList: User.listOrderByUsername()]
+
+            [
+                    projectCategoryList: projectCategoryService.list(),
+                    projectInstance: projectInstance,
+                    projectOwners: projectOwners,
+                    projectOwnerList: User.listOrderByUsername()
+            ]
         }
     }
 

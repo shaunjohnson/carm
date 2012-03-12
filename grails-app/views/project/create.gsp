@@ -1,4 +1,3 @@
-<%@ page import="carm.project.ProjectCategory; carm.security.User; carm.project.Project" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -44,7 +43,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'category', 'errors')}">
-                        <g:select name="category.id" from="${ProjectCategory.list().sort { it.name }}"
+                        <g:select name="category.id" from="${projectCategoryList}"
                                   optionKey="id" value="${projectInstance?.category?.id}"
                                   required="required"
                                   title="${message(code: 'project.category.help')}"/>

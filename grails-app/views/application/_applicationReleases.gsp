@@ -1,4 +1,3 @@
-<%@ page import="carm.release.ApplicationReleaseState; carm.release.ApplicationRelease" %>
 <g:set var="applicationReleasesTotal" value="${applicationInstance.releases.size()}"/>
 <g:set var="maxRecordsAllowed" value="${grailsApplication.config.ui.application.maxRecords}"/>
 <g:set var="maxRecordsToDisplay"

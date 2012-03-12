@@ -12,7 +12,10 @@ class ApplicationController {
     def applicationDeploymentService
     def applicationReleaseService
     def applicationService
+    def applicationTypeService
+    def sourceControlRepositoryService
     def projectService
+    def systemService
 
     def index() {
         redirect(action: "list", params: params)
@@ -20,7 +23,11 @@ class ApplicationController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationInstanceList: applicationService.list(params), applicationInstanceTotal: applicationService.count()]
+
+        [
+                applicationInstanceList: applicationService.list(params),
+                applicationInstanceTotal: applicationService.count()
+        ]
     }
 
     def create() {
@@ -32,7 +39,13 @@ class ApplicationController {
         else {
             def applicationInstance = new Application()
             applicationInstance.properties = params
-            return [applicationInstance: applicationInstance]
+
+            [
+                    applicationInstance: applicationInstance,
+                    applicationTypeList: applicationTypeService.list(),
+                    sourceControlRepositoryList: sourceControlRepositoryService.list(),
+                    systemList: systemService.list()
+            ]
         }
     }
 
@@ -49,7 +62,12 @@ class ApplicationController {
                 redirect(action: "show", id: applicationInstance.id)
             }
             else {
-                render(view: "create", model: [applicationInstance: applicationInstance])
+                render(view: "create", model: [
+                        applicationInstance: applicationInstance,
+                        applicationTypeList: applicationTypeService.list(),
+                        sourceControlRepositoryList: sourceControlRepositoryService.list(),
+                        systemList: systemService.list()
+                ])
             }
         }
     }
@@ -85,7 +103,12 @@ class ApplicationController {
             redirect(action: "list")
         }
         else {
-            return [applicationInstance: applicationInstance]
+            [
+                    applicationInstance: applicationInstance,
+                    applicationTypeList: applicationTypeService.list(),
+                    sourceControlRepositoryList: sourceControlRepositoryService.list(),
+                    systemList: systemService.list()
+            ]
         }
     }
 
@@ -94,20 +117,31 @@ class ApplicationController {
         if (applicationInstance) {
             if (params.version) {
                 def version = params.version.toLong()
-                if (applicationInstance.version > version) {
 
+                if (applicationInstance.version > version) {
                     applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label', default: 'Application')] as Object[], "Another user has updated this Application while you were editing")
-                    render(view: "edit", model: [applicationInstance: applicationInstance])
+                    render(view: "edit", model: [
+                            applicationInstance: applicationInstance,
+                            applicationTypeList: applicationTypeService.list(),
+                            sourceControlRepositoryList: sourceControlRepositoryService.list(),
+                            systemList: systemService.list()
+                    ])
                     return
                 }
             }
+
             applicationService.update(applicationInstance.project, applicationInstance, params)
             if (!applicationInstance.hasErrors() && applicationInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
                 redirect(action: "show", id: applicationInstance.id)
             }
             else {
-                render(view: "edit", model: [applicationInstance: applicationInstance])
+                render(view: "edit", model: [
+                        applicationInstance: applicationInstance,
+                        applicationTypeList: applicationTypeService.list(),
+                        sourceControlRepositoryList: sourceControlRepositoryService.list(),
+                        systemList: systemService.list()
+                ])
             }
         }
         else {

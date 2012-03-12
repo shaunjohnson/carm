@@ -1,4 +1,3 @@
-<%@ page import="carm.module.Module" %>
 <div class="sectionHeader">
     <div class="text">
         <g:message code="modules.label" default="Modules"/>

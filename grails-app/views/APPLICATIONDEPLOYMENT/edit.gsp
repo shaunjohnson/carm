@@ -1,4 +1,3 @@
-<%@ page import="carm.release.ApplicationRelease; carm.deployment.ApplicationDeployment; carm.system.SystemEnvironment" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -53,7 +52,8 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'sysEnvironment', 'errors')}">
-                        <g:select name="sysEnvironment.id" from="${SystemEnvironment.list()}" optionKey="id"
+                        <g:select name="sysEnvironment.id" optionKey="id"
+                                  from="${applicationDeploymentInstance?.applicationRelease?.application?.system?.environments}"
                                   noSelection="['null': '']" required="required"
                                   value="${applicationDeploymentInstance?.sysEnvironment?.id}"/>
                     </td>

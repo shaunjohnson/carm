@@ -1,4 +1,3 @@
-<%@ page import="carm.deployment.ApplicationDeployment" %>
 <div class="sectionHeader">
     <div class="text">
         <g:message code="environments.label" default="Environments"/>

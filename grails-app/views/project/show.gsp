@@ -1,4 +1,4 @@
-<%@ page import="carm.project.Project; org.springframework.security.acls.domain.BasePermission" %>
+<%@ page import="org.springframework.security.acls.domain.BasePermission" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

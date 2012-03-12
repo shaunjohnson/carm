@@ -15,7 +15,7 @@
                     <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
                 </th>
                 <th>
-                    <g:message code="applicationDeployment.environment.label" default="Environment"/>
+                    <g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/>
                 </th>
                 <th>
                     <g:message code="applicationDeployment.requestedDeploymentDate.label"

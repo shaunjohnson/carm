@@ -1,4 +1,3 @@
-<%@ page import="org.joda.time.Period; org.joda.time.DateTime" %>
 <div class="list">
     <table>
         <thead>
