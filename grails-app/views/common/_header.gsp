@@ -51,6 +51,7 @@
             <bc:listProjects isFirst="true"/>
             <bc:showProject project="${domain.applicationRelease.application.project}"/>
             <bc:showApplication application="${domain.applicationRelease.application}"/>
+            <bc:showApplicationRelease applicationRelease="${domain.applicationRelease}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showApplicationDeployment applicationDeployment="${domain}"/>
