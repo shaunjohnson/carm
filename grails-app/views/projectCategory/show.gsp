@@ -69,30 +69,6 @@
             </sec:ifAllGranted>
         </carm:showHideDetails>
     </div>
-
-    <g:set var="projects" value="${Project.findAllByCategory(projectCategoryInstance).sort { it.name }}"/>
-
-    <h2><g:message code="projects.label" default="Projects"/></h2>
-
-    <div class="dialog">
-        <g:if test="${projects.size()}">
-            <ul>
-                <g:each in="${projects}" var="project">
-                    <li>
-                        <g:link controller="project" action="show" id="${project.id}">
-                            ${project?.encodeAsHTML()}
-                        </g:link>
-                    </li>
-                </g:each>
-            </ul>
-        </g:if>
-        <g:else>
-            <p class="emphasis">
-                <g:message code="projectCategoryDoesNotHaveAnyProjects.message"
-                           default="There are no projects in this category."/>
-            </p>
-        </g:else>
-    </div>
 </div>
 </body>
 </html>
