@@ -8,6 +8,10 @@
 <div class="body">
     <carm:header pageName="${message(code: 'login.label', default: 'Login')}"/>
 
+    <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+    </g:if>
+
     <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
         <div class="dialog">
             <table>
