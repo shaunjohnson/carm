@@ -258,6 +258,16 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a list users link.
+     */
+    def listUsers = { attrs ->
+        def isFirst = attrs.isFirst
+        out << link(controller: "user", action: "list", isFirst: isFirst,
+                title: message(code: "showAllUsers.label"),
+                text: message(code: "users.label"))
+    }
+
+    /**
      * Renders a show application link.
      */
     def showApplication = { attrs ->
@@ -458,6 +468,17 @@ class CarmBreadcrumbTagLib {
                 title: message(code: "showSystemEnvironment.label"),
                 text: systemEnvironment.name,
                 id: systemEnvironment.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders a show user link.
+     */
+    def showUser = { attrs ->
+        def user = attrs.user
+        def isFirst = attrs.isFirst
+        out << link(controller: "user", action: "show",
+                title: message(code: "showUser.label"),
+                text: user.username, id: user.id, isFirst: isFirst)
     }
 
     /**

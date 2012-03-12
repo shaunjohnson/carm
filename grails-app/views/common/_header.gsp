@@ -445,10 +445,7 @@
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <bc:breadcrumbs>
-        <g:if test="${action == 'list'}">
-            <bc:listSystemComponents/>
-        </g:if>
-        <g:else>
+        <g:if test="${action != 'list'}">
             <bc:listSystems isFirst="true"/>
             <bc:showSystem system="${domain.system}"/>
 
@@ -462,7 +459,7 @@
                 <bc:showSystemComponent systemComponent="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
-        </g:else>
+        </g:if>
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemEnvironment'}">
@@ -471,10 +468,7 @@
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <bc:breadcrumbs>
-        <g:if test="${action == 'list'}">
-            <bc:listSystemEnvironments/>
-        </g:if>
-        <g:else>
+        <g:if test="${action != 'list'}">
             <bc:listSystems isFirst="true"/>
             <bc:showSystem system="${domain.system}"/>
 
@@ -488,6 +482,23 @@
                 <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+        </g:if>
+    </bc:breadcrumbs>
+</g:elseif>
+<g:elseif test="${controller == 'user'}">
+    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
+
+    <carm:pageHeaderLabel action="${action}" beanName="${domain?.username}" entityName="${entityName}"/>
+
+    <bc:breadcrumbs>
+        <bc:administration isFirst="true"/>
+
+        <g:if test="${action == 'list'}">
+            <bc:listUsers/>
+        </g:if>
+        <g:else>
+            <bc:listUsers/>
+            <bc:showUser user="${domain}"/>
         </g:else>
     </bc:breadcrumbs>
 </g:elseif>

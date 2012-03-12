@@ -20,7 +20,7 @@
 <g:if test="${size}">
     <g:each in="${activitySubList}" var="activity" status="i">
         <p>
-            <g:link class="activityUsername" controller="user" action="show" id="${activity.username}">
+            <g:link class="activityUsername" controller="user" action="show" params="[username: activity.username]">
                 ${activity.username}
             </g:link>
 
