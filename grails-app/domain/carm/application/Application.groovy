@@ -27,7 +27,7 @@ class Application {
         type(nullable: false)
         project(nullable: false)
         sourceControlRepository(nullable: false)
-        sourceControlPath(maxSize: 200, nullable: true)
+        sourceControlPath(maxSize: 200, nullable: true, unique: 'sourceControlRepository')
         system(nullable: true)
         buildInstructions(nullable: true)
         deployInstructions(nullable: true)
