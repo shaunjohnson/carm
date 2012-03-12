@@ -28,7 +28,7 @@ class ApplicationRelease {
     Date lastUpdated
 
     static constraints = {
-        releaseNumber(maxSize: 20, nullable: false, blank: false)
+        releaseNumber(maxSize: 20, nullable: false, blank: false, unique: 'application')
         changeLog(nullable: true)
         buildInstructions(nullable: true)
         buildPath(maxSize: 100, nullable: true)
