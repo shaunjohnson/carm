@@ -66,9 +66,10 @@ class ProjectService {
 
         log.debug "$prefix entered, project=$project"
 
-        project.delete()
-
-        carmSecurityService.deleteAllPermissions(project)
+        Project.withTransaction {
+            project.delete()
+            carmSecurityService.deleteAllPermissions(project)
+        }
 
         log.debug "$prefix leaving"
     }
