@@ -23,12 +23,10 @@
                     <g:message code="application.project.label" default="Project"/> -
                     <g:message code="applicationRelease.application.label" default="Application"/>
                 </th>
-                <th>
-                    <g:message code="applicationRelease.releaseNumber.label" default="Release Number"/>
-                </th>
-                <th>
-                    <g:message code="applicationRelease.releaseState.label" default="Release State"/>
-                </th>
+                <g:sortableColumn property="releaseNumber"
+                                  title="${message(code: 'applicationRelease.releaseNumber.label', default: 'Release Number')}"/>
+                <g:sortableColumn property="releaseState"
+                                  title="${message(code: 'applicationRelease.releaseState.label', default: 'Release State')}"/>
                 <th>
                     <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
                 </th>
