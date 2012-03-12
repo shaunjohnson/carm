@@ -32,7 +32,7 @@ environments {
             }
 
             dbCreate = "update" // one of 'create', 'create-drop', 'update'
-            url = "jdbc:mysql://localhost/carmsbx"
+            url = "jdbc:mysql://localhost/carmdev"
         }
     }
     test {
