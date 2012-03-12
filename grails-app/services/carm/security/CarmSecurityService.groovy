@@ -188,7 +188,7 @@ class CarmSecurityService {
         log.debug "$prefix entered. domainObject=$domainObject, principals=$principals, permission=$permission"
 
         if (principals) {
-            deleteAllPermissions(domainObject, permission)
+            deleteAllPermissions(domainObject)
 
             if (principals instanceof String) {
                 addPermission domainObject, principals, permission
