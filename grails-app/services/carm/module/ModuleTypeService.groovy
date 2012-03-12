@@ -58,11 +58,18 @@ class ModuleTypeService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ModuleType moduleType) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, moduleType=$moduleType"
+
         if (isInUse(moduleType)) {
+            log.error "$prefix Module type is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         moduleType.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

@@ -62,9 +62,15 @@ class ProjectService {
     @Transactional
     @PreAuthorize("hasPermission(#project, delete) or hasPermission(#project, admin)")
     void delete(Project project) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, project=$project"
+
         project.delete()
 
         carmSecurityService.deleteAllPermissions(project)
+
+        log.debug "$prefix leaving"
     }
 
     /**

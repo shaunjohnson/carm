@@ -116,11 +116,17 @@ class ApplicationDeploymentService {
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void delete(Project project, ApplicationDeployment applicationDeployment) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, applicationDeployment=$applicationDeployment"
+
 //        if (isInUse(applicationDeployment)) {
 //            throw new DomainInUseException()
 //        }
 
         applicationDeployment.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

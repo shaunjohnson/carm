@@ -47,7 +47,13 @@ class SourceControlUserService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlUser sourceControlUser) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, sourceControlUser=$sourceControlUser"
+
         sourceControlUser.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

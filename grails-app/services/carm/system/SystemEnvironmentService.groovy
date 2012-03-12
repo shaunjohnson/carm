@@ -64,11 +64,18 @@ class SystemEnvironmentService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SystemEnvironment systemEnvironment) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, systemEnvironment=$systemEnvironment"
+
         if (isInUse(systemEnvironment)) {
+            log.error "$prefix System environment is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         systemEnvironment.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

@@ -63,11 +63,18 @@ class SourceControlServerService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlServer sourceControlServer) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, sourceControlServer=$sourceControlServer"
+
         if (isInUse(sourceControlServer)) {
+            log.debug "$prefix Source control server is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         sourceControlServer.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

@@ -64,11 +64,18 @@ class SystemComponentService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SystemComponent systemComponent) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, systemComponent=$systemComponent"
+
         if (isInUse(systemComponent)) {
+            log.error "$prefix System component is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         systemComponent.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

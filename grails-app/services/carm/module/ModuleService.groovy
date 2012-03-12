@@ -59,7 +59,13 @@ class ModuleService {
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void delete(Project project, Module module) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, module=$module"
+
         module.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

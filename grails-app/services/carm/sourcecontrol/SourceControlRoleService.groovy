@@ -52,18 +52,25 @@ class SourceControlRoleService {
     }
 
     /**
-     * Deletes the provided SourceControlRepository object.
+     * Deletes the provided SourceControlRole object.
      *
-     * @param sourceControlRole SourceControlRepository object to delete
+     * @param sourceControlRole SourceControlRole object to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(SourceControlRole sourceControlRole) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, sourceControlRole=$sourceControlRole"
+
         if (isInUse(sourceControlRole)) {
+            log.error "$prefix Source control role is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         sourceControlRole.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

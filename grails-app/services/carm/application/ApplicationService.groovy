@@ -77,7 +77,13 @@ class ApplicationService {
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void delete(Project project, Application application) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, application=$application"
+
         application.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

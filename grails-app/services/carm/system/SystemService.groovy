@@ -74,11 +74,18 @@ class SystemService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(System system) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, system=$system"
+
         if (isInUse(system)) {
+            log.error "$prefix System is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         system.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

@@ -58,11 +58,18 @@ class ApplicationReleaseTestStateService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ApplicationReleaseTestState applicationReleaseTestState) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, applicationReleaseTestState=$applicationReleaseTestState"
+
         if (isInUse(applicationReleaseTestState)) {
+            log.error "Application release test state is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         applicationReleaseTestState.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

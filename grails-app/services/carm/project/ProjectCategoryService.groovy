@@ -57,11 +57,18 @@ class ProjectCategoryService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ProjectCategory projectCategory) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, projectCategory=$projectCategory"
+
         if (isInUse(projectCategory)) {
+            log.error "$prefix Project category is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         projectCategory.delete()
+        
+        log.debug "$prefix leving"
     }
 
     /**

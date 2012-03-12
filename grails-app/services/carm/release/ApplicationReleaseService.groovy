@@ -216,11 +216,18 @@ class ApplicationReleaseService {
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     void delete(Project project, ApplicationRelease applicationRelease) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, applicationRelease=$applicationRelease"
+        
         if (isInUse(applicationRelease)) {
+            log.error "$prefix Application release is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         applicationRelease.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**
@@ -327,11 +334,17 @@ class ApplicationReleaseService {
     @Transactional
     @PreAuthorize("hasPermission(#project, admin)")
     def submit(Project project, ApplicationRelease applicationRelease) {
+        def prefix = "submit() :"
+
+        log.debug "$prefix entered, applicationRelease=$applicationRelease"
+
         applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
         applicationRelease.submittedBy = springSecurityService.currentUser
         applicationRelease.dateSubmitted = new Date()
         applicationRelease.save()
 
         addToHistories(applicationRelease, "Submitted", null);
+        
+        log.debug "$prefix Application release submitted"
     }
 }

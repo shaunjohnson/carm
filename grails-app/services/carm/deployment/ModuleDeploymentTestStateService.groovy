@@ -58,11 +58,18 @@ class ModuleDeploymentTestStateService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ModuleDeploymentTestState moduleDeploymentTestState) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, moduleDeploymentTestState=$moduleDeploymentTestState"
+
         if (isInUse(moduleDeploymentTestState)) {
+            log.error "$prefix Module deployment test state is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         moduleDeploymentTestState.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**

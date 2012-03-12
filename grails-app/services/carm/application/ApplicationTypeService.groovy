@@ -58,11 +58,18 @@ class ApplicationTypeService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(ApplicationType applicationType) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, applicationType=$applicationType"
+
         if (isInUse(applicationType)) {
+            log.error "$prefix Application type is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         applicationType.delete()
+        
+        log.debug "$prefix leaving"
     }
 
     /**
