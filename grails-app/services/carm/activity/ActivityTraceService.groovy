@@ -11,6 +11,7 @@ import carm.module.Module
 import carm.application.Application
 import carm.release.ApplicationRelease
 import carm.system.System
+import carm.system.SystemComponent
 
 class ActivityTraceService implements ApplicationContextAware {
 
@@ -26,6 +27,7 @@ class ActivityTraceService implements ApplicationContextAware {
     private static final String MODULE_TYPE = Module.class.name
     private static final String PROJECT_TYPE = Project.class.name
     private static final String SYSTEM_TYPE = System.class.name
+    private static final String SYSTEM_COMPONENT_TYPE = SystemComponent.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"
@@ -84,6 +86,16 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     int countActivityBySystem(System system) {
         ActivityTrace.countByOid(generateOid(SYSTEM_TYPE, system.id))
+    }
+
+    /**
+     * Counts the total number of activity events for a SystemComponent.
+     *
+     * @param systemComponent SystemComponent used for query
+     * @return Number of ActivityTrace objects
+     */
+    int countActivityBySystemComponent(SystemComponent systemComponent) {
+        ActivityTrace.countByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id))
     }
 
     /**
@@ -151,6 +163,17 @@ class ActivityTraceService implements ApplicationContextAware {
         ActivityTrace.findAllByOid(generateOid(SYSTEM_TYPE, system.id), buildQueryParams(params))
     }
 
+    /**
+     * Lists latest activity events for a SystemComponent in reverse chronological order.
+     *
+     * @param systemComponent SystemComponent used for query
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityBySystemComponent(SystemComponent systemComponent, Map params) {
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id), buildQueryParams(params))
+    }
+
 
     /**
      * Application object was created.
@@ -161,8 +184,8 @@ class ActivityTraceService implements ApplicationContextAware {
         String projectOid = generateOid(PROJECT_TYPE, application.project.id)
         insertActivityTrace(projectOid, APPLICATION_TYPE, CREATED, application.id, application.name)
 
-        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
-        insertActivityTrace(applicationOid, APPLICATION_TYPE, CREATED, application.id, application.name)
+        String oid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(oid, APPLICATION_TYPE, CREATED, application.id, application.name)
     }
 
     /**
@@ -171,8 +194,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param application Application that was deleted
      */
     void applicationDeleted(Application application) {
-        String oid = generateOid(PROJECT_TYPE, application.project.id)
-        insertActivityTrace(oid, APPLICATION_TYPE, DELETED, application.id, application.name)
+        String projectOid = generateOid(PROJECT_TYPE, application.project.id)
+        insertActivityTrace(projectOid, APPLICATION_TYPE, DELETED, application.id, application.name)
     }
 
     /**
@@ -181,6 +204,9 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param application Application that was updated
      */
     void applicationUpdated(Application application) {
+        String projectOid = generateOid(PROJECT_TYPE, application.project.id)
+        insertActivityTrace(projectOid, APPLICATION_TYPE, UPDATED, application.id, application.name)
+
         String oid = generateOid(APPLICATION_TYPE, application.id)
         insertActivityTrace(oid, APPLICATION_TYPE, UPDATED, application.id, application.name)
     }
@@ -284,8 +310,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param module Module that was deleted
      */
     void moduleDeleted(Module module) {
-        String oid = generateOid(APPLICATION_TYPE, module.id)
-        insertActivityTrace(oid, MODULE_TYPE, DELETED, module.id, module.name)
+        String applicationOid = generateOid(APPLICATION_TYPE, module.id)
+        insertActivityTrace(applicationOid, MODULE_TYPE, DELETED, module.id, module.name)
     }
 
     /**
@@ -294,6 +320,9 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param module Module that was updated
      */
     void moduleUpdated(Module module) {
+        String applicationOid = generateOid(APPLICATION_TYPE, module.application.id)
+        insertActivityTrace(applicationOid, MODULE_TYPE, UPDATED, module.id, module.name)
+
         String oid = generateOid(MODULE_TYPE, module.id)
         insertActivityTrace(oid, MODULE_TYPE, UPDATED, module.id, module.name)
     }
@@ -317,8 +346,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project that was deleted
      */
     void projectDeleted(Project project) {
-        String oid = generateOid(ROOT_TYPE, ROOT_ID)
-        insertActivityTrace(oid, PROJECT_TYPE, DELETED, project.id, project.name)
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, PROJECT_TYPE, DELETED, project.id, project.name)
     }
 
     /**
@@ -327,6 +356,9 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project that was updated
      */
     void projectUpdated(Project project) {
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, PROJECT_TYPE, UPDATED, project.id, project.name)
+
         String oid = generateOid(PROJECT_TYPE, project.id)
         insertActivityTrace(oid, PROJECT_TYPE, UPDATED, project.id, project.name)
     }
@@ -350,8 +382,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param system System that was deleted
      */
     void systemDeleted(System system) {
-        String oid = generateOid(ROOT_TYPE, ROOT_ID)
-        insertActivityTrace(oid, SYSTEM_TYPE, DELETED, system.id, system.name)
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, SYSTEM_TYPE, DELETED, system.id, system.name)
     }
 
     /**
@@ -367,6 +399,42 @@ class ActivityTraceService implements ApplicationContextAware {
         insertActivityTrace(oid, SYSTEM_TYPE, UPDATED, system.id, system.name)
     }
 
+    /**
+     * SystemComponent object was created.
+     *
+     * @param systemComponent SystemComponent that was created
+     */
+    void systemComponentCreated(SystemComponent systemComponent) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, CREATED, systemComponent.id, systemComponent.name)
+
+        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id)
+        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, CREATED, systemComponent.id, systemComponent.name)
+    }
+
+    /**
+     * SystemComponent object was deleted.
+     *
+     * @param systemComponent SystemComponent that was deleted
+     */
+    void systemComponentDeleted(SystemComponent systemComponent) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, DELETED, systemComponent.id, systemComponent.name)
+    }
+
+    /**
+     * SystemComponent object was updated.
+     *
+     * @param systemComponent SystemComponent that was updated
+     */
+    void systemComponentUpdated(SystemComponent systemComponent) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, UPDATED, systemComponent.id, systemComponent.name)
+
+        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id)
+        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, UPDATED, systemComponent.id, systemComponent.name)
+    }
+
 
     /**
      * Inserts a new ActivityTrace record
@@ -379,10 +447,8 @@ class ActivityTraceService implements ApplicationContextAware {
         ActivityTrace.withNewSession {
             ActivityTrace trace = new ActivityTrace(oid: oid, action: action, objectId: objectId, objectName: objectName,
                     objectType: objectType, dateOccurred: new DateTime(), username: carmSecurityService.currentUsername)
-            if (trace.save()) {
-                // println "Successful save"
-            }
-            else {
+
+            if (!trace.save()) {
                 println "Error on save" + trace.errors
             }
         }

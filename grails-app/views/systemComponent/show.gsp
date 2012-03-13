@@ -79,6 +79,9 @@
             </sec:ifAllGranted>
         </carm:showHideDetails>
     </div>
+
+    <g:render template="/common/activity"
+              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemComponentInstance.id]"/>
 </div>
 </body>
 </html>

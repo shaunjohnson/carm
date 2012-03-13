@@ -1,6 +1,8 @@
 package carm.system
 
 class SystemComponent {
+    def activityTraceService
+
     String name
     String description
 
@@ -21,5 +23,17 @@ class SystemComponent {
 
     public String toString() {
         return name
+    }
+
+    def afterInsert() {
+        activityTraceService?.systemComponentCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService?.systemComponentDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService?.systemComponentUpdated(this)
     }
 }

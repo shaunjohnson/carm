@@ -8,6 +8,7 @@ class SystemComponentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def systemComponentService
     def systemService
 
@@ -53,7 +54,10 @@ class SystemComponentController {
             redirect(action: "list")
         }
         else {
-            [systemComponentInstance: systemComponentInstance]
+            [
+                    activityList: activityTraceService.listActivityBySystemComponent(systemComponentInstance, [:]),
+                    systemComponentInstance: systemComponentInstance
+            ]
         }
     }
 
@@ -119,6 +123,23 @@ class SystemComponentController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity() {
+        def systemComponentInstance = systemComponentService.get(params.id)
+        if (!systemComponentInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+            [
+                    systemComponentInstance: systemComponentInstance,
+                    activityList: activityTraceService.listActivityBySystemComponent(systemComponentInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystemComponent(systemComponentInstance)
+            ]
         }
     }
 }

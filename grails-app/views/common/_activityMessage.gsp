@@ -1,4 +1,4 @@
-<%@ page import="carm.system.System; carm.release.ApplicationRelease; carm.project.Project; carm.application.Application; carm.module.Module; carm.activity.ActivityAction" %>
+<%@ page import="carm.system.SystemComponent; carm.system.System; carm.release.ApplicationRelease; carm.project.Project; carm.application.Application; carm.module.Module; carm.activity.ActivityAction" %>
 
 <g:set var="activityMessage" value="${message(code: "activityTrace.${activity.objectType}.${activity.action}", args: [activity.objectName])}"/>
 
@@ -25,6 +25,11 @@
 <g:elseif test="${activity.objectType == System.class.name && activity.action != ActivityAction.DELETED && System.exists(activity.objectId)}">
     <g:link controller="system" action="show" id="${activity.objectId}">
         ${activityMessage.encodeAsHTML()}
+    </g:link>
+</g:elseif>
+<g:elseif test="${activity.objectType == SystemComponent.class.name && activity.action != ActivityAction.DELETED && SystemComponent.exists(activity.objectId)}">
+    <g:link controller="systemComponent" action="show" id="${activity.objectId}">
+         ${activityMessage.encodeAsHTML()}
     </g:link>
 </g:elseif>
 <g:else>
