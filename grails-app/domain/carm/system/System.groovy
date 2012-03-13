@@ -1,6 +1,8 @@
 package carm.system
 
 class System {
+    def activityTraceService
+
     String name
     String description
     List environments
@@ -21,5 +23,17 @@ class System {
 
     public String toString() {
         return name
+    }
+
+    def afterInsert() {
+        activityTraceService?.systemCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService?.systemDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService?.systemUpdated(this)
     }
 }

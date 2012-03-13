@@ -10,6 +10,7 @@ import carm.project.Project
 import carm.module.Module
 import carm.application.Application
 import carm.release.ApplicationRelease
+import carm.system.System
 
 class ActivityTraceService implements ApplicationContextAware {
 
@@ -24,6 +25,7 @@ class ActivityTraceService implements ApplicationContextAware {
     private static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
     private static final String MODULE_TYPE = Module.class.name
     private static final String PROJECT_TYPE = Project.class.name
+    private static final String SYSTEM_TYPE = System.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"
@@ -50,9 +52,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param application Application used for query
      * @return Number of ActivityTrace objects
      */
-    def countActivityByApplication(Application application) {
-        String oid = generateOid(APPLICATION_TYPE, application.id)
-        ActivityTrace.countByOid(oid)
+    int countActivityByApplication(Application application) {
+        ActivityTrace.countByOid(generateOid(APPLICATION_TYPE, application.id))
     }
 
     /**
@@ -61,9 +62,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param module Module used for query
      * @return Number of ActivityTrace objects
      */
-    def countActivityByModule(Module module) {
-        String oid = generateOid(MODULE_TYPE, module.id)
-        ActivityTrace.countByOid(oid)
+    int countActivityByModule(Module module) {
+        ActivityTrace.countByOid(generateOid(MODULE_TYPE, module.id))
     }
 
     /**
@@ -72,9 +72,18 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project used for query
      * @return Number of ActivityTrace objects
      */
-    def countActivityByProject(Project project) {
-        String oid = generateOid(PROJECT_TYPE, project.id)
-        ActivityTrace.countByOid(oid)
+    int countActivityByProject(Project project) {
+        ActivityTrace.countByOid(generateOid(PROJECT_TYPE, project.id))
+    }
+
+    /**
+     * Counts the total number of activity events for a System.
+     *
+     * @param system System used for query
+     * @return Number of ActivityTrace objects
+     */
+    int countActivityBySystem(System system) {
+        ActivityTrace.countByOid(generateOid(SYSTEM_TYPE, system.id))
     }
 
     /**
@@ -83,9 +92,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param project Project used for query
      * @return Number of ActivityTrace objects
      */
-    def countActivityByRoot() {
-        String oid = generateOid(ROOT_TYPE, ROOT_ID)
-        ActivityTrace.countByOid(oid)
+    int countActivityByRoot() {
+        ActivityTrace.countByOid(generateOid(ROOT_TYPE, ROOT_ID))
     }
 
 
@@ -97,8 +105,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityByApplication(Application application, Map params) {
-        String oid = generateOid(APPLICATION_TYPE, application.id)
-        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(APPLICATION_TYPE, application.id), buildQueryParams(params))
     }
 
     /**
@@ -109,8 +116,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityByModule(Module module, Map params) {
-        String oid = generateOid(MODULE_TYPE, module.id)
-        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(MODULE_TYPE, module.id), buildQueryParams(params))
     }
 
     /**
@@ -121,8 +127,7 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityByProject(Project project, Map params) {
-        String oid = generateOid(PROJECT_TYPE, project.id)
-        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(PROJECT_TYPE, project.id), buildQueryParams(params))
     }
 
     /**
@@ -132,8 +137,18 @@ class ActivityTraceService implements ApplicationContextAware {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityByRoot(Map params) {
-        String oid = generateOid(ROOT_TYPE, ROOT_ID)
-        ActivityTrace.findAllByOid(oid, buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(ROOT_TYPE, ROOT_ID), buildQueryParams(params))
+    }
+
+    /**
+     * Lists latest activity events for a System in reverse chronological order.
+     *
+     * @param system System used for query
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityBySystem(System system, Map params) {
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_TYPE, system.id), buildQueryParams(params))
     }
 
 
@@ -141,9 +156,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Application object was created.
      *
      * @param application Application that was created
-     * @return
      */
-    def applicationCreated(Application application) {
+    void applicationCreated(Application application) {
         String projectOid = generateOid(PROJECT_TYPE, application.project.id)
         insertActivityTrace(projectOid, APPLICATION_TYPE, CREATED, application.id, application.name)
 
@@ -155,9 +169,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Application object was deleted.
      *
      * @param application Application that was deleted
-     * @return
      */
-    def applicationDeleted(Application application) {
+    void applicationDeleted(Application application) {
         String oid = generateOid(PROJECT_TYPE, application.project.id)
         insertActivityTrace(oid, APPLICATION_TYPE, DELETED, application.id, application.name)
     }
@@ -166,9 +179,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Application object was updated.
      *
      * @param application Application that was updated
-     * @return
      */
-    def applicationUpdated(Application application) {
+    void applicationUpdated(Application application) {
         String oid = generateOid(APPLICATION_TYPE, application.id)
         insertActivityTrace(oid, APPLICATION_TYPE, UPDATED, application.id, application.name)
     }
@@ -177,9 +189,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * ApplicationRelease object was completed.
      *
      * @param applicationRelease ApplicationRelease that was completed
-     * @return
      */
-    def applicationReleaseCompleted(ApplicationRelease applicationRelease) {
+    void applicationReleaseCompleted(ApplicationRelease applicationRelease) {
         Application application = applicationRelease.application
         String objectName = "${application.name}:${applicationRelease.releaseNumber}"
 
@@ -194,9 +205,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * ApplicationRelease object was created.
      *
      * @param applicationRelease ApplicationRelease that was created
-     * @return
      */
-    def applicationReleaseCreated(ApplicationRelease applicationRelease) {
+    void applicationReleaseCreated(ApplicationRelease applicationRelease) {
         Application application = applicationRelease.application
         String objectName = "${application.name}:${applicationRelease.releaseNumber}"
 
@@ -211,9 +221,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * ApplicationRelease object was deleted.
      *
      * @param applicationRelease ApplicationRelease that was deleted
-     * @return
      */
-    def applicationReleaseDeleted(ApplicationRelease applicationRelease) {
+    void applicationReleaseDeleted(ApplicationRelease applicationRelease) {
         Application application = applicationRelease.application
         String objectName = "${application.name}:${applicationRelease.releaseNumber}"
 
@@ -228,9 +237,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * ApplicationRelease object was submitted.
      *
      * @param applicationRelease ApplicationRelease that was submitted
-     * @return
      */
-    def applicationReleaseSubmitted(ApplicationRelease applicationRelease) {
+    void applicationReleaseSubmitted(ApplicationRelease applicationRelease) {
         Application application = applicationRelease.application
         String objectName = "${application.name}:${applicationRelease.releaseNumber}"
 
@@ -245,9 +253,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * ApplicationRelease object was updated.
      *
      * @param applicationRelease ApplicationRelease that was updated
-     * @return
      */
-    def applicationReleaseUpdated(ApplicationRelease applicationRelease) {
+    void applicationReleaseUpdated(ApplicationRelease applicationRelease) {
         Application application = applicationRelease.application
         String objectName = "${application.name}:${applicationRelease.releaseNumber}"
 
@@ -262,9 +269,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Module object was created.
      *
      * @param module Module that was created
-     * @return
      */
-    def moduleCreated(Module module) {
+    void moduleCreated(Module module) {
         String applicationOid = generateOid(APPLICATION_TYPE, module.application.id)
         insertActivityTrace(applicationOid, MODULE_TYPE, CREATED, module.id, module.name)
 
@@ -276,9 +282,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Module object was deleted.
      *
      * @param module Module that was deleted
-     * @return
      */
-    def moduleDeleted(Module module) {
+    void moduleDeleted(Module module) {
         String oid = generateOid(APPLICATION_TYPE, module.id)
         insertActivityTrace(oid, MODULE_TYPE, DELETED, module.id, module.name)
     }
@@ -287,9 +292,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Module object was updated.
      *
      * @param module Module that was updated
-     * @return
      */
-    def moduleUpdated(Module module) {
+    void moduleUpdated(Module module) {
         String oid = generateOid(MODULE_TYPE, module.id)
         insertActivityTrace(oid, MODULE_TYPE, UPDATED, module.id, module.name)
     }
@@ -298,9 +302,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Project object was created.
      *
      * @param project Project that was created
-     * @return
      */
-    def projectCreated(Project project) {
+    void projectCreated(Project project) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(rootOid, PROJECT_TYPE, CREATED, project.id, project.name)
 
@@ -312,9 +315,8 @@ class ActivityTraceService implements ApplicationContextAware {
      * Project object was deleted.
      *
      * @param project Project that was deleted
-     * @return
      */
-    def projectDeleted(Project project) {
+    void projectDeleted(Project project) {
         String oid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(oid, PROJECT_TYPE, DELETED, project.id, project.name)
     }
@@ -323,11 +325,43 @@ class ActivityTraceService implements ApplicationContextAware {
      * Project object was updated.
      *
      * @param project Project that was updated
-     * @return
      */
-    def projectUpdated(Project project) {
+    void projectUpdated(Project project) {
         String oid = generateOid(PROJECT_TYPE, project.id)
         insertActivityTrace(oid, PROJECT_TYPE, UPDATED, project.id, project.name)
+    }
+
+    /**
+     * System object was created.
+     *
+     * @param system System that was created
+     */
+    void systemCreated(System system) {
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, SYSTEM_TYPE, CREATED, system.id, system.name)
+
+        String projectOid = generateOid(SYSTEM_TYPE, system.id)
+        insertActivityTrace(projectOid, SYSTEM_TYPE, CREATED, system.id, system.name)
+    }
+
+    /**
+     * System object was deleted.
+     *
+     * @param system System that was deleted
+     */
+    void systemDeleted(System system) {
+        String oid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(oid, SYSTEM_TYPE, DELETED, system.id, system.name)
+    }
+
+    /**
+     * System object was updated.
+     *
+     * @param system System that was updated
+     */
+    void systemUpdated(System system) {
+        String oid = generateOid(SYSTEM_TYPE, system.id)
+        insertActivityTrace(oid, SYSTEM_TYPE, UPDATED, system.id, system.name)
     }
 
 

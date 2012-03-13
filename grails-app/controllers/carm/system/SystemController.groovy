@@ -8,6 +8,7 @@ class SystemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationDeploymentService
     def applicationService
     def systemService
@@ -48,6 +49,7 @@ class SystemController {
         }
         else {
             [
+                    activityList: activityTraceService.listActivityBySystem(systemInstance, [:]),
                     systemInstance: systemInstance,
                     applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystem(systemInstance)
@@ -184,6 +186,23 @@ class SystemController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity() {
+        def systemInstance = systemService.get(params.id)
+        if (!systemInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+            [
+                    systemInstance: systemInstance,
+                    activityList: activityTraceService.listActivityBySystem(systemInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystem(systemInstance)
+            ]
         }
     }
 }
