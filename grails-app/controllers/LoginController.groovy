@@ -29,7 +29,7 @@ class LoginController {
      */
     def index = {
         if (springSecurityService.isLoggedIn()) {
-                redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
+            redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
         }
         else {
             redirect action: 'auth', params: params
@@ -50,7 +50,7 @@ class LoginController {
         String view = 'auth'
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
         render view: view, model: [postUrl: postUrl,
-                                   rememberMeParameter: config.rememberMe.parameter]
+                rememberMeParameter: config.rememberMe.parameter]
     }
 
     /**
@@ -66,7 +66,7 @@ class LoginController {
      */
     def denied = {
         if (springSecurityService.isLoggedIn() &&
-                    authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+                authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
             // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
             redirect action: 'full', params: params
         }
@@ -86,24 +86,23 @@ class LoginController {
      * Callback after a failed login. Redirects to the auth page with a warning message.
      */
     def authfail = {
-        def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
         String msg = ''
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
         if (exception) {
             if (exception instanceof AccountExpiredException) {
-                    msg = g.message(code: "springSecurity.errors.login.expired")
+                msg = g.message(code: "springSecurity.errors.login.expired")
             }
             else if (exception instanceof CredentialsExpiredException) {
-                    msg = g.message(code: "springSecurity.errors.login.passwordExpired")
+                msg = g.message(code: "springSecurity.errors.login.passwordExpired")
             }
             else if (exception instanceof DisabledException) {
-                    msg = g.message(code: "springSecurity.errors.login.disabled")
+                msg = g.message(code: "springSecurity.errors.login.disabled")
             }
             else if (exception instanceof LockedException) {
-                    msg = g.message(code: "springSecurity.errors.login.locked")
+                msg = g.message(code: "springSecurity.errors.login.locked")
             }
             else {
-                    msg = g.message(code: "springSecurity.errors.login.fail")
+                msg = g.message(code: "springSecurity.errors.login.fail")
             }
         }
 
