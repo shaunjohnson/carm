@@ -5,6 +5,8 @@ import carm.deployment.ApplicationDeployment
 import carm.security.User
 
 class ApplicationRelease {
+    def activityTraceService
+
     String releaseNumber
     String changeLog
     String buildInstructions
@@ -55,5 +57,20 @@ class ApplicationRelease {
 
     public String toString() {
         return "${releaseNumber} : ${application}"
+    }
+
+    def afterInsert() {
+        activityTraceService?.applicationReleaseCreated(this)
+
+        // TODO temporarily mark an application release as completed
+        activityTraceService.applicationReleaseCompleted(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService?.applicationReleaseDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService?.applicationReleaseUpdated(this)
     }
 }

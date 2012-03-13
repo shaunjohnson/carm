@@ -1,9 +1,11 @@
 package carm.activity
 
 public enum ActivityAction {
+    COMPLETED,
     CREATED,
-    UPDATED,
-    DELETED
+    DELETED,
+    SUBMITTED,
+    UPDATED
 
     String getKey() {
         name()

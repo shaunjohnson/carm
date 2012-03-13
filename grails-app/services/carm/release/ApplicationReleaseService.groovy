@@ -14,6 +14,7 @@ class ApplicationReleaseService {
 
     static transactional = false
 
+    def activityTraceService
     def applicationService
     def carmSecurityService
     def moduleService
@@ -195,12 +196,14 @@ class ApplicationReleaseService {
             applicationRelease.addToModuleReleases(new ModuleRelease(applicationRelease: applicationRelease, module: module))
         }
 
-        addToHistories(applicationRelease, "Created", null);
-
         applicationRelease.save()
 
         if (applicationRelease.hasErrors()) {
             applicationRelease.moduleReleases.clear()
+        }
+        else {
+            addToHistories(applicationRelease, "Created", null);
+            // TODO application release is marked completed by default. Refer to ApplicationRelease domain.
         }
 
         log.debug "$prefix returning $applicationRelease"
@@ -345,6 +348,7 @@ class ApplicationReleaseService {
         applicationRelease.save()
 
         addToHistories(applicationRelease, "Submitted", null);
+        activityTraceService.applicationReleaseSubmitted(applicationRelease)
         
         log.debug "$prefix Application release submitted"
     }
