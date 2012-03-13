@@ -69,8 +69,7 @@
                     <g:message code="project.projectOwners.label" default="Project Owners"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:listUsersWithPermission domainObject="${projectInstance}"
-                                                  permission="${BasePermission.ADMINISTRATION}"/>
+                    <g:render template="projectOwners" model="['projectInstance': projectInstance]"/>
                 </td>
             </tr>
             </tbody>

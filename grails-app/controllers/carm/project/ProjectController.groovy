@@ -58,9 +58,10 @@ class ProjectController {
         else {
             [
                     projectInstance: projectInstance,
+                    activityList: activityTraceService.listActivityByProject(projectInstance, [:]),
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingTasks: projectService.findAllPendingTasks(projectInstance),
-                    activityList: activityTraceService.listActivityByProject(projectInstance, [:])
+                    projectOwners: carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
             ]
         }
     }

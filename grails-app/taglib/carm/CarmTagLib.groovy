@@ -192,29 +192,6 @@ class CarmTagLib {
     }
 
     /**
-     * Lists all users with specified permission for the provided domain object. Outputs a static message if there are
-     * no users granted the permission to the provided domain object.
-     *
-     * attrs.domainObject - Domain object to lookup
-     * attrs.permission - Permission used to locate permitted users
-     */
-    def listUsersWithPermission = { attrs ->
-        def domainObject = attrs.domainObject
-        def permission = attrs.permission
-
-        def principals = carmSecurityService.findAllPrincipalsByDomainAndPermission(domainObject, permission)
-
-        if (principals.size()) {
-            out << "<ul>"
-            principals.each { out << "<li>$it</li>" }
-            out << "</ul>"
-        }
-        else {
-            out << message(code: "projectDoesNotHaveAnyOwners.message", default: "This project does not have any owners.")
-        }
-    }
-
-    /**
      * Creates a "move down" link.
      *
      * attrs.controller - Controller to invoke
