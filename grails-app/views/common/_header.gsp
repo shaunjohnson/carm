@@ -89,6 +89,10 @@
                 <bc:showApplicationRelease applicationRelease="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showApplicationRelease applicationRelease="${domain}"/>
+                <bc:label code="allActivity.label" args="[entityName]"/>
+            </g:elseif>
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
@@ -432,6 +436,10 @@
                 <bc:showSystem system="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showSystem system="${domain}"/>
+                <bc:label code="allActivity.label" args="[entityName]"/>
+            </g:elseif>
             <g:elseif test="${action == 'upcomingDeployments'}">
                 <bc:showSystem system="${domain}"/>
                 <bc:upcomingDeploymentsLabel entityName="${entityName}"/>
@@ -459,6 +467,10 @@
                 <bc:showSystemComponent systemComponent="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showSystemComponent systemComponent="${domain}"/>
+                <bc:label code="allActivity.label" args="[entityName]"/>
+            </g:elseif>
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
@@ -481,6 +493,10 @@
             <g:elseif test="${action == 'edit' || action == 'update'}">
                 <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
+            </g:elseif>
+            <g:elseif test="${action == 'listActivity'}">
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:label code="allActivity.label" args="[entityName]"/>
             </g:elseif>
         </g:if>
     </bc:breadcrumbs>

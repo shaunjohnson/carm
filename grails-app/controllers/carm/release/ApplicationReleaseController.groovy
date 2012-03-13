@@ -8,6 +8,7 @@ class ApplicationReleaseController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationService
     def applicationReleaseService
 
@@ -138,6 +139,23 @@ class ApplicationReleaseController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity() {
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
+        if (!applicationReleaseInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+            [
+                    applicationReleaseInstance: applicationReleaseInstance,
+                    activityList: activityTraceService.listActivityByApplicationRelease(applicationReleaseInstance, params),
+                    activityTotal: activityTraceService.countActivityByApplicationRelease(applicationReleaseInstance)
+            ]
         }
     }
 }

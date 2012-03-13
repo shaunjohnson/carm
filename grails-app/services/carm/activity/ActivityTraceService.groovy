@@ -59,6 +59,16 @@ class ActivityTraceService implements ApplicationContextAware {
     }
 
     /**
+     * Counts the total number of activity events for a ApplicationRelease.
+     *
+     * @param applicationRelease ApplicationRelease used for query
+     * @return Number of ActivityTrace objects
+     */
+    int countActivityByApplicationRelease(ApplicationRelease applicationRelease) {
+        ActivityTrace.countByOid(generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id))
+    }
+
+    /**
      * Counts the total number of activity events for a Module.
      *
      * @param module Module used for query
@@ -118,6 +128,17 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     List<ActivityTrace> listActivityByApplication(Application application, Map params) {
         ActivityTrace.findAllByOid(generateOid(APPLICATION_TYPE, application.id), buildQueryParams(params))
+    }
+
+    /**
+     * Lists latest activity events for an ApplicationRelease in reverse chronological order.
+     *
+     * @param applicationRelease ApplicationRelease used for query
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityByApplicationRelease(ApplicationRelease applicationRelease, Map params) {
+        ActivityTrace.findAllByOid(generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id), buildQueryParams(params))
     }
 
     /**
