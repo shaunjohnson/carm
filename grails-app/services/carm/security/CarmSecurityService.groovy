@@ -13,6 +13,7 @@ class CarmSecurityService {
 
     def aclService
     def aclUtilService
+    def springSecurityService
 
     /**
      * Adds a new permission for the provided domain object.
@@ -170,6 +171,24 @@ class CarmSecurityService {
         log.debug "$prefix returning ${principals.size()} principals"
 
         principals.sort()
+    }
+
+    /**
+     * Gets the current User.
+     *
+     * @return Current User object.
+     */
+    User getCurrentUser() {
+        (User)springSecurityService.currentUser
+    }
+    
+    /**
+     * Gets the current username (principle).
+     *
+     * @return Current username
+     */
+    String getCurrentUsername() {
+        springSecurityService?.principal?.username ?: "Unknown"
     }
 
     /**

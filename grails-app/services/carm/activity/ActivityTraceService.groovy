@@ -14,6 +14,7 @@ class ActivityTraceService implements ApplicationContextAware {
 
     static transactional = false
 
+    def carmSecurityService
     def springSecurityService
 
     MessageSource messageSource
@@ -249,7 +250,7 @@ class ActivityTraceService implements ApplicationContextAware {
     private insertActivityTrace(String oid, String objectType, ActivityAction action, Long objectId, String objectName) {
         ActivityTrace.withNewSession {
             def trace = new ActivityTrace(oid: oid, action: action, objectId: objectId, objectName: objectName,
-                    objectType: objectType, dateOccurred: new DateTime(), username: getUsername())
+                    objectType: objectType, dateOccurred: new DateTime(), username: carmSecurityService.currentUsername)
             if (trace.save()) {
                 // println "Successful save"
             }
@@ -279,15 +280,6 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     private String generateSummary(domain, action, args) {
         return messageSource.getMessage("activityTrace.${domain}.${action}", args?.toArray(), LocaleContextHolder.getLocale())
-    }
-
-    /**
-     * Gets the current username (principle).
-     *
-     * @return Current username
-     */
-    private String getUsername() {
-        springSecurityService?.getPrincipal()?.username ?: "Unknown"
     }
 
     /**

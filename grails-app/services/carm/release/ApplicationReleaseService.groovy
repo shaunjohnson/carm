@@ -15,6 +15,7 @@ class ApplicationReleaseService {
     static transactional = false
 
     def applicationService
+    def carmSecurityService
     def moduleService
     def springSecurityService
 
@@ -339,7 +340,7 @@ class ApplicationReleaseService {
         log.debug "$prefix entered, applicationRelease=$applicationRelease"
 
         applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
-        applicationRelease.submittedBy = springSecurityService.currentUser
+        applicationRelease.submittedBy = carmSecurityService.currentUser
         applicationRelease.dateSubmitted = new Date()
         applicationRelease.save()
 
