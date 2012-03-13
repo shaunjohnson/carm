@@ -137,7 +137,6 @@ class ProjectService {
         pendingTasks.sort { it.dateCreated }
     }
 
-
     /**
      * Gets a list of all Project objects where the current user is a project owner.
      *
@@ -180,5 +179,23 @@ class ProjectService {
         }
 
         pendingTasks.sort { it.dateCreated }
+    }
+
+    /**
+     * Finds all project owners for the provided Project instance.
+     *
+     * @param project Project used for querying
+     * @return List of project owner usernames
+     */
+    List<String> findAllProjectOwners(Project project) {
+        carmSecurityService.findAllPrincipalsByDomainAndPermission(project, BasePermission.ADMINISTRATION)
+    }
+
+    boolean isProjectOwner(Project project) {
+        if (!project) {
+            return false
+        }
+
+        carmSecurityService.hasPermission(project, BasePermission.ADMINISTRATION)
     }
 }

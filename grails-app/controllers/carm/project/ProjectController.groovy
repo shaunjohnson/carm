@@ -61,7 +61,7 @@ class ProjectController {
                     activityList: activityTraceService.listActivityByProject(projectInstance, [:]),
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingTasks: projectService.findAllPendingTasks(projectInstance),
-                    projectOwners: carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
+                    projectOwners: projectService.findAllProjectOwners(projectInstance)
             ]
         }
     }
@@ -73,12 +73,10 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            def projectOwners = carmSecurityService.findAllPrincipalsByDomainAndPermission(projectInstance, BasePermission.ADMINISTRATION)
-
             [
                     projectCategoryList: projectCategoryService.list(),
                     projectInstance: projectInstance,
-                    projectOwners: projectOwners,
+                    projectOwners: projectService.findAllProjectOwners(projectInstance),
                     projectOwnerList: User.listOrderByUsername()
             ]
         }

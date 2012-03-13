@@ -192,6 +192,17 @@ class CarmSecurityService {
     }
 
     /**
+     * Determines if the current user has the specified permission on the provided object.
+     *
+     * @param domainObject Object to test
+     * @param permission Permission to test
+     * @return True if the current user has the permission on this domain object
+     */
+    boolean hasPermission(domainObject, Permission permission) {
+        aclUtilService.hasPermission(springSecurityService.authentication, domainObject, permission)
+    }
+
+    /**
      * Replaces existing permissions with new ones for the provided principals.
      *
      * @param domainObject Domain object to which to grant access.
