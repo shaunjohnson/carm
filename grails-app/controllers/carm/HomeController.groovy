@@ -1,10 +1,7 @@
 package carm
 
-import carm.system.System
 import carm.project.Project
 import carm.release.ApplicationRelease
-import carm.project.ProjectCategory
-import carm.application.Application
 
 class HomeController {
     def activityTraceService
@@ -25,7 +22,6 @@ class HomeController {
         }
 
         [
-                applicationReleaseInstanceList: ApplicationRelease.listOrderByApplication(),
                 projectCategoryList: projectCategoryList,
                 systemInstanceList: systemService.findAllByProject(myProjects),
                 activityList: activityTraceService.listActivityByRoot([:]),
