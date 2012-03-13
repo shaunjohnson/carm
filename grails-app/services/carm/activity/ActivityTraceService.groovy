@@ -350,6 +350,9 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param system System that was deleted
      */
     void systemDeleted(System system) {
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, SYSTEM_TYPE, DELETED, system.id, system.name)
+
         String oid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(oid, SYSTEM_TYPE, DELETED, system.id, system.name)
     }
@@ -360,6 +363,9 @@ class ActivityTraceService implements ApplicationContextAware {
      * @param system System that was updated
      */
     void systemUpdated(System system) {
+        String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
+        insertActivityTrace(rootOid, SYSTEM_TYPE, UPDATED, system.id, system.name)
+
         String oid = generateOid(SYSTEM_TYPE, system.id)
         insertActivityTrace(oid, SYSTEM_TYPE, UPDATED, system.id, system.name)
     }
