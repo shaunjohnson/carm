@@ -22,12 +22,12 @@ class ActivityTraceService implements ApplicationContextAware {
 
     MessageSource messageSource
 
-    private static final String APPLICATION_TYPE = Application.class.name
-    private static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
-    private static final String MODULE_TYPE = Module.class.name
-    private static final String PROJECT_TYPE = Project.class.name
-    private static final String SYSTEM_TYPE = System.class.name
-    private static final String SYSTEM_COMPONENT_TYPE = SystemComponent.class.name
+    public static final String APPLICATION_TYPE = Application.class.name
+    public static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
+    public static final String MODULE_TYPE = Module.class.name
+    public static final String PROJECT_TYPE = Project.class.name
+    public static final String SYSTEM_TYPE = System.class.name
+    public static final String SYSTEM_COMPONENT_TYPE = SystemComponent.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"

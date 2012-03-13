@@ -16,7 +16,7 @@
                     </g:link>
                 </td>
                 <td>
-                    <g:render template="/common/activityMessage" model="[activity: activity]"/>
+                    <carm:activityMessage activity="${activity}"/>
                 </td>
                 <td>
                     <carm:formatDateTimePeriod value="${activity.dateOccurred}"/>

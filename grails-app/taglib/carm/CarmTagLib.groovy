@@ -13,13 +13,19 @@ import carm.sourcecontrol.SourceControlServer
 import carm.sourcecontrol.SourceControlRole
 import org.joda.time.DateTime
 import org.joda.time.Period
+import carm.system.System
 import carm.system.SystemEnvironment
 import carm.deployment.ModuleDeploymentTestState
+import carm.application.Application
+import carm.activity.ActivityAction
+import carm.module.Module
+import carm.project.Project
 
 class CarmTagLib {
 
     static namespace = "carm"
 
+    def activityTraceService
     def applicationReleaseService
     def applicationReleaseTestStateService
     def applicationTypeService
@@ -33,6 +39,50 @@ class CarmTagLib {
     def systemComponentService
     def systemEnvironmentService
     def systemService
+
+    /**
+     * Outputs an ActivityTrace object.
+     *
+     * attrs.activity - ActivityTrace object being outputted
+     */
+    def activityMessage = { attrs ->
+        def activity = attrs.activity
+        def activityMessage = message(code: "activityTrace.${activity.objectType}.${activity.action}", args: [activity.objectName])
+
+        def controller = null;
+        def title = null
+        if (activity.action != ActivityAction.DELETED) {
+            if (activity.objectType == activityTraceService.APPLICATION_TYPE && Application.exists(activity.objectId)) {
+                controller = "application"
+                title = message(code: "showApplication.label", default: "Show Application")
+            }
+            else if (activity.objectType == activityTraceService.MODULE_TYPE && Module.exists(activity.objectId)) {
+                controller = "module"
+                title = message(code: "showModule.label", default: "Show Module")
+            }
+            else if (activity.objectType == activityTraceService.PROJECT_TYPE && Project.exists(activity.objectId)) {
+                controller = "project"
+                title = message(code: "showProject.label", default: "Show Project")
+            }
+            else if (activity.objectType == activityTraceService.SYSTEM_TYPE && System.exists(activity.objectId)) {
+                controller = "system"
+                title = message(code: "showSystem.label", default: "Show System")
+            }
+            else if (activity.objectType == activityTraceService.SYSTEM_COMPONENT_TYPE && SystemComponent.exists(activity.objectId)) {
+                controller = "systemComponent"
+                title = message(code: "showSystemComponent.label", default: "Show System Component")
+            }
+        }
+
+        if (controller) {
+            out << link(controller: controller, action: "show", id: "${activity.objectId}", title: title) {
+                activityMessage.encodeAsHTML()
+            }
+        }
+        else {
+            out << activityMessage.encodeAsHTML()
+        }
+    }
 
     /**
      * Outputs a page header and breadcrumbs.
@@ -248,7 +298,7 @@ class CarmTagLib {
         out << '</div>'
 
         out << '<div class="clearning"></div>'
-        
+
         out << '</div>'
     }
 

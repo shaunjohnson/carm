@@ -24,7 +24,7 @@
                 ${activity.username}
             </g:link>
 
-            <g:render template="/common/activityMessage" model="[activity: activity]"/>
+            <carm:activityMessage activity="${activity}"/>
 
             <br>
 
