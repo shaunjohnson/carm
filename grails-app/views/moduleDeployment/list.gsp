@@ -20,7 +20,8 @@
             <thead>
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'module.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="name" title="${message(code: 'applicationRelease.releaseNumber.label', default: 'Release Number')}"/>
+                <g:sortableColumn property="name"
+                                  title="${message(code: 'applicationRelease.releaseNumber.label', default: 'Release Number')}"/>
                 <g:sortableColumn property="deploymentState"
                                   title="${message(code: 'moduleDeployment.deploymentState.label', default: 'Deployment State')}"/>
                 <g:sortableColumn property="testState"
@@ -36,12 +37,14 @@
                         </g:link>
                     </td>
                     <td>
-                        <g:link controller="applicationRelease" action="show" id="${moduleDeploymentInstance?.moduleRelease?.applicationRelease?.id}">
+                        <g:link controller="applicationRelease" action="show"
+                                id="${moduleDeploymentInstance?.moduleRelease?.applicationRelease?.id}">
                             ${moduleDeploymentInstance?.moduleRelease?.applicationRelease?.releaseNumber?.encodeAsHTML()}
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: moduleDeploymentInstance, field: "deploymentState")}
+                        <carm:formatModuleDeploymentState
+                                deploymentState="${moduleDeploymentInstance.deploymentState}"/>
                     </td>
                     <td>
                         ${fieldValue(bean: moduleDeploymentInstance, field: "testState")}

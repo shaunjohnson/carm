@@ -150,6 +150,11 @@ class CarmTagLib {
         out << "</span>"
     }
 
+    def formatModuleDeploymentState = { attrs ->
+        def deploymentState = attrs.deploymentState
+        out << message(code: "carm.deployment.ModuleDeploymentState.${deploymentState}", default: deploymentState.toString())
+    }
+    
     /**
      * Formats a SourceControlRepository as a link.
      *

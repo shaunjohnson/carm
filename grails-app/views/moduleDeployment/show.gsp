@@ -42,7 +42,7 @@
                     <g:message code="moduleDeployment.deploymentState.label" default="Deployment State"/>
                 </td>
                 <td valign="top" class="value">
-                    ${fieldValue(bean: moduleDeploymentInstance, field: "deploymentState")}
+                    <carm:formatModuleDeploymentState deploymentState="${moduleDeploymentInstance.deploymentState}"/>
                 </td>
             </tr>
             <tr class="prop">

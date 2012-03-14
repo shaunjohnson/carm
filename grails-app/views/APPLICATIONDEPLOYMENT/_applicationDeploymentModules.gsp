@@ -30,7 +30,8 @@
                         </g:link>
                     </td>
                     <td>
-                        ${fieldValue(bean: moduleDeploymentInstance, field: "deploymentState")}
+                        <carm:formatModuleDeploymentState
+                                deploymentState="${moduleDeploymentInstance.deploymentState}"/>
                     </td>
                     <td>
                         ${fieldValue(bean: moduleDeploymentInstance, field: "testState")}
