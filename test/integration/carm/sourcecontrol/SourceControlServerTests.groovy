@@ -2,7 +2,6 @@ package carm.sourcecontrol
 
 import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*
-import carm.enums.SourceControlServerType
 import grails.test.mixin.TestFor
 import grails.buildtestdata.mixin.Build
 

@@ -4,7 +4,6 @@ import static carm.CarmUnitTestCase.assertHasError
 import grails.test.*
 import grails.test.mixin.TestFor
 import grails.buildtestdata.mixin.Build
-import grails.test.mixin.Mock
 
 @TestFor(Project)
 @Build(Project)

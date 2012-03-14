@@ -4,12 +4,7 @@ import carm.system.System
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.acls.domain.BasePermission
 import carm.project.Project
-import carm.release.ApplicationRelease
-import carm.release.ApplicationReleaseState
-import carm.deployment.ApplicationDeployment
-import carm.deployment.ApplicationDeploymentState
 
 class ApplicationService {
 

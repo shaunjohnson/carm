@@ -324,8 +324,9 @@ class ApplicationReleaseService {
         }
         catch (IllegalArgumentException e) {
             // Not a semantic version number
-            return null
         }
+
+        return null
     }
 
     /**

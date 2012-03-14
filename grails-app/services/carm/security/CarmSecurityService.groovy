@@ -2,8 +2,6 @@ package carm.security
 
 import org.springframework.security.acls.model.NotFoundException
 import org.springframework.security.acls.model.Permission
-import org.springframework.security.acls.domain.BasePermission
-import carm.security.User
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 

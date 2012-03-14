@@ -1,25 +1,23 @@
 package carm
 
+import carm.activity.ActivityAction
+import carm.application.Application
+import carm.application.ApplicationType
+import carm.deployment.ModuleDeploymentTestState
+import carm.module.Module
+import carm.module.ModuleType
+import carm.project.Project
+import carm.project.ProjectCategory
 import carm.release.ApplicationRelease
 import carm.release.ApplicationReleaseTestState
-import carm.system.SystemComponent
-
 import carm.sourcecontrol.SourceControlRepository
-import carm.system.System
-import carm.project.ProjectCategory
-import carm.module.ModuleType
-import carm.application.ApplicationType
-import carm.sourcecontrol.SourceControlServer
 import carm.sourcecontrol.SourceControlRole
+import carm.sourcecontrol.SourceControlServer
+import carm.system.System
+import carm.system.SystemComponent
+import carm.system.SystemEnvironment
 import org.joda.time.DateTime
 import org.joda.time.Period
-import carm.system.System
-import carm.system.SystemEnvironment
-import carm.deployment.ModuleDeploymentTestState
-import carm.application.Application
-import carm.activity.ActivityAction
-import carm.module.Module
-import carm.project.Project
 
 class CarmTagLib {
 

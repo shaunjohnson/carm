@@ -1,8 +1,5 @@
 package carm
 
-import carm.project.Project
-import org.springframework.security.acls.domain.BasePermission
-
 class CarmSecurityTagLib {
     static namespace = "carmsec"
 
@@ -12,7 +9,7 @@ class CarmSecurityTagLib {
      * Renders the tag body if the current user is a project owner for the provided object.
      */
     def isProjectOwner = { attrs, body ->
-        Project project = null
+        def project = null
 
         if (attrs.project) {
             project = attrs.project

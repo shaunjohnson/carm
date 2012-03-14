@@ -1,7 +1,6 @@
 package carm.application
 
 import static carm.CarmUnitTestCase.assertHasError
-import grails.test.GrailsUnitTestCase
 import grails.test.mixin.TestFor
 import grails.buildtestdata.mixin.Build
 

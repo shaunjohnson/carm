@@ -2,7 +2,6 @@ package carm.project
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.acls.domain.BasePermission
 import carm.exceptions.DomainInUseException
 
 class ProjectCategoryService {

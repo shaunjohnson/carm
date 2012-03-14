@@ -1,10 +1,11 @@
 package carm.activity
 
+import static carm.activity.ActivityAction.*
+
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
-import static carm.activity.ActivityAction.*
 import org.joda.time.DateTime
 import carm.project.Project
 import carm.module.Module
@@ -13,14 +14,12 @@ import carm.release.ApplicationRelease
 import carm.system.System
 import carm.system.SystemComponent
 
-class ActivityTraceService implements ApplicationContextAware {
+class ActivityTraceService {
 
     static transactional = false
 
     def carmSecurityService
     def springSecurityService
-
-    MessageSource messageSource
 
     public static final String APPLICATION_TYPE = Application.class.name
     public static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
@@ -484,26 +483,5 @@ class ActivityTraceService implements ApplicationContextAware {
      */
     private String generateOid(String domain, Long id) {
         return "${domain}:${id}"
-    }
-
-    /**
-     * Generates a summary string using the provided key and action.
-     *
-     * @param type type
-     * @param args
-     * @return
-     */
-    private String generateSummary(domain, action, args) {
-        return messageSource.getMessage("activityTrace.${domain}.${action}", args?.toArray(), LocaleContextHolder.getLocale())
-    }
-
-    /**
-     * Sets the current applicationContext.
-     *
-     * @param applicationContext current ApplicationContext
-     */
-    @Override
-    void setApplicationContext(ApplicationContext applicationContext) {
-        messageSource = applicationContext.getBean("messageSource")
     }
 }
