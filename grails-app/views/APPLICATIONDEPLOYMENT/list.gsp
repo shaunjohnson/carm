@@ -8,7 +8,8 @@
 
 <body>
 <div class="body">
-    <carm:header domain="${applicationDeploymentInstanceList}" pageName="${message(code: 'default.list.label', args: [entityName])}"/>
+    <carm:header domain="${applicationDeploymentInstanceList}"
+                 pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -34,11 +35,13 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link action="show" id="${applicationDeploymentInstance.id}">
-                            ${fieldValue(bean: applicationDeploymentInstance, field: "deploymentState")}
+                            <carm:formatApplicationDeploymentState
+                                    deploymentState="${applicationDeploymentInstance.deploymentState}"/>
                         </g:link>
                     </td>
                     <td>
-                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                        <g:link controller="applicationRelease" action="show"
+                                id="${applicationDeploymentInstance?.applicationRelease?.id}">
                             ${message(code: 'pageHeader.applicationRelease.label', args: [
                                     applicationDeploymentInstance?.applicationRelease?.application?.name,
                                     applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}

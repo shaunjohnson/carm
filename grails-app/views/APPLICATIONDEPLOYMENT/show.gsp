@@ -22,7 +22,8 @@
                     <g:message code="applicationDeployment.applicationRelease.label" default="Application Release"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                    <g:link controller="applicationRelease" action="show"
+                            id="${applicationDeploymentInstance?.applicationRelease?.id}">
                         ${message(code: 'pageHeader.applicationRelease.label', args: [
                                 applicationDeploymentInstance?.applicationRelease?.application?.name,
                                 applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
@@ -76,8 +77,10 @@
                 <td valign="top" class="name">
                     <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
                 </td>
-                <td valign="top"
-                    class="value">${fieldValue(bean: applicationDeploymentInstance, field: "deploymentState")}</td>
+                <td valign="top" class="value">
+                    <carm:formatApplicationDeploymentState
+                            deploymentState="${applicationDeploymentInstance.deploymentState}"/>
+                </td>
             </tr>
 
             <tr class="prop detailProp">
