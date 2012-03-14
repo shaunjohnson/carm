@@ -5,21 +5,17 @@ import carm.system.System
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import carm.project.Project
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
 
-class ApplicationService {
+class ApplicationService implements ApplicationContextAware {
 
     static transactional = false
 
+    ApplicationContext applicationContext
     def applicationDeploymentService
     def grailsApplication
     def systemService
-
-    // Deferred service reference
-    protected applicationReleaseService
-
-    def initialize() {
-        applicationReleaseService = grailsApplication.mainContext.applicationReleaseService
-    }
 
     /**
      * Determines if the application is deployable. An application must be associated with a system that can be
@@ -185,8 +181,9 @@ class ApplicationService {
      * @return List of ApplicationDeployment and ApplicationRelease objects ordered by dateCreated ascending
      */
     List findAllPendingTasks(Application application) {
+        def applicationReleaseService = applicationContext.getBean("applicationReleaseService")
+
         def pendingTasks = []
-        
         pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByApplication(application)
         pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByApplication(application)
         

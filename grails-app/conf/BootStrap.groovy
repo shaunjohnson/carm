@@ -36,9 +36,6 @@ class BootStrap {
     def applicationService
 
     def init = { servletContext ->
-        // Initialize deferred references
-        applicationService.initialize()
-
         // Return immediately to disable bootstrapping data
         return
 
