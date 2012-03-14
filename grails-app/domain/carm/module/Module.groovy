@@ -1,7 +1,7 @@
 package carm.module
 
 import carm.application.Application
-import carm.system.SystemComponent
+import carm.system.SystemServer
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Module {
@@ -25,7 +25,7 @@ class Module {
 
     static belongsTo = [application: Application]
 
-    static hasMany = [systemComponents: SystemComponent]
+    static hasMany = [systemComponents: SystemServer]
 
     static mapping = {
         sort "name"

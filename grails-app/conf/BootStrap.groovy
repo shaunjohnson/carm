@@ -9,7 +9,7 @@ import carm.deployment.ModuleDeploymentTestState
 import carm.release.ModuleRelease
 import carm.project.Project
 import carm.system.System
-import carm.system.SystemComponent
+import carm.system.SystemServer
 import carm.security.Role
 import carm.sourcecontrol.SourceControlServer
 import carm.security.User
@@ -17,7 +17,7 @@ import carm.security.UserRole
 import carm.sourcecontrol.SourceControlServerType
 import carm.security.UserRole
 import carm.security.User
-import carm.system.SystemComponent
+import carm.system.SystemServer
 import carm.system.SystemEnvironment
 import carm.module.ModuleType
 import carm.sourcecontrol.SourceControlRepository
@@ -28,6 +28,7 @@ import carm.release.ApplicationRelease
 import org.springframework.security.acls.domain.BasePermission
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import carm.project.ProjectCategory
+import carm.system.SystemServer
 
 class BootStrap {
 
@@ -158,22 +159,22 @@ class BootStrap {
                 name = 'Big System'
                 description = 'Big System'
                 components = [
-                        dataLayer(SystemComponent) {
+                        dataLayer(SystemServer) {
                             name = 'Oracle 10g Database Server'
                             description = 'Oracle 10g database server that provides the data layer for Big System.'
                             system = bigSystem
                         },
-                        integrationLayer(SystemComponent) {
+                        integrationLayer(SystemServer) {
                             name = 'WebSphere Broker 7.0'
                             description = 'WebSphere Broker 7.0 is used for the Big System integration layer.'
                             system = bigSystem
                         },
-                        businessLayer(SystemComponent) {
+                        businessLayer(SystemServer) {
                             name = 'WebSphere Application Server 7.0'
                             description = 'The Big System business layer runs on WAS 7.0.'
                             system = bigSystem
                         },
-                        presentationLayer(SystemComponent) {
+                        presentationLayer(SystemServer) {
                             name = 'WebSphere Portal Server 7.0'
                             description = 'The Big System presentation layer is WebSphere Portal Server.'
                             system = bigSystem
@@ -216,7 +217,7 @@ class BootStrap {
                 name = 'Standalone System'
                 description 'Standalone applications system'
                 components = [
-                        standaloneComponent(SystemComponent) {
+                        standaloneComponent(SystemServer) {
                             name = 'Standalone system component'
                             system = standaloneSystem
                         }

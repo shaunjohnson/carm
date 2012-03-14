@@ -14,10 +14,11 @@ import carm.sourcecontrol.SourceControlRepository
 import carm.sourcecontrol.SourceControlRole
 import carm.sourcecontrol.SourceControlServer
 import carm.system.System
-import carm.system.SystemComponent
+
 import carm.system.SystemEnvironment
 import org.joda.time.DateTime
 import org.joda.time.Period
+import carm.system.SystemServer
 
 class CarmTagLib {
 
@@ -66,7 +67,7 @@ class CarmTagLib {
                 controller = "system"
                 title = message(code: "showSystem.label", default: "Show System")
             }
-            else if (activity.objectType == activityTraceService.SYSTEM_COMPONENT_TYPE && SystemComponent.exists(activity.objectId)) {
+            else if (activity.objectType == activityTraceService.SYSTEM_COMPONENT_TYPE && SystemServer.exists(activity.objectId)) {
                 controller = "systemComponent"
                 title = message(code: "showSystemComponent.label", default: "Show System Component")
             }
@@ -233,7 +234,7 @@ class CarmTagLib {
         else if (domain instanceof System) {
             isInUse = systemService.isInUse(domain)
         }
-        else if (domain instanceof SystemComponent) {
+        else if (domain instanceof SystemServer) {
             isInUse = systemComponentService.isInUse(domain)
         }
         else if (domain instanceof SystemEnvironment) {

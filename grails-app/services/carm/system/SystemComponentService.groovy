@@ -15,7 +15,7 @@ class SystemComponentService {
      * @param component Component to test
      * @return True if the component is in use
      */
-    boolean isInUse(SystemComponent component) {
+    boolean isInUse(SystemServer component) {
         def moduleCount = Module.executeQuery(
                 'select count(m) from Module m where :component in elements(m.systemComponents)',
                 [component: component])[0]
@@ -24,28 +24,28 @@ class SystemComponentService {
     }
 
     /**
-     * Returns a count of all SystemComponent objects.
+     * Returns a count of all SystemServer objects.
      *
-     * @return Count of all SystemComponent objects
+     * @return Count of all SystemServer objects
      */
     int count() {
-        SystemComponent.count()
+        SystemServer.count()
     }
 
     /**
-     * Creates a new SystemComponent using the provided properties.
+     * Creates a new SystemServer using the provided properties.
      *
-     * @param params SystemComponent properties
-     * @return Newly created SystemComponent
+     * @param params SystemServer properties
+     * @return Newly created SystemServer
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    SystemComponent create(Map params) {
+    SystemServer create(Map params) {
         def prefix = "create() :"
 
         log.debug "$prefix entered"
 
-        SystemComponent systemComponent = new SystemComponent(params)
+        SystemServer systemComponent = new SystemServer(params)
         systemComponent.save()
 
         log.debug "$prefix returning $systemComponent"
@@ -54,13 +54,13 @@ class SystemComponentService {
     }
 
     /**
-     * Deletes the provided SystemComponent.
+     * Deletes the provided SystemServer.
      *
-     * @param systemComponent SystemComponent to delete
+     * @param systemComponent SystemServer to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(SystemComponent systemComponent) {
+    void delete(SystemServer systemComponent) {
         def prefix = "delete() :"
 
         log.debug "$prefix entered, systemComponent=$systemComponent"
@@ -76,34 +76,34 @@ class SystemComponentService {
     }
 
     /**
-     * Gets the SystemComponent with the provided ID.
+     * Gets the SystemServer with the provided ID.
      *
-     * @param id ID of the SystemComponent to get
-     * @return Matching SystemComponent
+     * @param id ID of the SystemServer to get
+     * @return Matching SystemServer
      */
-    SystemComponent get(Serializable id) {
-        SystemComponent.get(id)
+    SystemServer get(Serializable id) {
+        SystemServer.get(id)
     }
 
     /**
-     * Gets a list of all SystemComponent objects.
+     * Gets a list of all SystemServer objects.
      *
      * @param params Query parameters
-     * @return List of SystemComponent objects
+     * @return List of SystemServer objects
      */
-    List<SystemComponent> list(Map params) {
-        SystemComponent.list(params)
+    List<SystemServer> list(Map params) {
+        SystemServer.list(params)
     }
 
     /**
-     * Updates the provided SystemComponent with the new properties.
+     * Updates the provided SystemServer with the new properties.
      *
-     * @param systemComponent SystemComponent to update
+     * @param systemComponent SystemServer to update
      * @param params New properties
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(SystemComponent systemComponent, Map params) {
+    void update(SystemServer systemComponent, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"

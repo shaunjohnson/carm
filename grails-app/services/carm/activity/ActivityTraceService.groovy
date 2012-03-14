@@ -2,17 +2,14 @@ package carm.activity
 
 import static carm.activity.ActivityAction.*
 
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.ApplicationContext
-import org.springframework.context.MessageSource
-import org.springframework.context.i18n.LocaleContextHolder
 import org.joda.time.DateTime
 import carm.project.Project
 import carm.module.Module
 import carm.application.Application
 import carm.release.ApplicationRelease
 import carm.system.System
-import carm.system.SystemComponent
+
+import carm.system.SystemServer
 
 class ActivityTraceService {
 
@@ -26,7 +23,7 @@ class ActivityTraceService {
     public static final String MODULE_TYPE = Module.class.name
     public static final String PROJECT_TYPE = Project.class.name
     public static final String SYSTEM_TYPE = System.class.name
-    public static final String SYSTEM_COMPONENT_TYPE = SystemComponent.class.name
+    public static final String SYSTEM_COMPONENT_TYPE = SystemServer.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"
@@ -98,12 +95,12 @@ class ActivityTraceService {
     }
 
     /**
-     * Counts the total number of activity events for a SystemComponent.
+     * Counts the total number of activity events for a SystemServer.
      *
-     * @param systemComponent SystemComponent used for query
+     * @param systemComponent SystemServer used for query
      * @return Number of ActivityTrace objects
      */
-    int countActivityBySystemComponent(SystemComponent systemComponent) {
+    int countActivityBySystemComponent(SystemServer systemComponent) {
         ActivityTrace.countByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id))
     }
 
@@ -184,13 +181,13 @@ class ActivityTraceService {
     }
 
     /**
-     * Lists latest activity events for a SystemComponent in reverse chronological order.
+     * Lists latest activity events for a SystemServer in reverse chronological order.
      *
-     * @param systemComponent SystemComponent used for query
+     * @param systemComponent SystemServer used for query
      * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listActivityBySystemComponent(SystemComponent systemComponent, Map params) {
+    List<ActivityTrace> listActivityBySystemComponent(SystemServer systemComponent, Map params) {
         ActivityTrace.findAllByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id), buildQueryParams(params))
     }
 
@@ -420,11 +417,11 @@ class ActivityTraceService {
     }
 
     /**
-     * SystemComponent object was created.
+     * SystemServer object was created.
      *
-     * @param systemComponent SystemComponent that was created
+     * @param systemComponent SystemServer that was created
      */
-    void systemComponentCreated(SystemComponent systemComponent) {
+    void systemComponentCreated(SystemServer systemComponent) {
         String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
         insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, CREATED, systemComponent.id, systemComponent.name)
 
@@ -433,21 +430,21 @@ class ActivityTraceService {
     }
 
     /**
-     * SystemComponent object was deleted.
+     * SystemServer object was deleted.
      *
-     * @param systemComponent SystemComponent that was deleted
+     * @param systemComponent SystemServer that was deleted
      */
-    void systemComponentDeleted(SystemComponent systemComponent) {
+    void systemComponentDeleted(SystemServer systemComponent) {
         String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
         insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, DELETED, systemComponent.id, systemComponent.name)
     }
 
     /**
-     * SystemComponent object was updated.
+     * SystemServer object was updated.
      *
-     * @param systemComponent SystemComponent that was updated
+     * @param systemComponent SystemServer that was updated
      */
-    void systemComponentUpdated(SystemComponent systemComponent) {
+    void systemComponentUpdated(SystemServer systemComponent) {
         String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
         insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, UPDATED, systemComponent.id, systemComponent.name)
 

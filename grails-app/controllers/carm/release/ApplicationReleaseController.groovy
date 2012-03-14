@@ -145,7 +145,7 @@ class ApplicationReleaseController {
     def listActivity() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemComponent'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
