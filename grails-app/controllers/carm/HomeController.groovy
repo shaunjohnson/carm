@@ -1,7 +1,6 @@
 package carm
 
 import carm.project.Project
-import carm.release.ApplicationRelease
 
 class HomeController {
     def activityTraceService

@@ -1,7 +1,6 @@
 package carm.project
 
 import carm.security.User
-import org.springframework.security.acls.domain.BasePermission
 import org.springframework.dao.DataIntegrityViolationException
 
 class ProjectController {
