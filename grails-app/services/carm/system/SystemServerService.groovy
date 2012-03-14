@@ -17,7 +17,7 @@ class SystemServerService {
      */
     boolean isInUse(SystemServer component) {
         def moduleCount = Module.executeQuery(
-                'select count(m) from Module m where :component in elements(m.systemComponents)',
+                'select count(m) from Module m where :component in elements(m.systemServers)',
                 [component: component])[0]
 
         moduleCount > 0
@@ -45,32 +45,32 @@ class SystemServerService {
 
         log.debug "$prefix entered"
 
-        SystemServer systemComponent = new SystemServer(params)
-        systemComponent.save()
+        SystemServer systemServer = new SystemServer(params)
+        systemServer.save()
 
-        log.debug "$prefix returning $systemComponent"
+        log.debug "$prefix returning $systemServer"
 
-        systemComponent
+        systemServer
     }
 
     /**
      * Deletes the provided SystemServer.
      *
-     * @param systemComponent SystemServer to delete
+     * @param systemServer SystemServer to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(SystemServer systemComponent) {
+    void delete(SystemServer systemServer) {
         def prefix = "delete() :"
 
-        log.debug "$prefix entered, systemComponent=$systemComponent"
+        log.debug "$prefix entered, systemServer=$systemServer"
 
-        if (isInUse(systemComponent)) {
+        if (isInUse(systemServer)) {
             log.error "$prefix System component is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
-        systemComponent.delete()
+        systemServer.delete()
         
         log.debug "$prefix leaving"
     }
@@ -98,17 +98,17 @@ class SystemServerService {
     /**
      * Updates the provided SystemServer with the new properties.
      *
-     * @param systemComponent SystemServer to update
+     * @param systemServer SystemServer to update
      * @param params New properties
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(SystemServer systemComponent, Map params) {
+    void update(SystemServer systemServer, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"
 
-        systemComponent.properties = params
+        systemServer.properties = params
 
         log.debug "$prefix leaving"
     }

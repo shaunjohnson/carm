@@ -40,14 +40,14 @@ class SystemServer {
     }
 
     def afterInsert() {
-        activityTraceService?.systemComponentCreated(this)
+        activityTraceService?.systemServerCreated(this)
     }
 
     def beforeDelete() {
-        activityTraceService?.systemComponentDeleted(this)
+        activityTraceService?.systemServerDeleted(this)
     }
 
     def afterUpdate() {
-        activityTraceService?.systemComponentUpdated(this)
+        activityTraceService?.systemServerUpdated(this)
     }
 }

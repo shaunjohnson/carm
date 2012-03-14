@@ -447,8 +447,8 @@
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
-<g:elseif test="${controller == 'systemComponent'}">
-    <g:set var="entityName" value="${message(code: 'systemComponent.label', default: 'System Component')}"/>
+<g:elseif test="${controller == 'systemServer'}">
+    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'System Component')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
@@ -458,17 +458,17 @@
             <bc:showSystem system="${domain.system}"/>
 
             <g:if test="${action == 'show'}">
-                <bc:showSystemComponent systemComponent="${domain}"/>
+                <bc:showSystemServer systemServer="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
                 <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <bc:showSystemComponent systemComponent="${domain}"/>
+                <bc:showSystemServer systemServer="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'listActivity'}">
-                <bc:showSystemComponent systemComponent="${domain}"/>
+                <bc:showSystemServer systemServer="${domain}"/>
                 <bc:label code="allActivity.label" args="[entityName]"/>
             </g:elseif>
         </g:if>

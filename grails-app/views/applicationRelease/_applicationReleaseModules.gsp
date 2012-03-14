@@ -16,11 +16,11 @@
             </td>
             <td>
                 <ul>
-                    <g:each in="${moduleReleaseInstance.module.systemComponents.sort { it.name }}"
-                            var="systemComponent">
+                    <g:each in="${moduleReleaseInstance.module.systemServers.sort { it.name }}"
+                            var="systemServer">
                         <li>
-                            <g:link controller="systemServer" action="show" id="${systemComponent?.id}">
-                                ${systemComponent?.encodeAsHTML()}
+                            <g:link controller="systemServer" action="show" id="${systemServer?.id}">
+                                ${systemServer?.encodeAsHTML()}
                             </g:link>
                         </li>
                     </g:each>

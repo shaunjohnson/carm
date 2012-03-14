@@ -25,7 +25,7 @@ class Module {
 
     static belongsTo = [application: Application]
 
-    static hasMany = [systemComponents: SystemServer]
+    static hasMany = [systemServers: SystemServer]
 
     static mapping = {
         sort "name"

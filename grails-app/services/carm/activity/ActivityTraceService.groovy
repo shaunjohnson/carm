@@ -97,11 +97,11 @@ class ActivityTraceService {
     /**
      * Counts the total number of activity events for a SystemServer.
      *
-     * @param systemComponent SystemServer used for query
+     * @param systemServer SystemServer used for query
      * @return Number of ActivityTrace objects
      */
-    int countActivityBySystemComponent(SystemServer systemComponent) {
-        ActivityTrace.countByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id))
+    int countActivityBySystemServer(SystemServer systemServer) {
+        ActivityTrace.countByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id))
     }
 
     /**
@@ -183,12 +183,12 @@ class ActivityTraceService {
     /**
      * Lists latest activity events for a SystemServer in reverse chronological order.
      *
-     * @param systemComponent SystemServer used for query
+     * @param systemServer SystemServer used for query
      * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listActivityBySystemComponent(SystemServer systemComponent, Map params) {
-        ActivityTrace.findAllByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id), buildQueryParams(params))
+    List<ActivityTrace> listActivityBySystemServer(SystemServer systemServer, Map params) {
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id), buildQueryParams(params))
     }
 
 
@@ -419,37 +419,37 @@ class ActivityTraceService {
     /**
      * SystemServer object was created.
      *
-     * @param systemComponent SystemServer that was created
+     * @param systemServer SystemServer that was created
      */
-    void systemComponentCreated(SystemServer systemComponent) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, CREATED, systemComponent.id, systemComponent.name)
+    void systemServerCreated(SystemServer systemServer) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, CREATED, systemServer.id, systemServer.name)
 
-        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id)
-        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, CREATED, systemComponent.id, systemComponent.name)
+        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id)
+        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, CREATED, systemServer.id, systemServer.name)
     }
 
     /**
      * SystemServer object was deleted.
      *
-     * @param systemComponent SystemServer that was deleted
+     * @param systemServer SystemServer that was deleted
      */
-    void systemComponentDeleted(SystemServer systemComponent) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, DELETED, systemComponent.id, systemComponent.name)
+    void systemServerDeleted(SystemServer systemServer) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, DELETED, systemServer.id, systemServer.name)
     }
 
     /**
      * SystemServer object was updated.
      *
-     * @param systemComponent SystemServer that was updated
+     * @param systemServer SystemServer that was updated
      */
-    void systemComponentUpdated(SystemServer systemComponent) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemComponent.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, UPDATED, systemComponent.id, systemComponent.name)
+    void systemServerUpdated(SystemServer systemServer) {
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, UPDATED, systemServer.id, systemServer.name)
 
-        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemComponent.id)
-        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, UPDATED, systemComponent.id, systemComponent.name)
+        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id)
+        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, UPDATED, systemServer.id, systemServer.name)
     }
 
 

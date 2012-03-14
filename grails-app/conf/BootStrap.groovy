@@ -290,7 +290,7 @@ class BootStrap {
                                         application = configApplication
                                         type = configModType
                                         deployInstructions = 'Copy to file system.Restart server.'
-                                        systemComponents = [
+                                        systemServers = [
                                                 businessLayer, integrationLayer, presentationLayer
                                         ]
                                     }
@@ -311,7 +311,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponents = [ businessLayer ]
+                                        systemServers = [ businessLayer ]
                                     },
                                     transEjbModule(Module) {
                                         name = 'Transition Services EJB'
@@ -319,7 +319,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponents = [ businessLayer ]
+                                        systemServers = [ businessLayer ]
                                     },
                                     bussMdbModule(Module) {
                                         name = 'Business Services MDB'
@@ -327,7 +327,7 @@ class BootStrap {
                                         application = earApplication
                                         type = mdbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemComponents = [ businessLayer ]
+                                        systemServers = [ businessLayer ]
                                     }
                             ]
                         },
@@ -346,7 +346,7 @@ class BootStrap {
                                         application = brokerApplication
                                         type = barModuleType
                                         deployInstructions = 'Update existing BAR file.'
-                                        systemComponents = [ integrationLayer ]
+                                        systemServers = [ integrationLayer ]
                                     }
                             ]
                             releases = [
@@ -380,7 +380,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemComponents = [ presentationLayer ]
+                                        systemServers = [ presentationLayer ]
                                     },
                                     userPortletModule(Module) {
                                         name = 'User Portlet'
@@ -388,7 +388,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemComponents = [ presentationLayer ]
+                                        systemServers = [ presentationLayer ]
                                     }
                             ]
                             releases = [

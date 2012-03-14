@@ -144,7 +144,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/sourceControlServer/**':        ['permitAll'],
     '/sourceControlUser/**':          ['permitAll'],
     '/system/**':                     ['permitAll'],
-    '/systemComponent/**':            ['permitAll'],
+    '/systemServer/**':            ['permitAll'],
     '/systemEnvironment/**':          ['permitAll']
 ]
 

@@ -84,24 +84,24 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="systemComponents">
-                            <g:message code="module.systemComponents.label" default="System Components"/>
+                        <carm:label for="systemServers">
+                            <g:message code="module.systemServers.label" default="System Components"/>
                         </carm:label>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: moduleInstance, field: 'systemComponents', 'errors')}">
+                        class="value ${hasErrors(bean: moduleInstance, field: 'systemServers', 'errors')}">
                         <g:if test="${moduleInstance.application.system}">
-                            <g:select name="systemComponents" multiple="yes" optionKey="id" size="5"
+                            <g:select name="systemServers" multiple="yes" optionKey="id" size="5"
                                       from="${moduleInstance.application.system.components.sort { it.name }}"
-                                      value="${moduleInstance?.systemComponents*.id}"
-                                      title="${message(code: 'module.systemComponents.help')}"/>
+                                      value="${moduleInstance?.systemServers*.id}"
+                                      title="${message(code: 'module.systemServers.help')}"/>
                         </g:if>
                         <g:else>
                             <p class="emphasis">
                                 <g:message code="moduleCannotBeDeployed.message"
                                            default="This module cannot be deployed to any component since the application is not associated with a system."/>
                             </p>
-                            <g:hiddenField name="systemComponents" value="${null}"/>
+                            <g:hiddenField name="systemServers" value="${null}"/>
                         </g:else>
                     </td>
                 </tr>

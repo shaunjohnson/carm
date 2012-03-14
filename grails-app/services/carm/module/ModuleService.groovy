@@ -16,7 +16,7 @@ class ModuleService {
      * @return True if the module can be deployed
      */
     boolean isDeployable(Module module) {
-        return module?.systemComponents?.size() > 0
+        return module?.systemServers?.size() > 0
     }
 
     /**

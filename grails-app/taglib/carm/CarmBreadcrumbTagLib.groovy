@@ -240,11 +240,11 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders a list system components link.
      */
-    def listSystemComponents = { attrs ->
+    def listSystemServers = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "systemComponent", action: "list", isFirst: isFirst,
-                title: message(code: "showAllSystemComponents.label"),
-                text: message(code: "systemComponents.label"))
+        out << link(controller: "systemServer", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSystemServers.label"),
+                text: message(code: "systemServers.label"))
     }
 
     /**
@@ -450,12 +450,12 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders a show system component link.
      */
-    def showSystemComponent = { attrs ->
-        def systemComponent = attrs.systemComponent
+    def showSystemServer = { attrs ->
+        def systemServer = attrs.systemServer
         def isFirst = attrs.isFirst
-        out << link(controller: "systemComponent", action: "show",
-                title: message(code: "showSystemComponent.label"),
-                text: systemComponent.name, id: systemComponent.id, isFirst: isFirst)
+        out << link(controller: "systemServer", action: "show",
+                title: message(code: "showSystemServer.label"),
+                text: systemServer.name, id: systemServer.id, isFirst: isFirst)
     }
 
     /**

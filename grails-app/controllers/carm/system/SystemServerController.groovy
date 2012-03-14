@@ -18,7 +18,7 @@ class SystemServerController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemComponentInstanceList: systemServerService.list(params), systemComponentInstanceTotal: systemServerService.count()]
+        [systemServerInstanceList: systemServerService.list(params), systemServerInstanceTotal: systemServerService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -29,116 +29,116 @@ class SystemServerController {
             redirect(action: "list")
         }
         else {
-            def systemComponentInstance = new SystemServer()
-            systemComponentInstance.properties = params
-            return [systemComponentInstance: systemComponentInstance]
+            def systemServerInstance = new SystemServer()
+            systemServerInstance.properties = params
+            return [systemServerInstance: systemServerInstance]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def save() {
-        def systemComponentInstance = systemServerService.create(params)
-        if (!systemComponentInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), systemComponentInstance.name])}"
-            redirect(controller: "system", action: "show", id: systemComponentInstance.system.id)
+        def systemServerInstance = systemServerService.create(params)
+        if (!systemServerInstance.hasErrors()) {
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), systemServerInstance.name])}"
+            redirect(controller: "system", action: "show", id: systemServerInstance.system.id)
         }
         else {
-            render(view: "create", model: [systemComponentInstance: systemComponentInstance])
+            render(view: "create", model: [systemServerInstance: systemServerInstance])
         }
     }
 
     def show() {
-        def systemComponentInstance = systemServerService.get(params.id)
-        if (!systemComponentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+        def systemServerInstance = systemServerService.get(params.id)
+        if (!systemServerInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
             [
-                    activityList: activityTraceService.listActivityBySystemComponent(systemComponentInstance, [:]),
-                    systemComponentInstance: systemComponentInstance
+                    activityList: activityTraceService.listActivityBySystemServer(systemServerInstance, [:]),
+                    systemServerInstance: systemServerInstance
             ]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemComponentInstance = systemServerService.get(params.id)
-        if (!systemComponentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+        def systemServerInstance = systemServerService.get(params.id)
+        if (!systemServerInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
-            return [systemComponentInstance: systemComponentInstance]
+            return [systemServerInstance: systemServerInstance]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemComponentInstance = systemServerService.get(params.id)
-        if (systemComponentInstance) {
+        def systemServerInstance = systemServerService.get(params.id)
+        if (systemServerInstance) {
             if (params.version) {
                 def version = params.version.toLong()
-                if (systemComponentInstance.version > version) {
-                    systemComponentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemComponent.label', default: 'SystemServer')] as Object[], "Another user has updated this SystemServer while you were editing")
-                    render(view: "edit", model: [systemComponentInstance: systemComponentInstance])
+                if (systemServerInstance.version > version) {
+                    systemServerInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemServer.label', default: 'SystemServer')] as Object[], "Another user has updated this SystemServer while you were editing")
+                    render(view: "edit", model: [systemServerInstance: systemServerInstance])
                     return
                 }
             }
-            systemServerService.update(systemComponentInstance, params)
-            if (!systemComponentInstance.hasErrors() && systemComponentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), systemComponentInstance.name])}"
-                redirect(action: "show", id: systemComponentInstance.id)
+            systemServerService.update(systemServerInstance, params)
+            if (!systemServerInstance.hasErrors() && systemServerInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), systemServerInstance.name])}"
+                redirect(action: "show", id: systemServerInstance.id)
             }
             else {
-                render(view: "edit", model: [systemComponentInstance: systemComponentInstance])
+                render(view: "edit", model: [systemServerInstance: systemServerInstance])
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemComponentInstance = systemServerService.get(params.id)
-        if (systemComponentInstance) {
-            def systemId = systemComponentInstance.system.id
+        def systemServerInstance = systemServerService.get(params.id)
+        if (systemServerInstance) {
+            def systemId = systemServerInstance.system.id
             try {
-                def name = systemComponentInstance.name
-                systemServerService.delete(systemComponentInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), name])}"
+                def name = systemServerInstance.name
+                systemServerService.delete(systemServerInstance)
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
     }
 
     def listActivity() {
-        def systemComponentInstance = systemServerService.get(params.id)
-        if (!systemComponentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
+        def systemServerInstance = systemServerService.get(params.id)
+        if (!systemServerInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    domainInstance: systemComponentInstance,
-                    activityList: activityTraceService.listActivityBySystemComponent(systemComponentInstance, params),
-                    activityTotal: activityTraceService.countActivityBySystemComponent(systemComponentInstance)
+                    domainInstance: systemServerInstance,
+                    activityList: activityTraceService.listActivityBySystemServer(systemServerInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystemServer(systemServerInstance)
             ]
         }
     }

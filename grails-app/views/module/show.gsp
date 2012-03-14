@@ -54,14 +54,14 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="module.systemComponents.label" default="System Components"/>
+                    <g:message code="module.systemServers.label" default="System Components"/>
                 </td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="systemComponent">
+                        <g:each in="${moduleInstance.systemServers.sort { it.name }}" var="systemServer">
                             <li>
-                                <g:link controller="systemServer" action="show" id="${systemComponent?.id}">
-                                    ${systemComponent?.encodeAsHTML()}
+                                <g:link controller="systemServer" action="show" id="${systemServer?.id}">
+                                    ${systemServer?.encodeAsHTML()}
                                 </g:link>
                             </li>
                         </g:each>

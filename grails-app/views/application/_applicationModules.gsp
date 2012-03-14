@@ -24,10 +24,10 @@
                 </td>
                 <td>
                     <ul>
-                        <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="systemComponent">
+                        <g:each in="${moduleInstance.systemServers.sort { it.name }}" var="systemServer">
                             <li>
-                                <g:link controller="systemServer" action="show" id="${systemComponent?.id}">
-                                    ${systemComponent?.encodeAsHTML()}
+                                <g:link controller="systemServer" action="show" id="${systemServer?.id}">
+                                    ${systemServer?.encodeAsHTML()}
                                 </g:link>
                             </li>
                         </g:each>
