@@ -107,10 +107,10 @@ class SystemService {
     }
 
     /**
-     * Moves the SystemEnvironment at the specific index for the provided System down in the list, if possible.
+     * Moves the SystemDeploymentEnvironment at the specific index for the provided System down in the list, if possible.
      *
      * @param system System to edit
-     * @param index Index of SystemEnvironment to move down
+     * @param index Index of SystemDeploymentEnvironment to move down
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -126,10 +126,10 @@ class SystemService {
     }
 
     /**
-     * Moves the SystemEnvironment at the specified index for the provided System up in the list, if possible.
+     * Moves the SystemDeploymentEnvironment at the specified index for the provided System up in the list, if possible.
      *
      * @param system System to edit
-     * @param index Index of SystemEnvironment to move up
+     * @param index Index of SystemDeploymentEnvironment to move up
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -15,33 +15,33 @@ class SystemEnvironmentService {
      * @param environment Environment to test
      * @return True if the environment is in use
      */
-    boolean isInUse(SystemEnvironment environment) {
+    boolean isInUse(SystemDeploymentEnvironment environment) {
         ApplicationDeployment.countBySysEnvironment(environment) > 0
     }
 
     /**
-     * Gets the total count of all SystemEnvironment objects.
+     * Gets the total count of all SystemDeploymentEnvironment objects.
      *
-     * @return Count of all SystemEnvironment objects.
+     * @return Count of all SystemDeploymentEnvironment objects.
      */
     int count() {
-        SystemEnvironment.count()
+        SystemDeploymentEnvironment.count()
     }
 
     /**
-     * Creates and saves a new SystemEnvironment using the provided properties.
+     * Creates and saves a new SystemDeploymentEnvironment using the provided properties.
      *
-     * @param params SystemEnvironment properties
-     * @return Newly created SystemEnvironment
+     * @param params SystemDeploymentEnvironment properties
+     * @return Newly created SystemDeploymentEnvironment
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    SystemEnvironment create(Map params) {
+    SystemDeploymentEnvironment create(Map params) {
         def prefix = "create() :"
 
         log.debug "$prefix entered"
 
-        SystemEnvironment systemEnvironment = new SystemEnvironment(params)
+        SystemDeploymentEnvironment systemEnvironment = new SystemDeploymentEnvironment(params)
 
         // Explicitly adding to the System due to "bug" in Grails. This is necessary since system.environments is a list
         def system = systemEnvironment.system
@@ -55,13 +55,13 @@ class SystemEnvironmentService {
     }
 
     /**
-     * Deletes the provided SystemEnvironment object.
+     * Deletes the provided SystemDeploymentEnvironment object.
      *
-     * @param systemEnvironment SystemEnvironment object to delete
+     * @param systemEnvironment SystemDeploymentEnvironment object to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(SystemEnvironment systemEnvironment) {
+    void delete(SystemDeploymentEnvironment systemEnvironment) {
         def prefix = "delete() :"
 
         log.debug "$prefix entered, systemEnvironment=$systemEnvironment"
@@ -77,34 +77,34 @@ class SystemEnvironmentService {
     }
 
     /**
-     * Gets the SystemEnvironment with the provided ID.
+     * Gets the SystemDeploymentEnvironment with the provided ID.
      *
-     * @param id ID of SystemEnvironment to load.
-     * @return Matching SystemEnvironment object
+     * @param id ID of SystemDeploymentEnvironment to load.
+     * @return Matching SystemDeploymentEnvironment object
      */
-    SystemEnvironment get(Serializable id) {
-        SystemEnvironment.get(id)
+    SystemDeploymentEnvironment get(Serializable id) {
+        SystemDeploymentEnvironment.get(id)
     }
 
     /**
-     * Gets list of all SystemEnvironment objects.
+     * Gets list of all SystemDeploymentEnvironment objects.
      *
      * @param params Query parameters
-     * @return List of SystemEnvironment objects
+     * @return List of SystemDeploymentEnvironment objects
      */
-    List<SystemEnvironment> list(Map params) {
-        SystemEnvironment.list(params)
+    List<SystemDeploymentEnvironment> list(Map params) {
+        SystemDeploymentEnvironment.list(params)
     }
 
     /**
-     * Updates the provided SystemEnvironment with the new properties.
+     * Updates the provided SystemDeploymentEnvironment with the new properties.
      *
-     * @param systemEnvironment SystemEnvironment to update
+     * @param systemEnvironment SystemDeploymentEnvironment to update
      * @param params New properties
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(SystemEnvironment systemEnvironment, Map params) {
+    void update(SystemDeploymentEnvironment systemEnvironment, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"

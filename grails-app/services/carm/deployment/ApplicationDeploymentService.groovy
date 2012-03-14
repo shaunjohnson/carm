@@ -3,14 +3,13 @@ package carm.deployment
 import org.joda.time.LocalDate
 import org.joda.time.DateTimeConstants
 import carm.system.System
-import carm.system.SystemEnvironment
+import carm.system.SystemDeploymentEnvironment
 import carm.release.ApplicationRelease
 import carm.application.Application
 import carm.project.Project
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import carm.release.ModuleRelease
-import carm.exceptions.DomainInUseException
 
 class ApplicationDeploymentService {
 
@@ -58,7 +57,7 @@ class ApplicationDeploymentService {
      */
     ApplicationDeployment newApplicationDeployment(ApplicationRelease applicationRelease) {
         Date requestedDeploymentDate = inferNextDeploymentDate()
-        SystemEnvironment sysEnvironment = inferNextEnvironment(applicationRelease)
+        SystemDeploymentEnvironment sysEnvironment = inferNextEnvironment(applicationRelease)
 
         new ApplicationDeployment(applicationRelease: applicationRelease,
                 requestedDeploymentDate: requestedDeploymentDate, sysEnvironment: sysEnvironment)
@@ -172,7 +171,7 @@ class ApplicationDeploymentService {
      * @param applicationRelease Application release used for querying
      * @return Next environment that can be used to deploy this release
      */
-    SystemEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
+    SystemDeploymentEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
         def releases = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
         def nextEnvironment = null
 
@@ -189,13 +188,13 @@ class ApplicationDeploymentService {
     }
 
     /**
-     * Finds the latest ApplicationDeployment of the provided Application to the provided SystemEnvironment.
+     * Finds the latest ApplicationDeployment of the provided Application to the provided SystemDeploymentEnvironment.
      *
      * @param application Application used for querying
-     * @param environment SystemEnvironment for querying
+     * @param environment SystemDeploymentEnvironment for querying
      * @return Matching ApplicationDeployment object
      */
-    def findLatestDeployment(Application application, SystemEnvironment environment) {
+    def findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
         def results = ApplicationDeployment.createCriteria().list {
             createAlias("applicationRelease", "applicationRelease")
             eq("sysEnvironment", environment)
@@ -253,12 +252,12 @@ class ApplicationDeploymentService {
     }
 
     /**
-     * Finds latest completed ApplicationDeployment objects for the provided SystemEnvironment.
+     * Finds latest completed ApplicationDeployment objects for the provided SystemDeploymentEnvironment.
      *
-     * @param systemEnvironment SystemEnvironment used for querying
+     * @param systemEnvironment SystemDeploymentEnvironment used for querying
      * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
      */
-    def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
+    def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemDeploymentEnvironment systemEnvironment) {
         def results = [:]
 
         Application.listOrderByType().each { application ->

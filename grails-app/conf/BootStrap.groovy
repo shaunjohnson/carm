@@ -18,7 +18,7 @@ import carm.sourcecontrol.SourceControlServerType
 import carm.security.UserRole
 import carm.security.User
 import carm.system.SystemServer
-import carm.system.SystemEnvironment
+import carm.system.SystemDeploymentEnvironment
 import carm.module.ModuleType
 import carm.sourcecontrol.SourceControlRepository
 import carm.sourcecontrol.SourceControlUser
@@ -29,6 +29,7 @@ import org.springframework.security.acls.domain.BasePermission
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import carm.project.ProjectCategory
 import carm.system.SystemServer
+import carm.system.SystemDeploymentEnvironment
 
 class BootStrap {
 
@@ -180,32 +181,32 @@ class BootStrap {
                             system = bigSystem
                         }]
                 environments = [
-                        sandboxEnv(SystemEnvironment) {
+                        sandboxEnv(SystemDeploymentEnvironment) {
                             name = 'Sandbox'
                             description = 'Sandbox is where applications are initially tested.'
                             system = bigSystem
                         },
-                        integrationEnv(SystemEnvironment) {
+                        integrationEnv(SystemDeploymentEnvironment) {
                             name = 'Integration'
                             description = 'Integration is where applications are tested together.'
                             system = bigSystem
                         },
-                        testEnv(SystemEnvironment) {
+                        testEnv(SystemDeploymentEnvironment) {
                             name = 'Test'
                             description = 'Application and user testing environment.'
                             system = bigSystem
                         },
-                        stageEnv(SystemEnvironment) {
+                        stageEnv(SystemDeploymentEnvironment) {
                             name = 'Stage'
                             description = 'Stage mimics production and is used for performance testing.'
                             system = bigSystem
                         },
-                        trainEnv(SystemEnvironment) {
+                        trainEnv(SystemDeploymentEnvironment) {
                             name = 'Train'
                             description = 'Train is where users are trained to use the applications.'
                             system = bigSystem
                         },
-                        productionEnv(SystemEnvironment) {
+                        productionEnv(SystemDeploymentEnvironment) {
                             name = 'Production'
                             description = 'Production is the end goal.'
                             system = bigSystem
@@ -223,17 +224,17 @@ class BootStrap {
                         }
                 ]
                 environments = [
-                        developmentStandaloneEnvironemnt(SystemEnvironment) {
+                        developmentStandaloneEnvironemnt(SystemDeploymentEnvironment) {
                             name = 'Development (Standalone)'
                             description = 'Development system for standalone applications.'
                             system = standaloneSystem
                         },
-                        testStandaloneEnvironemnt(SystemEnvironment) {
+                        testStandaloneEnvironemnt(SystemDeploymentEnvironment) {
                             name = 'Test (Standalone)'
                             description = 'Test system for standalone applications.'
                             system = standaloneSystem
                         },
-                        productionStandaloneEnvironemnt(SystemEnvironment) {
+                        productionStandaloneEnvironemnt(SystemDeploymentEnvironment) {
                             name = 'Production (Standalone)'
                             description = 'Production system for standalone applications.'
                             system = standaloneSystem

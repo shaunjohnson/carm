@@ -30,7 +30,7 @@ class SystemEnvironmentController {
             redirect(action: "list")
         }
         else {
-            def systemEnvironmentInstance = new SystemEnvironment()
+            def systemEnvironmentInstance = new SystemDeploymentEnvironment()
             systemEnvironmentInstance.properties = params
             return [systemEnvironmentInstance: systemEnvironmentInstance]
         }
@@ -40,7 +40,7 @@ class SystemEnvironmentController {
     def save() {
         def systemEnvironmentInstance = systemEnvironmentService.create(params)
         if (systemEnvironmentInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), systemEnvironmentInstance.name])}"
             redirect(controller: "system", action: "show", id: systemEnvironmentInstance.system.id)
         }
         else {
@@ -51,7 +51,7 @@ class SystemEnvironmentController {
     def show() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -67,7 +67,7 @@ class SystemEnvironmentController {
     def edit() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -82,14 +82,14 @@ class SystemEnvironmentController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (systemEnvironmentInstance.version > version) {
-                    systemEnvironmentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemEnvironment.label', default: 'SystemEnvironment')] as Object[], "Another user has updated this SystemEnvironment while you were editing")
+                    systemEnvironmentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment')] as Object[], "Another user has updated this SystemDeploymentEnvironment while you were editing")
                     render(view: "edit", model: [systemEnvironmentInstance: systemEnvironmentInstance])
                     return
                 }
             }
             systemEnvironmentService.update(systemEnvironmentInstance, params)
             if (!systemEnvironmentInstance.hasErrors() && systemEnvironmentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), systemEnvironmentInstance.name])}"
                 redirect(action: "show", id: systemEnvironmentInstance.id)
             }
             else {
@@ -97,7 +97,7 @@ class SystemEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -110,20 +110,20 @@ class SystemEnvironmentController {
             try {
                 def name = systemEnvironmentInstance.name
                 systemEnvironmentService.delete(systemEnvironmentInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }

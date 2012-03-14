@@ -2,7 +2,7 @@ package carm.system
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
-class SystemEnvironment {
+class SystemDeploymentEnvironment {
     String name
     String description
 
@@ -26,7 +26,7 @@ class SystemEnvironment {
     }
 
     boolean equals(other) {
-        if (!(other instanceof SystemEnvironment)) {
+        if (!(other instanceof SystemDeploymentEnvironment)) {
             return false
         }
 

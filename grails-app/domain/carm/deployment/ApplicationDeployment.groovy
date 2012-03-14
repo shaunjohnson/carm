@@ -1,9 +1,10 @@
 package carm.deployment
 
 import carm.release.ApplicationRelease
-import carm.system.SystemEnvironment
+
 import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
+import carm.system.SystemDeploymentEnvironment
 
 class ApplicationDeployment {
     String deploymentInstructions
@@ -41,7 +42,7 @@ class ApplicationDeployment {
         testedBy(nullable: true)
     }
 
-    static belongsTo = [applicationRelease: ApplicationRelease, sysEnvironment: SystemEnvironment]
+    static belongsTo = [applicationRelease: ApplicationRelease, sysEnvironment: SystemDeploymentEnvironment]
 
     static hasMany = [moduleDeployments: ModuleDeployment]
 

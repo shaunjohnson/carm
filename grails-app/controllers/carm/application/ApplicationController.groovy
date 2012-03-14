@@ -2,7 +2,8 @@ package carm.application
 
 import carm.exceptions.DomainInUseException
 import org.springframework.dao.DataIntegrityViolationException
-import carm.system.SystemEnvironment
+
+import carm.system.SystemDeploymentEnvironment
 
 class ApplicationController {
 
@@ -81,7 +82,7 @@ class ApplicationController {
         else {
             def deployments = [:]
 
-            applicationInstance?.system?.environments?.each { SystemEnvironment environment ->
+            applicationInstance?.system?.environments?.each { SystemDeploymentEnvironment environment ->
                 deployments[environment] = [
                         lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
                 ]

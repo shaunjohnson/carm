@@ -15,10 +15,10 @@ import carm.sourcecontrol.SourceControlRole
 import carm.sourcecontrol.SourceControlServer
 import carm.system.System
 
-import carm.system.SystemEnvironment
 import org.joda.time.DateTime
 import org.joda.time.Period
 import carm.system.SystemServer
+import carm.system.SystemDeploymentEnvironment
 
 class CarmTagLib {
 
@@ -237,7 +237,7 @@ class CarmTagLib {
         else if (domain instanceof SystemServer) {
             isInUse = systemServerService.isInUse(domain)
         }
-        else if (domain instanceof SystemEnvironment) {
+        else if (domain instanceof SystemDeploymentEnvironment) {
             isInUse = systemEnvironmentService.isInUse(domain)
         }
         else {
