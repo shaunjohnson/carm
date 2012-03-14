@@ -11,7 +11,7 @@ class SystemEnvironmentController {
     def applicationService
     def applicationDeploymentService
     def systemService
-    def systemEnvironmentService
+    def systemDeploymentEnvironmentService
 
     def index() {
         redirect(action: "list", params: params)
@@ -19,7 +19,7 @@ class SystemEnvironmentController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemEnvironmentInstanceList: systemEnvironmentService.list(params), systemEnvironmentInstanceTotal: systemEnvironmentService.count()]
+        [systemEnvironmentInstanceList: systemDeploymentEnvironmentService.list(params), systemEnvironmentInstanceTotal: systemDeploymentEnvironmentService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -38,7 +38,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def save() {
-        def systemEnvironmentInstance = systemEnvironmentService.create(params)
+        def systemEnvironmentInstance = systemDeploymentEnvironmentService.create(params)
         if (systemEnvironmentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), systemEnvironmentInstance.name])}"
             redirect(controller: "system", action: "show", id: systemEnvironmentInstance.system.id)
@@ -49,7 +49,7 @@ class SystemEnvironmentController {
     }
 
     def show() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        def systemEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
@@ -65,7 +65,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        def systemEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
@@ -77,7 +77,7 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        def systemEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -87,7 +87,7 @@ class SystemEnvironmentController {
                     return
                 }
             }
-            systemEnvironmentService.update(systemEnvironmentInstance, params)
+            systemDeploymentEnvironmentService.update(systemEnvironmentInstance, params)
             if (!systemEnvironmentInstance.hasErrors() && systemEnvironmentInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), systemEnvironmentInstance.name])}"
                 redirect(action: "show", id: systemEnvironmentInstance.id)
@@ -104,12 +104,12 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        def systemEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
             def systemId = systemEnvironmentInstance.system.id
             try {
                 def name = systemEnvironmentInstance.name
-                systemEnvironmentService.delete(systemEnvironmentInstance)
+                systemDeploymentEnvironmentService.delete(systemEnvironmentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }

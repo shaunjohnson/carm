@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import carm.deployment.ApplicationDeployment
 import carm.exceptions.DomainInUseException
 
-class SystemEnvironmentService {
+class SystemDeploymentEnvironmentService {
 
     static transactional = false
 

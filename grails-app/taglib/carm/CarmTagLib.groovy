@@ -36,7 +36,7 @@ class CarmTagLib {
     def sourceControlRoleService
     def sourceControlServerService
     def systemServerService
-    def systemEnvironmentService
+    def systemDeploymentEnvironmentService
     def systemService
 
     /**
@@ -238,7 +238,7 @@ class CarmTagLib {
             isInUse = systemServerService.isInUse(domain)
         }
         else if (domain instanceof SystemDeploymentEnvironment) {
-            isInUse = systemEnvironmentService.isInUse(domain)
+            isInUse = systemDeploymentEnvironmentService.isInUse(domain)
         }
         else {
             out << '<span style="color: red;">Domain is not supported by the ifNotInUse tag!</span>'
