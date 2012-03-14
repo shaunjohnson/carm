@@ -502,7 +502,7 @@ class BootStrap {
 
 //            portalRelease210DeploymentIntegration(ApplicationDeployment) {
 //                applicationRelease = portalRelease210
-//                systemEnvironment = ref('integrationEnv')
+//                systemDeploymentEnvironment = ref('integrationEnv')
 //                deploymentInstructions = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in tellus ipsum, et egestas lectus. Nulla facilisi. Aliquam erat volutpat. Mauris id tortor lacus. In eros nisi, gravida quis aliquet sit amet, sodales ac augue. Sed rutrum, lectus sit amet viverra tincidunt, metus ligula vehicula arcu, sit amet sollicitudin lectus mi ut justo. Suspendisse suscipit tempus ligula et molestie. Duis nisl lorem, tincidunt venenatis egestas non, consectetur vel lectus. Vivamus sagittis cursus sapien, vitae aliquet massa lobortis vitae. Fusce eleifend nulla sit amet tellus tincidunt ut molestie metus auctor. Cras congue pretium turpis, vitae accumsan metus fermentum quis. Curabitur vitae dui lectus, id dapibus diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur vitae nisi in elit rhoncus aliquam. Quisque dolor tortor, dictum id auctor non, dapibus a ante.'
 //                deploymentState = 'Deployed'
 //                requestedDeploymentDate = new Date()

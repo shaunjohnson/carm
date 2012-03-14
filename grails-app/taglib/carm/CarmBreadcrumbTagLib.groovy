@@ -250,11 +250,11 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders a list system environments link.
      */
-    def listSystemEnvironments = { attrs ->
+    def listSystemDeploymentEnvironments = { attrs ->
         def isFirst = attrs.isFirst
-        out << link(controller: "systemEnvironment", action: "list", isFirst: isFirst,
-                title: message(code: "showAllSystemEnvironments.label"),
-                text: message(code: "systemEnvironments.label"))
+        out << link(controller: "systemDeploymentEnvironment", action: "list", isFirst: isFirst,
+                title: message(code: "showAllSystemDeploymentEnvironments.label"),
+                text: message(code: "systemDeploymentEnvironments.label"))
     }
 
     /**
@@ -461,13 +461,13 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders a show system environment link.
      */
-    def showSystemEnvironment = { attrs ->
-        def systemEnvironment = attrs.systemEnvironment
+    def showSystemDeploymentEnvironment = { attrs ->
+        def systemDeploymentEnvironment = attrs.systemDeploymentEnvironment
         def isFirst = attrs.isFirst
-        out << link(controller: "systemEnvironment", action: "show",
-                title: message(code: "showSystemEnvironment.label"),
-                text: systemEnvironment.name,
-                id: systemEnvironment.id, isFirst: isFirst)
+        out << link(controller: "systemDeploymentEnvironment", action: "show",
+                title: message(code: "showSystemDeploymentEnvironment.label"),
+                text: systemDeploymentEnvironment.name,
+                id: systemDeploymentEnvironment.id, isFirst: isFirst)
     }
 
     /**

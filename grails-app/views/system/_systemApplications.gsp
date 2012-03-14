@@ -24,7 +24,7 @@
                     <g:each var="environment" in="${systemInstance.environments}">
                         <th style="text-align: center; width: 5em;">
                             <g:link controller="systemDeplymentEnvironment" action="show" id="${environment.id}"
-                                title="${message(code: 'showSystemEnvironment.label')}">
+                                title="${message(code: 'showSystemDeploymentEnvironment.label')}">
                                 ${environment.name.encodeAsHTML()}
                             </g:link>
                         </th>

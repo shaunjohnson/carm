@@ -13,7 +13,7 @@
                         title="${message(code: 'showApplicationRelease.label')}">${task.applicationRelease.releaseNumber}</g:link>
                 to
                 <g:link controller="systemDeplymentEnvironment" action="show" id="${task.sysEnvironment.id}"
-                        title="${message(code: 'showSystemEnvironment.label')}">${task.sysEnvironment.name}</g:link>
+                        title="${message(code: 'showSystemDeploymentEnvironment.label')}">${task.sysEnvironment.name}</g:link>
 
                 <g:if test="${task.deploymentState == ApplicationDeploymentState.DRAFT}">
                     was created, but has not been submitted.

@@ -41,37 +41,37 @@ class SystemDeploymentEnvironmentService {
 
         log.debug "$prefix entered"
 
-        SystemDeploymentEnvironment systemEnvironment = new SystemDeploymentEnvironment(params)
+        SystemDeploymentEnvironment systemDeploymentEnvironment = new SystemDeploymentEnvironment(params)
 
         // Explicitly adding to the System due to "bug" in Grails. This is necessary since system.environments is a list
-        def system = systemEnvironment.system
-        system.addToEnvironments(systemEnvironment)
+        def system = systemDeploymentEnvironment.system
+        system.addToEnvironments(systemDeploymentEnvironment)
 
-        systemEnvironment.save()
+        systemDeploymentEnvironment.save()
 
-        log.debug "$prefix returning $systemEnvironment"
+        log.debug "$prefix returning $systemDeploymentEnvironment"
 
-        systemEnvironment
+        systemDeploymentEnvironment
     }
 
     /**
      * Deletes the provided SystemDeploymentEnvironment object.
      *
-     * @param systemEnvironment SystemDeploymentEnvironment object to delete
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment object to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(SystemDeploymentEnvironment systemEnvironment) {
+    void delete(SystemDeploymentEnvironment systemDeploymentEnvironment) {
         def prefix = "delete() :"
 
-        log.debug "$prefix entered, systemEnvironment=$systemEnvironment"
+        log.debug "$prefix entered, systemDeploymentEnvironment=$systemDeploymentEnvironment"
 
-        if (isInUse(systemEnvironment)) {
+        if (isInUse(systemDeploymentEnvironment)) {
             log.error "$prefix System environment is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
-        systemEnvironment.delete()
+        systemDeploymentEnvironment.delete()
         
         log.debug "$prefix leaving"
     }
@@ -99,17 +99,17 @@ class SystemDeploymentEnvironmentService {
     /**
      * Updates the provided SystemDeploymentEnvironment with the new properties.
      *
-     * @param systemEnvironment SystemDeploymentEnvironment to update
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment to update
      * @param params New properties
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(SystemDeploymentEnvironment systemEnvironment, Map params) {
+    void update(SystemDeploymentEnvironment systemDeploymentEnvironment, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"
 
-        systemEnvironment.properties = params
+        systemDeploymentEnvironment.properties = params
 
         log.debug "$prefix leaving"
     }

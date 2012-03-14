@@ -77,7 +77,7 @@
                 <g:render template="systemServers" model="['systemInstance': systemInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="systemEnvironments" model="['systemInstance': systemInstance]"/>
+                <g:render template="systemDeploymentEnvironments" model="['systemInstance': systemInstance]"/>
             </td>
         </tr>
         </tbody>

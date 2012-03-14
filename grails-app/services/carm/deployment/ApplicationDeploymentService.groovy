@@ -164,7 +164,7 @@ class ApplicationDeploymentService {
     }
 
     /**
-     * Infers the next System Environment to deploy a release to. This determines the next environment by analyzing
+     * Infers the next System Deployment Environment to deploy a release to. This determines the next environment by analyzing
      * existing deployments of the same release. The environment returned will be the next environment that can be
      * deployed to. If null is returned then the last environment has been deployed to.
      *
@@ -254,10 +254,10 @@ class ApplicationDeploymentService {
     /**
      * Finds latest completed ApplicationDeployment objects for the provided SystemDeploymentEnvironment.
      *
-     * @param systemEnvironment SystemDeploymentEnvironment used for querying
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment used for querying
      * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
      */
-    def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemDeploymentEnvironment systemEnvironment) {
+    def findAllLatestCompletedDeploymentsBySystemDeploymentEnvironment(SystemDeploymentEnvironment systemDeploymentEnvironment) {
         def results = [:]
 
         Application.listOrderByType().each { application ->
@@ -268,11 +268,11 @@ class ApplicationDeploymentService {
                     ApplicationDeployment ad
                 where
                     ad.deploymentState = :deploymentState
-                    and ad.sysEnvironment = :systemEnvironment
+                    and ad.sysEnvironment = :systemDeploymentEnvironment
                     and ad.applicationRelease.application = :application
                 group by
                     ad.sysEnvironment
-            """, [deploymentState: ApplicationDeploymentState.COMPLETED, systemEnvironment: systemEnvironment, application: application])
+            """, [deploymentState: ApplicationDeploymentState.COMPLETED, systemDeploymentEnvironment: systemDeploymentEnvironment, application: application])
 
             deployments.each {
                 def applicationReleaseId = it[0]

@@ -2,13 +2,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'System Environment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'System Deployment Environment')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
 <body>
 <div class="body">
-    <carm:header domain="${systemEnvironmentInstanceList}"/>
+    <carm:header domain="${systemDeploymentEnvironmentInstanceList}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -19,28 +19,28 @@
             <thead>
             <tr>
                 <g:sortableColumn property="name"
-                                  title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
+                                  title="${message(code: 'systemDeploymentEnvironment.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description"
-                                  title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
-                <th><g:message code="systemEnvironment.system.label" default="System"/></th>
+                                  title="${message(code: 'systemDeploymentEnvironment.description.label', default: 'Description')}"/>
+                <th><g:message code="systemDeploymentEnvironment.system.label" default="System"/></th>
             </tr>
             </thead>
             <tbody>
-            <g:each in="${systemEnvironmentInstanceList}" status="i" var="systemEnvironmentInstance">
+            <g:each in="${systemDeploymentEnvironmentInstanceList}" status="i" var="systemDeploymentEnvironmentInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
-                        <g:link action="show" id="${systemEnvironmentInstance.id}">
-                            ${fieldValue(bean: systemEnvironmentInstance, field: "name")}
+                        <g:link action="show" id="${systemDeploymentEnvironmentInstance.id}">
+                            ${fieldValue(bean: systemDeploymentEnvironmentInstance, field: "name")}
                         </g:link>
                     </td>
                     <td>
                         <div class="expander">
-                            <carm:plainText value="${systemEnvironmentInstance.description}"/>
+                            <carm:plainText value="${systemDeploymentEnvironmentInstance.description}"/>
                         </div>
                     </td>
                     <td>
-                        <g:link controller="system" action="show" id="${systemEnvironmentInstance.system.id}">
-                            ${fieldValue(bean: systemEnvironmentInstance, field: "system")}
+                        <g:link controller="system" action="show" id="${systemDeploymentEnvironmentInstance.system.id}">
+                            ${fieldValue(bean: systemDeploymentEnvironmentInstance, field: "system")}
                         </g:link>
                     </td>
                 </tr>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${systemEnvironmentInstanceTotal}"/>
+        <g:paginate total="${systemDeploymentEnvironmentInstanceTotal}"/>
     </div>
 </div>
 </body>

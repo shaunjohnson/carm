@@ -474,8 +474,8 @@
         </g:if>
     </bc:breadcrumbs>
 </g:elseif>
-<g:elseif test="${controller == 'systemEnvironment'}">
-    <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'System Environment')}"/>
+<g:elseif test="${controller == 'systemDeploymentEnvironment'}">
+    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'System Deployment Environment')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
@@ -485,17 +485,17 @@
             <bc:showSystem system="${domain.system}"/>
 
             <g:if test="${action == 'show'}">
-                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:showSystemDeploymentEnvironment systemDeploymentEnvironment="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
                 <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:showSystemDeploymentEnvironment systemDeploymentEnvironment="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'listActivity'}">
-                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:showSystemDeploymentEnvironment systemDeploymentEnvironment="${domain}"/>
                 <bc:label code="allActivity.label" args="[entityName]"/>
             </g:elseif>
         </g:if>

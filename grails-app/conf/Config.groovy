@@ -145,7 +145,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/sourceControlUser/**':          ['permitAll'],
     '/system/**':                     ['permitAll'],
     '/systemServer/**':            ['permitAll'],
-    '/systemEnvironment/**':          ['permitAll']
+    '/systemDeploymentEnvironment/**':          ['permitAll']
 ]
 
 // Grant ROLE_ADMIN the ROLE_USER role too
