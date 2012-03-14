@@ -36,6 +36,6 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${activityTotal}" id="${domainInstance.id}"/>
+        <g:paginate total="${activityTotal}" id="${domainInstance?.id}"/>
     </div>
 </div>
