@@ -4,7 +4,7 @@ import grails.plugins.springsecurity.Secured
 import carm.exceptions.DomainInUseException
 import org.springframework.dao.DataIntegrityViolationException
 
-class SystemDeplymentEnvironmentController {
+class SystemDeploymentEnvironmentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 

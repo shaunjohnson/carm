@@ -12,7 +12,7 @@
                 <g:link controller="applicationRelease" action="show" id="${task.applicationRelease.id}"
                         title="${message(code: 'showApplicationRelease.label')}">${task.applicationRelease.releaseNumber}</g:link>
                 to
-                <g:link controller="systemDeplymentEnvironment" action="show" id="${task.sysEnvironment.id}"
+                <g:link controller="systemDeploymentEnvironment" action="show" id="${task.sysEnvironment.id}"
                         title="${message(code: 'showSystemDeploymentEnvironment.label')}">${task.sysEnvironment.name}</g:link>
 
                 <g:if test="${task.deploymentState == ApplicationDeploymentState.DRAFT}">

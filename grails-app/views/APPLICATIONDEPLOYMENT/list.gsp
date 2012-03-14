@@ -48,7 +48,7 @@
                         </g:link>
                     </td>
                     <td>
-                        <g:link controller="systemDeplymentEnvironment" action="show"
+                        <g:link controller="systemDeploymentEnvironment" action="show"
                                 id="${applicationDeploymentInstance?.sysEnvironment?.id}">
                             ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>

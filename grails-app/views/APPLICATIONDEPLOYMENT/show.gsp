@@ -36,7 +36,7 @@
                     <g:message code="applicationDeployment.sysEnvironment.label" default="System Deployment Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemDeplymentEnvironment" action="show"
+                    <g:link controller="systemDeploymentEnvironment" action="show"
                             id="${applicationDeploymentInstance?.sysEnvironment?.id}">
                         ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
