@@ -26,7 +26,7 @@
                     <ul>
                         <g:each in="${moduleInstance.systemComponents.sort { it.name }}" var="systemComponent">
                             <li>
-                                <g:link controller="systemComponent" action="show" id="${systemComponent?.id}">
+                                <g:link controller="systemServer" action="show" id="${systemComponent?.id}">
                                     ${systemComponent?.encodeAsHTML()}
                                 </g:link>
                             </li>

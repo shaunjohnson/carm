@@ -4,7 +4,7 @@
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
-            <g:link class="create" controller="systemComponent" action="create"
+            <g:link class="create" controller="systemServer" action="create"
                     params="['system.id': systemInstance?.id]">
                 <g:message code="addComponent.label" default="Add Component"/>
             </g:link>
@@ -16,7 +16,7 @@
     <ul>
         <g:each in="${systemInstance.components.sort { it.name }}" var="component">
             <li>
-                <g:link controller="systemComponent" action="show" id="${component.id}">
+                <g:link controller="systemServer" action="show" id="${component.id}">
                     ${component?.encodeAsHTML()}
                 </g:link>
             </li>
