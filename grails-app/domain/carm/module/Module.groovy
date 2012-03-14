@@ -2,6 +2,7 @@ package carm.module
 
 import carm.application.Application
 import carm.system.SystemComponent
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Module {
     def activityTraceService
@@ -33,6 +34,18 @@ class Module {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof Module)) {
+            return false
+        }
+
+        other.name == name && other.type == type
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).append(type).toHashCode()
     }
 
     def afterInsert() {

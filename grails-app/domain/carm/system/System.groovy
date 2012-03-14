@@ -1,5 +1,7 @@
 package carm.system
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class System {
     def activityTraceService
 
@@ -23,6 +25,18 @@ class System {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof System)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 
     def afterInsert() {

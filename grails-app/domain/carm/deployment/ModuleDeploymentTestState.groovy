@@ -1,5 +1,7 @@
 package carm.deployment
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class ModuleDeploymentTestState implements Comparable<ModuleDeploymentTestState> {
     String name
     String description
@@ -22,5 +24,17 @@ class ModuleDeploymentTestState implements Comparable<ModuleDeploymentTestState>
 
     int compareTo(ModuleDeploymentTestState o) {
         return name.compareTo(o?.name)
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ModuleDeploymentTestState)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }

@@ -5,6 +5,7 @@ import carm.project.Project
 import carm.system.System
 import carm.module.Module
 import carm.release.ApplicationRelease
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Application {
     def activityTraceService
@@ -45,6 +46,18 @@ class Application {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof Application)) {
+            return false
+        }
+
+        other.name == name && other.type == type && other.project == project
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).append(type).append(project).toHashCode()
     }
 
     def afterInsert() {

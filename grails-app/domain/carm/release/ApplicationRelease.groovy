@@ -3,6 +3,7 @@ package carm.release
 import carm.application.Application
 import carm.deployment.ApplicationDeployment
 import carm.security.User
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class ApplicationRelease {
     def activityTraceService
@@ -57,6 +58,18 @@ class ApplicationRelease {
 
     public String toString() {
         return "${releaseNumber} : ${application}"
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ApplicationRelease)) {
+            return false
+        }
+
+        other.application == application && other.releaseNumber == releaseNumber
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(application).append(releaseNumber).toHashCode()
     }
 
     def afterInsert() {

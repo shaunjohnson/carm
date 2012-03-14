@@ -1,5 +1,7 @@
 package carm.release
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestState> {
     String name
     String description
@@ -22,5 +24,17 @@ class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestSt
 
     int compareTo(ApplicationReleaseTestState o) {
         return name.compareTo(o?.name)
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ApplicationReleaseTestState)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }

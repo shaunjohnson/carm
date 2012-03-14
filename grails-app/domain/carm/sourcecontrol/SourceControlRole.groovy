@@ -1,5 +1,7 @@
 package carm.sourcecontrol
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class SourceControlRole {
     String name
     String description
@@ -18,5 +20,17 @@ class SourceControlRole {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof SourceControlRole)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }

@@ -1,6 +1,7 @@
 package carm.deployment
 
 import carm.release.ModuleRelease
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class ModuleDeployment {
     ModuleRelease moduleRelease
@@ -23,5 +24,21 @@ class ModuleDeployment {
     
     static mapping = {
         deploymentInstructions type: 'text'
+    }
+    
+    String toString() {
+        "Module Deployment : $applicationDeployment - $deploymentState - $testState"
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ModuleDeployment)) {
+            return false
+        }
+
+        other.moduleRelease == moduleRelease && other.deploymentState == deploymentState && other.testState == testState
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(moduleRelease).append(deploymentState).append(testState).toHashCode()
     }
 }

@@ -1,5 +1,7 @@
 package carm.system
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class SystemEnvironment {
     String name
     String description
@@ -23,11 +25,15 @@ class SystemEnvironment {
         return name
     }
 
-    boolean equals(def o) {
-        if (is(o)) return true
-        if (o instanceof SystemEnvironment) {
-            return id == o.id
+    boolean equals(other) {
+        if (!(other instanceof SystemEnvironment)) {
+            return false
         }
-        return false
+
+        other.name == name && other.system == system
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).append(system).toHashCode()
     }
 }

@@ -1,5 +1,7 @@
 package carm.sourcecontrol
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class SourceControlServer {
     String name
     String description
@@ -24,5 +26,17 @@ class SourceControlServer {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof SourceControlServer)) {
+            return false
+        }
+
+        other.name == name && other.type == type && other.url == url
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).append(type).append(url).toHashCode()
     }
 }

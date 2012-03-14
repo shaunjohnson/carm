@@ -1,6 +1,7 @@
 package carm.activity
 
 import org.joda.time.DateTime
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class ActivityTrace {
     String oid
@@ -22,7 +23,24 @@ class ActivityTrace {
     }
 
     static mapping = {
-        sort "dateOccurred":"desc"
+        sort "dateOccurred": "desc"
         version false
+    }
+
+    String toString() {
+        "Activity Trace : $username $action $objectName with ID $objectId on $dateOccurred"
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ActivityTrace)) {
+            return false
+        }
+
+        other.oid == oid && other.username == username && other.action == action && other.objectName == objectName &&
+                other.objectId == objectId && other.objectType == objectType
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(oid).append(username).append(action).append(objectName).append(objectId).append(objectType).toHashCode()
     }
 }

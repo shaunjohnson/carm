@@ -1,6 +1,7 @@
 package carm.security
 
 import carm.sourcecontrol.SourceControlUser
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class User {
     transient springSecurityService
@@ -46,5 +47,17 @@ class User {
 
     public String toString() {
         return username
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof User)) {
+            return false
+        }
+
+        other.username == username
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(username).toHashCode()
     }
 }

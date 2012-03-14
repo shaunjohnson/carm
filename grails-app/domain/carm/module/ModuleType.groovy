@@ -1,5 +1,7 @@
 package carm.module
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class ModuleType {
     String name
     String description
@@ -18,5 +20,17 @@ class ModuleType {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ModuleType)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }

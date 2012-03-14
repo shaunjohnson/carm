@@ -3,6 +3,7 @@ package carm.deployment
 import carm.release.ApplicationRelease
 import carm.system.SystemEnvironment
 import carm.security.User
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class ApplicationDeployment {
     String deploymentInstructions
@@ -46,5 +47,25 @@ class ApplicationDeployment {
 
     static mapping = {
         deploymentInstructions type: 'text'
+    }
+
+    String toString() {
+        "Application Deployment : $applicationRelease to $sysEnvironment - $deploymentState"
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ApplicationDeployment)) {
+            return false
+        }
+
+        other.applicationRelease == applicationRelease && other.requestedDeploymentDate == requestedDeploymentDate &&
+                other.completedDeploymentDate == completedDeploymentDate && other.deploymentState == deploymentState
+    }
+
+    int hashCode() {
+        def builder = new HashCodeBuilder()
+        builder.append(applicationRelease).append(requestedDeploymentDate)
+        builder.append(completedDeploymentDate).append(deploymentState)
+        builder.toHashCode()
     }
 }

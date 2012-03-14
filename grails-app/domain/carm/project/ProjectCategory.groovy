@@ -1,5 +1,7 @@
 package carm.project
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class ProjectCategory {
     String name
     String description
@@ -18,5 +20,17 @@ class ProjectCategory {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ProjectCategory)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }

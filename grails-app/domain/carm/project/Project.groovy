@@ -1,6 +1,7 @@
 package carm.project
 
 import carm.application.Application
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Project {
     def activityTraceService
@@ -26,6 +27,18 @@ class Project {
 
     public String toString() {
         return name
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof Project)) {
+            return false
+        }
+
+        other.name == name && other.category == category
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).append(category).toHashCode()
     }
 
     def afterInsert() {

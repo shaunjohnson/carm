@@ -1,5 +1,7 @@
 package carm.application
 
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 class ApplicationType implements Comparable<ApplicationType> {
     String name
     String description
@@ -22,5 +24,17 @@ class ApplicationType implements Comparable<ApplicationType> {
 
     int compareTo(ApplicationType o) {
         return name.compareTo(o?.name)
+    }
+
+    boolean equals(other) {
+        if (!(other instanceof ApplicationRole)) {
+            return false
+        }
+
+        other.name == name
+    }
+
+    int hashCode() {
+        new HashCodeBuilder().append(name).toHashCode()
     }
 }
