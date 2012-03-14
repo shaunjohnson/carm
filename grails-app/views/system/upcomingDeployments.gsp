@@ -23,10 +23,10 @@
             </div>
 
             <div style="margin-bottom: 2em;">
-                <g:each in="${requestedDeploymentDateEntry.value.entrySet()}" var="sysEnvironmentEntry">
-                    <h3>${sysEnvironmentEntry.key}</h3>
+                <g:each in="${requestedDeploymentDateEntry.value.entrySet()}" var="deploymentEnvironmentEntry">
+                    <h3>${deploymentEnvironmentEntry.key}</h3>
 
-                    <g:each in="${sysEnvironmentEntry.value.entrySet()}" var="applicationTypeEntry">
+                    <g:each in="${deploymentEnvironmentEntry.value.entrySet()}" var="applicationTypeEntry">
                         <div style="margin-left: 2em;">
                             <h4>${applicationTypeEntry.key}</h4>
 

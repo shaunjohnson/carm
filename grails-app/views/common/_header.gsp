@@ -43,7 +43,7 @@
 
     <carm:pageHeaderLabel action="${action}"
                           beanName="${message(code: 'pageHeader.applicationDeployment.label',
-                                  args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.sysEnvironment])}"
+                                  args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.deploymentEnvironment])}"
                           entityName="${entityName}"/>
 
     <bc:breadcrumbs>
@@ -214,7 +214,7 @@
 
     <carm:pageHeaderLabel action="${action}"
                           beanName="${message(code: 'pageHeader.moduleDeployment.label',
-                                  args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.sysEnvironment])}"
+                                  args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.deploymentEnvironment])}"
                           entityName="${entityName}"/>
 
     <bc:breadcrumbs>

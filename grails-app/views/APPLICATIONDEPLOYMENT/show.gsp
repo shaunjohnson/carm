@@ -33,7 +33,7 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="applicationDeployment.sysEnvironment.label" default="System Deployment Environment"/>
+                    <g:message code="applicationDeployment.deploymentEnvironment.label" default="System Deployment Environment"/>
                 </td>
                 <td valign="top" class="value">
                     <g:link controller="systemDeploymentEnvironment" action="show"

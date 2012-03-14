@@ -80,7 +80,7 @@
         </carm:showHideDetails>
     </div>
 
-    <g:render template="systemDeploymentEnvironmentApplications"
+    <g:render template="systemEnvironmentApplications"
               model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
 </div>
 </body>

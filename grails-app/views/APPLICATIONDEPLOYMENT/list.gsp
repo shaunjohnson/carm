@@ -23,7 +23,7 @@
                                   title="${message(code: 'applicationDeployment.deploymentState.label', default: 'Deployment State')}"/>
                 <th><g:message code="applicationDeployment.applicationRelease.label"
                                default="Application Release"/></th>
-                <th><g:message code="applicationDeployment.sysEnvironment.label" default="Environment"/></th>
+                <th><g:message code="applicationDeployment.deploymentEnvironment.label" default="Environment"/></th>
                 <g:sortableColumn property="requestedDeploymentDate"
                                   title="${message(code: 'applicationDeployment.requestedDeploymentDate.label', default: 'Requested Deployment Date')}"/>
                 <g:sortableColumn property="completedDeploymentDate"

@@ -57,10 +57,10 @@ class ApplicationDeploymentService {
      */
     ApplicationDeployment newApplicationDeployment(ApplicationRelease applicationRelease) {
         Date requestedDeploymentDate = inferNextDeploymentDate()
-        SystemDeploymentEnvironment sysEnvironment = inferNextEnvironment(applicationRelease)
+        SystemDeploymentEnvironment deploymentEnvironment = inferNextEnvironment(applicationRelease)
 
         new ApplicationDeployment(applicationRelease: applicationRelease,
-                requestedDeploymentDate: requestedDeploymentDate, deploymentEnvironment: sysEnvironment)
+                requestedDeploymentDate: requestedDeploymentDate, deploymentEnvironment: deploymentEnvironment)
     }
 
     /**
