@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import carm.module.Module
 import carm.exceptions.DomainInUseException
 
-class SystemComponentService {
+class SystemServerService {
 
     static transactional = false
 

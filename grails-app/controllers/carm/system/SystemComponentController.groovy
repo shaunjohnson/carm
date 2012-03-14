@@ -9,7 +9,7 @@ class SystemComponentController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def activityTraceService
-    def systemComponentService
+    def systemServerService
     def systemService
 
     def index() {
@@ -18,7 +18,7 @@ class SystemComponentController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemComponentInstanceList: systemComponentService.list(params), systemComponentInstanceTotal: systemComponentService.count()]
+        [systemComponentInstanceList: systemServerService.list(params), systemComponentInstanceTotal: systemServerService.count()]
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -37,7 +37,7 @@ class SystemComponentController {
 
     @Secured(['ROLE_ADMIN'])
     def save() {
-        def systemComponentInstance = systemComponentService.create(params)
+        def systemComponentInstance = systemServerService.create(params)
         if (!systemComponentInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), systemComponentInstance.name])}"
             redirect(controller: "system", action: "show", id: systemComponentInstance.system.id)
@@ -48,7 +48,7 @@ class SystemComponentController {
     }
 
     def show() {
-        def systemComponentInstance = systemComponentService.get(params.id)
+        def systemComponentInstance = systemServerService.get(params.id)
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
@@ -63,7 +63,7 @@ class SystemComponentController {
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemComponentInstance = systemComponentService.get(params.id)
+        def systemComponentInstance = systemServerService.get(params.id)
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
@@ -75,7 +75,7 @@ class SystemComponentController {
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemComponentInstance = systemComponentService.get(params.id)
+        def systemComponentInstance = systemServerService.get(params.id)
         if (systemComponentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -85,7 +85,7 @@ class SystemComponentController {
                     return
                 }
             }
-            systemComponentService.update(systemComponentInstance, params)
+            systemServerService.update(systemComponentInstance, params)
             if (!systemComponentInstance.hasErrors() && systemComponentInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), systemComponentInstance.name])}"
                 redirect(action: "show", id: systemComponentInstance.id)
@@ -102,12 +102,12 @@ class SystemComponentController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemComponentInstance = systemComponentService.get(params.id)
+        def systemComponentInstance = systemServerService.get(params.id)
         if (systemComponentInstance) {
             def systemId = systemComponentInstance.system.id
             try {
                 def name = systemComponentInstance.name
-                systemComponentService.delete(systemComponentInstance)
+                systemServerService.delete(systemComponentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), name])}"
                 redirect(controller: "system", action: "show", id: systemId)
             }
@@ -127,7 +127,7 @@ class SystemComponentController {
     }
 
     def listActivity() {
-        def systemComponentInstance = systemComponentService.get(params.id)
+        def systemComponentInstance = systemServerService.get(params.id)
         if (!systemComponentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemComponent.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")

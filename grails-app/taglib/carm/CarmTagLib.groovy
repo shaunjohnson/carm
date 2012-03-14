@@ -35,7 +35,7 @@ class CarmTagLib {
     def sourceControlRepositoryService
     def sourceControlRoleService
     def sourceControlServerService
-    def systemComponentService
+    def systemServerService
     def systemEnvironmentService
     def systemService
 
@@ -235,7 +235,7 @@ class CarmTagLib {
             isInUse = systemService.isInUse(domain)
         }
         else if (domain instanceof SystemServer) {
-            isInUse = systemComponentService.isInUse(domain)
+            isInUse = systemServerService.isInUse(domain)
         }
         else if (domain instanceof SystemEnvironment) {
             isInUse = systemEnvironmentService.isInUse(domain)
