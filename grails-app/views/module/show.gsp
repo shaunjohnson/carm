@@ -54,7 +54,7 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="module.systemServers.label" default="System Components"/>
+                    <g:message code="module.systemServers.label" default="System Servers"/>
                 </td>
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>

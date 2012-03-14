@@ -17,7 +17,7 @@ class System {
         description(maxSize: 4000, nullable: true)
     }
 
-    static hasMany = [components: SystemServer, environments: SystemEnvironment]
+    static hasMany = [servers: SystemServer, environments: SystemEnvironment]
 
     static mapping = {
         sort "name"

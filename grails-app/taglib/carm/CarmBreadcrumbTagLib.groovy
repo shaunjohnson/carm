@@ -238,7 +238,7 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
-     * Renders a list system components link.
+     * Renders a list system servers link.
      */
     def listSystemServers = { attrs ->
         def isFirst = attrs.isFirst
@@ -448,7 +448,7 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
-     * Renders a show system component link.
+     * Renders a show system server link.
      */
     def showSystemServer = { attrs ->
         def systemServer = attrs.systemServer

@@ -87,21 +87,21 @@
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label for="systemServers">
-                            <g:message code="module.systemServers.label" default="System Components"/>
+                            <g:message code="module.systemServers.label" default="System Servers"/>
                         </carm:label>
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: moduleInstance, field: 'systemServers', 'errors')}">
                         <g:if test="${moduleInstance.application.system}">
                             <g:select name="systemServers" multiple="yes" optionKey="id" size="5"
-                                      from="${moduleInstance.application.system.components.sort { it.name }}"
+                                      from="${moduleInstance.application.system.servers.sort { it.name }}"
                                       value="${moduleInstance?.systemServers*.id}"
                                       title="${message(code: 'module.systemServers.help')}"/>
                         </g:if>
                         <g:else>
                             <p class="emphasis">
                                 <g:message code="moduleCannotBeDeployed.message"
-                                           default="This module cannot be deployed to any component since the application is not associated with a system."/>
+                                           default="This module cannot be deployed to any server since the application is not associated with a system."/>
                             </p>
                             <g:hiddenField name="systemServers" value="${null}"/>
                         </g:else>

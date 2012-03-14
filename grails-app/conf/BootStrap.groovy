@@ -158,7 +158,7 @@ class BootStrap {
             bigSystem(System) {
                 name = 'Big System'
                 description = 'Big System'
-                components = [
+                servers = [
                         dataLayer(SystemServer) {
                             name = 'Oracle 10g Database Server'
                             description = 'Oracle 10g database server that provides the data layer for Big System.'
@@ -216,9 +216,9 @@ class BootStrap {
             standaloneSystem(System) {
                 name = 'Standalone System'
                 description 'Standalone applications system'
-                components = [
-                        standaloneComponent(SystemServer) {
-                            name = 'Standalone system component'
+                servers = [
+                        standaloneServer(SystemServer) {
+                            name = 'Standalone system server'
                             system = standaloneSystem
                         }
                 ]

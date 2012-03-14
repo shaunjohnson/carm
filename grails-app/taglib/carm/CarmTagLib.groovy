@@ -67,9 +67,9 @@ class CarmTagLib {
                 controller = "system"
                 title = message(code: "showSystem.label", default: "Show System")
             }
-            else if (activity.objectType == activityTraceService.SYSTEM_COMPONENT_TYPE && SystemServer.exists(activity.objectId)) {
+            else if (activity.objectType == activityTraceService.SYSTEM_SERVER_TYPE && SystemServer.exists(activity.objectId)) {
                 controller = "systemServer"
-                title = message(code: "showSystemServer.label", default: "Show System Component")
+                title = message(code: "showSystemServer.label", default: "Show System Server")
             }
         }
 

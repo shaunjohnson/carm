@@ -9,7 +9,7 @@ class ModuleService {
     static transactional = false
 
     /**
-     * Determines if the module is deployable. An module must be associated with a system system component in order to
+     * Determines if the module is deployable. An module must be associated with a system system server in order to
      * be deployable.
      *
      * @param module Module to test

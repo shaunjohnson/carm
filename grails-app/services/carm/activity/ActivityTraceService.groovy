@@ -23,7 +23,7 @@ class ActivityTraceService {
     public static final String MODULE_TYPE = Module.class.name
     public static final String PROJECT_TYPE = Project.class.name
     public static final String SYSTEM_TYPE = System.class.name
-    public static final String SYSTEM_COMPONENT_TYPE = SystemServer.class.name
+    public static final String SYSTEM_SERVER_TYPE = SystemServer.class.name
 
     private static final Long ROOT_ID = 0L
     private static final String ROOT_TYPE = "Root"
@@ -101,7 +101,7 @@ class ActivityTraceService {
      * @return Number of ActivityTrace objects
      */
     int countActivityBySystemServer(SystemServer systemServer) {
-        ActivityTrace.countByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id))
+        ActivityTrace.countByOid(generateOid(SYSTEM_SERVER_TYPE, systemServer.id))
     }
 
     /**
@@ -188,7 +188,7 @@ class ActivityTraceService {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityBySystemServer(SystemServer systemServer, Map params) {
-        ActivityTrace.findAllByOid(generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id), buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_SERVER_TYPE, systemServer.id), buildQueryParams(params))
     }
 
 
@@ -423,10 +423,10 @@ class ActivityTraceService {
      */
     void systemServerCreated(SystemServer systemServer) {
         String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, CREATED, systemServer.id, systemServer.name)
+        insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, CREATED, systemServer.id, systemServer.name)
 
-        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id)
-        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, CREATED, systemServer.id, systemServer.name)
+        String oid = generateOid(SYSTEM_SERVER_TYPE, systemServer.id)
+        insertActivityTrace(oid, SYSTEM_SERVER_TYPE, CREATED, systemServer.id, systemServer.name)
     }
 
     /**
@@ -436,7 +436,7 @@ class ActivityTraceService {
      */
     void systemServerDeleted(SystemServer systemServer) {
         String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, DELETED, systemServer.id, systemServer.name)
+        insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, DELETED, systemServer.id, systemServer.name)
     }
 
     /**
@@ -446,10 +446,10 @@ class ActivityTraceService {
      */
     void systemServerUpdated(SystemServer systemServer) {
         String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
-        insertActivityTrace(systemOid, SYSTEM_COMPONENT_TYPE, UPDATED, systemServer.id, systemServer.name)
+        insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, UPDATED, systemServer.id, systemServer.name)
 
-        String oid = generateOid(SYSTEM_COMPONENT_TYPE, systemServer.id)
-        insertActivityTrace(oid, SYSTEM_COMPONENT_TYPE, UPDATED, systemServer.id, systemServer.name)
+        String oid = generateOid(SYSTEM_SERVER_TYPE, systemServer.id)
+        insertActivityTrace(oid, SYSTEM_SERVER_TYPE, UPDATED, systemServer.id, systemServer.name)
     }
 
 

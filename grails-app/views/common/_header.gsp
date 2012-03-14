@@ -448,7 +448,7 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemServer'}">
-    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'System Component')}"/>
+    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'System Server')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 

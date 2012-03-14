@@ -10,15 +10,15 @@ class SystemServerService {
     static transactional = false
 
     /**
-     * Determines if the provided component is in use.
+     * Determines if the provided server is in use.
      *
-     * @param component Component to test
-     * @return True if the component is in use
+     * @param server Server to test
+     * @return True if the server is in use
      */
-    boolean isInUse(SystemServer component) {
+    boolean isInUse(SystemServer server) {
         def moduleCount = Module.executeQuery(
-                'select count(m) from Module m where :component in elements(m.systemServers)',
-                [component: component])[0]
+                'select count(m) from Module m where :server in elements(m.systemServers)',
+                [server: server])[0]
 
         moduleCount > 0
     }
@@ -66,7 +66,7 @@ class SystemServerService {
         log.debug "$prefix entered, systemServer=$systemServer"
 
         if (isInUse(systemServer)) {
-            log.error "$prefix System component is in use and cannot be deleted"
+            log.error "$prefix System server is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 

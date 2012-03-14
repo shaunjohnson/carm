@@ -513,10 +513,10 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-17") {
-		createTable(tableName: "module_system_component") {
-			column(name: "module_system_components_id", type: "bigint")
+		createTable(tableName: "module_system_server") {
+			column(name: "module_system_servers_id", type: "bigint")
 
-			column(name: "system_component_id", type: "bigint")
+			column(name: "system_server_id", type: "bigint")
 		}
 	}
 
@@ -797,9 +797,9 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-28") {
-		createTable(tableName: "system_component") {
+		createTable(tableName: "system_server") {
 			column(autoIncrement: "true", name: "id", type: "bigint") {
-				constraints(nullable: "false", primaryKey: "true", primaryKeyName: "system_componPK")
+				constraints(nullable: "false", primaryKey: "true", primaryKeyName: "system_serverPK")
 			}
 
 			column(name: "version", type: "bigint") {
@@ -1147,14 +1147,14 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-67") {
-		createIndex(indexName: "FKDCCBC6099BD4FD1", tableName: "module_system_component") {
-			column(name: "system_component_id")
+		createIndex(indexName: "FKDCCBC6099BD4FD1", tableName: "module_system_server") {
+			column(name: "system_server_id")
 		}
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-68") {
-		createIndex(indexName: "FKDCCBC60CD0BDB00", tableName: "module_system_component") {
-			column(name: "module_system_components_id")
+		createIndex(indexName: "FKDCCBC60CD0BDB00", tableName: "module_system_server") {
+			column(name: "module_system_servers_id")
 		}
 	}
 
@@ -1231,13 +1231,13 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-81") {
-		createIndex(indexName: "FK1982DAED4EE68204", tableName: "system_component") {
+		createIndex(indexName: "FK1982DAED4EE68204", tableName: "system_server") {
 			column(name: "system_id")
 		}
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-82") {
-		createIndex(indexName: "name_unique_1330979409932", tableName: "system_component", unique: "true") {
+		createIndex(indexName: "name_unique_1330979409932", tableName: "system_server", unique: "true") {
 			column(name: "name")
 		}
 	}
@@ -1375,11 +1375,11 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-114") {
-		addForeignKeyConstraint(baseColumnNames: "module_system_components_id", baseTableName: "module_system_component", constraintName: "FKDCCBC60CD0BDB00", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "module", referencesUniqueColumn: "false")
+		addForeignKeyConstraint(baseColumnNames: "module_system_servers_id", baseTableName: "module_system_server", constraintName: "FKDCCBC60CD0BDB00", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "module", referencesUniqueColumn: "false")
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-115") {
-		addForeignKeyConstraint(baseColumnNames: "system_component_id", baseTableName: "module_system_component", constraintName: "FKDCCBC6099BD4FD1", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system_component", referencesUniqueColumn: "false")
+		addForeignKeyConstraint(baseColumnNames: "system_server_id", baseTableName: "module_system_server", constraintName: "FKDCCBC6099BD4FD1", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system_server", referencesUniqueColumn: "false")
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-116") {
@@ -1399,7 +1399,7 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-120") {
-		addForeignKeyConstraint(baseColumnNames: "system_id", baseTableName: "system_component", constraintName: "FK1982DAED4EE68204", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system", referencesUniqueColumn: "false")
+		addForeignKeyConstraint(baseColumnNames: "system_id", baseTableName: "system_server", constraintName: "FK1982DAED4EE68204", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system", referencesUniqueColumn: "false")
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-121") {
