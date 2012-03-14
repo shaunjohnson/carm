@@ -152,7 +152,7 @@ class ApplicationReleaseController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    applicationReleaseInstance: applicationReleaseInstance,
+                    domainInstance: applicationReleaseInstance,
                     activityList: activityTraceService.listActivityByApplicationRelease(applicationReleaseInstance, params),
                     activityTotal: activityTraceService.countActivityByApplicationRelease(applicationReleaseInstance)
             ]

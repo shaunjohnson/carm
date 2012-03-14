@@ -136,7 +136,7 @@ class SystemComponentController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    systemComponentInstance: systemComponentInstance,
+                    domainInstance: systemComponentInstance,
                     activityList: activityTraceService.listActivityBySystemComponent(systemComponentInstance, params),
                     activityTotal: activityTraceService.countActivityBySystemComponent(systemComponentInstance)
             ]

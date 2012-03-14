@@ -199,7 +199,7 @@ class SystemController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    systemInstance: systemInstance,
+                    domainInstance: systemInstance,
                     activityList: activityTraceService.listActivityBySystem(systemInstance, params),
                     activityTotal: activityTraceService.countActivityBySystem(systemInstance)
             ]

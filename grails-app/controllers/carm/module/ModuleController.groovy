@@ -159,7 +159,7 @@ class ModuleController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    moduleInstance: moduleInstance,
+                    domainInstance: moduleInstance,
                     activityList: activityTraceService.listActivityByModule(moduleInstance, params),
                     activityTotal: activityTraceService.countActivityByModule(moduleInstance)
             ]

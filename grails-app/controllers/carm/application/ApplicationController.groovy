@@ -202,7 +202,7 @@ class ApplicationController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    applicationInstance: applicationInstance,
+                    domainInstance: applicationInstance,
                     activityList: activityTraceService.listActivityByApplication(applicationInstance, params),
                     activityTotal: activityTraceService.countActivityByApplication(applicationInstance)
             ]

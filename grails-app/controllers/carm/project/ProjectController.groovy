@@ -136,7 +136,7 @@ class ProjectController {
         else {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
             [
-                    projectInstance: projectInstance,
+                    domainInstance: projectInstance,
                     activityList: activityTraceService.listActivityByProject(projectInstance, params),
                     activityTotal: activityTraceService.countActivityByProject(projectInstance)
             ]

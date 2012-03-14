@@ -7,18 +7,7 @@
 </head>
 
 <body>
-<div class="body">
-    <carm:header domain="${applicationReleaseInstance}" pageName="${message(code: 'default.listActivity.label', args: [entityName])}"/>
-
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
-
-    <g:render template="/common/listActivity" model="[activityList: activityList]"/>
-
-    <div class="paginateButtons">
-        <g:paginate total="${activityTotal}" id="${applicationReleaseInstance.id}"/>
-    </div>
+<g:render template="/common/listActivity" model="[activityList: activityList]"/>
 </div>
 </body>
 </html>
