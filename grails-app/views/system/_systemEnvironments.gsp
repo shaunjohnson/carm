@@ -4,7 +4,7 @@
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
-            <g:link class="create" controller="systemEnvironment" action="create"
+            <g:link class="create" controller="systemDeplymentEnvironment" action="create"
                     params="['system.id': systemInstance?.id]">
                 <g:message code="addEnvironment.label" default="Add Environment"/>
             </g:link>
@@ -21,7 +21,7 @@
                     ${eindex + 1}.
                 </td>
                 <td class="olContent">
-                    <g:link controller="systemEnvironment" action="show" id="${environment?.id}">
+                    <g:link controller="systemDeplymentEnvironment" action="show" id="${environment?.id}">
                         ${environment?.encodeAsHTML()}
                     </g:link>
                 </td>

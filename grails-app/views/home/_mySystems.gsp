@@ -18,7 +18,7 @@
                 </g:link>
             </h3>
             <g:each in="${systemInstance.environments}" var="systemEnvironment" status="i">
-                <g:link controller="systemEnvironment" action="show"
+                <g:link controller="systemDeplymentEnvironment" action="show"
                         id="${systemEnvironment.id}">${systemEnvironment.encodeAsHTML()}</g:link><g:if
                     test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
             </g:each>

@@ -17,7 +17,7 @@
 
         <tr>
             <td>
-                <g:link controller="systemEnvironment" action="show" id="${environment.id}">
+                <g:link controller="systemDeplymentEnvironment" action="show" id="${environment.id}">
                     ${environment.name.encodeAsHTML()}
                 </g:link>
             </td>
