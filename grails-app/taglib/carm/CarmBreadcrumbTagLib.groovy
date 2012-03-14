@@ -285,7 +285,7 @@ class CarmBreadcrumbTagLib {
         def applicationDeployment = attrs.applicationDeployment
         def isFirst = attrs.isFirst
         def text = message(code: "breadcrumbs.applicationDeployment.label",
-                args: [applicationDeployment.applicationRelease.releaseNumber, applicationDeployment.sysEnvironment.name])
+                args: [applicationDeployment.applicationRelease.releaseNumber, applicationDeployment.deploymentEnvironment.name])
         out << link(controller: "applicationDeployment", action: "show",
                 title: message(code: "showApplicationDeployment.label"),
                 text: text, id: applicationDeployment.id, isFirst: isFirst)

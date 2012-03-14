@@ -51,11 +51,11 @@
                         </carm:label>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'sysEnvironment', 'errors')}">
+                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentEnvironment', 'errors')}">
                         <g:select name="sysEnvironment.id" optionKey="id"
                                   from="${applicationDeploymentInstance?.applicationRelease?.application?.system?.environments}"
                                   noSelection="['null': '']" required="required"
-                                  value="${applicationDeploymentInstance?.sysEnvironment?.id}"/>
+                                  value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

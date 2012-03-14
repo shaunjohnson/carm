@@ -16,7 +16,7 @@ class SystemDeploymentEnvironmentService {
      * @return True if the environment is in use
      */
     boolean isInUse(SystemDeploymentEnvironment environment) {
-        ApplicationDeployment.countBySysEnvironment(environment) > 0
+        ApplicationDeployment.countByDeploymentEnvironment(environment) > 0
     }
 
     /**

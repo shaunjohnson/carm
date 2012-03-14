@@ -37,7 +37,7 @@
                                     deploymentState="${deploymentInstance.deploymentState}"/>
                         </td>
                         <td>
-                            ${deploymentInstance.sysEnvironment?.encodeAsHTML()}
+                            ${deploymentInstance.deploymentEnvironment?.encodeAsHTML()}
                         </td>
                         <td>
                             <carm:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
@@ -57,8 +57,8 @@
                         </td>
                         <td>
                             <g:link controller="systemDeploymentEnvironment" action="show"
-                                    id="${deploymentInstance.sysEnvironment.id}">
-                                ${deploymentInstance.sysEnvironment?.encodeAsHTML()}
+                                    id="${deploymentInstance.deploymentEnvironment.id}">
+                                ${deploymentInstance.deploymentEnvironment?.encodeAsHTML()}
                             </g:link>
                         </td>
                         <td>

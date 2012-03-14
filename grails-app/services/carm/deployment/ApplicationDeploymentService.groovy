@@ -49,7 +49,7 @@ class ApplicationDeploymentService {
      * <ul>
      * <li>applicationRelease - Passed in ApplicationRelease object</li>
      * <li>requestedDeploymentDate - Next business (week) day</li>
-     * <li>sysEnvironment - Next system environment to be deployed to</li>
+     * <li>deploymentEnvironment - Next system environment to be deployed to</li>
      * </ul>
      *
      * @param applicationRelease ApplicationRelease this deployment is associated with
@@ -60,7 +60,7 @@ class ApplicationDeploymentService {
         SystemDeploymentEnvironment sysEnvironment = inferNextEnvironment(applicationRelease)
 
         new ApplicationDeployment(applicationRelease: applicationRelease,
-                requestedDeploymentDate: requestedDeploymentDate, sysEnvironment: sysEnvironment)
+                requestedDeploymentDate: requestedDeploymentDate, deploymentEnvironment: sysEnvironment)
     }
 
     /**
@@ -177,7 +177,7 @@ class ApplicationDeploymentService {
 
         // Start at last environment and work back towards the first
         applicationRelease.application.system.environments.reverse().each { environment ->
-            if (releases.find { it.sysEnvironment == environment }) {
+            if (releases.find { it.deploymentEnvironment == environment }) {
                 return
             }
 
@@ -197,7 +197,7 @@ class ApplicationDeploymentService {
     def findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
         def results = ApplicationDeployment.createCriteria().list {
             createAlias("applicationRelease", "applicationRelease")
-            eq("sysEnvironment", environment)
+            eq("deploymentEnvironment", environment)
             eq("applicationRelease.application", application)
             inList("deploymentState", ApplicationDeploymentState.deployedStates)
             maxResults(1)
@@ -219,15 +219,15 @@ class ApplicationDeploymentService {
         Application.listOrderByType().each { application ->
             def deployments = ApplicationDeployment.executeQuery("""
                 select
-                    ad.sysEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate)
+                    ad.deploymentEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate)
                 from
                     ApplicationDeployment ad
                 where
                     ad.deploymentState = :deploymentState
-                    and ad.sysEnvironment.system = :system
+                    and ad.deploymentEnvironment.system = :system
                     and ad.applicationRelease.application = :application
                 group by
-                    ad.sysEnvironment
+                    ad.deploymentEnvironment
             """, [deploymentState: ApplicationDeploymentState.COMPLETED, system: system, application: application])
 
             def applicationDeployments = [:]
@@ -268,10 +268,10 @@ class ApplicationDeploymentService {
                     ApplicationDeployment ad
                 where
                     ad.deploymentState = :deploymentState
-                    and ad.sysEnvironment = :systemDeploymentEnvironment
+                    and ad.deploymentEnvironment = :systemDeploymentEnvironment
                     and ad.applicationRelease.application = :application
                 group by
-                    ad.sysEnvironment
+                    ad.deploymentEnvironment
             """, [deploymentState: ApplicationDeploymentState.COMPLETED, systemDeploymentEnvironment: systemDeploymentEnvironment, application: application])
 
             deployments.each {
@@ -307,10 +307,10 @@ class ApplicationDeploymentService {
             where
                 ad.deploymentState = :deploymentState
                 and ad.completedDeploymentDate is null
-                and ad.sysEnvironment.system = :system
+                and ad.deploymentEnvironment.system = :system
             order by
                 ad.requestedDeploymentDate asc,
-                ad.sysEnvironment.name asc,
+                ad.deploymentEnvironment.name asc,
                 ad.applicationRelease.application.type asc,
                 ad.applicationRelease.application.name asc
         """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: system])

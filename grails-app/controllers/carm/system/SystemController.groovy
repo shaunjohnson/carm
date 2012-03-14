@@ -163,10 +163,10 @@ class SystemController {
                     applicationDeploymentsGrouped[deployment.requestedDeploymentDate] = dateGroup
                 }
 
-                def envGroup = dateGroup[deployment.sysEnvironment]
+                def envGroup = dateGroup[deployment.deploymentEnvironment]
                 if (!envGroup) {
                     envGroup = [:]
-                    dateGroup[deployment.sysEnvironment] = envGroup
+                    dateGroup[deployment.deploymentEnvironment] = envGroup
                 }
 
                 def typeList = envGroup[deployment.applicationRelease.application.type]

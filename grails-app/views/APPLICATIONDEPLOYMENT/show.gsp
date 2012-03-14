@@ -37,8 +37,8 @@
                 </td>
                 <td valign="top" class="value">
                     <g:link controller="systemDeploymentEnvironment" action="show"
-                            id="${applicationDeploymentInstance?.sysEnvironment?.id}">
-                        ${applicationDeploymentInstance?.sysEnvironment?.encodeAsHTML()}
+                            id="${applicationDeploymentInstance?.deploymentEnvironment?.id}">
+                        ${applicationDeploymentInstance?.deploymentEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>

@@ -212,7 +212,7 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
-			column(name: "sys_environment_id", type: "bigint") {
+			column(name: "deployment_environment_id", type: "bigint") {
 				constraints(nullable: "false")
 			}
 
@@ -827,7 +827,7 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-29") {
-		createTable(tableName: "system_environment") {
+		createTable(tableName: "system_deployment_environment") {
 			column(autoIncrement: "true", name: "id", type: "bigint") {
 				constraints(nullable: "false", primaryKey: "true", primaryKeyName: "system_enviroPK")
 			}
@@ -1022,7 +1022,7 @@ databaseChangeLog = {
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-46") {
 		createIndex(indexName: "FKA9139914724961F3", tableName: "application_deployment") {
-			column(name: "sys_environment_id")
+			column(name: "deployment_environment_id")
 		}
 	}
 
@@ -1243,7 +1243,7 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-83") {
-		createIndex(indexName: "FKF9DD34034EE68204", tableName: "system_environment") {
+		createIndex(indexName: "FKF9DD34034EE68204", tableName: "system_deployment_environment") {
 			column(name: "system_id")
 		}
 	}
@@ -1307,7 +1307,7 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-97") {
-		addForeignKeyConstraint(baseColumnNames: "sys_environment_id", baseTableName: "application_deployment", constraintName: "FKA9139914724961F3", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system_environment", referencesUniqueColumn: "false")
+		addForeignKeyConstraint(baseColumnNames: "deployment_environment_id", baseTableName: "application_deployment", constraintName: "FKA9139914724961F3", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system_deployment_environment", referencesUniqueColumn: "false")
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-98") {
@@ -1403,7 +1403,7 @@ databaseChangeLog = {
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-121") {
-		addForeignKeyConstraint(baseColumnNames: "system_id", baseTableName: "system_environment", constraintName: "FKF9DD34034EE68204", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system", referencesUniqueColumn: "false")
+		addForeignKeyConstraint(baseColumnNames: "system_id", baseTableName: "system_deployment_environment", constraintName: "FKF9DD34034EE68204", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "system", referencesUniqueColumn: "false")
 	}
 
 	changeSet(author: "spjohnso (generated)", id: "1330979409995-122") {

@@ -29,7 +29,7 @@ class ApplicationDeployment {
 
     static constraints = {
         applicationRelease(nullable: false)
-        sysEnvironment(nullable: false)
+        deploymentEnvironment(nullable: false)
         deploymentInstructions(nullable: true)
         requestedDeploymentDate(nullable: false)
         completedDeploymentDate(nullable: true)
@@ -42,7 +42,7 @@ class ApplicationDeployment {
         testedBy(nullable: true)
     }
 
-    static belongsTo = [applicationRelease: ApplicationRelease, sysEnvironment: SystemDeploymentEnvironment]
+    static belongsTo = [applicationRelease: ApplicationRelease, deploymentEnvironment: SystemDeploymentEnvironment]
 
     static hasMany = [moduleDeployments: ModuleDeployment]
 
@@ -51,7 +51,7 @@ class ApplicationDeployment {
     }
 
     String toString() {
-        "Application Deployment : $applicationRelease to $sysEnvironment - $deploymentState"
+        "Application Deployment : $applicationRelease to $deploymentEnvironment - $deploymentState"
     }
 
     boolean equals(other) {
