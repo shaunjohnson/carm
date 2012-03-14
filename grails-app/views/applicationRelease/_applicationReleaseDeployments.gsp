@@ -31,11 +31,13 @@
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link controller="applicationDeployment" action="show" id="${deploymentInstance.id}">
-                            ${deploymentInstance.deploymentState?.encodeAsHTML()}
+                            <carm:formatApplicationDeploymentState
+                                    deploymentState="${deploymentInstance.deploymentState}"/>
                         </g:link>
                     </td>
                     <td>
-                        <g:link controller="systemEnvironment" action="show" id="${deploymentInstance.sysEnvironment.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${deploymentInstance.sysEnvironment.id}">
                             ${deploymentInstance.sysEnvironment?.encodeAsHTML()}
                         </g:link>
                     </td>
