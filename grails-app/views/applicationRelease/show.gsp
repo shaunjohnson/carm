@@ -53,7 +53,7 @@
                     <g:message code="application.system.label" default="System"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="system" action="show"
+                    <g:link controller="systemEnvironment" action="show"
                             id="${applicationReleaseInstance?.application?.system?.id}">
                         ${applicationReleaseInstance?.application?.system?.encodeAsHTML()}
                     </g:link>

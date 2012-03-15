@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'System Deployment Environment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
@@ -32,10 +32,10 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="system" action="show" id="${systemDeploymentEnvironmentInstance?.system?.id}">
-                            ${systemDeploymentEnvironmentInstance?.system?.encodeAsHTML()}
+                        <g:link controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}">
+                            ${systemDeploymentEnvironmentInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
-                        <g:hiddenField name="system.id" value="${systemDeploymentEnvironmentInstance?.system?.id}"/>
+                        <g:hiddenField name="sysEnvironment.id" value="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

@@ -13,12 +13,12 @@ import carm.release.ApplicationReleaseTestState
 import carm.sourcecontrol.SourceControlRepository
 import carm.sourcecontrol.SourceControlRole
 import carm.sourcecontrol.SourceControlServer
-import carm.system.System
 
 import org.joda.time.DateTime
 import org.joda.time.Period
 import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
+import carm.system.SystemEnvironment
 
 class CarmTagLib {
 
@@ -37,7 +37,7 @@ class CarmTagLib {
     def sourceControlServerService
     def systemServerService
     def systemDeploymentEnvironmentService
-    def systemService
+    def systemEnvironmentService
 
     /**
      * Outputs an ActivityTrace object.
@@ -63,13 +63,13 @@ class CarmTagLib {
                 controller = "project"
                 title = message(code: "showProject.label", default: "Show Project")
             }
-            else if (activity.objectType == activityTraceService.SYSTEM_TYPE && System.exists(activity.objectId)) {
+            else if (activity.objectType == activityTraceService.SYSTEM_TYPE && SystemEnvironment.exists(activity.objectId)) {
                 controller = "system"
-                title = message(code: "showSystem.label", default: "Show System")
+                title = message(code: "showSystem.label", default: "Show SystemEnvironment")
             }
             else if (activity.objectType == activityTraceService.SYSTEM_SERVER_TYPE && SystemServer.exists(activity.objectId)) {
                 controller = "systemServer"
-                title = message(code: "showSystemServer.label", default: "Show System Server")
+                title = message(code: "showSystemServer.label", default: "Show SystemEnvironment Server")
             }
         }
 
@@ -231,8 +231,8 @@ class CarmTagLib {
         else if (domain instanceof SourceControlServer) {
             isInUse = sourceControlServerService.isInUse(domain)
         }
-        else if (domain instanceof System) {
-            isInUse = systemService.isInUse(domain)
+        else if (domain instanceof SystemEnvironment) {
+            isInUse = systemEnvironmentService.isInUse(domain)
         }
         else if (domain instanceof SystemServer) {
             isInUse = systemServerService.isInUse(domain)

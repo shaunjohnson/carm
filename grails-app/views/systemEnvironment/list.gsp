@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>
+    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 

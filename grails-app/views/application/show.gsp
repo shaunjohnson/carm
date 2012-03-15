@@ -87,7 +87,7 @@
                     <g:message code="application.system.label" default="System"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="system" action="show" id="${applicationInstance?.system?.id}">
+                    <g:link controller="systemEnvironment" action="show" id="${applicationInstance?.system?.id}">
                         ${applicationInstance?.system?.encodeAsHTML()}
                     </g:link>
                 </td>

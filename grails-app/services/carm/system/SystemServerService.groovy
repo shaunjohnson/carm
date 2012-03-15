@@ -66,7 +66,7 @@ class SystemServerService {
         log.debug "$prefix entered, systemServer=$systemServer"
 
         if (isInUse(systemServer)) {
-            log.error "$prefix System server is in use and cannot be deleted"
+            log.error "$prefix SystemEnvironment server is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 

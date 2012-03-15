@@ -2,7 +2,7 @@ package carm.application
 
 import carm.sourcecontrol.SourceControlRepository
 import carm.project.Project
-import carm.system.System
+import carm.system.SystemEnvironment
 import carm.module.Module
 import carm.release.ApplicationRelease
 import org.apache.commons.lang.builder.HashCodeBuilder
@@ -15,7 +15,7 @@ class Application {
     ApplicationType type
     SourceControlRepository sourceControlRepository
     String sourceControlPath
-    System system
+    SystemEnvironment system
     String buildInstructions
     String deployInstructions
 

@@ -17,7 +17,7 @@ class SystemServer {
         system(nullable: false)
     }
 
-    static belongsTo = [system: System]
+    static belongsTo = [system: SystemEnvironment]
 
     static mapping = {
         sort "name"
@@ -32,7 +32,7 @@ class SystemServer {
             return false
         }
 
-        other.name == name && other.system == system
+        other.name == name && other.sysEnvironment == system
     }
 
     int hashCode() {

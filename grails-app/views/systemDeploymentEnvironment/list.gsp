@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'System Deployment Environment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -39,8 +39,8 @@
                         </div>
                     </td>
                     <td>
-                        <g:link controller="system" action="show" id="${systemDeploymentEnvironmentInstance.system.id}">
-                            ${fieldValue(bean: systemDeploymentEnvironmentInstance, field: "system")}
+                        <g:link controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance.sysEnvironment.id}">
+                            ${fieldValue(bean: systemDeploymentEnvironmentInstance, field: "sysEnvironment")}
                         </g:link>
                     </td>
                 </tr>

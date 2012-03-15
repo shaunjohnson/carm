@@ -2,7 +2,7 @@ package carm.deployment
 
 import org.joda.time.LocalDate
 import org.joda.time.DateTimeConstants
-import carm.system.System
+
 import carm.system.SystemDeploymentEnvironment
 import carm.release.ApplicationRelease
 import carm.application.Application
@@ -10,6 +10,7 @@ import carm.project.Project
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import carm.release.ModuleRelease
+import carm.system.SystemEnvironment
 
 class ApplicationDeploymentService {
 
@@ -164,7 +165,7 @@ class ApplicationDeploymentService {
     }
 
     /**
-     * Infers the next System Deployment Environment to deploy a release to. This determines the next environment by analyzing
+     * Infers the next SystemEnvironment Deployment Environment to deploy a release to. This determines the next environment by analyzing
      * existing deployments of the same release. The environment returned will be the next environment that can be
      * deployed to. If null is returned then the last environment has been deployed to.
      *
@@ -208,12 +209,12 @@ class ApplicationDeploymentService {
     }
 
     /**
-     * Finds latest completed ApplicationDeployment objects for the provided System.
+     * Finds latest completed ApplicationDeployment objects for the provided SystemEnvironment.
      *
-     * @param system System used for querying
+     * @param system SystemEnvironment used for querying
      * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
      */
-    def findAllLatestCompletedDeploymentsBySystem(System system) {
+    def findAllLatestCompletedDeploymentsBySystem(SystemEnvironment system) {
         def results = [:]
 
         Application.listOrderByType().each { application ->
@@ -224,7 +225,7 @@ class ApplicationDeploymentService {
                     ApplicationDeployment ad
                 where
                     ad.deploymentState = :deploymentState
-                    and ad.deploymentEnvironment.system = :system
+                    and ad.deploymentEnvironment.sysEnvironment = :system
                     and ad.applicationRelease.application = :application
                 group by
                     ad.deploymentEnvironment
@@ -297,17 +298,17 @@ class ApplicationDeploymentService {
     /**
      * Finds all application deployments that are upcoming for a provided system.
      *
-     * @param system System used to filter deployments
+     * @param system SystemEnvironment used to filter deployments
      * @return List of ApplicationDeployment objects
      */
-    def findAllUpcomingBySystem(System system) {
+    def findAllUpcomingBySystem(SystemEnvironment system) {
         ApplicationDeployment.executeQuery("""
             from
                 ApplicationDeployment ad
             where
                 ad.deploymentState = :deploymentState
                 and ad.completedDeploymentDate is null
-                and ad.deploymentEnvironment.system = :system
+                and ad.deploymentEnvironment.sysEnvironment = :system
             order by
                 ad.requestedDeploymentDate asc,
                 ad.deploymentEnvironment.name asc,

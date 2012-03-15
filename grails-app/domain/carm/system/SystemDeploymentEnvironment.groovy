@@ -12,10 +12,10 @@ class SystemDeploymentEnvironment {
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false)
         description(maxSize: 4000, nullable: true)
-        system(nullable: false)
+        sysEnvironment(nullable: false)
     }
 
-    static belongsTo = [system: System]
+    static belongsTo = [sysEnvironment: SystemEnvironment]
 
     static mapping = {
         sort "name"
@@ -30,10 +30,10 @@ class SystemDeploymentEnvironment {
             return false
         }
 
-        other.name == name && other.system == system
+        other.name == name && other.sysEnvironment == sysEnvironment
     }
 
     int hashCode() {
-        new HashCodeBuilder().append(name).append(system).toHashCode()
+        new HashCodeBuilder().append(name).append(sysEnvironment).toHashCode()
     }
 }

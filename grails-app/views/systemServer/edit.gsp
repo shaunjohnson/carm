@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'System Server')}"/>
+    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'SystemEnvironment Server')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
@@ -32,7 +32,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="system" action="show" id="${systemServerInstance?.system?.id}">
+                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.system?.id}">
                             ${systemServerInstance?.system?.encodeAsHTML()}
                         </g:link>
                         <g:hiddenField name="system.id" value="${systemServerInstance?.system?.id}"/>

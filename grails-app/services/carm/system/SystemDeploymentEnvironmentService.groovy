@@ -43,8 +43,8 @@ class SystemDeploymentEnvironmentService {
 
         SystemDeploymentEnvironment systemDeploymentEnvironment = new SystemDeploymentEnvironment(params)
 
-        // Explicitly adding to the System due to "bug" in Grails. This is necessary since system.environments is a list
-        def system = systemDeploymentEnvironment.system
+        // Explicitly adding to the SystemEnvironment due to "bug" in Grails. This is necessary since system.environments is a list
+        def system = systemDeploymentEnvironment.sysEnvironment
         system.addToEnvironments(systemDeploymentEnvironment)
 
         systemDeploymentEnvironment.save()
@@ -67,7 +67,7 @@ class SystemDeploymentEnvironmentService {
         log.debug "$prefix entered, systemDeploymentEnvironment=$systemDeploymentEnvironment"
 
         if (isInUse(systemDeploymentEnvironment)) {
-            log.error "$prefix System environment is in use and cannot be deleted"
+            log.error "$prefix SystemEnvironment environment is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 

@@ -5,7 +5,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
             <g:link class="create" controller="systemDeploymentEnvironment" action="create"
-                    params="['system.id': systemInstance?.id]">
+                    params="['sysEnvironment.id': systemInstance?.id]">
                 <g:message code="addEnvironment.label" default="Add Environment"/>
             </g:link>
         </div>

@@ -7,9 +7,9 @@ import carm.project.Project
 import carm.module.Module
 import carm.application.Application
 import carm.release.ApplicationRelease
-import carm.system.System
 
 import carm.system.SystemServer
+import carm.system.SystemEnvironment
 
 class ActivityTraceService {
 
@@ -22,7 +22,7 @@ class ActivityTraceService {
     public static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
     public static final String MODULE_TYPE = Module.class.name
     public static final String PROJECT_TYPE = Project.class.name
-    public static final String SYSTEM_TYPE = System.class.name
+    public static final String SYSTEM_TYPE = SystemEnvironment.class.name
     public static final String SYSTEM_SERVER_TYPE = SystemServer.class.name
 
     private static final Long ROOT_ID = 0L
@@ -85,12 +85,12 @@ class ActivityTraceService {
     }
 
     /**
-     * Counts the total number of activity events for a System.
+     * Counts the total number of activity events for a SystemEnvironment.
      *
-     * @param system System used for query
+     * @param system SystemEnvironment used for query
      * @return Number of ActivityTrace objects
      */
-    int countActivityBySystem(System system) {
+    int countActivityBySystem(SystemEnvironment system) {
         ActivityTrace.countByOid(generateOid(SYSTEM_TYPE, system.id))
     }
 
@@ -170,13 +170,13 @@ class ActivityTraceService {
     }
 
     /**
-     * Lists latest activity events for a System in reverse chronological order.
+     * Lists latest activity events for a SystemEnvironment in reverse chronological order.
      *
-     * @param system System used for query
+     * @param system SystemEnvironment used for query
      * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listActivityBySystem(System system, Map params) {
+    List<ActivityTrace> listActivityBySystem(SystemEnvironment system, Map params) {
         ActivityTrace.findAllByOid(generateOid(SYSTEM_TYPE, system.id), buildQueryParams(params))
     }
 
@@ -381,11 +381,11 @@ class ActivityTraceService {
     }
 
     /**
-     * System object was created.
+     * SystemEnvironment object was created.
      *
-     * @param system System that was created
+     * @param system SystemEnvironment that was created
      */
-    void systemCreated(System system) {
+    void systemCreated(SystemEnvironment system) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(rootOid, SYSTEM_TYPE, CREATED, system.id, system.name)
 
@@ -394,21 +394,21 @@ class ActivityTraceService {
     }
 
     /**
-     * System object was deleted.
+     * SystemEnvironment object was deleted.
      *
-     * @param system System that was deleted
+     * @param system SystemEnvironment that was deleted
      */
-    void systemDeleted(System system) {
+    void systemDeleted(SystemEnvironment system) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(rootOid, SYSTEM_TYPE, DELETED, system.id, system.name)
     }
 
     /**
-     * System object was updated.
+     * SystemEnvironment object was updated.
      *
-     * @param system System that was updated
+     * @param system SystemEnvironment that was updated
      */
-    void systemUpdated(System system) {
+    void systemUpdated(SystemEnvironment system) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(rootOid, SYSTEM_TYPE, UPDATED, system.id, system.name)
 

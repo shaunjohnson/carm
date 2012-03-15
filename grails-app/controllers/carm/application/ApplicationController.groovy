@@ -16,7 +16,7 @@ class ApplicationController {
     def applicationTypeService
     def sourceControlRepositoryService
     def projectService
-    def systemService
+    def systemEnvironmentService
 
     def index() {
         redirect(action: "list", params: params)
@@ -45,7 +45,7 @@ class ApplicationController {
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                    systemList: systemService.list()
+                    systemList: systemEnvironmentService.list()
             ]
         }
     }
@@ -67,7 +67,7 @@ class ApplicationController {
                         applicationInstance: applicationInstance,
                         applicationTypeList: applicationTypeService.list(),
                         sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                        systemList: systemService.list()
+                        systemList: systemEnvironmentService.list()
                 ])
             }
         }
@@ -108,7 +108,7 @@ class ApplicationController {
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                    systemList: systemService.list()
+                    systemList: systemEnvironmentService.list()
             ]
         }
     }
@@ -125,7 +125,7 @@ class ApplicationController {
                             applicationInstance: applicationInstance,
                             applicationTypeList: applicationTypeService.list(),
                             sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                            systemList: systemService.list()
+                            systemList: systemEnvironmentService.list()
                     ])
                     return
                 }
@@ -141,7 +141,7 @@ class ApplicationController {
                         applicationInstance: applicationInstance,
                         applicationTypeList: applicationTypeService.list(),
                         sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                        systemList: systemService.list()
+                        systemList: systemEnvironmentService.list()
                 ])
             }
         }

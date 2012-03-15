@@ -2,7 +2,7 @@ package carm.system
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
-class System {
+class SystemEnvironment {
     def activityTraceService
 
     String name
@@ -28,7 +28,7 @@ class System {
     }
 
     boolean equals(other) {
-        if (!(other instanceof System)) {
+        if (!(other instanceof SystemEnvironment)) {
             return false
         }
 

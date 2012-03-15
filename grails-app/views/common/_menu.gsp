@@ -14,7 +14,7 @@
                 </g:link>
             </li>
             <li>
-                <g:link controller="system">
+                <g:link controller="systemEnvironment">
                     <g:message code="systems.label" default="Systems"/>
                 </g:link>
             </li>

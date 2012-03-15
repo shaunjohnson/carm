@@ -5,7 +5,7 @@ import carm.project.Project
 class HomeController {
     def activityTraceService
     def projectService
-    def systemService
+    def systemEnvironmentService
 
     def index() {
         List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
@@ -22,7 +22,7 @@ class HomeController {
 
         [
                 projectCategoryList: projectCategoryList,
-                systemInstanceList: systemService.findAllByProject(myProjects),
+                systemInstanceList: systemEnvironmentService.findAllByProject(myProjects),
                 activityList: activityTraceService.listActivityByRoot([:]),
                 pendingTasks: projectService.findAllPendingTasks(myProjects)
         ]

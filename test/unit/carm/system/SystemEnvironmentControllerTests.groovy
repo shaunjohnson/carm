@@ -1,10 +1,9 @@
 package carm.system
 
-import grails.test.*
 import grails.test.mixin.TestFor
 
-@TestFor(SystemService)
-class SystemServiceTests {
+@TestFor(SystemEnvironmentController)
+class SystemEnvironmentControllerTests {
     void testSomething() {
 
     }

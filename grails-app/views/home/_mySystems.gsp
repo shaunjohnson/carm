@@ -3,7 +3,7 @@
         <g:message code="myEnvironments.label" default="My Environments"/>
     </div>
     <div class="actions">
-        <g:link controller="system" action="list">
+        <g:link controller="systemEnvironment" action="list">
             <g:message code="allSystems.label" default="All Systems"/>
         </g:link>
     </div>
@@ -13,7 +13,7 @@
     <g:each in="${systemInstanceList}" var="systemInstance" status="systemIndex">
         <div style="margin: 0.5em 0;">
             <h3>
-                <g:link controller="system" action="show" id="${systemInstance.id}">
+                <g:link controller="systemEnvironment" action="show" id="${systemInstance.id}">
                     ${systemInstance.encodeAsHTML()}
                 </g:link>
             </h3>
@@ -23,7 +23,7 @@
                     test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
             </g:each>
             <div style="margin: 0.5em 0;">
-                <g:link controller="system" action="upcomingDeployments" id="${systemInstance.id}">
+                <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
                     <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
                 </g:link>
             </div>

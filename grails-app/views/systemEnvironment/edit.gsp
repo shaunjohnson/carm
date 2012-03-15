@@ -2,8 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>
-    <title><g:message code="default.create.label" args="[entityName]"/></title>
+    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
+    <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
 <body>
@@ -13,14 +13,15 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-
     <g:hasErrors bean="${systemInstance}">
         <div class="errors">
             <g:renderErrors bean="${systemInstance}" as="list"/>
         </div>
     </g:hasErrors>
 
-    <g:form action="save">
+    <g:form action="update" method="post">
+        <g:hiddenField name="id" value="${systemInstance?.id}"/>
+        <g:hiddenField name="version" value="${systemInstance?.version}"/>
         <div class="dialog">
             <table>
                 <tbody>
@@ -50,7 +51,6 @@
                                     value="${systemInstance?.description}"
                                     title="${message(code: 'system.description.help')}"/>
                     </td>
-                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -60,13 +60,13 @@
 
         <div class="buttons">
             <span class="button">
-                <g:link class="list" action="list">
+                <g:link class="show" action="show" id="${systemInstance.id}">
                     <g:message code="default.button.cancel.label" default="Cancel"/>
                 </g:link>
             </span>
             <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                <g:submitButton name="save" class="save"
+                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
             </span>
         </div>
     </g:form>

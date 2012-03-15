@@ -6,37 +6,37 @@ import carm.application.Application
 import carm.project.Project
 import carm.exceptions.DomainInUseException
 
-class SystemService {
+class SystemEnvironmentService {
 
     static transactional = false
 
     /**
      * Determines if the provided system is in use.
      *
-     * @param system System to test
+     * @param system SystemEnvironment to test
      * @return True if the system is in use
      */
-    boolean isInUse(System system) {
+    boolean isInUse(SystemEnvironment system) {
         Application.countBySystem(system) > 0
     }
 
     /**
-     * Returns a count of all System objects.
+     * Returns a count of all SystemEnvironment objects.
      *
-     * @return Total number of System objects.
+     * @return Total number of SystemEnvironment objects.
      */
     int count() {
-        System.count()
+        SystemEnvironment.count()
     }
 
     /**
      * Determines if the provided system can be deployed to. A system that has at least one server and at least one
      * environment can be deployed to.
      *
-     * @param system System object to test.
+     * @param system SystemEnvironment object to test.
      * @return True if the system can be deployed to.
      */
-    boolean canBeDeployedTo(System system) {
+    boolean canBeDeployedTo(SystemEnvironment system) {
         boolean hasServers = (system?.servers?.size() ?: 0) > 0
         boolean hasEnvironments = (system?.environments?.size() ?: 0) > 0
 
@@ -44,19 +44,19 @@ class SystemService {
     }
 
     /**
-     * Creates and saves a new System instance.
+     * Creates and saves a new SystemEnvironment instance.
      *
-     * @param params System properties
-     * @return newly created System object
+     * @param params SystemEnvironment properties
+     * @return newly created SystemEnvironment object
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    System create(Map params) {
+    SystemEnvironment create(Map params) {
         def prefix = "create() :"
 
         log.debug "$prefix entered"
 
-        System system = new System(params)
+        SystemEnvironment system = new SystemEnvironment(params)
         system.save()
 
         log.debug "$prefix returning $system"
@@ -65,19 +65,19 @@ class SystemService {
     }
 
     /**
-     * Deletes the provided System object.
+     * Deletes the provided SystemEnvironment object.
      *
-     * @param system System object to delete
+     * @param system SystemEnvironment object to delete
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(System system) {
+    void delete(SystemEnvironment system) {
         def prefix = "delete() :"
 
         log.debug "$prefix entered, system=$system"
 
         if (isInUse(system)) {
-            log.error "$prefix System is in use and cannot be deleted"
+            log.error "$prefix SystemEnvironment is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
@@ -87,34 +87,34 @@ class SystemService {
     }
 
     /**
-     * Gets the System object with the provided ID.
+     * Gets the SystemEnvironment object with the provided ID.
      *
-     * @param id ID of System object
-     * @return Matching System object
+     * @param id ID of SystemEnvironment object
+     * @return Matching SystemEnvironment object
      */
-    System get(Serializable id) {
-        System.get(id)
+    SystemEnvironment get(Serializable id) {
+        SystemEnvironment.get(id)
     }
 
     /**
-     * Gets a list of all System objects.
+     * Gets a list of all SystemEnvironment objects.
      *
      * @param params Query parameters
-     * @return List of System objects
+     * @return List of SystemEnvironment objects
      */
-    List<System> list(Map params) {
-        System.list(params)
+    List<SystemEnvironment> list(Map params) {
+        SystemEnvironment.list(params)
     }
 
     /**
-     * Moves the SystemDeploymentEnvironment at the specific index for the provided System down in the list, if possible.
+     * Moves the SystemDeploymentEnvironment at the specific index for the provided SystemEnvironment down in the list, if possible.
      *
-     * @param system System to edit
+     * @param system SystemEnvironment to edit
      * @param index Index of SystemDeploymentEnvironment to move down
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void moveEnvironmentDown(System system, int index) {
+    void moveEnvironmentDown(SystemEnvironment system, int index) {
         def environments = system.environments
 
         if ((index + 1) < environments.size()) {
@@ -126,14 +126,14 @@ class SystemService {
     }
 
     /**
-     * Moves the SystemDeploymentEnvironment at the specified index for the provided System up in the list, if possible.
+     * Moves the SystemDeploymentEnvironment at the specified index for the provided SystemEnvironment up in the list, if possible.
      *
-     * @param system System to edit
+     * @param system SystemEnvironment to edit
      * @param index Index of SystemDeploymentEnvironment to move up
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void moveEnvironmentUp(System system, int index) {
+    void moveEnvironmentUp(SystemEnvironment system, int index) {
         def environments = system.environments
 
         if (index > 0) {
@@ -145,14 +145,14 @@ class SystemService {
     }
 
     /**
-     * Updates the provided System object with the new properties.
+     * Updates the provided SystemEnvironment object with the new properties.
      *
-     * @param system System to update
+     * @param system SystemEnvironment to update
      * @param params New property values
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(System system, Map params) {
+    void update(SystemEnvironment system, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"
@@ -163,12 +163,12 @@ class SystemService {
     }
 
     /**
-     * Finds all System objects associated with the provided List of Project objects.
+     * Finds all SystemEnvironment objects associated with the provided List of Project objects.
      *
      * @param projects List of Projects used for querying
-     * @return List of System objects
+     * @return List of SystemEnvironment objects
      */
-    List<System> findAllByProject(List<Project> projects) {
+    List<SystemEnvironment> findAllByProject(List<Project> projects) {
         if (!projects?.size()) {
             return []
         }
@@ -181,6 +181,6 @@ class SystemService {
                 a.project in :projects
                 and a.system is not null
             order by a.system.name
-        """, [projects: projects]) as List<System>
+        """, [projects: projects]) as List<SystemEnvironment>
     }
 }

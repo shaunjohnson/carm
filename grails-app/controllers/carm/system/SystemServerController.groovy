@@ -10,7 +10,7 @@ class SystemServerController {
 
     def activityTraceService
     def systemServerService
-    def systemService
+    def systemEnvironmentService
 
     def index() {
         redirect(action: "list", params: params)
@@ -23,9 +23,9 @@ class SystemServerController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        def systemInstance = systemService.get(params.system?.id)
+        def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system?.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.sysEnvironment?.id])}"
             redirect(action: "list")
         }
         else {
@@ -40,7 +40,7 @@ class SystemServerController {
         def systemServerInstance = systemServerService.create(params)
         if (!systemServerInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), systemServerInstance.name])}"
-            redirect(controller: "system", action: "show", id: systemServerInstance.system.id)
+            redirect(controller: "systemEnvironment", action: "show", id: systemServerInstance.system.id)
         }
         else {
             render(view: "create", model: [systemServerInstance: systemServerInstance])
@@ -109,7 +109,7 @@ class SystemServerController {
                 def name = systemServerInstance.name
                 systemServerService.delete(systemServerInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), name])}"
-                redirect(controller: "system", action: "show", id: systemId)
+                redirect(controller: "systemEnvironment", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"

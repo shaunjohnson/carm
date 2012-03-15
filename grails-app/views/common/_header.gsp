@@ -418,7 +418,7 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'system'}">
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'System')}"/>
+    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
@@ -448,14 +448,14 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemServer'}">
-    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'System Server')}"/>
+    <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'SystemEnvironment Server')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
             <bc:listSystems isFirst="true"/>
-            <bc:showSystem system="${domain.system}"/>
+            <bc:showSystem system="${domain.sysEnvironment}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showSystemServer systemServer="${domain}"/>
@@ -475,14 +475,14 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemDeploymentEnvironment'}">
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'System Deployment Environment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
 
     <carm:pageHeaderLabel action="${action}" beanName="${domain?.name}" entityName="${entityName}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
             <bc:listSystems isFirst="true"/>
-            <bc:showSystem system="${domain.system}"/>
+            <bc:showSystem system="${domain.sysEnvironment}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showSystemDeploymentEnvironment systemDeploymentEnvironment="${domain}"/>

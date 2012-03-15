@@ -1,6 +1,6 @@
 package carm.application
 
-import carm.system.System
+import carm.system.SystemEnvironment
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
@@ -15,7 +15,7 @@ class ApplicationService implements ApplicationContextAware {
     ApplicationContext applicationContext
     def applicationDeploymentService
     def grailsApplication
-    def systemService
+    def systemEnvironmentService
 
     /**
      * Determines if the application is deployable. An application must be associated with a system that can be
@@ -25,7 +25,7 @@ class ApplicationService implements ApplicationContextAware {
      * @return True if the application can be deployed
      */
     boolean isDeployable(Application application) {
-        return systemService.canBeDeployedTo(application?.system)
+        return systemEnvironmentService.canBeDeployedTo(application?.system)
     }
 
     /**
@@ -117,12 +117,12 @@ class ApplicationService implements ApplicationContextAware {
     }
 
     /**
-     * Finds all Application objects, grouped by ApplicationType using the provided System.
+     * Finds all Application objects, grouped by ApplicationType using the provided SystemEnvironment.
      *
-     * @param system System used for querying
+     * @param system SystemEnvironment used for querying
      * @return Map with key of ApplicationType and value of List of Application objects
      */
-    SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(System system) {
+    SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(SystemEnvironment system) {
         def applications = Application.createCriteria().list {
             eq('system', system)
             and {

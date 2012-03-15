@@ -10,7 +10,7 @@ class SystemDeploymentEnvironmentController {
 
     def applicationService
     def applicationDeploymentService
-    def systemService
+    def systemEnvironmentService
     def systemDeploymentEnvironmentService
 
     def index() {
@@ -24,15 +24,18 @@ class SystemDeploymentEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        def systemInstance = systemService.get(params.system?.id)
+        def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'System'), params.system?.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.systemEnvironment?.id])}"
             redirect(action: "list")
         }
         else {
             def systemDeploymentEnvironmentInstance = new SystemDeploymentEnvironment()
             systemDeploymentEnvironmentInstance.properties = params
-            return [systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance]
+
+             [
+                     systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance
+             ]
         }
     }
 
@@ -41,7 +44,7 @@ class SystemDeploymentEnvironmentController {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.create(params)
         if (systemDeploymentEnvironmentInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), systemDeploymentEnvironmentInstance.name])}"
-            redirect(controller: "system", action: "show", id: systemDeploymentEnvironmentInstance.system.id)
+            redirect(controller: "systemEnvironment", action: "show", id: systemDeploymentEnvironmentInstance.sysEnvironment.id)
         }
         else {
             render(view: "create", model: [systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance])
@@ -57,7 +60,7 @@ class SystemDeploymentEnvironmentController {
         else {
             [
                     systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance,
-                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemDeploymentEnvironmentInstance.system),
+                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemDeploymentEnvironmentInstance.sysEnvironment),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance)
             ]
         }
@@ -106,12 +109,12 @@ class SystemDeploymentEnvironmentController {
     def delete() {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (systemDeploymentEnvironmentInstance) {
-            def systemId = systemDeploymentEnvironmentInstance.system.id
+            def systemId = systemDeploymentEnvironmentInstance.sysEnvironment.id
             try {
                 def name = systemDeploymentEnvironmentInstance.name
                 systemDeploymentEnvironmentService.delete(systemDeploymentEnvironmentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
-                redirect(controller: "system", action: "show", id: systemId)
+                redirect(controller: "systemEnvironment", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"

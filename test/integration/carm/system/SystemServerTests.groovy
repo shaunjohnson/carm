@@ -29,7 +29,7 @@ class SystemServerTests {
         assertHasError(SystemServer.buildWithoutSave(name: null), 'name', 'nullable')
     }
     void testNameUnique() {
-        SystemServer.build(name: 'TestSystemComponent', system: System.build(name: 'TestSystem'))
+        SystemServer.build(name: 'TestSystemComponent', system: SystemEnvironment.build(name: 'TestSystem'))
         assertHasError(SystemServer.buildWithoutSave(name: 'TestSystemComponent'), 'name', 'unique')
     }
 
