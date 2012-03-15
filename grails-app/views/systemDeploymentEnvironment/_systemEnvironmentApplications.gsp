@@ -57,7 +57,8 @@
                             <g:link controller="applicationDeployment" action="show"
                                     id="${applicationDeployment?.applicationDeploymentId}"
                                     title="${message(code: 'showApplicationDeployment.label')}">
-                                ${applicationDeployment?.deploymentState}
+                                <carm:formatApplicationDeploymentState
+                                        deploymentState="${applicationDeployment?.deploymentState}"/>
                             </g:link>
                         </td>
                     </tr>
