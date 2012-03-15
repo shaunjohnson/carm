@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'SystemEnvironment')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -29,9 +29,9 @@
             <table>
                 <thead>
                 <tr>
-                    <g:sortableColumn property="name" title="${message(code: 'system.name.label', default: 'Name')}"/>
+                    <g:sortableColumn property="name" title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
                     <g:sortableColumn property="description"
-                                      title="${message(code: 'system.description.label', default: 'Description')}"/>
+                                      title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,7 +59,7 @@
     </g:if>
     <g:else>
         <p class="emphasis">
-            <g:message code="carmNoSystems.message" default="There are no systems."/>
+            <g:message code="carmNoEnvironments.message" default="There are no environments."/>
         </p>
     </g:else>
 </div>

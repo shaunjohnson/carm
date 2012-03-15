@@ -1,6 +1,6 @@
 <div class="sectionHeader">
     <div class="text">
-        <g:message code="system.environments.label" default="Environments"/>
+        <g:message code="systemEnvironment.environments.label" default="Environments"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
@@ -50,7 +50,7 @@
 </g:if>
 <g:else>
     <p class="emphasis">
-        <g:message code="systemDoesNotHaveAnyEnvironments.message"
-                   default="This system does not have any environments."/>
+        <g:message code="systemEnvironmentDoesNotHaveAnyEnvironments.message"
+                   default="This environment does not have any deployment environments."/>
     </p>
 </g:else>

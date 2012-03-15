@@ -19,7 +19,10 @@ class SystemEnvironmentController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemInstanceList: systemEnvironmentService.list(params), systemInstanceTotal: systemEnvironmentService.count()]
+        [
+                systemInstanceList: systemEnvironmentService.list(params),
+                systemInstanceTotal: systemEnvironmentService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -33,7 +36,7 @@ class SystemEnvironmentController {
     def save() {
         def systemInstance = systemEnvironmentService.create(params)
         if (!systemInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), systemInstance.name])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemInstance.name])}"
             redirect(action: "show", id: systemInstance.id)
         }
         else {
@@ -44,7 +47,7 @@ class SystemEnvironmentController {
     def show() {
         def systemInstance = systemEnvironmentService.get(params.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -61,7 +64,7 @@ class SystemEnvironmentController {
     def moveEnvDown() {
         def systemInstance = systemEnvironmentService.get(params.systemId)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -75,7 +78,7 @@ class SystemEnvironmentController {
     def moveEnvUp() {
         def systemInstance = systemEnvironmentService.get(params.systemId)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -89,7 +92,7 @@ class SystemEnvironmentController {
     def edit() {
         def systemInstance = systemEnvironmentService.get(params.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -105,14 +108,14 @@ class SystemEnvironmentController {
                 def version = params.version.toLong()
                 if (systemInstance.version > version) {
 
-                    systemInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'system.label', default: 'SystemEnvironment')] as Object[], "Another user has updated this SystemEnvironment while you were editing")
+                    systemInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemEnvironment.label', default: 'SystemEnvironment')] as Object[], "Another user has updated this SystemEnvironment while you were editing")
                     render(view: "edit", model: [systemInstance: systemInstance])
                     return
                 }
             }
             systemEnvironmentService.update(systemInstance, params)
             if (!systemInstance.hasErrors() && systemInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), systemInstance.name])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemInstance.name])}"
                 redirect(action: "show", id: systemInstance.id)
             }
             else {
@@ -120,7 +123,7 @@ class SystemEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -132,20 +135,20 @@ class SystemEnvironmentController {
             try {
                 def name = systemInstance.name
                 systemEnvironmentService.delete(systemInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), name])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -184,7 +187,7 @@ class SystemEnvironmentController {
             ]
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -192,7 +195,7 @@ class SystemEnvironmentController {
     def listActivity() {
         def systemInstance = systemEnvironmentService.get(params.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {

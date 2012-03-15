@@ -47,7 +47,7 @@
 </g:if>
 <g:else>
     <p class="emphasis">
-        <g:message code="applicationNotConfiguredForSystem.message"
-                   default="This application is not configured to work with a system."/>
+        <g:message code="applicationNotConfiguredForEnvironment.message"
+                   default="This application is not configured to work with an environment."/>
     </p>
 </g:else>

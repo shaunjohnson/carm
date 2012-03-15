@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'SystemEnvironment')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
@@ -28,20 +28,20 @@
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label for="name" required="true">
-                            <g:message code="system.name.label" default="Name"/>
+                            <g:message code="systemEnvironment.name.label" default="Name"/>
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'name', 'errors')}">
                         <g:textField name="name" maxlength="50" size="50"
                                      value="${systemInstance?.name}"
                                      required="required"
-                                     title="${message(code: 'system.name.help')}"/>
+                                     title="${message(code: 'systemEnvironment.name.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label for="description">
-                            <g:message code="system.description.label" default="Description"/>
+                            <g:message code="systemEnvironment.description.label" default="Description"/>
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'description', 'errors')}">
@@ -49,7 +49,7 @@
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
                                     value="${systemInstance?.description}"
-                                    title="${message(code: 'system.description.help')}"/>
+                                    title="${message(code: 'systemEnvironment.description.help')}"/>
                     </td>
                 </tr>
                 </tbody>

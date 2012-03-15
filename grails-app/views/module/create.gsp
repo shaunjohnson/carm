@@ -99,7 +99,7 @@
                         <g:else>
                             <p class="emphasis">
                                 <g:message code="moduleCannotBeDeployed.message"
-                                           default="This module cannot be deployed to any server since the application is not associated with a system."/>
+                                           default="This module cannot be deployed to any server since the application is not associated with an environment."/>
                             </p>
                             <g:hiddenField name="systemServers" value="${null}"/>
                         </g:else>

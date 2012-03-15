@@ -234,7 +234,7 @@ class CarmBreadcrumbTagLib {
         def isFirst = attrs.isFirst
         out << link(controller: "system", action: "list", isFirst: isFirst,
                 title: message(code: "showAllSystems.label"),
-                text: message(code: "systems.label"))
+                text: message(code: "systemEnvironments.label"))
     }
 
     /**
@@ -443,7 +443,7 @@ class CarmBreadcrumbTagLib {
         def system = attrs.system
         def isFirst = attrs.isFirst
         out << link(controller: "system", action: "show",
-                title: message(code: "showSystem.label"),
+                title: message(code: "showSystemEnvironment.label"),
                 text: system.name, id: system.id, isFirst: isFirst)
     }
 

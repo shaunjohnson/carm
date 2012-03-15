@@ -18,14 +18,17 @@ class SystemServerController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemServerInstanceList: systemServerService.list(params), systemServerInstanceTotal: systemServerService.count()]
+        [
+                systemServerInstanceList: systemServerService.list(params),
+                systemServerInstanceTotal: systemServerService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])
     def create() {
         def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.sysEnvironment?.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.sysEnvironment?.id])}"
             redirect(action: "list")
         }
         else {

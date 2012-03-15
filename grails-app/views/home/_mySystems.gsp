@@ -36,7 +36,7 @@
 </g:if>
 <g:else>
     <p class="emphasis">
-        <g:message code="youDontWorkOnAnyProjectsAssociatedWithASystem.message"
-                   default="You don't work on any projects associated with a system."/>
+        <g:message code="youDontWorkOnAnyProjectsAssociatedWithAnEnvironment.message"
+                   default="You don't work on any projects associated with an environment."/>
     </p>
 </g:else>

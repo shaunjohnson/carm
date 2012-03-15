@@ -19,14 +19,17 @@ class SystemDeploymentEnvironmentController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [systemDeploymentEnvironmentInstanceList: systemDeploymentEnvironmentService.list(params), systemDeploymentEnvironmentInstanceTotal: systemDeploymentEnvironmentService.count()]
+        [
+                systemDeploymentEnvironmentInstanceList: systemDeploymentEnvironmentService.list(params),
+                systemDeploymentEnvironmentInstanceTotal: systemDeploymentEnvironmentService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])
     def create() {
         def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'system.label', default: 'SystemEnvironment'), params.systemEnvironment?.id])}"
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.systemEnvironment?.id])}"
             redirect(action: "list")
         }
         else {

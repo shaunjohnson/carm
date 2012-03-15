@@ -1,11 +1,11 @@
 <div class="sectionHeader">
     <div class="text">
-        <g:message code="system.servers.label" default="Servers"/>
+        <g:message code="systemEnvironment.servers.label" default="Servers"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
             <g:link class="create" controller="systemServer" action="create"
-                    params="['system.id': systemInstance?.id]">
+                    params="['systemEnvironment.id': systemInstance?.id]">
                 <g:message code="addServer.label" default="Add Server"/>
             </g:link>
         </div>
@@ -25,7 +25,7 @@
 </g:if>
 <g:else>
     <p class="emphasis">
-        <g:message code="systemDoesNotHaveAnyServer.message"
-                   default="This system does not have any servers."/>
+        <g:message code="systemEnvironmentDoesNotHaveAnyServers.message"
+                   default="This environment does not have any servers."/>
     </p>
 </g:else>

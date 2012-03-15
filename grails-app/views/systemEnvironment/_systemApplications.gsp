@@ -64,7 +64,7 @@
 </g:if>
 <g:else>
     <p class="emphasis">
-        <g:message code="systemDoesNotHaveAnyApplications.message"
-                   default="This system does not have any applications."/>
+        <g:message code="systemEnvironmentDoesNotHaveAnyApplications.message"
+                   default="This environment does not have any applications."/>
     </p>
 </g:else>

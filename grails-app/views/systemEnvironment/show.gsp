@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'system.label', default: 'SystemEnvironment')}"/>
+    <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'SystemEnvironment')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 
@@ -19,7 +19,7 @@
             <tbody>
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="system.description.label" default="Description"/>
+                    <g:message code="systemEnvironment.description.label" default="Description"/>
                 </td>
                 <td valign="top" class="value">
                     <div class="expander">
@@ -34,7 +34,7 @@
 
             <tr class="prop detailProp">
                 <td valign="top" class="name">
-                    <g:message code="system.dateCreated.label" default="Date Created"/>
+                    <g:message code="systemEnvironment.dateCreated.label" default="Date Created"/>
                 </td>
                 <td valign="top" class="value">
                     <g:formatDate date="${systemInstance?.dateCreated}"/>
@@ -42,7 +42,7 @@
             </tr>
             <tr class="prop detailProp">
                 <td valign="top" class="name">
-                    <g:message code="system.lastUpdated.label" default="Last Updated"/>
+                    <g:message code="systemEnvironment.lastUpdated.label" default="Last Updated"/>
                 </td>
                 <td valign="top" class="value">
                     <g:formatDate date="${systemInstance?.lastUpdated}"/>

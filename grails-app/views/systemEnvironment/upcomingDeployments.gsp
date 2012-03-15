@@ -57,8 +57,8 @@
     </g:if>
     <g:else>
         <p class="emphasis">
-            <g:message code="noUpcomingDeploymentsForSystem.message"
-                       default="There are no upcoming deployments for this system."/>
+            <g:message code="noUpcomingDeploymentsForEnvironment.message"
+                       default="There are no upcoming deployments for this environment."/>
         </p>
     </g:else>
 </div>
