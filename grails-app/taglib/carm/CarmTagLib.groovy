@@ -63,6 +63,10 @@ class CarmTagLib {
                 controller = "project"
                 title = message(code: "showProject.label", default: "Show Project")
             }
+            else if (activity.objectType == activityTraceService.SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE && SystemDeploymentEnvironment.exists(activity.objectId)) {
+                controller = "systemDeploymentEnvironment"
+                title = message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")
+            }
             else if (activity.objectType == activityTraceService.SYSTEM_ENVIRONMENT_TYPE && SystemEnvironment.exists(activity.objectId)) {
                 controller = "systemEnvironment"
                 title = message(code: "showSystemEnvironment.label", default: "Show Environment")

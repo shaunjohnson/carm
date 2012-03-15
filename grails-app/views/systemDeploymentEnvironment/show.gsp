@@ -82,6 +82,9 @@
 
     <g:render template="systemEnvironmentApplications"
               model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+
+    <g:render template="/common/activity"
+              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemDeploymentEnvironmentInstance.id]"/>
 </div>
 </body>
 </html>

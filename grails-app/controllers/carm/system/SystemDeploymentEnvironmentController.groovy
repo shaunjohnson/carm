@@ -8,6 +8,7 @@ class SystemDeploymentEnvironmentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationService
     def applicationDeploymentService
     def systemEnvironmentService
@@ -62,6 +63,7 @@ class SystemDeploymentEnvironmentController {
         }
         else {
             [
+                    activityList: activityTraceService.listActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance, [:]),
                     systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance,
                     applicationsGrouped: applicationService.findAllBySystemEnvironmentGroupedByType(systemDeploymentEnvironmentInstance.sysEnvironment),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance)

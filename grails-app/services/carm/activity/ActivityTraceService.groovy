@@ -10,6 +10,7 @@ import carm.release.ApplicationRelease
 
 import carm.system.SystemServer
 import carm.system.SystemEnvironment
+import carm.system.SystemDeploymentEnvironment
 
 class ActivityTraceService {
 
@@ -22,6 +23,7 @@ class ActivityTraceService {
     public static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
     public static final String MODULE_TYPE = Module.class.name
     public static final String PROJECT_TYPE = Project.class.name
+    public static final String SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE = SystemDeploymentEnvironment.class.name
     public static final String SYSTEM_ENVIRONMENT_TYPE = SystemEnvironment.class.name
     public static final String SYSTEM_SERVER_TYPE = SystemServer.class.name
 
@@ -42,7 +44,6 @@ class ActivityTraceService {
                 order: "desc"
         ]
     }
-
 
     /**
      * Counts the total number of activity events for a Application.
@@ -85,6 +86,16 @@ class ActivityTraceService {
     }
 
     /**
+     * Counts the total number of activity events for a SystemDeploymentEnvironment.
+     *
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment used for query
+     * @return Number of ActivityTrace objects
+     */
+    int countActivityBySystemDeploymentEnvironment(SystemDeploymentEnvironment systemDeploymentEnvironment) {
+        ActivityTrace.countByOid(generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id))
+    }
+
+    /**
      * Counts the total number of activity events for a SystemEnvironment.
      *
      * @param systemEnvironment SystemEnvironment used for query
@@ -113,7 +124,6 @@ class ActivityTraceService {
     int countActivityByRoot() {
         ActivityTrace.countByOid(generateOid(ROOT_TYPE, ROOT_ID))
     }
-
 
     /**
      * Lists latest activity events for an Application in reverse chronological order.
@@ -170,6 +180,17 @@ class ActivityTraceService {
     }
 
     /**
+     * Lists latest activity events for a SystemDeploymentEnvironment in reverse chronological order.
+     *
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment used for query
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityBySystemDeploymentEnvironment(SystemDeploymentEnvironment systemDeploymentEnvironment, Map params) {
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id), buildQueryParams(params))
+    }
+
+    /**
      * Lists latest activity events for a SystemEnvironment in reverse chronological order.
      *
      * @param systemEnvironment SystemEnvironment used for query
@@ -190,7 +211,6 @@ class ActivityTraceService {
     List<ActivityTrace> listActivityBySystemServer(SystemServer systemServer, Map params) {
         ActivityTrace.findAllByOid(generateOid(SYSTEM_SERVER_TYPE, systemServer.id), buildQueryParams(params))
     }
-
 
     /**
      * Application object was created.
@@ -381,6 +401,42 @@ class ActivityTraceService {
     }
 
     /**
+     * SystemDeploymentEnvironment object was created.
+     *
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment that was created
+     */
+    void systemDeploymentEnvironmentCreated(SystemDeploymentEnvironment systemDeploymentEnvironment) {
+        String systemEnvironmentOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemDeploymentEnvironment.sysEnvironment.id)
+        insertActivityTrace(systemEnvironmentOid, SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, CREATED, systemDeploymentEnvironment.id, systemDeploymentEnvironment.name)
+
+        String oid = generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id)
+        insertActivityTrace(oid, SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, CREATED, systemDeploymentEnvironment.id, systemDeploymentEnvironment.name)
+    }
+
+    /**
+     * SystemDeploymentEnvironment object was deleted.
+     *
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment that was deleted
+     */
+    void systemDeploymentEnvironmentDeleted(SystemDeploymentEnvironment systemDeploymentEnvironment) {
+        String systemEnvironmentOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemDeploymentEnvironment.sysEnvironment.id)
+        insertActivityTrace(systemEnvironmentOid, SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, DELETED, systemDeploymentEnvironment.id, systemDeploymentEnvironment.name)
+    }
+
+    /**
+     * SystemDeploymentEnvironment object was updated.
+     *
+     * @param systemDeploymentEnvironment SystemDeploymentEnvironment that was updated
+     */
+    void systemDeploymentEnvironmentUpdated(SystemDeploymentEnvironment systemDeploymentEnvironment) {
+        String systemEnvironmentOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemDeploymentEnvironment.sysEnvironment.id)
+        insertActivityTrace(systemEnvironmentOid, SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, UPDATED, systemDeploymentEnvironment.id, systemDeploymentEnvironment.name)
+
+        String oid = generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id)
+        insertActivityTrace(oid, SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, UPDATED, systemDeploymentEnvironment.id, systemDeploymentEnvironment.name)
+    }
+
+    /**
      * SystemEnvironment object was created.
      *
      * @param systemEnvironment SystemEnvironment that was created
@@ -389,7 +445,7 @@ class ActivityTraceService {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
         insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, systemEnvironment.id, systemEnvironment.name)
 
-        String projectOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, system.id)
+        String projectOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id)
         insertActivityTrace(projectOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, systemEnvironment.id, systemEnvironment.name)
     }
 
@@ -451,7 +507,6 @@ class ActivityTraceService {
         String oid = generateOid(SYSTEM_SERVER_TYPE, systemServer.id)
         insertActivityTrace(oid, SYSTEM_SERVER_TYPE, UPDATED, systemServer.id, systemServer.name)
     }
-
 
     /**
      * Inserts a new ActivityTrace record

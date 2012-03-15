@@ -3,6 +3,8 @@ package carm.system
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 class SystemDeploymentEnvironment {
+    def activityTraceService
+
     String name
     String description
 
@@ -35,5 +37,17 @@ class SystemDeploymentEnvironment {
 
     int hashCode() {
         new HashCodeBuilder().append(name).append(sysEnvironment).toHashCode()
+    }
+
+    def afterInsert() {
+        activityTraceService?.systemDeploymentEnvironmentCreated(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService?.systemDeploymentEnvironmentDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService?.systemDeploymentEnvironmentUpdated(this)
     }
 }
