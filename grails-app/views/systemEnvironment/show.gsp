@@ -8,7 +8,7 @@
 
 <body>
 <div class="body">
-    <carm:header domain="${systemInstance}"/>
+    <carm:header domain="${systemEnvironmentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
@@ -23,7 +23,7 @@
                 </td>
                 <td valign="top" class="value">
                     <div class="expander">
-                        <carm:plainText value="${systemInstance?.description}"/>
+                        <carm:plainText value="${systemEnvironmentInstance?.description}"/>
                     </div>
                 </td>
             </tr>
@@ -37,7 +37,7 @@
                     <g:message code="systemEnvironment.dateCreated.label" default="Date Created"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatDate date="${systemInstance?.dateCreated}"/>
+                    <g:formatDate date="${systemEnvironmentInstance?.dateCreated}"/>
                 </td>
             </tr>
             <tr class="prop detailProp">
@@ -45,7 +45,7 @@
                     <g:message code="systemEnvironment.lastUpdated.label" default="Last Updated"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatDate date="${systemInstance?.lastUpdated}"/>
+                    <g:formatDate date="${systemEnvironmentInstance?.lastUpdated}"/>
                 </td>
             </tr>
             </tbody>
@@ -54,13 +54,13 @@
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div class="buttons">
                     <span class="button">
-                        <g:link class="edit" action="edit" id="${systemInstance?.id}">
+                        <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
                             <g:message code="default.button.edit.label" default="Edit"/>
                         </g:link>
                     </span>
-                    <carm:ifNotInUse domain="${systemInstance}">
+                    <carm:ifNotInUse domain="${systemEnvironmentInstance}">
                         <span class="button">
-                            <g:link class="delete" action="delete" id="${systemInstance?.id}">
+                            <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
                                 <g:message code="default.button.delete.label" default="Delete"/>
                             </g:link>
                         </span>
@@ -74,20 +74,20 @@
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="systemServers" model="['systemInstance': systemInstance]"/>
+                <g:render template="systemServers" model="['systemInstance': systemEnvironmentInstance]"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="systemDeploymentEnvironments" model="['systemInstance': systemInstance]"/>
+                <g:render template="systemDeploymentEnvironments" model="['systemInstance': systemEnvironmentInstance]"/>
             </td>
         </tr>
         </tbody>
     </table>
 
     <g:render template="systemApplications"
-              model="['systemInstance': systemInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+              model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
 
     <g:render template="/common/activity"
-              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemInstance.id]"/>
+              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemEnvironmentInstance.id]"/>
 </div>
 </body>
 </html>

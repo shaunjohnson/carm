@@ -20,106 +20,111 @@ class SystemEnvironmentController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
-                systemInstanceList: systemEnvironmentService.list(params),
-                systemInstanceTotal: systemEnvironmentService.count()
+                systemEnvironmentInstanceList: systemEnvironmentService.list(params),
+                systemEnvironmentInstanceTotal: systemEnvironmentService.count()
         ]
     }
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        def systemInstance = new SystemEnvironment()
-        systemInstance.properties = params
-        return [systemInstance: systemInstance]
+        def systemEnvironmentInstance = new SystemEnvironment()
+        systemEnvironmentInstance.properties = params
+
+        [
+                systemEnvironmentInstance: systemEnvironmentInstance
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])
     def save() {
-        def systemInstance = systemEnvironmentService.create(params)
-        if (!systemInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemInstance.name])}"
-            redirect(action: "show", id: systemInstance.id)
+        def systemEnvironmentInstance = systemEnvironmentService.create(params)
+        if (!systemEnvironmentInstance.hasErrors()) {
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
+            redirect(action: "show", id: systemEnvironmentInstance.id)
         }
         else {
-            render(view: "create", model: [systemInstance: systemInstance])
+            render(view: "create", model: [systemEnvironmentInstance: systemEnvironmentInstance])
         }
     }
 
     def show() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (!systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
             [
-                    activityList: activityTraceService.listActivityBySystemEnvironment(systemInstance, [:]),
-                    systemInstance: systemInstance,
-                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance),
-                    latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystem(systemInstance)
+                    activityList: activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, [:]),
+                    systemEnvironmentInstance: systemEnvironmentInstance,
+                    applicationsGrouped: applicationService.findAllBySystemEnvironmentGroupedByType(systemEnvironmentInstance),
+                    latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemEnvironment(systemEnvironmentInstance)
             ]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def moveEnvDown() {
-        def systemInstance = systemEnvironmentService.get(params.systemId)
-        if (!systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.systemId)
+        if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
-            systemEnvironmentService.moveEnvironmentDown(systemInstance, params.index?.toInteger())
+            systemEnvironmentService.moveEnvironmentDown(systemEnvironmentInstance, params.index?.toInteger())
 
-            redirect(action: "show", id: systemInstance.id)
+            redirect(action: "show", id: systemEnvironmentInstance.id)
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def moveEnvUp() {
-        def systemInstance = systemEnvironmentService.get(params.systemId)
-        if (!systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.systemId)
+        if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
-            systemEnvironmentService.moveEnvironmentUp(systemInstance, params.index?.toInteger())
+            systemEnvironmentService.moveEnvironmentUp(systemEnvironmentInstance, params.index?.toInteger())
 
-            redirect(action: "show", id: systemInstance.id)
+            redirect(action: "show", id: systemEnvironmentInstance.id)
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def edit() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (!systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
-            return [systemInstance: systemInstance]
+            [
+                    systemEnvironmentInstance: systemEnvironmentInstance
+            ]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
     def update() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (systemEnvironmentInstance) {
             if (params.version) {
                 def version = params.version.toLong()
-                if (systemInstance.version > version) {
+                if (systemEnvironmentInstance.version > version) {
 
-                    systemInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemEnvironment.label', default: 'SystemEnvironment')] as Object[], "Another user has updated this SystemEnvironment while you were editing")
-                    render(view: "edit", model: [systemInstance: systemInstance])
+                    systemEnvironmentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'systemEnvironment.label', default: 'SystemEnvironment')] as Object[], "Another user has updated this SystemEnvironment while you were editing")
+                    render(view: "edit", model: [systemEnvironmentInstance: systemEnvironmentInstance])
                     return
                 }
             }
-            systemEnvironmentService.update(systemInstance, params)
-            if (!systemInstance.hasErrors() && systemInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemInstance.name])}"
-                redirect(action: "show", id: systemInstance.id)
+            systemEnvironmentService.update(systemEnvironmentInstance, params)
+            if (!systemEnvironmentInstance.hasErrors() && systemEnvironmentInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), systemEnvironmentInstance.name])}"
+                redirect(action: "show", id: systemEnvironmentInstance.id)
             }
             else {
-                render(view: "edit", model: [systemInstance: systemInstance])
+                render(view: "edit", model: [systemEnvironmentInstance: systemEnvironmentInstance])
             }
         }
         else {
@@ -130,11 +135,11 @@ class SystemEnvironmentController {
 
     @Secured(['ROLE_ADMIN'])
     def delete() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (systemEnvironmentInstance) {
             try {
-                def name = systemInstance.name
-                systemEnvironmentService.delete(systemInstance)
+                def name = systemEnvironmentInstance.name
+                systemEnvironmentService.delete(systemEnvironmentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(action: "list")
             }
@@ -154,9 +159,9 @@ class SystemEnvironmentController {
     }
 
     def upcomingDeployments() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (systemInstance) {
-            def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystem(systemInstance)
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (systemEnvironmentInstance) {
+            def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystemEnvironment(systemEnvironmentInstance)
 
             def applicationDeploymentsGrouped = [:]
             applicationDeploymentInstanceList.each { deployment ->
@@ -183,7 +188,7 @@ class SystemEnvironmentController {
 
             [
                     applicationDeploymentsGrouped: applicationDeploymentsGrouped,
-                    systemInstance: systemInstance
+                    systemInstance: systemEnvironmentInstance
             ]
         }
         else {
@@ -193,8 +198,8 @@ class SystemEnvironmentController {
     }
 
     def listActivity() {
-        def systemInstance = systemEnvironmentService.get(params.id)
-        if (!systemInstance) {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (!systemEnvironmentInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
@@ -202,9 +207,9 @@ class SystemEnvironmentController {
             params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
             [
-                    domainInstance: systemInstance,
-                    activityList: activityTraceService.listActivityBySystemEnvironment(systemInstance, params),
-                    activityTotal: activityTraceService.countActivityBySystemEnvironment(systemInstance)
+                    domainInstance: systemEnvironmentInstance,
+                    activityList: activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystemEnvironment(systemEnvironmentInstance)
             ]
         }
     }

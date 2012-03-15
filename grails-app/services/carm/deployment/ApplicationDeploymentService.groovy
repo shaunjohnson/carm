@@ -214,10 +214,10 @@ class ApplicationDeploymentService {
     /**
      * Finds latest completed ApplicationDeployment objects for the provided SystemEnvironment.
      *
-     * @param system SystemEnvironment used for querying
+     * @param systemEnvironment SystemEnvironment used for querying
      * @return Array of maps containing basic ApplicationDeployment and ApplicationRelease field values
      */
-    def findAllLatestCompletedDeploymentsBySystem(SystemEnvironment system) {
+    def findAllLatestCompletedDeploymentsBySystemEnvironment(SystemEnvironment systemEnvironment) {
         def results = [:]
 
         Application.listOrderByType().each { application ->
@@ -232,7 +232,7 @@ class ApplicationDeploymentService {
                     and ad.applicationRelease.application = :application
                 group by
                     ad.deploymentEnvironment
-            """, [deploymentState: ApplicationDeploymentState.COMPLETED, system: system, application: application])
+            """, [deploymentState: ApplicationDeploymentState.COMPLETED, system: systemEnvironment, application: application])
 
             def applicationDeployments = [:]
 
@@ -301,10 +301,10 @@ class ApplicationDeploymentService {
     /**
      * Finds all application deployments that are upcoming for a provided system.
      *
-     * @param system SystemEnvironment used to filter deployments
+     * @param systemEnvironment SystemEnvironment used to filter deployments
      * @return List of ApplicationDeployment objects
      */
-    def findAllUpcomingBySystem(SystemEnvironment system) {
+    def findAllUpcomingBySystemEnvironment(SystemEnvironment systemEnvironment) {
         ApplicationDeployment.executeQuery("""
             from
                 ApplicationDeployment ad
@@ -317,7 +317,7 @@ class ApplicationDeploymentService {
                 ad.deploymentEnvironment.name asc,
                 ad.applicationRelease.application.type asc,
                 ad.applicationRelease.application.name asc
-        """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: system])
+        """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: systemEnvironment])
     }
 
     /**

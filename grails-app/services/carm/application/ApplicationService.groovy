@@ -119,12 +119,12 @@ class ApplicationService implements ApplicationContextAware {
     /**
      * Finds all Application objects, grouped by ApplicationType using the provided SystemEnvironment.
      *
-     * @param system SystemEnvironment used for querying
+     * @param systemEnvironment SystemEnvironment used for querying
      * @return Map with key of ApplicationType and value of List of Application objects
      */
-    SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(SystemEnvironment system) {
+    SortedMap<ApplicationType, List<Application>> findAllBySystemEnvironmentGroupedByType(SystemEnvironment systemEnvironment) {
         def applications = Application.createCriteria().list {
-            eq('sysEnvironment', system)
+            eq('sysEnvironment', systemEnvironment)
             and {
                 order('type', 'asc')
                 order('name', 'asc')

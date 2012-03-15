@@ -8,7 +8,7 @@
 
 <body>
 <div class="body">
-    <carm:header domain="${systemInstanceList}"/>
+    <carm:header domain="${systemEnvironmentInstanceList}"/>
 
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="nav">
@@ -24,7 +24,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <g:if test="${systemInstanceTotal}">
+    <g:if test="${systemEnvironmentInstanceTotal}">
         <div class="list">
             <table>
                 <thead>
@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <g:each in="${systemInstanceList}" status="i" var="systemInstance">
+                <g:each in="${systemEnvironmentInstanceList}" status="i" var="systemInstance">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
                             <g:link action="show" id="${systemInstance.id}">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="paginateButtons">
-            <g:paginate total="${systemInstanceTotal}"/>
+            <g:paginate total="${systemEnvironmentInstanceTotal}"/>
         </div>
     </g:if>
     <g:else>

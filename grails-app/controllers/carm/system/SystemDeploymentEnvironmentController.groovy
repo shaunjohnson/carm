@@ -63,7 +63,7 @@ class SystemDeploymentEnvironmentController {
         else {
             [
                     systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance,
-                    applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemDeploymentEnvironmentInstance.sysEnvironment),
+                    applicationsGrouped: applicationService.findAllBySystemEnvironmentGroupedByType(systemDeploymentEnvironmentInstance.sysEnvironment),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance)
             ]
         }

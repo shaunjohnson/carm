@@ -8,15 +8,15 @@
 
 <body>
 <div class="body">
-    <carm:header domain="${systemInstance}"/>
+    <carm:header domain="${systemEnvironmentInstance}"/>
 
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <g:hasErrors bean="${systemInstance}">
+    <g:hasErrors bean="${systemEnvironmentInstance}">
         <div class="errors">
-            <g:renderErrors bean="${systemInstance}" as="list"/>
+            <g:renderErrors bean="${systemEnvironmentInstance}" as="list"/>
         </div>
     </g:hasErrors>
 
@@ -30,9 +30,9 @@
                             <g:message code="systemEnvironment.name.label" default="Name"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'name', 'errors')}">
+                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'errors')}">
                         <g:textField name="name" maxlength="50" size="50"
-                                     value="${systemInstance?.name}"
+                                     value="${systemEnvironmentInstance?.name}"
                                      required="required"
                                      title="${message(code: 'systemEnvironment.name.help')}"/>
                     </td>
@@ -43,11 +43,11 @@
                             <g:message code="systemEnvironment.description.label" default="Description"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemInstance, field: 'description', 'errors')}">
+                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${systemInstance?.description}"
+                                    value="${systemEnvironmentInstance?.description}"
                                     title="${message(code: 'systemEnvironment.description.help')}"/>
                     </td>
                     </td>
