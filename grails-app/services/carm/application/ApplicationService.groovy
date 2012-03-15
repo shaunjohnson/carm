@@ -25,7 +25,7 @@ class ApplicationService implements ApplicationContextAware {
      * @return True if the application can be deployed
      */
     boolean isDeployable(Application application) {
-        return systemEnvironmentService.canBeDeployedTo(application?.system)
+        return systemEnvironmentService.canBeDeployedTo(application?.sysEnvironment)
     }
 
     /**
@@ -124,7 +124,7 @@ class ApplicationService implements ApplicationContextAware {
      */
     SortedMap<ApplicationType, List<Application>> findAllBySystemGroupedByType(SystemEnvironment system) {
         def applications = Application.createCriteria().list {
-            eq('system', system)
+            eq('sysEnvironment', system)
             and {
                 order('type', 'asc')
                 order('name', 'asc')

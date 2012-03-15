@@ -28,7 +28,7 @@
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label for="system.id">
-                            <g:message code="systemServer.system.label" default="System"/>
+                            <g:message code="systemServer.sysEnvironment.label" default="System"/>
                         </carm:label>
                     </td>
                     <td valign="top" class="value">

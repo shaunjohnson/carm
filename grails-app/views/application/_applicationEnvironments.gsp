@@ -9,16 +9,16 @@
     </div>
 </div>
 
-<g:if test="${applicationInstance?.system?.environments?.size()}">
+<g:if test="${applicationInstance?.sysEnvironment}">
 <table style="width: 100%;">
     <tbody>
-    <g:each in="${applicationInstance.system.environments}" var="environment">
-        <g:set var="deployment" value="${deployments[environment].lastDeployment}"/>
+    <g:each in="${applicationInstance.sysEnvironment.environments}" var="deploymentEnvironment">
+        <g:set var="deployment" value="${deployments[deploymentEnvironment].lastDeployment}"/>
 
         <tr>
             <td>
-                <g:link controller="systemDeploymentEnvironment" action="show" id="${environment.id}">
-                    ${environment.name.encodeAsHTML()}
+                <g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}">
+                    ${deploymentEnvironment.name.encodeAsHTML()}
                 </g:link>
             </td>
             <td>

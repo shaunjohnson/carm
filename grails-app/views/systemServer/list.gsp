@@ -22,7 +22,7 @@
                                   title="${message(code: 'systemServer.name.label', default: 'Name')}"/>
                 <g:sortableColumn property="description"
                                   title="${message(code: 'systemServer.description.label', default: 'Description')}"/>
-                <th><g:message code="systemServer.system.label" default="System"/></th>
+                <th><g:message code="systemServer.sysEnvironment.label" default="System"/></th>
             </tr>
             </thead>
             <tbody>

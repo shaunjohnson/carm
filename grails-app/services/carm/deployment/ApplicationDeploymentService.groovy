@@ -177,7 +177,7 @@ class ApplicationDeploymentService {
         def nextEnvironment = null
 
         // Start at last environment and work back towards the first
-        applicationRelease.application.system.environments.reverse().each { environment ->
+        applicationRelease.application.sysEnvironment.environments.reverse().each { environment ->
             if (releases.find { it.deploymentEnvironment == environment }) {
                 return
             }

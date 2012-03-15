@@ -15,7 +15,7 @@ class Application {
     ApplicationType type
     SourceControlRepository sourceControlRepository
     String sourceControlPath
-    SystemEnvironment system
+    SystemEnvironment sysEnvironment
     String buildInstructions
     String deployInstructions
 
@@ -29,7 +29,7 @@ class Application {
         project(nullable: false)
         sourceControlRepository(nullable: false)
         sourceControlPath(maxSize: 200, nullable: true, unique: 'sourceControlRepository')
-        system(nullable: true)
+        sysEnvironment(nullable: true)
         buildInstructions(nullable: true)
         deployInstructions(nullable: true)
     }

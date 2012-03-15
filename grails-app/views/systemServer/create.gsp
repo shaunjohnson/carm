@@ -25,15 +25,15 @@
                 <tbody>
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="system.id">
-                            <g:message code="systemServer.system.label" default="System"/>
+                        <carm:label for="sysEnvironment.id">
+                            <g:message code="systemServer.sysEnvironment.label" default="Environment"/>
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
                         <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.sysEnvironment?.id}">
                             ${systemServerInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
-                        <g:hiddenField name="system.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
+                        <g:hiddenField name="sysEnvironment.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">

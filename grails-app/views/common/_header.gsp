@@ -424,8 +424,8 @@
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
-            <bc:listSystems isFirst="true"/>
-            <bc:showSystem system="${domain.sysEnvironment}"/>
+            <bc:listSystemEnvironments isFirst="true"/>
+            <bc:showSystemEnvironment systemEnvironment="${domain.sysEnvironment}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showSystemDeploymentEnvironment systemDeploymentEnvironment="${domain}"/>
@@ -451,24 +451,24 @@
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
-            <bc:listSystems isFirst="true"/>
+            <bc:listSystemEnvironments isFirst="true"/>
 
             <g:if test="${action == 'show'}">
-                <bc:showSystem system="${domain}"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
             </g:if>
             <g:elseif test="${action == 'create' || action == 'save'}">
                 <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">
-                <bc:showSystem system="${domain}"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:editLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'listActivity'}">
-                <bc:showSystem system="${domain}"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:label code="allActivity.label" args="[entityName]"/>
             </g:elseif>
             <g:elseif test="${action == 'upcomingDeployments'}">
-                <bc:showSystem system="${domain}"/>
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:upcomingDeploymentsLabel entityName="${entityName}"/>
             </g:elseif>
         </g:if>
@@ -481,8 +481,8 @@
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
-            <bc:listSystems isFirst="true"/>
-            <bc:showSystem system="${domain.sysEnvironment}"/>
+            <bc:listSystemEnvironments isFirst="true"/>
+            <bc:showSystemEnvironment systemEnvironment="${domain.sysEnvironment}"/>
 
             <g:if test="${action == 'show'}">
                 <bc:showSystemServer systemServer="${domain}"/>

@@ -84,11 +84,11 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="application.system.label" default="System"/>
+                    <g:message code="application.sysEnvironment.label" default="Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show" id="${applicationInstance?.system?.id}">
-                        ${applicationInstance?.system?.encodeAsHTML()}
+                    <g:link controller="systemEnvironment" action="show" id="${applicationInstance?.sysEnvironment?.id}">
+                        ${applicationInstance?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>

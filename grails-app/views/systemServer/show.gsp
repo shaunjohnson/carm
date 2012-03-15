@@ -29,7 +29,7 @@
             </tr>
             <tr class="prop detailProp">
                 <td valign="top" class="name">
-                    <g:message code="systemServer.system.label" default="System"/>
+                    <g:message code="systemServer.sysEnvironment.label" default="System"/>
                 </td>
                 <td valign="top" class="value">
                     <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.sysEnvironment?.id}">

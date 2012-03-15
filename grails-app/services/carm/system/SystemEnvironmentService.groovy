@@ -17,7 +17,7 @@ class SystemEnvironmentService {
      * @return True if the system is in use
      */
     boolean isInUse(SystemEnvironment system) {
-        Application.countBySystem(system) > 0
+        Application.countBySysEnvironment(system) > 0
     }
 
     /**
@@ -174,13 +174,13 @@ class SystemEnvironmentService {
         }
 
         return Application.executeQuery("""
-            select distinct a.system
+            select distinct a.sysEnvironment
             from
                 Application a
             where
                 a.project in :projects
-                and a.system is not null
-            order by a.system.name
+                and a.sysEnvironment is not null
+            order by a.sysEnvironment.name
         """, [projects: projects]) as List<SystemEnvironment>
     }
 }

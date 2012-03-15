@@ -50,12 +50,12 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="application.system.label" default="System"/>
+                    <g:message code="application.sysEnvironment.label" default="System"/>
                 </td>
                 <td valign="top" class="value">
                     <g:link controller="systemEnvironment" action="show"
-                            id="${applicationReleaseInstance?.application?.system?.id}">
-                        ${applicationReleaseInstance?.application?.system?.encodeAsHTML()}
+                            id="${applicationReleaseInstance?.application?.sysEnvironment?.id}">
+                        ${applicationReleaseInstance?.application?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
             </tr>

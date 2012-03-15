@@ -51,7 +51,7 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentEnvironment', 'errors')}">
                         <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
-                                  from="${applicationDeploymentInstance?.applicationRelease?.application?.system?.environments}"
+                                  from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
                                   optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
                     </td>
                 </tr>

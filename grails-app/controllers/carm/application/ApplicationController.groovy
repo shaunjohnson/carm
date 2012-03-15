@@ -45,7 +45,7 @@ class ApplicationController {
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                    systemList: systemEnvironmentService.list()
+                    systemEnvironmentList: systemEnvironmentService.list()
             ]
         }
     }
@@ -67,7 +67,7 @@ class ApplicationController {
                         applicationInstance: applicationInstance,
                         applicationTypeList: applicationTypeService.list(),
                         sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                        systemList: systemEnvironmentService.list()
+                        systemEnvironmentList: systemEnvironmentService.list()
                 ])
             }
         }
@@ -82,7 +82,7 @@ class ApplicationController {
         else {
             def deployments = [:]
 
-            applicationInstance?.system?.environments?.each { SystemDeploymentEnvironment environment ->
+            applicationInstance?.sysEnvironment?.environments?.each { SystemDeploymentEnvironment environment ->
                 deployments[environment] = [
                         lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
                 ]

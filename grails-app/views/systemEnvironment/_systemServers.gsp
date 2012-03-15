@@ -5,7 +5,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="actions">
             <g:link class="create" controller="systemServer" action="create"
-                    params="['systemEnvironment.id': systemInstance?.id]">
+                    params="['sysEnvironment.id': systemInstance?.id]">
                 <g:message code="addServer.label" default="Add Server"/>
             </g:link>
         </div>

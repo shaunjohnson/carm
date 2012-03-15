@@ -133,14 +133,14 @@
 
                 <tr class="prop">
                     <td valign="top" class="name">
-                        <carm:label for="system.id">
-                            <g:message code="application.system.label" default="System"/>
+                        <carm:label for="sysEnvironment.id">
+                            <g:message code="application.sysEnvironment.label" default="Environment"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'system', 'errors')}">
-                        <g:select name="system.id" from="${systemList}" optionKey="id"
-                                  value="${applicationInstance?.system?.id}" noSelection="['null': '']"
-                                  title="${message(code: 'application.system.help')}"/>
+                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sysEnvironment', 'errors')}">
+                        <g:select name="sysEnvironment.id" from="${systemEnvironmentList}" optionKey="id"
+                                  value="${applicationInstance?.sysEnvironment?.id}" noSelection="['null': '']"
+                                  title="${message(code: 'application.sysEnvironment.help')}"/>
                     </td>
                 </tr>
                 <tr class="prop">
