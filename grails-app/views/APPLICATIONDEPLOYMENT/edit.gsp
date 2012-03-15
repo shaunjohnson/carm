@@ -72,6 +72,19 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <carm:label for="completedDeploymentDate">
+                            <g:message code="applicationDeployment.completedDeploymentDate.label"
+                                       default="Completed Deployment Date"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'completedDeploymentDate', 'errors')}">
+                        <g:datePicker name="completedDeploymentDate" precision="day"
+                                      value="${applicationDeploymentInstance?.completedDeploymentDate}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <carm:label for="deploymentInstructions">
                             <g:message code="applicationDeployment.deploymentInstructions.label"
                                        default="Deployment Instructions"/>

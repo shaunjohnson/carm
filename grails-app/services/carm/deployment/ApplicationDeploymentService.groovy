@@ -60,8 +60,12 @@ class ApplicationDeploymentService {
         Date requestedDeploymentDate = inferNextDeploymentDate()
         SystemDeploymentEnvironment deploymentEnvironment = inferNextEnvironment(applicationRelease)
 
-        new ApplicationDeployment(applicationRelease: applicationRelease,
-                requestedDeploymentDate: requestedDeploymentDate, deploymentEnvironment: deploymentEnvironment)
+        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
+        new ApplicationDeployment(
+                applicationRelease: applicationRelease,
+                completedDeploymentDate: requestedDeploymentDate,
+                requestedDeploymentDate: requestedDeploymentDate,
+                deploymentEnvironment: deploymentEnvironment)
     }
 
     /**
@@ -83,7 +87,6 @@ class ApplicationDeploymentService {
         // Saving as COMPLETE instead of DRAFT for this release, which does not include the workflow.
         // applicationDeploymentInstance.deploymentState = ApplicationDeploymentState.DRAFT
         applicationDeployment.deploymentState = ApplicationDeploymentState.COMPLETED
-        applicationDeployment.completedDeploymentDate = new Date()
 
         ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
         applicationRelease.application.modules.each { module ->
