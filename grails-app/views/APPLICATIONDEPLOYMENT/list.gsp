@@ -54,10 +54,10 @@
                         </g:link>
                     </td>
                     <td>
-                        <g:formatDate date="${applicationDeploymentInstance.requestedDeploymentDate}"/>
+                        <carm:formatDateOnly date="${applicationDeploymentInstance.requestedDeploymentDate}"/>
                     </td>
                     <td>
-                        <g:formatDate date="${applicationDeploymentInstance.completedDeploymentDate}"/>
+                        <carm:formatDateOnly date="${applicationDeploymentInstance.completedDeploymentDate}"/>
                     </td>
                 </tr>
             </g:each>

@@ -59,7 +59,7 @@
                                default="Requested Deployment Date"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatDate date="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
+                    <carm:formatDateOnly date="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
                 </td>
             </tr>
 
@@ -69,7 +69,7 @@
                                default="Completed Deployment Date"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:formatDate date="${applicationDeploymentInstance?.completedDeploymentDate}"/>
+                    <carm:formatDateOnly date="${applicationDeploymentInstance?.completedDeploymentDate}"/>
                 </td>
             </tr>
 
