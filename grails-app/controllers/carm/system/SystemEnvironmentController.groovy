@@ -52,7 +52,7 @@ class SystemEnvironmentController {
         }
         else {
             [
-                    activityList: activityTraceService.listActivityBySystem(systemInstance, [:]),
+                    activityList: activityTraceService.listActivityBySystemEnvironment(systemInstance, [:]),
                     systemInstance: systemInstance,
                     applicationsGrouped: applicationService.findAllBySystemGroupedByType(systemInstance),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystem(systemInstance)
@@ -203,8 +203,8 @@ class SystemEnvironmentController {
 
             [
                     domainInstance: systemInstance,
-                    activityList: activityTraceService.listActivityBySystem(systemInstance, params),
-                    activityTotal: activityTraceService.countActivityBySystem(systemInstance)
+                    activityList: activityTraceService.listActivityBySystemEnvironment(systemInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystemEnvironment(systemInstance)
             ]
         }
     }

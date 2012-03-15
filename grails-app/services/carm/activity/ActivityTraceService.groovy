@@ -87,11 +87,11 @@ class ActivityTraceService {
     /**
      * Counts the total number of activity events for a SystemEnvironment.
      *
-     * @param system SystemEnvironment used for query
+     * @param systemEnvironment SystemEnvironment used for query
      * @return Number of ActivityTrace objects
      */
-    int countActivityBySystem(SystemEnvironment system) {
-        ActivityTrace.countByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, system.id))
+    int countActivityBySystemEnvironment(SystemEnvironment systemEnvironment) {
+        ActivityTrace.countByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id))
     }
 
     /**
@@ -172,12 +172,12 @@ class ActivityTraceService {
     /**
      * Lists latest activity events for a SystemEnvironment in reverse chronological order.
      *
-     * @param system SystemEnvironment used for query
+     * @param systemEnvironment SystemEnvironment used for query
      * @param params Query parameters
      * @return List of ActivityTrace objects
      */
-    List<ActivityTrace> listActivityBySystem(SystemEnvironment system, Map params) {
-        ActivityTrace.findAllByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, system.id), buildQueryParams(params))
+    List<ActivityTrace> listActivityBySystemEnvironment(SystemEnvironment systemEnvironment, Map params) {
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id), buildQueryParams(params))
     }
 
     /**
@@ -383,37 +383,37 @@ class ActivityTraceService {
     /**
      * SystemEnvironment object was created.
      *
-     * @param system SystemEnvironment that was created
+     * @param systemEnvironment SystemEnvironment that was created
      */
-    void systemCreated(SystemEnvironment system) {
+    void systemEnvironmentCreated(SystemEnvironment systemEnvironment) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
-        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, system.id, system.name)
+        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, systemEnvironment.id, systemEnvironment.name)
 
         String projectOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, system.id)
-        insertActivityTrace(projectOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, system.id, system.name)
+        insertActivityTrace(projectOid, SYSTEM_ENVIRONMENT_TYPE, CREATED, systemEnvironment.id, systemEnvironment.name)
     }
 
     /**
      * SystemEnvironment object was deleted.
      *
-     * @param system SystemEnvironment that was deleted
+     * @param systemEnvironment SystemEnvironment that was deleted
      */
-    void systemDeleted(SystemEnvironment system) {
+    void systemEnvironmentDeleted(SystemEnvironment systemEnvironment) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
-        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, DELETED, system.id, system.name)
+        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, DELETED, systemEnvironment.id, systemEnvironment.name)
     }
 
     /**
      * SystemEnvironment object was updated.
      *
-     * @param system SystemEnvironment that was updated
+     * @param systemEnvironment SystemEnvironment that was updated
      */
-    void systemUpdated(SystemEnvironment system) {
+    void systemEnvironmentUpdated(SystemEnvironment systemEnvironment) {
         String rootOid = generateOid(ROOT_TYPE, ROOT_ID)
-        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, UPDATED, system.id, system.name)
+        insertActivityTrace(rootOid, SYSTEM_ENVIRONMENT_TYPE, UPDATED, systemEnvironment.id, systemEnvironment.name)
 
-        String oid = generateOid(SYSTEM_ENVIRONMENT_TYPE, system.id)
-        insertActivityTrace(oid, SYSTEM_ENVIRONMENT_TYPE, UPDATED, system.id, system.name)
+        String oid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id)
+        insertActivityTrace(oid, SYSTEM_ENVIRONMENT_TYPE, UPDATED, systemEnvironment.id, systemEnvironment.name)
     }
 
     /**

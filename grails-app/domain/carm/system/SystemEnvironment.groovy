@@ -40,14 +40,14 @@ class SystemEnvironment {
     }
 
     def afterInsert() {
-        activityTraceService?.systemCreated(this)
+        activityTraceService?.systemEnvironmentCreated(this)
     }
 
     def beforeDelete() {
-        activityTraceService?.systemDeleted(this)
+        activityTraceService?.systemEnvironmentDeleted(this)
     }
 
     def afterUpdate() {
-        activityTraceService?.systemUpdated(this)
+        activityTraceService?.systemEnvironmentUpdated(this)
     }
 }
