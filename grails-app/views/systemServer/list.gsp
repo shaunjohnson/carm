@@ -39,8 +39,8 @@
                         </div>
                     </td>
                     <td>
-                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance.system.id}">
-                            ${fieldValue(bean: systemServerInstance, field: "system")}
+                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance.sysEnvironment.id}">
+                            ${fieldValue(bean: systemServerInstance, field: "sysEnvironment")}
                         </g:link>
                     </td>
                 </tr>

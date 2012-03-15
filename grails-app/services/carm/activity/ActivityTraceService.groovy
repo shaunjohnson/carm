@@ -422,7 +422,7 @@ class ActivityTraceService {
      * @param systemServer SystemServer that was created
      */
     void systemServerCreated(SystemServer systemServer) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.sysEnvironment.id)
         insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, CREATED, systemServer.id, systemServer.name)
 
         String oid = generateOid(SYSTEM_SERVER_TYPE, systemServer.id)
@@ -435,7 +435,7 @@ class ActivityTraceService {
      * @param systemServer SystemServer that was deleted
      */
     void systemServerDeleted(SystemServer systemServer) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.sysEnvironment.id)
         insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, DELETED, systemServer.id, systemServer.name)
     }
 
@@ -445,7 +445,7 @@ class ActivityTraceService {
      * @param systemServer SystemServer that was updated
      */
     void systemServerUpdated(SystemServer systemServer) {
-        String systemOid = generateOid(SYSTEM_TYPE, systemServer.system.id)
+        String systemOid = generateOid(SYSTEM_TYPE, systemServer.sysEnvironment.id)
         insertActivityTrace(systemOid, SYSTEM_SERVER_TYPE, UPDATED, systemServer.id, systemServer.name)
 
         String oid = generateOid(SYSTEM_SERVER_TYPE, systemServer.id)

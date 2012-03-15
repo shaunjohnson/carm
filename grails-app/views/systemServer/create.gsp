@@ -30,10 +30,10 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.system?.id}">
-                            ${systemServerInstance?.system?.encodeAsHTML()}
+                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.sysEnvironment?.id}">
+                            ${systemServerInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
-                        <g:hiddenField name="system.id" value="${systemServerInstance?.system?.id}"/>
+                        <g:hiddenField name="system.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -72,7 +72,7 @@
 
         <div class="buttons">
             <span class="button">
-                <g:link class="show" controller="systemEnvironment" action="show" id="${systemServerInstance.system.id}">
+                <g:link class="show" controller="systemEnvironment" action="show" id="${systemServerInstance.sysEnvironment.id}">
                     <g:message code="default.button.cancel.label" default="Cancel"/>
                 </g:link>
             </span>

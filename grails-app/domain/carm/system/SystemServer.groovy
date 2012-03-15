@@ -14,10 +14,10 @@ class SystemServer {
     static constraints = {
         name(minSize: 2, maxSize: 50, blank: false, unique: true)
         description(maxSize: 4000, nullable: true)
-        system(nullable: false)
+        sysEnvironment(nullable: false)
     }
 
-    static belongsTo = [system: SystemEnvironment]
+    static belongsTo = [sysEnvironment: SystemEnvironment]
 
     static mapping = {
         sort "name"
@@ -32,11 +32,11 @@ class SystemServer {
             return false
         }
 
-        other.name == name && other.sysEnvironment == system
+        other.name == name && other.sysEnvironment == sysEnvironment
     }
 
     int hashCode() {
-        new HashCodeBuilder().append(name).append(system).toHashCode()
+        new HashCodeBuilder().append(name).append(sysEnvironment).toHashCode()
     }
 
     def afterInsert() {

@@ -40,7 +40,7 @@ class SystemServerController {
         def systemServerInstance = systemServerService.create(params)
         if (!systemServerInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), systemServerInstance.name])}"
-            redirect(controller: "systemEnvironment", action: "show", id: systemServerInstance.system.id)
+            redirect(controller: "systemEnvironment", action: "show", id: systemServerInstance.sysEnvironment.id)
         }
         else {
             render(view: "create", model: [systemServerInstance: systemServerInstance])
@@ -104,7 +104,7 @@ class SystemServerController {
     def delete() {
         def systemServerInstance = systemServerService.get(params.id)
         if (systemServerInstance) {
-            def systemId = systemServerInstance.system.id
+            def systemId = systemServerInstance.sysEnvironment.id
             try {
                 def name = systemServerInstance.name
                 systemServerService.delete(systemServerInstance)
