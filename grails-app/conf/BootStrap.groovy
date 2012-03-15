@@ -8,7 +8,7 @@ import carm.deployment.ModuleDeployment
 import carm.deployment.ModuleDeploymentTestState
 import carm.release.ModuleRelease
 import carm.project.Project
-import carm.system.System
+import carm.system.SystemEnvironment
 import carm.system.SystemServer
 import carm.security.Role
 import carm.sourcecontrol.SourceControlServer
@@ -30,6 +30,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import carm.project.ProjectCategory
 import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
+import carm.system.SystemEnvironment
 
 class BootStrap {
 
@@ -38,6 +39,23 @@ class BootStrap {
     def applicationService
 
     def init = { servletContext ->
+        def roleAdmin
+        
+        if (!Role.findByAuthority('ROLE_ADMIN')) {
+            roleAdmin = new Role(authority: 'ROLE_ADMIN').save()
+        }
+
+        if (!Role.findByAuthority('ROLE_USER')) {
+            new Role(authority: 'ROLE_USER').save()
+        }
+
+        if (!User.findByUsername('admin')) {
+            def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
+            adminUser.save()
+
+            new UserRole(user: adminUser, role: roleAdmin).save()
+        }
+
         // Return immediately to disable bootstrapping data
         return
 
@@ -117,8 +135,8 @@ class BootStrap {
             // Source Control Repositories
             //
             subversionRepository(SourceControlRepository) {
-                name = 'Big System SVN Repository'
-                description = 'Big System Subversion repository.'
+                name = 'Big SystemEnvironment SVN Repository'
+                description = 'Big SystemEnvironment Subversion repository.'
                 path = '/bigrepo'
                 server = subversionServer
             }
@@ -156,28 +174,28 @@ class BootStrap {
             //
             // Systems
             //
-            bigSystem(System) {
-                name = 'Big System'
-                description = 'Big System'
+            bigSystem(SystemEnvironment) {
+                name = 'Big SystemEnvironment'
+                description = 'Big SystemEnvironment'
                 servers = [
                         dataLayer(SystemServer) {
                             name = 'Oracle 10g Database Server'
-                            description = 'Oracle 10g database server that provides the data layer for Big System.'
+                            description = 'Oracle 10g database server that provides the data layer for Big SystemEnvironment.'
                             system = bigSystem
                         },
                         integrationLayer(SystemServer) {
                             name = 'WebSphere Broker 7.0'
-                            description = 'WebSphere Broker 7.0 is used for the Big System integration layer.'
+                            description = 'WebSphere Broker 7.0 is used for the Big SystemEnvironment integration layer.'
                             system = bigSystem
                         },
                         businessLayer(SystemServer) {
                             name = 'WebSphere Application Server 7.0'
-                            description = 'The Big System business layer runs on WAS 7.0.'
+                            description = 'The Big SystemEnvironment business layer runs on WAS 7.0.'
                             system = bigSystem
                         },
                         presentationLayer(SystemServer) {
                             name = 'WebSphere Portal Server 7.0'
-                            description = 'The Big System presentation layer is WebSphere Portal Server.'
+                            description = 'The Big SystemEnvironment presentation layer is WebSphere Portal Server.'
                             system = bigSystem
                         }]
                 environments = [
@@ -214,8 +232,8 @@ class BootStrap {
                 ]
             }
 
-            standaloneSystem(System) {
-                name = 'Standalone System'
+            standaloneSystem(SystemEnvironment) {
+                name = 'Standalone SystemEnvironment'
                 description 'Standalone applications system'
                 servers = [
                         standaloneServer(SystemServer) {
@@ -312,7 +330,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemServers = [ businessLayer ]
+                                        systemServers = [businessLayer]
                                     },
                                     transEjbModule(Module) {
                                         name = 'Transition Services EJB'
@@ -320,7 +338,7 @@ class BootStrap {
                                         application = earApplication
                                         type = ejbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemServers = [ businessLayer ]
+                                        systemServers = [businessLayer]
                                     },
                                     bussMdbModule(Module) {
                                         name = 'Business Services MDB'
@@ -328,7 +346,7 @@ class BootStrap {
                                         application = earApplication
                                         type = mdbModType
                                         deployInstructions = 'Update existing application.\nRestart server.'
-                                        systemServers = [ businessLayer ]
+                                        systemServers = [businessLayer]
                                     }
                             ]
                         },
@@ -347,7 +365,7 @@ class BootStrap {
                                         application = brokerApplication
                                         type = barModuleType
                                         deployInstructions = 'Update existing BAR file.'
-                                        systemServers = [ integrationLayer ]
+                                        systemServers = [integrationLayer]
                                     }
                             ]
                             releases = [
@@ -381,7 +399,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemServers = [ presentationLayer ]
+                                        systemServers = [presentationLayer]
                                     },
                                     userPortletModule(Module) {
                                         name = 'User Portlet'
@@ -389,7 +407,7 @@ class BootStrap {
                                         application = portalApplication
                                         type = portletModType
                                         deployInstructions = 'Update existing application.'
-                                        systemServers = [ presentationLayer ]
+                                        systemServers = [presentationLayer]
                                     }
                             ]
                             releases = [
