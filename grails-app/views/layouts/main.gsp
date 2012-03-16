@@ -67,7 +67,8 @@
 
 <div class="footer">
     <hr class="divider" style="margin: 0 1em;"/>
-    <g:message code="carm.copyright.label" default="Change And Release Management 2011"/>
+    <g:message code="carm.copyright.label" default="Change And Release Management 2011"
+               args="[meta(name: 'app.version')]"/>
 </div>
 
 <div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
