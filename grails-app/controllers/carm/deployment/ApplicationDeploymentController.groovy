@@ -108,7 +108,7 @@ class ApplicationDeploymentController {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (applicationDeploymentInstance) {
             try {
-                applicationDeploymentService.delete(applicationDeploymentInstance)
+                applicationDeploymentService.delete(applicationDeploymentInstance.applicationRelease.application.project, applicationDeploymentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
                 redirect(action: "list")
             }
