@@ -192,15 +192,15 @@
 
                 <div>&nbsp;</div>
 
-                <g:render template="applicationModules" model="[applicationInstance: applicationInstance]"/>
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationInstance.id]"/>
             </td>
             <td class="layoutColumnLast">
                 <g:render template="applicationReleases" model="[applicationInstance: applicationInstance]"/>
 
                 <div>&nbsp;</div>
 
-                <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationInstance.id]"/>
+                <g:render template="applicationModules" model="[applicationInstance: applicationInstance]"/>
             </td>
         </tr>
         </tbody>
