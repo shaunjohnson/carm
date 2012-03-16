@@ -20,8 +20,6 @@
             <thead>
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'application.name.label', default: 'Name')}"/>
-                <g:sortableColumn property="description"
-                                  title="${message(code: 'application.description.label', default: 'Description')}"/>
                 <th><g:message code="application.type.label" default="Type"/></th>
                 <th><g:message code="application.project.label" default="Project"/></th>
                 <th><g:message code="application.sourceControlRepository.label"
@@ -35,11 +33,6 @@
                         <g:link action="show" id="${applicationInstance.id}">
                             ${fieldValue(bean: applicationInstance, field: "name")}
                         </g:link>
-                    </td>
-                    <td>
-                        <div class="expander">
-                            <carm:plainText value="${applicationInstance.description}"/>
-                        </div>
                     </td>
                     <td>
                         <g:link controller="applicationType" action="show" id="${applicationInstance.type.id}">
