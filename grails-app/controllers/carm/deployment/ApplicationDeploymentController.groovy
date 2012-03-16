@@ -107,10 +107,11 @@ class ApplicationDeploymentController {
     def delete() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (applicationDeploymentInstance) {
+            ApplicationRelease applicationRelease = applicationDeploymentInstance.applicationRelease
             try {
-                applicationDeploymentService.delete(applicationDeploymentInstance.applicationRelease.application.project, applicationDeploymentInstance)
+                applicationDeploymentService.delete(applicationRelease.application.project, applicationDeploymentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
-                redirect(action: "list")
+                redirect(controller: "applicationRelease", action: "show", id: applicationRelease.id)
             }
             catch (DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
