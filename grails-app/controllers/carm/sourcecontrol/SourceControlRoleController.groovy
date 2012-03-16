@@ -15,8 +15,10 @@ class SourceControlRoleController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [sourceControlRoleInstanceList: sourceControlRoleService.list(params), sourceControlRoleInstanceTotal: sourceControlRoleService.count()]
+        [
+                sourceControlRoleInstanceList: sourceControlRoleService.list(params),
+                sourceControlRoleInstanceTotal: sourceControlRoleService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

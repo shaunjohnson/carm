@@ -1,5 +1,5 @@
 <g:set var="applicationReleasesTotal" value="${applicationInstance.releases.size()}"/>
-<g:set var="maxRecordsAllowed" value="${grailsApplication.config.ui.application.maxRecords}"/>
+<g:set var="maxRecordsAllowed" value="${grailsApplication.config.ui.applicationRelease.maxRecords}"/>
 <g:set var="maxRecordsToDisplay"
        value="${Math.min(applicationReleasesTotal, maxRecordsAllowed)}"/>
 <g:set var="applicationReleases"

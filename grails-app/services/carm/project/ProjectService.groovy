@@ -11,6 +11,7 @@ class ProjectService {
     def applicationDeploymentService
     def applicationReleaseService
     def carmSecurityService
+    def grailsApplication
 
     /**
      * Returns a count of all Project objects.
@@ -89,7 +90,12 @@ class ProjectService {
      * @return List of Project objects
      */
     List<Project> list(Map params) {
-        Project.list(params)
+        Project.list([
+                max: grailsApplication.config.ui.project.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

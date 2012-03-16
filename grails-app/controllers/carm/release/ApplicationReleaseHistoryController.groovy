@@ -9,7 +9,6 @@ class ApplicationReleaseHistoryController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 applicationReleaseHistoryInstanceList: applicationReleaseHistoryService.list(params),
                 applicationReleaseHistoryInstanceTotal: applicationReleaseHistoryService.count()

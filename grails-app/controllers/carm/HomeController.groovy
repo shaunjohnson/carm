@@ -29,7 +29,6 @@ class HomeController {
     }
 
     def listActivity() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 activityList: activityTraceService.listActivityByRoot(params),
                 activityTotal: activityTraceService.countActivityByRoot()

@@ -8,6 +8,8 @@ class ModuleService {
     
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the module is deployable. An module must be associated with a system system server in order to
      * be deployable.
@@ -85,7 +87,12 @@ class ModuleService {
      * @return List of Module objects
      */
     List<Module> list(Map params) {
-        Module.list(params)
+        Module.list([
+                max: grailsApplication.config.ui.module.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

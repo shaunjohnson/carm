@@ -7,6 +7,8 @@ class SourceControlUserService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Returns a count of all SourceControlUser objects.
      *
@@ -71,7 +73,12 @@ class SourceControlUserService {
      * @return List of SourceControlUser objects
      */
     List<SourceControlUser> list(Map params) {
-        SourceControlUser.list(params)
+        SourceControlUser.list([
+                max: grailsApplication.config.ui.sourceControlUser.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

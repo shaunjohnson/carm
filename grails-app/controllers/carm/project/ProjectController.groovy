@@ -20,8 +20,10 @@ class ProjectController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [projectInstanceList: projectService.list(params), projectInstanceTotal: projectService.count()]
+        [
+                projectInstanceList: projectService.list(params),
+                projectInstanceTotal: projectService.count()
+        ]
     }
 
     def create() {
@@ -134,7 +136,6 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
             [
                     domainInstance: projectInstance,
                     activityList: activityTraceService.listActivityByProject(projectInstance, params),

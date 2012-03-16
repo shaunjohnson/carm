@@ -4,6 +4,8 @@ class UserService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Returns a count of all User objects.
      *
@@ -40,6 +42,11 @@ class UserService {
      * @return List of User objects
      */
     List<User> list(Map params) {
-        User.list(params)
+        User.list([
+                max: grailsApplication.config.ui.user.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 }

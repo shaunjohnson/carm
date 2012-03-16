@@ -15,8 +15,10 @@ class ApplicationReleaseTestStateController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationReleaseTestStateInstanceList: applicationReleaseTestStateService.list(params), applicationReleaseTestStateInstanceTotal: applicationReleaseTestStateService.count()]
+        [
+                applicationReleaseTestStateInstanceList: applicationReleaseTestStateService.list(params),
+                applicationReleaseTestStateInstanceTotal: applicationReleaseTestStateService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

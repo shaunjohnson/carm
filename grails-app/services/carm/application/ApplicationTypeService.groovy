@@ -8,6 +8,8 @@ class ApplicationTypeService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided type is in use.
      *
@@ -87,7 +89,12 @@ class ApplicationTypeService {
      * @return List of ApplicationType objects
      */
     List<ApplicationType> list(Map params) {
-        ApplicationType.list(params)
+        ApplicationType.list([
+                max: grailsApplication.config.ui.applicationType.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

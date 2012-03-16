@@ -9,7 +9,6 @@ class ModuleDeploymentController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 moduleDeploymentInstanceList: moduleDeploymentService.list(params),
                 moduleDeploymentInstanceTotal: moduleDeploymentService.count()

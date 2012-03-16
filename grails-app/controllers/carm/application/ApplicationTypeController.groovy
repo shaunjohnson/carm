@@ -15,8 +15,10 @@ class ApplicationTypeController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [applicationTypeInstanceList: applicationTypeService.list(params), applicationTypeInstanceTotal: applicationTypeService.count()]
+        [
+                applicationTypeInstanceList: applicationTypeService.list(params),
+                applicationTypeInstanceTotal: applicationTypeService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

@@ -15,8 +15,10 @@ class ModuleTypeController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [moduleTypeInstanceList: moduleTypeService.list(params), moduleTypeInstanceTotal: moduleTypeService.count()]
+        [
+                moduleTypeInstanceList: moduleTypeService.list(params),
+                moduleTypeInstanceTotal: moduleTypeService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

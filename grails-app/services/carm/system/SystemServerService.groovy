@@ -9,6 +9,8 @@ class SystemServerService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided server is in use.
      *
@@ -92,7 +94,12 @@ class SystemServerService {
      * @return List of SystemServer objects
      */
     List<SystemServer> list(Map params) {
-        SystemServer.list(params)
+        SystemServer.list([
+                max: grailsApplication.config.ui.systemServer.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

@@ -16,7 +16,6 @@ class ApplicationDeploymentController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 applicationDeploymentInstanceList: applicationDeploymentService.list(params),
                 applicationDeploymentInstanceTotal: applicationDeploymentService.count()

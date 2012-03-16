@@ -9,6 +9,8 @@ class SourceControlServerService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided server is in use.
      *
@@ -92,7 +94,12 @@ class SourceControlServerService {
      * @return List of SourceControlServer objects
      */
     List<SourceControlServer> list(Map params) {
-        SourceControlServer.list(params)
+        SourceControlServer.list([
+                max: grailsApplication.config.ui.sourceControlServer.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

@@ -4,6 +4,8 @@ class ModuleDeploymentService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Returns a count of all ModuleDeployment objects.
      *
@@ -30,6 +32,11 @@ class ModuleDeploymentService {
      * @return List of ModuleDeployment objects
      */
     List<ModuleDeployment> list(Map params) {
-        ModuleDeployment.list(params)
+        ModuleDeployment.list([
+                max: grailsApplication.config.ui.moduleDeployment.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 }

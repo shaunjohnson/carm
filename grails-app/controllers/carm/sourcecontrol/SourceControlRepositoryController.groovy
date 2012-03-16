@@ -15,8 +15,10 @@ class SourceControlRepositoryController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [sourceControlRepositoryInstanceList: sourceControlRepositoryService.list(params), sourceControlRepositoryInstanceTotal: sourceControlRepositoryService.count()]
+        [
+                sourceControlRepositoryInstanceList: sourceControlRepositoryService.list(params),
+                sourceControlRepositoryInstanceTotal: sourceControlRepositoryService.count()
+        ]
     }
 
     def create() {

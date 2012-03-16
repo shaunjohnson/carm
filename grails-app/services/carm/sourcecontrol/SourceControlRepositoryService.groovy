@@ -9,6 +9,8 @@ class SourceControlRepositoryService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided repository is in use.
      *
@@ -88,7 +90,12 @@ class SourceControlRepositoryService {
      * @return List of SourceControlRepository objects
      */
     List<SourceControlRepository> list(Map params) {
-        SourceControlRepository.list(params)
+        SourceControlRepository.list([
+                max: grailsApplication.config.ui.sourceControlRepository.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

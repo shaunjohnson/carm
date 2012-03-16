@@ -9,6 +9,8 @@ class SystemDeploymentEnvironmentService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided environment is in use.
      *
@@ -93,7 +95,12 @@ class SystemDeploymentEnvironmentService {
      * @return List of SystemDeploymentEnvironment objects
      */
     List<SystemDeploymentEnvironment> list(Map params) {
-        SystemDeploymentEnvironment.list(params)
+        SystemDeploymentEnvironment.list([
+                max: grailsApplication.config.ui.systemDeploymentEnvironment.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

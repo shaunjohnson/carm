@@ -10,6 +10,8 @@ class SystemEnvironmentService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided system is in use.
      *
@@ -103,7 +105,12 @@ class SystemEnvironmentService {
      * @return List of SystemEnvironment objects
      */
     List<SystemEnvironment> list(Map params) {
-        SystemEnvironment.list(params)
+        SystemEnvironment.list([
+                max: grailsApplication.config.ui.systemEnvironment.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

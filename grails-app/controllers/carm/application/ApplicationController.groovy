@@ -23,8 +23,6 @@ class ApplicationController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
         [
                 applicationInstanceList: applicationService.list(params),
                 applicationInstanceTotal: applicationService.count()
@@ -183,8 +181,6 @@ class ApplicationController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     applicationInstance: applicationInstance,
                     applicationReleaseInstanceList: applicationReleaseService.findAllByApplication(applicationInstance, params),
@@ -200,8 +196,6 @@ class ApplicationController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     domainInstance: applicationInstance,
                     activityList: activityTraceService.listActivityByApplication(applicationInstance, params),

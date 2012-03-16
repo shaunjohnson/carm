@@ -8,6 +8,7 @@ class ModuleController {
 
     def activityTraceService
     def applicationService
+    def grailsApplication
     def moduleService
     def moduleTypeService
 
@@ -16,8 +17,10 @@ class ModuleController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [moduleInstanceList: moduleService.list(params), moduleInstanceTotal: moduleService.count()]
+        [
+                moduleInstanceList: moduleService.list(params),
+                moduleInstanceTotal: moduleService.count()
+        ]
     }
 
     def create() {
@@ -156,8 +159,6 @@ class ModuleController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     domainInstance: moduleInstance,
                     activityList: activityTraceService.listActivityByModule(moduleInstance, params),

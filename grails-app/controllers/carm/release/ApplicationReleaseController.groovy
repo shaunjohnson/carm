@@ -17,7 +17,6 @@ class ApplicationReleaseController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 applicationReleaseInstanceList: applicationReleaseService.list(params),
                 applicationReleaseInstanceTotal: applicationReleaseService.count()
@@ -149,8 +148,6 @@ class ApplicationReleaseController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     domainInstance: applicationReleaseInstance,
                     activityList: activityTraceService.listActivityByApplicationRelease(applicationReleaseInstance, params),

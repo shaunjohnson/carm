@@ -94,7 +94,12 @@ class ApplicationService implements ApplicationContextAware {
      * @return List of Application objects
      */
     List<Application> list(Map params) {
-        Application.list(params)
+        Application.list([
+                max: grailsApplication.config.ui.application.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

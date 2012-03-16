@@ -17,6 +17,7 @@ class ActivityTraceService {
     static transactional = false
 
     def carmSecurityService
+    def grailsApplication
     def springSecurityService
 
     public static final String APPLICATION_TYPE = Application.class.name
@@ -39,9 +40,10 @@ class ActivityTraceService {
      */
     private Map buildQueryParams(Map params) {
         [
-                max: params.max ?: 10,
-                sort: "dateOccurred",
-                order: "desc"
+                max: grailsApplication.config.ui.activityTrace.listMax,
+                offset: params?.offset,
+                sort: params?.sort ?: "dateOccurred",
+                order: params?.order ?: "desc"
         ]
     }
 

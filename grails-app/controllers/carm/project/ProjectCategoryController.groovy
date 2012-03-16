@@ -15,8 +15,10 @@ class ProjectCategoryController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [projectCategoryInstanceList: projectCategoryService.list(params), projectCategoryInstanceTotal: projectCategoryService.count()]
+        [
+                projectCategoryInstanceList: projectCategoryService.list(params),
+                projectCategoryInstanceTotal: projectCategoryService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

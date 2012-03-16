@@ -17,7 +17,6 @@ class SystemServerController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 systemServerInstanceList: systemServerService.list(params),
                 systemServerInstanceTotal: systemServerService.count()
@@ -136,8 +135,6 @@ class SystemServerController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     domainInstance: systemServerInstance,
                     activityList: activityTraceService.listActivityBySystemServer(systemServerInstance, params),

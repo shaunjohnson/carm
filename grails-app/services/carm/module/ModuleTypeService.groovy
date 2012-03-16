@@ -8,6 +8,8 @@ class ModuleTypeService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided type is in use.
      *
@@ -87,7 +89,12 @@ class ModuleTypeService {
      * @return List of ModuleType objects
      */
     List<ModuleType> list(Map params) {
-        ModuleType.list(params)
+        ModuleType.list([
+                max: grailsApplication.config.ui.moduleType.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

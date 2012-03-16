@@ -7,6 +7,8 @@ class ApplicationReleaseHistoryService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Gets a count of all ApplicationReleaseHistory records.
      *
@@ -33,6 +35,11 @@ class ApplicationReleaseHistoryService {
      * @return List of ApplicationReleaseHistory objects
      */
     List<ApplicationReleaseHistory> list(Map params) {
-        ApplicationReleaseHistory.list params
+        ApplicationReleaseHistory.list([
+                max: grailsApplication.config.ui.applicationReleaseHistory.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 }

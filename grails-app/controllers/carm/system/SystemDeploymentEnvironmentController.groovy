@@ -19,7 +19,6 @@ class SystemDeploymentEnvironmentController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 systemDeploymentEnvironmentInstanceList: systemDeploymentEnvironmentService.list(params),
                 systemDeploymentEnvironmentInstanceTotal: systemDeploymentEnvironmentService.count()
@@ -133,6 +132,21 @@ class SystemDeploymentEnvironmentController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity() {
+        def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
+        if (!systemDeploymentEnvironmentInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    domainInstance: systemDeploymentEnvironmentInstance,
+                    activityList: activityTraceService.listActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance, params),
+                    activityTotal: activityTraceService.countActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance)
+            ]
         }
     }
 }

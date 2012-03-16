@@ -18,7 +18,6 @@ class SystemEnvironmentController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [
                 systemEnvironmentInstanceList: systemEnvironmentService.list(params),
                 systemEnvironmentInstanceTotal: systemEnvironmentService.count()
@@ -204,8 +203,6 @@ class SystemEnvironmentController {
             redirect(action: "list")
         }
         else {
-            params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
             [
                     domainInstance: systemEnvironmentInstance,
                     activityList: activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, params),

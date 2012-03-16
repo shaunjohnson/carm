@@ -8,6 +8,8 @@ class ModuleDeploymentTestStateService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided test state is in use.
      *
@@ -87,7 +89,12 @@ class ModuleDeploymentTestStateService {
      * @return List of ModuleDeploymentTestState objects
      */
     List<ModuleDeploymentTestState> list(Map params) {
-        ModuleDeploymentTestState.list(params)
+        ModuleDeploymentTestState.list([
+                max: grailsApplication.config.ui.moduleDeploymentTestState.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

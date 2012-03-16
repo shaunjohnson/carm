@@ -16,6 +16,8 @@ class ApplicationDeploymentService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Returns a count of all ApplicationDeployment objects.
      *
@@ -42,7 +44,12 @@ class ApplicationDeploymentService {
      * @return List of ApplicationDeployment objects
      */
     List<ApplicationDeployment> list(Map params) {
-        ApplicationDeployment.list(params)
+        ApplicationDeployment.list([
+                max: grailsApplication.config.ui.applicationDeployment.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

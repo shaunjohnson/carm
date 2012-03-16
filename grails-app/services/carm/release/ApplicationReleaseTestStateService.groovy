@@ -8,6 +8,8 @@ class ApplicationReleaseTestStateService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided test state is in use.
      *
@@ -87,7 +89,12 @@ class ApplicationReleaseTestStateService {
      * @return List of ApplicationReleaseTestState objects
      */
     List<ApplicationReleaseTestState> list(Map params) {
-        ApplicationReleaseTestState.list(params)
+        ApplicationReleaseTestState.list([
+                max: grailsApplication.config.ui.applicationReleaseTestState.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

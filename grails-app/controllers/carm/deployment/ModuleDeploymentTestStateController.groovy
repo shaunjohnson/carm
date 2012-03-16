@@ -15,8 +15,10 @@ class ModuleDeploymentTestStateController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [moduleDeploymentTestStateInstanceList: moduleDeploymentTestStateService.list(params), moduleDeploymentTestStateInstanceTotal: moduleDeploymentTestStateService.count()]
+        [
+                moduleDeploymentTestStateInstanceList: moduleDeploymentTestStateService.list(params),
+                moduleDeploymentTestStateInstanceTotal: moduleDeploymentTestStateService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

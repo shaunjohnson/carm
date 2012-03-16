@@ -15,8 +15,10 @@ class SourceControlServerController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [sourceControlServerInstanceList: sourceControlServerService.list(params), sourceControlServerInstanceTotal: sourceControlServerService.count()]
+        [
+                sourceControlServerInstanceList: sourceControlServerService.list(params),
+                sourceControlServerInstanceTotal: sourceControlServerService.count()
+        ]
     }
 
     @Secured(['ROLE_ADMIN'])

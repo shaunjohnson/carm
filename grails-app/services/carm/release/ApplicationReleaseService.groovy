@@ -17,6 +17,7 @@ class ApplicationReleaseService {
     def activityTraceService
     def applicationService
     def carmSecurityService
+    def grailsApplication
     def moduleService
     def springSecurityService
 
@@ -251,7 +252,12 @@ class ApplicationReleaseService {
      * @return List of ApplicationRelease objects
      */
     List<ApplicationRelease> list(Map params) {
-        ApplicationRelease.list(params)
+        ApplicationRelease.list([
+                max: grailsApplication.config.ui.applicationRelease.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

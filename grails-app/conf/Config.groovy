@@ -159,19 +159,78 @@ grails.plugins.springsecurity.secureChannel.definition = [
 
 // CARM UI configurable options
 ui {
-    activity {
+    activityTrace {
         maxRecords = 10
+        listMax = 25
     }
     application {
+        listMax = 25
+    }
+    applicationDeployment {
+        listMax = 25
+    }
+    applicationRelease {
+        listMax = 25
         maxRecords = 5
+    }
+    applicationReleaseHistory {
+        listMax = 25
+    }
+    applicationReleaseTestState {
+        listMax = 25
+    }
+    applicationType {
+        listMax = 25
+    }
+    module {
+        listMax = 25
+    }
+    moduleDeployment {
+        listMax = 25
+    }
+    moduleDeploymentTestState {
+        listMax = 25
+    }
+    moduleType {
+        listMax = 25
+    }
+    project {
+        listMax = 25
+    }
+    projectCategory {
+        listMax = 25
     }
     richTextEditor {
         type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
         height = 400    // Height of editor in pixels
         width = 600     // Width of editor in pixels
     }
+    sourceControlRepository {
+        listMax = 25
+    }
+    sourceControlRole {
+        listMax = 25
+    }
+    sourceControlServer {
+        listMax = 25
+    }
+    sourceControluser {
+        listMax = 25
+    }
+    systemDeploymentEnvironment {
+        listMax = 25
+    }
+    systemEnvironment {
+        listMax = 25
+    }
+    systemServer {
+        listMax = 25
+    }
     textarea{
         cols = 60
         rows = 8
+    }
+    user {
+        listMax = 25
     }
 }

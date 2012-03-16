@@ -8,6 +8,8 @@ class ProjectCategoryService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided category is in use.
      *
@@ -87,7 +89,12 @@ class ProjectCategoryService {
      * @return List of ProjectCategory objects
      */
     List<ProjectCategory> list(Map params) {
-        ProjectCategory.list(params)
+        ProjectCategory.list([
+                max: grailsApplication.config.ui.projectCategory.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**

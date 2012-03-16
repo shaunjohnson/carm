@@ -9,6 +9,8 @@ class SourceControlRoleService {
 
     static transactional = false
 
+    def grailsApplication
+
     /**
      * Determines if the provided role is in use.
      *
@@ -88,7 +90,12 @@ class SourceControlRoleService {
      * @return List of SourceControlRole objects
      */
     List<SourceControlRole> list(Map params) {
-        SourceControlRole.list(params)
+        SourceControlRole.list([
+                max: grailsApplication.config.ui.sourceControlRole.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
     }
 
     /**
