@@ -214,7 +214,7 @@ ui {
     sourceControlServer {
         listMax = 25
     }
-    sourceControluser {
+    sourceControlUser {
         listMax = 25
     }
     systemDeploymentEnvironment {

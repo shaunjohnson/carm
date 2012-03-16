@@ -39,7 +39,8 @@
                         </div>
                     </td>
                     <td>
-                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance.sysEnvironment.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemServerInstance.sysEnvironment.id}">
                             ${fieldValue(bean: systemServerInstance, field: "sysEnvironment")}
                         </g:link>
                     </td>
@@ -50,7 +51,7 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${systemServerInstanceTotal}"/>
+        <g:paginate total="${systemServerInstanceTotal}" max="${grailsApplication.config.ui.systemServer.listMax}"/>
     </div>
 </div>
 </body>

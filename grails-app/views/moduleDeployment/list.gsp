@@ -56,7 +56,8 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${moduleDeploymentInstanceTotal}"/>
+        <g:paginate total="${moduleDeploymentInstanceTotal}"
+                    max="${grailsApplication.config.ui.moduleDeployment.listMax}"/>
     </div>
 </div>
 </body>

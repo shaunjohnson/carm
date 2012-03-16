@@ -2,7 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
+    <g:set var="entityName"
+           value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -26,7 +27,8 @@
             </tr>
             </thead>
             <tbody>
-            <g:each in="${systemDeploymentEnvironmentInstanceList}" status="i" var="systemDeploymentEnvironmentInstance">
+            <g:each in="${systemDeploymentEnvironmentInstanceList}" status="i"
+                    var="systemDeploymentEnvironmentInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link action="show" id="${systemDeploymentEnvironmentInstance.id}">
@@ -39,7 +41,8 @@
                         </div>
                     </td>
                     <td>
-                        <g:link controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance.sysEnvironment.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemDeploymentEnvironmentInstance.sysEnvironment.id}">
                             ${fieldValue(bean: systemDeploymentEnvironmentInstance, field: "sysEnvironment")}
                         </g:link>
                     </td>
@@ -50,7 +53,8 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${systemDeploymentEnvironmentInstanceTotal}"/>
+        <g:paginate total="${systemDeploymentEnvironmentInstanceTotal}"
+                    max="${grailsApplication.config.ui.systemDeploymentEnvironment.listMax}"/>
     </div>
 </div>
 </body>

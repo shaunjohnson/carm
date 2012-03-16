@@ -29,7 +29,8 @@
             <table>
                 <thead>
                 <tr>
-                    <g:sortableColumn property="name" title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
+                    <g:sortableColumn property="name"
+                                      title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
                     <g:sortableColumn property="description"
                                       title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
                 </tr>
@@ -54,7 +55,8 @@
         </div>
 
         <div class="paginateButtons">
-            <g:paginate total="${systemEnvironmentInstanceTotal}"/>
+            <g:paginate total="${systemEnvironmentInstanceTotal}"
+                        max="${grailsApplication.config.ui.systemEnvironment.listMax}"/>
         </div>
     </g:if>
     <g:else>

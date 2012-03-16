@@ -65,7 +65,8 @@
         </div>
 
         <div class="paginateButtons">
-            <g:paginate total="${sourceControlServerInstanceTotal}"/>
+            <g:paginate total="${sourceControlServerInstanceTotal}"
+                        max="${grailsApplication.config.ui.sourceControlServer.listMax}"/>
         </div>
     </g:if>
     <g:else>
