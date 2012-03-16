@@ -35,6 +35,10 @@
                 <bc:showApplication application="${domain}"/>
                 <bc:label code="allReleases.label" args="[entityName]"/>
             </g:elseif>
+            <g:elseif test="${action == 'showFullHistory'}">
+                <bc:showApplication application="${domain}"/>
+                <bc:label code="showFullHistory.label" args="[entityName]"/>
+            </g:elseif>
         </g:else>
     </bc:breadcrumbs>
 </g:elseif>

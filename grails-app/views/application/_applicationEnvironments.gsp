@@ -3,7 +3,7 @@
         <g:message code="environments.label" default="Environments"/>
     </div>
     <div class="actions">
-        <g:link action="showFullHistory">
+        <g:link action="showFullHistory" id="${applicationInstance.id}">
             <g:message code="showFullHistory.label" default="Show Full History"/>
         </g:link>
     </div>

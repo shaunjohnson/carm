@@ -28,6 +28,28 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Returns a count of all ApplicationDeployment objects filtered by Application.
+     *
+     * @return Total number of ApplicationDeployment objects filtered by Application.
+     */
+    int countByApplication(Application application) {
+        ApplicationDeployment.executeQuery(
+                'select count(ad) from ApplicationDeployment ad where ad.applicationRelease.application = ?',
+                [application])[0] as int
+    }
+
+    /**
+     * Finds all ApplicationDeployment objects filtered by Application.
+     *
+     * @return All ApplicationDeployment objects filtered by Application.
+     */
+    List<ApplicationDeployment> findAllByApplication(Application application, Map params) {
+        ApplicationDeployment.executeQuery(
+                'from ApplicationDeployment ad where ad.applicationRelease.application = ?',
+                [application])
+    }
+
+    /**
      * Gets the ApplicationDeployment object with the provided ID.
      *
      * @param id ID of ApplicationDeployment object
