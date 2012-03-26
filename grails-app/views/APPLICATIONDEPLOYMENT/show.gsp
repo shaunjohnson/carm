@@ -21,6 +21,15 @@
                 <g:message code="default.button.redeploy.label" default="Redeploy to {0}"
                            args="[applicationDeploymentInstance.deploymentEnvironment.name]"/>
             </carm:button>
+
+            <g:if test="${nextEnvironment}">
+                <carm:button controller="applicationDeployment" action="create"
+                             id="${applicationDeploymentInstance.id}"
+                             params="['deploymentEnvironment.id': nextEnvironment.id, 'applicationRelease.id': applicationDeploymentInstance.applicationRelease.id]">
+                    <g:message code="default.button.promote.label" default="Promote to {0}"
+                               args="[nextEnvironment.name]"/>
+                </carm:button>
+            </g:if>
         </div>
     </carmsec:isProjectOwner>
 

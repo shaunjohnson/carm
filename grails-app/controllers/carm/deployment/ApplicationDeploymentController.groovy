@@ -63,7 +63,8 @@ class ApplicationDeploymentController {
         else {
             [
                     activityList: activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, [:]),
-                    applicationDeploymentInstance: applicationDeploymentInstance
+                    applicationDeploymentInstance: applicationDeploymentInstance,
+                    nextEnvironment: applicationDeploymentService.inferNextEnvironment(applicationDeploymentInstance.applicationRelease)
             ]
         }
     }
