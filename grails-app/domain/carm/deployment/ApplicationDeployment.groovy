@@ -7,6 +7,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.system.SystemDeploymentEnvironment
 
 class ApplicationDeployment {
+    def activityTraceService
+
     String deploymentInstructions
     Date requestedDeploymentDate
     Date completedDeploymentDate
@@ -68,5 +70,20 @@ class ApplicationDeployment {
         builder.append(applicationRelease).append(requestedDeploymentDate)
         builder.append(completedDeploymentDate).append(deploymentState)
         builder.toHashCode()
+    }
+
+    def afterInsert() {
+        activityTraceService?.applicationDeploymentCreated(this)
+
+        // TODO temporarily mark an application deployment as completed
+        activityTraceService.applicationDeploymentCompleted(this)
+    }
+
+    def beforeDelete() {
+        activityTraceService?.applicationDeploymentDeleted(this)
+    }
+
+    def afterUpdate() {
+        activityTraceService?.applicationDeploymentUpdated(this)
     }
 }

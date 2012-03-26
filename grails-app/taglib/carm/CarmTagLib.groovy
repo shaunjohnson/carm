@@ -19,6 +19,7 @@ import org.joda.time.Period
 import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
 import carm.system.SystemEnvironment
+import carm.deployment.ApplicationDeployment
 
 class CarmTagLib {
 
@@ -54,6 +55,10 @@ class CarmTagLib {
             if (activity.objectType == activityTraceService.APPLICATION_TYPE && Application.exists(activity.objectId)) {
                 controller = "application"
                 title = message(code: "showApplication.label", default: "Show Application")
+            }
+            else if (activity.objectType == activityTraceService.APPLICATION_DEPLOYMENT_TYPE && ApplicationDeployment.exists(activity.objectId)) {
+                controller = "applicationDeployment"
+                title = message(code: "showApplicationDeployment.label", default: "Show Application Deployment")
             }
             else if (activity.objectType == activityTraceService.MODULE_TYPE && Module.exists(activity.objectId)) {
                 controller = "module"

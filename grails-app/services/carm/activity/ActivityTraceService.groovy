@@ -11,6 +11,7 @@ import carm.release.ApplicationRelease
 import carm.system.SystemServer
 import carm.system.SystemEnvironment
 import carm.system.SystemDeploymentEnvironment
+import carm.deployment.ApplicationDeployment
 
 class ActivityTraceService {
 
@@ -20,6 +21,7 @@ class ActivityTraceService {
     def grailsApplication
     def springSecurityService
 
+    public static final String APPLICATION_DEPLOYMENT_TYPE = ApplicationDeployment.class.name
     public static final String APPLICATION_TYPE = Application.class.name
     public static final String APPLICATION_RELEASE_TYPE = ApplicationRelease.class.name
     public static final String MODULE_TYPE = Module.class.name
@@ -189,7 +191,7 @@ class ActivityTraceService {
      * @return List of ActivityTrace objects
      */
     List<ActivityTrace> listActivityBySystemDeploymentEnvironment(SystemDeploymentEnvironment systemDeploymentEnvironment, Map params) {
-        ActivityTrace.findAllByOid(generateOid(SYSTEM_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id), buildQueryParams(params))
+        ActivityTrace.findAllByOid(generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, systemDeploymentEnvironment.id), buildQueryParams(params))
     }
 
     /**
@@ -248,6 +250,159 @@ class ActivityTraceService {
 
         String oid = generateOid(APPLICATION_TYPE, application.id)
         insertActivityTrace(oid, APPLICATION_TYPE, UPDATED, application.id, application.name)
+    }
+
+    /**
+     * ApplicationDeployment object was completed.
+     *
+     * @param applicationDeployment ApplicationDeployment that was completed
+     */
+    void applicationDeploymentCompleted(ApplicationDeployment applicationDeployment) {
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        Application application = applicationRelease.application
+        Project project = application.project
+        SystemDeploymentEnvironment deploymentEnvironment = applicationDeployment.deploymentEnvironment
+        SystemEnvironment systemEnvironment = deploymentEnvironment.sysEnvironment
+        def servers = (application.modules*.systemServers).flatten()
+
+        String objectName = "${application.name}:${applicationRelease.releaseNumber} to ${applicationDeployment.deploymentEnvironment.name}"
+
+        String applicationDeploymentOid = generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id)
+        insertActivityTrace(applicationDeploymentOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        String applicationReleaseOid = generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id)
+        insertActivityTrace(applicationReleaseOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        String projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        String systemDeploymentEnvironmentOid = generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, deploymentEnvironment.id)
+        insertActivityTrace(systemDeploymentEnvironmentOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        String systemEnvironmentOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id)
+        insertActivityTrace(systemEnvironmentOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+
+        servers.each { SystemServer server ->
+            String systemServerOid = generateOid(SYSTEM_SERVER_TYPE, server.id)
+            insertActivityTrace(systemServerOid, APPLICATION_DEPLOYMENT_TYPE, COMPLETED, applicationDeployment.id, objectName)
+        }
+    }
+
+    /**
+     * ApplicationDeployment object was created.
+     *
+     * @param applicationDeployment ApplicationDeployment that was created
+     */
+    void applicationDeploymentCreated(ApplicationDeployment applicationDeployment) {
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        Application application = applicationRelease.application
+        Project project = application.project
+
+        String objectName = "${application.name}:${applicationRelease.releaseNumber} to ${applicationDeployment.deploymentEnvironment.name}"
+
+        String applicationDeploymentOid = generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id)
+        insertActivityTrace(applicationDeploymentOid, APPLICATION_DEPLOYMENT_TYPE, CREATED, applicationDeployment.id, objectName)
+
+        String applicationReleaseOid = generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id)
+        insertActivityTrace(applicationReleaseOid, APPLICATION_DEPLOYMENT_TYPE, CREATED, applicationDeployment.id, objectName)
+
+        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_DEPLOYMENT_TYPE, CREATED, applicationDeployment.id, objectName)
+
+        String projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, APPLICATION_DEPLOYMENT_TYPE, CREATED, applicationDeployment.id, objectName)
+    }
+
+    /**
+     * ApplicationDeployment object was deleted.
+     *
+     * @param applicationDeployment ApplicationDeployment that was deleted
+     */
+    void applicationDeploymentDeleted(ApplicationDeployment applicationDeployment) {
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        Application application = applicationRelease.application
+        Project project = application.project
+
+        String objectName = "${application.name}:${applicationRelease.releaseNumber} to ${applicationDeployment.deploymentEnvironment.name}"
+
+        String applicationDeploymentOid = generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id)
+        insertActivityTrace(applicationDeploymentOid, APPLICATION_DEPLOYMENT_TYPE, DELETED, applicationDeployment.id, objectName)
+
+        String applicationReleaseOid = generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id)
+        insertActivityTrace(applicationReleaseOid, APPLICATION_DEPLOYMENT_TYPE, DELETED, applicationDeployment.id, objectName)
+
+        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_DEPLOYMENT_TYPE, DELETED, applicationDeployment.id, objectName)
+
+        String projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, APPLICATION_DEPLOYMENT_TYPE, DELETED, applicationDeployment.id, objectName)
+    }
+
+    /**
+     * ApplicationDeployment object was submitted.
+     *
+     * @param applicationDeployment ApplicationDeployment that was submitted
+     */
+    void applicationDeploymentSubmitted(ApplicationDeployment applicationDeployment) {
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        Application application = applicationRelease.application
+        Project project = application.project
+        SystemDeploymentEnvironment deploymentEnvironment = applicationDeployment.deploymentEnvironment
+        SystemEnvironment systemEnvironment = deploymentEnvironment.sysEnvironment
+        def servers = (application.modules*.systemServers).flatten()
+
+        String objectName = "${application.name}:${applicationRelease.releaseNumber} to ${applicationDeployment.deploymentEnvironment.name}"
+
+        String applicationDeploymentOid = generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id)
+        insertActivityTrace(applicationDeploymentOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        String applicationReleaseOid = generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id)
+        insertActivityTrace(applicationReleaseOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        String projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        String systemDeploymentEnvironmentOid = generateOid(SYSTEM_DEPLOYMENT_ENVIRONMENT_TYPE, deploymentEnvironment.id)
+        insertActivityTrace(systemDeploymentEnvironmentOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        String systemEnvironmentOid = generateOid(SYSTEM_ENVIRONMENT_TYPE, systemEnvironment.id)
+        insertActivityTrace(systemEnvironmentOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+
+        servers.each { SystemServer server ->
+            String systemServerOid = generateOid(SYSTEM_SERVER_TYPE, server.id)
+            insertActivityTrace(systemServerOid, APPLICATION_DEPLOYMENT_TYPE, SUBMITTED, applicationDeployment.id, objectName)
+        }
+    }
+
+    /**
+     * ApplicationDeployment object was updated.
+     *
+     * @param applicationDeployment ApplicationDeployment that was updated
+     */
+    void applicationDeploymentUpdated(ApplicationDeployment applicationDeployment) {
+        ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
+        Application application = applicationRelease.application
+        Project project = application.project
+
+        String objectName = "${application.name}:${applicationRelease.releaseNumber} to ${applicationDeployment.deploymentEnvironment.name}"
+
+        String applicationDeploymentOid = generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id)
+        insertActivityTrace(applicationDeploymentOid, APPLICATION_DEPLOYMENT_TYPE, UPDATED, applicationDeployment.id, objectName)
+
+        String applicationReleaseOid = generateOid(APPLICATION_RELEASE_TYPE, applicationRelease.id)
+        insertActivityTrace(applicationReleaseOid, APPLICATION_DEPLOYMENT_TYPE, UPDATED, applicationDeployment.id, objectName)
+
+        String applicationOid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(applicationOid, APPLICATION_DEPLOYMENT_TYPE, UPDATED, applicationDeployment.id, objectName)
+
+        String projectOid = generateOid(PROJECT_TYPE, project.id)
+        insertActivityTrace(projectOid, APPLICATION_DEPLOYMENT_TYPE, UPDATED, applicationDeployment.id, objectName)
     }
 
     /**
