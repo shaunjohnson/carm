@@ -88,13 +88,15 @@ class ApplicationDeploymentService {
     ApplicationDeployment newApplicationDeployment(ApplicationRelease applicationRelease) {
         Date requestedDeploymentDate = inferNextDeploymentDate()
         SystemDeploymentEnvironment deploymentEnvironment = inferNextEnvironment(applicationRelease)
+        String deploymentInstructions = inferDeploymentInstructions(applicationRelease)
 
         // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
         new ApplicationDeployment(
                 applicationRelease: applicationRelease,
                 completedDeploymentDate: requestedDeploymentDate,
                 requestedDeploymentDate: requestedDeploymentDate,
-                deploymentEnvironment: deploymentEnvironment)
+                deploymentEnvironment: deploymentEnvironment,
+                deploymentInstructions: deploymentInstructions)
     }
 
     /**
@@ -157,7 +159,7 @@ class ApplicationDeploymentService {
 //        }
 
         applicationDeployment.delete()
-        
+
         log.debug "$prefix leaving"
     }
 
@@ -178,6 +180,25 @@ class ApplicationDeploymentService {
         applicationDeployment.properties = params
 
         log.debug "$prefix leaving"
+    }
+
+    /**
+     * Infers what the deployment instructions should be. These will default to the instructions used for the last
+     * deployment of the provided release. If this is the first deployment then the instructions from the Application
+     * will be used.
+     *
+     * @param applicationRelease Application released used for querying
+     * @return Deployment instructions
+     */
+    String inferDeploymentInstructions(ApplicationRelease applicationRelease) {
+        ApplicationDeployment applicationDeployment = findLastApplicationDeploymentByApplicationRelease(applicationRelease)
+
+        if (applicationDeployment) {
+            return applicationDeployment.deploymentInstructions
+        }
+        else {
+            return applicationRelease.application.deployInstructions
+        }
     }
 
     /**
@@ -221,13 +242,29 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Finds the last ApplicationDeployment created for the provided application release.
+     *
+     * @param applicationRelease ApplicationRelease used for filtering
+     * @return Last ApplicationDeployment or null if there are no deployments of the application release
+     */
+    private ApplicationDeployment findLastApplicationDeploymentByApplicationRelease(ApplicationRelease applicationRelease) {
+        def deployments = ApplicationDeployment.createCriteria().list {
+            eq("applicationRelease", applicationRelease)
+            maxResults(1)
+            order("dateCreated", "desc")
+        }
+
+        return deployments.size() ? deployments[0] : null
+    }
+
+    /**
      * Finds the latest ApplicationDeployment of the provided Application to the provided SystemDeploymentEnvironment.
      *
      * @param application Application used for querying
      * @param environment SystemDeploymentEnvironment for querying
      * @return Matching ApplicationDeployment object
      */
-    def findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
+    ApplicationDeployment findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
         def results = ApplicationDeployment.createCriteria().list {
             createAlias("applicationRelease", "applicationRelease")
             eq("deploymentEnvironment", environment)
