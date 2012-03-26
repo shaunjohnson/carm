@@ -8,6 +8,7 @@ class ApplicationDeploymentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def activityTraceService
     def applicationDeploymentService
     def applicationReleaseService
 
@@ -61,7 +62,10 @@ class ApplicationDeploymentController {
             redirect(action: "list")
         }
         else {
-            [applicationDeploymentInstance: applicationDeploymentInstance]
+            [
+                    activityList: activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, [:]),
+                    applicationDeploymentInstance: applicationDeploymentInstance
+            ]
         }
     }
 
@@ -124,6 +128,21 @@ class ApplicationDeploymentController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def listActivity() {
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
+        if (!applicationDeploymentInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    domainInstance: applicationDeploymentInstance,
+                    activityList: activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, params),
+                    activityTotal: activityTraceService.countActivityByApplicationDeployment(applicationDeploymentInstance)
+            ]
         }
     }
 }

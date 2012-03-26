@@ -134,6 +134,11 @@
             <td class="layoutColumnLast">
                 <g:render template="applicationReleaseDeployments"
                           model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
+
+                <div>&nbsp;</div>
+
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationDeploymentInstance.id]"/>
             </td>
         </tr>
         </tbody>

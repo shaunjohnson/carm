@@ -60,6 +60,16 @@ class ActivityTraceService {
     }
 
     /**
+     * Counts the total number of activity events for a ApplicationDeployment.
+     *
+     * @param applicationDeployment ApplicationDeployment used for query
+     * @return Number of ActivityTrace objects
+     */
+    int countActivityByApplicationDeployment(ApplicationDeployment applicationDeployment) {
+        ActivityTrace.countByOid(generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id))
+    }
+
+    /**
      * Counts the total number of activity events for a ApplicationRelease.
      *
      * @param applicationRelease ApplicationRelease used for query
@@ -138,6 +148,17 @@ class ActivityTraceService {
      */
     List<ActivityTrace> listActivityByApplication(Application application, Map params) {
         ActivityTrace.findAllByOid(generateOid(APPLICATION_TYPE, application.id), buildQueryParams(params))
+    }
+
+    /**
+     * Lists latest activity events for an ApplicationDeployment in reverse chronological order.
+     *
+     * @param applicationDeployment ApplicationDeployment used for query
+     * @param params Query parameters
+     * @return List of ActivityTrace objects
+     */
+    List<ActivityTrace> listActivityByApplicationDeployment(ApplicationDeployment applicationDeployment, Map params) {
+        ActivityTrace.findAllByOid(generateOid(APPLICATION_DEPLOYMENT_TYPE, applicationDeployment.id), buildQueryParams(params))
     }
 
     /**
