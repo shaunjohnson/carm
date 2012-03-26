@@ -26,6 +26,7 @@ class CarmTagLib {
     static namespace = "carm"
 
     def activityTraceService
+    def applicationDeploymentService
     def applicationReleaseService
     def applicationReleaseTestStateService
     def applicationTypeService
@@ -56,7 +57,7 @@ class CarmTagLib {
                 controller = "application"
                 title = message(code: "showApplication.label", default: "Show Application")
             }
-            else if (activity.objectType == activityTraceService.APPLICATION_DEPLOYMENT_TYPE && ApplicationDeployment.exists(activity.objectId)) {
+            else if (activity.objectType == activityTraceService.APPLICATION_DEPLOYMENT_TYPE && applicationDeploymentService.exists(activity.objectId)) {
                 controller = "applicationDeployment"
                 title = message(code: "showApplicationDeployment.label", default: "Show Application Deployment")
             }
@@ -117,6 +118,11 @@ class CarmTagLib {
         def entityName = attrs.entityName
         def beanName = attrs.beanName
 
+        // Override action if necessary
+        if (action == 'redeploy') {
+            action = 'create'
+        }
+        
         if (action == 'show') {
             out << "<h1>$beanName</h1>"
         }

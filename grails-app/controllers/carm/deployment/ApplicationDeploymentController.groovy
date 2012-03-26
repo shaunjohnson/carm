@@ -54,7 +54,6 @@ class ApplicationDeploymentController {
         }
     }
 
-
     def show() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
@@ -143,6 +142,20 @@ class ApplicationDeploymentController {
                     activityList: activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, params),
                     activityTotal: activityTraceService.countActivityByApplicationDeployment(applicationDeploymentInstance)
             ]
+        }
+    }
+
+    def redeploy() {
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
+        if (!applicationDeploymentInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            def project = applicationDeploymentInstance.applicationRelease.application.project
+            def newApplicationDeploymentInstance = applicationDeploymentService.redeploy(project, applicationDeploymentInstance)
+
+            render(view: "create", model: [applicationDeploymentInstance: newApplicationDeploymentInstance])
         }
     }
 }

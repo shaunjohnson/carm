@@ -60,7 +60,7 @@
             <g:if test="${action == 'show'}">
                 <bc:showApplicationDeployment applicationDeployment="${domain}"/>
             </g:if>
-            <g:elseif test="${action == 'create' || action == 'save'}">
+            <g:elseif test="${action == 'create' || action == 'save' || action == 'redeploy'}">
                 <bc:createLabel entityName="${entityName}"/>
             </g:elseif>
             <g:elseif test="${action == 'edit' || action == 'update'}">

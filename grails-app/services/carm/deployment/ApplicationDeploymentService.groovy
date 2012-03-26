@@ -39,6 +39,16 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Determines if an ApplicationDeployment with the ID exists.
+     *
+     * @param id ID of ApplicationDeployment to find
+     * @return true if the ApplicationDeployment exists
+     */
+    boolean exists(Serializable id) {
+        ApplicationDeployment.exists(id)
+    }
+
+    /**
      * Finds all ApplicationDeployment objects filtered by Application.
      *
      * @return All ApplicationDeployment objects filtered by Application.
@@ -161,6 +171,31 @@ class ApplicationDeploymentService {
         applicationDeployment.delete()
 
         log.debug "$prefix leaving"
+    }
+
+    /**
+     * Redeploys an existing deployment to the same environment.
+     *
+     * @param project Project in which the associated application exists
+     * @param applicationDeployment Deployment to redeploy
+     * @return Newly created deployment
+     */
+    @Transactional
+    @PreAuthorize("hasPermission(#project, admin)")
+    ApplicationDeployment redeploy(Project project, ApplicationDeployment applicationDeployment) {
+        ApplicationDeployment newApplicationDeployment = new ApplicationDeployment()
+
+        Date requestedDeploymentDate = inferNextDeploymentDate()
+
+        newApplicationDeployment.applicationRelease = applicationDeployment.applicationRelease
+        newApplicationDeployment.deploymentEnvironment = applicationDeployment.deploymentEnvironment
+        newApplicationDeployment.deploymentInstructions = applicationDeployment.deploymentInstructions
+
+        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
+        newApplicationDeployment.requestedDeploymentDate = requestedDeploymentDate
+        newApplicationDeployment.completedDeploymentDate = requestedDeploymentDate
+
+        newApplicationDeployment
     }
 
     /**

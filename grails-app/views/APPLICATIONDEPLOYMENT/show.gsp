@@ -14,6 +14,16 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
+        <div class="buttons">
+            <carm:button controller="applicationDeployment" action="redeploy"
+                         id="${applicationDeploymentInstance.id}">
+                <g:message code="default.button.redeploy.label" default="Redeploy to {0}"
+                           args="[applicationDeploymentInstance.deploymentEnvironment.name]"/>
+            </carm:button>
+        </div>
+    </carmsec:isProjectOwner>
+
     <div class="dialog">
         <table id="applicationDeploymentDetails" class="details">
             <tbody>
@@ -33,7 +43,8 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
-                    <g:message code="applicationDeployment.deploymentEnvironment.label" default="System Deployment Environment"/>
+                    <g:message code="applicationDeployment.deploymentEnvironment.label"
+                               default="System Deployment Environment"/>
                 </td>
                 <td valign="top" class="value">
                     <g:link controller="systemDeploymentEnvironment" action="show"
