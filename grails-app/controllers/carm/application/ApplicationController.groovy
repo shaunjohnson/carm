@@ -106,7 +106,7 @@ class ApplicationController {
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
-                    systemList: systemEnvironmentService.list()
+                    systemEnvironmentList: systemEnvironmentService.list()
             ]
         }
     }
