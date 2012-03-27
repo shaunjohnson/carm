@@ -54,9 +54,15 @@ class ApplicationDeploymentService {
      * @return All ApplicationDeployment objects filtered by Application.
      */
     List<ApplicationDeployment> findAllByApplication(Application application, Map params) {
-        ApplicationDeployment.executeQuery(
-                'from ApplicationDeployment ad where ad.applicationRelease.application = ?',
-                [application])
+        ApplicationDeployment.createCriteria().list([
+                max: grailsApplication.config.ui.application.showFullHistoryMax,
+                offset: params?.offset ?: 0,
+                sort: params?.sort,
+                order: params?.order
+        ]) {
+            createAlias("applicationRelease", "applicationRelease")
+            eq("applicationRelease.application", application)
+        }
     }
 
     /**
@@ -85,7 +91,7 @@ class ApplicationDeploymentService {
             order("requestedDeploymentDate", "desc")
         }
     }
-    
+
     /**
      * Gets the ApplicationDeployment object with the provided ID.
      *

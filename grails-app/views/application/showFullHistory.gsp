@@ -66,7 +66,8 @@
     </div>
 
     <div class="paginateButtons">
-        <g:paginate total="${applicationDeploymentInstanceTotal}" id="${applicationInstance.id}"/>
+        <g:paginate total="${applicationDeploymentInstanceTotal}" id="${applicationInstance.id}"
+                    max="${grailsApplication.config.ui.application.showFullHistoryMax}"/>
     </div>
 </div>
 </body>

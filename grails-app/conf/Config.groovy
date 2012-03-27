@@ -165,6 +165,9 @@ ui {
     }
     application {
         listMax = 25
+        showFullHistoryMax = 25
+        showFullHistorySort = 'completedDeploymentDate'
+        showFullHistoryOrder = 'desc'
     }
     applicationDeployment {
         listMax = 25
