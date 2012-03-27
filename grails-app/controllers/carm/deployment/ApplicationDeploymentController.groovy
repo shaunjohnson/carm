@@ -32,7 +32,7 @@ class ApplicationDeploymentController {
         else {
             [
                     applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance),
-                    existingDeployments:  applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
+                    existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
             ]
         }
     }
@@ -47,7 +47,7 @@ class ApplicationDeploymentController {
             def applicationDeploymentInstance = applicationDeploymentService.create(applicationReleaseInstance.application.project, params)
             if (!applicationDeploymentInstance.hasErrors()) {
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
-                redirect(action: "show", id: applicationDeploymentInstance.id)
+                redirect(controller: "application", action: "show", id: applicationDeploymentInstance.applicationRelease.application.id)
             }
             else {
                 render(view: "create", model: [applicationDeploymentInstance: applicationDeploymentInstance])
