@@ -53,6 +53,7 @@
                         <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
                                   from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
                                   optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
+                        <carm:highlight id="deploymentEnvironmentMessage" display="none"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -114,5 +115,32 @@
         </div>
     </g:form>
 </div>
+
+<g:set var="alreadyDeployedTo" value="${existingDeployments*.deploymentEnvironment?.name?.join(", ")}"/>
+<g:set var="alreadyDeployedToIds" value="${existingDeployments*.deploymentEnvironment?.id?.join(", ")}"/>
+
+<script type="text/javascript">
+    jQuery(function() {
+        var alreadyDeployedTo = [${alreadyDeployedToIds}];
+
+        function deploymentEnvironmentChanged() {
+            var selectedEnvironmentId = jQuery("#deploymentEnvironment\\.id").val();
+
+            if (selectedEnvironmentId && jQuery.inArray(parseInt(selectedEnvironmentId), alreadyDeployedTo) === -1) {
+                jQuery("#deploymentEnvironmentMessage:visible").hide('blind');
+                jQuery("#deploymentEnvironmentMessage_message").html("");
+            }
+            else {
+                jQuery("#deploymentEnvironmentMessage_message").html("This release was already deployed to <strong>${alreadyDeployedTo}</strong>");
+                jQuery("#deploymentEnvironmentMessage:hidden").show('blind');
+            }
+        }
+
+        jQuery("#deploymentEnvironment\\.id").change(deploymentEnvironmentChanged);
+
+        deploymentEnvironmentChanged();
+    });
+</script>
+
 </body>
 </html>

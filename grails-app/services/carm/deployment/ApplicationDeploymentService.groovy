@@ -60,6 +60,33 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Finds all ApplicationDeployment filtered by ApplicationRelease and ordered by environment name ascending.
+     *
+     * @param applicationRelease ApplicationRelease used for querying
+     * @return List of ApplicationDeployment objects
+     */
+    List<ApplicationDeployment> findAllByApplicationReleaseOrderByEnvironment(ApplicationRelease applicationRelease) {
+        ApplicationDeployment.createCriteria().list {
+            createAlias("deploymentEnvironment", "deploymentEnvironment")
+            eq("applicationRelease", applicationRelease)
+            order("deploymentEnvironment.name", "asc")
+        }
+    }
+
+    /**
+     * Finds all ApplicationDeployment filtered by ApplicationRelease and ordered by requestedDeploymentDate descending.
+     *
+     * @param applicationRelease ApplicationRelease used for querying
+     * @return List of ApplicationDeployment objects
+     */
+    List<ApplicationDeployment> findAllByApplicationReleaseOrderByRequestedDate(ApplicationRelease applicationRelease) {
+        ApplicationDeployment.createCriteria().list {
+            eq("applicationRelease", applicationRelease)
+            order("requestedDeploymentDate", "desc")
+        }
+    }
+    
+    /**
      * Gets the ApplicationDeployment object with the provided ID.
      *
      * @param id ID of ApplicationDeployment object

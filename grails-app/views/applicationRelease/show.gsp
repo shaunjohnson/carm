@@ -151,7 +151,7 @@
             </td>
             <td class="layoutColumnLast">
                 <g:render template="applicationReleaseDeployments"
-                          model="['applicationReleaseInstance': applicationReleaseInstance]"/>
+                          model="['applicationDeploymentList': applicationDeploymentList]"/>
 
                 <div>&nbsp;</div>
 

@@ -31,7 +31,8 @@ class ApplicationDeploymentController {
         }
         else {
             [
-                    applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance)
+                    applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance),
+                    existingDeployments:  applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
             ]
         }
     }
@@ -64,6 +65,7 @@ class ApplicationDeploymentController {
             [
                     activityList: activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, [:]),
                     applicationDeploymentInstance: applicationDeploymentInstance,
+                    applicationDeploymentList: applicationDeploymentService.findAllByApplicationReleaseOrderByRequestedDate(applicationDeploymentInstance.applicationRelease),
                     nextEnvironment: applicationDeploymentService.inferNextEnvironment(applicationDeploymentInstance.applicationRelease)
             ]
         }
@@ -155,8 +157,12 @@ class ApplicationDeploymentController {
         else {
             def project = applicationDeploymentInstance.applicationRelease.application.project
             def newApplicationDeploymentInstance = applicationDeploymentService.redeploy(project, applicationDeploymentInstance)
+            def existingDeployments = applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationDeploymentInstance.applicationRelease)
 
-            render(view: "create", model: [applicationDeploymentInstance: newApplicationDeploymentInstance])
+            render(view: "create", model: [
+                    applicationDeploymentInstance: newApplicationDeploymentInstance,
+                    existingDeployments: existingDeployments
+            ])
         }
     }
 }

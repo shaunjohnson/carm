@@ -9,6 +9,7 @@ class ApplicationReleaseController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def activityTraceService
+    def applicationDeploymentService
     def applicationService
     def applicationReleaseService
 
@@ -61,7 +62,10 @@ class ApplicationReleaseController {
             redirect(action: "list")
         }
         else {
-            [applicationReleaseInstance: applicationReleaseInstance]
+            [
+                    applicationReleaseInstance: applicationReleaseInstance,
+                    applicationDeploymentList: applicationDeploymentService.findAllByApplicationReleaseOrderByRequestedDate(applicationReleaseInstance)
+            ]
         }
     }
 

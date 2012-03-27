@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<g:if test="${applicationReleaseInstance?.deployments?.size()}">
+<g:if test="${applicationDeploymentList.size()}">
     <div class="list">
         <table style="width: 100%;">
             <thead>
@@ -26,8 +26,7 @@
             </tr>
             </thead>
             <tbody>
-            <g:each in="${applicationReleaseInstance?.deployments?.sort { it.completedDeploymentDate }?.reverse()}"
-                    var="deploymentInstance" status="i">
+            <g:each in="${applicationDeploymentList}" var="deploymentInstance" status="i">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link controller="applicationDeployment" action="show" id="${deploymentInstance.id}">
