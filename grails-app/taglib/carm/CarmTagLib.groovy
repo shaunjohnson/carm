@@ -122,7 +122,7 @@ class CarmTagLib {
         if (action == 'redeploy') {
             action = 'create'
         }
-        
+
         if (action == 'show') {
             out << "<h1>$beanName</h1>"
         }
@@ -175,7 +175,7 @@ class CarmTagLib {
         def deploymentState = attrs.deploymentState
         out << message(code: "carm.deployment.ModuleDeploymentState.${deploymentState}", default: deploymentState.toString())
     }
-    
+
     /**
      * Formats a SourceControlRepository as a link.
      *
@@ -380,5 +380,16 @@ class CarmTagLib {
         if (applicationReleaseService.isSubmittable(applicationRelease)) {
             out << body()
         }
+    }
+
+    /**
+     * Renders a highlight widget
+     */
+    def highlight = { attrs, body ->
+        def message = attrs.message
+        def display = attrs.display ?: 'block'
+        def id = attrs.id
+
+        out << render(template: '/common/highlightWidget', model: [display: display, id: id, message: message])
     }
 }

@@ -594,3 +594,8 @@ div.sectionHeader div.actions a {
     font-weight: bold;
     padding-right: 1em;
 }
+
+.ui-widget p {
+    margin: 12px 0;
+    padding: 0;
+}
