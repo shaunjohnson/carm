@@ -62,13 +62,14 @@ class ApplicationDeployment {
         }
 
         other.applicationRelease == applicationRelease && other.requestedDeploymentDate == requestedDeploymentDate &&
-                other.completedDeploymentDate == completedDeploymentDate && other.deploymentState == deploymentState
+                other.completedDeploymentDate == completedDeploymentDate && other.deploymentState == deploymentState &&
+                other.deploymentEnvironment == deploymentEnvironment
     }
 
     int hashCode() {
         def builder = new HashCodeBuilder()
         builder.append(applicationRelease).append(requestedDeploymentDate)
-        builder.append(completedDeploymentDate).append(deploymentState)
+        builder.append(completedDeploymentDate).append(deploymentState).append(deploymentEnvironment)
         builder.toHashCode()
     }
 
