@@ -292,16 +292,20 @@ class ApplicationDeploymentService {
      * @return Next environment that can be used to deploy this release
      */
     SystemDeploymentEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
-        def releases = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
-        def nextEnvironment = null
+        def deployments = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
+        SystemDeploymentEnvironment nextEnvironment = null
 
         // Start at last environment and work back towards the first
-        applicationRelease.application.sysEnvironment.environments.reverse().each { environment ->
-            if (releases.find { it.deploymentEnvironment == environment }) {
-                return
+        for (SystemDeploymentEnvironment environment : applicationRelease.application.sysEnvironment.environments.reverse()) {
+            if (deployments.find { it.deploymentEnvironment == environment }) {
+                break
             }
 
             nextEnvironment = environment
+        }
+
+        if (deployments.find { it.deploymentEnvironment == nextEnvironment }) {
+            nextEnvironment = null
         }
 
         return nextEnvironment
