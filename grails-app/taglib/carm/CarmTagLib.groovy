@@ -61,6 +61,10 @@ class CarmTagLib {
                 controller = "applicationDeployment"
                 title = message(code: "showApplicationDeployment.label", default: "Show Application Deployment")
             }
+            else if (activity.objectType == activityTraceService.APPLICATION_RELEASE_TYPE && applicationReleaseService.exists(activity.objectId)) {
+                controller = "applicationRelease"
+                title = message(code: "showApplicationRelease.label", default: "Show Application Release")
+            }
             else if (activity.objectType == activityTraceService.MODULE_TYPE && Module.exists(activity.objectId)) {
                 controller = "module"
                 title = message(code: "showModule.label", default: "Show Module")

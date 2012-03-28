@@ -236,6 +236,16 @@ class ApplicationReleaseService {
     }
 
     /**
+     * Determines if an ApplicationRelease with the ID exists.
+     *
+     * @param id ID of ApplicationRelease to find
+     * @return true if the ApplicationRelease exists
+     */
+    boolean exists(Serializable id) {
+        ApplicationRelease.exists(id)
+    }
+
+    /**
      * Gets the ApplicationRelease object with the provided ID.
      *
      * @param id ID of ApplicationRelease object
