@@ -163,9 +163,7 @@ class ApplicationDeploymentService {
         applicationDeployment.deploymentState = ApplicationDeploymentState.COMPLETED
 
         ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
-        applicationRelease.application.modules.each { module ->
-            ModuleRelease moduleRelease = applicationRelease.moduleReleases.find { it.module == module }
-
+        applicationRelease.moduleReleases.each { moduleRelease ->
             // Saving each ModuleDeployment as "DEPLOYED" for this release, which does not permit users to select which
             // modules to include in the deployment.
             ModuleDeployment moduleDeployment = new ModuleDeployment(applicationDeployment: applicationDeployment,
