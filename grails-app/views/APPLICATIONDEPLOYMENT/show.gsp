@@ -16,12 +16,6 @@
 
     <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
         <div class="buttons">
-            <carm:button controller="applicationDeployment" action="redeploy"
-                         id="${applicationDeploymentInstance.id}">
-                <g:message code="default.button.redeploy.label" default="Redeploy to {0}"
-                           args="[applicationDeploymentInstance.deploymentEnvironment.name]"/>
-            </carm:button>
-
             <g:if test="${nextEnvironment}">
                 <carm:button controller="applicationDeployment" action="create"
                              id="${applicationDeploymentInstance.id}"
@@ -30,6 +24,11 @@
                                args="[nextEnvironment.name]"/>
                 </carm:button>
             </g:if>
+            <carm:button controller="applicationDeployment" action="redeploy"
+                         id="${applicationDeploymentInstance.id}">
+                <g:message code="default.button.redeploy.label" default="Redeploy to {0}"
+                           args="[applicationDeploymentInstance.deploymentEnvironment.name]"/>
+            </carm:button>
         </div>
     </carmsec:isProjectOwner>
 
