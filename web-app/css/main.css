@@ -29,7 +29,7 @@ a:link, a:visited {
     text-decoration: none;
 }
 
-a, div.tab a {
+a, div.tab a, a * {
     color: rgb(65, 131, 196);
 }
 

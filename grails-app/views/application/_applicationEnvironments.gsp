@@ -20,26 +20,24 @@
 
             <tr>
                 <td>
-                    <g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}">
+                    <g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
+                        title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">
                         ${deploymentEnvironment.name.encodeAsHTML()}
                     </g:link>
                 </td>
                 <td>
                     <g:if test="${deployment}">
-                        <g:link controller="applicationRelease" action="show" id="${deployment.applicationRelease.id}">
+                        <g:link controller="applicationRelease" action="show" id="${deployment.applicationRelease.id}"
+                                title="${message(code: "showApplicationRelease.label", default: "Show Application Release")}">
                             ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
                         </g:link>
                     </g:if>
                 </td>
                 <td>
                     <g:if test="${deployment}">
-                        <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
-                    </g:if>
-                </td>
-                <td>
-                    <g:if test="${deployment}">
-                        <g:link controller="applicationDeployment" action="show" id="${deployment.id}">
-                            <g:message code="viewDeployment.label" default="View Deployment"/>
+                        <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
+                                title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
+                            <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
                         </g:link>
                     </g:if>
                 </td>
