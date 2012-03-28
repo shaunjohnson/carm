@@ -62,9 +62,14 @@ class ApplicationReleaseController {
             redirect(action: "list")
         }
         else {
+            def nextEnvironment = applicationDeploymentService.inferNextEnvironment(applicationReleaseInstance)
+            def lastApplicationDeploymentInstance = nextEnvironment ? applicationDeploymentService.findLatestDeployment(applicationReleaseInstance.application, nextEnvironment) : null
+
             [
                     applicationReleaseInstance: applicationReleaseInstance,
-                    applicationDeploymentList: applicationDeploymentService.findAllByApplicationReleaseOrderByRequestedDate(applicationReleaseInstance)
+                    applicationDeploymentList: applicationDeploymentService.findAllByApplicationReleaseOrderByRequestedDate(applicationReleaseInstance),
+                    nextEnvironment: nextEnvironment,
+                    lastApplicationDeploymentInstance: lastApplicationDeploymentInstance
             ]
         }
     }

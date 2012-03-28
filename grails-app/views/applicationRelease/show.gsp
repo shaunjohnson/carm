@@ -16,12 +16,22 @@
 
     <carmsec:isProjectOwner applicationRelease="${applicationReleaseInstance}">
         <div class="buttons">
-            <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+            <g:if test="${nextEnvironment}">
                 <carm:button controller="applicationDeployment" action="create"
-                             params="['applicationRelease.id': applicationReleaseInstance.id]">
-                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                             id="${lastApplicationDeploymentInstance?.id}"
+                             params="['deploymentEnvironment.id': nextEnvironment?.id, 'applicationRelease.id': applicationReleaseInstance?.id]">
+                    <g:message code="default.button.promote.label" default="Promote to {0}"
+                               args="[nextEnvironment?.name]"/>
                 </carm:button>
-            </carm:isDeployable>
+            </g:if>
+            <g:else>
+                <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+                    <carm:button controller="applicationDeployment" action="create"
+                                 params="['applicationRelease.id': applicationReleaseInstance.id]">
+                        <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                    </carm:button>
+                </carm:isDeployable>
+            </g:else>
 
             <%--
             <carm:isSubmittable applicationRelease="${applicationReleaseInstance}">
