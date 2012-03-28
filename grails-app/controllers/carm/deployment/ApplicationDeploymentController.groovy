@@ -46,7 +46,11 @@ class ApplicationDeploymentController {
         else {
             def applicationDeploymentInstance = applicationDeploymentService.create(applicationReleaseInstance.application.project, params)
             if (!applicationDeploymentInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
+                def application = applicationReleaseInstance.application.name
+                def releaseNumber = applicationReleaseInstance.releaseNumber
+                def envirnoment = applicationDeploymentInstance.deploymentEnvironment.name
+
+                flash.message = "${message(code: 'applicationDeployment.created.message', default: 'Deployment of {0} Release {1} to {2} created', args: [application, releaseNumber, envirnoment])}"
                 redirect(controller: "application", action: "show", id: applicationDeploymentInstance.applicationRelease.application.id)
             }
             else {
