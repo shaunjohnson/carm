@@ -58,6 +58,7 @@ class SystemServerController {
         else {
             [
                     activityList: activityTraceService.listActivityBySystemServer(systemServerInstance, [:]),
+                    activityCount: activityTraceService.countActivityBySystemServer(systemServerInstance),
                     systemServerInstance: systemServerInstance
             ]
         }

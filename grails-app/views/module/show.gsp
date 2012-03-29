@@ -1,4 +1,4 @@
-<html>
+html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
@@ -125,7 +125,7 @@
             </td>
             <td class="layoutColumnLast">
                 <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: moduleInstance.id]"/>
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: moduleInstance.id]"/>
             </td>
         </tr>
         </tbody>

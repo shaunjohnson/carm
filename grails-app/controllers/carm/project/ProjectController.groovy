@@ -60,6 +60,7 @@ class ProjectController {
             [
                     projectInstance: projectInstance,
                     activityList: activityTraceService.listActivityByProject(projectInstance, [:]),
+                    activityCount: activityTraceService.countActivityByProject(projectInstance),
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingTasks: projectService.findAllPendingTasks(projectInstance),
                     projectOwners: projectService.findAllProjectOwners(projectInstance)

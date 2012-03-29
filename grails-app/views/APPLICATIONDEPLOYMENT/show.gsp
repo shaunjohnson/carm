@@ -157,7 +157,7 @@
                 <div>&nbsp;</div>
 
                 <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationDeploymentInstance.id]"/>
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: applicationDeploymentInstance.id]"/>
             </td>
         </tr>
         </tbody>

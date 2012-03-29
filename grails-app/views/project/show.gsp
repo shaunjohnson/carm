@@ -102,7 +102,7 @@
             </td>
             <td class="layoutColumnLast">
                 <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: projectInstance.id]"/>
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: projectInstance.id]"/>
             </td>
         </tr>
         </tbody>

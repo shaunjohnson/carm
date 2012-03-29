@@ -87,7 +87,8 @@
                     <g:message code="application.sysEnvironment.label" default="Environment"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show" id="${applicationInstance?.sysEnvironment?.id}">
+                    <g:link controller="systemEnvironment" action="show"
+                            id="${applicationInstance?.sysEnvironment?.id}">
                         ${applicationInstance?.sysEnvironment?.encodeAsHTML()}
                     </g:link>
                 </td>
@@ -193,7 +194,7 @@
                 <div>&nbsp;</div>
 
                 <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity', domainId: applicationInstance.id]"/>
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: applicationInstance.id]"/>
             </td>
             <td class="layoutColumnLast">
                 <g:render template="applicationReleases" model="[applicationInstance: applicationInstance]"/>

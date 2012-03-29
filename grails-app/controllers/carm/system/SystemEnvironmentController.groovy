@@ -55,6 +55,7 @@ class SystemEnvironmentController {
         else {
             [
                     activityList: activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, [:]),
+                    activityCount: activityTraceService.countActivityBySystemEnvironment(systemEnvironmentInstance),
                     systemEnvironmentInstance: systemEnvironmentInstance,
                     applicationsGrouped: applicationService.findAllBySystemEnvironmentGroupedByType(systemEnvironmentInstance),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemEnvironment(systemEnvironmentInstance)

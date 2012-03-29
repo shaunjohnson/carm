@@ -81,7 +81,7 @@
     </div>
 
     <g:render template="/common/activity"
-              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemServerInstance.id]"/>
+              model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemServerInstance.id]"/>
 </div>
 </body>
 </html>

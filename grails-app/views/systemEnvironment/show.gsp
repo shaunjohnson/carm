@@ -87,7 +87,7 @@
               model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
 
     <g:render template="/common/activity"
-              model="[activityList: activityList, listActivityAction: 'listActivity', domainId: systemEnvironmentInstance.id]"/>
+              model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemEnvironmentInstance.id]"/>
 </div>
 </body>
 </html>

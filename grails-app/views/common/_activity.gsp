@@ -20,8 +20,11 @@
 <g:if test="${size}">
     <g:render template="/common/activityBlock" model="[activityList: activitySubList]"/>
 
-    <carm:showMore controller="${params.controller}" action="ajaxShowMoreActivity" id="${domainId}" appendId="activityBlock"
-                   step="${grailsApplication.config.ui.activityTrace.maxRecords}"/>
+    <g:if test="${size <= activityCount}">
+        <carm:showMore controller="${params.controller}" action="ajaxShowMoreActivity" id="${domainId}"
+                       appendId="activityBlock" max="${activityCount}"
+                       step="${grailsApplication.config.ui.activityTrace.maxRecords}"/>
+    </g:if>
 </g:if>
 <g:else>
     <p class="emphasis">

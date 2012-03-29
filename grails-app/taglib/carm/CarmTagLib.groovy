@@ -144,11 +144,12 @@ class CarmTagLib {
         def controller = attrs.controller
         def action = attrs.action
         def id = attrs.id
+        def max = attrs.max
         def step = attrs.step
         def clientId = "showMore_${controller}_${action}_${id}"
         def appendId = attrs.appendId
 
-        out << render(template: "/common/showMore", model: [clientId: clientId, controller: controller, action: action, id: id, step: step, appendId: appendId])
+        out << render(template: "/common/showMore", model: [clientId: clientId, controller: controller, action: action, id: id, max: max, step: step, appendId: appendId])
     }
 
     /**

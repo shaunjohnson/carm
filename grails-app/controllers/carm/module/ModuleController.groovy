@@ -71,7 +71,8 @@ class ModuleController {
         else {
             [
                     moduleInstance: moduleInstance,
-                    activityList: activityTraceService.listActivityByModule(moduleInstance, [:])
+                    activityList: activityTraceService.listActivityByModule(moduleInstance, [:]),
+                    activityCount: activityTraceService.countActivityByModule(moduleInstance)
             ]
         }
     }

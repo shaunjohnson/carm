@@ -63,6 +63,7 @@ class SystemDeploymentEnvironmentController {
         else {
             [
                     activityList: activityTraceService.listActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance, [:]),
+                    activityCount: activityTraceService.countActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance),
                     systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance,
                     applicationsGrouped: applicationService.findAllBySystemEnvironmentGroupedByType(systemDeploymentEnvironmentInstance.sysEnvironment),
                     latestDeployments: applicationDeploymentService.findAllLatestCompletedDeploymentsBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance)

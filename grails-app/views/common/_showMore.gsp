@@ -21,6 +21,10 @@
 
             offset += step;
 
+            if (offset >= ${activityCount}) {
+                showMoreButton.hide();
+            }
+
             jQuery.ajax({
                 url:'${createLink(controller: "${controller}", action: "${action}", id: id)}',
                 data:{ offset:offset, max:step },
