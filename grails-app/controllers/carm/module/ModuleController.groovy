@@ -166,4 +166,15 @@ class ModuleController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def moduleInstance = moduleService.get(params.id)
+        def activityList = []
+
+        if (!moduleInstance) {
+            activityList = activityTraceService.listActivityByModule(moduleInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

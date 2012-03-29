@@ -149,4 +149,15 @@ class SystemDeploymentEnvironmentController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
+        def activityList = []
+
+        if (!systemDeploymentEnvironmentInstance) {
+            activityList = activityTraceService.listActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

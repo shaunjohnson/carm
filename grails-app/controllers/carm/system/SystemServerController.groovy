@@ -142,4 +142,15 @@ class SystemServerController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def systemServerInstance = systemServerService.get(params.id)
+        def activityList = []
+
+        if (!systemServerInstance) {
+            activityList = activityTraceService.listActivityBySystemServer(systemServerInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

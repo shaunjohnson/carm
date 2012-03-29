@@ -34,4 +34,10 @@ class HomeController {
                 activityTotal: activityTraceService.countActivityByRoot()
         ]
     }
+
+    def ajaxShowMoreActivity() {
+        def activityList = activityTraceService.listActivityByRoot(params)
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

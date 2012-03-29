@@ -210,4 +210,15 @@ class SystemEnvironmentController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        def activityList = []
+
+        if (!systemEnvironmentInstance) {
+            activityList = activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

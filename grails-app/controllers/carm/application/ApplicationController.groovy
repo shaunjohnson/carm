@@ -204,6 +204,17 @@ class ApplicationController {
         }
     }
 
+    def ajaxShowMoreActivity() {
+        def applicationInstance = applicationService.get(params.id)
+        def activityList = []
+
+        if (applicationInstance) {
+            activityList = activityTraceService.listActivityByApplication(applicationInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
+
     def showFullHistory() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {

@@ -164,4 +164,15 @@ class ApplicationReleaseController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def applicationReleaseInstance = applicationReleaseService.get(params.id)
+        def activityList = []
+
+        if (!applicationReleaseInstance) {
+            activityList = activityTraceService.listActivityByApplicationRelease(applicationReleaseInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

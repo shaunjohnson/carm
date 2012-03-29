@@ -152,6 +152,17 @@ class ApplicationDeploymentController {
         }
     }
 
+    def ajaxShowMoreActivity() {
+        def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
+        def activityList = []
+
+        if (!applicationDeploymentInstance) {
+            activityList = activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
+
     def redeploy() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
