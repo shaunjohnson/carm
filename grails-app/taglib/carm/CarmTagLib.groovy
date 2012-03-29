@@ -342,15 +342,14 @@ class CarmTagLib {
         out << '</div>'
     }
 
-    private outputAttrs(attrs) {
-        def writer = getOut()
-        attrs.each { k, v ->
-            writer << " $k=\"${v.encodeAsHTML()}\""
-        }
-    }
-
     def label = { attrs, body ->
-        out << '<label" ' << outputAttrs(attrs) << '>' << body()
+        out << '<label '
+
+        attrs.each { k, v ->
+            out << " $k=\"${v.encodeAsHTML()}\""
+        }
+
+        out << '>' << body()
 
         if (attrs.required) {
             out << '<img src="' << resource(dir: 'images', file: 'required_star.gif') << '" alt="required" />'
