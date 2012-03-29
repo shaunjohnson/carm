@@ -103,17 +103,6 @@ class ApplicationReleaseService {
     }
 
     /**
-     * Find all ApplicationRelease objects by Application instance.
-     *
-     * @param application Application object used for filtering
-     * @param params Query params
-     * @return List of ApplicationRelease objects
-     */
-    List<ApplicationRelease> findAllByApplication(Application application, Map params) {
-        return ApplicationRelease.findAllByApplication(application, params)
-    }
-
-    /**
      * Count all ApplicationRelease objects byt Application instance.
      *
      * @param application Application object used for filtering
@@ -264,6 +253,24 @@ class ApplicationReleaseService {
     List<ApplicationRelease> list(Map params) {
         ApplicationRelease.list([
                 max: grailsApplication.config.ui.applicationRelease.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ])
+    }
+
+    /**
+     * Gets a list of all ApplicationRelease objects filtered by Application.
+     *
+     * @param application Application used for filtering
+     * @param params Query parameters
+     * @return List of ApplicationRelease objects
+     */
+    List<ApplicationRelease> findAllByApplication(Application application, Map params) {
+        def max = params?.max?.toLong() ?: grailsApplication.config.ui.applicationRelease.listMax
+
+        ApplicationRelease.findAllByApplication(application, [
+                max: Math.min(max, grailsApplication.config.ui.applicationRelease.listMax),
                 offset: params?.offset,
                 sort: params?.sort,
                 order: params?.order

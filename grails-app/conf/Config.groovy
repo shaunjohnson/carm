@@ -174,7 +174,7 @@ ui {
     }
     applicationRelease {
         listMax = 25
-        maxRecords = 5
+        maxRecords = 3
     }
     applicationReleaseHistory {
         listMax = 25

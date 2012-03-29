@@ -96,6 +96,20 @@ class ApplicationController {
         }
     }
 
+    def ajaxShowMoreReleases() {
+        def applicationInstance = applicationService.get(params.id)
+        def applicationReleaseList = []
+
+        if (applicationInstance) {
+            applicationReleaseList = applicationReleaseService.findAllByApplication(applicationInstance, params)
+        }
+
+        render(template: "applicationReleaseBlock", model: [
+                applicationReleaseList: applicationReleaseList,
+                addLeadingDivider: true
+        ])
+    }
+
     def edit() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
