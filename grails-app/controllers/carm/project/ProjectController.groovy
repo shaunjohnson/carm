@@ -143,4 +143,15 @@ class ProjectController {
             ]
         }
     }
+
+    def ajaxShowMoreActivity() {
+        def projectInstance = projectService.get(params.id)
+        def activityList = []
+
+        if (projectInstance) {
+            activityList = activityTraceService.listActivityByProject(projectInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
 }

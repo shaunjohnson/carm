@@ -18,19 +18,10 @@
 </div>
 
 <g:if test="${size}">
-    <g:each in="${activitySubList}" var="activity" status="i">
-        <p>
-            <g:link class="activityUsername" controller="user" action="show" params="[username: activity.username]">
-                ${activity.username}
-            </g:link>
+    <g:render template="/common/activityBlock" model="[activityList: activitySubList]"/>
 
-            <carm:activityMessage activity="${activity}"/>
-
-            <br>
-
-            <carm:formatDateTimePeriod class="activityDateOccurred" value="${activity.dateOccurred}"/>
-        </p>
-    </g:each>
+    <carm:showMore controller="project" action="ajaxShowMoreActivity" id="${domainId}" appendId="activityBlock"
+                   step="${grailsApplication.config.ui.activityTrace.maxRecords}"/>
 </g:if>
 <g:else>
     <p class="emphasis">

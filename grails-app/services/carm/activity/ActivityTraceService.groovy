@@ -42,7 +42,7 @@ class ActivityTraceService {
      */
     private Map buildQueryParams(Map params) {
         [
-                max: grailsApplication.config.ui.activityTrace.listMax,
+                max: params?.max ?: grailsApplication.config.ui.activityTrace.listMax,
                 offset: params?.offset,
                 sort: params?.sort ?: "dateOccurred",
                 order: params?.order ?: "desc"
