@@ -91,7 +91,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
-                        <table>
+                        <table class="tight">
                             <g:each var="moduleRelease"
                                     in="${applicationDeploymentInstance?.applicationRelease?.moduleReleases}">
                                 <g:if test="${moduleReleaseService.isDeployable(moduleRelease)}">

@@ -318,6 +318,10 @@ th.desc a {
     background-image: url(../images/skin/sorted_desc.gif);
 }
 
+table.tight td, table.tight th {
+    padding: 0 4px 4px 0;
+}
+
 .odd {
     background: #f7f7f7;
 }
