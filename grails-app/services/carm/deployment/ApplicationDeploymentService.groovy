@@ -249,6 +249,16 @@ class ApplicationDeploymentService {
 
         applicationDeployment.properties = params
 
+        //
+        applicationDeployment.moduleDeployments.each { moduleDeployment ->
+            if (params["moduleDeployment.${moduleDeployment.id}"] == 'on') {
+                moduleDeployment.deploymentState = ModuleDeploymentState.DEPLOYED
+            }
+            else {
+                moduleDeployment.deploymentState = ModuleDeploymentState.NOT_DEPLOYED
+            }
+        }
+
         log.debug "$prefix leaving"
     }
 

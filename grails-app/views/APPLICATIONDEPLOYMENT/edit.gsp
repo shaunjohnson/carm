@@ -1,3 +1,4 @@
+<%@ page import="carm.deployment.ModuleDeploymentState" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -35,7 +36,8 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                        <g:link controller="applicationRelease" action="show"
+                                id="${applicationDeploymentInstance?.applicationRelease?.id}">
                             ${message(code: 'pageHeader.applicationRelease.label', args: [
                                     applicationDeploymentInstance?.applicationRelease?.application?.name,
                                     applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
@@ -81,6 +83,48 @@
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'completedDeploymentDate', 'errors')}">
                         <g:datePicker name="completedDeploymentDate" precision="day"
                                       value="${applicationDeploymentInstance?.completedDeploymentDate}"/>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
+                        <carm:label required="true">
+                            <g:message code="modules.label" default="Modules"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
+                        <table class="tight">
+                            <g:each var="moduleDeployment" in="${applicationDeploymentInstance.moduleDeployments.sort{ it.moduleRelease.module.name} }">
+                                <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
+                                    <tr>
+                                        <td>
+                                            <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
+                                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}" checked="${true}"/>
+                                            </g:if>
+                                            <g:else>
+                                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"/>
+                                            </g:else>
+                                        </td>
+                                        <td>
+                                            <carm:label for="moduleDeployment.${moduleDeployment.id}">
+                                                ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
+                                            </carm:label>
+                                        </td>
+                                    </tr>
+                                </g:if>
+                                <g:else>
+                                    <tr>
+                                        <td>
+                                            <g:checkBox name="moduleDeployment.${moduleDeployment.id}" disabled="true"/>
+                                        </td>
+                                        <td class="disabled">
+                                            <g:message code="moduleReleaseCannotBeDeployed.message"
+                                                       args="[moduleDeployment.moduleRelease.module.name]"/>
+                                        </td>
+                                    </tr>
+                                </g:else>
+                            </g:each>
+                        </table>
                     </td>
                 </tr>
                 <tr class="prop">

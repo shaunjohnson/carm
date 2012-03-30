@@ -50,9 +50,9 @@ class ApplicationDeploymentController {
             if (!applicationDeploymentInstance.hasErrors()) {
                 def application = applicationReleaseInstance.application.name
                 def releaseNumber = applicationReleaseInstance.releaseNumber
-                def envirnoment = applicationDeploymentInstance.deploymentEnvironment.name
+                def environment = applicationDeploymentInstance.deploymentEnvironment.name
 
-                flash.message = "${message(code: 'applicationDeployment.created.message', default: 'Deployment of {0} Release {1} to {2} created', args: [application, releaseNumber, envirnoment])}"
+                flash.message = "${message(code: 'applicationDeployment.created.message', default: 'Deployment of {0} Release {1} to {2} created', args: [application, releaseNumber, environment])}"
                 redirect(controller: "application", action: "show", id: applicationDeploymentInstance.applicationRelease.application.id)
             }
             else {
@@ -85,7 +85,10 @@ class ApplicationDeploymentController {
             redirect(action: "list")
         }
         else {
-            return [applicationDeploymentInstance: applicationDeploymentInstance]
+            [
+                    applicationDeploymentInstance: applicationDeploymentInstance,
+                    moduleReleaseService: moduleReleaseService
+            ]
         }
     }
 
