@@ -164,10 +164,14 @@ class ApplicationDeploymentService {
 
         ApplicationRelease applicationRelease = applicationDeployment.applicationRelease
         applicationRelease.moduleReleases.each { moduleRelease ->
-            // Saving each ModuleDeployment as "DEPLOYED" for this release, which does not permit users to select which
-            // modules to include in the deployment.
+            def deploymentState = ModuleDeploymentState.NOT_DEPLOYED
+
+            if (params["moduleRelease.${moduleRelease.id}"] == 'on') {
+                deploymentState = ModuleDeploymentState.DEPLOYED
+            }
+
             ModuleDeployment moduleDeployment = new ModuleDeployment(applicationDeployment: applicationDeployment,
-                    moduleRelease: moduleRelease, deploymentState: ModuleDeploymentState.DEPLOYED)
+                    moduleRelease: moduleRelease, deploymentState: deploymentState)
             applicationDeployment.addToModuleDeployments(moduleDeployment)
         }
 

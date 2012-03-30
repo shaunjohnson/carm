@@ -141,6 +141,10 @@ tr.highlight {
     clear: both;
 }
 
+.disabled {
+    color: #BBB;
+}
+
 .requiredFieldsMessage {
     color: #888;
     font-style: italic;

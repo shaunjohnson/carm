@@ -20,6 +20,7 @@ import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
 import carm.system.SystemEnvironment
 import carm.deployment.ApplicationDeployment
+import carm.release.ModuleRelease
 
 class CarmTagLib {
 
@@ -32,6 +33,7 @@ class CarmTagLib {
     def applicationTypeService
     def carmSecurityService
     def moduleDeploymentTestStateService
+    def moduleReleaseService
     def moduleTypeService
     def projectCategoryService
     def sourceControlRepositoryService
@@ -380,8 +382,17 @@ class CarmTagLib {
      */
     def isDeployable = { attrs, body ->
         ApplicationRelease applicationRelease = attrs.applicationRelease
+        ModuleRelease moduleRelease = attrs.moduleRelease
 
-        if (applicationReleaseService.isDeployable(applicationRelease)) {
+        def deployable = false
+        if (applicationRelease) {
+            deployable = applicationReleaseService.isDeployable(applicationRelease)
+        }
+        else if (moduleRelease) {
+            deployable = moduleReleaseService.isDeployable(moduleRelease)
+        }
+
+        if (deployable) {
             out << body()
         }
     }

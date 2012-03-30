@@ -11,6 +11,7 @@ class ApplicationDeploymentController {
     def activityTraceService
     def applicationDeploymentService
     def applicationReleaseService
+    def moduleReleaseService
 
     def index() {
         redirect(action: "list", params: params)
@@ -32,7 +33,8 @@ class ApplicationDeploymentController {
         else {
             [
                     applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance),
-                    existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
+                    existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance),
+                    moduleReleaseService: moduleReleaseService
             ]
         }
     }

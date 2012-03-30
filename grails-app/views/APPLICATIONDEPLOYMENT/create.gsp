@@ -33,7 +33,8 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        <g:link controller="applicationRelease" action="show" id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                        <g:link controller="applicationRelease" action="show"
+                                id="${applicationDeploymentInstance?.applicationRelease?.id}">
                             ${message(code: 'pageHeader.applicationRelease.label', args: [
                                     applicationDeploymentInstance?.applicationRelease?.application?.name,
                                     applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
@@ -84,6 +85,44 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <carm:label required="true">
+                            <g:message code="modules.label" default="Modules"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
+                        <table>
+                            <g:each var="moduleRelease"
+                                    in="${applicationDeploymentInstance?.applicationRelease?.moduleReleases}">
+                                <g:if test="${moduleReleaseService.isDeployable(moduleRelease)}">
+                                    <tr>
+                                        <td>
+                                            <g:checkBox name="moduleRelease.${moduleRelease.id}" checked="${true}"/>
+                                        </td>
+                                        <td>
+                                            <carm:label for="moduleRelease.${moduleRelease.id}">
+                                                ${moduleRelease.module.name.encodeAsHTML()}
+                                            </carm:label>
+                                        </td>
+                                    </tr>
+                                </g:if>
+                                <g:else>
+                                    <tr>
+                                        <td>
+                                            <g:checkBox name="moduleRelease.${moduleRelease.id}" disabled="true"/>
+                                        </td>
+                                        <td class="disabled">
+                                            <g:message code="moduleReleaseCannotBeDeployed.message"
+                                                       args="[moduleRelease.module.name]"/>
+                                        </td>
+                                    </tr>
+                                </g:else>
+                            </g:each>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <carm:label for="deploymentInstructions">
                             <g:message code="applicationDeployment.deploymentInstructions.label"
                                        default="Deployment Instructions"/>
@@ -120,7 +159,7 @@
 <g:set var="alreadyDeployedToIds" value="${existingDeployments*.deploymentEnvironment?.id?.join(", ")}"/>
 
 <script type="text/javascript">
-    jQuery(function() {
+    jQuery(function () {
         var alreadyDeployedTo = [${alreadyDeployedToIds}];
 
         function deploymentEnvironmentChanged() {

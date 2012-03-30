@@ -50,6 +50,6 @@
         </tbody>
     </table>
 </g:each>
-<script type="">
+<script type="text/javascript">
     jQuery("button.button").button();
 </script>
