@@ -169,7 +169,7 @@ class ApplicationReleaseController {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         def activityList = []
 
-        if (!applicationReleaseInstance) {
+        if (applicationReleaseInstance) {
             activityList = activityTraceService.listActivityByApplicationRelease(applicationReleaseInstance, params)
         }
 

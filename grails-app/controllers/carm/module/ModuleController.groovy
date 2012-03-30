@@ -172,7 +172,7 @@ class ModuleController {
         def moduleInstance = moduleService.get(params.id)
         def activityList = []
 
-        if (!moduleInstance) {
+        if (moduleInstance) {
             activityList = activityTraceService.listActivityByModule(moduleInstance, params)
         }
 

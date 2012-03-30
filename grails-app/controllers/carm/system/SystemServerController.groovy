@@ -148,7 +148,7 @@ class SystemServerController {
         def systemServerInstance = systemServerService.get(params.id)
         def activityList = []
 
-        if (!systemServerInstance) {
+        if (systemServerInstance) {
             activityList = activityTraceService.listActivityBySystemServer(systemServerInstance, params)
         }
 

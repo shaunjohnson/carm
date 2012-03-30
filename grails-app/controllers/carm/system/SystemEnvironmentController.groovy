@@ -216,7 +216,7 @@ class SystemEnvironmentController {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         def activityList = []
 
-        if (!systemEnvironmentInstance) {
+        if (systemEnvironmentInstance) {
             activityList = activityTraceService.listActivityBySystemEnvironment(systemEnvironmentInstance, params)
         }
 

@@ -155,7 +155,7 @@ class SystemDeploymentEnvironmentController {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         def activityList = []
 
-        if (!systemDeploymentEnvironmentInstance) {
+        if (systemDeploymentEnvironmentInstance) {
             activityList = activityTraceService.listActivityBySystemDeploymentEnvironment(systemDeploymentEnvironmentInstance, params)
         }
 

@@ -162,7 +162,7 @@ class ApplicationDeploymentController {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         def activityList = []
 
-        if (!applicationDeploymentInstance) {
+        if (applicationDeploymentInstance) {
             activityList = activityTraceService.listActivityByApplicationDeployment(applicationDeploymentInstance, params)
         }
 
