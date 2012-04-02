@@ -38,6 +38,10 @@
             </sec:ifNotLoggedIn>
         </div>
 
+        <div style="float: right; margin-right: 2em;">
+            <input id="quicksearch" size="20" placeholder="Search Applications"/>
+        </div>
+
         <div id="spinner" class="spinner" style="display: none;">
             <img src="${resource(dir: 'images', file: 'spinner.gif')}"
                  alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>

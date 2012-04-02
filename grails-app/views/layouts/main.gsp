@@ -28,8 +28,8 @@
     <script type='text/javascript'>
         jQuery(function () {
             jQuery('.expander').expander({
-                expandText: '<g:message code="showMore.label"/>',
-                userCollapseText: '<g:message code="showLess.label"/>'
+                expandText:'<g:message code="showMore.label"/>',
+                userCollapseText:'<g:message code="showLess.label"/>'
             });
             jQuery("button.button").button();
             jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
@@ -56,7 +56,18 @@
                 return false;
             });
 
-            jQuery(':input:visible:first').focus();
+            // Quick search
+            jQuery("#quicksearch").autocomplete({
+                source:"${createLink(controller: "home", action: "ajaxQuickSearch")}",
+                minLength:2,
+                select:function (event, ui) {
+                    if (ui.item) {
+                        window.location = "${createLink(controller: "application", action: "show")}/" + ui.item.id
+                    }
+                }
+            });
+
+            jQuery('.body :input:visible:first').focus();
         });
     </script>
 </head>

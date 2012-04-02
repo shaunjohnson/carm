@@ -8,6 +8,7 @@ import carm.deployment.ApplicationDeploymentState
 import carm.release.ApplicationRelease
 import carm.release.ApplicationReleaseState
 import org.apache.commons.lang.time.DateUtils
+import carm.application.Application
 
 class HomeController {
     def activityTraceService
@@ -100,5 +101,15 @@ class HomeController {
         def activityList = activityTraceService.listActivityByRoot(params)
 
         render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
+
+    def ajaxQuickSearch() {
+        def results = []
+
+        Application.findAllByNameIlike("%${params.term}%", [max: 10]).each {
+            results << [ id: it.id, value: it.name, label: it.name ]
+        }
+
+        render(text: results as JSON)
     }
 }
