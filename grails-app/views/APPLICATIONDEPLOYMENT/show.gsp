@@ -64,6 +64,16 @@
 
             <tr class="prop">
                 <td valign="top" class="name">
+                    <g:message code="applicationRelease.changeLog.label"
+                               default="Change Log"/>
+                </td>
+                <td valign="top" class="value">
+                    ${applicationDeploymentInstance.applicationRelease.changeLog.decodeHTML()}
+                </td>
+            </tr>
+
+            <tr class="prop">
+                <td valign="top" class="name">
                     <g:message code="applicationDeployment.deploymentInstructions.label"
                                default="Deployment Instructions"/>
                 </td>
