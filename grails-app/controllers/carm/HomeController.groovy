@@ -26,12 +26,12 @@ class HomeController {
         if (springSecurityService.isLoggedIn()) {
             List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
 
-            myProjectCategories.each { project ->
-                if (projectCategoryList[project.category]) {
-                    projectCategoryList[project.category] << project
+            myProjects.each { Project project ->
+                if (myProjectCategories[project.category]) {
+                    myProjectCategories[project.category] << project
                 }
                 else {
-                    projectCategoryList[project.category] = [ project ]
+                    myProjectCategories[project.category] = [ project ]
                 }
             }
 

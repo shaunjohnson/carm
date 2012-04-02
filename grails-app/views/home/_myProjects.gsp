@@ -10,8 +10,8 @@
     </div>
 </div>
 
-<g:if test="${projectCategoryList?.size()}">
-    <g:each in="${projectCategoryList.entrySet()}" var="projectCategoryEntry" status="projectCategoryIndex">
+<g:if test="${myProjectCategories.size()}">
+    <g:each in="${myProjectCategories.entrySet()}" var="projectCategoryEntry" status="projectCategoryIndex">
         <g:set var="projectCategory" value="${projectCategoryEntry.key}"/>
         <g:set var="projects" value="${projectCategoryEntry.value}"/>
 
@@ -32,7 +32,7 @@
             </ul>
         </div>
 
-        <g:if test="${(projectCategoryIndex + 1) < projectCategoryList.size()}">
+        <g:if test="${(projectCategoryIndex + 1) < myProjectCategories.size()}">
             <hr class="divider"/>
         </g:if>
     </g:each>
