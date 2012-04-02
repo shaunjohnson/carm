@@ -9,8 +9,8 @@
     </div>
 </div>
 
-<g:if test="${pendingTasks?.size()}">
-    <g:render template="/common/pendingTasks" model="[pendingTasks: pendingTasks]"/>
+<g:if test="${myPendingTasks?.size()}">
+    <g:render template="/common/pendingTasks" model="[pendingTasks: myPendingTasks]"/>
 </g:if>
 <g:else>
     <p class="emphasis">

@@ -10,23 +10,29 @@
 <div class="body">
     <carm:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
-    <g:render template="myOpenTasks" model="[pendingTasks: pendingTasks]"/>
+    <sec:ifLoggedIn>
+        <g:render template="myOpenTasks" model="[myPendingTasks: myPendingTasks]"/>
+    </sec:ifLoggedIn>
 
     <table class="twoColumnLayout">
         <tbody>
         <tr>
             <td class="layoutColumnFirst">
-                <g:render template="myProjects" model="[projectCategoryList: projectCategoryList]"/>
+                <sec:ifLoggedIn>
+                    <g:render template="myProjects" model="[myProjectCategories: myProjectCategories]"/>
 
-                <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                </sec:ifLoggedIn>
 
                 <g:render template="/common/activity"
                           model="[activityList: activityList, listActivityAction: 'listActivity']"/>
             </td>
             <td class="layoutColumnLast">
-                <g:render template="mySystems" model="[systemInstanceList: systemInstanceList]"/>
+                <sec:ifLoggedIn>
+                    <g:render template="mySystems" model="[mySystemEnvironments: mySystemEnvironments]"/>
 
-                <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                </sec:ifLoggedIn>
 
                 <div class="sectionHeader">
                     <div class="text">

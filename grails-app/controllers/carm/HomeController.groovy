@@ -15,29 +15,39 @@ class HomeController {
     def applicationDeploymentService
     def applicationReleaseService
     def projectService
+    def springSecurityService
     def systemEnvironmentService
 
     def index() {
-        List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
+        def myPendingTasks = []
+        def myProjectCategories = [:]
+        def mySystemEnvironments = []
 
-        def projectCategoryList = [:]
-        myProjects.each { project ->
-            if (projectCategoryList[project.category]) {
-                projectCategoryList[project.category] << project
+        if (springSecurityService.isLoggedIn()) {
+            List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
+
+            myProjectCategories.each { project ->
+                if (projectCategoryList[project.category]) {
+                    projectCategoryList[project.category] << project
+                }
+                else {
+                    projectCategoryList[project.category] = [ project ]
+                }
             }
-            else {
-                projectCategoryList[project.category] = [ project ]
-            }
+
+            mySystemEnvironments = systemEnvironmentService.findAllByProject(myProjects)
+            myPendingTasks = projectService.findAllPendingTasks(myProjects)
+        }
+        else {
+
         }
 
         [
-                projectCategoryList: projectCategoryList,
-                systemInstanceList: systemEnvironmentService.findAllByProject(myProjects),
-                activityList: activityTraceService.listActivityByRoot([:]),
-                pendingTasks: projectService.findAllPendingTasks(myProjects),
-                releasesPerDay: [4, 5, 7, 10, 2],
-                deploymentsPerDay: [3, 6, 12, 3, 5],
-                dayNames: ["Mon", "Tue", "Wed", "Thu", "Fri"]
+                myPendingTasks: myPendingTasks,
+                myProjectCategories: myProjectCategories,
+                mySystemEnvironments: mySystemEnvironments,
+                
+                activityList: activityTraceService.listActivityByRoot([:])
         ]
     }
 

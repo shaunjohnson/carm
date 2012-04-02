@@ -9,8 +9,8 @@
     </div>
 </div>
 
-<g:if test="${systemInstanceList?.size()}">
-    <g:each in="${systemInstanceList}" var="systemInstance" status="systemIndex">
+<g:if test="${mySystemEnvironments.size()}">
+    <g:each in="${mySystemEnvironments}" var="systemInstance" status="systemIndex">
         <div style="margin: 0.5em 0;">
             <h3>
                 <g:link controller="systemEnvironment" action="show" id="${systemInstance.id}">
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <g:if test="${(systemIndex + 1) < systemInstanceList.size()}">
+        <g:if test="${(systemIndex + 1) < mySystemEnvironments.size()}">
             <hr class="divider"/>
         </g:if>
     </g:each>
