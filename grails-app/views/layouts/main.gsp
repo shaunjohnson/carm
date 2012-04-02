@@ -22,6 +22,7 @@
 
     <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.expander.min.js')}'></script>
     <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css"/>
 
     <script type='text/javascript'>
