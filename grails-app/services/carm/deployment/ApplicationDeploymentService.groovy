@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import carm.release.ModuleRelease
 import carm.system.SystemEnvironment
+import org.apache.commons.lang.time.DateUtils
 
 class ApplicationDeploymentService {
 
@@ -497,6 +498,24 @@ class ApplicationDeploymentService {
                 ad.applicationRelease.application.type asc,
                 ad.applicationRelease.application.name asc
         """, [deploymentState: ApplicationDeploymentState.SUBMITTED, system: systemEnvironment])
+
+        // TODO Temporary workaround to show upcoming deployments. The following query should be removed and the
+        // previous should be used once the workflow has been completed
+        ApplicationDeployment.executeQuery("""
+            from
+                ApplicationDeployment ad
+            where
+                ad.deploymentEnvironment.sysEnvironment = :system
+                and (
+                    ad.completedDeploymentDate is null
+                    or ad.completedDeploymentDate >= :today
+                )
+            order by
+                ad.requestedDeploymentDate asc,
+                ad.deploymentEnvironment.name asc,
+                ad.applicationRelease.application.type asc,
+                ad.applicationRelease.application.name asc
+        """, [today: DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH), system: systemEnvironment])
     }
 
     /**
