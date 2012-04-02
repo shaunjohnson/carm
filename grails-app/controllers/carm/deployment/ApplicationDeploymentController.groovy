@@ -182,7 +182,8 @@ class ApplicationDeploymentController {
 
             render(view: "create", model: [
                     applicationDeploymentInstance: newApplicationDeploymentInstance,
-                    existingDeployments: existingDeployments
+                    existingDeployments: existingDeployments,
+                    moduleReleaseService: moduleReleaseService
             ])
         }
     }
