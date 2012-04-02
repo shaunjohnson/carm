@@ -1,3 +1,4 @@
+<%@ page import="carm.deployment.ModuleDeploymentState" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -92,16 +93,20 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
                         <table class="tight">
-                            <g:each var="moduleRelease"
-                                    in="${applicationDeploymentInstance.applicationRelease.moduleReleases.sort{ it.module.name} }">
-                                <g:if test="${moduleReleaseService.isDeployable(moduleRelease)}">
+                            <g:each var="moduleDeployment" in="${applicationDeploymentInstance.moduleDeployments?.sort{ it.moduleRelease.module.name} }">
+                                <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
                                     <tr>
                                         <td>
-                                            <g:checkBox name="moduleRelease.${moduleRelease.id}" checked="${true}"/>
+                                            <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
+                                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}" checked="${true}"/>
+                                            </g:if>
+                                            <g:else>
+                                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"/>
+                                            </g:else>
                                         </td>
                                         <td>
-                                            <carm:label for="moduleRelease.${moduleRelease.id}">
-                                                ${moduleRelease.module.name.encodeAsHTML()}
+                                            <carm:label for="moduleRelease.${moduleDeployment.moduleRelease.id}">
+                                                ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
                                             </carm:label>
                                         </td>
                                     </tr>
@@ -109,11 +114,11 @@
                                 <g:else>
                                     <tr>
                                         <td>
-                                            <g:checkBox name="moduleRelease.${moduleRelease.id}" disabled="true"/>
+                                            <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}" disabled="true"/>
                                         </td>
                                         <td class="disabled">
                                             <g:message code="moduleReleaseCannotBeDeployed.message"
-                                                       args="[moduleRelease.module.name]"/>
+                                                       args="[moduleDeployment.moduleRelease.module.name]"/>
                                         </td>
                                     </tr>
                                 </g:else>

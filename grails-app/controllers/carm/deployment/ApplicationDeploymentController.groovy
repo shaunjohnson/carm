@@ -56,7 +56,11 @@ class ApplicationDeploymentController {
                 redirect(controller: "application", action: "show", id: applicationDeploymentInstance.applicationRelease.application.id)
             }
             else {
-                render(view: "create", model: [applicationDeploymentInstance: applicationDeploymentInstance])
+                render(view: "create", model: [
+                        applicationDeploymentInstance: applicationDeploymentInstance,
+                        existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance),
+                        moduleReleaseService: moduleReleaseService
+                ])
             }
         }
     }

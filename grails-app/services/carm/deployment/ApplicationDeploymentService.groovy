@@ -156,12 +156,33 @@ class ApplicationDeploymentService {
         String deploymentInstructions = inferDeploymentInstructions(applicationRelease)
 
         // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
-        new ApplicationDeployment(
+        ApplicationDeployment applicationDeployment = new ApplicationDeployment(
                 applicationRelease: applicationRelease,
                 completedDeploymentDate: requestedDeploymentDate,
                 requestedDeploymentDate: requestedDeploymentDate,
                 deploymentEnvironment: deploymentEnvironment,
                 deploymentInstructions: deploymentInstructions)
+
+        ApplicationDeployment lastApplicationDeployment = findLastApplicationDeploymentByApplicationRelease(applicationRelease)
+
+        if (lastApplicationDeployment) {
+            lastApplicationDeployment.moduleDeployments.each { moduleDeployment ->
+                applicationDeployment.addToModuleDeployments(new ModuleDeployment(
+                        applicationDeployment: applicationDeployment,
+                        moduleRelease: moduleDeployment.moduleRelease,
+                        deploymentState: moduleDeployment.deploymentState))
+            }
+        }
+        else {
+            applicationRelease.moduleReleases.each { moduleRelease ->
+                applicationDeployment.addToModuleDeployments(new ModuleDeployment(
+                        applicationDeployment: applicationDeployment,
+                        moduleRelease: moduleRelease,
+                        deploymentState: ModuleDeploymentState.DEPLOYED))
+            }
+        }
+
+        return applicationDeployment
     }
 
     /**
@@ -198,10 +219,6 @@ class ApplicationDeploymentService {
         }
 
         applicationDeployment.save()
-
-        if (applicationDeployment.hasErrors()) {
-            applicationDeployment.moduleDeployments.clear()
-        }
 
         log.debug "$prefix returning $applicationDeployment"
 
@@ -251,6 +268,13 @@ class ApplicationDeploymentService {
         // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
         newApplicationDeployment.requestedDeploymentDate = requestedDeploymentDate
         newApplicationDeployment.completedDeploymentDate = requestedDeploymentDate
+
+        applicationDeployment.moduleDeployments.each { moduleDeployment ->
+            newApplicationDeployment.addToModuleDeployments(new ModuleDeployment(
+                    applicationDeployment: newApplicationDeployment,
+                    moduleRelease: moduleDeployment.moduleRelease,
+                    deploymentState: moduleDeployment.deploymentState))
+        }
 
         newApplicationDeployment
     }
