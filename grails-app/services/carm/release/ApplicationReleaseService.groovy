@@ -113,6 +113,27 @@ class ApplicationReleaseService {
     }
 
     /**
+     * Counts all completed releases each day starting at the provided start Date
+     *
+     * @param startDate Date to start counting; matched against date created
+     * @return List of tuplets (day of month, count of releases)
+     */
+    def countCompletedReleasesGroupByDay(Date startDate) {
+        ApplicationRelease.executeQuery("""
+                select
+                    day(dateCreated),
+                    count(dateCreated)
+                from
+                    ApplicationRelease
+                where
+                    releaseState = :releaseState
+                    and dateCreated > :startDate
+                group by
+                    day(dateCreated)""",
+                [releaseState: ApplicationReleaseState.COMPLETED, startDate: startDate])
+    }
+
+    /**
      * Finds all pending (not completed) application releases for the provided application.
      *
      * @param application Application used for filtering
@@ -213,14 +234,14 @@ class ApplicationReleaseService {
         def prefix = "delete() :"
 
         log.debug "$prefix entered, applicationRelease=$applicationRelease"
-        
+
         if (isInUse(applicationRelease)) {
             log.error "$prefix Application release is in use and cannot be deleted"
             throw new DomainInUseException()
         }
 
         applicationRelease.delete()
-        
+
         log.debug "$prefix leaving"
     }
 
@@ -373,7 +394,7 @@ class ApplicationReleaseService {
 
         addToHistories(applicationRelease, "Submitted", null);
         activityTraceService.applicationReleaseSubmitted(applicationRelease)
-        
+
         log.debug "$prefix Application release submitted"
     }
 }

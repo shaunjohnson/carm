@@ -39,6 +39,27 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Counts all completed deployments each day starting at the provided start Date
+     *
+     * @param startDate Date to start counting; matched against completed deployment date
+     * @return List of tuplets (day of month, count of deployments)
+     */
+    def countCompletedDeploymentsGroupByDay(Date startDate) {
+        ApplicationDeployment.executeQuery("""
+                select
+                    day(completedDeploymentDate),
+                    count(completedDeploymentDate)
+                from
+                    ApplicationDeployment
+                where
+                    deploymentState = :deploymentState
+                    and completedDeploymentDate > :startDate
+                group by
+                    day(completedDeploymentDate)""",
+                [deploymentState: ApplicationDeploymentState.COMPLETED, startDate: startDate])
+    }
+
+    /**
      * Determines if an ApplicationDeployment with the ID exists.
      *
      * @param id ID of ApplicationDeployment to find
@@ -313,11 +334,11 @@ class ApplicationDeploymentService {
         if (!deployments.size()) {
             return null
         }
-        
+
         SystemDeploymentEnvironment nextEnvironment = null
 
         // Start at last environment and work back towards the first
-        for (SystemDeploymentEnvironment environment : environments.reverse()) {
+        for (SystemDeploymentEnvironment environment: environments.reverse()) {
             if (deployments.find { it.deploymentEnvironment == environment }) {
                 break
             }
