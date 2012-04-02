@@ -34,7 +34,7 @@
             <g:each in="${applicationDeploymentInstanceList}" status="i" var="applicationDeploymentInstance">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
-                        <g:link action="show" id="${applicationDeploymentInstance.id}">
+                        <g:link controller="applicationDeployment" action="show" id="${applicationDeploymentInstance.id}">
                             <carm:formatApplicationDeploymentState
                                     deploymentState="${applicationDeploymentInstance.deploymentState}"/>
                         </g:link>
