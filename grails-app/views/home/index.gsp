@@ -30,7 +30,7 @@
 
                 <div class="sectionHeader">
                     <div class="text">
-                        Activity Chart
+                        <g:message code="activityChart.label" default="Activity Chart"/>
                     </div>
                 </div>
 
@@ -63,7 +63,8 @@
     function drawChart(response) {
         var data = response.getDataTable();
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, {width: 450, height: 240, title: 'Releases per Day'});
+        chart.draw(data, {width: 450, height: 240,
+            title: '<g:message code="releaseAndDeploymentActivityByDay.label" default="Releases and Deployments per Day"/>'});
     }
 </script>
 

@@ -69,9 +69,9 @@ class HomeController {
         map.status = 'ok'
 
         def columns = []
-        columns << [label: 'Day', type: 'string']
-        columns << [label: 'Releases', type: 'number']
-        columns << [label: 'Deployments', type: 'number']
+        columns << [label: message(code: 'day.label'), type: 'string']
+        columns << [label: message(code: 'releases.label'), type: 'number']
+        columns << [label: message(code: 'deployments.label'), type: 'number']
 
         def data = generateData()
 
