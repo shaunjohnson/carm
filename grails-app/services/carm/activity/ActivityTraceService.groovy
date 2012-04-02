@@ -686,6 +686,29 @@ class ActivityTraceService {
         insertActivityTrace(oid, SYSTEM_SERVER_TYPE, UPDATED, systemServer.id, systemServer.name)
     }
 
+    private getMostActiveByOidType(String oidType, Map params) {
+        def activityTraces = ActivityTrace.executeQuery(
+                """select
+                    oid
+                from
+                    ActivityTrace
+                where
+                    oid like :oidLike
+                group by
+                    oid
+                order by
+                    count(oid) desc""",
+                [oidLike: oidType + ":%"], [max: buildQueryParams(params).max])
+    }
+
+    public List<Serializable> getMostActiveProjectIds(Map params) {
+        getMostActiveByOidType(PROJECT_TYPE, params).collect { String oid -> oid.split(":")[1] as Long }
+    }
+
+    public List<Serializable> getMostActiveSystemEnvironmentIds(Map params) {
+        getMostActiveByOidType(SYSTEM_ENVIRONMENT_TYPE, params).collect { String oid -> oid.split(":")[1] as Long }
+    }
+
     /**
      * Inserts a new ActivityTrace record
      *

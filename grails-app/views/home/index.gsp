@@ -20,9 +20,12 @@
             <td class="layoutColumnFirst">
                 <sec:ifLoggedIn>
                     <g:render template="myProjects" model="[myProjectCategories: myProjectCategories]"/>
-
-                    <div>&nbsp;</div>
                 </sec:ifLoggedIn>
+                <sec:ifNotLoggedIn>
+                    <g:render template="mostActiveProjects" model="[mostActiveProjects: mostActiveProjects]"/>
+                </sec:ifNotLoggedIn>
+
+                <div>&nbsp;</div>
 
                 <g:render template="/common/activity"
                           model="[activityList: activityList, listActivityAction: 'listActivity']"/>
@@ -30,9 +33,12 @@
             <td class="layoutColumnLast">
                 <sec:ifLoggedIn>
                     <g:render template="mySystems" model="[mySystemEnvironments: mySystemEnvironments]"/>
-
-                    <div>&nbsp;</div>
                 </sec:ifLoggedIn>
+                <sec:ifNotLoggedIn>
+                    <g:render template="mostActiveSystems" model="[mostActiveSystemEnvironments: mostActiveSystemEnvironments]"/>
+                </sec:ifNotLoggedIn>
+
+                <div>&nbsp;</div>
 
                 <div class="sectionHeader">
                     <div class="text">

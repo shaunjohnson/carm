@@ -10,6 +10,7 @@ class SystemEnvironmentService {
 
     static transactional = false
 
+    def activityTraceService
     def grailsApplication
 
     /**
@@ -96,6 +97,25 @@ class SystemEnvironmentService {
      */
     SystemEnvironment get(Serializable id) {
         SystemEnvironment.get(id)
+    }
+
+    /**
+     * Lists out the most active system environments.
+     *
+     * @param params Query parameters
+     * @return List of SystemEnvironment objects
+     */
+    List<SystemEnvironment> getMostActiveSystems(Map params) {
+        def queryParams = [
+                max: grailsApplication.config.ui.project.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ]
+
+        def activeIds = activityTraceService.getMostActiveSystemEnvironmentIds([ max: queryParams.max ])
+
+        SystemEnvironment.findAllByIdInList(activeIds, queryParams)
     }
 
     /**

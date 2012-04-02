@@ -19,6 +19,8 @@ class HomeController {
     def systemEnvironmentService
 
     def index() {
+        def mostActiveProjects = []
+        def mostActiveSystemEnvironments = []
         def myPendingTasks = []
         def myProjectCategories = [:]
         def mySystemEnvironments = []
@@ -39,14 +41,18 @@ class HomeController {
             myPendingTasks = projectService.findAllPendingTasks(myProjects)
         }
         else {
-
+            mostActiveProjects = projectService.getMostActiveProjects()
+            mostActiveSystemEnvironments = systemEnvironmentService.getMostActiveSystems()
         }
 
         [
                 myPendingTasks: myPendingTasks,
                 myProjectCategories: myProjectCategories,
                 mySystemEnvironments: mySystemEnvironments,
-                
+
+                mostActiveProjects: mostActiveProjects,
+                mostActiveSystemEnvironments: mostActiveSystemEnvironments,
+
                 activityList: activityTraceService.listActivityByRoot([:])
         ]
     }
