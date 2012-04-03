@@ -10,29 +10,26 @@
     </div>
 </div>
 
-<g:if test="${myProjectCategories.size()}">
-    <g:each in="${myProjectCategories.entrySet()}" var="projectCategoryEntry" status="projectCategoryIndex">
-        <g:set var="projectCategory" value="${projectCategoryEntry.key}"/>
-        <g:set var="projects" value="${projectCategoryEntry.value}"/>
-
+<g:if test="${myProjects.size()}">
+    <g:each in="${myProjects}" var="project" status="projectIndex">
         <div style="margin: 0.5em 0;">
             <h3>
-                <g:link controller="projectCategory" action="show" id="${projectCategory.id}">
-                    ${projectCategory.encodeAsHTML()}
+                <g:link controller="project" action="show" id="${project.id}">
+                    ${project.name.encodeAsHTML()}
                 </g:link>
             </h3>
             <ul>
-                <g:each in="${projects}" var="projectInstance">
+                <g:each in="${project.applications.sort { it.name }}" var="application">
                     <li>
-                        <g:link controller="project" action="show" id="${projectInstance.id}">
-                            ${projectInstance.encodeAsHTML()}
+                        <g:link controller="application" action="show" id="${application.id}">
+                            ${application.name.encodeAsHTML()}
                         </g:link>
                     </li>
                 </g:each>
             </ul>
         </div>
 
-        <g:if test="${(projectCategoryIndex + 1) < myProjectCategories.size()}">
+        <g:if test="${(projectIndex + 1) < myProjects.size()}">
             <hr class="divider"/>
         </g:if>
     </g:each>

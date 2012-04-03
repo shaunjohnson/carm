@@ -23,21 +23,11 @@ class HomeController {
         def mostActiveApplications = [:]
         def mostActiveSystemEnvironments = []
         def myPendingTasks = []
-        def myProjectCategories = [:]
+        def myProjects = [:]
         def mySystemEnvironments = []
 
         if (springSecurityService.isLoggedIn()) {
-            List<Project> myProjects = projectService.getAllProjectsWhereOwner().sort { it.category.name <=> it.name }
-
-            myProjects.each { Project project ->
-                if (myProjectCategories[project.category]) {
-                    myProjectCategories[project.category] << project
-                }
-                else {
-                    myProjectCategories[project.category] = [ project ]
-                }
-            }
-
+            myProjects = projectService.getAllProjectsWhereOwner()
             mySystemEnvironments = systemEnvironmentService.findAllByProject(myProjects)
             myPendingTasks = projectService.findAllPendingTasks(myProjects)
         }
@@ -58,7 +48,7 @@ class HomeController {
 
         [
                 myPendingTasks: myPendingTasks,
-                myProjectCategories: myProjectCategories,
+                myProjects: myProjects,
                 mySystemEnvironments: mySystemEnvironments,
 
                 mostActiveApplications: mostActiveApplications,

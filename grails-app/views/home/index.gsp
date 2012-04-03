@@ -19,16 +19,11 @@
         <tr>
             <td class="layoutColumnFirst">
                 <sec:ifLoggedIn>
-                    <g:render template="myProjects" model="[myProjectCategories: myProjectCategories]"/>
+                    <g:render template="myProjects" model="[myProjects: myProjects]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
                     <g:render template="mostActiveApplications" model="[mostActiveApplications: mostActiveApplications]"/>
                 </sec:ifNotLoggedIn>
-
-                <div>&nbsp;</div>
-
-                <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity']"/>
             </td>
             <td class="layoutColumnLast">
                 <sec:ifLoggedIn>
@@ -51,6 +46,11 @@
                         style="position:absolute; top:50%; height: 42px; margin-top:-21px; margin-left: -21px;"
                          alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>
                 </div>
+
+                <div>&nbsp;</div>
+
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, listActivityAction: 'listActivity']"/>
             </td>
         </tr>
         </tbody>
