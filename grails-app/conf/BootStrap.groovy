@@ -37,6 +37,7 @@ class BootStrap {
     def aclUtilService
     def fixtureLoader
     def applicationService
+    def mailService
 
     def init = { servletContext ->
         def roleAdmin
@@ -50,7 +51,7 @@ class BootStrap {
         }
 
         if (!User.findByUsername('admin')) {
-            def adminUser = new User(username: 'admin', enabled: true, password: 'admin')
+            def adminUser = new User(username: 'admin', enabled: true, password: 'admin', email: "admin@localhost.com")
             adminUser.save()
 
             new UserRole(user: adminUser, role: roleAdmin).save()
