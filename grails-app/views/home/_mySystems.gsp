@@ -2,6 +2,7 @@
     <div class="text">
         <g:message code="myEnvironments.label" default="My Environments"/>
     </div>
+
     <div class="actions">
         <g:link controller="systemEnvironment" action="list">
             <g:message code="allSystems.label" default="All Systems"/>
@@ -17,11 +18,15 @@
                     ${systemInstance.encodeAsHTML()}
                 </g:link>
             </h3>
-            <g:each in="${systemInstance.environments}" var="systemDeploymentEnvironment" status="i">
-                <g:link controller="systemDeploymentEnvironment" action="show"
-                        id="${systemDeploymentEnvironment.id}">${systemDeploymentEnvironment.encodeAsHTML()}</g:link><g:if
-                    test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
-            </g:each>
+
+            <div style="margin-left: 1.5em;">
+                <g:each in="${systemInstance.environments}" var="systemDeploymentEnvironment" status="i">
+                    <g:link controller="systemDeploymentEnvironment" action="show"
+                            id="${systemDeploymentEnvironment.id}">${systemDeploymentEnvironment.encodeAsHTML()}</g:link><g:if
+                        test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
+                </g:each>
+            </div>
+
             <div style="margin: 0.5em 0;">
                 <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
                     <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
