@@ -894,6 +894,10 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
+            column(name: "email", type: "varchar(255)") {
+                constraints(nullable: "false", unique: "true")
+            }
+
 			column(name: "enabled", type: "bit") {
 				constraints(nullable: "false")
 			}
