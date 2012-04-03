@@ -106,6 +106,21 @@ log4j = {
     warn   'org.mortbay.log'
 }
 
+// Mail server settings
+grails.mail.host = "smtpserver"
+grails.mail.port = 25
+grails.mail.default.from = "carm@localhost.com"
+
+carm.mail.type = 'shell'  // 'shell' or 'mail'
+
+// {0} - SMTP Server
+// {1} - SMTP Server port
+// {2} - From email address
+// {3} - To email address
+// {4} - Subject
+// {5} - Message content
+carm.mail.shell.command = 'bmail -s "{0}" -p "{1}" -f "{2}" -t "{3}" -a "{4}" -b "{5}"'
+
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'carm.security.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'carm.security.UserRole'

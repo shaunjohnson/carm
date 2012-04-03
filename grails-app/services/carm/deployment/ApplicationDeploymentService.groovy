@@ -18,6 +18,8 @@ class ApplicationDeploymentService {
     static transactional = false
 
     def grailsApplication
+    def notificationService
+    def springSecurityService
 
     /**
      * Returns a count of all ApplicationDeployment objects.
@@ -219,6 +221,11 @@ class ApplicationDeploymentService {
         }
 
         applicationDeployment.save()
+
+        notificationService.sendEmail(
+                springSecurityService.currentUser.email,
+                "${applicationRelease.application.name} deployed to ${applicationDeployment.deploymentEnvironment.name}",
+                "${applicationRelease.application.name} was successfully deployed to ${applicationDeployment.deploymentEnvironment.name}")
 
         log.debug "$prefix returning $applicationDeployment"
 
