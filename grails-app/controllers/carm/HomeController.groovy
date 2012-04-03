@@ -14,12 +14,13 @@ class HomeController {
     def activityTraceService
     def applicationDeploymentService
     def applicationReleaseService
+    def applicationService
     def projectService
     def springSecurityService
     def systemEnvironmentService
 
     def index() {
-        def mostActiveProjects = []
+        def mostActiveApplications = [:]
         def mostActiveSystemEnvironments = []
         def myPendingTasks = []
         def myProjectCategories = [:]
@@ -41,7 +42,17 @@ class HomeController {
             myPendingTasks = projectService.findAllPendingTasks(myProjects)
         }
         else {
-            mostActiveProjects = projectService.getMostActiveProjects()
+            def activeApplications = applicationService.getMostActiveApplications().sort { it.project.name <=> it.name }
+            
+            activeApplications.each { Application application ->
+                if (mostActiveApplications[application.project]) {
+                    mostActiveApplications[application.project] << application
+                }
+                else {
+                    mostActiveApplications[application.project] = [ application ]
+                }
+            }
+            
             mostActiveSystemEnvironments = systemEnvironmentService.getMostActiveSystems()
         }
 
@@ -50,7 +61,7 @@ class HomeController {
                 myProjectCategories: myProjectCategories,
                 mySystemEnvironments: mySystemEnvironments,
 
-                mostActiveProjects: mostActiveProjects,
+                mostActiveApplications: mostActiveApplications,
                 mostActiveSystemEnvironments: mostActiveSystemEnvironments,
 
                 activityList: activityTraceService.listActivityByRoot([:])

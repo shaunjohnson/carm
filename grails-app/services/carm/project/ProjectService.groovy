@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional
 class ProjectService {
     static transactional = false
 
-    def activityTraceService
     def applicationDeploymentService
     def applicationReleaseService
     def carmSecurityService
@@ -151,25 +150,6 @@ class ProjectService {
     @PostFilter("hasPermission(filterObject, admin)")
     List<Project> getAllProjectsWhereOwner(Map params) {
         Project.list params
-    }
-
-    /**
-     * Lists out the most active projects.
-     *
-     * @param params Query parameters
-     * @return List of Project objects
-     */
-    List<Project> getMostActiveProjects(Map params) {
-        def queryParams = [
-                max: grailsApplication.config.ui.project.listMax,
-                offset: params?.offset,
-                sort: params?.sort,
-                order: params?.order
-        ]
-        
-        def activeIds = activityTraceService.getMostActiveProjectIds([ max: queryParams.max ])
-
-        Project.findAllByIdInList(activeIds, queryParams)
     }
 
     /**

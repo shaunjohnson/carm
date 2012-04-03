@@ -701,8 +701,8 @@ class ActivityTraceService {
                 [oidLike: oidType + ":%"], [max: buildQueryParams(params).max])
     }
 
-    public List<Serializable> getMostActiveProjectIds(Map params) {
-        getMostActiveByOidType(PROJECT_TYPE, params).collect { String oid -> oid.split(":")[1] as Long }
+    public List<Serializable> getMostActiveApplicationIds(Map params) {
+        getMostActiveByOidType(APPLICATION_TYPE, params).collect { String oid -> oid.split(":")[1] as Long }
     }
 
     public List<Serializable> getMostActiveSystemEnvironmentIds(Map params) {

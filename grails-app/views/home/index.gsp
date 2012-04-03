@@ -22,7 +22,7 @@
                     <g:render template="myProjects" model="[myProjectCategories: myProjectCategories]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
-                    <g:render template="mostActiveProjects" model="[mostActiveProjects: mostActiveProjects]"/>
+                    <g:render template="mostActiveApplications" model="[mostActiveApplications: mostActiveApplications]"/>
                 </sec:ifNotLoggedIn>
 
                 <div>&nbsp;</div>

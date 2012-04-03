@@ -13,6 +13,7 @@ class ApplicationService implements ApplicationContextAware {
     static transactional = false
 
     ApplicationContext applicationContext
+    def activityTraceService
     def applicationDeploymentService
     def grailsApplication
     def systemEnvironmentService
@@ -85,6 +86,25 @@ class ApplicationService implements ApplicationContextAware {
      */
     Application get(Serializable id) {
         Application.get(id)
+    }
+
+    /**
+     * Lists out the most active applications.
+     *
+     * @param params Query parameters
+     * @return List of Application objects
+     */
+    List<Application> getMostActiveApplications(Map params) {
+        def queryParams = [
+                max: grailsApplication.config.ui.application.listMax,
+                offset: params?.offset,
+                sort: params?.sort,
+                order: params?.order
+        ]
+
+        def activeIds = activityTraceService.getMostActiveApplicationIds([ max: queryParams.max ])
+
+        Application.findAllByIdInList(activeIds, queryParams)
     }
 
     /**
