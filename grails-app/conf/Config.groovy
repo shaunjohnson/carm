@@ -106,6 +106,7 @@ log4j = {
     warn   'org.mortbay.log'
 }
 
+
 // Mail server settings
 grails.mail.host = "smtpserver"
 grails.mail.port = 25
@@ -120,6 +121,7 @@ carm.mail.type = 'shell'  // 'shell' or 'mail'
 // {4} - Subject
 // {5} - Message content
 carm.mail.shell.command = 'bmail -s "{0}" -p "{1}" -f "{2}" -t "{3}" -a "{4}" -b "{5}"'
+
 
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'carm.security.User'
