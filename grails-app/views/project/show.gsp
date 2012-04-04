@@ -49,7 +49,7 @@
             </div>
 
             <div id="detailsTab">
-                <g:render template="details" model="[projectInstance: projectInstance]"/>
+                <g:render template="projectDetails" model="[projectInstance: projectInstance]"/>
             </div>
 
             <div id="permissionsTab">

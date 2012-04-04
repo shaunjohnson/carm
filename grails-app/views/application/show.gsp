@@ -59,7 +59,7 @@
             </div>
 
             <div id="detailsTab">
-                <g:render template="details" model="[applicationInstance: applicationInstance]"/>
+                <g:render template="applicationDetails" model="[applicationInstance: applicationInstance]"/>
 
                 <div>&nbsp;</div>
 
