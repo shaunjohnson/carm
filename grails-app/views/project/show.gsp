@@ -69,7 +69,7 @@
                     <g:message code="project.projectOwners.label" default="Project Owners"/>
                 </td>
                 <td valign="top" class="value">
-                    <g:render template="projectOwners" model="['projectInstance': projectInstance]"/>
+                    <g:render template="projectOwners" model="[projectOwners: projectOwners]"/>
                 </td>
             </tr>
             </tbody>
