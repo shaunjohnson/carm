@@ -68,7 +68,7 @@
                                default="Change Log"/>
                 </td>
                 <td valign="top" class="value">
-                    ${applicationDeploymentInstance.applicationRelease.changeLog.decodeHTML()}
+                    ${applicationDeploymentInstance.applicationRelease.changeLog?.decodeHTML()}
                 </td>
             </tr>
 
