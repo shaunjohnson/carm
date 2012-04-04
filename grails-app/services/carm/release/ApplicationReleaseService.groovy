@@ -9,16 +9,21 @@ import carm.project.Project
 import carm.application.Application
 import carm.deployment.ApplicationDeployment
 import carm.exceptions.DomainInUseException
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
 
-class ApplicationReleaseService {
+class ApplicationReleaseService implements ApplicationContextAware {
 
     static transactional = false
 
+    ApplicationContext applicationContext
     def activityTraceService
     def applicationService
     def carmSecurityService
     def grailsApplication
+    def linkGeneratorService
     def moduleService
+    def notificationService
     def springSecurityService
 
     /**
@@ -215,6 +220,8 @@ class ApplicationReleaseService {
         else {
             addToHistories(applicationRelease, "Created", null);
             // TODO application release is marked completed by default. Refer to ApplicationRelease domain.
+
+            sendNotification(applicationRelease)
         }
 
         log.debug "$prefix returning $applicationRelease"
@@ -396,5 +403,30 @@ class ApplicationReleaseService {
         activityTraceService.applicationReleaseSubmitted(applicationRelease)
 
         log.debug "$prefix Application release submitted"
+    }
+
+    private sendNotification(ApplicationRelease applicationRelease) {
+        def currentUser = carmSecurityService.getCurrentUser()
+
+        def projectService = applicationContext.getBean("projectService")
+        def projectOwners = projectService.findAllProjectOwners(applicationRelease.application.project)
+
+        // Do not send notification to current user
+        projectOwners.remove(currentUser.username)
+
+        // Send notification only if there is at least one other project owner
+        if (projectOwners.size()) {
+            def args = [
+                    applicationRelease.application.name,
+                    applicationRelease.releaseNumber,
+                    currentUser.username,
+                    linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show', id: applicationRelease.id)
+            ]
+
+            notificationService.sendEmail(
+                    currentUser.email,
+                    carmSecurityService.findAllUsersByUsernameInList(projectOwners),
+                    'applicationReleased.notification.subject', 'applicationReleased.notification.message', args)
+        }
     }
 }

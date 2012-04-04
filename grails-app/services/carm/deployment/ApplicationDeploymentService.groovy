@@ -228,7 +228,9 @@ class ApplicationDeploymentService implements ApplicationContextAware {
 
         applicationDeployment.save()
 
-        sendNotification(applicationDeployment)
+        if (!applicationRelease.hasErrors()) {
+            sendNotification(applicationDeployment)
+        }
 
         log.debug "$prefix returning $applicationDeployment"
 
