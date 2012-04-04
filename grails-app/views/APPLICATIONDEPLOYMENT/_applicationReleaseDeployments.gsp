@@ -28,7 +28,7 @@
             <tbody>
             <g:each in="${applicationDeploymentList}"
                     var="deploymentInstance" status="i">
-                <g:if test="${applicationDeploymentInstance == deploymentInstance}">
+                <g:if test="${applicationDeploymentInstance.id == deploymentInstance.id}">
                     <tr class="highlight ${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>
                             <carm:formatApplicationDeploymentState
