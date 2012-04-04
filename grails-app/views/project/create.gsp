@@ -70,7 +70,8 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:select name="projectOwners" from="${projectOwnerList}" optionKey="username"
+                        <g:select name="projectOwners" from="${projectOwnerList}"
+                                  optionKey="username" optionValue="fullName"
                                   value="${projectOwners}" multiple="true"
                                   required="required"
                                   title="${message(code: 'project.projectOwners.help')}"/>

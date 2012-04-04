@@ -601,7 +601,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
                     applicationDeployment.applicationRelease.application.name,
                     applicationDeployment.applicationRelease.releaseNumber,
                     applicationDeployment.deploymentEnvironment.name,
-                    currentUser.username,
+                    currentUser.fullName,
                     linkGeneratorService.createLink(controller: 'application', action: 'show',
                             id: applicationDeployment.applicationRelease.application.id)
             ]

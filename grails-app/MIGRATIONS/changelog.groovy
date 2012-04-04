@@ -902,6 +902,10 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
+            column(name: "fullName", type: "varchar(255)") {
+                constraints(nullable: "false")
+            }
+
 			column(name: "last_updated", type: "datetime") {
 				constraints(nullable: "false")
 			}

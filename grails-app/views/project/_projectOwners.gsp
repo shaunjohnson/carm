@@ -9,7 +9,7 @@
         <g:each in="${projectOwners}" var="projectOwner">
             <li>
                 <g:link controller="user" action="show" params="[username: projectOwner]">
-                    ${projectOwner}
+                    <carm:formatUser username="${projectOwner}"/>
                 </g:link>
             </li>
         </g:each>

@@ -28,7 +28,7 @@
         <div style="float: right; margin-top: 3px;">
             <sec:ifLoggedIn>
                 <g:link controller='logout'>
-                    <g:message code="logout.label" default="Logout"/> (<sec:loggedInUserInfo field="username"/>)
+                    <g:message code="logout.label" default="Logout"/> (<carm:formatCurrentUser/>)
                 </g:link>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
@@ -38,8 +38,8 @@
             </sec:ifNotLoggedIn>
         </div>
 
-        <div style="float: right; margin-right: 2em;">
-            <input id="quicksearch" size="20" placeholder="Search Applications"/>
+        <div style="float: right; margin-right: 1.5em;">
+            <input id="quicksearch" size="18" placeholder="Search Applications"/>
         </div>
 
         <div id="spinner" class="spinner" style="display: none;">

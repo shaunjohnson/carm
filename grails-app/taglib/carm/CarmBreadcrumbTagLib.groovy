@@ -478,7 +478,7 @@ class CarmBreadcrumbTagLib {
         def isFirst = attrs.isFirst
         out << link(controller: "user", action: "show",
                 title: message(code: "showUser.label"),
-                text: user.username, id: user.id, isFirst: isFirst)
+                text: user.fullName, id: user.id, isFirst: isFirst)
     }
 
     /**

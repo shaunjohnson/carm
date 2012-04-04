@@ -419,7 +419,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
             def args = [
                     applicationRelease.application.name,
                     applicationRelease.releaseNumber,
-                    currentUser.username,
+                    currentUser.fullName,
                     linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show',
                             id: applicationRelease.application.id)
             ]

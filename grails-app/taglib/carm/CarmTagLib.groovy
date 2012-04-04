@@ -229,6 +229,24 @@ class CarmTagLib {
     }
 
     /**
+     * Formats the current user fullName.
+     */
+    def formatCurrentUser = { attrs ->
+        out << carmSecurityService.currentUser.fullName.encodeAsHTML()
+    }
+
+    /**
+     * Formats a user as the user's full name if possible, otherwise the username is outputted
+     *
+     * attrs.username - Username of User to format
+     */
+    def formatUser = { attrs ->
+        def username = attrs.username
+
+        out << (carmSecurityService.findUserByUsername(username)?.fullName ?: username).encodeAsHTML()
+    }
+
+    /**
      * Renders the body of the tag if the provided domain is not in use.
      *
      * attrs.domain - Domain to test for use

@@ -172,7 +172,7 @@ class CarmSecurityService {
     }
 
     /**
-     * Find all users by username in list
+     * Find all users by username in list.
      *
      * @param usernames Username list used for filtering
      * @return List of User objects
@@ -181,6 +181,16 @@ class CarmSecurityService {
         User.findAllByUsernameInList(usernames)
     }
 
+    /**
+     * Finds a user by username.
+     *
+     * @param username Username for user to find
+     * @return Matching User object
+     */
+    User findUserByUsername(String username) {
+        User.findByUsername(username)
+    }
+    
     /**
      * Finds all user email addresses by username in list
      *

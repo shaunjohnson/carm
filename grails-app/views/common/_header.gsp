@@ -508,7 +508,7 @@
 <g:elseif test="${controller == 'user'}">
     <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
 
-    <carm:pageHeaderLabel action="${action}" beanName="${domain?.username}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel action="${action}" beanName="${domain?.fullName}" entityName="${entityName}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>

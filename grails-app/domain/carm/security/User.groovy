@@ -9,6 +9,7 @@ class User {
     String username
     String password
     String email
+    String fullName
     boolean enabled
     boolean accountExpired
     boolean accountLocked
@@ -18,8 +19,9 @@ class User {
     Date lastUpdated
 
     static constraints = {
-        username blank: false, unique: true
-        password blank: false
+        username(blank: false, unique: true)
+        password(blank: false)
+        fullName(blank: false, nullable: false)
     }
 
     static mapping = {
