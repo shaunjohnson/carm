@@ -71,15 +71,18 @@
 
         <div class="panel-container">
             <div id="summaryTab">
-                <g:render template="applicationReleaseSummary" model="[applicationReleaseInstance: applicationReleaseInstance]"/>
+                <g:render template="applicationReleaseSummary"
+                          model="[applicationReleaseInstance: applicationReleaseInstance]"/>
             </div>
 
             <div id="detailsTab">
-                <g:render template="applicationReleaseDetails" model="[applicationReleaseInstance: applicationReleaseInstance]"/>
+                <g:render template="applicationReleaseDetails"
+                          model="[applicationReleaseInstance: applicationReleaseInstance]"/>
 
                 <div>&nbsp;</div>
 
-                <g:render template="applicationReleaseModules" model="['applicationReleaseInstance': applicationReleaseInstance]"/>
+                <g:render template="applicationReleaseModules"
+                          model="['applicationReleaseInstance': applicationReleaseInstance]"/>
             </div>
 
             <div id="deploymentsTab">
