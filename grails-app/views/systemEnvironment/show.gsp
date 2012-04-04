@@ -14,80 +14,60 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="dialog">
-        <table id="systemDetails" class="details">
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="systemEnvironment.description.label" default="Description"/>
-                </td>
-                <td valign="top" class="value">
-                    <div class="expander">
-                        <carm:plainText value="${systemEnvironmentInstance?.description}"/>
-                    </div>
-                </td>
-            </tr>
+    <div id="systemTabs" class="tab-container">
+        <ul class="tabs">
+            <li>
+                <a href="#applicationsTab">
+                    <g:message code="applications.label" default="Applications"/>
+                </a>
+            </li>
+            <li>
+                <a href="#detailsTab">
+                    <g:message code="details.label" default="Details"/>
+                </a>
+            </li>
+            <li>
+                <a href="#activityTab">
+                    <g:message code="activity.label" default="Activity"/>
+                </a>
+            </li>
+        </ul>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+        <div class="panel-container">
+            <div id="applicationsTab">
+                <g:render template="systemApplications"
+                          model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+            </div>
 
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="systemEnvironment.dateCreated.label" default="Date Created"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${systemEnvironmentInstance?.dateCreated}"/>
-                </td>
-            </tr>
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="systemEnvironment.lastUpdated.label" default="Last Updated"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${systemEnvironmentInstance?.lastUpdated}"/>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <carm:showHideDetails sectionId="systemDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${systemEnvironmentInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <carm:ifNotInUse domain="${systemEnvironmentInstance}">
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${systemEnvironmentInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </carm:ifNotInUse>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
+            <div id="detailsTab">
+                <g:render template="systemDetails" model="[systemInstance: systemEnvironmentInstance]"/>
+
+                <table class="twoColumnLayout">
+                    <tbody>
+                    <tr>
+                        <td class="layoutColumnFirst">
+                            <g:render template="systemServers" model="['systemInstance': systemEnvironmentInstance]"/>
+                        </td>
+                        <td class="layoutColumnLast">
+                            <g:render template="systemDeploymentEnvironments" model="['systemInstance': systemEnvironmentInstance]"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="activityTab">
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemEnvironmentInstance.id]"/>
+            </div>
+        </div>
     </div>
 
-    <table class="twoColumnLayout">
-        <tbody>
-        <tr>
-            <td class="layoutColumnFirst">
-                <g:render template="systemServers" model="['systemInstance': systemEnvironmentInstance]"/>
-            </td>
-            <td class="layoutColumnLast">
-                <g:render template="systemDeploymentEnvironments" model="['systemInstance': systemEnvironmentInstance]"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <g:render template="systemApplications"
-              model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
-
-    <g:render template="/common/activity"
-              model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemEnvironmentInstance.id]"/>
+    <script type='text/javascript'>
+        jQuery(function () {
+            jQuery("#systemTabs").easytabs({ animationSpeed:'fast' });
+        });
+    </script>
 </div>
 </body>
 </html>

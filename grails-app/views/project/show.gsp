@@ -15,7 +15,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div id="applicationTabs" class="tab-container">
+    <div id="projectTabs" class="tab-container">
         <ul class="tabs">
             <li>
                 <a href="#summaryTab">
@@ -65,7 +65,7 @@
 
     <script type='text/javascript'>
         jQuery(function () {
-            jQuery("#applicationTabs").easytabs({ animationSpeed:'fast' });
+            jQuery("#projectTabs").easytabs({ animationSpeed:'fast' });
         });
     </script>
 </div>
