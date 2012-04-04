@@ -1,45 +1,53 @@
 package carm
 
+import org.springframework.context.i18n.LocaleContextHolder
 import java.text.MessageFormat
+import org.springframework.context.MessageSource
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
 
-class NotificationService {
+class NotificationService implements ApplicationContextAware {
 
     static transactional = false
 
+    ApplicationContext applicationContext
     def grailsApplication
     def mailService
 
-    def sendEmail(String fromEmailAddress, String toEmailAddress, String subject, String message) {
-        def type = grailsApplication.config.carm.mail.type
-        def emailSubject = "[CARM] ${subject}"
+    def sendEmail(String fromEmailAddress, List<String> toEmailAddresses, String subjectCode, String messageCode, List<Object> args) {
+        MessageSource messageSource = applicationContext.getBean("messageSource")
+        String subject = "[CARM] " + messageSource.getMessage(subjectCode, args.toArray(), LocaleContextHolder.locale)
+        String message = messageSource.getMessage(messageCode, args.toArray(), LocaleContextHolder.locale)
 
+        def type = grailsApplication.config.carm.mail.type
         if (type == 'shell') {
-            sendEmailUsingShell(fromEmailAddress, toEmailAddress, emailSubject, message)
+            sendEmailUsingShell(fromEmailAddress, toEmailAddresses, subject, message)
         }
         else if (type == 'mail') {
-            sendEmailUsingMail(fromEmailAddress, toEmailAddress, emailSubject, message)
+            sendEmailUsingMail(fromEmailAddress, toEmailAddresses, subject, message)
         }
         else {
             // Do nothing
         }
     }
 
-    private sendEmailUsingMail(String fromEmailAddress, String toEmailAddress, String subject, String message) {
+    private sendEmailUsingMail(String fromEmailAddress, List<String> toEmailAddresses, String subject, String message) {
         mailService.sendMail {
-            to toEmailAddress
+            to toEmailAddresses.join(", ")
             from fromEmailAddress
             subject subject
             body message
         }
     }
 
-    private sendEmailUsingShell(String fromEmailAddress, String toEmailAddress, String subject, String message) {
+    private sendEmailUsingShell(String fromEmailAddress, List<String> toEmailAddresses, String subject, String message) {
         def shell = grailsApplication.config.carm.mail.shell.command
         def host = grailsApplication.config.grails.mail.host
         def port = grailsApplication.config.grails.mail.port
 
-        def command = MessageFormat.format(shell, [host, port, fromEmailAddress, toEmailAddress, subject, message].toArray())
-
-        command.execute()
+        toEmailAddresses.each { toEmailAddress ->
+            def command = MessageFormat.format(shell, [host, port, fromEmailAddress, toEmailAddress, subject, message].toArray())
+            command.execute()
+        }
     }
 }
