@@ -14,77 +14,47 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="dialog">
-        <table id="systemDeploymentEnvironmentDetails" class="details">
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="systemDeploymentEnvironment.description.label" default="Description"/>
-                </td>
-                <td valign="top" class="value">
-                    <div class="expander">
-                        <carm:plainText value="${systemDeploymentEnvironmentInstance?.description}"/>
-                    </div>
-                </td>
-            </tr>
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="systemDeploymentEnvironment.system.label" default="System"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:link controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}">
-                        ${systemDeploymentEnvironmentInstance?.sysEnvironment?.encodeAsHTML()}
-                    </g:link>
-                </td>
-            </tr>
+    <div id="systemTabs" class="tab-container">
+        <ul class="tabs">
+            <li>
+                <a href="#applicationsTab">
+                    <g:message code="applications.label" default="Applications"/>
+                </a>
+            </li>
+            <li>
+                <a href="#detailsTab">
+                    <g:message code="details.label" default="Details"/>
+                </a>
+            </li>
+            <li>
+                <a href="#activityTab">
+                    <g:message code="activity.label" default="Activity"/>
+                </a>
+            </li>
+        </ul>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+        <div class="panel-container">
+            <div id="applicationsTab">
+                <g:render template="systemEnvironmentApplications"
+                          model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+            </div>
 
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="systemDeploymentEnvironment.dateCreated.label" default="Date Created"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${systemDeploymentEnvironmentInstance?.dateCreated}"/>
-                </td>
-            </tr>
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="systemDeploymentEnvironment.lastUpdated.label" default="Last Updated"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${systemDeploymentEnvironmentInstance?.lastUpdated}"/>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <carm:showHideDetails sectionId="systemDeploymentEnvironmentDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${systemDeploymentEnvironmentInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <carm:ifNotInUse domain="${systemDeploymentEnvironmentInstance}">
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${systemDeploymentEnvironmentInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </carm:ifNotInUse>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
+            <div id="detailsTab">
+                <g:render template="systemEnvironmentDetails" model="[systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance]"/>
+            </div>
+
+            <div id="activityTab">
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemDeploymentEnvironmentInstance.id]"/>
+            </div>
+        </div>
     </div>
 
-    <g:render template="systemEnvironmentApplications"
-              model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
-
-    <g:render template="/common/activity"
-              model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemDeploymentEnvironmentInstance.id]"/>
+    <script type='text/javascript'>
+        jQuery(function () {
+            jQuery("#systemTabs").easytabs({ animationSpeed:'fast' });
+        });
+    </script>
 </div>
 </body>
 </html>
