@@ -420,7 +420,8 @@ class ApplicationReleaseService implements ApplicationContextAware {
                     applicationRelease.application.name,
                     applicationRelease.releaseNumber,
                     currentUser.username,
-                    linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show', id: applicationRelease.id)
+                    linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show',
+                            id: applicationRelease.application.id)
             ]
 
             notificationService.sendEmail(
