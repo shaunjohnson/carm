@@ -20,6 +20,9 @@
     <g:javascript library="jquery" plugin="jquery"/>
     <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
 
+    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.cookie.js')}'></script>
+    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.ba-hashchange.min.js')}'></script>
+    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.easytabs.min.js')}'></script>
     <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.expander.min.js')}'></script>
     <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
