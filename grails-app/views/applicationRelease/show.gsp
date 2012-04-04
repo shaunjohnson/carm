@@ -59,7 +59,7 @@
             </li>
             <li>
                 <a href="#deploymentsTab">
-                    <g:message code="permissions.label" default="Permissions"/>
+                    <g:message code="deployments.label" default="Deployments"/>
                 </a>
             </li>
             <li>
