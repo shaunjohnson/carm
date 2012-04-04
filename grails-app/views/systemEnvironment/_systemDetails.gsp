@@ -30,11 +30,11 @@
         </td>
     </tr>
 
-    <tr class="prop detailProp">
+    <tr class="prop">
         <td colspan="2">&nbsp;</td>
     </tr>
 
-    <tr class="prop detailProp">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="systemEnvironment.dateCreated.label" default="Date Created"/>
         </td>
@@ -42,7 +42,7 @@
             <g:formatDate date="${systemEnvironmentInstance?.dateCreated}"/>
         </td>
     </tr>
-    <tr class="prop detailProp">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="systemEnvironment.lastUpdated.label" default="Last Updated"/>
         </td>
