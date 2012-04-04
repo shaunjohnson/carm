@@ -426,7 +426,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
 
             notificationService.sendEmail(
                     currentUser.email,
-                    carmSecurityService.findAllUsersByUsernameInList(projectOwners),
+                    carmSecurityService.findAllEmailByUsernameInList(projectOwners),
                     'applicationReleased.notification.subject', 'applicationReleased.notification.message', args)
         }
     }

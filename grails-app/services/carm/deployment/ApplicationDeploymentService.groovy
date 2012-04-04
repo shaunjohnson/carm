@@ -608,7 +608,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
 
             notificationService.sendEmail(
                     currentUser.email,
-                    carmSecurityService.findAllUsersByUsernameInList(projectOwners),
+                    carmSecurityService.findAllEmailByUsernameInList(projectOwners),
                     'applicationDeployed.notification.subject', 'applicationDeployed.notification.message', args)
         }
     }
