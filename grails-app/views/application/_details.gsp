@@ -17,7 +17,7 @@
 
 <table>
     <tbody>
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.project.label" default="Project"/></td>
         <td valign="top" class="value">
@@ -26,7 +26,7 @@
             </g:link>
         </td>
     </tr>
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.type.label" default="Type"/>
         </td>
@@ -49,11 +49,11 @@
         </td>
     </tr>
 
-    <tr class="prop ">
+    <tr class="prop">
         <td colspan="2">&nbsp;</td>
     </tr>
 
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.sourceControlRepository.label" default="Source Control Repository"/>
         </td>
@@ -69,7 +69,7 @@
             <carm:formatSourceControl application="${applicationInstance}"/>
         </td>
     </tr>
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.buildInstructions.label" default="Build Instructions"/>
         </td>
@@ -78,7 +78,7 @@
         </td>
     </tr>
 
-    <tr class="prop ">
+    <tr class="prop">
         <td colspan="2">&nbsp;</td>
     </tr>
 
@@ -93,7 +93,7 @@
             </g:link>
         </td>
     </tr>
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.deployInstructions.label" default="Deploy Instructions"/>
         </td>
@@ -102,11 +102,11 @@
         </td>
     </tr>
 
-    <tr class="prop ">
+    <tr class="prop">
         <td colspan="2">&nbsp;</td>
     </tr>
 
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.dateCreated.label" default="Date Created"/>
         </td>
@@ -114,7 +114,7 @@
             <g:formatDate date="${applicationInstance?.dateCreated}"/>
         </td>
     </tr>
-    <tr class="prop ">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="application.lastUpdated.label" default="Last Updated"/>
         </td>

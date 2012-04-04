@@ -1,3 +1,9 @@
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="project.projectOwners.label" default="Project Owners"/>
+    </div>
+</div>
+
 <g:if test="${projectOwners?.size()}">
     <ul>
         <g:each in="${projectOwners}" var="projectOwner">

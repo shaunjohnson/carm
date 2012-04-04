@@ -15,98 +15,59 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="dialog">
-        <table id="projectDetails" class="details">
-            <tbody>
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="project.category.label" default="Category"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:link controller="projectCategory" action="show" id="${projectInstance?.category?.id}">
-                        ${fieldValue(bean: projectInstance, field: "category")}
-                    </g:link>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="project.description.label" default="Description"/>
-                </td>
-                <td valign="top" class="value">
-                    <div class="expander">
-                        <carm:plainText value="${projectInstance?.description}"/>
-                    </div>
-                </td>
-            </tr>
+    <div id="applicationTabs" class="tab-container">
+        <ul class="tabs">
+            <li>
+                <a href="#summaryTab">
+                    <g:message code="summary.label" default="Summary"/>
+                </a>
+            </li>
+            <li>
+                <a href="#detailsTab">
+                    <g:message code="details.label" default="Details"/>
+                </a>
+            </li>
+            <li>
+                <a href="#permissionsTab">
+                    <g:message code="permissions.label" default="Permissions"/>
+                </a>
+            </li>
+            <li>
+                <a href="#activityTab">
+                    <g:message code="activity.label" default="Activity"/>
+                </a>
+            </li>
+        </ul>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+        <div class="panel-container">
+            <div id="summaryTab">
+                <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
 
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="project.dateCreated.label" default="Date Created"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${projectInstance?.dateCreated}"/>
-                </td>
-            </tr>
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="project.lastUpdated.label" default="Last Updated"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:formatDate date="${projectInstance?.lastUpdated}"/>
-                </td>
-            </tr>
+                <div>&nbsp;</div>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
-
-            <tr class="prop detailProp">
-                <td valign="top" class="name">
-                    <g:message code="project.projectOwners.label" default="Project Owners"/>
-                </td>
-                <td valign="top" class="value">
-                    <g:render template="projectOwners" model="[projectOwners: projectOwners]"/>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <carm:showHideDetails sectionId="projectDetails" entityName="${entityName}">
-            <carmsec:isProjectOwner project="${projectInstance}">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${projectInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <span class="button">
-                        <g:link class="delete" action="delete" id="${projectInstance?.id}">
-                            <g:message code="default.button.delete.label" default="Delete"/>
-                        </g:link>
-                    </span>
-                </div>
-            </carmsec:isProjectOwner>
-        </carm:showHideDetails>
-    </div>
-
-    <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
-
-    <table class="twoColumnLayout">
-        <tbody>
-        <tr>
-            <td class="layoutColumnFirst">
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
-            </td>
-            <td class="layoutColumnLast">
+            </div>
+
+            <div id="detailsTab">
+                <g:render template="details" model="[projectInstance: projectInstance]"/>
+            </div>
+
+            <div id="permissionsTab">
+                <g:render template="projectOwners" model="[projectOwners: projectOwners]"/>
+            </div>
+
+            <div id="activityTab">
                 <g:render template="/common/activity"
                           model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: projectInstance.id]"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript'>
+        jQuery(function () {
+            jQuery("#applicationTabs").easytabs({ animationSpeed:'fast' });
+        });
+    </script>
 </div>
 
 </body>
