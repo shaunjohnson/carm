@@ -484,6 +484,15 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders an upcoming deployments label.
      */
+    def completedDeploymentsLabel = { attrs ->
+        def entityName = attrs.entityName
+        def isFirst = attrs.isFirst
+        out << text(code: "default.completedDeployments.label", args: [entityName], isFirst: isFirst)
+    }
+
+    /**
+     * Renders an upcoming deployments label.
+     */
     def upcomingDeploymentsLabel = { attrs ->
         def entityName = attrs.entityName
         def isFirst = attrs.isFirst

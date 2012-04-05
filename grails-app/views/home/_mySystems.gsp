@@ -28,9 +28,19 @@
             </div>
 
             <div style="margin: 0.5em 0;">
-                <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
-                    <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
-                </g:link>
+                <div style="float:left; padding-right: 1em;">
+                    <g:link controller="systemEnvironment" action="completedDeployments" id="${systemInstance.id}">
+                        <g:message code="completedDeployments.label" default="Completed Deployments"/>
+                    </g:link>
+                </div>
+
+                <div style="float:left; padding-right: 1em;">
+                    <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
+                        <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
+                    </g:link>
+                </div>
+
+                <div class="clearing"></div>
             </div>
         </div>
 

@@ -122,6 +122,42 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         }
     }
 
+    def findAllDeploymentsGroupedByDay(SystemEnvironment systemEnvironment, Date completedDate) {
+        groupDeploymentsByDateEnvironmentType(findAllBySystemEnvironmentAndCompletedDate(systemEnvironment, completedDate))
+    }
+
+    def findAllUpcomingDeploymentsGroupedByDay(SystemEnvironment systemEnvironment) {
+        groupDeploymentsByDateEnvironmentType(findAllUpcomingBySystemEnvironment(systemEnvironment))
+    }
+
+    private groupDeploymentsByDateEnvironmentType(List<ApplicationDeployment> applicationDeployments) {
+        def applicationDeploymentsGrouped = [:]
+
+        applicationDeployments.each { ApplicationDeployment deployment ->
+            def dateGroup = applicationDeploymentsGrouped[deployment.requestedDeploymentDate]
+            if (!dateGroup) {
+                dateGroup = [:]
+                applicationDeploymentsGrouped[deployment.requestedDeploymentDate] = dateGroup
+            }
+
+            def envGroup = dateGroup[deployment.deploymentEnvironment]
+            if (!envGroup) {
+                envGroup = [:]
+                dateGroup[deployment.deploymentEnvironment] = envGroup
+            }
+
+            def typeList = envGroup[deployment.applicationRelease.application.type]
+            if (!typeList) {
+                typeList = []
+                envGroup[deployment.applicationRelease.application.type] = typeList
+            }
+
+            typeList.add(deployment)
+        }
+
+        applicationDeploymentsGrouped
+    }
+
     /**
      * Gets the ApplicationDeployment object with the provided ID.
      *
@@ -512,6 +548,28 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         }
 
         return results
+    }
+
+    /**
+     * Finds all application deployments for a system completed on a specific day.
+     *
+     * @param systemEnvironment SystemEnvironment used to filter deployments
+     * @param completedDeploymentDate Completed deployment date used for filtering deployments
+     * @return List of ApplicationDeployment objects
+     */
+    def findAllBySystemEnvironmentAndCompletedDate(SystemEnvironment systemEnvironment, Date completedDeploymentDate) {
+        ApplicationDeployment.executeQuery("""
+            from
+                ApplicationDeployment ad
+            where
+                ad.deploymentEnvironment.sysEnvironment = :systemEnvironment
+                and ad.completedDeploymentDate = :completedDeploymentDate
+            order by
+                ad.requestedDeploymentDate asc,
+                ad.deploymentEnvironment.name asc,
+                ad.applicationRelease.application.type asc,
+                ad.applicationRelease.application.name asc
+        """, [systemEnvironment: systemEnvironment, completedDeploymentDate: completedDeploymentDate])
     }
 
     /**

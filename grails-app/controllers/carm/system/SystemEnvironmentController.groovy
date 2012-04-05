@@ -3,6 +3,9 @@ package carm.system
 import grails.plugins.springsecurity.Secured
 import carm.exceptions.DomainInUseException
 import org.springframework.dao.DataIntegrityViolationException
+import org.apache.commons.lang.time.DateUtils
+import org.joda.time.DateTime
+import java.text.SimpleDateFormat
 
 class SystemEnvironmentController {
 
@@ -158,36 +161,41 @@ class SystemEnvironmentController {
         }
     }
 
+    def ajaxDeploymentsByDay() {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (systemEnvironmentInstance) {
+            def date = new SimpleDateFormat(message(code: 'java.datepicker.format')).parse(params.date)
+            def applicationDeploymentsGrouped = applicationDeploymentService.findAllDeploymentsGroupedByDay(systemEnvironmentInstance, date)
+
+            render(template: "completedDeployments", model: [applicationDeploymentsGrouped: applicationDeploymentsGrouped, date: date])
+        }
+        else {
+            render "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+        }
+    }
+
+    def completedDeployments() {
+        def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
+        if (systemEnvironmentInstance) {
+            def today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH)
+
+            [
+                    applicationDeploymentsGrouped: applicationDeploymentService.findAllDeploymentsGroupedByDay(systemEnvironmentInstance, today),
+                    systemInstance: systemEnvironmentInstance,
+                    today: today
+            ]
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
     def upcomingDeployments() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
-            def applicationDeploymentInstanceList = applicationDeploymentService.findAllUpcomingBySystemEnvironment(systemEnvironmentInstance)
-
-            def applicationDeploymentsGrouped = [:]
-            applicationDeploymentInstanceList.each { deployment ->
-                def dateGroup = applicationDeploymentsGrouped[deployment.requestedDeploymentDate]
-                if (!dateGroup) {
-                    dateGroup = [:]
-                    applicationDeploymentsGrouped[deployment.requestedDeploymentDate] = dateGroup
-                }
-
-                def envGroup = dateGroup[deployment.deploymentEnvironment]
-                if (!envGroup) {
-                    envGroup = [:]
-                    dateGroup[deployment.deploymentEnvironment] = envGroup
-                }
-
-                def typeList = envGroup[deployment.applicationRelease.application.type]
-                if (!typeList) {
-                    typeList = []
-                    envGroup[deployment.applicationRelease.application.type] = typeList
-                }
-
-                typeList.add(deployment)
-            }
-
             [
-                    applicationDeploymentsGrouped: applicationDeploymentsGrouped,
+                    applicationDeploymentsGrouped: applicationDeploymentService.findAllUpcomingDeploymentsGroupedByDay(systemEnvironmentInstance),
                     systemInstance: systemEnvironmentInstance
             ]
         }

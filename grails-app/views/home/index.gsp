@@ -22,7 +22,8 @@
                     <g:render template="myProjects" model="[myProjects: myProjects]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
-                    <g:render template="mostActiveApplications" model="[mostActiveApplications: mostActiveApplications]"/>
+                    <g:render template="mostActiveApplications"
+                              model="[mostActiveApplications: mostActiveApplications]"/>
                 </sec:ifNotLoggedIn>
             </td>
             <td class="layoutColumnLast">
@@ -30,7 +31,8 @@
                     <g:render template="mySystems" model="[mySystemEnvironments: mySystemEnvironments]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
-                    <g:render template="mostActiveSystems" model="[mostActiveSystemEnvironments: mostActiveSystemEnvironments]"/>
+                    <g:render template="mostActiveSystems"
+                              model="[mostActiveSystemEnvironments: mostActiveSystemEnvironments]"/>
                 </sec:ifNotLoggedIn>
 
                 <div>&nbsp;</div>
@@ -43,7 +45,7 @@
 
                 <div id="chart_div" style="height: 240px; width: 450px; text-align: center; position:relative">
                     <img src="${resource(dir: 'images', file: 'ajax-loader.gif')}"
-                        style="position:absolute; top:50%; height: 42px; margin-top:-21px; margin-left: -21px;"
+                         style="position:absolute; top:50%; height: 42px; margin-top:-21px; margin-left: -21px;"
                          alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>
                 </div>
 
@@ -75,8 +77,8 @@
     function drawChart(response) {
         var data = response.getDataTable();
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, {width: 450, height: 240,
-            title: '<g:message code="releaseAndDeploymentActivityByDay.label" default="Releases and Deployments per Day"/>'});
+        chart.draw(data, {width:450, height:240,
+            title:'<g:message code="releaseAndDeploymentActivityByDay.label" default="Releases and Deployments per Day"/>'});
     }
 </script>
 

@@ -471,6 +471,10 @@
                 <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:label code="allActivity.label" args="[entityName]"/>
             </g:elseif>
+            <g:elseif test="${action == 'completedDeployments'}">
+                <bc:showSystemEnvironment systemEnvironment="${domain}"/>
+                <bc:completedDeploymentsLabel entityName="${entityName}"/>
+            </g:elseif>
             <g:elseif test="${action == 'upcomingDeployments'}">
                 <bc:showSystemEnvironment systemEnvironment="${domain}"/>
                 <bc:upcomingDeploymentsLabel entityName="${entityName}"/>
