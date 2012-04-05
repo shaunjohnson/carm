@@ -21,26 +21,36 @@
             <tr>
                 <td>
                     <g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
-                        title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">
+                            title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">
                         ${deploymentEnvironment.name.encodeAsHTML()}
                     </g:link>
                 </td>
-                <td>
-                    <g:if test="${deployment}">
+                <g:if test="${deployment}">
+                    <td>
                         <g:link controller="applicationRelease" action="show" id="${deployment.applicationRelease.id}"
                                 title="${message(code: "showApplicationRelease.label", default: "Show Application Release")}">
                             ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
                         </g:link>
-                    </g:if>
-                </td>
-                <td>
-                    <g:if test="${deployment}">
+                    </td>
+                    <td>
+                        <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
+                    </td>
+                    <td>
                         <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
                                 title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
-                            <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
+                            <img src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/>
                         </g:link>
-                    </g:if>
-                </td>
+                        <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
+                                title="${message(code: "promote.label", default: "Promote")}">
+                            <img src="${fam.icon(name: 'page_white_get')}" alt="Promote"/>
+                        </g:link>
+                    </td>
+                </g:if>
+                <g:else>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </g:else>
             </tr>
         </g:each>
         </tbody>
