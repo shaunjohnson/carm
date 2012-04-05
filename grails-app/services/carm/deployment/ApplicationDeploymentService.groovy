@@ -123,21 +123,24 @@ class ApplicationDeploymentService implements ApplicationContextAware {
     }
 
     def findAllDeploymentsGroupedByDay(SystemEnvironment systemEnvironment, Date completedDate) {
-        groupDeploymentsByDateEnvironmentType(findAllBySystemEnvironmentAndCompletedDate(systemEnvironment, completedDate))
+        def applicationDeployments =findAllBySystemEnvironmentAndCompletedDate(systemEnvironment, completedDate)
+        groupDeploymentsByDateEnvironmentType(applicationDeployments, "completedDeploymentDate")
     }
 
     def findAllUpcomingDeploymentsGroupedByDay(SystemEnvironment systemEnvironment) {
-        groupDeploymentsByDateEnvironmentType(findAllUpcomingBySystemEnvironment(systemEnvironment))
+        def applicationDeployments = findAllUpcomingBySystemEnvironment(systemEnvironment)
+        groupDeploymentsByDateEnvironmentType(applicationDeployments, "requestedDeploymentDate")
     }
 
-    private groupDeploymentsByDateEnvironmentType(List<ApplicationDeployment> applicationDeployments) {
+    private groupDeploymentsByDateEnvironmentType(List<ApplicationDeployment> applicationDeployments, String dateField) {
         def applicationDeploymentsGrouped = [:]
 
         applicationDeployments.each { ApplicationDeployment deployment ->
-            def dateGroup = applicationDeploymentsGrouped[deployment.requestedDeploymentDate]
+            def date = deployment["${dateField}"]
+            def dateGroup = applicationDeploymentsGrouped[date]
             if (!dateGroup) {
                 dateGroup = [:]
-                applicationDeploymentsGrouped[deployment.requestedDeploymentDate] = dateGroup
+                applicationDeploymentsGrouped[date] = dateGroup
             }
 
             def envGroup = dateGroup[deployment.deploymentEnvironment]
