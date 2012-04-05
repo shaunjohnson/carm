@@ -46,7 +46,8 @@ class ApplicationReleaseController {
         else {
             def applicationReleaseInstance = applicationReleaseService.create(applicationInstance.project, params)
             if (!applicationReleaseInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), applicationReleaseInstance.releaseNumber])}"
+                def releaseNumber = applicationReleaseInstance.releaseNumber
+                flash.message = "${message(code: 'applicationRelease.created.message', default: 'Release {0} of {1} created', args: [releaseNumber, applicationInstance])}"
                 redirect(controller: "application", action: "show", id: applicationReleaseInstance.application.id)
             }
             else {
@@ -98,7 +99,9 @@ class ApplicationReleaseController {
             }
             applicationReleaseService.update(applicationReleaseInstance.application.project, applicationReleaseInstance, params)
             if (!applicationReleaseInstance.hasErrors() && applicationReleaseInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), applicationReleaseInstance.releaseNumber])}"
+                def releaseNumber = applicationReleaseInstance.releaseNumber
+                def application = applicationReleaseInstance.application
+                flash.message = "${message(code: 'applicationRelease.updated.message', default: 'Release {0} of {1} updated', args: [releaseNumber, application])}"
                 redirect(controller: "applicationRelease", action: "show", id: applicationReleaseInstance.id)
             }
             else {
@@ -117,8 +120,9 @@ class ApplicationReleaseController {
             try {
                 def applicationId = applicationReleaseInstance.application.id
                 def releaseNumber = applicationReleaseInstance.releaseNumber
+                def application = applicationReleaseInstance.application
                 applicationReleaseService.delete(applicationReleaseInstance.application.project, applicationReleaseInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), releaseNumber])}"
+                flash.message = "${message(code: 'applicationRelease.deleted.message', default: 'Release {0} of {1} deleted', args: [releaseNumber, application])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (DataIntegrityViolationException e) {

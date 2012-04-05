@@ -102,7 +102,6 @@ class ApplicationDeploymentController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (applicationDeploymentInstance.version > version) {
-
                     applicationDeploymentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment')] as Object[], "Another user has updated this ApplicationDeployment while you were editing")
                     render(view: "edit", model: [applicationDeploymentInstance: applicationDeploymentInstance])
                     return
@@ -110,7 +109,12 @@ class ApplicationDeploymentController {
             }
             applicationDeploymentService.update(applicationDeploymentInstance.applicationRelease.application.project, applicationDeploymentInstance, params)
             if (!applicationDeploymentInstance.hasErrors() && applicationDeploymentInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), applicationDeploymentInstance.id])}"
+                def applicationRelease = applicationDeploymentInstance.applicationRelease
+                def application = applicationRelease.application.name
+                def releaseNumber = applicationRelease.releaseNumber
+                def environment = applicationDeploymentInstance.deploymentEnvironment.name
+
+                flash.message = "${message(code: 'applicationDeployment.updated.message', default: 'Deployment of {0} Release {1} to {2} updated', args: [application, releaseNumber, environment])}"
                 redirect(action: "show", id: applicationDeploymentInstance.id)
             }
             else {
@@ -127,9 +131,13 @@ class ApplicationDeploymentController {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (applicationDeploymentInstance) {
             ApplicationRelease applicationRelease = applicationDeploymentInstance.applicationRelease
+            def application = applicationRelease.application.name
+            def releaseNumber = applicationRelease.releaseNumber
+            def environment = applicationDeploymentInstance.deploymentEnvironment.name
+
             try {
                 applicationDeploymentService.delete(applicationRelease.application.project, applicationDeploymentInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+                flash.message = "${message(code: 'applicationDeployment.deleted.message', default: 'Deployment of {0} Release {1} to {2} deleted', args: [application, releaseNumber, environment])}"
                 redirect(controller: "applicationRelease", action: "show", id: applicationRelease.id)
             }
             catch (DataIntegrityViolationException e) {

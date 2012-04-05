@@ -70,7 +70,6 @@ class ProjectCategoryController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (projectCategoryInstance.version > version) {
-                    
                     projectCategoryInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'projectCategory.label', default: 'ProjectCategory')] as Object[], "Another user has updated this ProjectCategory while you were editing")
                     render(view: "edit", model: [projectCategoryInstance: projectCategoryInstance])
                     return
