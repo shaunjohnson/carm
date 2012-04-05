@@ -26,17 +26,21 @@
                         test="${(i + 1) < systemInstance.environments.size()}">,</g:if>
                 </g:each>
             </div>
-
+            
             <div style="margin: 0.5em 0;">
                 <div style="float:left; padding-right: 1em;">
+                    <g:message code="deployments.label" default="Deployments"/>:
+                </div>
+
+                <div style="float:left; padding-right: 1em;">
                     <g:link controller="systemEnvironment" action="completedDeployments" id="${systemInstance.id}">
-                        <g:message code="completedDeployments.label" default="Completed Deployments"/>
+                        <g:message code="completed.label" default="Completed"/>
                     </g:link>
                 </div>
 
                 <div style="float:left; padding-right: 1em;">
                     <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
-                        <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
+                        <g:message code="upcoming.label" default="Upcoming"/>
                     </g:link>
                 </div>
 
