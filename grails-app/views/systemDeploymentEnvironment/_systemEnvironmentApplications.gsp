@@ -44,23 +44,27 @@
                                 )
                             </g:if>
                         </td>
-                        <td>
-                            <g:if test="${applicationDeployment?.applicationDeploymentId}">
+                        <g:if test="${applicationDeployment?.applicationDeploymentId}">
+                            <td>
                                 <g:link controller="applicationDeployment" action="show"
                                         id="${applicationDeployment.applicationDeploymentId}"
                                         title="${message(code: 'showApplicationDeployment.label')}">
                                     <carm:formatDateOnly date="${applicationDeployment.completedDeploymentDate}"/>
                                 </g:link>
-                            </g:if>
-                        </td>
-                        <td>
-                            <g:link controller="applicationDeployment" action="show"
-                                    id="${applicationDeployment?.applicationDeploymentId}"
-                                    title="${message(code: 'showApplicationDeployment.label')}">
-                                <carm:formatApplicationDeploymentState
-                                        deploymentState="${applicationDeployment?.deploymentState}"/>
-                            </g:link>
-                        </td>
+                            </td>
+                            <td>
+                                <g:link controller="applicationDeployment" action="show"
+                                        id="${applicationDeployment?.applicationDeploymentId}"
+                                        title="${message(code: 'showApplicationDeployment.label')}">
+                                    <carm:formatApplicationDeploymentState
+                                            deploymentState="${applicationDeployment?.deploymentState}"/>
+                                </g:link>
+                            </td>
+                        </g:if>
+                        <g:else>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </g:else>
                     </tr>
                 </g:each>
                 </tbody>

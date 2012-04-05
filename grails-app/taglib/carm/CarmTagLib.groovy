@@ -163,7 +163,10 @@ class CarmTagLib {
 
     def formatApplicationDeploymentState = { attrs ->
         def deploymentState = attrs.deploymentState
-        out << message(code: "carm.deployment.ApplicationDeploymentState.${deploymentState}", default: deploymentState.toString())
+
+        if (deploymentState) {
+            out << message(code: "carm.deployment.ApplicationDeploymentState.${deploymentState}", default: deploymentState.toString())
+        }
     }
 
     def formatBinariesPath = { attrs ->
