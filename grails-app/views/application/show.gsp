@@ -27,6 +27,11 @@
                 </a>
             </li>
             <li>
+                <a href="#modulesTab">
+                    <g:message code="modules.label" default="Modules"/>
+                </a>
+            </li>
+            <li>
                 <a href="#permissionsTab">
                     <g:message code="permissions.label" default="Permissions"/>
                 </a>
@@ -60,9 +65,9 @@
 
             <div id="detailsTab">
                 <g:render template="applicationDetails" model="[applicationInstance: applicationInstance]"/>
+            </div>
 
-                <div>&nbsp;</div>
-
+            <div id="modulesTab">
                 <g:render template="applicationModules" model="[applicationInstance: applicationInstance]"/>
             </div>
 
