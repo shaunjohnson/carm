@@ -17,6 +17,7 @@ class Application {
     String sourceControlPath
     SystemEnvironment sysEnvironment
     String buildInstructions
+    String binariesPath
     String deployInstructions
 
     Date dateCreated
@@ -31,6 +32,7 @@ class Application {
         sourceControlPath(maxSize: 200, nullable: true, unique: 'sourceControlRepository')
         sysEnvironment(nullable: true)
         buildInstructions(nullable: true)
+        binariesPath(maxSize:  200)
         deployInstructions(nullable: true)
     }
 

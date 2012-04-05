@@ -1,4 +1,7 @@
 <%@ page import="carm.deployment.ApplicationDeploymentState" %>
+
+<g:set var="applicationRelease" value="${applicationDeploymentInstance.applicationRelease}"/>
+
 <div class="sectionHeader">
     <div class="text">
         <g:message code="summary.label" default="Summary"/>
@@ -13,18 +16,18 @@
         </td>
         <td valign="top" class="value">
             <g:link controller="project" action="show"
-                    id="${applicationDeploymentInstance.applicationRelease.application.project.id}">
-                ${applicationDeploymentInstance.applicationRelease.application.project.name.encodeAsHTML()}
+                    id="${applicationRelease.application.project.id}">
+                ${applicationRelease.application.project.name.encodeAsHTML()}
             </g:link>
             -
             <g:link controller="application" action="show"
-                    id="${applicationDeploymentInstance.applicationRelease.application.id}">
-                ${applicationDeploymentInstance.applicationRelease.application.name.encodeAsHTML()}
+                    id="${applicationRelease.application.id}">
+                ${applicationRelease.application.name.encodeAsHTML()}
             </g:link>
             -
             <g:link controller="applicationRelease" action="show"
-                    id="${applicationDeploymentInstance.applicationRelease.id}">
-                ${applicationDeploymentInstance.applicationRelease.releaseNumber.encodeAsHTML()}
+                    id="${applicationRelease.id}">
+                ${applicationRelease.releaseNumber.encodeAsHTML()}
             </g:link>
             (<g:link controller="systemDeploymentEnvironment" action="show"
                      id="${applicationDeploymentInstance.deploymentEnvironment.id}">${applicationDeploymentInstance.deploymentEnvironment.name.encodeAsHTML()}</g:link>)
@@ -70,8 +73,8 @@
         </td>
         <td valign="top" class="value">
             <g:link controller="applicationRelease" action="show"
-                    id="${applicationDeploymentInstance.applicationRelease.id}">
-                ${applicationDeploymentInstance.applicationRelease.releaseNumber.encodeAsHTML()}
+                    id="${applicationRelease.id}">
+                ${applicationRelease.releaseNumber.encodeAsHTML()}
             </g:link>
         </td>
     </tr>
@@ -82,7 +85,7 @@
                        default="Change Log"/>
         </td>
         <td valign="top" class="value">
-            ${applicationDeploymentInstance.applicationRelease.changeLog?.decodeHTML()}
+            ${applicationRelease.changeLog?.decodeHTML()}
         </td>
     </tr>
 
@@ -95,5 +98,16 @@
             ${fieldValue(bean: applicationDeploymentInstance, field: "deploymentInstructions").decodeHTML()}
         </td>
     </tr>
+
+    <g:if test="${applicationRelease.application.binariesPath}">
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="application.binariesPath.label" default="Binaries Path"/>
+            </td>
+            <td valign="top" class="value">
+                <carm:formatBinariesPath applicationRelease="${applicationRelease}"/>
+            </td>
+        </tr>
+    </g:if>
     </tbody>
 </table>

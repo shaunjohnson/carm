@@ -55,5 +55,16 @@
             ${fieldValue(bean: applicationReleaseInstance, field: "buildInstructions").decodeHTML()}
         </td>
     </tr>
+
+    <g:if test="${applicationReleaseInstance.application.binariesPath}">
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="application.binariesPath.label" default="Binaries Path"/>
+            </td>
+            <td valign="top" class="value">
+                <carm:formatBinariesPath applicationRelease="${applicationReleaseInstance}"/>
+            </td>
+        </tr>
+    </g:if>
     </tbody>
 </table>

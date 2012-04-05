@@ -134,6 +134,8 @@ databaseChangeLog = {
 				constraints(nullable: "false")
 			}
 
+            column(name: "binaries_path", type: "varchar(200)")
+
 			column(name: "build_instructions", type: "longtext")
 
 			column(name: "date_created", type: "datetime") {

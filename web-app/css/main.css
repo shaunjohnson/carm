@@ -105,6 +105,11 @@ select {
     padding: 2px 2px 2px 0;
 }
 
+.fieldHelp {
+    color: #ACA899;
+    font-size: 0.85em;
+}
+
 strong {
     font-weight: bold;
 }

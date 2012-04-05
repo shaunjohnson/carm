@@ -71,6 +71,14 @@
     </tr>
     <tr class="prop">
         <td valign="top" class="name">
+            <g:message code="application.binariesPath.label" default="Binaries Path"/>
+        </td>
+        <td valign="top" class="value">
+            ${applicationInstance?.binariesPath?.encodeAsHTML()}
+        </td>
+    </tr>
+    <tr class="prop">
+        <td valign="top" class="name">
             <g:message code="application.buildInstructions.label" default="Build Instructions"/>
         </td>
         <td valign="top" class="value">

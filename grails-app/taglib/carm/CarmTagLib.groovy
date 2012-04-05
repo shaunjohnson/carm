@@ -166,6 +166,13 @@ class CarmTagLib {
         out << message(code: "carm.deployment.ApplicationDeploymentState.${deploymentState}", default: deploymentState.toString())
     }
 
+    def formatBinariesPath = { attrs ->
+        def applicationRelease = attrs.applicationRelease
+        def url = applicationRelease.application.binariesPath.replaceAll(/\$\{releaseNumber\}/, applicationRelease.releaseNumber)
+
+        out << link(url: url, target: "_blank") { url }
+    }
+
     /**
      * Formats a Date using a short format. This ia a helper taglib that makes it possible to control the format of
      * dates (not date and time) from a central location.

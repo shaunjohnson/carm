@@ -113,6 +113,22 @@
                 </tr>
                 <tr class="prop">
                     <td valign="top" class="name">
+                        <carm:label for="binariesPath">
+                            <g:message code="application.binariesPath.label" default="Binaries Path"/>
+                        </carm:label>
+                    </td>
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'binariesPath', 'errors')}">
+                        <g:textField name="binariesPath" maxlength="200" size="50"
+                                     value="${applicationInstance?.binariesPath}"
+                                     title="${message(code: 'application.binariesPath.help')}"/>
+                        <div class="fieldHelp">
+                            <g:message code="application.binariesPath.description"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="prop">
+                    <td valign="top" class="name">
                         <carm:label for="buildInstructions">
                             <g:message code="application.buildInstructions.label" default="Build Instructions"/>
                         </carm:label>
