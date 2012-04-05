@@ -721,3 +721,8 @@ div.sectionHeader div.actions a {
 .tabs li.open a.menu:after, .tabs .dropdown.open .dropdown-toggle:after {
     border-top-color: #555;
 }
+
+.ui-datepicker-week-end a.ui-state-default {
+    background: white;
+    border: 1px solid #E6E6E6;
+}
