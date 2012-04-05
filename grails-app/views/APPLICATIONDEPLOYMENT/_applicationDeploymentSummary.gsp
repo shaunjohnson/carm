@@ -1,3 +1,4 @@
+<%@ page import="carm.deployment.ApplicationDeploymentState" %>
 <div class="sectionHeader">
     <div class="text">
         <g:message code="summary.label" default="Summary"/>
@@ -8,27 +9,69 @@
     <tbody>
     <tr class="prop">
         <td valign="top" class="name">
-            <g:message code="applicationDeployment.applicationRelease.label" default="Application Release"/>
+            <g:message code="deployment.label" default="Deployment"/>
         </td>
         <td valign="top" class="value">
-            <g:link controller="applicationRelease" action="show"
-                    id="${applicationDeploymentInstance?.applicationRelease?.id}">
-                ${message(code: 'pageHeader.applicationRelease.label', args: [
-                        applicationDeploymentInstance?.applicationRelease?.application?.name,
-                        applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
+            <g:link controller="project" action="show"
+                    id="${applicationDeploymentInstance.applicationRelease.application.project.id}">
+                ${applicationDeploymentInstance.applicationRelease.application.project.name.encodeAsHTML()}
             </g:link>
+            -
+            <g:link controller="application" action="show"
+                    id="${applicationDeploymentInstance.applicationRelease.application.id}">
+                ${applicationDeploymentInstance.applicationRelease.application.name.encodeAsHTML()}
+            </g:link>
+            -
+            <g:link controller="applicationRelease" action="show"
+                    id="${applicationDeploymentInstance.applicationRelease.id}">
+                ${applicationDeploymentInstance.applicationRelease.releaseNumber.encodeAsHTML()}
+            </g:link>
+            (<g:link controller="systemDeploymentEnvironment" action="show"
+                     id="${applicationDeploymentInstance.deploymentEnvironment.id}">${applicationDeploymentInstance.deploymentEnvironment.name.encodeAsHTML()}</g:link>)
         </td>
     </tr>
 
     <tr class="prop">
         <td valign="top" class="name">
-            <g:message code="applicationDeployment.deploymentEnvironment.label"
-                       default="System Deployment Environment"/>
+            <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
         </td>
         <td valign="top" class="value">
-            <g:link controller="systemDeploymentEnvironment" action="show"
-                    id="${applicationDeploymentInstance?.deploymentEnvironment?.id}">
-                ${applicationDeploymentInstance?.deploymentEnvironment?.encodeAsHTML()}
+            <carm:formatApplicationDeploymentState
+                    deploymentState="${applicationDeploymentInstance.deploymentState}"/>
+        </td>
+    </tr>
+    
+    <g:if test="${applicationDeploymentInstance.deploymentState == ApplicationDeploymentState.COMPLETED}">
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="applicationDeployment.completedDeploymentDate.label"
+                           default="Completed Deployment Date"/>
+            </td>
+            <td valign="top" class="value">
+                <carm:formatDateOnly date="${applicationDeploymentInstance?.completedDeploymentDate}"/>
+            </td>
+        </tr>
+    </g:if>
+    <g:else>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="applicationDeployment.requestedDeploymentDate.label"
+                           default="Requested Deployment Date"/>
+            </td>
+            <td valign="top" class="value">
+                <carm:formatDateOnly date="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
+            </td>
+        </tr>
+    </g:else>
+
+    <tr class="prop">
+        <td valign="top" class="name">
+            <g:message code="applicationRelease.releaseNumber.label" default="Release Number"/>
+        </td>
+        <td valign="top" class="value">
+            <g:link controller="applicationRelease" action="show"
+                    id="${applicationDeploymentInstance.applicationRelease.id}">
+                ${applicationDeploymentInstance.applicationRelease.releaseNumber.encodeAsHTML()}
             </g:link>
         </td>
     </tr>
@@ -50,36 +93,6 @@
         </td>
         <td valign="top" class="value">
             ${fieldValue(bean: applicationDeploymentInstance, field: "deploymentInstructions").decodeHTML()}
-        </td>
-    </tr>
-
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="applicationDeployment.requestedDeploymentDate.label"
-                       default="Requested Deployment Date"/>
-        </td>
-        <td valign="top" class="value">
-            <carm:formatDateOnly date="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
-        </td>
-    </tr>
-
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="applicationDeployment.completedDeploymentDate.label"
-                       default="Completed Deployment Date"/>
-        </td>
-        <td valign="top" class="value">
-            <carm:formatDateOnly date="${applicationDeploymentInstance?.completedDeploymentDate}"/>
-        </td>
-    </tr>
-
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="applicationDeployment.deploymentState.label" default="Deployment State"/>
-        </td>
-        <td valign="top" class="value">
-            <carm:formatApplicationDeploymentState
-                    deploymentState="${applicationDeploymentInstance.deploymentState}"/>
         </td>
     </tr>
     </tbody>
