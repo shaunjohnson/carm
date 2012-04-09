@@ -15,6 +15,7 @@ class HomeController {
     def applicationDeploymentService
     def applicationReleaseService
     def applicationService
+    def carmSecurityService
     def projectService
     def springSecurityService
     def systemEnvironmentService
@@ -22,11 +23,13 @@ class HomeController {
     def index() {
         def mostActiveApplications = [:]
         def mostActiveSystemEnvironments = []
+        def myFavorites = []
         def myPendingTasks = []
         def myProjects = [:]
         def mySystemEnvironments = []
 
         if (springSecurityService.isLoggedIn()) {
+            myFavorites = carmSecurityService.currentUser?.favorites?.sort() { it.application.name }
             myProjects = projectService.getAllProjectsWhereOwner()
             mySystemEnvironments = systemEnvironmentService.findAllByProject(myProjects)
             myPendingTasks = projectService.findAllPendingTasks(myProjects)
@@ -47,6 +50,7 @@ class HomeController {
         }
 
         [
+                myFavorites: myFavorites,
                 myPendingTasks: myPendingTasks,
                 myProjects: myProjects,
                 mySystemEnvironments: mySystemEnvironments,

@@ -2,6 +2,7 @@ package carm.security
 
 import carm.sourcecontrol.SourceControlUser
 import org.apache.commons.lang.builder.HashCodeBuilder
+import carm.Favorite
 
 class User {
     transient springSecurityService
@@ -28,7 +29,7 @@ class User {
         password column: '`password`'
     }
 
-    static hasMany = [sourceControlUsers: SourceControlUser]
+    static hasMany = [sourceControlUsers: SourceControlUser, favorites: Favorite]
 
     Set<Role> getAuthorities() {
         UserRole.findAllByUser(this).collect { it.role } as Set
