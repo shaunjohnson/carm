@@ -46,7 +46,11 @@ class ProjectController {
             redirect(action: "show", id: projectInstance.id)
         }
         else {
-            render(view: "create", model: [projectInstance: projectInstance, projectOwners: params.projectOwners, projectOwnerList: User.listOrderByUsername()])
+            render(view: "create", model: [
+                    projectCategoryList: projectCategoryService.list(),
+                    projectInstance: projectInstance,
+                    projectOwners: params.projectOwners,
+                    projectOwnerList: User.listOrderByUsername()])
         }
     }
 
@@ -91,7 +95,11 @@ class ProjectController {
                 def version = params.version.toLong()
                 if (projectInstance.version > version) {
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
-                    render(view: "edit", model: [projectInstance: projectInstance, projectOwnerList: User.listOrderByUsername()])
+                    render(view: "edit", model: [
+                            projectCategoryList: projectCategoryService.list(),
+                            projectInstance: projectInstance,
+                            projectOwners: projectService.findAllProjectOwners(projectInstance),
+                            projectOwnerList: User.listOrderByUsername()])
                     return
                 }
             }
@@ -101,7 +109,11 @@ class ProjectController {
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
-                render(view: "edit", model: [projectInstance: projectInstance, projectOwnerList: User.listOrderByUsername()])
+                render(view: "edit", model: [
+                        projectCategoryList: projectCategoryService.list(),
+                        projectInstance: projectInstance,
+                        projectOwners: projectService.findAllProjectOwners(projectInstance),
+                        projectOwnerList: User.listOrderByUsername()])
             }
         }
         else {
