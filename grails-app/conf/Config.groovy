@@ -222,7 +222,7 @@ ui {
     }
     richTextEditor {
         type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
-        height = 400    // Height of editor in pixels
+        height = 250    // Height of editor in pixels
         width = 600     // Width of editor in pixels
     }
     sourceControlRepository {
@@ -248,7 +248,7 @@ ui {
     }
     textarea{
         cols = 60
-        rows = 8
+        rows = 5
     }
     user {
         listMax = 25
