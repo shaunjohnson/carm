@@ -68,7 +68,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'errors')}">
-                        <g:datePicker name="requestedDeploymentDate" precision="day"
+                        <carm:datePicker name="requestedDeploymentDate"
                                       value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
                     </td>
                 </tr>
@@ -81,7 +81,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'completedDeploymentDate', 'errors')}">
-                        <g:datePicker name="completedDeploymentDate" precision="day"
+                        <carm:datePicker name="completedDeploymentDate"
                                       value="${applicationDeploymentInstance?.completedDeploymentDate}"/>
                     </td>
                 </tr>
