@@ -70,6 +70,22 @@
                 }
             });
 
+            // Favorites
+            var addToFavorites = jQuery("#addToFavorites"),
+                removeFromFavorites = jQuery("#removeFromFavorites");
+
+            addToFavorites.click(function() {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddToFavorites", id: params.id)}');
+                addToFavorites.hide();
+                removeFromFavorites.show();
+            });
+
+            removeFromFavorites.click(function() {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveFromFavorites", id: params.id)}');
+                addToFavorites.show();
+                removeFromFavorites.hide();
+            });
+
             jQuery('.body :input:visible:first').focus();
         });
     </script>

@@ -19,7 +19,7 @@ import org.joda.time.Period
 import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
 import carm.system.SystemEnvironment
-import carm.deployment.ApplicationDeployment
+
 import carm.release.ModuleRelease
 
 class CarmTagLib {
@@ -32,6 +32,7 @@ class CarmTagLib {
     def applicationReleaseTestStateService
     def applicationTypeService
     def carmSecurityService
+    def favoriteService
     def moduleDeploymentTestStateService
     def moduleReleaseService
     def moduleTypeService
@@ -120,7 +121,8 @@ class CarmTagLib {
      * attrs.beanName - Name of the bean displayed on the show view
      */
     def pageHeaderLabel = { attrs ->
-        def action = attrs.action
+        def action = attrs.action ?: actionName
+        def entity = attrs.entity
         def entityName = attrs.entityName
         def beanName = attrs.beanName
 
@@ -129,17 +131,39 @@ class CarmTagLib {
             action = 'create'
         }
 
+        out << '<h1><div style="float: left;">'
+
         if (action == 'show') {
-            out << "<h1>$beanName</h1>"
+            out << beanName
         }
         else if (action == 'listReleases') {
             def headerText = message(code: "default.${action}.label", args: [beanName])
-            out << "<h1>$headerText</h1>"
+            out << headerText
         }
         else {
             def headerText = message(code: "default.${action}.label", args: [entityName])
-            out << "<h1>$headerText</h1>"
+            out << headerText
         }
+
+        out << '</div>'
+
+        if (controllerName == 'application') {
+            def isFavorite = favoriteService.isFavoriteByCurrentuser(entity)
+
+            out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
+            out << '<img src="' << resource(dir: 'images', file: 'unstarred48.png')
+            out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
+            out << message(code: 'addToFavorites.message')
+            out << '" /></div>'
+
+            out << '<div id="removeFromFavorites" style="float: right; ' << (isFavorite ? "display: block;" : "display: none;") << '">'
+            out << '<img src="' << resource(dir: 'images', file: 'starred48.png')
+            out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
+            out << message(code: 'removeFromFavorites.message')
+            out << '" /></div>'
+        }
+
+        out << '<div class="clearing"></div></h1>'
     }
 
     def showMore = { attrs ->
