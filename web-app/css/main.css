@@ -567,6 +567,10 @@ a.showHideDetails {
     width: 228px;
 }
 
+#favoritesButton {
+    cursor: pointer;
+}
+
 /**
  * Show more records button
  */
