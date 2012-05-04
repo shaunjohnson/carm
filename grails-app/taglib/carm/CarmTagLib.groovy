@@ -40,6 +40,7 @@ class CarmTagLib {
     def sourceControlRepositoryService
     def sourceControlRoleService
     def sourceControlServerService
+    def springSecurityService
     def systemServerService
     def systemDeploymentEnvironmentService
     def systemEnvironmentService
@@ -147,7 +148,7 @@ class CarmTagLib {
 
         out << '</div>'
 
-        if (controllerName == 'application') {
+        if (controllerName == 'application' && springSecurityService.isLoggedIn()) {
             def isFavorite = favoriteService.isFavoriteByCurrentuser(entity)
 
             out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
