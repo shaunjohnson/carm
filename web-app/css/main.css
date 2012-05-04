@@ -534,7 +534,7 @@ a.showHideDetails {
     position: relative;
 }
 
-#topMenu a {
+#topMenu a.menuLink {
     color: rgb(34, 34, 34);
     display: block;
     float: left;
@@ -544,20 +544,27 @@ a.showHideDetails {
     text-decoration: none;
 }
 
-#topMenu a:hover {
+#topMenu a.menuLink:hover {
     color: rgb(65, 131, 196);
 }
 
-#topMenu ul {
+#topMenu ul.menuLinkContainer {
     float: left;
     line-height: 26px;
     list-style: outside none none;
-    margin: 0 0 0 20px;
+    margin: 3px 0 0 20px;
 }
 
 #topMenu li {
     float: left;
     margin: 0 20px 0 0;
+}
+
+#favorites {
+    z-index: 1;
+    top: 32px;
+    left: 876px;
+    width: 228px;
 }
 
 /**

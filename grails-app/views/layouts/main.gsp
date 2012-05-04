@@ -87,6 +87,13 @@
             });
 
             jQuery('.body :input:visible:first').focus();
+
+            jQuery("#favoritesButton").click(function() {
+                jQuery("#favorites").toggle();
+            });
+            jQuery("#favorites .ui-menu-item a")
+                    .mouseover(function() { jQuery(this).addClass("ui-state-hover") })
+                    .mouseout(function() { jQuery(this).removeClass("ui-state-hover") });
         });
     </script>
 </head>

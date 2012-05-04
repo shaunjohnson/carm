@@ -471,4 +471,10 @@ class CarmTagLib {
 
         out << render(template: '/common/highlightWidget', model: [display: display, id: id, message: message])
     }
+
+    def favoritesDropdown = {
+        if (springSecurityService.isLoggedIn()) {
+            out << render(template: "/common/favorites", model: [favorites: favoriteService.findAllByCurrentUser()])
+        }
+    }
 }
