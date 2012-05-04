@@ -265,6 +265,10 @@ class CarmTagLib {
         }
     }
 
+    def formatSystemEnvironment = { attrs ->
+        out << render(template: "/common/systemEnvironment", model: [systemEnvironment: attrs.systemEnvironment])
+    }
+
     /**
      * Formats the current user fullName.
      */

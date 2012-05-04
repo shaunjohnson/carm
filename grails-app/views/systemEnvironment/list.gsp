@@ -25,39 +25,18 @@
     </g:if>
 
     <g:if test="${systemEnvironmentInstanceTotal}">
-        <div class="list">
-            <table>
-                <thead>
-                <tr>
-                    <g:sortableColumn property="name"
-                                      title="${message(code: 'systemEnvironment.name.label', default: 'Name')}"/>
-                    <g:sortableColumn property="description"
-                                      title="${message(code: 'systemEnvironment.description.label', default: 'Description')}"/>
-                </tr>
-                </thead>
-                <tbody>
-                <g:each in="${systemEnvironmentInstanceList}" status="i" var="systemInstance">
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td>
-                            <g:link action="show" id="${systemInstance.id}">
-                                ${fieldValue(bean: systemInstance, field: "name")}
-                            </g:link>
-                        </td>
-                        <td>
-                            <div class="expander">
-                                <carm:plainText value="${systemInstance.description}"/>
-                            </div>
-                        </td>
-                    </tr>
-                </g:each>
-                </tbody>
-            </table>
-        </div>
+        <g:each in="${systemEnvironmentInstanceList}" var="systemEnvironment" status="systemIndex">
+            <div style="margin: 0.5em 0;">
+                <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
+            </div>
 
-        <div class="paginateButtons">
-            <g:paginate total="${systemEnvironmentInstanceTotal}"
-                        max="${grailsApplication.config.ui.systemEnvironment.listMax}"/>
-        </div>
+            <g:if test="${(systemIndex + 1) < systemEnvironmentInstanceList.size()}">
+                <hr class="divider"/>
+            </g:if>
+        </g:each>
+
+        <g:paginate total="${systemEnvironmentInstanceTotal}"
+                    max="${grailsApplication.config.ui.systemEnvironment.listMax}"/>
     </g:if>
     <g:else>
         <p class="emphasis">
