@@ -202,10 +202,8 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         SystemDeploymentEnvironment deploymentEnvironment = inferNextEnvironment(applicationRelease)
         String deploymentInstructions = inferDeploymentInstructions(applicationRelease)
 
-        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
         ApplicationDeployment applicationDeployment = new ApplicationDeployment(
                 applicationRelease: applicationRelease,
-                completedDeploymentDate: requestedDeploymentDate,
                 requestedDeploymentDate: requestedDeploymentDate,
                 deploymentEnvironment: deploymentEnvironment,
                 deploymentInstructions: deploymentInstructions)
@@ -265,6 +263,9 @@ class ApplicationDeploymentService implements ApplicationContextAware {
             applicationDeployment.addToModuleDeployments(moduleDeployment)
         }
 
+        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
+        applicationDeployment.completedDeploymentDate = applicationDeployment.requestedDeploymentDate
+
         applicationDeployment.save()
 
         if (!applicationRelease.hasErrors()) {
@@ -315,10 +316,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         newApplicationDeployment.applicationRelease = applicationDeployment.applicationRelease
         newApplicationDeployment.deploymentEnvironment = applicationDeployment.deploymentEnvironment
         newApplicationDeployment.deploymentInstructions = applicationDeployment.deploymentInstructions
-
-        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
         newApplicationDeployment.requestedDeploymentDate = requestedDeploymentDate
-        newApplicationDeployment.completedDeploymentDate = requestedDeploymentDate
 
         applicationDeployment.moduleDeployments.each { moduleDeployment ->
             newApplicationDeployment.addToModuleDeployments(new ModuleDeployment(
@@ -355,6 +353,9 @@ class ApplicationDeploymentService implements ApplicationContextAware {
                 moduleDeployment.deploymentState = ModuleDeploymentState.NOT_DEPLOYED
             }
         }
+
+        // TODO Set completed deployment date to the requested date by default. Needed since there is no workflow yet.
+        applicationDeployment.completedDeploymentDate = applicationDeployment.requestedDeploymentDate
 
         log.debug "$prefix leaving"
     }
