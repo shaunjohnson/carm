@@ -91,7 +91,8 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: moduleInstance, field: 'systemServers', 'errors')}">
                         <g:if test="${moduleInstance.application.sysEnvironment}">
-                            <g:select name="systemServers" multiple="yes" optionKey="id" size="5"
+                            <g:select name="systemServers" multiple="yes" optionKey="id"
+                                      size="${moduleInstance.application.sysEnvironment.servers.size()}"
                                       from="${moduleInstance.application.sysEnvironment.servers.sort { it.name }}"
                                       value="${moduleInstance?.systemServers*.id}"
                                       title="${message(code: 'module.systemServers.help')}"/>
