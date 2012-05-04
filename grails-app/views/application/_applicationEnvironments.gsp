@@ -35,7 +35,7 @@
                     <td>
                         <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
                     </td>
-                    <td>
+                    <td style="white-space: nowrap;">
                         <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
                                 title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
                             <img src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/>
