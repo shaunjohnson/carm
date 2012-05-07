@@ -90,9 +90,14 @@
 
             jQuery('.body :input:visible:first').focus();
 
-            userInfoButton.click(function() {
+            function closeUserInfo() {
+                userInfo.hide();
+                jQuery("body").off("click", closeUserInfo);
+            }
+
+            userInfoButton.click(function(event) {
                 if (userInfo.is(":visible")) {
-                    userInfo.hide();
+                    closeUserInfo();
                 }
                 else {
                     var pos = userInfoButton.position();
@@ -102,8 +107,12 @@
                         top: (pos.top + userInfoButton.outerHeight()) + "px",
                         left: (pos.left - userInfo.outerWidth() + userInfoButton.outerWidth()) + "px"
                     }).show();
+
+                    jQuery("body").on("click", closeUserInfo);
+                    event.stopPropagation(); // To prevent triggering the closeUserInfo handler
                 }
             });
+
             jQuery("#userInfo .ui-menu-item a")
                     .mouseover(function() { jQuery(this).addClass("ui-state-hover") })
                     .mouseout(function() { jQuery(this).removeClass("ui-state-hover") });
