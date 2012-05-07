@@ -47,7 +47,7 @@
         </div>
 
         <div style="float: right; margin-right: 1.5em;">
-            <input id="quicksearch" size="18" placeholder="Search Applications"/>
+            <input id="quicksearch" size="18" placeholder="${message(code: 'search.label', default: 'Search')}"/>
         </div>
 
         <div id="spinner" class="spinner" style="display: none;">
