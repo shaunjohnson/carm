@@ -21,7 +21,7 @@ import carm.system.SystemDeploymentEnvironment
 import carm.system.SystemEnvironment
 
 import carm.release.ModuleRelease
-import java.text.DateFormat
+
 import java.text.SimpleDateFormat
 
 class CarmTagLib {
@@ -479,7 +479,7 @@ class CarmTagLib {
     }
 
     def userInfoDropdown = {
-        out << render(template: "/common/favorites", model: [
+        out << render(template: "/common/userInfoDropdown", model: [
                 username: carmSecurityService.currentUsername,
                 favorites: favoriteService.findAllByCurrentUser()])
     }
