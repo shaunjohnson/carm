@@ -11,6 +11,28 @@ class FavoriteService {
     def springSecurityService
 
     /**
+     * Delete all favorites for the current user
+     *
+     * @param id ID of Favorite record to delete
+     */
+    void deleteAllFromCurrentUser(Serializable id) {
+        Favorite.executeUpdate("delete from Favorite where user = :user", [user:  carmSecurityService.currentUser])
+    }
+
+    /**
+     * Delete a favorite record by ID for the current user.
+     *
+     * @param id ID of Favorite record to delete
+     */
+    void deleteFromCurrentUser(Serializable id) {
+        Favorite favorite = Favorite.get(id)
+
+        if (favorite && favorite.user == carmSecurityService.currentUser) {
+            favorite.delete()
+        }
+    }
+
+    /**
      * Find all Favorite objects by current user
      *
      * @return List of Favorite objects for the current user
@@ -40,7 +62,7 @@ class FavoriteService {
      * @param entity Entity to test
      * @return True of the entity is on the current users favorites list
      */
-    boolean isFavoriteByCurrentuser(entity) {
+    boolean isFavoriteByCurrentUser(entity) {
         if (entity instanceof Application) {
             return Favorite.countByUserAndApplication(carmSecurityService.currentUser, entity) > 0
         }

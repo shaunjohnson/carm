@@ -14,11 +14,6 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="dialog">
-
-    </div>
-
-
     <div id="projectTabs" class="tab-container">
         <ul class="tabs">
             <li>
@@ -73,7 +68,8 @@
             </div>
 
             <div id="favoritesTab">
-                <g:render template="favorites" model="[favorites: favorites]"/>
+                <g:render template="favorites"
+                          model="[favorites: favorites, isCurrentUser: isCurrentUser, userInstance: userInstance]"/>
             </div>
 
             <div id="activityTab">

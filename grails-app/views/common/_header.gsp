@@ -520,7 +520,7 @@
         <bc:listUsers/>
 
         <g:if test="${action == 'list'}">
-            
+
         </g:if>
         <g:elseif test="${action == 'listActivity'}">
             <bc:showUser user="${domain}"/>

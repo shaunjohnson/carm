@@ -151,7 +151,7 @@ class CarmTagLib {
         out << '</div>'
 
         if (controllerName == 'application' && action == 'show' && springSecurityService.isLoggedIn()) {
-            def isFavorite = favoriteService.isFavoriteByCurrentuser(entity)
+            def isFavorite = favoriteService.isFavoriteByCurrentUser(entity)
 
             out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
             out << '<img src="' << resource(dir: 'images', file: 'unstarred48.png')

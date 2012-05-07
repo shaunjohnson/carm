@@ -3,6 +3,7 @@ package carm.security
 class UserController {
 
     def activityTraceService
+    def carmSecurityService
     def favoriteService
     def userService
 
@@ -44,7 +45,8 @@ class UserController {
                 userInstance: userInstance,
                 activityList: activityTraceService.listActivityByUser(userInstance, [:]),
                 activityCount: activityTraceService.countActivityByUser(userInstance),
-                favorites: favoriteService.findAllByUser(userInstance)
+                favorites: favoriteService.findAllByUser(userInstance),
+                isCurrentUser: (carmSecurityService.currentUsername == userInstance.username)
         ]
     }
 
@@ -72,5 +74,15 @@ class UserController {
         }
 
         render(template: "/common/activityBlock", model: [activityList: activityList])
+    }
+
+    def ajaxDeleteAllFavorites() {
+        favoriteService.deleteAllFromCurrentUser()
+        render ""
+    }
+
+    def ajaxRemoveFromFavorites() {
+        favoriteService.deleteFromCurrentUser(params.id)
+        render ""
     }
 }
