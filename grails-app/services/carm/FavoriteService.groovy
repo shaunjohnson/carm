@@ -7,6 +7,7 @@ class FavoriteService {
     static transactional = false
 
     def carmSecurityService
+    def springSecurityService
 
     /**
      * Find all Favorite objects by current user
@@ -14,8 +15,13 @@ class FavoriteService {
      * @return List of Favorite objects for the current user
      */
     List<Favorite> findAllByCurrentUser() {
-        Favorite.executeQuery("from Favorite where user = :user order by application.name asc",
-                [user: carmSecurityService.currentUser])
+        if (springSecurityService.isLoggedIn()) {
+            Favorite.executeQuery("from Favorite where user = :user order by application.name asc",
+                    [user: carmSecurityService.currentUser])
+        }
+        else {
+            []
+        }
     }
 
     /**
