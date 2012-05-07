@@ -150,7 +150,7 @@ class CarmTagLib {
 
         out << '</div>'
 
-        if (controllerName == 'application' && springSecurityService.isLoggedIn()) {
+        if (controllerName == 'application' && action == 'show' && springSecurityService.isLoggedIn()) {
             def isFavorite = favoriteService.isFavoriteByCurrentuser(entity)
 
             out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
