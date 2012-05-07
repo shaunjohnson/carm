@@ -2,6 +2,8 @@ package carm.security
 
 class UserController {
 
+    def activityTraceService
+    def favoriteService
     def userService
 
     def index() {
@@ -38,6 +40,37 @@ class UserController {
             redirect(action: "list")
         }
 
-        [userInstance: userInstance]
+        [
+                userInstance: userInstance,
+                activityList: activityTraceService.listActivityByUser(userInstance, [:]),
+                activityCount: activityTraceService.countActivityByUser(userInstance),
+                favorites: favoriteService.findAllByUser(userInstance)
+        ]
+    }
+
+    def listActivity() {
+        def userInstance = userService.get(params.id)
+        if (!userInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    domainInstance: userInstance,
+                    activityList: activityTraceService.listActivityByUser(userInstance, params),
+                    activityTotal: activityTraceService.countActivityByUser(userInstance)
+            ]
+        }
+    }
+
+    def ajaxShowMoreActivity() {
+        def userInstance = userService.get(params.id)
+        def activityList = []
+
+        if (userInstance) {
+            activityList = activityTraceService.listActivityByUser(userInstance, params)
+        }
+
+        render(template: "/common/activityBlock", model: [activityList: activityList])
     }
 }

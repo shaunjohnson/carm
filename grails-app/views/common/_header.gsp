@@ -517,11 +517,16 @@
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
 
+        <bc:listUsers/>
+
         <g:if test="${action == 'list'}">
-            <bc:listUsers/>
+            
         </g:if>
+        <g:elseif test="${action == 'listActivity'}">
+            <bc:showUser user="${domain}"/>
+            <bc:label code="allActivity.label" args="[entityName]"/>
+        </g:elseif>
         <g:else>
-            <bc:listUsers/>
             <bc:showUser user="${domain}"/>
         </g:else>
     </bc:breadcrumbs>

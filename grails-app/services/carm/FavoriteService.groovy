@@ -1,6 +1,7 @@
 package carm
 
 import carm.application.Application
+import carm.security.User
 
 class FavoriteService {
 
@@ -22,6 +23,15 @@ class FavoriteService {
         else {
             []
         }
+    }
+
+    /**
+     * Find all Favorite objects by user
+     *
+     * @return List of Favorite objects for the user
+     */
+    List<Favorite> findAllByUser(User user) {
+        Favorite.executeQuery("from Favorite where user = :user order by application.name asc", [user: user])
     }
 
     /**

@@ -15,37 +15,80 @@
     </g:if>
 
     <div class="dialog">
-        <table class="details">
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="user.fullName.label" default="Full Name"/>
-                </td>
-                <td valign="top" class="value">
-                    ${userInstance.fullName.encodeAsHTML()}
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="user.username.label" default="Username"/>
-                </td>
-                <td valign="top" class="value">
-                    ${userInstance.username.encodeAsHTML()}
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <g:message code="user.email.label" default="Email"/>
-                </td>
-                <td valign="top" class="value">
-                    <a href="mailto:${userInstance.email}">
-                        ${userInstance.email.encodeAsHTML()}
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
     </div>
+
+
+    <div id="projectTabs" class="tab-container">
+        <ul class="tabs">
+            <li>
+                <a href="#summaryTab">
+                    <g:message code="details.label" default="Details"/>
+                </a>
+            </li>
+            <li>
+                <a href="#favoritesTab">
+                    <g:message code="favorites.label" default="Favorites"/>
+                </a>
+            </li>
+            <li>
+                <a href="#activityTab">
+                    <g:message code="activity.label" default="Activity"/>
+                </a>
+            </li>
+        </ul>
+
+        <div class="panel-container">
+            <div id="summaryTab">
+                <table>
+                    <tbody>
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <g:message code="user.fullName.label" default="Full Name"/>
+                        </td>
+                        <td valign="top" class="value">
+                            ${userInstance.fullName.encodeAsHTML()}
+                        </td>
+                    </tr>
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <g:message code="user.username.label" default="Username"/>
+                        </td>
+                        <td valign="top" class="value">
+                            ${userInstance.username.encodeAsHTML()}
+                        </td>
+                    </tr>
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <g:message code="user.email.label" default="Email"/>
+                        </td>
+                        <td valign="top" class="value">
+                            <a href="mailto:${userInstance.email}">
+                                ${userInstance.email.encodeAsHTML()}
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="favoritesTab">
+                <g:render template="favorites" model="[favorites: favorites]"/>
+            </div>
+
+            <div id="activityTab">
+                <g:render template="/common/activity"
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: userInstance.id]"/>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript'>
+        jQuery(function () {
+            jQuery("#projectTabs").easytabs({ animationSpeed:'fast' });
+        });
+    </script>
+
 </div>
 </body>
 </html>
