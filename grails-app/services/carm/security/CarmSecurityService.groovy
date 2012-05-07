@@ -216,7 +216,7 @@ class CarmSecurityService {
      * @return Current username
      */
     String getCurrentUsername() {
-        springSecurityService?.principal?.username ?: "Unknown"
+        springSecurityService.isLoggedIn() ? springSecurityService.principal.username : "Unknown"
     }
 
     /**
