@@ -25,13 +25,19 @@
             </li>
         </ul>
 
-        <carm:favoritesDropdown/>
-
-        <div style="float: right; margin-top: 3px;">
+        <div style="float: right; margin-left: 5px; margin-top: 5px;">
             <sec:ifLoggedIn>
-                <g:link controller="logout" class="menuLink">
-                    <g:message code="logout.label" default="Logout"/> (<carm:formatCurrentUser/>)
-                </g:link>
+                <a id="userInfoButton" class="menuLink">
+                    <div>
+                        <div style="float: left;">
+                            <carm:formatCurrentUser/>
+                        </div>
+                        <div style="float: left;">
+                            <span class="ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                        <div class="clearing"></div>
+                    </div>
+                </a>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
                 <g:link controller="login" class="menuLink">

@@ -1,12 +1,7 @@
-<sec:ifLoggedIn>
+<div id="userInfo" class="ui-widget ui-widget-content ui-corner-all" style="display: none;">
     <g:if test="${favorites.size()}">
-        <div style="float: right; margin-left: 5px; margin-top: 3px;">
-            <div class="ui-state-default ui-corner-all">
-                <span id="favoritesButton" class="ui-icon ui-icon-triangle-1-s"></span>
-            </div>
-
-            <ul id="favorites" style="display: none;"
-                class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all">
+        <div>
+            <ul class="ui-menu ui-widget-content ui-corner-all">
                 <g:each in="${favorites}" var="favorite">
                     <li class="ui-menu-item">
                         <g:link controller="application" action="show" id="${favorite.application.id}"
@@ -16,6 +11,24 @@
                     </li>
                 </g:each>
             </ul>
+
+            <div class="clearing"></div>
         </div>
     </g:if>
-</sec:ifLoggedIn>
+
+    <div class="ui-widget-header" style="padding: 0.5em;">
+        <div style="float: left;">
+            <carm:button controller="user" action="show" params="[username: username]" class="menuLink">
+                <g:message code="profile.label" default="Profile"/>
+            </carm:button>
+        </div>
+
+        <div style="float: right;">
+            <carm:button controller="logout" class="menuLink">
+                <g:message code="logout.label" default="Logout"/>
+            </carm:button>
+        </div>
+
+        <div class="clearing"></div>
+    </div>
+</div>

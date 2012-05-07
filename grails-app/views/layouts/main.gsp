@@ -71,7 +71,9 @@
             });
 
             // Favorites
-            var addToFavorites = jQuery("#addToFavorites"),
+            var userInfo = jQuery("#userInfo"),
+                userInfoButton = jQuery("#userInfoButton"),
+                addToFavorites = jQuery("#addToFavorites"),
                 removeFromFavorites = jQuery("#removeFromFavorites");
 
             addToFavorites.click(function() {
@@ -88,10 +90,21 @@
 
             jQuery('.body :input:visible:first').focus();
 
-            jQuery("#favoritesButton").click(function() {
-                jQuery("#favorites").toggle();
+            userInfoButton.click(function() {
+                if (userInfo.is(":visible")) {
+                    userInfo.hide();
+                }
+                else {
+                    var pos = userInfoButton.position();
+
+                    userInfo.css({
+                        position: "absolute",
+                        top: (pos.top + userInfoButton.outerHeight()) + "px",
+                        left: (pos.left - userInfo.outerWidth() + userInfoButton.outerWidth()) + "px"
+                    }).show();
+                }
             });
-            jQuery("#favorites .ui-menu-item a")
+            jQuery("#userInfo .ui-menu-item a")
                     .mouseover(function() { jQuery(this).addClass("ui-state-hover") })
                     .mouseout(function() { jQuery(this).removeClass("ui-state-hover") });
         });
@@ -117,6 +130,8 @@
                    default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
     </p>
 </div>
+
+<carm:userInfoDropdown/>
 
 </body>
 </html>

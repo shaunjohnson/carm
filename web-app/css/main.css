@@ -560,15 +560,24 @@ a.showHideDetails {
     margin: 0 20px 0 0;
 }
 
-#favorites {
+#userInfo {
     z-index: 1;
-    top: 32px;
-    left: 876px;
-    width: 228px;
+    width: 250px;
 }
 
-#favoritesButton {
+#userInfo ul {
+    width: 244px;
+}
+
+#userInfoButton {
     cursor: pointer;
+}
+
+#userInfoButton * {
+    color: rgb(34, 34, 34);
+    font-size: 1.0em;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /**
