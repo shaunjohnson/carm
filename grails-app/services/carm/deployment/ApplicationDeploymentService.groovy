@@ -404,12 +404,12 @@ class ApplicationDeploymentService implements ApplicationContextAware {
      * @return Next environment that can be used to deploy this release
      */
     SystemDeploymentEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
-        def environments = applicationRelease.application.sysEnvironment.environments
-        def deployments = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
+        List<SystemDeploymentEnvironment> environments = applicationRelease.application.sysEnvironment.environments
+        List<ApplicationDeployment> deployments = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
 
-        // Return null if there are no deployments
+        // Return first environment if there are no deployments
         if (!deployments.size()) {
-            return null
+            return environments.size() ? environments[0] : null
         }
 
         SystemDeploymentEnvironment nextEnvironment = null
