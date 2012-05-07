@@ -24,6 +24,10 @@
                     <g:render template="myProjects" model="[myProjects: myProjects]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
+                    <g:render template="login"/>
+
+                    <div>&nbsp;</div>
+
                     <g:render template="mostActiveApplications"
                               model="[mostActiveApplications: mostActiveApplications]"/>
                 </sec:ifNotLoggedIn>

@@ -581,6 +581,19 @@ a.showHideDetails {
 }
 
 /**
+ * Login
+ */
+#login {
+    background: #F1F1F1;
+    border: 1px solid #E5E5E5;
+    padding: 0.5em;
+}
+
+#login p {
+    margin: 0.5em 0 0 0.5em;
+}
+
+/**
  * Show more records button
  */
 .showMoreButton {

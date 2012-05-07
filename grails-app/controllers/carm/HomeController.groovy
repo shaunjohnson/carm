@@ -10,6 +10,7 @@ import carm.release.ApplicationReleaseState
 import org.apache.commons.lang.time.DateUtils
 import carm.application.Application
 import carm.module.Module
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class HomeController {
     def activityTraceService
@@ -61,8 +62,15 @@ class HomeController {
                 mostActiveApplications: mostActiveApplications,
                 mostActiveSystemEnvironments: mostActiveSystemEnvironments,
 
-                activityList: activityTraceService.listActivityByRoot([:])
+                activityList: activityTraceService.listActivityByRoot([:]),
+
+                loginPostUrl: generatePostUrl()
         ]
+    }
+
+    private String generatePostUrl() {
+        def config = SpringSecurityUtils.securityConfig
+        "${request.contextPath}${config.apf.filterProcessesUrl}"
     }
 
     def generateData() {
