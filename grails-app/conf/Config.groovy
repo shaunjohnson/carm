@@ -225,6 +225,9 @@ ui {
         height = 250    // Height of editor in pixels
         width = 600     // Width of editor in pixels
     }
+    search {
+        maxResults = 15
+    }
     sourceControlRepository {
         listMax = 25
     }

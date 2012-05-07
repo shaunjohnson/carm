@@ -18,6 +18,7 @@ class HomeController {
     def applicationService
     def carmSecurityService
     def favoriteService
+    def grailsApplication
     def projectService
     def springSecurityService
     def systemEnvironmentService
@@ -128,15 +129,16 @@ class HomeController {
 
     def ajaxQuickSearch() {
         def results = []
+        def maxResults = grailsApplication.config.ui.search.maxResults
 
-        Application.findAllByNameIlike("%${params.term}%", [max: 10]).each {
+        Application.findAllByNameIlike("%${params.term}%", [max: maxResults]).each {
             results << [ type: "application", id: it.id, value: it.name, label: it.name ]
         }
 
         def applicationHits = results.size()
 
-        if (applicationHits < 10) {
-            Module.findAllByNameIlike("%${params.term}%", [max: 10 - applicationHits]).each {
+        if (applicationHits < maxResults) {
+            Module.findAllByNameIlike("%${params.term}%", [max: maxResults - applicationHits]).each {
                 results << [ type:  "module", id: it.id, value: it.name, label: it.name ]
             }
         }
