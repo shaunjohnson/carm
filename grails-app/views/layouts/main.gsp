@@ -65,7 +65,12 @@
                 minLength:2,
                 select:function (event, ui) {
                     if (ui.item) {
-                        window.location = "${createLink(controller: "application", action: "show")}/" + ui.item.id
+                        if (ui.item.type == "application") {
+                            window.location = "${createLink(controller: "application", action: "show")}/" + ui.item.id
+                        }
+                        else if (ui.item.type == "module") {
+                            window.location = "${createLink(controller: "module", action: "show")}/" + ui.item.id
+                        }
                     }
                 }
             });

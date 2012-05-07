@@ -219,9 +219,29 @@ class CarmTagLib {
     def formatDateTimePeriod = { attrs ->
         DateTime value = attrs.value
         def styleClass = attrs.class
+        Period period = new Period(value, new DateTime())
 
         out << '<span class="' << styleClass << '" title="' << joda.format(value: value) << '">'
-        out << joda.formatPeriod(value: new Period(value, new DateTime()))
+
+        if (period.years > 0) {
+            out << joda.formatPeriod(value: period, fields: "years, months")
+        }
+        else if (period.months > 0) {
+            out << joda.formatPeriod(value: period, fields: "months, days")
+        }
+        else if (period.days > 0) {
+            out << joda.formatPeriod(value: period, fields:  "days")
+        }
+        else if (period.hours > 0) {
+            out << joda.formatPeriod(value: period, fields: "hours, minutes")
+        }
+        else if (period.minutes > 0) {
+            out << joda.formatPeriod(value: period, fields:  "minutes, seconds")
+        }
+        else {
+            out << joda.formatPeriod(value: period, fields:  "seconds")
+        }
+
         out << '&nbsp;' << message(code: "ago.label", default: "ago")
         out << "</span>"
     }
