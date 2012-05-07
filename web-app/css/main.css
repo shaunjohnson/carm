@@ -529,7 +529,7 @@ a.showHideDetails {
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
 
     height: 35px;
-    margin: 0;
+    margin: 0 0 1em 0;
     padding-top: 8px;
     position: relative;
 }
