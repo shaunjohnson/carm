@@ -146,8 +146,16 @@ class HomeController {
         def applicationHits = results.size()
 
         if (applicationHits < maxResults) {
-            Module.findAllByNameIlike("%${params.term}%", [max: maxResults - applicationHits]).each {
-                results << [ type:  "module", id: it.id, value: it.name, label: it.name ]
+            List<Module> modules = Module.findAllByNameIlike("%${params.term}%", [max: 2 * maxResults])
+
+            for (Module module : modules) {
+                if (!results.find { it.value == module.name }) {
+                    results << [ type:  "moule", id: module.id, value: module.name, label: module.name ]
+                }
+
+                if (results.size() == maxResults) {
+                    break
+                }
             }
         }
 
