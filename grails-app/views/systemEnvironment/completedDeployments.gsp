@@ -14,6 +14,12 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <div class="buttons">
+        <carm:button action="upcomingDeployments" id="${params.id}">
+            <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
+        </carm:button>
+    </div>
+
     <script type="text/javascript">
         function loadDeployments() {
             jQuery("#deploymentsBlock").html("");
@@ -48,7 +54,7 @@
         });
     </script>
 
-    <div>
+    <div style="margin-top: 1em;">
         <div id="date" style="margin-left: auto; margin-right: auto; width: 85%"></div>
     </div>
 

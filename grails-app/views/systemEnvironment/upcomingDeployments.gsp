@@ -14,6 +14,12 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <div class="buttons">
+        <carm:button action="completedDeployments" id="${params.id}">
+            <g:message code="completedDeployments.label" default="Completed Deployments"/>
+        </carm:button>
+    </div>
+
     <g:if test="${applicationDeploymentsGrouped?.size()}">
         <g:render template="deploymentsBlock"
                   model="[applicationDeploymentsGrouped: applicationDeploymentsGrouped]"/>

@@ -31,7 +31,8 @@
                             <g:message code="systemEnvironment.name.label" default="Name"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'errors')}">
+                    <td valign="top"
+                        class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'errors')}">
                         <g:textField name="name" maxlength="50" size="50"
                                      value="${systemEnvironmentInstance?.name}"
                                      required="required"
@@ -44,7 +45,8 @@
                             <g:message code="systemEnvironment.description.label" default="Description"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'description', 'errors')}">
+                    <td valign="top"
+                        class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'description', 'errors')}">
                         <g:textArea name="description"
                                     cols="${grailsApplication.config.ui.textarea.cols}"
                                     rows="${grailsApplication.config.ui.textarea.rows}"
@@ -53,21 +55,16 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link action="show" id="${systemEnvironmentInstance.id}"><g:message code="default.button.cancel.label"
+                                                                                              default="Cancel"/></g:link>
+                        <g:submitButton name="save"
+                                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" action="show" id="${systemEnvironmentInstance.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="save" class="save"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            </span>
         </div>
     </g:form>
 </div>

@@ -32,7 +32,8 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'application', 'errors')}">
-                        <g:link controller="application" action="show" id="${applicationReleaseInstance?.application?.id}">
+                        <g:link controller="application" action="show"
+                                id="${applicationReleaseInstance?.application?.id}">
                             ${applicationReleaseInstance?.application?.encodeAsHTML()}
                         </g:link>
                         <g:hiddenField name="application.id" value="${applicationReleaseInstance?.application?.id}"/>
@@ -66,9 +67,7 @@
                     </td>
                 </tr>
 
-                <tr class="prop">
-                    <td colspan="2">&nbsp;</td>
-                </tr>
+                <carm:formDividerRow/>
 
                 <tr class="prop">
                     <td valign="top" class="name">
@@ -93,28 +92,24 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationReleaseInstance, field: 'buildInstructions', 'errors')}">
-                        <richui:richTextEditor name="buildInstructions" value="${applicationReleaseInstance?.buildInstructions}"
+                        <richui:richTextEditor name="buildInstructions"
+                                               value="${applicationReleaseInstance?.buildInstructions}"
                                                height="${grailsApplication.config.ui.richTextEditor.height}"
                                                width="${grailsApplication.config.ui.richTextEditor.width}"/>
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link controller="application" action="show"
+                                id="${applicationReleaseInstance?.application?.id}"><g:message
+                                code="default.button.cancel.label" default="Cancel"/></g:link>
+                        <g:submitButton name="create"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" controller="application" action="show"
-                        id="${applicationReleaseInstance?.application?.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-            </span>
         </div>
     </g:form>
 </div>

@@ -79,9 +79,7 @@
                     </td>
                 </tr>
 
-                <tr class="prop">
-                    <td colspan="2">&nbsp;</td>
-                </tr>
+                <carm:formDividerRow/>
 
                 <tr class="prop">
                     <td valign="top" class="name">
@@ -142,9 +140,7 @@
                     </td>
                 </tr>
 
-                <tr class="prop">
-                    <td colspan="2">&nbsp;</td>
-                </tr>
+                <carm:formDividerRow/>
 
                 <tr class="prop">
                     <td valign="top" class="name">
@@ -152,7 +148,8 @@
                             <g:message code="application.sysEnvironment.label" default="Environment"/>
                         </carm:label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sysEnvironment', 'errors')}">
+                    <td valign="top"
+                        class="value ${hasErrors(bean: applicationInstance, field: 'sysEnvironment', 'errors')}">
                         <g:select name="sysEnvironment.id" from="${systemEnvironmentList}" optionKey="id"
                                   value="${applicationInstance?.sysEnvironment?.id}" noSelection="['null': '']"
                                   title="${message(code: 'application.sysEnvironment.help')}"/>
@@ -173,21 +170,17 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link controller="project" action="show"
+                                id="${applicationInstance?.project?.id}"><g:message code="default.button.cancel.label"
+                                                                                    default="Cancel"/></g:link>
+                        <g:submitButton name="create"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" controller="project" action="show" id="${applicationInstance?.project?.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-            </span>
         </div>
     </g:form>
 </div>

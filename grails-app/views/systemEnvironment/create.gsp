@@ -50,24 +50,19 @@
                                     value="${systemEnvironmentInstance?.description}"
                                     title="${message(code: 'systemEnvironment.description.help')}"/>
                     </td>
-                    </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link action="list">
+                            <g:message code="default.button.cancel.label" default="Cancel"/>
+                        </g:link>
+                        <g:submitButton name="create"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="list" action="list">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-            </span>
         </div>
     </g:form>
 </div>

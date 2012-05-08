@@ -65,6 +65,9 @@
                                     title="${message(code: 'project.description.help')}"/>
                     </td>
                 </tr>
+
+                <carm:formDividerRow/>
+
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label for="projectOwners" required="true">
@@ -80,22 +83,17 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link action="show" id="${projectInstance.id}"><g:message code="default.button.cancel.label"
+                                                                                    default="Cancel"/></g:link>
+                        <g:submitButton name="save"
+                                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                    </div>
+                </carm:formFooter>
             </tbody>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" action="show" id="${projectInstance.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="save" class="save"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            </span>
         </div>
     </g:form>
 </div>

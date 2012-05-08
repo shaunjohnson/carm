@@ -397,6 +397,7 @@ table.tight td, table.tight th {
 
 .dialog table {
     padding: 5px 0;
+    width: 100%;
 }
 
 .prop {
@@ -420,23 +421,24 @@ table.tight td, table.tight th {
 .buttons {
     /*background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;*/
     /*border: 1px solid #ccc;*/
-    color: #666;
-    font-size: 0.9em;
+    /*color: #666;*/
+    /*font-size: 0.9em;*/
     /*height: 20px;*/
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     /*overflow: hidden;*/
     /*padding: 0;*/
 }
 
 .buttons input, .buttons a {
-    background: #fff;
-    border: 0;
-    cursor: pointer;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
+    /*background: #fff;*/
+    /*border: 0;*/
+    /*cursor: pointer;*/
+    margin-left: 1em;
+    /*overflow: visible;*/
+    /*padding: 2px 6px;*/
 }
 
+/*
 .buttons input {
     border: 1px solid #ccc;
     padding: 5px;
@@ -459,9 +461,9 @@ table.tight td, table.tight th {
 }
 
 .buttons a {
-    margin-left: 3px;
     text-decoration: none;
 }
+*/
 
 /*
  * Two column layout

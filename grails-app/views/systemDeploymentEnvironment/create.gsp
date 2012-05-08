@@ -2,7 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
+    <g:set var="entityName"
+           value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
 </head>
 
@@ -30,10 +31,12 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}">
                             ${systemDeploymentEnvironmentInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
-                        <g:hiddenField name="sysEnvironment.id" value="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}"/>
+                        <g:hiddenField name="sysEnvironment.id"
+                                       value="${systemDeploymentEnvironmentInstance?.sysEnvironment?.id}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -66,21 +69,17 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemDeploymentEnvironmentInstance.sysEnvironment.id}"><g:message
+                                code="default.button.cancel.label" default="Cancel"/></g:link>
+                        <g:submitButton name="create"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" controller="systemEnvironment" action="show" id="${systemDeploymentEnvironmentInstance.sysEnvironment.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-            </span>
         </div>
     </g:form>
 </div>

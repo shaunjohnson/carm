@@ -32,7 +32,8 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.sysEnvironment?.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemServerInstance?.sysEnvironment?.id}">
                             ${systemServerInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
                         <g:hiddenField name="sysEnvironment.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
@@ -45,7 +46,7 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: systemServerInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50"  size="50"
+                        <g:textField name="name" maxlength="50" size="50"
                                      value="${systemServerInstance?.name}"
                                      required="required"
                                      title="${message(code: 'systemServer.name.help')}"/>
@@ -67,21 +68,16 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link action="show" id="${systemServerInstance.id}"><g:message code="default.button.cancel.label"
+                                                                                         default="Cancel"/></g:link>
+                        <g:submitButton name="save"
+                                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" action="show" id="${systemServerInstance.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="save" class="save"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            </span>
         </div>
     </g:form>
 </div>

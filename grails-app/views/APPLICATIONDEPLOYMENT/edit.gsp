@@ -69,9 +69,12 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'errors')}">
                         <carm:datePicker name="requestedDeploymentDate"
-                                      value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
+                                         value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
                     </td>
                 </tr>
+
+                <carm:formDividerRow/>
+
                 <tr class="prop">
                     <td valign="top" class="name">
                         <carm:label required="true">
@@ -81,12 +84,14 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
                         <table class="tight">
-                            <g:each var="moduleDeployment" in="${applicationDeploymentInstance.moduleDeployments.sort{ it.moduleRelease.module.name} }">
+                            <g:each var="moduleDeployment"
+                                    in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module.name}}">
                                 <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
                                     <tr>
-                                        <td>
+                                        <td width="10px">
                                             <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
-                                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}" checked="${true}"/>
+                                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"
+                                                            checked="${true}"/>
                                             </g:if>
                                             <g:else>
                                                 <g:checkBox name="moduleDeployment.${moduleDeployment.id}"/>
@@ -130,20 +135,17 @@
                     </td>
                 </tr>
                 </tbody>
-            </table>
-        </div>
 
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" controller="application" action="show"
-                        id="${applicationDeploymentInstance.applicationRelease.application.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="save" class="save"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            </span>
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link controller="application" action="show"
+                                id="${applicationDeploymentInstance.applicationRelease.application.id}"><g:message
+                                code="default.button.cancel.label" default="Cancel"/></g:link>
+                        <g:submitButton name="save"
+                                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                    </div>
+                </carm:formFooter>
+            </table>
         </div>
     </g:form>
 </div>

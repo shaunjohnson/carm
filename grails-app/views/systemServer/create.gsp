@@ -30,7 +30,8 @@
                         </carm:label>
                     </td>
                     <td valign="top" class="value">
-                        <g:link controller="systemEnvironment" action="show" id="${systemServerInstance?.sysEnvironment?.id}">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemServerInstance?.sysEnvironment?.id}">
                             ${systemServerInstance?.sysEnvironment?.encodeAsHTML()}
                         </g:link>
                         <g:hiddenField name="sysEnvironment.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
@@ -65,21 +66,17 @@
                     </td>
                 </tr>
                 </tbody>
+
+                <carm:formFooter>
+                    <div class="buttons">
+                        <g:link controller="systemEnvironment" action="show"
+                                id="${systemServerInstance.sysEnvironment.id}"><g:message code="default.button.cancel.label"
+                                                                                          default="Cancel"/></g:link>
+                        <g:submitButton name="create"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </carm:formFooter>
             </table>
-        </div>
-
-        <carm:requiredLabelMessage/>
-
-        <div class="buttons">
-            <span class="button">
-                <g:link class="show" controller="systemEnvironment" action="show" id="${systemServerInstance.sysEnvironment.id}">
-                    <g:message code="default.button.cancel.label" default="Cancel"/>
-                </g:link>
-            </span>
-            <span class="button">
-                <g:submitButton name="create" class="save"
-                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-            </span>
         </div>
     </g:form>
 </div>

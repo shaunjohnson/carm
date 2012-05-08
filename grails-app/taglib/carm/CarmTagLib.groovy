@@ -188,6 +188,19 @@ class CarmTagLib {
         out << "<button class='button' onclick='window.location=\"" << createLink(attrs) << "\"'>" << body() << "</button>"
     }
 
+    def formDividerRow = { attrs ->
+        out << '<tr><td colspan="2"><hr class="divider" style="margin: 1em 0;"/></td></tr>'
+    }
+
+    def formFooter = { attrs, body ->
+        out << '<tfoot>'
+        out << formDividerRow()
+        out << '<tr><td colspan="2">'
+        out << '<div style="float: right;">' << body() << '</div>'
+        out << '<div class="clearing"></div>'
+        out << '</td></tr><tfoot>'
+    }
+
     def formatApplicationDeploymentState = { attrs ->
         def deploymentState = attrs.deploymentState
 

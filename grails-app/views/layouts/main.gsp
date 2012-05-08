@@ -34,7 +34,7 @@
                 expandText:'<g:message code="showMore.label"/>',
                 userCollapseText:'<g:message code="showLess.label"/>'
             });
-            jQuery("button.button").button();
+            jQuery("button.button, .buttons input").button();
             jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
 
             jQuery("#delete-dialog").dialog({
