@@ -12,7 +12,7 @@
     </g:each>
 </div>
 
-<div style="margin: 0.5em 0;">
+<div style="margin: 0.5em 0 0 1.5em;">
     <div style="float:left; padding-right: 1em;">
         <g:message code="deployments.label" default="Deployments"/>:
     </div>
