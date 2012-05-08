@@ -71,6 +71,9 @@
                         else if (ui.item.type == "module") {
                             window.location = "${createLink(controller: "module", action: "show")}/" + ui.item.id
                         }
+                        else if (ui.item.type == "project") {
+                            window.location = "${createLink(controller: "project", action: "show")}/" + ui.item.id
+                        }
                     }
                 }
             });

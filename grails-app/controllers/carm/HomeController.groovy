@@ -2,12 +2,9 @@ package carm
 
 import carm.project.Project
 import grails.converters.JSON
-import carm.deployment.ApplicationDeployment
+
 import org.joda.time.DateTime
-import carm.deployment.ApplicationDeploymentState
-import carm.release.ApplicationRelease
-import carm.release.ApplicationReleaseState
-import org.apache.commons.lang.time.DateUtils
+
 import carm.application.Application
 import carm.module.Module
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
@@ -143,14 +140,26 @@ class HomeController {
             results << [ type: "application", id: it.id, value: it.name, label: it.name ]
         }
 
-        def applicationHits = results.size()
-
-        if (applicationHits < maxResults) {
+        if (results.size() < maxResults) {
             List<Module> modules = Module.findAllByNameIlike("%${params.term}%", [max: 2 * maxResults])
 
             for (Module module : modules) {
                 if (!results.find { it.value == module.name }) {
-                    results << [ type:  "moule", id: module.id, value: module.name, label: module.name ]
+                    results << [ type:  "module", id: module.id, value: module.name, label: module.name ]
+                }
+
+                if (results.size() == maxResults) {
+                    break
+                }
+            }
+        }
+
+        if (results.size() < maxResults) {
+            List<Project> projects = Project.findAllByNameIlike("%${params.term}%", [max: 2 * maxResults])
+
+            for (Project project : projects) {
+                if (!results.find { it.value == project.name }) {
+                    results << [ type:  "project", id: project.id, value: project.name, label: project.name ]
                 }
 
                 if (results.size() == maxResults) {
