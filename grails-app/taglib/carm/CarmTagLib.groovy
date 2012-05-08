@@ -154,13 +154,13 @@ class CarmTagLib {
             def isFavorite = favoriteService.isFavoriteByCurrentUser(entity)
 
             out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
-            out << '<img src="' << resource(dir: 'images', file: 'unstarred48.png')
+            out << '<img src="' << resource(dir: 'images', file: 'unstarred.png')
             out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
             out << message(code: 'addToFavorites.message')
             out << '" /></div>'
 
             out << '<div id="removeFromFavorites" style="float: right; ' << (isFavorite ? "display: block;" : "display: none;") << '">'
-            out << '<img src="' << resource(dir: 'images', file: 'starred48.png')
+            out << '<img src="' << resource(dir: 'images', file: 'starred.png')
             out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
             out << message(code: 'removeFromFavorites.message')
             out << '" /></div>'
