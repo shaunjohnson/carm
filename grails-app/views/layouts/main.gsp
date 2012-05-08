@@ -76,21 +76,26 @@
                         }
                     }
                 }
-            });
+            }).data("autocomplete")._renderItem = function (ul, item) {
+                return jQuery('<li class="ui-menu-item-with-icon"></li>')
+                        .data("item.autocomplete", item)
+                        .append('<a><span class="' + item.type + '-item-icon"></span>' + item.label + '</a>')
+                        .appendTo(ul);
+            };
 
             // Favorites
             var userInfo = jQuery("#userInfo"),
-                userInfoButton = jQuery("#userInfoButton"),
-                addToFavorites = jQuery("#addToFavorites"),
-                removeFromFavorites = jQuery("#removeFromFavorites");
+                    userInfoButton = jQuery("#userInfoButton"),
+                    addToFavorites = jQuery("#addToFavorites"),
+                    removeFromFavorites = jQuery("#removeFromFavorites");
 
-            addToFavorites.click(function() {
+            addToFavorites.click(function () {
                 jQuery.get('${createLink(controller: "favorite", action: "ajaxAddToFavorites", id: params.id)}');
                 addToFavorites.hide();
                 removeFromFavorites.show();
             });
 
-            removeFromFavorites.click(function() {
+            removeFromFavorites.click(function () {
                 jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveFromFavorites", id: params.id)}');
                 addToFavorites.show();
                 removeFromFavorites.hide();
@@ -103,7 +108,7 @@
                 jQuery("body").off("click", closeUserInfo);
             }
 
-            userInfoButton.click(function(event) {
+            userInfoButton.click(function (event) {
                 if (userInfo.is(":visible")) {
                     closeUserInfo();
                 }
@@ -111,9 +116,9 @@
                     var pos = userInfoButton.position();
 
                     userInfo.css({
-                        position: "absolute",
-                        top: (pos.top + userInfoButton.outerHeight()) + "px",
-                        left: (pos.left - userInfo.outerWidth() + userInfoButton.outerWidth()) + "px"
+                        position:"absolute",
+                        top:(pos.top + userInfoButton.outerHeight()) + "px",
+                        left:(pos.left - userInfo.outerWidth() + userInfoButton.outerWidth()) + "px"
                     }).show();
 
                     jQuery("body").on("click", closeUserInfo);
@@ -122,10 +127,42 @@
             });
 
             jQuery("#userInfo .ui-menu-item a")
-                    .mouseover(function() { jQuery(this).addClass("ui-state-hover") })
-                    .mouseout(function() { jQuery(this).removeClass("ui-state-hover") });
+                    .mouseover(function () {
+                        jQuery(this).addClass("ui-state-hover")
+                    })
+                    .mouseout(function () {
+                        jQuery(this).removeClass("ui-state-hover")
+                    });
         });
     </script>
+
+    <style>
+        /*
+         * Autocomplete
+         */
+            .ui-menu .ui-menu-item-with-icon a {
+                padding-left: 20px;
+            }
+
+            span.application-item-icon, span.module-item-icon, span.project-item-icon {
+                display: inline-block;
+                height: 20px;
+                width: 20px;
+                margin-left: -16px;
+            }
+
+            span.application-item-icon {
+                background: url("${fam.icon(name: 'application')}") no-repeat left 6px;
+            }
+
+            span.module-item-icon {
+                background: url("${fam.icon(name: 'brick')}") no-repeat left 6px;
+            }
+
+            span.project-item-icon {
+                background: url("${fam.icon(name: 'building')}") no-repeat left 6px;
+            }
+    </style>
 </head>
 
 <body>
