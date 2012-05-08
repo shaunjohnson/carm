@@ -58,7 +58,7 @@
                 <div>&nbsp;</div>
 
                 <g:render template="/common/activity"
-                          model="[activityList: activityList, listActivityAction: 'listActivity']"/>
+                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity']"/>
             </td>
         </tr>
         </tbody>

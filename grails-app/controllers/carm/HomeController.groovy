@@ -60,6 +60,7 @@ class HomeController {
                 mostActiveSystemEnvironments: mostActiveSystemEnvironments,
 
                 activityList: activityTraceService.listActivityByRoot([:]),
+                activityCount: activityTraceService.countActivityByRoot(),
 
                 loginPostUrl: generatePostUrl()
         ]
