@@ -24,12 +24,18 @@
             </tr>
             <tr class="prop">
                 <td valign="top" class="name">
-                    <input type="submit" id="submit" value="${message(code: "springSecurity.login.button")}"/>
+                    &nbsp;
                 </td>
                 <td valign="top" class="value">
-                    <input type="checkbox" class="chk" name="${rememberMeParameter}" id="remember_me"
-                           <g:if test="${hasCookie}">checked="checked"</g:if>/>
-                    <label for="remember_me"><g:message code="springSecurity.login.remember.me.label"/></label>
+                    <div style="float: right;" class="buttons">
+                        <input type="submit" id="submit" value="${message(code: "springSecurity.login.button")}"/>
+                    </div>
+                    <div style="float: left;">
+                        <input type="checkbox" class="chk" name="${rememberMeParameter}" id="remember_me"
+                               <g:if test="${hasCookie}">checked="checked"</g:if>/>
+                        <label for="remember_me"><g:message code="springSecurity.login.remember.me.label"/></label>
+                    </div>
+                    <div class="clearing"></div>
                 </td>
             </tr>
             </tbody>
