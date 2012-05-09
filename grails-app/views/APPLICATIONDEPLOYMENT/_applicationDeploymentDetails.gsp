@@ -64,6 +64,8 @@
         </td>
     </tr>
 
+    <carm:formDividerRow/>
+
     <tr class="prop">
         <td valign="top" class="name">
             <g:message code="applicationDeployment.requestedDeploymentDate.label"
@@ -94,9 +96,7 @@
         </td>
     </tr>
 
-    <tr class="prop">
-        <td colspan="2">&nbsp;</td>
-    </tr>
+    <carm:formDividerRow/>
 
     <tr class="prop">
         <td valign="top" class="name">
