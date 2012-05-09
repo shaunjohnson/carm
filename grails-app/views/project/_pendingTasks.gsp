@@ -14,4 +14,6 @@
                        default="This project does not have any pending tasks."/>
         </p>
     </g:else>
+
+    <div>&nbsp;</div>
 </g:if>

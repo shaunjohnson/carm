@@ -43,8 +43,6 @@
             <div id="summaryTab">
                 <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
 
-                <div>&nbsp;</div>
-
                 <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
             </div>
 
