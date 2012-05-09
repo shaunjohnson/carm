@@ -42,6 +42,10 @@ class ApplicationDeployment {
         assignedTo(nullable: true)
         dateTested(nullable: true)
         testedBy(nullable: true)
+
+        moduleDeployments(validator: { val, obj ->
+            val.size() > 0 && val.find { it.deploymentState == ModuleDeploymentState.DEPLOYED }
+        })
     }
 
     static belongsTo = [applicationRelease: ApplicationRelease, deploymentEnvironment: SystemDeploymentEnvironment]
