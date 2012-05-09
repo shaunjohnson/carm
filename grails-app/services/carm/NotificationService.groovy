@@ -5,6 +5,7 @@ import java.text.MessageFormat
 import org.springframework.context.MessageSource
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
+import grails.util.Environment
 
 class NotificationService implements ApplicationContextAware {
 
@@ -15,8 +16,10 @@ class NotificationService implements ApplicationContextAware {
     def mailService
 
     def sendEmail(String fromEmailAddress, List<String> toEmailAddresses, String subjectCode, String messageCode, List<Object> args) {
+        def currentEnv = (Environment.current == Environment.PRODUCTION ? "" : " - ${Environment.current}")
+
         MessageSource messageSource = applicationContext.getBean("messageSource")
-        String subject = "[CARM] " + messageSource.getMessage(subjectCode, args.toArray(), LocaleContextHolder.locale)
+        String subject = "[CARM${currentEnv}] " + messageSource.getMessage(subjectCode, args.toArray(), LocaleContextHolder.locale)
         String message = messageSource.getMessage(messageCode, args.toArray(), LocaleContextHolder.locale)
 
         def type = grailsApplication.config.carm.mail.type
