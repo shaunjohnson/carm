@@ -14,10 +14,11 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div class="buttons">
-        <carm:button action="upcomingDeployments" id="${params.id}">
-            <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
-        </carm:button>
+    <div class="nav">
+        <span class="menuButton">
+            <g:link action="upcomingDeployments" id="${params.id}"><g:message code="upcomingDeployments.label"
+                                                                              default="Upcoming Deployments"/></g:link>
+        </span>
     </div>
 
     <script type="text/javascript">
