@@ -43,6 +43,7 @@ class ModuleTypeService {
         log.debug "$prefix entered"
 
         ModuleType moduleType = new ModuleType(params)
+        moduleType.description = moduleType.description?.trim()
         moduleType.save()
 
         log.debug "$prefix returning $moduleType"
@@ -111,6 +112,7 @@ class ModuleTypeService {
         log.debug "$prefix entered"
 
         moduleType.properties = params
+        moduleType.description = moduleType.description?.trim()
 
         log.debug "$prefix leaving"
     }

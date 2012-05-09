@@ -48,6 +48,7 @@ class SystemServerService {
         log.debug "$prefix entered"
 
         SystemServer systemServer = new SystemServer(params)
+        systemServer.description = systemServer.description?.trim()
         systemServer.save()
 
         log.debug "$prefix returning $systemServer"
@@ -116,6 +117,7 @@ class SystemServerService {
         log.debug "$prefix entered"
 
         systemServer.properties = params
+        systemServer.description = systemServer.description?.trim()
 
         log.debug "$prefix leaving"
     }

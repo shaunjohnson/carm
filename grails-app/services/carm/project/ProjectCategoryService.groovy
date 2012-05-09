@@ -43,6 +43,7 @@ class ProjectCategoryService {
         log.debug "$prefix entered"
 
         ProjectCategory projectCategory = new ProjectCategory(params)
+        projectCategory.description = projectCategory.description?.trim()
         projectCategory.save()
 
         log.debug "$prefix returning $projectCategory"
@@ -111,6 +112,7 @@ class ProjectCategoryService {
         log.debug "$prefix entered"
 
         projectCategory.properties = params
+        projectCategory.description = projectCategory.description?.trim()
 
         log.debug "$prefix leaving"
     }

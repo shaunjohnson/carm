@@ -59,12 +59,13 @@ class SystemEnvironmentService {
 
         log.debug "$prefix entered"
 
-        SystemEnvironment system = new SystemEnvironment(params)
-        system.save()
+        SystemEnvironment systemEnvironment = new SystemEnvironment(params)
+        systemEnvironment.description = systemEnvironment.description?.trim()
+        systemEnvironment.save()
 
-        log.debug "$prefix returning $system"
+        log.debug "$prefix returning $systemEnvironment"
 
-        system
+        systemEnvironment
     }
 
     /**
@@ -179,12 +180,13 @@ class SystemEnvironmentService {
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void update(SystemEnvironment system, Map params) {
+    void update(SystemEnvironment systemEnvironment, Map params) {
         def prefix = "update() :"
 
         log.debug "$prefix entered"
 
-        system.properties = params
+        systemEnvironment.properties = params
+        systemEnvironment.description = systemEnvironment.description?.trim()
 
         log.debug "$prefix leaving"
     }

@@ -43,6 +43,7 @@ class ApplicationTypeService {
         log.debug "$prefix entered"
 
         ApplicationType applicationType = new ApplicationType(params)
+        applicationType.description = applicationType.description?.trim()
         applicationType.save()
 
         log.debug "$prefix returning $applicationType"
@@ -111,6 +112,7 @@ class ApplicationTypeService {
         log.debug "$prefix entered"
 
         applicationType.properties = params
+        applicationType.description = applicationType.description?.trim()
 
         log.debug "$prefix leaving"
     }

@@ -44,6 +44,7 @@ class SourceControlRoleService {
         log.debug "$prefix entered"
 
         SourceControlRole sourceControlRole = new SourceControlRole(params)
+        sourceControlRole.description = sourceControlRole.description?.trim()
         sourceControlRole.save()
 
         log.debug "$prefix returning $sourceControlRole"
@@ -112,6 +113,7 @@ class SourceControlRoleService {
         log.debug "$prefix entered"
 
         sourceControlRole.properties = params
+        sourceControlRole.description = sourceControlRole.description?.trim()
 
         log.debug "$prefix leaving"
     }

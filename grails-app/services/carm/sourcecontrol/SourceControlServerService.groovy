@@ -48,6 +48,7 @@ class SourceControlServerService {
         log.debug "$prefix entered"
 
         SourceControlServer sourceControlServer = new SourceControlServer(params)
+        sourceControlServer.description = sourceControlServer.description?.trim()
         sourceControlServer.save()
 
         log.debug "$prefix returning $sourceControlServer"
@@ -116,6 +117,7 @@ class SourceControlServerService {
         log.debug "$prefix entered"
 
         sourceControlServer.properties = params
+        sourceControlServer.description = sourceControlServer.description?.trim()
 
         log.debug "$prefix leaving"
     }

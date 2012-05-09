@@ -43,6 +43,7 @@ class ModuleDeploymentTestStateService {
         log.debug "$prefix entered"
 
         ModuleDeploymentTestState moduleDeploymentTestState = new ModuleDeploymentTestState(params)
+        moduleDeploymentTestState.description = moduleDeploymentTestState.description?.trim()
         moduleDeploymentTestState.save()
 
         log.debug "$prefix returning $moduleDeploymentTestState"
@@ -111,6 +112,7 @@ class ModuleDeploymentTestStateService {
         log.debug "$prefix entered"
 
         moduleDeploymentTestState.properties = params
+        moduleDeploymentTestState.description = moduleDeploymentTestState.description?.trim()
 
         log.debug "$prefix leaving"
     }

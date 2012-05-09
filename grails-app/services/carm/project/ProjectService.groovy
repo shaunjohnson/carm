@@ -41,6 +41,7 @@ class ProjectService {
         }
 
         Project project = new Project(params)
+        project.description = project.description?.trim()
         project.save()
 
         // Grant the list of project owners administration permission
@@ -117,6 +118,7 @@ class ProjectService {
         }
 
         project.properties = params
+        project.description = project.description?.trim()
 
         // Grant the list of project owners administration permission
         if (!project.hasErrors()) {

@@ -43,6 +43,7 @@ class ApplicationReleaseTestStateService {
         log.debug "$prefix entered"
 
         ApplicationReleaseTestState applicationReleaseTestState = new ApplicationReleaseTestState(params)
+        applicationReleaseTestState.description = applicationReleaseTestState.description?.trim()
         applicationReleaseTestState.save()
 
         log.debug "$prefix returning $applicationReleaseTestState"
@@ -111,6 +112,7 @@ class ApplicationReleaseTestStateService {
         log.debug "$prefix entered"
 
         applicationReleaseTestState.properties = params
+        applicationReleaseTestState.description = applicationReleaseTestState.description?.trim()
 
         log.debug "$prefix leaving"
     }

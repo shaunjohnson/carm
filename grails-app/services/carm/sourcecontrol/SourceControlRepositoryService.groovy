@@ -44,6 +44,7 @@ class SourceControlRepositoryService {
         log.debug "$prefix entered"
 
         SourceControlRepository sourceControlRepository = new SourceControlRepository(params)
+        sourceControlRepository.description = sourceControlRepository.description?.trim()
         sourceControlRepository.save()
 
         log.debug "$prefix returning $sourceControlRepository"
@@ -112,6 +113,7 @@ class SourceControlRepositoryService {
         log.debug "$prefix entered"
 
         sourceControlRepository.properties = params
+        sourceControlRepository.description = sourceControlRepository.description?.trim()
 
         log.debug "$prefix leaving"
     }

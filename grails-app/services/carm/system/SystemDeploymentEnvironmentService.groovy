@@ -44,6 +44,7 @@ class SystemDeploymentEnvironmentService {
         log.debug "$prefix entered"
 
         SystemDeploymentEnvironment systemDeploymentEnvironment = new SystemDeploymentEnvironment(params)
+        systemDeploymentEnvironment.description = systemDeploymentEnvironment.description?.trim()
 
         // Explicitly adding to the SystemEnvironment due to "bug" in Grails. This is necessary since system.environments is a list
         def system = systemDeploymentEnvironment.sysEnvironment
@@ -117,6 +118,7 @@ class SystemDeploymentEnvironmentService {
         log.debug "$prefix entered"
 
         systemDeploymentEnvironment.properties = params
+        systemDeploymentEnvironment.description = systemDeploymentEnvironment.description?.trim()
 
         log.debug "$prefix leaving"
     }

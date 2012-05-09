@@ -54,6 +54,7 @@ class ApplicationService implements ApplicationContextAware {
         log.debug "$prefix entered"
 
         Application application = new Application(params)
+        application.description = application.description?.trim()
         application.save()
 
         log.debug "$prefix returning $application"
@@ -141,6 +142,7 @@ class ApplicationService implements ApplicationContextAware {
         log.debug "$prefix entered"
 
         application.properties = params
+        application.description = application.description?.trim()
 
         log.debug "$prefix leaving"
     }

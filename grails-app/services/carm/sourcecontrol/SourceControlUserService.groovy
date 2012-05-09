@@ -32,6 +32,7 @@ class SourceControlUserService {
         log.debug "$prefix entered"
 
         SourceControlUser sourceControlUser = new SourceControlUser(params)
+        sourceControlUser.description = sourceControlUser.description?.trim()
         sourceControlUser.save()
 
         log.debug "$prefix returning $sourceControlUser"
@@ -95,6 +96,7 @@ class SourceControlUserService {
         log.debug "$prefix entered"
 
         sourceControlUser.properties = params
+        sourceControlUser.description = sourceControlUser.description?.trim()
 
         log.debug "$prefix leaving"
     }
