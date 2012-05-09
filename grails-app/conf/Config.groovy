@@ -112,7 +112,7 @@ grails.mail.host = "smtpserver"
 grails.mail.port = 25
 grails.mail.default.from = "carm@localhost.com"
 
-carm.mail.type = 'shell'  // 'shell' or 'mail'
+carm.mail.type = 'mail'  // 'shell' or 'mail'
 
 // {0} - SMTP Server
 // {1} - SMTP Server port
