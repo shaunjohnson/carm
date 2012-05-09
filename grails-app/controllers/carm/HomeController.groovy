@@ -36,17 +36,19 @@ class HomeController {
             myPendingTasks = projectService.findAllPendingTasks(myProjects)
         }
         else {
-            def activeApplications = applicationService.getMostActiveApplications().sort { it.project.name <=> it.name }
-            
+            def activeApplications = applicationService.getMostActiveApplications().sort { it.project.name }
+
             activeApplications.each { Application application ->
                 if (mostActiveApplications[application.project]) {
                     mostActiveApplications[application.project] << application
                 }
                 else {
-                    mostActiveApplications[application.project] = [ application ]
+                    mostActiveApplications[application.project] = [application]
                 }
             }
-            
+
+            mostActiveApplications.entrySet().each { it.value.sort { it.name } }
+
             mostActiveSystemEnvironments = systemEnvironmentService.getMostActiveSystems()
         }
 
@@ -138,7 +140,7 @@ class HomeController {
         def maxResults = grailsApplication.config.ui.search.maxResults
 
         Application.findAllByNameIlike("%${params.term}%", [max: maxResults]).each {
-            results << [ type: "application", id: it.id, value: it.name, label: it.name ]
+            results << [type: "application", id: it.id, value: it.name, label: it.name]
         }
 
         if (results.size() < maxResults) {
@@ -146,7 +148,7 @@ class HomeController {
 
             for (Module module : modules) {
                 if (!results.find { it.value == module.name }) {
-                    results << [ type:  "module", id: module.id, value: module.name, label: module.name ]
+                    results << [type: "module", id: module.id, value: module.name, label: module.name]
                 }
 
                 if (results.size() == maxResults) {
@@ -160,7 +162,7 @@ class HomeController {
 
             for (Project project : projects) {
                 if (!results.find { it.value == project.name }) {
-                    results << [ type:  "project", id: project.id, value: project.name, label: project.name ]
+                    results << [type: "project", id: project.id, value: project.name, label: project.name]
                 }
 
                 if (results.size() == maxResults) {
