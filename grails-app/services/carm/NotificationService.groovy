@@ -31,11 +31,11 @@ class NotificationService implements ApplicationContextAware {
         }
     }
 
-    private sendEmailUsingMail(String fromEmailAddress, List<String> toEmailAddresses, String subject, String message) {
+    private sendEmailUsingMail(String fromEmailAddress, List<String> toEmailAddresses, String subjectText, String message) {
         mailService.sendMail {
-            to toEmailAddresses.join(", ")
+            to toEmailAddresses
             from fromEmailAddress
-            subject subject
+            subject subjectText
             body message
         }
     }
