@@ -17,8 +17,8 @@
     <div id="systemTabs" class="tab-container">
         <ul class="tabs">
             <li>
-                <a href="#applicationsTab">
-                    <g:message code="applications.label" default="Applications"/>
+                <a href="#summaryTab">
+                    <g:message code="summary.label" default="Summary"/>
                 </a>
             </li>
             <li>
@@ -34,14 +34,7 @@
         </ul>
 
         <div class="panel-container">
-            <div id="applicationsTab">
-                <g:render template="systemApplications"
-                          model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
-            </div>
-
-            <div id="detailsTab">
-                <g:render template="systemDetails" model="[systemInstance: systemEnvironmentInstance]"/>
-
+            <div id="summaryTab">
                 <table class="twoColumnLayout">
                     <tbody>
                     <tr>
@@ -54,6 +47,13 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <g:render template="systemApplications"
+                          model="['systemInstance': systemEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+            </div>
+
+            <div id="detailsTab">
+                <g:render template="systemDetails" model="[systemInstance: systemEnvironmentInstance]"/>
             </div>
 
             <div id="activityTab">
