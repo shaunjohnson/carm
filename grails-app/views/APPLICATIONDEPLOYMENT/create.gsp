@@ -151,8 +151,9 @@
     </g:form>
 </div>
 
-<g:set var="alreadyDeployedTo" value="${existingDeployments*.deploymentEnvironment?.name?.join(", ")}"/>
-<g:set var="alreadyDeployedToIds" value="${existingDeployments*.deploymentEnvironment?.id?.join(", ")}"/>
+<g:set var="existingEnvironments" value="${existingDeployments*.deploymentEnvironment?.unique()}"/>
+<g:set var="alreadyDeployedTo" value="${existingEnvironments.collect { it.name }.join(", ")}"/>
+<g:set var="alreadyDeployedToIds" value="${existingEnvironments.collect { it.id }.join(", ")}"/>
 
 <script type="text/javascript">
     jQuery(function () {
