@@ -15,6 +15,7 @@ class ApplicationService implements ApplicationContextAware {
     ApplicationContext applicationContext
     def activityTraceService
     def applicationDeploymentService
+    def favoriteService
     def grailsApplication
     def systemEnvironmentService
 
@@ -73,7 +74,10 @@ class ApplicationService implements ApplicationContextAware {
 
         log.debug "$prefix entered, application=$application"
 
+        def applicationId = application.id
+
         application.delete()
+        favoriteService.deleteAllForApplicationId(applicationId)
         
         log.debug "$prefix leaving"
     }

@@ -25,10 +25,19 @@ class FavoriteService {
     }
 
     /**
+     * Delete all favorites for the provided application ID
+     *
+     * @param applicationId Application ID for favorites to delete
+     */
+    void deleteAllForApplicationId(Serializable applicationId) {
+        Favorite.executeUpdate("delete from Favorite where application.id = :applicationId", [applicationId: applicationId])
+    }
+
+    /**
      * Delete all favorites for the current user
      */
     void deleteAllFromCurrentUser() {
-        Favorite.executeUpdate("delete from Favorite where user = :user", [user:  carmSecurityService.currentUser])
+        Favorite.executeUpdate("delete from Favorite where user = :user", [user: carmSecurityService.currentUser])
     }
 
     /**
