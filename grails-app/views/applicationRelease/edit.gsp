@@ -103,8 +103,7 @@
 
                 <carm:formFooter>
                     <div class="buttons">
-                        <g:link controller="application" action="show"
-                                id="${applicationReleaseInstance.application.id}"><g:message
+                        <g:link action="show" id="${applicationReleaseInstance.application.id}"><g:message
                                 code="default.button.cancel.label" default="Cancel"/></g:link>
                         <g:submitButton name="save"
                                         value="${message(code: 'default.button.update.label', default: 'Update')}"/>
