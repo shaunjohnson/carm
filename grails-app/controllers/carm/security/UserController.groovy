@@ -82,7 +82,7 @@ class UserController {
     }
 
     def ajaxRemoveFromFavorites() {
-        favoriteService.deleteFromCurrentUser(params.id)
+        favoriteService.deleteFromCurrentUserById(params.id)
         render ""
     }
 }

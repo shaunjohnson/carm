@@ -7,12 +7,12 @@ class FavoriteController {
     def index() { }
 
     def ajaxAddToFavorites() {
-        favoriteService.addToFavorites(params.id)
+        favoriteService.addToCurrentUserFavorites(params.id)
         render ""
     }
 
     def ajaxRemoveFromFavorites() {
-        favoriteService.removeFromFavorites(params.id)
+        favoriteService.removeFromCurrentUserFavorites(params.id)
         render ""
     }
 }

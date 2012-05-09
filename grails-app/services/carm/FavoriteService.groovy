@@ -11,11 +11,23 @@ class FavoriteService {
     def springSecurityService
 
     /**
-     * Delete all favorites for the current user
+     * Adds an Application to the current user's favorites.
      *
-     * @param id ID of Favorite record to delete
+     * @param id Application ID
      */
-    void deleteAllFromCurrentUser(Serializable id) {
+    void addToCurrentUserFavorites(Serializable id) {
+        Application application = Application.get(id)
+
+        if (application) {
+            new Favorite(user: carmSecurityService.currentUser, application: application).save()
+            log.debug "Added $application to favories"
+        }
+    }
+
+    /**
+     * Delete all favorites for the current user
+     */
+    void deleteAllFromCurrentUser() {
         Favorite.executeUpdate("delete from Favorite where user = :user", [user:  carmSecurityService.currentUser])
     }
 
@@ -24,7 +36,7 @@ class FavoriteService {
      *
      * @param id ID of Favorite record to delete
      */
-    void deleteFromCurrentUser(Serializable id) {
+    void deleteFromCurrentUserById(Serializable id) {
         Favorite favorite = Favorite.get(id)
 
         if (favorite && favorite.user == carmSecurityService.currentUser) {
@@ -38,13 +50,7 @@ class FavoriteService {
      * @return List of Favorite objects for the current user
      */
     List<Favorite> findAllByCurrentUser() {
-        if (springSecurityService.isLoggedIn()) {
-            Favorite.executeQuery("from Favorite where user = :user order by application.name asc",
-                    [user: carmSecurityService.currentUser])
-        }
-        else {
-            []
-        }
+        springSecurityService.isLoggedIn() ? findAllByUser(carmSecurityService.currentUser) : []
     }
 
     /**
@@ -72,25 +78,11 @@ class FavoriteService {
     }
 
     /**
-     * Adds an Application to the current user's favorites.
-     *
-     * @param id Application ID
-     */
-    void addToFavorites(Serializable id) {
-        Application application = Application.get(id)
-
-        if (application) {
-            new Favorite(user: carmSecurityService.currentUser, application: application).save()
-            log.debug "Added $application to favories"
-        }
-    }
-
-    /**
      * Removes an Application from the current user's favorites
      *
      * @param id Application ID
      */
-    void removeFromFavorites(Serializable id) {
+    void removeFromCurrentUserFavorites(Serializable id) {
         Application application = Application.get(id)
 
         if (application) {
