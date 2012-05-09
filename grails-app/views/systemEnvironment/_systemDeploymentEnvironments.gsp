@@ -28,7 +28,7 @@
                 <td>
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <g:if test="${eindex > 0}">
-                            <carm:moveUp controller="system" action="moveEnvUp"
+                            <carm:moveUp controller="systemEnvironment" action="moveEnvUp"
                                          id="${environment.id}"
                                          params="[systemId: systemInstance.id, index: eindex]"/>
                         </g:if>
@@ -37,7 +37,7 @@
                 <td>
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <g:if test="${eindex + 1 < systemInstance.environments.size()}">
-                            <carm:moveDown controller="system" action="moveEnvDown"
+                            <carm:moveDown controller="systemEnvironment" action="moveEnvDown"
                                            id="${environment.id}"
                                            params="[systemId: systemInstance.id, index: eindex]"/>
                         </g:if>
