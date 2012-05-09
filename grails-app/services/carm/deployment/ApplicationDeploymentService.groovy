@@ -268,7 +268,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
 
         applicationDeployment.save()
 
-        if (!applicationRelease.hasErrors()) {
+        if (!applicationDeployment.hasErrors()) {
             sendNotification(applicationDeployment)
         }
 
@@ -344,7 +344,6 @@ class ApplicationDeploymentService implements ApplicationContextAware {
 
         applicationDeployment.properties = params
 
-        //
         applicationDeployment.moduleDeployments.each { moduleDeployment ->
             if (params["moduleDeployment.${moduleDeployment.id}"] == 'on') {
                 moduleDeployment.deploymentState = ModuleDeploymentState.DEPLOYED
