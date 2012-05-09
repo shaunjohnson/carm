@@ -32,18 +32,25 @@
                     <g:message code="permissions.label" default="Permissions"/>
                 </a>
             </li>
-            <li>
-                <a href="#activityTab">
-                    <g:message code="activity.label" default="Activity"/>
-                </a>
-            </li>
         </ul>
 
         <div class="panel-container">
             <div id="summaryTab">
                 <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
 
-                <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
+                <table class="twoColumnLayout">
+                    <tbody>
+                    <tr>
+                        <td class="layoutColumnFirst">
+                            <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
+                        </td>
+                        <td class="layoutColumnLast">
+                            <g:render template="/common/activity"
+                                      model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: projectInstance.id]"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div id="detailsTab">
@@ -52,11 +59,6 @@
 
             <div id="permissionsTab">
                 <g:render template="projectOwners" model="[projectOwners: projectOwners]"/>
-            </div>
-
-            <div id="activityTab">
-                <g:render template="/common/activity"
-                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: projectInstance.id]"/>
             </div>
         </div>
     </div>
