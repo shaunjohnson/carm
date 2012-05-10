@@ -22,6 +22,9 @@ class NotificationService implements ApplicationContextAware {
         String subject = "[CARM${currentEnv}] " + messageSource.getMessage(subjectCode, args.toArray(), LocaleContextHolder.locale)
         String message = messageSource.getMessage(messageCode, args.toArray(), LocaleContextHolder.locale)
 
+        // Remove duplicates
+        toEmailAddresses.unique()
+
         def type = grailsApplication.config.carm.mail.type
         if (type == 'shell') {
             sendEmailUsingShell(fromEmailAddress, toEmailAddresses, subject, message)
