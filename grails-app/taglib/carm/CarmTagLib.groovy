@@ -46,6 +46,7 @@ class CarmTagLib {
     def systemServerService
     def systemDeploymentEnvironmentService
     def systemEnvironmentService
+    def watchService
 
     /**
      * Outputs an ActivityTrace object.
@@ -150,20 +151,18 @@ class CarmTagLib {
 
         out << '</div>'
 
-        if (controllerName == 'application' && action == 'show' && springSecurityService.isLoggedIn()) {
-            def isFavorite = favoriteService.isFavoriteByCurrentUser(entity)
+        if (action == 'show' && springSecurityService.isLoggedIn()) {
+            if (controllerName == 'application') {
+                out << render(template: "/favorite/favorites",
+                        model: [isFavorite: favoriteService.isFavoriteByCurrentUser(entity)])
 
-            out << '<div id="addToFavorites" style="float: right; ' << (isFavorite ? "display: none;" : "display: block;") << '">'
-            out << '<img src="' << resource(dir: 'images', file: 'unstarred.png')
-            out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
-            out << message(code: 'addToFavorites.message')
-            out << '" /></div>'
-
-            out << '<div id="removeFromFavorites" style="float: right; ' << (isFavorite ? "display: block;" : "display: none;") << '">'
-            out << '<img src="' << resource(dir: 'images', file: 'starred.png')
-            out << '" alt="favorite" width="20" height="20" style="cursor: pointer;" title="'
-            out << message(code: 'removeFromFavorites.message')
-            out << '" /></div>'
+                out << render(template: "/watch/watches",
+                        model: [type: "Application", isWatched: watchService.isApplicationWatchedByCurrentUser(entity)])
+            }
+            else if (controllerName == 'project') {
+                out << render(template: "/watch/watches",
+                        model: [type: "Project", isWatched: watchService.isProjectWatchedByCurrentUser(entity)])
+            }
         }
 
         out << '<div class="clearing"></div></h1>'
@@ -243,16 +242,16 @@ class CarmTagLib {
             out << joda.formatPeriod(value: period, fields: "months, days")
         }
         else if (period.days > 0) {
-            out << joda.formatPeriod(value: period, fields:  "days")
+            out << joda.formatPeriod(value: period, fields: "days")
         }
         else if (period.hours > 0) {
             out << joda.formatPeriod(value: period, fields: "hours, minutes")
         }
         else if (period.minutes > 0) {
-            out << joda.formatPeriod(value: period, fields:  "minutes, seconds")
+            out << joda.formatPeriod(value: period, fields: "minutes, seconds")
         }
         else {
-            out << joda.formatPeriod(value: period, fields:  "seconds")
+            out << joda.formatPeriod(value: period, fields: "seconds")
         }
 
         out << '&nbsp;' << message(code: "ago.label", default: "ago")

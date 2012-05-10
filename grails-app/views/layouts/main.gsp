@@ -37,6 +37,7 @@
             jQuery("button.button, .buttons input").button();
             jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
 
+            // Delete confirmation
             jQuery("#delete-dialog").dialog({
                 autoOpen:false,
                 resizable:false,
@@ -53,7 +54,6 @@
                 }
             });
 
-            // Delete confirmation
             jQuery("a.delete").click(function () {
                 jQuery('#delete-dialog').data('link', this).dialog('open');
                 return false;
@@ -83,11 +83,19 @@
                         .appendTo(ul);
             };
 
+            // Preload imates
+            new Image().src = "${resource(dir: 'images', file: 'unstarred.png')}";
+            new Image().src = "${resource(dir: 'images', file: 'starred.png')}";
+            new Image().src = "${fam.icon(name: 'email')}";
+            new Image().src = "${fam.icon(name: 'email_go')}";
+            new Image().src = "${fam.icon(name: 'email_add')}";
+            new Image().src = "${fam.icon(name: 'email_delete')}";
+
             // Favorites
             var userInfo = jQuery("#userInfo"),
-                    userInfoButton = jQuery("#userInfoButton"),
-                    addToFavorites = jQuery("#addToFavorites"),
-                    removeFromFavorites = jQuery("#removeFromFavorites");
+                userInfoButton = jQuery("#userInfoButton"),
+                addToFavorites = jQuery("#addToFavorites"),
+                removeFromFavorites = jQuery("#removeFromFavorites");
 
             addToFavorites.click(function () {
                 jQuery.get('${createLink(controller: "favorite", action: "ajaxAddToFavorites", id: params.id)}');
@@ -100,6 +108,44 @@
                 addToFavorites.show();
                 removeFromFavorites.hide();
             });
+
+            // Watches
+            var addApplicationToWatches = jQuery("#addApplicationToWatches"),
+                addProjectToWatches = jQuery("#addProjectToWatches"),
+                removeApplicationFromWatches = jQuery("#removeApplicationFromWatches"),
+                removeProjectFromWatches = jQuery("#removeProjectFromWatches");
+
+            addApplicationToWatches
+                .click(function () {
+                    jQuery.get('${createLink(controller: "watch", action: "ajaxAddApplicationToWatches", id: params.id)}');
+                    addApplicationToWatches.hide();
+                    removeApplicationFromWatches.show();
+                })
+                .hover( function() { jQuery(this).toggleClass("add-to-watches add-to-watches-hover"); });
+
+            addProjectToWatches
+                .click(function () {
+                    jQuery.get('${createLink(controller: "watch", action: "ajaxAddProjectToWatches", id: params.id)}');
+                    addProjectToWatches.hide();
+                    removeProjectFromWatches.show();
+                })
+                .hover( function() { jQuery(this).toggleClass("add-to-watches add-to-watches-hover"); });
+
+            removeApplicationFromWatches
+                .click(function () {
+                    jQuery.get('${createLink(controller: "watch", action: "ajaxRemoveApplicationFromWatches", id: params.id)}');
+                    addApplicationToWatches.show();
+                    removeApplicationFromWatches.hide();
+                })
+                .hover( function() { jQuery(this).toggleClass("remove-from-watches remove-from-watches-hover"); });
+
+            removeProjectFromWatches
+                .click(function () {
+                    jQuery.get('${createLink(controller: "watch", action: "ajaxRemoveProjectFromWatches", id: params.id)}');
+                    addProjectToWatches.show();
+                    removeProjectFromWatches.hide();
+                })
+                .hover( function() { jQuery(this).toggleClass("remove-from-watches remove-from-watches-hover"); });
 
             jQuery('.body :input:visible:first').focus();
 
@@ -137,31 +183,66 @@
     </script>
 
     <style>
+        .page-header-action {
+            cursor: pointer;
+            float: right;
+            margin-left: 1em;
+            padding-left: 1.5em;
+        }
+
+        .page-header-action, .page-header-action * {
+            font-size: 1em;
+        }
+
+        .add-to-favorites {
+            background: url("${resource(dir: 'images', file: 'unstarred.png')}") no-repeat left;
+        }
+
+        .remove-from-favorites {
+            background: url("${resource(dir: 'images', file: 'starred.png')}") no-repeat left;
+        }
+
+        .add-to-watches {
+            background: url("${fam.icon(name: 'email')}") no-repeat left;
+        }
+
+        .add-to-watches-hover {
+            background: url("${fam.icon(name: 'email_add')}") no-repeat left;
+        }
+
+        .remove-from-watches {
+            background: url("${fam.icon(name: 'email_go')}") no-repeat left;
+        }
+
+        .remove-from-watches-hover {
+            background: url("${fam.icon(name: 'email_delete')}") no-repeat left;
+        }
+
         /*
          * Autocomplete
          */
-            .ui-menu .ui-menu-item-with-icon a {
-                padding-left: 20px;
-            }
+        .ui-menu .ui-menu-item-with-icon a {
+            padding-left: 20px;
+        }
 
-            span.application-item-icon, span.module-item-icon, span.project-item-icon {
-                display: inline-block;
-                height: 20px;
-                width: 20px;
-                margin-left: -16px;
-            }
+        span.application-item-icon, span.module-item-icon, span.project-item-icon {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            margin-left: -16px;
+        }
 
-            span.application-item-icon {
-                background: url("${fam.icon(name: 'application')}") no-repeat left 6px;
-            }
+        span.application-item-icon {
+            background: url("${fam.icon(name: 'application')}") no-repeat left 6px;
+        }
 
-            span.module-item-icon {
-                background: url("${fam.icon(name: 'brick')}") no-repeat left 6px;
-            }
+        span.module-item-icon {
+            background: url("${fam.icon(name: 'brick')}") no-repeat left 6px;
+        }
 
-            span.project-item-icon {
-                background: url("${fam.icon(name: 'building')}") no-repeat left 6px;
-            }
+        span.project-item-icon {
+            background: url("${fam.icon(name: 'building')}") no-repeat left 6px;
+        }
     </style>
 </head>
 
