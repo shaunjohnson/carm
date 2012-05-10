@@ -25,6 +25,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
     def moduleService
     def notificationService
     def springSecurityService
+    def watchService
 
     /**
      * Determines if the application release is deployable. A release can be deployed if the release is in a completed
@@ -424,9 +425,12 @@ class ApplicationReleaseService implements ApplicationContextAware {
                             id: applicationRelease.application.id)
             ]
 
+            def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)
+            toEmailAddresses.addAll(watchService.findAllEmailByApplication(applicationRelease.application))
+
             notificationService.sendEmail(
                     currentUser.email,
-                    carmSecurityService.findAllEmailByUsernameInList(projectOwners),
+                    toEmailAddresses,
                     'applicationReleased.notification.subject', 'applicationReleased.notification.message', args)
         }
     }

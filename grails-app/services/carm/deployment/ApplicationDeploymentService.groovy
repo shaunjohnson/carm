@@ -26,6 +26,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
     def grailsApplication
     def linkGeneratorService
     def notificationService
+    def watchService
 
     /**
      * Returns a count of all ApplicationDeployment objects.
@@ -123,7 +124,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
     }
 
     def findAllDeploymentsGroupedByDay(SystemEnvironment systemEnvironment, Date completedDate) {
-        def applicationDeployments =findAllBySystemEnvironmentAndCompletedDate(systemEnvironment, completedDate)
+        def applicationDeployments = findAllBySystemEnvironmentAndCompletedDate(systemEnvironment, completedDate)
         groupDeploymentsByDateEnvironmentType(applicationDeployments, "completedDeploymentDate")
     }
 
@@ -414,7 +415,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         SystemDeploymentEnvironment nextEnvironment = null
 
         // Start at last environment and work back towards the first
-        for (SystemDeploymentEnvironment environment: environments.reverse()) {
+        for (SystemDeploymentEnvironment environment : environments.reverse()) {
             if (deployments.find { it.deploymentEnvironment == environment }) {
                 break
             }
@@ -652,10 +653,10 @@ class ApplicationDeploymentService implements ApplicationContextAware {
 
         def projectService = applicationContext.getBean("projectService")
         def projectOwners = projectService.findAllProjectOwners(applicationDeployment.applicationRelease.application.project)
-        
+
         // Do not send notification to current user
         projectOwners.remove(currentUser.username)
-        
+
         // Send notification only if there is at least one other project owner
         if (projectOwners.size()) {
             def args = [
@@ -667,9 +668,12 @@ class ApplicationDeploymentService implements ApplicationContextAware {
                             id: applicationDeployment.applicationRelease.application.id)
             ]
 
+            def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)
+            toEmailAddresses.addAll(watchService.findAllEmailByApplication(applicationDeployment.applicationRelease.application))
+
             notificationService.sendEmail(
                     currentUser.email,
-                    carmSecurityService.findAllEmailByUsernameInList(projectOwners),
+                    toEmailAddresses,
                     'applicationDeployed.notification.subject', 'applicationDeployed.notification.message', args)
         }
     }

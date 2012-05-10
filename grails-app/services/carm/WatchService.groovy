@@ -86,6 +86,28 @@ class WatchService {
     }
 
     /**
+     * Finds all user email addresses by application.
+     *
+     * @param application Application used to filter watches
+     * @return List of email addresses
+     */
+    List<String> findAllEmailByApplication(Application application) {
+        List<String> emailAddresses = Watch.findAllByApplication(application)*.user.email
+        emailAddresses.addAll findAllEmailByProject(application.project)
+        return emailAddresses
+    }
+
+    /**
+     * Finds all user email addresses by application.
+     *
+     * @param application Application used to filter watches
+     * @return List of email addresses
+     */
+    List<String> findAllEmailByProject(Project project) {
+        Watch.findAllByProject(project)*.user.email
+    }
+
+    /**
      * Removes an Application from the current user's watches
      *
      * @param id Application ID
