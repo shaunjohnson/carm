@@ -22,8 +22,8 @@
                 </a>
             </li>
             <li>
-                <a href="#favoritesTab">
-                    <g:message code="favorites.label" default="Favorites"/>
+                <a href="#favoritesAndWatchesTab">
+                    <g:message code="favoritesAndWatches.label" default="Favorites and Watches"/>
                 </a>
             </li>
             <li>
@@ -67,9 +67,21 @@
                 </table>
             </div>
 
-            <div id="favoritesTab">
-                <g:render template="favorites"
-                          model="[favorites: favorites, isCurrentUser: isCurrentUser, userInstance: userInstance]"/>
+            <div id="favoritesAndWatchesTab">
+                <table class="twoColumnLayout">
+                    <tbody>
+                    <tr>
+                        <td class="layoutColumnFirst">
+                            <g:render template="favorites"
+                                      model="[favorites: favorites, isCurrentUser: isCurrentUser, userInstance: userInstance]"/>
+                        </td>
+                        <td class="layoutColumnLast">
+                            <g:render template="watches"
+                                      model="[watches: watches, isCurrentUser: isCurrentUser, userInstance: userInstance]"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div id="activityTab">

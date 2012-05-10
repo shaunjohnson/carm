@@ -2,6 +2,7 @@ package carm
 
 import carm.application.Application
 import carm.project.Project
+import carm.security.User
 
 class WatchService {
 
@@ -35,6 +36,35 @@ class WatchService {
             new Watch(user: carmSecurityService.currentUser, project: project).save()
             log.debug "Added $project to watches"
         }
+    }
+
+    /**
+     * Delete all watches for the current user
+     */
+    void deleteAllFromCurrentUser() {
+        Watch.executeUpdate("delete from Watch where user = :user", [user: carmSecurityService.currentUser])
+    }
+
+    /**
+     * Delete a Watch record by ID for the current user.
+     *
+     * @param id ID of Watch record to delete
+     */
+    void deleteFromCurrentUserById(Serializable id) {
+        Watch watch = Watch.get(id)
+
+        if (watch && watch.user == carmSecurityService.currentUser) {
+            watch.delete()
+        }
+    }
+
+    /**
+     * Find all Watch objects by user
+     *
+     * @return List of Watch objects for the user
+     */
+    List<Watch> findAllByUser(User user) {
+        Watch.executeQuery("from Watch where user = :user", [user: user]).sort { it.project <=> it.application }
     }
 
     /**

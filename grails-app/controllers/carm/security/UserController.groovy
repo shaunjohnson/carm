@@ -6,6 +6,7 @@ class UserController {
     def carmSecurityService
     def favoriteService
     def userService
+    def watchService
 
     def index() {
         redirect(action: "list", params: params)
@@ -46,7 +47,8 @@ class UserController {
                 activityList: activityTraceService.listActivityByUser(userInstance, [:]),
                 activityCount: activityTraceService.countActivityByUser(userInstance),
                 favorites: favoriteService.findAllByUser(userInstance),
-                isCurrentUser: (carmSecurityService.currentUsername == userInstance.username)
+                isCurrentUser: (carmSecurityService.currentUsername == userInstance.username),
+                watches: watchService.findAllByUser(userInstance),
         ]
     }
 
@@ -81,8 +83,18 @@ class UserController {
         render ""
     }
 
+    def ajaxDeleteAllWatches() {
+        watchService.deleteAllFromCurrentUser()
+        render ""
+    }
+
     def ajaxRemoveFromFavorites() {
         favoriteService.deleteFromCurrentUserById(params.id)
+        render ""
+    }
+
+    def ajaxRemoveFromWatches() {
+        watchService.deleteFromCurrentUserById(params.id)
         render ""
     }
 }

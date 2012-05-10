@@ -2,7 +2,7 @@
 <g:set var="controller" value="${params.controller}"/>
 
 <g:if test="${controller == 'administration'}">
-    <carm:pageHeaderLabel action="show" beanName="${pageName}"/>
+    <carm:pageHeaderLabel action="show" beanName="${pageName}" entity="${domain}"/>
 </g:if>
 <g:elseif test="${controller == 'application'}">
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
@@ -46,9 +46,9 @@
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
 
     <carm:pageHeaderLabel
-                          beanName="${message(code: 'pageHeader.applicationDeployment.label',
-                                  args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.deploymentEnvironment])}"
-                          entityName="${entityName}"/>
+            beanName="${message(code: 'pageHeader.applicationDeployment.label',
+                    args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.deploymentEnvironment])}"
+            entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -74,8 +74,8 @@
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
 
     <carm:pageHeaderLabel
-                          beanName="${message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber])}"
-                          entityName="${entityName}"/>
+            beanName="${message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber])}"
+            entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -105,14 +105,11 @@
            value="${message(code: 'applicationReleaseHistory.label', default: 'Application Release History')}"/>
 
     <g:if test="${action == 'list'}">
-        <carm:pageHeaderLabel
-                              beanName="${domain}"
-                              entityName="${entityName}"/>
+        <carm:pageHeaderLabel beanName="${domain}" entityName="${entityName}" entity="${domain}"/>
     </g:if>
     <g:else>
-        <carm:pageHeaderLabel
-                              beanName="${formatDate(date: domain.dateCreated)}"
-                              entityName="${entityName}"/>
+        <carm:pageHeaderLabel beanName="${formatDate(date: domain.dateCreated)}" entityName="${entityName}"
+                              entity="${domain}"/>
     </g:else>
 
     <bc:breadcrumbs>
@@ -132,7 +129,7 @@
     <g:set var="entityName"
            value="${message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -155,7 +152,7 @@
 <g:elseif test="${controller == 'applicationType'}">
     <g:set var="entityName" value="${message(code: 'applicationType.label', default: 'Application Type')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -174,17 +171,17 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller ==~ /.*home/}">
-    <carm:pageHeaderLabel action="show" beanName="${pageName}"/>
+    <carm:pageHeaderLabel action="show" beanName="${pageName}" entity="${domain}"/>
     <bc:breadcrumbs/>
 </g:elseif>
 <g:elseif test="${controller == 'login'}">
-    <carm:pageHeaderLabel action="show" beanName="${pageName}"/>
+    <carm:pageHeaderLabel action="show" beanName="${pageName}" entity="${domain}"/>
     <bc:breadcrumbs/>
 </g:elseif>
 <g:elseif test="${controller == 'module'}">
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action == 'list'}">
@@ -217,9 +214,9 @@
     <g:set var="applicationRelease" value="${applicationDeployment?.applicationRelease}"/>
 
     <carm:pageHeaderLabel
-                          beanName="${message(code: 'pageHeader.moduleDeployment.label',
-                                  args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.deploymentEnvironment])}"
-                          entityName="${entityName}"/>
+            beanName="${message(code: 'pageHeader.moduleDeployment.label',
+                    args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.deploymentEnvironment])}"
+            entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action == 'show'}">
@@ -236,7 +233,7 @@
     <g:set var="entityName"
            value="${message(code: 'moduleDeploymentTestState.label', default: 'Module Deployment Test State')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -257,7 +254,7 @@
 <g:elseif test="${controller == 'moduleType'}">
     <g:set var="entityName" value="${message(code: 'moduleType.label', default: 'Module Type')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -278,7 +275,7 @@
 <g:elseif test="${controller == 'project'}">
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -304,7 +301,7 @@
 <g:elseif test="${controller == 'projectCategory'}">
     <g:set var="entityName" value="${message(code: 'projectCategory.label', default: 'Project Category')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -326,7 +323,7 @@
     <g:set var="entityName"
            value="${message(code: 'sourceControlRepository.label', default: 'Source Control Repository')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -354,7 +351,7 @@
 <g:elseif test="${controller == 'sourceControlRole'}">
     <g:set var="entityName" value="${message(code: 'sourceControlRole.label', default: 'Source Control Role')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -375,7 +372,7 @@
 <g:elseif test="${controller == 'sourceControlServer'}">
     <g:set var="entityName" value="${message(code: 'sourceControlServer.label', default: 'Source Control Server')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -396,7 +393,7 @@
 <g:elseif test="${controller == 'sourceControlUser'}">
     <g:set var="entityName" value="${message(code: 'sourceControlUser.label', default: 'Source Control User')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>
@@ -422,9 +419,10 @@
     </bc:breadcrumbs>
 </g:elseif>
 <g:elseif test="${controller == 'systemDeploymentEnvironment'}">
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
+    <g:set var="entityName"
+           value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -451,7 +449,7 @@
 <g:elseif test="${controller == 'systemEnvironment'}">
     <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'SystemEnvironment')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -485,7 +483,7 @@
 <g:elseif test="${controller == 'systemServer'}">
     <g:set var="entityName" value="${message(code: 'systemServer.label', default: 'SystemEnvironment Server')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.name}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <g:if test="${action != 'list'}">
@@ -512,7 +510,7 @@
 <g:elseif test="${controller == 'user'}">
     <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
 
-    <carm:pageHeaderLabel beanName="${domain?.fullName}" entityName="${entityName}"/>
+    <carm:pageHeaderLabel beanName="${domain?.fullName}" entityName="${entityName}" entity="${domain}"/>
 
     <bc:breadcrumbs>
         <bc:administration isFirst="true"/>

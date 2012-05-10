@@ -192,6 +192,7 @@
 
         .page-header-action, .page-header-action * {
             font-size: 1em;
+            font-weight: normal;
         }
 
         .add-to-favorites {
@@ -216,6 +217,16 @@
 
         .remove-from-watches-hover {
             background: url("${fam.icon(name: 'email_delete')}") no-repeat left;
+        }
+
+        .application-watch {
+            background: url("${fam.icon(name: 'application')}") no-repeat left;
+            padding-left: 1.5em
+        }
+
+        .project-watch {
+            background: url("${fam.icon(name: 'building')}") no-repeat left;
+            padding-left: 1.5em
         }
 
         /*

@@ -1,3 +1,9 @@
+<div class="sectionHeader">
+    <div class="text">
+        <g:message code="favorites.label" default="Favorites"/>
+    </div>
+</div>
+
 <g:if test="${favorites.size()}">
     <div id="favorites-block">
         <g:if test="${isCurrentUser}">
