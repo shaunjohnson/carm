@@ -6,13 +6,23 @@ class FavoriteController {
 
     def index() { }
 
-    def ajaxAddToFavorites() {
-        favoriteService.addToCurrentUserFavorites(params.id)
+    def ajaxAddApplicationToFavorites() {
+        favoriteService.addApplicationToCurrentUserFavorites(params.id)
         render ""
     }
 
-    def ajaxRemoveFromFavorites() {
-        favoriteService.removeFromCurrentUserFavorites(params.id)
+    def ajaxAddProjectToFavorites() {
+        favoriteService.addProjectToCurrentUserFavorites(params.id)
+        render ""
+    }
+
+    def ajaxRemoveApplicationFromFavorites() {
+        favoriteService.removeApplicationFromCurrentUserFavorites(params.id)
+        render ""
+    }
+
+    def ajaxRemoveProjectFromFavorites() {
+        favoriteService.removeProjectFromCurrentUserFavorites(params.id)
         render ""
     }
 }

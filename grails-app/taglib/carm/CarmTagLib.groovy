@@ -154,12 +154,15 @@ class CarmTagLib {
         if (action == 'show' && springSecurityService.isLoggedIn()) {
             if (controllerName == 'application') {
                 out << render(template: "/favorite/favorites",
-                        model: [isFavorite: favoriteService.isFavoriteByCurrentUser(entity)])
+                        model: [type: "Application", isFavorite: favoriteService.isApplicationFavoriteByCurrentUser(entity)])
 
                 out << render(template: "/watch/watches",
                         model: [type: "Application", isWatched: watchService.isApplicationWatchedByCurrentUser(entity)])
             }
             else if (controllerName == 'project') {
+                out << render(template: "/favorite/favorites",
+                        model: [type: "Project", isFavorite: favoriteService.isProjectFavoriteByCurrentUser(entity)])
+
                 out << render(template: "/watch/watches",
                         model: [type: "Project", isWatched: watchService.isProjectWatchedByCurrentUser(entity)])
             }

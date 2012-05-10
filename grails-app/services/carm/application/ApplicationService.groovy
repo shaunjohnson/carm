@@ -75,10 +75,11 @@ class ApplicationService implements ApplicationContextAware {
 
         log.debug "$prefix entered, application=$application"
 
-        def applicationId = application.id
-
-        application.delete()
-        favoriteService.deleteAllForApplicationId(applicationId)
+        Application.withTransaction {
+            def applicationId = application.id
+            application.delete()
+            favoriteService.deleteAllForApplicationId(applicationId)
+        }
         
         log.debug "$prefix leaving"
     }

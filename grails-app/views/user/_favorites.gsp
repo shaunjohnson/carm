@@ -16,15 +16,24 @@
 
         <ul>
             <g:each in="${favorites}" var="favorite">
-                <li id="favorite_${favorite.id}">
-                    <g:link controller="application" action="show" id="${favorite.application.id}">
-                        ${favorite.application.name.encodeAsHTML()}
-                    </g:link>
+                <g:set var="className" value="${favorite.application ? 'application-favorite' : 'project-favorite'}"/>
+
+                <li id="favorite_${favorite.id}" class="${className}">
+                    <g:if test="${favorite.application}">
+                        <g:link controller="application" action="show" id="${favorite.application.id}">
+                            ${favorite.application.name.encodeAsHTML()}
+                        </g:link>
+                    </g:if>
+                    <g:elseif test="${favorite.project}">
+                        <g:link controller="project" action="show" id="${favorite.project.id}">
+                            ${favorite.project.name.encodeAsHTML()}
+                        </g:link>
+                    </g:elseif>
 
                     <g:if test="${isCurrentUser}">
                         <a href="#" onclick="return deleteFavorite(${favorite.id});"
                            title="${message(code: 'deleteFavorite.label')}">
-                            <img align="top" src='${fam.icon(name: 'cross')}' alt="Delete"/>
+                            <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
                         </a>
                     </g:if>
                 </li>

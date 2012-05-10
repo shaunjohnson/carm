@@ -19,8 +19,6 @@
         <tr>
             <td class="layoutColumnFirst">
                 <sec:ifLoggedIn>
-                    <g:render template="myFavorites" model="[myFavorites: myFavorites]"/>
-
                     <g:render template="myProjects" model="[myProjects: myProjects]"/>
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>

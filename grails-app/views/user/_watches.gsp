@@ -18,7 +18,7 @@
             <g:each in="${watches}" var="watch">
                 <g:set var="className" value="${watch.application ? 'application-watch' : 'project-watch'}"/>
 
-                <li id="favorite_${watch.id}" class="${className}">
+                <li id="watch_${watch.id}" class="${className}">
                     <g:if test="${watch.application}">
                         <g:link controller="application" action="show" id="${watch.application.id}">
                             ${watch.application.name.encodeAsHTML()}
@@ -33,7 +33,7 @@
                     <g:if test="${isCurrentUser}">
                         <a href="#" onclick="return deleteWatch(${watch.id});"
                            title="${message(code: 'deleteFavorite.label')}">
-                            <img align="top" src='${fam.icon(name: 'cross')}' alt="Delete"/>
+                            <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
                         </a>
                     </g:if>
                 </li>
@@ -53,7 +53,7 @@
 
             function deleteWatch(id) {
                 jQuery.get('${createLink(controller: "user", action: "ajaxRemoveFromWatches")}/' + id);
-                jQuery("#favorite_" + id).remove();
+                jQuery("#watch_" + id).remove();
 
                 if (!jQuery("#watches-block li").length) {
                     jQuery("#watches-block").remove();

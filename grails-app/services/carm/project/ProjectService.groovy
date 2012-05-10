@@ -11,6 +11,7 @@ class ProjectService {
     def applicationDeploymentService
     def applicationReleaseService
     def carmSecurityService
+    def favoriteService
     def grailsApplication
 
     /**
@@ -67,8 +68,10 @@ class ProjectService {
         log.debug "$prefix entered, project=$project"
 
         Project.withTransaction {
+            def projectId = project.id
             project.delete()
             carmSecurityService.deleteAllPermissions(project)
+            favoriteService.deleteAllForProjectId(projectId)
         }
 
         log.debug "$prefix leaving"

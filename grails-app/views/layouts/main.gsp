@@ -94,19 +94,33 @@
             // Favorites
             var userInfo = jQuery("#userInfo"),
                 userInfoButton = jQuery("#userInfoButton"),
-                addToFavorites = jQuery("#addToFavorites"),
-                removeFromFavorites = jQuery("#removeFromFavorites");
+                addApplicationToFavorites = jQuery("#addApplicationToFavorites"),
+                addProjectToFavorites = jQuery("#addProjectToFavorites"),
+                removeApplicationFromFavorites = jQuery("#removeApplicationFromFavorites"),
+                removeProjectFromFavorites = jQuery("#removeProjectFromFavorites");
 
-            addToFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddToFavorites", id: params.id)}');
-                addToFavorites.hide();
-                removeFromFavorites.show();
+            addApplicationToFavorites.click(function () {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddApplicationToFavorites", id: params.id)}');
+                addApplicationToFavorites.hide();
+                removeApplicationFromFavorites.show();
             });
 
-            removeFromFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveFromFavorites", id: params.id)}');
-                addToFavorites.show();
-                removeFromFavorites.hide();
+            addProjectToFavorites.click(function () {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddProjectToFavorites", id: params.id)}');
+                addProjectToFavorites.hide();
+                removeProjectFromFavorites.show();
+            });
+
+            removeApplicationFromFavorites.click(function () {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveApplicationFromFavorites", id: params.id)}');
+                addApplicationToFavorites.show();
+                removeApplicationFromFavorites.hide();
+            });
+
+            removeProjectFromFavorites.click(function () {
+                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveProjectFromFavorites", id: params.id)}');
+                addProjectToFavorites.show();
+                removeProjectFromFavorites.hide();
             });
 
             // Watches
@@ -172,7 +186,7 @@
                 }
             });
 
-            jQuery("#userInfo .ui-menu-item a")
+            jQuery("#userInfo .ui-menu-item-with-icon a")
                     .mouseover(function () {
                         jQuery(this).addClass("ui-state-hover")
                     })
@@ -219,12 +233,12 @@
             background: url("${fam.icon(name: 'email_delete')}") no-repeat left;
         }
 
-        .application-watch {
+        .application-favorite, .application-watch {
             background: url("${fam.icon(name: 'application')}") no-repeat left;
             padding-left: 1.5em
         }
 
-        .project-watch {
+        .project-favorite, .project-watch {
             background: url("${fam.icon(name: 'building')}") no-repeat left;
             padding-left: 1.5em
         }

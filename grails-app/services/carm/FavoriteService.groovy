@@ -2,6 +2,7 @@ package carm
 
 import carm.application.Application
 import carm.security.User
+import carm.project.Project
 
 class FavoriteService {
 
@@ -15,12 +16,26 @@ class FavoriteService {
      *
      * @param id Application ID
      */
-    void addToCurrentUserFavorites(Serializable id) {
+    void addApplicationToCurrentUserFavorites(Serializable id) {
         Application application = Application.get(id)
 
         if (application) {
             new Favorite(user: carmSecurityService.currentUser, application: application).save()
             log.debug "Added $application to favories"
+        }
+    }
+
+    /**
+     * Adds an Application to the current user's favorites.
+     *
+     * @param id Application ID
+     */
+    void addProjectToCurrentUserFavorites(Serializable id) {
+        Project project = Project.get(id)
+
+        if (project) {
+            new Favorite(user: carmSecurityService.currentUser, project: project).save()
+            log.debug "Added $project to favories"
         }
     }
 
@@ -31,6 +46,15 @@ class FavoriteService {
      */
     void deleteAllForApplicationId(Serializable applicationId) {
         Favorite.executeUpdate("delete from Favorite where application.id = :applicationId", [applicationId: applicationId])
+    }
+
+    /**
+     * Delete all favorites for the provided project ID
+     *
+     * @param projectId Project ID for favorites to delete
+     */
+    void deleteAllForProjectId(Serializable projectId) {
+        Favorite.executeUpdate("delete from Favorite where project.id = :projectId", [projectId: projectId])
     }
 
     /**
@@ -68,22 +92,27 @@ class FavoriteService {
      * @return List of Favorite objects for the user
      */
     List<Favorite> findAllByUser(User user) {
-        Favorite.executeQuery("from Favorite where user = :user order by application.name asc", [user: user])
+        Favorite.executeQuery("from Favorite where user = :user", [user: user]).sort { it.project <=> it.application }
     }
 
     /**
-     * Determines if the provided entity is on the current user's favorites list
+     * Determines if the provided Application is on the current user's favorites list
      *
-     * @param entity Entity to test
-     * @return True of the entity is on the current users favorites list
+     * @param application Application to test
+     * @return True of the application is on the current users favorites list
      */
-    boolean isFavoriteByCurrentUser(entity) {
-        if (entity instanceof Application) {
-            return Favorite.countByUserAndApplication(carmSecurityService.currentUser, entity) > 0
-        }
-        else {
-            return false
-        }
+    boolean isApplicationFavoriteByCurrentUser(Application application) {
+        Favorite.countByUserAndApplication(carmSecurityService.currentUser, application) > 0
+    }
+
+    /**
+     * Determines if the provided Project is on the current user's favorites list
+     *
+     * @param project Project to test
+     * @return True of the project is on the current users favorites list
+     */
+    boolean isProjectFavoriteByCurrentUser(Project project) {
+        Favorite.countByUserAndProject(carmSecurityService.currentUser, project) > 0
     }
 
     /**
@@ -91,7 +120,7 @@ class FavoriteService {
      *
      * @param id Application ID
      */
-    void removeFromCurrentUserFavorites(Serializable id) {
+    void removeApplicationFromCurrentUserFavorites(Serializable id) {
         Application application = Application.get(id)
 
         if (application) {
@@ -99,7 +128,25 @@ class FavoriteService {
 
             if (favorite) {
                 favorite.delete()
-                log.debug "Removed $application from favories"
+                log.debug "Removed $application from favorites"
+            }
+        }
+    }
+
+    /**
+     * Removes an Project from the current user's favorites
+     *
+     * @param id Project ID
+     */
+    void removeProjectFromCurrentUserFavorites(Serializable id) {
+        Project project = Project.get(id)
+
+        if (project) {
+            Favorite favorite = Favorite.findByUserAndProject(carmSecurityService.currentUser, project)
+
+            if (favorite) {
+                favorite.delete()
+                log.debug "Removed $project from favorites"
             }
         }
     }
