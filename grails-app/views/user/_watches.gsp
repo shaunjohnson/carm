@@ -44,7 +44,7 @@
     <g:if test="${isCurrentUser}">
         <script type="text/javascript">
             function deleteAllWatches() {
-                jQuery.get('${createLink(controller: "user", action: "ajaxDeleteAllWatches")}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxDeleteAllWatches")}' });
                 jQuery("#watches-block").remove();
                 jQuery("#no-watches-message").show();
 
@@ -52,7 +52,7 @@
             }
 
             function deleteWatch(id) {
-                jQuery.get('${createLink(controller: "user", action: "ajaxRemoveFromWatches")}/' + id);
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxRemoveFromWatches")}/' + id });
                 jQuery("#watch_" + id).remove();
 
                 if (!jQuery("#watches-block li").length) {

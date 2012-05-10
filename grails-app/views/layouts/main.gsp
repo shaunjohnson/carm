@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="pragma" content="NO-CACHE">
     <title><g:layoutTitle default="Grails"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'carm.ico')}" type="image/x-icon"/>
@@ -100,25 +101,25 @@
                 removeProjectFromFavorites = jQuery("#removeProjectFromFavorites");
 
             addApplicationToFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddApplicationToFavorites", id: params.id)}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxAddApplicationToFavorites", id: params.id)}' });
                 addApplicationToFavorites.hide();
                 removeApplicationFromFavorites.show();
             });
 
             addProjectToFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxAddProjectToFavorites", id: params.id)}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxAddProjectToFavorites", id: params.id)}' });
                 addProjectToFavorites.hide();
                 removeProjectFromFavorites.show();
             });
 
             removeApplicationFromFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveApplicationFromFavorites", id: params.id)}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxRemoveApplicationFromFavorites", id: params.id)}' });
                 addApplicationToFavorites.show();
                 removeApplicationFromFavorites.hide();
             });
 
             removeProjectFromFavorites.click(function () {
-                jQuery.get('${createLink(controller: "favorite", action: "ajaxRemoveProjectFromFavorites", id: params.id)}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxRemoveProjectFromFavorites", id: params.id)}' });
                 addProjectToFavorites.show();
                 removeProjectFromFavorites.hide();
             });
@@ -131,7 +132,7 @@
 
             addApplicationToWatches
                 .click(function () {
-                    jQuery.get('${createLink(controller: "watch", action: "ajaxAddApplicationToWatches", id: params.id)}');
+                    jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxAddApplicationToWatches", id: params.id)}' });
                     addApplicationToWatches.hide();
                     removeApplicationFromWatches.show();
                 })
@@ -139,7 +140,7 @@
 
             addProjectToWatches
                 .click(function () {
-                    jQuery.get('${createLink(controller: "watch", action: "ajaxAddProjectToWatches", id: params.id)}');
+                    jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxAddProjectToWatches", id: params.id)}' });
                     addProjectToWatches.hide();
                     removeProjectFromWatches.show();
                 })
@@ -147,7 +148,7 @@
 
             removeApplicationFromWatches
                 .click(function () {
-                    jQuery.get('${createLink(controller: "watch", action: "ajaxRemoveApplicationFromWatches", id: params.id)}');
+                    jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxRemoveApplicationFromWatches", id: params.id)}' });
                     addApplicationToWatches.show();
                     removeApplicationFromWatches.hide();
                 })
@@ -155,7 +156,7 @@
 
             removeProjectFromWatches
                 .click(function () {
-                    jQuery.get('${createLink(controller: "watch", action: "ajaxRemoveProjectFromWatches", id: params.id)}');
+                    jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxRemoveProjectFromWatches", id: params.id)}' });
                     addProjectToWatches.show();
                     removeProjectFromWatches.hide();
                 })

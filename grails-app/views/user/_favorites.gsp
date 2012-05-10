@@ -44,7 +44,7 @@
     <g:if test="${isCurrentUser}">
         <script type="text/javascript">
             function deleteAllFavorites() {
-                jQuery.get('${createLink(controller: "user", action: "ajaxDeleteAllFavorites")}');
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxDeleteAllFavorites")}' });
                 jQuery("#favorites-block").remove();
                 jQuery("#no-favorites-message").show();
 
@@ -52,7 +52,7 @@
             }
 
             function deleteFavorite(id) {
-                jQuery.get('${createLink(controller: "user", action: "ajaxRemoveFromFavorites")}/' + id);
+                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxRemoveFromFavorites")}/' + id });
                 jQuery("#favorite_" + id).remove();
 
                 if (!jQuery("#favorites-block li").length) {
