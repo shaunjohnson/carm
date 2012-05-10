@@ -39,6 +39,24 @@ class WatchService {
     }
 
     /**
+     * Delete all watches for the provided application ID
+     *
+     * @param applicationId Application ID for watches to delete
+     */
+    void deleteAllForApplicationId(Serializable applicationId) {
+        Watch.executeUpdate("delete from Watch where application.id = :applicationId", [applicationId: applicationId])
+    }
+
+    /**
+     * Delete all watches for the provided project ID
+     *
+     * @param projectId Project ID for watches to delete
+     */
+    void deleteAllForProjectId(Serializable projectId) {
+        Watch.executeUpdate("delete from Watch where project.id = :projectId", [projectId: projectId])
+    }
+
+    /**
      * Delete all watches for the current user
      */
     void deleteAllFromCurrentUser() {

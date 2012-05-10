@@ -18,6 +18,7 @@ class ApplicationService implements ApplicationContextAware {
     def favoriteService
     def grailsApplication
     def systemEnvironmentService
+    def watchService
 
     /**
      * Determines if the application is deployable. An application must be associated with a system that can be
@@ -79,6 +80,7 @@ class ApplicationService implements ApplicationContextAware {
             def applicationId = application.id
             application.delete()
             favoriteService.deleteAllForApplicationId(applicationId)
+            watchService.deleteAllForApplicationId(applicationId)
         }
         
         log.debug "$prefix leaving"

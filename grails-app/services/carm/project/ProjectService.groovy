@@ -13,6 +13,7 @@ class ProjectService {
     def carmSecurityService
     def favoriteService
     def grailsApplication
+    def watchService
 
     /**
      * Returns a count of all Project objects.
@@ -72,6 +73,7 @@ class ProjectService {
             project.delete()
             carmSecurityService.deleteAllPermissions(project)
             favoriteService.deleteAllForProjectId(projectId)
+            watchService.deleteAllForProjectId(projectId)
         }
 
         log.debug "$prefix leaving"
