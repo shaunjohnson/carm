@@ -35,11 +35,13 @@ class NotificationService implements ApplicationContextAware {
     }
 
     private sendEmailUsingMail(String fromEmailAddress, List<String> toEmailAddresses, String subjectText, String message) {
-        mailService.sendMail {
-            to toEmailAddresses
-            from fromEmailAddress
-            subject subjectText
-            body message
+        toEmailAddresses.each { toEmailAddress ->
+            mailService.sendMail {
+                to toEmailAddress
+                from fromEmailAddress
+                subject subjectText
+                body message
+            }
         }
     }
 
