@@ -39,6 +39,7 @@ class CarmTagLib {
     def moduleReleaseService
     def moduleTypeService
     def projectCategoryService
+    def projectService
     def sourceControlRepositoryService
     def sourceControlRoleService
     def sourceControlServerService
@@ -388,7 +389,7 @@ class CarmTagLib {
 
             out << bc.breadcrumbs(null) {
                 if (action != 'list') {
-                    out <<  bc.listProjects(isFirst: true)
+                    out << bc.listProjects(isFirst: true)
 
                     if (action == 'show') {
                         out << bc.showProject(project: domain)
@@ -672,24 +673,49 @@ class CarmTagLib {
 
         out << '</div>'
 
-        if (action == 'show' && springSecurityService.isLoggedIn()) {
+        if (springSecurityService.isLoggedIn()) {
             if (controllerName == 'application') {
-                out << render(template: "/favorite/favorites",
-                        model: [type: "Application", isFavorite: favoriteService.isApplicationFavoriteByCurrentUser(entity)])
-
-                out << render(template: "/watch/watches",
-                        model: [type: "Application", isWatched: watchService.isApplicationWatchedByCurrentUser(entity)])
+                out << render(template: "/application/actions", model: [applicationInstance: entity])
+            }
+            else if (controllerName == 'module') {
+                out << render(template: "/module/actions", model: [moduleInstance: entity])
             }
             else if (controllerName == 'project') {
-                out << render(template: "/favorite/favorites",
-                        model: [type: "Project", isFavorite: favoriteService.isProjectFavoriteByCurrentUser(entity)])
-
-                out << render(template: "/watch/watches",
-                        model: [type: "Project", isWatched: watchService.isProjectWatchedByCurrentUser(entity)])
+                out << render(template: "/project/actions", model: [projectInstance: entity])
             }
         }
 
         out << '<div class="clearing"></div></h1>'
+    }
+
+    def favoriteActions = { attrs ->
+        def entity = attrs.entity
+
+        if (actionName == 'show') {
+            if (entity instanceof Application) {
+                out << render(template: "/favorite/favorites",
+                        model: [type: "Application", isFavorite: favoriteService.isApplicationFavoriteByCurrentUser(entity)])
+            }
+            else if (entity instanceof Project) {
+                out << render(template: "/favorite/favorites",
+                        model: [type: "Project", isFavorite: favoriteService.isProjectFavoriteByCurrentUser(entity)])
+            }
+        }
+    }
+
+    def watchActions = { attrs ->
+        def entity = attrs.entity
+
+        if (actionName == 'show') {
+            if (entity instanceof Application) {
+                out << render(template: "/watch/watches",
+                        model: [type: "Application", isWatched: watchService.isApplicationWatchedByCurrentUser(entity)])
+            }
+            else if (entity instanceof Project) {
+                out << render(template: "/watch/watches",
+                        model: [type: "Project", isWatched: watchService.isProjectWatchedByCurrentUser(entity)])
+            }
+        }
     }
 
     def showMore = { attrs ->

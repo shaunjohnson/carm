@@ -2,17 +2,6 @@
     <div class="text">
         <g:message code="details.label" default="Details"/>
     </div>
-    <carmsec:isProjectOwner project="${projectInstance}">
-        <div class="actions">
-            <g:link class="edit" action="edit" id="${projectInstance?.id}">
-                <g:message code="default.button.edit.label" default="Edit"/>
-            </g:link>
-
-            <g:link class="delete" action="delete" id="${projectInstance?.id}">
-                <g:message code="default.button.delete.label" default="Delete"/>
-            </g:link>
-        </div>
-    </carmsec:isProjectOwner>
 </div>
 
 <table width="100%">

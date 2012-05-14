@@ -201,7 +201,7 @@
         .page-header-action {
             cursor: pointer;
             float: right;
-            margin-left: 1em;
+            margin-left: 1.5em;
             padding-left: 1.5em;
         }
 
@@ -225,6 +225,39 @@
         .add-to-watches-hover {
             background: url("${fam.icon(name: 'email_add')}") no-repeat left;
         }
+
+
+        .new-project-action {
+            background: url("${fam.icon(name: 'building_add')}") no-repeat left;
+        }
+
+
+        .delete-application-action {
+            background: url("${fam.icon(name: 'application_delete')}") no-repeat left;
+        }
+
+        .delete-module-action {
+            background: url("${fam.icon(name: 'brick_delete')}") no-repeat left;
+        }
+
+        .delete-project-action {
+            background: url("${fam.icon(name: 'building_delete')}") no-repeat left;
+        }
+
+
+        .edit-application-action {
+            background: url("${fam.icon(name: 'application_edit')}") no-repeat left;
+        }
+
+        .edit-module-action {
+            background: url("${fam.icon(name: 'brick_edit')}") no-repeat left;
+        }
+
+        .edit-project-action {
+            background: url("${fam.icon(name: 'building_edit')}") no-repeat left;
+        }
+
+
 
         .remove-from-watches {
             background: url("${fam.icon(name: 'email_go')}") no-repeat left;

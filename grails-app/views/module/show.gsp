@@ -77,11 +77,11 @@ html>
                 </td>
             </tr>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td colspan="2">&nbsp;</td>
             </tr>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="module.dateCreated.label" default="Date Created"/>
                 </td>
@@ -89,7 +89,7 @@ html>
                     <g:formatDate date="${moduleInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="module.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -99,22 +99,6 @@ html>
             </tr>
             </tbody>
         </table>
-        <carm:showHideDetails sectionId="moduleDetails" entityName="${entityName}">
-            <carmsec:isProjectOwner module="${moduleInstance}">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${moduleInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <span class="button">
-                        <g:link class="delete" action="delete" id="${moduleInstance?.id}">
-                            <g:message code="default.button.delete.label" default="Delete"/>
-                        </g:link>
-                    </span>
-                </div>
-            </carmsec:isProjectOwner>
-        </carm:showHideDetails>
     </div>
 
     <table class="twoColumnLayout">
