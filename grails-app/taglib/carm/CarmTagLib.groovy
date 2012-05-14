@@ -113,7 +113,528 @@ class CarmTagLib {
         def domain = attrs.domain
         def pageName = attrs.pageName
 
-        out << render(template: "/common/header", model: [domain: domain, pageName: pageName])
+        def action = actionName
+        def controller = controllerName
+
+        if (controller == 'administration') {
+            out << carm.pageHeaderLabel(action: "show", beanName: pageName, entity: domain)
+        }
+        else if (controller == 'application') {
+            def entityName = message(code: 'application.label', default: 'Application')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action == 'list') {
+                    out << bc.listApplications(isFirst: true)
+                }
+                else {
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: domain.project)
+
+                    if (action == 'show') {
+                        out << bc.showApplication(application: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showApplication(application: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showApplication(application: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                    else if (action == 'listReleases') {
+                        out << bc.showApplication(application: domain)
+                        out << bc.label(code: "allReleases.label", args: [entityName])
+                    }
+                    else if (action == 'showFullHistory') {
+                        out << bc.showApplication(application: domain)
+                        out << bc.label(code: "showFullHistory.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'applicationDeployment') {
+            def entityName = message(code: 'applicationDeployment.label', default: 'Application Deployment')
+
+            out << carm.pageHeaderLabel(beanName: message(code: 'pageHeader.applicationDeployment.label',
+                    args: [domain?.applicationRelease?.application?.name, domain?.applicationRelease?.releaseNumber, domain?.deploymentEnvironment]),
+                    entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: domain.applicationRelease.application.project)
+                    out << bc.showApplication(application: domain.applicationRelease.application)
+                    out << bc.showApplicationRelease(applicationRelease: domain.applicationRelease)
+
+                    if (action == 'show') {
+                        out << bc.showApplicationDeployment(applicationDeployment: domain)
+                    }
+                    else if (action == 'create' || action == 'save' || action == 'redeploy') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showApplicationDeployment(applicationDeployment: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                }
+            }
+        }
+        else if (controller == 'applicationRelease') {
+            def entityName = message(code: 'applicationRelease.label', default: 'Application Release')
+
+            carm: pageHeaderLabel(beanName: message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber]),
+                    entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: domain.application.project)
+                    out << bc.showApplication(application: domain.application)
+
+                    if (action == 'show') {
+                        out << bc.showApplicationRelease(applicationRelease: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showApplicationRelease(applicationRelease: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showApplicationRelease(applicationRelease: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'applicationReleaseHistory') {
+            def entityName = message(code: 'applicationReleaseHistory.label', default: 'Application Release History')
+
+            if (action == 'list') {
+                out << carm.pageHeaderLabel(beanName: domain, entityName: entityName, entity: domain)
+            }
+            else {
+                out << carm.pageHeaderLabel(beanName: formatDate(date: domain.dateCreated), entityName: entityName, entity: domain)
+            }
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: domain.applicationRelease.application.project)
+                    out << bc.showApplication(application: domain.applicationRelease.application)
+                    out << bc.showApplicationRelease(applicationRelease: domain.applicationRelease)
+
+                    if (action == 'show') {
+                        out << bc.showApplicationReleaseHistory(applicationReleaseHistory: domain)
+                    }
+                }
+            }
+        }
+        else if (controller == 'applicationReleaseTestState') {
+            def entityName = message(code: 'applicationReleaseTestState.label', default: 'Application Release Test State')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listApplicationReleaseTestStates()
+
+                if (action == 'show') {
+                    out << bc.link(controller: "applicationReleaseTestState", action: "show",
+                            title: "Show Application Release Test State", text: domain.name, id: domain.id)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.link(controller: "applicationReleaseTestState", action: "show",
+                            title: "Show Application Release Test State", text: domain.name, id: domain.id)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'applicationType') {
+            def entityName = message(code: 'applicationType.label', default: 'Application Type')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listApplicationTypes()
+
+                if (action == 'show') {
+                    out << bc.showApplicationType(applicationType: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showApplicationType(applicationType: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller ==~ /.*home/) {
+            out << carm.pageHeaderLabel(action: "show", beanName: pageName, entity: domain)
+            out << bc.breadcrumbs()
+        }
+        else if (controller == 'login') {
+            out << carm.pageHeaderLabel(action: "show", beanName: pageName, entity: domain)
+            out << bc.breadcrumbs()
+        }
+        else if (controller == 'module') {
+            def entityName = message(code: 'module.label', default: 'Module')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action == 'list') {
+                    out << bc.listModules(isFirst: true)
+                }
+                else {
+                    out << bc.showProject(project: domain.application.project, isFirst: true)
+                    out << bc.showApplication(application: domain.application)
+
+                    if (action == 'show') {
+                        out << bc.showModule(module: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showModule(module: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showModule(module: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'moduleDeployment') {
+            def entityName = message(code: 'moduleDeployment.label', default: 'Module Deployment')
+            def applicationDeployment = domain?.applicationDeployment
+            def applicationRelease = applicationDeployment?.applicationRelease
+
+            out << carm.pageHeaderLabel(
+                    beanName: message(code: 'pageHeader.moduleDeployment.label',
+                            args: [applicationRelease?.application?.name, applicationRelease?.releaseNumber, applicationDeployment?.deploymentEnvironment]),
+                    entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action == 'show') {
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: applicationRelease.application.project)
+                    out << bc.showApplication(application: applicationRelease.application)
+                    out << bc.showApplicationRelease(applicationRelease: applicationRelease)
+                    out << bc.showApplicationDeployment(applicationDeployment: applicationDeployment)
+                    out << bc.showModuleDeployment(moduleDeployment: domain)
+                }
+            }
+        }
+        else if (controller == 'moduleDeploymentTestState') {
+            def entityName = message(code: 'moduleDeploymentTestState.label', default: 'Module Deployment Test State')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listModuleDeploymentTestStates()
+
+                if (action == 'show') {
+                    out << bc.showModuleDeploymentTestState(moduleDeploymentTestState: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showModuleDeploymentTestState(moduleDeploymentTestState: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'moduleType') {
+            def entityName = message(code: 'moduleType.label', default: 'Module Type')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listModuleTypes()
+
+                if (action == 'show') {
+                    out << bc.showModuleType(moduleType: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showModuleType(moduleType: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'project') {
+            def entityName = message(code: 'project.label', default: 'Project')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out <<  bc.listProjects(isFirst: true)
+
+                    if (action == 'show') {
+                        out << bc.showProject(project: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showProject(project: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showProject(project: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'projectCategory') {
+            def entityName = message(code: 'projectCategory.label', default: 'Project Category')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listProjectCategories()
+
+                if (action == 'show') {
+                    out << bc.showProjectCategory(projectCategory: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showProjectCategory(projectCategory: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'sourceControlRepository') {
+            def entityName = message(code: 'sourceControlRepository.label', default: 'Source Control Repository')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+
+                if (action == 'list') {
+                    out << bc.listSourceControlRepositories()
+                }
+                else {
+                    out << bc.listSourceControlServers()
+                    out << bc.showSourceControlServer(sourceControlServer: domain.server)
+
+                    if (action == 'show') {
+                        out << bc.showSourceControlRepository(sourceControlRepository: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showSourceControlRepository(sourceControlRepository: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                }
+            }
+        }
+        else if (controller == 'sourceControlRole') {
+            def entityName = message(code: 'sourceControlRole.label', default: 'Source Control Role')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listSourceControlRoles()
+
+                if (action == 'show') {
+                    out << bc.showSourceControlRole(sourceControlRole: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showSourceControlRole(sourceControlRole: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'sourceControlServer') {
+            def entityName = message(code: 'sourceControlServer.label', default: 'Source Control Server')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listSourceControlServers()
+
+                if (action == 'show') {
+                    out << bc.showSourceControlServer(sourceControlServer: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showSourceControlServer(sourceControlServer: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
+        else if (controller == 'sourceControlUser') {
+            def entityName = message(code: 'sourceControlUser.label', default: 'Source Control User')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+
+                if (action == 'list') {
+                    out << bc.listSourceControlUsers()
+                }
+                else {
+                    out << bc.listSourceControlServers()
+                    out << bc.showSourceControlServer(sourceControlServer: domain.server)
+
+                    if (action == 'show') {
+                        out << bc.showSourceControlUser(sourceControlUser: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showSourceControlUser(sourceControlUser: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                }
+            }
+        }
+        else if (controller == 'systemDeploymentEnvironment') {
+            def entityName = message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listSystemEnvironments(isFirst: true)
+                    out << bc.showSystemEnvironment(systemEnvironment: domain.sysEnvironment)
+
+                    if (action == 'show') {
+                        out << bc.showSystemDeploymentEnvironment(systemDeploymentEnvironment: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showSystemDeploymentEnvironment(systemDeploymentEnvironment: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showSystemDeploymentEnvironment(systemDeploymentEnvironment: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'systemEnvironment') {
+            def entityName = message(code: 'systemEnvironment.label', default: 'SystemEnvironment')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listSystemEnvironments(isFirst: true)
+
+                    if (action == 'show') {
+                        out << bc.showSystemEnvironment(systemEnvironment: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showSystemEnvironment(systemEnvironment: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showSystemEnvironment(systemEnvironment: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                    else if (action == 'completedDeployments') {
+                        out << bc.showSystemEnvironment(systemEnvironment: domain)
+                        out << bc.completedDeploymentsLabel(entityName: entityName)
+                    }
+                    else if (action == 'upcomingDeployments') {
+                        out << bc.showSystemEnvironment(systemEnvironment: domain)
+                        out << bc.upcomingDeploymentsLabel(entityName: entityName)
+                    }
+                }
+            }
+        }
+        else if (controller == 'systemServer') {
+            def entityName = message(code: 'systemServer.label', default: 'SystemEnvironment Server')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                if (action != 'list') {
+                    out << bc.listSystemEnvironments(isFirst: true)
+                    out << bc.showSystemEnvironment(systemEnvironment: domain.sysEnvironment)
+
+                    if (action == 'show') {
+                        out << bc.showSystemServer(systemServer: domain)
+                    }
+                    else if (action == 'create' || action == 'save') {
+                        out << bc.createLabel(entityName: entityName)
+                    }
+                    else if (action == 'edit' || action == 'update') {
+                        out << bc.showSystemServer(systemServer: domain)
+                        out << bc.editLabel(entityName: entityName)
+                    }
+                    else if (action == 'listActivity') {
+                        out << bc.showSystemServer(systemServer: domain)
+                        out << bc.label(code: "allActivity.label", args: [entityName])
+                    }
+                }
+            }
+        }
+        else if (controller == 'user') {
+            def entityName = message(code: 'user.label', default: 'User')
+
+            out << carm.pageHeaderLabel(beanName: domain?.fullName, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listUsers()
+
+                if (action == 'list') {
+                    // Do nothing
+                }
+                else if (action == 'listActivity') {
+                    out << bc.showUser(user: domain)
+                    out << bc.label(code: "allActivity.label", args: [entityName])
+                }
+                else {
+                    out << bc.showUser(user: domain)
+                }
+            }
+        }
     }
 
     /**
