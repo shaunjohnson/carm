@@ -218,15 +218,17 @@
         .delete-project-action {               background: url("${fam.icon(name: 'building_delete')}") no-repeat left; }
         .delete-source-control-repo-action {   background: url("${fam.icon(name: 'database_delete')}") no-repeat left; }
         .delete-source-control-server-action { background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
+        .delete-user-action {                  background: url("${fam.icon(name: 'user_delete')}") no-repeat left; }
         .edit-application-action {             background: url("${fam.icon(name: 'application_edit')}") no-repeat left; }
         .edit-module-action {                  background: url("${fam.icon(name: 'brick_edit')}") no-repeat left; }
         .edit-project-action {                 background: url("${fam.icon(name: 'building_edit')}") no-repeat left; }
         .edit-source-control-repo-action {     background: url("${fam.icon(name: 'database_edit')}") no-repeat left; }
         .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
+        .edit-user-action {                    background: url("${fam.icon(name: 'user_edit')}") no-repeat left; }
         .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
         .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
-        .add-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
-        .add-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }
+        .new-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
+        .new-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }
 
         /*
          * Autocomplete

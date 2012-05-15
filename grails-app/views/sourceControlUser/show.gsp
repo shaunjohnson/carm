@@ -86,11 +86,9 @@
                 </td>
             </tr>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="sourceControlUser.dateCreated.label" default="Date Created"/>
                 </td>
@@ -98,7 +96,7 @@
                     <g:formatDate date="${sourceControlUserInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="sourceControlUser.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -108,22 +106,6 @@
             </tr>
             </tbody>
         </table>
-        <carm:showHideDetails sectionId="sourceControlUserDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${sourceControlUserInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <span class="button">
-                        <g:link class="delete" action="delete" id="${sourceControlUserInstance?.id}">
-                            <g:message code="default.button.delete.label" default="Delete"/>
-                        </g:link>
-                    </span>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
     </div>
 </div>
 </body>
