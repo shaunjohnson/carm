@@ -236,6 +236,8 @@
         .edit-user-action {                    background: url("${fam.icon(name: 'user_edit')}") no-repeat left; }
         .edit-user-role-action {               background: url("${fam.icon(name: 'vcard_edit')}") no-repeat left; }
         .new-action {                          background: url("${fam.icon(name: 'add')}") no-repeat left; }
+        .new-application-action {              background: url("${fam.icon(name: 'application_add')}") no-repeat left; }
+        .new-module-action {                   background: url("${fam.icon(name: 'brick_add')}") no-repeat left; }
         .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
         .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
         .new-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }

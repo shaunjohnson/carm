@@ -3,12 +3,13 @@
         <g:message code="modules.label" default="Modules"/>
     </div>
     <carmsec:isProjectOwner application="${applicationInstance}">
-        <div class="actions">
-            <g:link class="create" controller="module" action="create"
+        <div class="header-action new-module-action">
+            <g:link controller="module" action="create"
                     params="['application.id': applicationInstance?.id]">
                 <g:message code="addModule.label" default="Add Module"/>
             </g:link>
         </div>
+        <div class="clearing"></div>
     </carmsec:isProjectOwner>
 </div>
 
