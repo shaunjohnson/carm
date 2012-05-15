@@ -680,6 +680,9 @@ class CarmTagLib {
             else if (controllerName == 'applicationReleaseTestState') {
                 out << render(template: "/applicationReleaseTestState/actions", model: [applicationReleaseTestStateInstance: entity])
             }
+            else if (controllerName == 'applicationType') {
+                out << render(template: "/applicationType/actions", model: [applicationTypeInstance: entity])
+            }
             else if (controllerName == 'module') {
                 out << render(template: "/module/actions", model: [moduleInstance: entity])
             }
