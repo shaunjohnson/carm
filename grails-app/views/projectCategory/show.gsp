@@ -28,11 +28,9 @@
                 </td>
             </tr>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="projectCategory.dateCreated.label" default="Date Created"/>
                 </td>
@@ -40,7 +38,7 @@
                     <g:formatDate date="${projectCategoryInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="projectCategory.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -50,24 +48,6 @@
             </tr>
             </tbody>
         </table>
-        <carm:showHideDetails sectionId="projectCategoryDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${projectCategoryInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <carm:ifNotInUse domain="${projectCategoryInstance}">
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${projectCategoryInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </carm:ifNotInUse>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
     </div>
 </div>
 </body>
