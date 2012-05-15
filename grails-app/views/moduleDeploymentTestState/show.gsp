@@ -29,11 +29,9 @@
                 </td>
             </tr>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="moduleDeploymentTestState.dateCreated.label" default="Date Created"/>
                 </td>
@@ -41,7 +39,7 @@
                     <g:formatDate date="${moduleDeploymentTestStateInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="moduleDeploymentTestState.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -51,25 +49,6 @@
             </tr>
             </tbody>
         </table>
-        <carm:showHideDetails sectionId="moduleDeploymentTestStateDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${moduleDeploymentTestStateInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <carm:ifNotInUse domain="${moduleDeploymentTestStateInstance}">
-                        <span class="button">
-                            <g:link class="delete" action="delete"
-                                    id="${moduleDeploymentTestStateInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </carm:ifNotInUse>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
     </div>
 </div>
 </body>
