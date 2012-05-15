@@ -35,10 +35,12 @@
                 expandText:'<g:message code="showMore.label"/>',
                 userCollapseText:'<g:message code="showLess.label"/>'
             });
+
             jQuery("button.button, .buttons input").button();
             jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
+            jQuery('.body :input:visible:first').focus();
 
-            // Delete confirmation
+            /* Delete confirmation */
             jQuery("#delete-dialog").dialog({
                 autoOpen:false,
                 resizable:false,
@@ -60,7 +62,7 @@
                 return false;
             });
 
-            // Quick search
+            /* Quick search */
             jQuery("#quicksearch").autocomplete({
                 source:"${createLink(controller: "home", action: "ajaxQuickSearch")}",
                 minLength:2,
@@ -84,7 +86,7 @@
                         .appendTo(ul);
             };
 
-            // Preload imates
+            /* Preload imates */
             new Image().src = "${resource(dir: 'images', file: 'unstarred.png')}";
             new Image().src = "${resource(dir: 'images', file: 'starred.png')}";
             new Image().src = "${fam.icon(name: 'email')}";
@@ -92,7 +94,7 @@
             new Image().src = "${fam.icon(name: 'email_add')}";
             new Image().src = "${fam.icon(name: 'email_delete')}";
 
-            // Favorites
+            /* Favorites */
             var userInfo = jQuery("#userInfo"),
                 userInfoButton = jQuery("#userInfoButton"),
                 addApplicationToFavorites = jQuery("#addApplicationToFavorites"),
@@ -102,29 +104,25 @@
 
             addApplicationToFavorites.click(function () {
                 jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxAddApplicationToFavorites", id: params.id)}' });
-                addApplicationToFavorites.hide();
-                removeApplicationFromFavorites.show();
+                addApplicationToFavorites.hide(); removeApplicationFromFavorites.show();
             });
 
             addProjectToFavorites.click(function () {
                 jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxAddProjectToFavorites", id: params.id)}' });
-                addProjectToFavorites.hide();
-                removeProjectFromFavorites.show();
+                addProjectToFavorites.hide(); removeProjectFromFavorites.show();
             });
 
             removeApplicationFromFavorites.click(function () {
                 jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxRemoveApplicationFromFavorites", id: params.id)}' });
-                addApplicationToFavorites.show();
-                removeApplicationFromFavorites.hide();
+                addApplicationToFavorites.show(); removeApplicationFromFavorites.hide();
             });
 
             removeProjectFromFavorites.click(function () {
                 jQuery.ajax({ cache: false, url: '${createLink(controller: "favorite", action: "ajaxRemoveProjectFromFavorites", id: params.id)}' });
-                addProjectToFavorites.show();
-                removeProjectFromFavorites.hide();
+                addProjectToFavorites.show(); removeProjectFromFavorites.hide();
             });
 
-            // Watches
+            /* Watches */
             var addApplicationToWatches = jQuery("#addApplicationToWatches"),
                 addProjectToWatches = jQuery("#addProjectToWatches"),
                 removeApplicationFromWatches = jQuery("#removeApplicationFromWatches"),
@@ -133,41 +131,33 @@
             addApplicationToWatches
                 .click(function () {
                     jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxAddApplicationToWatches", id: params.id)}' });
-                    addApplicationToWatches.hide();
-                    removeApplicationFromWatches.show();
+                    addApplicationToWatches.hide(); removeApplicationFromWatches.show();
                 })
                 .hover( function() { jQuery(this).toggleClass("add-to-watches add-to-watches-hover"); });
 
             addProjectToWatches
                 .click(function () {
                     jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxAddProjectToWatches", id: params.id)}' });
-                    addProjectToWatches.hide();
-                    removeProjectFromWatches.show();
+                    addProjectToWatches.hide(); removeProjectFromWatches.show();
                 })
                 .hover( function() { jQuery(this).toggleClass("add-to-watches add-to-watches-hover"); });
 
             removeApplicationFromWatches
                 .click(function () {
                     jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxRemoveApplicationFromWatches", id: params.id)}' });
-                    addApplicationToWatches.show();
-                    removeApplicationFromWatches.hide();
+                    addApplicationToWatches.show(); removeApplicationFromWatches.hide();
                 })
                 .hover( function() { jQuery(this).toggleClass("remove-from-watches remove-from-watches-hover"); });
 
             removeProjectFromWatches
                 .click(function () {
                     jQuery.ajax({ cache: false, url: '${createLink(controller: "watch", action: "ajaxRemoveProjectFromWatches", id: params.id)}' });
-                    addProjectToWatches.show();
-                    removeProjectFromWatches.hide();
+                    addProjectToWatches.show(); removeProjectFromWatches.hide();
                 })
                 .hover( function() { jQuery(this).toggleClass("remove-from-watches remove-from-watches-hover"); });
 
-            jQuery('.body :input:visible:first').focus();
-
-            function closeUserInfo() {
-                userInfo.hide();
-                jQuery("body").off("click", closeUserInfo);
-            }
+            /* User Information */
+            function closeUserInfo() { userInfo.hide(); jQuery("body").off("click", closeUserInfo); }
 
             userInfoButton.click(function (event) {
                 if (userInfo.is(":visible")) {
@@ -187,13 +177,7 @@
                 }
             });
 
-            jQuery("#userInfo .ui-menu-item-with-icon a")
-                    .mouseover(function () {
-                        jQuery(this).addClass("ui-state-hover")
-                    })
-                    .mouseout(function () {
-                        jQuery(this).removeClass("ui-state-hover")
-                    });
+            jQuery("#userInfo .ui-menu-item-with-icon a").hover(function () { jQuery(this).toggleClass("ui-state-hover"); });
         });
     </script>
 
@@ -210,62 +194,13 @@
             font-weight: normal;
         }
 
-        .add-to-favorites {
-            background: url("${resource(dir: 'images', file: 'unstarred.png')}") no-repeat left;
-        }
-
-        .remove-from-favorites {
-            background: url("${resource(dir: 'images', file: 'starred.png')}") no-repeat left;
-        }
-
-        .add-to-watches {
-            background: url("${fam.icon(name: 'email')}") no-repeat left;
-        }
-
-        .add-to-watches-hover {
-            background: url("${fam.icon(name: 'email_add')}") no-repeat left;
-        }
-
-
-        .new-project-action {
-            background: url("${fam.icon(name: 'building_add')}") no-repeat left;
-        }
-
-
-        .delete-application-action {
-            background: url("${fam.icon(name: 'application_delete')}") no-repeat left;
-        }
-
-        .delete-module-action {
-            background: url("${fam.icon(name: 'brick_delete')}") no-repeat left;
-        }
-
-        .delete-project-action {
-            background: url("${fam.icon(name: 'building_delete')}") no-repeat left;
-        }
-
-
-        .edit-application-action {
-            background: url("${fam.icon(name: 'application_edit')}") no-repeat left;
-        }
-
-        .edit-module-action {
-            background: url("${fam.icon(name: 'brick_edit')}") no-repeat left;
-        }
-
-        .edit-project-action {
-            background: url("${fam.icon(name: 'building_edit')}") no-repeat left;
-        }
-
-
-
-        .remove-from-watches {
-            background: url("${fam.icon(name: 'email_go')}") no-repeat left;
-        }
-
-        .remove-from-watches-hover {
-            background: url("${fam.icon(name: 'email_delete')}") no-repeat left;
-        }
+        /* Favorites and Watches */
+        .add-to-favorites {          background: url("${resource(dir: 'images', file: 'unstarred.png')}") no-repeat left; }
+        .remove-from-favorites {     background: url("${resource(dir: 'images', file: 'starred.png')}") no-repeat left; }
+        .add-to-watches {            background: url("${fam.icon(name: 'email')}") no-repeat left; }
+        .add-to-watches-hover {      background: url("${fam.icon(name: 'email_add')}") no-repeat left; }
+        .remove-from-watches {       background: url("${fam.icon(name: 'email_go')}") no-repeat left; }
+        .remove-from-watches-hover { background: url("${fam.icon(name: 'email_delete')}") no-repeat left; }
 
         .application-favorite, .application-watch {
             background: url("${fam.icon(name: 'application')}") no-repeat left;
@@ -277,12 +212,22 @@
             padding-left: 1.5em
         }
 
+        /* Actions */
+        .delete-application-action {           background: url("${fam.icon(name: 'application_delete')}") no-repeat left; }
+        .delete-module-action {                background: url("${fam.icon(name: 'brick_delete')}") no-repeat left; }
+        .delete-project-action {               background: url("${fam.icon(name: 'building_delete')}") no-repeat left; }
+        .delete-source-control-server-action { background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
+        .edit-application-action {             background: url("${fam.icon(name: 'application_edit')}") no-repeat left; }
+        .edit-module-action {                  background: url("${fam.icon(name: 'brick_edit')}") no-repeat left; }
+        .edit-project-action {                 background: url("${fam.icon(name: 'building_edit')}") no-repeat left; }
+        .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
+        .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
+        .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
+
         /*
          * Autocomplete
          */
-        .ui-menu .ui-menu-item-with-icon a {
-            padding-left: 20px;
-        }
+        .ui-menu .ui-menu-item-with-icon a { padding-left: 20px; }
 
         span.application-item-icon, span.module-item-icon, span.project-item-icon {
             display: inline-block;
@@ -291,17 +236,9 @@
             margin-left: -16px;
         }
 
-        span.application-item-icon {
-            background: url("${fam.icon(name: 'application')}") no-repeat left 6px;
-        }
-
-        span.module-item-icon {
-            background: url("${fam.icon(name: 'brick')}") no-repeat left 6px;
-        }
-
-        span.project-item-icon {
-            background: url("${fam.icon(name: 'building')}") no-repeat left 6px;
-        }
+        span.application-item-icon { background: url("${fam.icon(name: 'application')}") no-repeat left 6px; }
+        span.module-item-icon {      background: url("${fam.icon(name: 'brick')}") no-repeat left 6px; }
+        span.project-item-icon {     background: url("${fam.icon(name: 'building')}") no-repeat left 6px; }
     </style>
 </head>
 

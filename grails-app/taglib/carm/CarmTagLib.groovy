@@ -683,6 +683,9 @@ class CarmTagLib {
             else if (controllerName == 'project') {
                 out << render(template: "/project/actions", model: [projectInstance: entity])
             }
+            else if (controllerName == 'sourceControlServer') {
+                out << render(template: "/sourceControlServer/actions", model: [sourceControlServerInstance: entity])
+            }
         }
 
         out << '<div class="clearing"></div></h1>'
