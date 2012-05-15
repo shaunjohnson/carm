@@ -48,9 +48,7 @@ html>
                 </td>
             </tr>
 
-            <tr class="prop">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
             <tr class="prop">
                 <td valign="top" class="name">
@@ -77,9 +75,7 @@ html>
                 </td>
             </tr>
 
-            <tr class="prop">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
             <tr class="prop">
                 <td valign="top" class="name">
@@ -101,19 +97,8 @@ html>
         </table>
     </div>
 
-    <table class="twoColumnLayout">
-        <tbody>
-        <tr>
-            <td class="layoutColumnFirst">
-                &nbsp;
-            </td>
-            <td class="layoutColumnLast">
-                <g:render template="/common/activity"
-                          model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: moduleInstance.id]"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <g:render template="/common/activity"
+              model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: moduleInstance.id]"/>
 </div>
 </body>
 </html>
