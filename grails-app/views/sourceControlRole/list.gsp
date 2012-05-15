@@ -10,16 +10,6 @@
 <div class="body">
     <carm:header domain="${sourceControlRoleInstanceList}"/>
 
-    <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="nav">
-            <span class="menuButton">
-                <g:link class="create" action="create">
-                    <g:message code="default.new.label" args="[entityName]"/>
-                </g:link>
-            </span>
-        </div>
-    </sec:ifAllGranted>
-
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

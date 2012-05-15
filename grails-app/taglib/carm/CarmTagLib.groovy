@@ -686,6 +686,9 @@ class CarmTagLib {
             else if (controllerName == 'sourceControlRepository') {
                 out << render(template: "/sourceControlRepository/actions", model: [sourceControlRepositoryInstance: entity])
             }
+            else if (controllerName == 'sourceControlRole') {
+                out << render(template: "/sourceControlRole/actions", model: [sourceControlRoleInstance: entity])
+            }
             else if (controllerName == 'sourceControlServer') {
                 out << render(template: "/sourceControlServer/actions", model: [sourceControlServerInstance: entity])
             }
