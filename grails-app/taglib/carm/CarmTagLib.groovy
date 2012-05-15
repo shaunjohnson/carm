@@ -713,6 +713,9 @@ class CarmTagLib {
             else if (controllerName == 'systemEnvironment') {
                 out << render(template: "/systemEnvironment/actions", model: [systemEnvironmentInstance: entity])
             }
+            else if (controllerName == 'systemServer') {
+                out << render(template: "/systemServer/actions", model: [systemServerInstance: entity])
+            }
         }
 
         out << '<div class="clearing"></div></h1>'

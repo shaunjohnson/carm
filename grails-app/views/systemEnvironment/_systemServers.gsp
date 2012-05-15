@@ -3,12 +3,13 @@
         <g:message code="systemEnvironment.servers.label" default="Servers"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="actions">
-            <g:link class="create" controller="systemServer" action="create"
+        <div class="header-action new-system-server-action">
+            <g:link controller="systemServer" action="create"
                     params="['sysEnvironment.id': systemInstance?.id]">
                 <g:message code="addServer.label" default="Add Server"/>
             </g:link>
         </div>
+        <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
 

@@ -38,11 +38,9 @@
                 </td>
             </tr>
 
-            <tr class="prop detailProp">
-                <td colspan="2">&nbsp;</td>
-            </tr>
+            <carm:formDividerRow/>
 
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="systemServer.dateCreated.label" default="Date Created"/>
                 </td>
@@ -50,7 +48,7 @@
                     <g:formatDate date="${systemServerInstance?.dateCreated}"/>
                 </td>
             </tr>
-            <tr class="prop detailProp">
+            <tr class="prop">
                 <td valign="top" class="name">
                     <g:message code="systemServer.lastUpdated.label" default="Last Updated"/>
                 </td>
@@ -60,24 +58,6 @@
             </tr>
             </tbody>
         </table>
-        <carm:showHideDetails sectionId="systemServerDetails" entityName="${entityName}">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
-                <div class="buttons">
-                    <span class="button">
-                        <g:link class="edit" action="edit" id="${systemServerInstance?.id}">
-                            <g:message code="default.button.edit.label" default="Edit"/>
-                        </g:link>
-                    </span>
-                    <carm:ifNotInUse domain="${systemServerInstance}">
-                        <span class="button">
-                            <g:link class="delete" action="delete" id="${systemServerInstance?.id}">
-                                <g:message code="default.button.delete.label" default="Delete"/>
-                            </g:link>
-                        </span>
-                    </carm:ifNotInUse>
-                </div>
-            </sec:ifAllGranted>
-        </carm:showHideDetails>
     </div>
 
     <g:render template="/common/activity"

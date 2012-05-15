@@ -9,7 +9,6 @@
                 <g:message code="addRepository.label" default="Add Repository"/>
             </g:link>
         </div>
-
         <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
