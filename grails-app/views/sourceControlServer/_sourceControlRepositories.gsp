@@ -3,12 +3,14 @@
         <g:message code="sourceControlServer.repositories.label" default="Repositories"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="actions">
+        <div class="header-action add-source-contro-repo-action">
             <g:link class="create" controller="sourceControlRepository" action="create"
                     params="['server.id': sourceControlServerInstance?.id]">
                 <g:message code="addRepository.label" default="Add Repository"/>
             </g:link>
         </div>
+
+        <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
 

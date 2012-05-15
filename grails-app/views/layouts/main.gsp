@@ -182,14 +182,14 @@
     </script>
 
     <style>
-        .page-header-action {
+        .header-action {
             cursor: pointer;
             float: right;
             margin-left: 1.5em;
             padding-left: 1.5em;
         }
 
-        .page-header-action, .page-header-action * {
+        .header-action, .header-action * {
             font-size: 1em;
             font-weight: normal;
         }
@@ -223,6 +223,8 @@
         .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
         .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
         .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
+        .add-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
+        .add-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }
 
         /*
          * Autocomplete

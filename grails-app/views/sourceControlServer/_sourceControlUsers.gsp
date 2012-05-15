@@ -3,12 +3,13 @@
         <g:message code="sourceControlServer.users.label" default="Users"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="actions">
+        <div class="header-action add-user-action">
             <g:link class="create" controller="sourceControlUser" action="create"
                     params="['server.id': sourceControlServerInstance?.id]">
                 <g:message code="addUser.label" default="Add User"/>
             </g:link>
         </div>
+        <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
 
