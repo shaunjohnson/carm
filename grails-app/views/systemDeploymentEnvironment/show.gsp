@@ -2,7 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
+    <g:set var="entityName"
+           value="${message(code: 'systemDeploymentEnvironment.label', default: 'SystemEnvironment Deployment Environment')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 
@@ -40,7 +41,8 @@
             </div>
 
             <div id="detailsTab">
-                <g:render template="systemEnvironmentDetails" model="[systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance]"/>
+                <g:render template="systemEnvironmentDetails"
+                          model="[systemDeploymentEnvironmentInstance: systemDeploymentEnvironmentInstance]"/>
             </div>
 
             <div id="activityTab">

@@ -713,6 +713,9 @@ class CarmTagLib {
             else if (controllerName == 'systemEnvironment') {
                 out << render(template: "/systemEnvironment/actions", model: [systemEnvironmentInstance: entity])
             }
+            else if (controllerName == 'systemDeploymentEnvironment') {
+                out << render(template: "/systemDeploymentEnvironment/actions", model: [systemDeploymentEnvironmentInstance: entity])
+            }
             else if (controllerName == 'systemServer') {
                 out << render(template: "/systemServer/actions", model: [systemServerInstance: entity])
             }

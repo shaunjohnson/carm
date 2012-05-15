@@ -219,6 +219,7 @@
         .delete-project-action {               background: url("${fam.icon(name: 'building_delete')}") no-repeat left; }
         .delete-source-control-repo-action {   background: url("${fam.icon(name: 'database_delete')}") no-repeat left; }
         .delete-source-control-server-action { background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
+        .delete-system-dep-env-action {        background: url("${fam.icon(name: 'table_delete')}") no-repeat left; }
         .delete-system-env-action {            background: url("${fam.icon(name: 'layout_delete')}") no-repeat left; }
         .delete-system-server-action {         background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
         .delete-user-action {                  background: url("${fam.icon(name: 'user_delete')}") no-repeat left; }
@@ -229,6 +230,7 @@
         .edit-project-action {                 background: url("${fam.icon(name: 'building_edit')}") no-repeat left; }
         .edit-source-control-repo-action {     background: url("${fam.icon(name: 'database_edit')}") no-repeat left; }
         .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
+        .edit-system-dep-env-action {          background: url("${fam.icon(name: 'table_edit')}") no-repeat left; }
         .edit-system-env-action {              background: url("${fam.icon(name: 'layout_edit')}") no-repeat left; }
         .edit-system-server-action {           background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
         .edit-user-action {                    background: url("${fam.icon(name: 'user_edit')}") no-repeat left; }
@@ -237,6 +239,7 @@
         .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
         .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
         .new-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
+        .new-system-dep-env-action {           background: url("${fam.icon(name: 'table_add')}") no-repeat left; }
         .new-system-env-action {               background: url("${fam.icon(name: 'layout_add')}") no-repeat left; }
         .new-system-server-action {            background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
         .new-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }

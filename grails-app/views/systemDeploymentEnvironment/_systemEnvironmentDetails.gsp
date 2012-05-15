@@ -2,19 +2,6 @@
     <div class="text">
         <g:message code="details.label" default="Details"/>
     </div>
-    <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="actions">
-            <g:link class="edit" action="edit" id="${systemDeploymentEnvironmentInstance?.id}">
-                <g:message code="default.button.edit.label" default="Edit"/>
-            </g:link>
-
-            <carm:ifNotInUse domain="${systemDeploymentEnvironmentInstance}">
-                <g:link class="delete" action="delete" id="${systemDeploymentEnvironmentInstance?.id}">
-                    <g:message code="default.button.delete.label" default="Delete"/>
-                </g:link>
-            </carm:ifNotInUse>
-        </div>
-    </sec:ifAllGranted>
 </div>
 
 <table width="100%">
