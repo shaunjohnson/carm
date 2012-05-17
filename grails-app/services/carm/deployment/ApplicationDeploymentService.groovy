@@ -664,8 +664,8 @@ class ApplicationDeploymentService implements ApplicationContextAware {
                     applicationDeployment.applicationRelease.releaseNumber,
                     applicationDeployment.deploymentEnvironment.name,
                     currentUser.fullName,
-                    linkGeneratorService.createLink(controller: 'application', action: 'show',
-                            id: applicationDeployment.applicationRelease.application.id)
+                    linkGeneratorService.createLink(controller: 'applicationDeployment', action: 'show',
+                            id: applicationDeployment..id)
             ]
 
             def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)

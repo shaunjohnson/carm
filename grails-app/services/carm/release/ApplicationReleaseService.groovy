@@ -422,7 +422,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
                     applicationRelease.releaseNumber,
                     currentUser.fullName,
                     linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show',
-                            id: applicationRelease.application.id)
+                            id: applicationRelease.id)
             ]
 
             def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)
