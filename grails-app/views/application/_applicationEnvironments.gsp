@@ -57,8 +57,8 @@
     </table>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="applicationNotConfiguredForEnvironment.message"
-                   default="This application is not configured to work with an environment."/>
+    <p>
+        <em><g:message code="applicationNotConfiguredForEnvironment.message"
+                       default="This application is not configured to work with an environment."/></em>
     </p>
 </g:else>

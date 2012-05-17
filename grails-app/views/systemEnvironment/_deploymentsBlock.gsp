@@ -11,10 +11,10 @@
                 <h3>${deploymentEnvironmentEntry.key}</h3>
 
                 <g:each in="${deploymentEnvironmentEntry.value.entrySet()}" var="applicationTypeEntry">
-                    <div style="margin-left: 2em;">
+                    <div class="offset1">
                         <h4>${applicationTypeEntry.key}</h4>
 
-                        <ul style="margin-left: 1em;">
+                        <ul class="offset1">
                             <g:each in="${applicationTypeEntry.value}" var="applicationDeployment">
                                 <li>
                                     <g:link controller="application" action="show"
@@ -38,9 +38,9 @@
             </g:each>
         </g:if>
         <g:else>
-            <p class="emphasis">
-                <g:message code="noDeploymentsForThisDate.message"
-                           default="There are no deployments for this date."/>
+            <p>
+                <em><g:message code="noDeploymentsForThisDate.message"
+                               default="There are no deployments for this date."/></em>
             </p>
         </g:else>
     </div>

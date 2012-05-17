@@ -1,54 +1,56 @@
 <g:each in="${applicationReleaseList}" var="applicationReleaseInstance" status="i">
-    <table style="width: 100%;">
-        <tbody>
-        <g:if test="${addLeadingDivider}">
-            <tr>
-                <td colspan="2"><hr class="divider"/></td>
-            </tr>
-            <g:set var="addLeadingDivider" value="${false}"/>
-        </g:if>
-        <tr>
-            <td style="padding-bottom: 1em; width: 10%;">
-                <h4 class="applicationReleaseNumber">
-                    <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
-                        ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
-                    </g:link>
-                </h4>
+    <g:if test="${addLeadingDivider}">
+        <hr class="divider"/>
+        <g:set var="addLeadingDivider" value="${false}"/>
+    </g:if>
 
-                <div style="margin: 0.5em 0;">
-                    <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
-                </div>
+    <div class="row">
+        <div class="span1">
+            <h4 class="applicationReleaseNumber">
+                <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
+                    ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
+                </g:link>
+            </h4>
 
-                <div>
+            <div style="margin: 0.5em 0;">
+                <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
+            </div>
+
+            <div>
+                <span class="label label-info">
                     ${applicationReleaseInstance.releaseState.encodeAsHTML()}
-                </div>
-            </td>
-            <td style="padding-bottom: 1em;">
-                <div class="expander">
-                    ${applicationReleaseInstance.changeLog?.decodeHTML()}
-                </div>
+                </span>
+            </div>
+        </div>
 
-                <carmsec:isProjectOwner application="${applicationReleaseInstance.application}">
-                    <div class="buttons">
-                        <span class="button">
-                            <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
-                                <carm:button controller="applicationDeployment" action="create"
-                                             params="['applicationRelease.id': applicationReleaseInstance.id]">
-                                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
-                                </carm:button>
-                            </carm:isDeployable>
-                        </span>
-                    </div>
-                </carmsec:isProjectOwner>
-            </td>
-        </tr>
-        <g:if test="${(i + 1) < applicationReleaseList.size()}">
-            <tr>
-                <td colspan="2"><hr class="divider"/></td>
-            </tr>
-        </g:if>
-        </tbody>
-    </table>
+        <div class="span5">
+            <carmsec:isProjectOwner application="${applicationReleaseInstance.application}">
+                <div class="btn-group" style="margin-bottom: 0.5em;">
+                    <g:link class="btn btn-mini" controller="applicationRelease" action="show"
+                            id="${applicationReleaseInstance.id}">
+                        <g:message code="default.button.view.label"/>
+                    </g:link>
+                    <g:link class="btn btn-mini" controller="applicationRelease" action="edit"
+                            id="${applicationReleaseInstance.id}">
+                        <g:message code="default.button.edit.label"/>
+                    </g:link>
+                    <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+                        <g:link class="btn btn-mini" controller="applicationDeployment" action="create"
+                                params="['applicationRelease.id': applicationReleaseInstance.id]">
+                            <g:message code="deploy.label" default="Deploy"/>
+                        </g:link>
+                    </carm:isDeployable>
+                </div>
+            </carmsec:isProjectOwner>
+
+            <div class="expander">
+                ${applicationReleaseInstance.changeLog?.decodeHTML()}
+            </div>
+        </div>
+    </div>
+    <g:if test="${(i + 1) < applicationReleaseList.size()}">
+        <hr class="divider"/>
+    </g:if>
 </g:each>
 <script type="text/javascript">
     jQuery("button.button").button();

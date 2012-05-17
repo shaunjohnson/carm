@@ -27,7 +27,7 @@
     </g:if>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="noRecordedActivity.message" default="There is no recorded activity."/>
+    <p>
+        <em><g:message code="noRecordedActivity.message" default="There is no recorded activity."/></em>
     </p>
 </g:else>

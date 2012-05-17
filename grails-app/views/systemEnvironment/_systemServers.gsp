@@ -9,6 +9,7 @@
                 <g:message code="addServer.label" default="Add Server"/>
             </g:link>
         </div>
+
         <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
@@ -25,8 +26,8 @@
     </ul>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="systemEnvironmentDoesNotHaveAnyServers.message"
-                   default="This environment does not have any servers."/>
+    <p>
+        <em><g:message code="systemEnvironmentDoesNotHaveAnyServers.message"
+                       default="This environment does not have any servers."/></em>
     </p>
 </g:else>

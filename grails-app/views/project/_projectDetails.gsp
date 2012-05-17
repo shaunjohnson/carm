@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<table width="100%">
+<table class="details">
     <tbody>
     <tr class="prop">
         <td valign="top" class="name">

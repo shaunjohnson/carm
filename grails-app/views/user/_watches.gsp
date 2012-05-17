@@ -7,8 +7,8 @@
 <g:if test="${watches.size()}">
     <div id="watches-block">
         <g:if test="${isCurrentUser}">
-            <div class="buttons" style="margin-bottom: 1em;">
-                <button class="button" onclick="return deleteAllWatches();">
+            <div style="margin-bottom: 1em;">
+                <button class="btn" onclick="return deleteAllWatches();">
                     <g:message code="deleteAllWatches.label" default="Delete All Watches"/>
                 </button>
             </div>
@@ -44,7 +44,7 @@
     <g:if test="${isCurrentUser}">
         <script type="text/javascript">
             function deleteAllWatches() {
-                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxDeleteAllWatches")}' });
+                jQuery.ajax({ cache:false, url:'${createLink(controller: "user", action: "ajaxDeleteAllWatches")}' });
                 jQuery("#watches-block").remove();
                 jQuery("#no-watches-message").show();
 
@@ -52,7 +52,7 @@
             }
 
             function deleteWatch(id) {
-                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxRemoveFromWatches")}/' + id });
+                jQuery.ajax({ cache:false, url:'${createLink(controller: "user", action: "ajaxRemoveFromWatches")}/' + id });
                 jQuery("#watch_" + id).remove();
 
                 if (!jQuery("#watches-block li").length) {
@@ -66,7 +66,7 @@
     </g:if>
 </g:if>
 
-<p id="no-watches-message" class="emphasis" style="display: ${watches.size() ? 'none' : 'block'};">
-    <g:message code="userDoesNotHaveAnyWatches.message"
-               default="This user does not have any watches"/>
+<p id="no-watches-message" style="display: ${watches.size() ? 'none' : 'block'};">
+    <em><g:message code="userDoesNotHaveAnyWatches.message"
+                   default="This user does not have any watches"/></em>
 </p>

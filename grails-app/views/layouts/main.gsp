@@ -13,23 +13,137 @@
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'carm.ico')}" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
+
+    <!--<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">-->
+    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">--}%
+
     <g:layoutHead/>
 
     <g:javascript library="application"/>
-    <g:javascript library="jquery" plugin="jquery"/>
-    <jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>
+    %{--<g:javascript library="jquery" plugin="jquery"/>--}%
+    %{--<jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>--}%
 
-    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.cookie.js')}'></script>
-    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.ba-hashchange.min.js')}'></script>
-    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.easytabs.min.js')}'></script>
-    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.expander.min.js')}'></script>
-    <script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>
+    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.cookie.js')}'></script>--}%
+    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.ba-hashchange.min.js')}'></script>--}%
+    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.easytabs.min.js')}'></script>--}%
+    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.expander.min.js')}'></script>--}%
+    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>--}%
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css"/>
+    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css"/>--}%
 
-    <script type='text/javascript'>
+    <style>
+        .header-action {
+            cursor: pointer;
+            float: right;
+            margin-left: 1.5em;
+            padding-left: 1.7em;
+        }
+
+        .header-action, .header-action * {
+            /*font-size: 0.8em;*/
+            font-weight: normal;
+        }
+
+        /* Favorites and Watches */
+        .add-to-favorites {          background: url("${resource(dir: 'images', file: 'unstarred.png')}") no-repeat left; }
+        .remove-from-favorites {     background: url("${resource(dir: 'images', file: 'starred.png')}") no-repeat left; }
+        .add-to-watches {            background: url("${fam.icon(name: 'email')}") no-repeat left; }
+        .add-to-watches-hover {      background: url("${fam.icon(name: 'email_add')}") no-repeat left; }
+        .remove-from-watches {       background: url("${fam.icon(name: 'email_go')}") no-repeat left; }
+        .remove-from-watches-hover { background: url("${fam.icon(name: 'email_delete')}") no-repeat left; }
+
+        .application-favorite, .application-watch {
+            background: url("${fam.icon(name: 'application')}") no-repeat left;
+            padding-left: 1.5em
+        }
+
+        .project-favorite, .project-watch {
+            background: url("${fam.icon(name: 'building')}") no-repeat left;
+            padding-left: 1.5em
+        }
+
+        /* Actions */
+        .delete-action {                       background: url("${fam.icon(name: 'delete')}") no-repeat left; }
+        .delete-application-action {           background: url("${fam.icon(name: 'application_delete')}") no-repeat left; }
+        .delete-module-action {                background: url("${fam.icon(name: 'brick_delete')}") no-repeat left; }
+        .delete-project-action {               background: url("${fam.icon(name: 'building_delete')}") no-repeat left; }
+        .delete-source-control-repo-action {   background: url("${fam.icon(name: 'database_delete')}") no-repeat left; }
+        .delete-source-control-server-action { background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
+        .delete-system-dep-env-action {        background: url("${fam.icon(name: 'table_delete')}") no-repeat left; }
+        .delete-system-env-action {            background: url("${fam.icon(name: 'layout_delete')}") no-repeat left; }
+        .delete-system-server-action {         background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
+        .delete-user-action {                  background: url("${fam.icon(name: 'user_delete')}") no-repeat left; }
+        .delete-user-role-action {             background: url("${fam.icon(name: 'vcard_delete')}") no-repeat left; }
+        .edit-action {                         background: url("${fam.icon(name: 'page_white_edit')}") no-repeat left; }
+        .edit-application-action {             background: url("${fam.icon(name: 'application_edit')}") no-repeat left; }
+        .edit-module-action {                  background: url("${fam.icon(name: 'brick_edit')}") no-repeat left; }
+        .edit-project-action {                 background: url("${fam.icon(name: 'building_edit')}") no-repeat left; }
+        .edit-source-control-repo-action {     background: url("${fam.icon(name: 'database_edit')}") no-repeat left; }
+        .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
+        .edit-system-dep-env-action {          background: url("${fam.icon(name: 'table_edit')}") no-repeat left; }
+        .edit-system-env-action {              background: url("${fam.icon(name: 'layout_edit')}") no-repeat left; }
+        .edit-system-server-action {           background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
+        .edit-user-action {                    background: url("${fam.icon(name: 'user_edit')}") no-repeat left; }
+        .edit-user-role-action {               background: url("${fam.icon(name: 'vcard_edit')}") no-repeat left; }
+        .new-action {                          background: url("${fam.icon(name: 'add')}") no-repeat left; }
+        .new-application-action {              background: url("${fam.icon(name: 'application_add')}") no-repeat left; }
+        .new-module-action {                   background: url("${fam.icon(name: 'brick_add')}") no-repeat left; }
+        .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
+        .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
+        .new-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
+        .new-system-dep-env-action {           background: url("${fam.icon(name: 'table_add')}") no-repeat left; }
+        .new-system-env-action {               background: url("${fam.icon(name: 'layout_add')}") no-repeat left; }
+        .new-system-server-action {            background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
+        .new-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }
+        .new-user-role-action {                background: url("${fam.icon(name: 'vcard_add')}") no-repeat left; }
+
+        /*
+         * Autocomplete
+         */
+        .ui-menu .ui-menu-item-with-icon a { padding-left: 20px; }
+
+        span.application-item-icon, span.module-item-icon, span.project-item-icon {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            margin-left: -16px;
+        }
+
+        span.application-item-icon { background: url("${fam.icon(name: 'application')}") no-repeat left 6px; }
+        span.module-item-icon {      background: url("${fam.icon(name: 'brick')}") no-repeat left 6px; }
+        span.project-item-icon {     background: url("${fam.icon(name: 'building')}") no-repeat left 6px; }
+    </style>
+    <r:layoutResources/>
+</head>
+
+<body>
+<g:render template="/common/menu"/>
+
+<div class="container">
+<g:layoutBody/>
+<r:layoutResources/>
+</div>
+
+<div class="clearing"></div>
+
+<div class="footer">
+    <hr class="divider" style="margin: 0 1em;"/>
+    <g:message code="carm.copyright.label" default="Change And Release Management 2011"
+               args="[meta(name: 'app.version')]"/>
+</div>
+
+<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
+     style="display: none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <g:message code="deleteThisItemExplanation.message"
+                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
+    </p>
+</div>
+
+<carm:userInfoDropdown/>
+
+<script type="text/javascript">
         jQuery(function () {
             jQuery('.expander').expander({
                 expandText:'<g:message code="showMore.label"/>',
@@ -179,113 +293,7 @@
 
             jQuery("#userInfo .ui-menu-item-with-icon a").hover(function () { jQuery(this).toggleClass("ui-state-hover"); });
         });
-    </script>
-
-    <style>
-        .header-action {
-            cursor: pointer;
-            float: right;
-            margin-left: 1.5em;
-            padding-left: 1.5em;
-        }
-
-        .header-action, .header-action * {
-            font-size: 1em;
-            font-weight: normal;
-        }
-
-        /* Favorites and Watches */
-        .add-to-favorites {          background: url("${resource(dir: 'images', file: 'unstarred.png')}") no-repeat left; }
-        .remove-from-favorites {     background: url("${resource(dir: 'images', file: 'starred.png')}") no-repeat left; }
-        .add-to-watches {            background: url("${fam.icon(name: 'email')}") no-repeat left; }
-        .add-to-watches-hover {      background: url("${fam.icon(name: 'email_add')}") no-repeat left; }
-        .remove-from-watches {       background: url("${fam.icon(name: 'email_go')}") no-repeat left; }
-        .remove-from-watches-hover { background: url("${fam.icon(name: 'email_delete')}") no-repeat left; }
-
-        .application-favorite, .application-watch {
-            background: url("${fam.icon(name: 'application')}") no-repeat left;
-            padding-left: 1.5em
-        }
-
-        .project-favorite, .project-watch {
-            background: url("${fam.icon(name: 'building')}") no-repeat left;
-            padding-left: 1.5em
-        }
-
-        /* Actions */
-        .delete-action {                       background: url("${fam.icon(name: 'delete')}") no-repeat left; }
-        .delete-application-action {           background: url("${fam.icon(name: 'application_delete')}") no-repeat left; }
-        .delete-module-action {                background: url("${fam.icon(name: 'brick_delete')}") no-repeat left; }
-        .delete-project-action {               background: url("${fam.icon(name: 'building_delete')}") no-repeat left; }
-        .delete-source-control-repo-action {   background: url("${fam.icon(name: 'database_delete')}") no-repeat left; }
-        .delete-source-control-server-action { background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
-        .delete-system-dep-env-action {        background: url("${fam.icon(name: 'table_delete')}") no-repeat left; }
-        .delete-system-env-action {            background: url("${fam.icon(name: 'layout_delete')}") no-repeat left; }
-        .delete-system-server-action {         background: url("${fam.icon(name: 'server_delete')}") no-repeat left; }
-        .delete-user-action {                  background: url("${fam.icon(name: 'user_delete')}") no-repeat left; }
-        .delete-user-role-action {             background: url("${fam.icon(name: 'vcard_delete')}") no-repeat left; }
-        .edit-action {                         background: url("${fam.icon(name: 'page_white_edit')}") no-repeat left; }
-        .edit-application-action {             background: url("${fam.icon(name: 'application_edit')}") no-repeat left; }
-        .edit-module-action {                  background: url("${fam.icon(name: 'brick_edit')}") no-repeat left; }
-        .edit-project-action {                 background: url("${fam.icon(name: 'building_edit')}") no-repeat left; }
-        .edit-source-control-repo-action {     background: url("${fam.icon(name: 'database_edit')}") no-repeat left; }
-        .edit-source-control-server-action {   background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
-        .edit-system-dep-env-action {          background: url("${fam.icon(name: 'table_edit')}") no-repeat left; }
-        .edit-system-env-action {              background: url("${fam.icon(name: 'layout_edit')}") no-repeat left; }
-        .edit-system-server-action {           background: url("${fam.icon(name: 'server_edit')}") no-repeat left; }
-        .edit-user-action {                    background: url("${fam.icon(name: 'user_edit')}") no-repeat left; }
-        .edit-user-role-action {               background: url("${fam.icon(name: 'vcard_edit')}") no-repeat left; }
-        .new-action {                          background: url("${fam.icon(name: 'add')}") no-repeat left; }
-        .new-application-action {              background: url("${fam.icon(name: 'application_add')}") no-repeat left; }
-        .new-module-action {                   background: url("${fam.icon(name: 'brick_add')}") no-repeat left; }
-        .new-project-action {                  background: url("${fam.icon(name: 'building_add')}") no-repeat left; }
-        .new-source-control-server-action {    background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
-        .new-source-contro-repo-action {       background: url("${fam.icon(name: 'database_add')}") no-repeat left; }
-        .new-system-dep-env-action {           background: url("${fam.icon(name: 'table_add')}") no-repeat left; }
-        .new-system-env-action {               background: url("${fam.icon(name: 'layout_add')}") no-repeat left; }
-        .new-system-server-action {            background: url("${fam.icon(name: 'server_add')}") no-repeat left; }
-        .new-user-action {                     background: url("${fam.icon(name: 'user_add')}") no-repeat left; }
-        .new-user-role-action {                background: url("${fam.icon(name: 'vcard_add')}") no-repeat left; }
-
-        /*
-         * Autocomplete
-         */
-        .ui-menu .ui-menu-item-with-icon a { padding-left: 20px; }
-
-        span.application-item-icon, span.module-item-icon, span.project-item-icon {
-            display: inline-block;
-            height: 20px;
-            width: 20px;
-            margin-left: -16px;
-        }
-
-        span.application-item-icon { background: url("${fam.icon(name: 'application')}") no-repeat left 6px; }
-        span.module-item-icon {      background: url("${fam.icon(name: 'brick')}") no-repeat left 6px; }
-        span.project-item-icon {     background: url("${fam.icon(name: 'building')}") no-repeat left 6px; }
-    </style>
-</head>
-
-<body>
-<g:render template="/common/menu"/>
-<g:layoutBody/>
-<div class="clearing"></div>
-
-<div class="footer">
-    <hr class="divider" style="margin: 0 1em;"/>
-    <g:message code="carm.copyright.label" default="Change And Release Management 2011"
-               args="[meta(name: 'app.version')]"/>
-</div>
-
-<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
-     style="display: none;">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        <g:message code="deleteThisItemExplanation.message"
-                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
-    </p>
-</div>
-
-<carm:userInfoDropdown/>
+<script>
 
 </body>
 </html>

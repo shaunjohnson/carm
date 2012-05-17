@@ -188,7 +188,7 @@ class CarmTagLib {
         else if (controller == 'applicationRelease') {
             def entityName = message(code: 'applicationRelease.label', default: 'Application Release')
 
-            carm: pageHeaderLabel(beanName: message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber]),
+            out << carm.pageHeaderLabel(beanName: message(code: 'pageHeader.applicationRelease.label', args: [domain?.application?.name, domain?.releaseNumber]),
                     entityName: entityName, entity: domain)
 
             out << bc.breadcrumbs(null) {
@@ -657,7 +657,8 @@ class CarmTagLib {
             action = 'create'
         }
 
-        out << '<h1><div style="float: left;">'
+        out << '<div class="row">'
+        out << '<div class="span8"><h1 style="margin-bottom: 0.25em;">'
 
         if (action == 'show') {
             out << beanName
@@ -666,12 +667,15 @@ class CarmTagLib {
             def headerText = message(code: "default.${action}.label", args: [beanName])
             out << headerText
         }
+//        else if (entity instanceof Application && (action == 'create' || action == 'save')) {
+//            out << "Add Application to ${entity.project.name}"
+//        }
         else {
             def headerText = message(code: "default.${action}.label", args: [entityName])
             out << headerText
         }
 
-        out << '</div>'
+        out << '</h1></div><div class="span4" style="margin-top: 5px;">'
 
         if (springSecurityService.isLoggedIn()) {
             if (controllerName == 'application') {
@@ -721,7 +725,7 @@ class CarmTagLib {
             }
         }
 
-        out << '<div class="clearing"></div></h1>'
+        out << '</div></div>'
     }
 
     def favoriteActions = { attrs ->
@@ -766,24 +770,8 @@ class CarmTagLib {
         out << render(template: "/common/showMore", model: [clientId: clientId, controller: controller, action: action, id: id, max: max, step: step, appendId: appendId])
     }
 
-    /**
-     * Generates a link button using the same parameters that are used with links.
-     */
-    def button = { attrs, body ->
-        out << "<button class='button' onclick='window.location=\"" << createLink(attrs) << "\"'>" << body() << "</button>"
-    }
-
     def formDividerRow = { attrs ->
         out << '<tr><td colspan="2"><hr class="divider" style="margin: 1em 0;"/></td></tr>'
-    }
-
-    def formFooter = { attrs, body ->
-        out << '<tfoot>'
-        out << formDividerRow()
-        out << '<tr><td colspan="2">'
-        out << '<div style="float: right;">' << body() << '</div>'
-        out << '<div class="clearing"></div>'
-        out << '</td></tr><tfoot>'
     }
 
     def formatApplicationDeploymentState = { attrs ->
@@ -1151,6 +1139,21 @@ class CarmTagLib {
 
         out.println "});"
         out.println "})</script>"
+    }
 
+    def formSection = { attrs, body ->
+        def legend = attrs.legend
+
+        out << '<fieldset><legend>'
+
+        if (legend) {
+            out << legend
+        }
+
+        out << '</legend>' << body() << '</fieldset>'
+    }
+
+    def formButtons = { attrs, body ->
+        out << '<div class="form-actions">' << body() << '</div>'
     }
 }

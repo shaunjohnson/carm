@@ -12,9 +12,7 @@
 
 <g:if test="${mySystemEnvironments.size()}">
     <g:each in="${mySystemEnvironments}" var="systemEnvironment" status="systemIndex">
-        <div style="margin: 0.5em 0;">
-            <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
-        </div>
+        <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
 
         <g:if test="${(systemIndex + 1) < mySystemEnvironments.size()}">
             <hr class="divider"/>
@@ -22,8 +20,8 @@
     </g:each>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="youDontWorkOnAnyProjectsAssociatedWithAnEnvironment.message"
-                   default="You don't work on any projects associated with an environment."/>
+    <p>
+        <em><g:message code="youDontWorkOnAnyProjectsAssociatedWithAnEnvironment.message"
+                       default="You don't work on any projects associated with an environment."/></em>
     </p>
 </g:else>

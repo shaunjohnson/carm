@@ -2,69 +2,57 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
+    <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'systemEnvironment.label', default: 'SystemEnvironment')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
 </head>
 
 <body>
-<div class="body">
-    <carm:header domain="${systemEnvironmentInstance}"/>
+<carm:header domain="${systemEnvironmentInstance}"/>
 
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
+<g:if test="${flash.message}">
+    <div class="alert alert-info">${flash.message}</div>
+</g:if>
+<g:hasErrors bean="${systemEnvironmentInstance}">
+    <div class="alert alert-error">
+        <h4><g:message code="systemEnvironment.error.create"/></h4>
+        <g:renderErrors bean="${systemEnvironmentInstance}" as="list"/>
+    </div>
+</g:hasErrors>
 
-    <g:hasErrors bean="${systemEnvironmentInstance}">
-        <div class="errors">
-            <g:renderErrors bean="${systemEnvironmentInstance}" as="list"/>
+<g:form action="save" class="offset1 span8">
+    <div class="control-group ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'error')}">
+        <carm:label class="control-label" for="name" required="true">
+            <g:message code="systemEnvironment.name.label" default="Name"/>
+        </carm:label>
+        <div class="controls">
+            <g:textField name="name" maxlength="50" size="50"
+                         value="${systemEnvironmentInstance?.name}"
+                         required="required"
+                         title="${message(code: 'systemEnvironment.name.help')}"/>
         </div>
-    </g:hasErrors>
+    </div>
 
-    <g:form action="save">
-        <div class="dialog">
-            <table>
-                <tbody>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="name" required="true">
-                            <g:message code="systemEnvironment.name.label" default="Name"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'name', 'errors')}">
-                        <g:textField name="name" maxlength="50" size="50"
-                                     value="${systemEnvironmentInstance?.name}"
-                                     required="required"
-                                     title="${message(code: 'systemEnvironment.name.help')}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="description">
-                            <g:message code="systemEnvironment.description.label" default="Description"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: systemEnvironmentInstance, field: 'description', 'errors')}">
-                        <g:textArea name="description"
-                                    cols="${grailsApplication.config.ui.textarea.cols}"
-                                    rows="${grailsApplication.config.ui.textarea.rows}"
-                                    value="${systemEnvironmentInstance?.description}"
-                                    title="${message(code: 'systemEnvironment.description.help')}"/>
-                    </td>
-                </tr>
-                </tbody>
-
-                <carm:formFooter>
-                    <div class="buttons">
-                        <g:link action="list">
-                            <g:message code="default.button.cancel.label" default="Cancel"/>
-                        </g:link>
-                        <g:submitButton name="create"
-                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-                    </div>
-                </carm:formFooter>
-            </table>
+    <div class="control-group ${hasErrors(bean: systemEnvironmentInstance, field: 'description', 'error')}">
+        <carm:label class="control-label" for="description">
+            <g:message code="systemEnvironment.description.label" default="Description"/>
+        </carm:label>
+        <div class="controls">
+            <g:textArea name="description"
+                        cols="${grailsApplication.config.ui.textarea.cols}"
+                        rows="${grailsApplication.config.ui.textarea.rows}"
+                        value="${systemEnvironmentInstance?.description}"
+                        title="${message(code: 'systemEnvironment.description.help')}"/>
         </div>
-    </g:form>
-</div>
+    </div>
+
+    <carm:formButtons>
+        <g:submitButton class="btn btn-primary" name="create"
+                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+        <g:link class="btn" action="list">
+            <g:message code="default.button.cancel.label" default="Cancel"/>
+        </g:link>
+    </carm:formButtons>
+</g:form>
 </body>
 </html>

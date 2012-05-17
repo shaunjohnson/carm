@@ -15,21 +15,20 @@
         <g:set var="project" value="${projectEntry.key}"/>
         <g:set var="applications" value="${projectEntry.value}"/>
 
-        <div style="margin: 0.5em 0;">
-            <h3>
-                <g:link controller="project" action="show" id="${project.id}">
-                    ${project.encodeAsHTML()}
-                </g:link>
-            </h3>
-            <ul>
-                <g:each in="${applications}" var="application">
-                    <li>
-                        <g:link controller="application" action="show" id="${application.id}">
-                            ${application.encodeAsHTML()}
-                        </g:link>
-                    </li>
-                </g:each>
-            </ul>
+        <h4>
+            <g:link controller="project" action="show" id="${project.id}">
+                ${project.encodeAsHTML()}
+            </g:link>
+        </h4>
+
+        <div class="row">
+            <g:each in="${applications}" var="application">
+                <div class="offset1">
+                    <g:link controller="application" action="show" id="${application.id}">
+                        ${application.encodeAsHTML()}
+                    </g:link>
+                </div>
+            </g:each>
         </div>
 
         <g:if test="${(projectIndex + 1) < mostActiveApplications.size()}">
@@ -38,7 +37,7 @@
     </g:each>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="noActiveApplications.message" default="There are no active applications."/>
+    <p>
+        <em><g:message code="noActiveApplications.message" default="There are no active applications."/></em>
     </p>
 </g:else>

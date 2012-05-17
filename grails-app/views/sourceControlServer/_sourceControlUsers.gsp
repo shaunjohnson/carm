@@ -9,12 +9,13 @@
                 <g:message code="addUser.label" default="Add User"/>
             </g:link>
         </div>
+
         <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
 
 <g:if test="${sourceControlServerInstance?.users?.size()}">
-    <ul>
+    <ul class="offset1">
         <g:each in="${sourceControlServerInstance.users.sort { it.name }}" var="user">
             <li>
                 <g:link controller="sourceControlUser" action="show" id="${user.id}">
@@ -25,8 +26,8 @@
     </ul>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="sourceControlServerDoesNotHaveAnyUsers.message"
-                   default="This source control server does not have any users."/>
+    <p>
+        <em><g:message code="sourceControlServerDoesNotHaveAnyUsers.message"
+                       default="This source control server does not have any users."/></em>
     </p>
 </g:else>

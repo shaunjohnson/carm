@@ -1,44 +1,28 @@
-<div id="login">
-    <form action="${loginPostUrl}" method="POST" id="loginForm" autocomplete="off">
-        <p class="emphasis">
-            <g:message code="notLoggedIn.message" default="You are currently not logged in."/>
-        </p>
+<form action="${loginPostUrl}" method="POST" id="loginForm" class="well" xmlns="http://www.w3.org/1999/html">
+    <p>
+        <em><g:message code="notLoggedIn.message" default="You are currently not logged in."/></em>
+    </p>
 
-        <table>
-            <tbody>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <label for="username"><g:message code="springSecurity.login.username.label"/></label>
-                </td>
-                <td valign="top" class="value">
-                    <input type="text" class="text_" name="j_username" id="username"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    <label for="password"><g:message code="springSecurity.login.password.label"/></label>
-                </td>
-                <td valign="top" class="value">
-                    <input type="password" class="text_" name="j_password" id="password"/>
-                </td>
-            </tr>
-            <tr class="prop">
-                <td valign="top" class="name">
-                    &nbsp;
-                </td>
-                <td valign="top" class="value">
-                    <div style="float: right;" class="buttons">
-                        <input type="submit" id="submit" value="${message(code: "springSecurity.login.button")}"/>
-                    </div>
-                    <div style="float: left;">
-                        <input type="checkbox" class="chk" name="${rememberMeParameter}" id="remember_me"
-                               <g:if test="${hasCookie}">checked="checked"</g:if>/>
-                        <label for="remember_me"><g:message code="springSecurity.login.remember.me.label"/></label>
-                    </div>
-                    <div class="clearing"></div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+    <p>
+        <label for="username"><g:message code="springSecurity.login.username.label"/></label>
+        <input type="text" class="span4" name="j_username" id="username"/>
+    </p>
+
+    <p>
+        <label for="password"><g:message code="springSecurity.login.password.label"/></label>
+        <input type="password" class="span4" name="j_password" id="password"/>
+    </p>
+
+    <p>
+        <label for="remember_me" class="checkbox">
+            <input type="checkbox" name="${rememberMeParameter}" id="remember_me"
+                   <g:if test="${hasCookie}">checked="checked"</g:if>/>
+            <g:message code="springSecurity.login.remember.me.label"/>
+        </label>
+    </p>
+
+    <p>
+        <input class="btn btn-primary" type="submit" id="submit"
+               value="${message(code: "springSecurity.login.button")}"/>
+    </p>
+</form>

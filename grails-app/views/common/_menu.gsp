@@ -1,7 +1,7 @@
 <div id="topMenu" class="clearing">
     <div style="margin: 0 auto; width: 900px;">
         <div>
-            <g:link uri="/" style="outline: none; font-size: 1.5em;" class="menuLink">
+            <g:link uri="/" style="outline: none; font-size: 1.8em;" class="menuLink">
                 <img src="${resource(dir: 'images', file: 'CARM_29x20.gif')}" width="29" height="20" alt="Logo"
                      style="border-style: none"/>
                 <g:message code="carm.shortName.label" default="CARM"/>
@@ -25,7 +25,7 @@
             </li>
         </ul>
 
-        <div style="float: right; margin-left: 5px; margin-top: 5px;">
+        <div style="float: right; margin-left: 5px; margin-top: 3px;">
             <sec:ifLoggedIn>
                 <a id="userInfoButton" class="menuLink">
                     <div>

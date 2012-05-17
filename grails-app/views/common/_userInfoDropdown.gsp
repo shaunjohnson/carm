@@ -26,17 +26,17 @@
         </div>
     </g:if>
 
-    <div class="ui-widget-header" style="padding: 0.5em;">
+    <div class="ui-widget-header" style="padding: 0 0.5em;">
         <div style="float: left;">
-            <carm:button controller="user" action="show" params="[username: username]" class="menuLink">
+            <g:link controller="user" action="show" params="[username: username]" class="menuLink">
                 <g:message code="profile.label" default="Profile"/>
-            </carm:button>
+            </g:link>
         </div>
 
         <div style="float: right;">
-            <carm:button controller="logout" class="menuLink">
+            <g:link controller="logout" class="menuLink">
                 <g:message code="logout.label" default="Logout"/>
-            </carm:button>
+            </g:link>
         </div>
 
         <div class="clearing"></div>

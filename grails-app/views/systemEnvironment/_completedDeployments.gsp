@@ -9,8 +9,8 @@
         </div>
     </div>
 
-    <p class="emphasis">
-        <g:message code="noDeploymentsForThisDate.message"
-                   default="There are no deployments for this date."/>
+    <p>
+        <em><g:message code="noDeploymentsForThisDate.message"
+                       default="There are no deployments for this date."/></em>
     </p>
 </g:else>

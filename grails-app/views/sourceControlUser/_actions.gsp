@@ -13,10 +13,3 @@
         </div>
     </sec:ifAllGranted>
 </g:if>
-<g:elseif test="${params.action == 'list'}">
-    <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="header-action new-source-control-repo-action">
-            <g:link action="create"><g:message code="default.new.label" args="[entityName]"/></g:link>
-        </div>
-    </sec:ifAllGranted>
-</g:elseif>

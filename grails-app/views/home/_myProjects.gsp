@@ -12,21 +12,20 @@
 
 <g:if test="${myProjects.size()}">
     <g:each in="${myProjects}" var="project" status="projectIndex">
-        <div style="margin: 0.5em 0;">
-            <h3>
-                <g:link controller="project" action="show" id="${project.id}">
-                    ${project.name.encodeAsHTML()}
-                </g:link>
-            </h3>
-            <ul>
-                <g:each in="${project.applications.sort { it.name }}" var="application">
-                    <li>
-                        <g:link controller="application" action="show" id="${application.id}">
-                            ${application.name.encodeAsHTML()}
-                        </g:link>
-                    </li>
-                </g:each>
-            </ul>
+        <h4>
+            <g:link controller="project" action="show" id="${project.id}">
+                ${project.name.encodeAsHTML()}
+            </g:link>
+        </h4>
+
+        <div class="row">
+            <g:each in="${project.applications.sort { it.name }}" var="application">
+                <div class="offset1">
+                    <g:link controller="application" action="show" id="${application.id}">
+                        ${application.name.encodeAsHTML()}
+                    </g:link>
+                </div>
+            </g:each>
         </div>
 
         <g:if test="${(projectIndex + 1) < myProjects.size()}">
@@ -35,7 +34,7 @@
     </g:each>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="youDontWorkOnAnyProjects.message" default="You don't work on any projects."/>
+    <p>
+        <em><g:message code="youDontWorkOnAnyProjects.message" default="You don't work on any projects."/></em>
     </p>
 </g:else>

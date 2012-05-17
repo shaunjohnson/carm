@@ -174,6 +174,8 @@ grails.plugins.springsecurity.secureChannel.definition = [
 //   '/login/**':         'REQUIRES_SECURE_CHANNEL'
 ]
 
+grails.plugins.twitterbootstrap.fixtaglib = true
+
 // CARM UI configurable options
 ui {
     activityTrace {
@@ -222,8 +224,8 @@ ui {
     }
     richTextEditor {
         type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
-        height = 250    // Height of editor in pixels
-        width = 600     // Width of editor in pixels
+        height = 175    // Height of editor in pixels
+        width = 690     // Width of editor in pixels
     }
     search {
         maxResults = 15

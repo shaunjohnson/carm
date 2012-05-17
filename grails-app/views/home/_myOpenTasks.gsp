@@ -15,8 +15,8 @@
         <g:render template="/common/pendingTasks" model="[pendingTasks: myPendingTasks]"/>
     </g:if>
     <g:else>
-        <p class="emphasis">
-            <g:message code="youDontHaveAnyOpenTasks.message" default="You don't have any open tasks."/>
+        <p>
+            <em><g:message code="youDontHaveAnyOpenTasks.message" default="You don't have any open tasks."/></em>
         </p>
     </g:else>
 </g:if>

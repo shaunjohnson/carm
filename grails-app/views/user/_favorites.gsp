@@ -7,8 +7,8 @@
 <g:if test="${favorites.size()}">
     <div id="favorites-block">
         <g:if test="${isCurrentUser}">
-            <div class="buttons" style="margin-bottom: 1em;">
-                <button class="button" onclick="return deleteAllFavorites();">
+            <div style="margin-bottom: 1em;">
+                <button class="btn" onclick="return deleteAllFavorites();">
                     <g:message code="deleteAllFavorites.label" default="Delete All Favorites"/>
                 </button>
             </div>
@@ -44,7 +44,7 @@
     <g:if test="${isCurrentUser}">
         <script type="text/javascript">
             function deleteAllFavorites() {
-                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxDeleteAllFavorites")}' });
+                jQuery.ajax({ cache:false, url:'${createLink(controller: "user", action: "ajaxDeleteAllFavorites")}' });
                 jQuery("#favorites-block").remove();
                 jQuery("#no-favorites-message").show();
 
@@ -52,7 +52,7 @@
             }
 
             function deleteFavorite(id) {
-                jQuery.ajax({ cache: false, url: '${createLink(controller: "user", action: "ajaxRemoveFromFavorites")}/' + id });
+                jQuery.ajax({ cache:false, url:'${createLink(controller: "user", action: "ajaxRemoveFromFavorites")}/' + id });
                 jQuery("#favorite_" + id).remove();
 
                 if (!jQuery("#favorites-block li").length) {
@@ -66,7 +66,7 @@
     </g:if>
 </g:if>
 
-<p id="no-favorites-message" class="emphasis" style="display: ${favorites.size() ? 'none' : 'block'};">
-    <g:message code="userDoesNotHaveAnyFavorites.message"
-               default="This user does not have any favorites"/>
+<p id="no-favorites-message" style="display: ${favorites.size() ? 'none' : 'block'};">
+    <em><g:message code="userDoesNotHaveAnyFavorites.message"
+                   default="This user does not have any favorites"/></em>
 </p>

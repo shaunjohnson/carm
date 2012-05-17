@@ -9,22 +9,24 @@
                 <g:message code="addApplication.label" default="Add Application"/>
             </g:link>
         </div>
+
         <div class="clearing"></div>
     </carmsec:isProjectOwner>
 </div>
 
 <g:if test="${applicationsGrouped?.size()}">
     <g:each in="${applicationsGrouped}" var="entry">
-        <h3>${entry.key}</h3>
-        <ul>
+        <h4>${entry.key}</h4>
+
+        <div class="row">
             <g:each in="${entry.value}" var="application">
-                <li>
+                <div class="offset1">
                     <g:link controller="application" action="show" id="${application.id}">
                         ${application?.encodeAsHTML()}
                     </g:link>
-                </li>
+                </div>
             </g:each>
-        </ul>
+        </div>
     </g:each>
 </g:if>
 <g:else>

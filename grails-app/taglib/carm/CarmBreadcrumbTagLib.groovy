@@ -154,7 +154,7 @@ class CarmBreadcrumbTagLib {
         def isFirst = attrs.isFirst
         out << link(controller: "moduleDeploymentTestState", action: "list", isFirst: isFirst,
                 title: message(code: "showAllModuleDeploymentTestStates.label"),
-                text: message(code: "moduleDeploymentTestState.label"))
+                text: message(code: "moduleDeploymentTestStates.label"))
     }
 
     /**

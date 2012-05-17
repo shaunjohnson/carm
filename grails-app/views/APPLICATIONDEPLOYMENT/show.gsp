@@ -30,6 +30,7 @@
                            args="[applicationDeploymentInstance.deploymentEnvironment.name]"/>
             </carm:button>
         </div>
+        <div class="clearing"></div>
     </carmsec:isProjectOwner>
 
     <div id="applicationDeploymentTabs" class="tab-container">

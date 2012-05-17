@@ -17,7 +17,7 @@
     </carmsec:isProjectOwner>
 </div>
 
-<table>
+<table class="details">
     <tbody>
     <tr class="prop">
         <td valign="top" class="name">

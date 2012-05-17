@@ -32,13 +32,16 @@
         <g:render template="applicationReleaseBlock" model="[applicationReleaseList: applicationReleases]"/>
     </div>
 
+    <div class="clearing" style="margin: 1em 0;"></div>
+
     <g:if test="${maxRecordsAllowed <= applicationReleasesTotal}">
         <carm:showMore controller="${params.controller}" action="ajaxShowMoreReleases" id="${applicationInstance.id}"
                        appendId="releaseBlock" max="${applicationReleasesTotal}" step="${maxRecordsAllowed}"/>
     </g:if>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="applicationHasNotBeenReleased.message" default="This application has not been released."/>
+    <p>
+        <em><g:message code="applicationHasNotBeenReleased.message"
+                       default="This application has not been released."/></em>
     </p>
 </g:else>

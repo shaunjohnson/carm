@@ -9,12 +9,13 @@
                 <g:message code="addRepository.label" default="Add Repository"/>
             </g:link>
         </div>
+
         <div class="clearing"></div>
     </sec:ifAllGranted>
 </div>
 
 <g:if test="${sourceControlServerInstance.repositories.size()}">
-    <ul>
+    <ul class="offset1">
         <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="repository">
             <li>
                 <g:link controller="sourceControlRepository" action="show" id="${repository.id}">
@@ -25,8 +26,8 @@
     </ul>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="sourceControlServerDoesNotHaveAnyRepositories.message"
-                   default="This source control server does not have any repositories."/>
+    <p>
+        <em><g:message code="sourceControlServerDoesNotHaveAnyRepositories.message"
+                       default="This source control server does not have any repositories."/></em>
     </p>
 </g:else>
