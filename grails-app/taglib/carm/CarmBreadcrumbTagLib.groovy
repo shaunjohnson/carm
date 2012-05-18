@@ -16,7 +16,7 @@ class CarmBreadcrumbTagLib {
      * Renders a breadcrumbs section.
      */
     def breadcrumbs = { attrs, body ->
-        out << '<div class="breadcrumbs">' << body() << '</div>'
+        out << '<div><ul class="breadcrumbs">' << body() << '</ul><div class="clearing"></div></div>'
     }
 
     /**
@@ -39,11 +39,13 @@ class CarmBreadcrumbTagLib {
         def text = attrs.text
         def uri = attrs.uri
 
+        out << '<li>'
+
         if (!isFirst) {
             out << '<span class="spacer"> &raquo; </span>'
         }
 
-        out << g.link(uri: uri, controller: controller, action: action, id: id, title: title) { text.encodeAsHTML() }
+        out << g.link(uri: uri, controller: controller, action: action, id: id, title: title) { text.encodeAsHTML() } << ' </li>'
     }
 
     /**
@@ -56,7 +58,7 @@ class CarmBreadcrumbTagLib {
         def code = attrs.code
         def args = attrs.args
 
-        out << '<span class="spacer"> &raquo; </span>' << message(code: code, args: args)
+        out << '<li><span class="spacer"> &raquo; </span>' << message(code: code, args: args) << ' </li>'
     }
 
     /**
