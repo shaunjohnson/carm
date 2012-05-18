@@ -423,10 +423,14 @@ span.project-item-icon {
 <body>
 <g:render template="/common/menu"/>
 
-<div class="container">
+<div class="container" style="margin-bottom: 75px;">
     <g:layoutBody/>
     <r:layoutResources/>
+</div>
 
+<hr>
+
+<div class="container">
     <footer class="footer">
         <p class="pull-right"><a href="#"><i class="icon-arrow-up"></i>Back to top</a></p>
 
@@ -440,14 +444,17 @@ span.project-item-icon {
 <div id="delete-dialog" class="modal" style="display: none;">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
+
         <h3><g:message code="deleteThisItem.message" default="Delete this item?"/></h3>
     </div>
+
     <div class="modal-body">
         <p>
             <g:message code="deleteThisItemExplanation.message"
                        default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
         </p>
     </div>
+
     <div class="modal-footer">
         <a id="delete-dialog-cancel" href="#" class="btn">
             <g:message code="default.button.cancel.label" default="Cancel"/>
