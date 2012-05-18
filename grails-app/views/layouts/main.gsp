@@ -428,7 +428,5 @@
     </p>
 </div>
 
-<carm:userInfoDropdown/>
-
 </body>
 </html>

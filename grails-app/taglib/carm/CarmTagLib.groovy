@@ -1061,12 +1061,6 @@ class CarmTagLib {
         out << render(template: '/common/highlightWidget', model: [display: display, id: id, message: message])
     }
 
-    def userInfoDropdown = {
-        out << render(template: "/common/userInfoDropdown", model: [
-                username: carmSecurityService.currentUsername,
-                favorites: favoriteService.findAllByCurrentUser()])
-    }
-
     def datePicker = {attrs, body ->
         def out = out
         def name = attrs.name    //The name attribute is required for the tag to work seamlessly with grails
