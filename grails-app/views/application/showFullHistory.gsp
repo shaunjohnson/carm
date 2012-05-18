@@ -63,9 +63,8 @@
     </tbody>
 </table>
 
-<div class="paginateButtons">
-    <g:paginate total="${applicationDeploymentInstanceTotal}" id="${applicationInstance.id}"
-                max="${grailsApplication.config.ui.application.showFullHistoryMax}"/>
-</div>
+<carm:paginate total="${applicationDeploymentInstanceTotal}" id="${applicationInstance.id}"
+               max="${grailsApplication.config.ui.application.showFullHistoryMax}"/>
+
 </body>
 </html>

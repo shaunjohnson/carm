@@ -70,9 +70,8 @@
     </tbody>
 </table>
 
-<div class="paginateButtons">
-    <g:paginate total="${applicationReleaseHistoryInstanceTotal}"
-                max="${grailsApplication.config.ui.applicationReleaseHistory.listMax}"/>
-</div>
+<carm:paginate total="${applicationReleaseHistoryInstanceTotal}"
+               max="${grailsApplication.config.ui.applicationReleaseHistory.listMax}"/>
+
 </body>
 </html>

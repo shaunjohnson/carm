@@ -25,8 +25,8 @@
         </g:if>
     </g:each>
 
-    <g:paginate total="${systemEnvironmentInstanceTotal}"
-                max="${grailsApplication.config.ui.systemEnvironment.listMax}"/>
+    <carm:paginate total="${systemEnvironmentInstanceTotal}"
+                   max="${grailsApplication.config.ui.systemEnvironment.listMax}"/>
 </g:if>
 <g:else>
     <p>

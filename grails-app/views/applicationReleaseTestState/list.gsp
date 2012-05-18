@@ -45,10 +45,8 @@
         </tbody>
     </table>
 
-    <div class="paginateButtons">
-        <g:paginate total="${applicationReleaseTestStateInstanceTotal}"
-                    max="${grailsApplication.config.ui.applicationReleaseTestState.listMax}"/>
-    </div>
+    <carm:paginate total="${applicationReleaseTestStateInstanceTotal}"
+                   max="${grailsApplication.config.ui.applicationReleaseTestState.listMax}"/>
 </g:if>
 <g:else>
     <p>

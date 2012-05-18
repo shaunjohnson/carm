@@ -48,7 +48,6 @@
     </tbody>
 </table>
 
-<div class="paginateButtons">
-    <g:paginate total="${systemServerInstanceTotal}" max="${grailsApplication.config.ui.systemServer.listMax}"/>
-</div>
+<carm:paginate total="${systemServerInstanceTotal}" max="${grailsApplication.config.ui.systemServer.listMax}"/>
+
 </html>

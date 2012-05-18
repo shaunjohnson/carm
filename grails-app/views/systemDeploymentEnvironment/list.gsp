@@ -50,9 +50,8 @@
     </tbody>
 </table>
 
-<div class="paginateButtons">
-    <g:paginate total="${systemDeploymentEnvironmentInstanceTotal}"
-                max="${grailsApplication.config.ui.systemDeploymentEnvironment.listMax}"/>
-</div>
+<carm:paginate total="${systemDeploymentEnvironmentInstanceTotal}"
+               max="${grailsApplication.config.ui.systemDeploymentEnvironment.listMax}"/>
+
 </body>
 </html>

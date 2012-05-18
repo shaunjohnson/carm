@@ -48,8 +48,7 @@
     </tbody>
 </table>
 
-<div class="paginateButtons">
-    <g:paginate total="${applicationReleaseInstanceTotal}" id="${applicationInstance.id}"/>
-</div>
+<carm:paginate total="${applicationReleaseInstanceTotal}" id="${applicationInstance.id}"/>
+
 </body>
 </html>

@@ -131,30 +131,6 @@ th a:link, th a:visited, th a:hover {
     width: 100%;
 }
 
-/* PAGINATION */
-
-.paginateButtons {
-    font-size: 0.9em;
-    overflow: hidden;
-    padding: 10px 3px;
-}
-
-.paginateButtons a {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-top-color: #ccc;
-    border-right-color: #aaa;
-    border-left-color: #ccc;
-    border-bottom-color: #aaa;
-    color: #666;
-    margin: 0 3px;
-    padding: 2px 6px;
-}
-
-.paginateButtons span {
-    padding: 2px 3px;
-}
-
 .prop {
     padding: 5px;
 }

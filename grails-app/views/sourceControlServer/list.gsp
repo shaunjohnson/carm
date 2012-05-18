@@ -52,10 +52,8 @@
         </tbody>
     </table>
 
-    <div class="paginateButtons">
-        <g:paginate total="${sourceControlServerInstanceTotal}"
-                    max="${grailsApplication.config.ui.sourceControlServer.listMax}"/>
-    </div>
+    <carm:paginate total="${sourceControlServerInstanceTotal}"
+                   max="${grailsApplication.config.ui.sourceControlServer.listMax}"/>
 </g:if>
 <g:else>
     <p>

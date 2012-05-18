@@ -32,8 +32,6 @@
         </tbody>
     </table>
 
-    <div class="paginateButtons">
-        <g:paginate total="${activityTotal}" id="${domainInstance?.id}"
-                    max="${grailsApplication.config.ui.activityTrace.listMax}"/>
-    </div>
+    <carm:paginate total="${activityTotal}" id="${domainInstance?.id}"
+                   max="${grailsApplication.config.ui.activityTrace.listMax}"/>
 </div>
