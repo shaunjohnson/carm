@@ -9,9 +9,9 @@
         <g:render template="/common/pendingTasks" model="[pendingTasks: pendingTasks]"/>
     </g:if>
     <g:else>
-        <p class="emphasis">
-            <g:message code="projectDoesNotHaveAnyPendingTasks.message"
-                       default="This project does not have any pending tasks."/>
+        <p>
+            <em><g:message code="projectDoesNotHaveAnyPendingTasks.message"
+                           default="This project does not have any pending tasks."/></em>
         </p>
     </g:else>
 

@@ -21,7 +21,7 @@
         </div>
 
         <g:if test="${(systemIndex + 1) < systemEnvironmentInstanceList.size()}">
-            <hr class="divider"/>
+            <hr/>
         </g:if>
     </g:each>
 

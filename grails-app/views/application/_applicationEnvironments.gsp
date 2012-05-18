@@ -13,7 +13,15 @@
 </div>
 
 <g:if test="${applicationInstance?.sysEnvironment}">
-    <table style="width: 100%;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><g:message code="environment.label"/></th>
+                <th><g:message code="lastRelease.label"/></th>
+                <th><g:message code="releasedOn.label"/></th>
+                <th><g:message code="actions.label"/></th>
+            </tr>
+        </thead>
         <tbody>
         <g:each in="${applicationInstance.sysEnvironment.environments}" var="deploymentEnvironment">
             <g:set var="deployment" value="${deployments[deploymentEnvironment].lastDeployment}"/>

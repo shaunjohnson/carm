@@ -53,8 +53,8 @@
     </div>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="applicationReleaseDoesNotHaveAnyDeployments.message"
-                   default="This application release does not have any deployments."/>
+    <p>
+        <em><g:message code="applicationReleaseDoesNotHaveAnyDeployments.message"
+                       default="This application release does not have any deployments."/></em>
     </p>
 </g:else>

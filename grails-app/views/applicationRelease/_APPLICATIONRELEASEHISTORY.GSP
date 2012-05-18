@@ -15,8 +15,9 @@
             </tr>
             </thead>
             <tbody>
-            <g:each in="${applicationReleaseInstance?.histories?.sort { it.dateCreated }.reverse()}" var="historyInstance"
-                status="i">
+            <g:each in="${applicationReleaseInstance?.histories?.sort { it.dateCreated }.reverse()}"
+                    var="historyInstance"
+                    status="i">
                 <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>
                         <g:link controller="applicationReleaseHistory" action="show" id="${historyInstance.id}"
@@ -37,8 +38,8 @@
     </div>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="applicationReleaseDoesNotHaveAnyHistory.message"
-                   default="This application release does not have any recorded history."/>
+    <p>
+        <em><g:message code="applicationReleaseDoesNotHaveAnyHistory.message"
+                       default="This application release does not have any recorded history."/></em>
     </p>
 </g:else>

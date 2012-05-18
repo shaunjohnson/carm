@@ -15,7 +15,7 @@
         <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
 
         <g:if test="${(systemIndex + 1) < mostActiveSystemEnvironments.size()}">
-            <hr class="divider"/>
+            <hr/>
         </g:if>
     </g:each>
 </g:if>

@@ -77,9 +77,9 @@
                 </ul>
             </g:if>
             <g:else>
-                <p class="emphasis">
-                    <g:message code="userDoesNotHaveAnyRoles.message"
-                               default="This user does not have any roles."/>
+                <p>
+                    <em><g:message code="userDoesNotHaveAnyRoles.message"
+                                   default="This user does not have any roles."/></em>
                 </p>
             </g:else>
         </td>

@@ -29,7 +29,7 @@
         </div>
 
         <g:if test="${(projectIndex + 1) < myProjects.size()}">
-            <hr class="divider"/>
+            <hr/>
         </g:if>
     </g:each>
 </g:if>

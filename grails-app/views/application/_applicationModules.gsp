@@ -9,6 +9,7 @@
                 <g:message code="addModule.label" default="Add Module"/>
             </g:link>
         </div>
+
         <div class="clearing"></div>
     </carmsec:isProjectOwner>
 </div>
@@ -40,8 +41,8 @@
     </table>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="applicationDoesNotHaveAnyModules.message"
-                   default="This application does not have any modules."/>
+    <p>
+        <em><g:message code="applicationDoesNotHaveAnyModules.message"
+                       default="This application does not have any modules."/></em>
     </p>
 </g:else>

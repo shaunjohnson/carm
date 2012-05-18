@@ -10,10 +10,6 @@ label {
     font-weight: bold;
 }
 
-/*input[type="text"], input[type="password"], input.text, input.title, textarea, select {*/
-/*margin: 0;*/
-/*}*/
-
 textarea {
     height: 90px;
     width: 682px;
@@ -31,12 +27,7 @@ a:link, a:visited {
 }
 
 a:hover {
-    /*color: rgb(65, 131, 196);*/
     text-decoration: underline;
-}
-
-h4.applicationReleaseNumber {
-    margin: 0;
 }
 
 h3 a, h4 a {
@@ -47,20 +38,11 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     color: #ACA899;
 }
 
-.fieldHelp {
-    color: #ACA899;
-    font-size: 0.8em;
-}
-
-.footer {
+#footer {
     color: #999;
     text-align: center;
-    margin: 1em 0;
+    margin: 2em 0;
     padding-bottom: 2em;
-}
-
-tr.highlight {
-    background-color: #FFFFB2;
 }
 
 .centered {
@@ -74,30 +56,6 @@ tr.highlight {
 .disabled {
     color: #BBB;
 }
-
-.requiredFieldsMessage {
-    color: #888;
-    font-style: italic;
-    white-space: nowrap;
-}
-
-.requiredFieldsMessage img {
-    padding-left: 0.5em;
-}
-
-/*
-hr.divider {
-    border: 0;
-    height: 1px;
-    background-color: rgb(234, 234, 234);
-    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    color: rgb(196, 196, 196);
-    margin: 1.45em 0;
-}
-*/
 
 /* NAVIGATION MENU */
 
@@ -144,10 +102,6 @@ hr.divider {
 }
 
 /* MESSAGES AND ERRORS */
-
-.emphasis {
-    font-style: italic;
-}
 
 .message {
     background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
@@ -198,7 +152,7 @@ table.details tr td {
     background-color: #FFF;
 }
 
-td, th {
+table.details tr td, table.details tr th {
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
@@ -220,14 +174,6 @@ th.asc a {
 
 th.desc a {
     background-image: url(../images/skin/sorted_desc.gif);
-}
-
-table.tight {
-    width: auto;
-}
-
-table.tight td, table.tight th {
-    padding: 0 4px 4px 0;
 }
 
 /* PAGINATION */
@@ -291,15 +237,6 @@ table.ol td.olIndex {
 
 table.ol td.olContent {
     padding-right: 0.5em;
-}
-
-a.reorderLink {
-    text-decoration: none;
-}
-
-a.showHideDetails {
-    display: inline-block;
-    margin: 0.5em;
 }
 
 /*
@@ -371,19 +308,6 @@ a.showHideDetails {
 }
 
 /**
- * Login
- */
-#login {
-    background: #f8f8f8;
-    border: 1px solid #E5E5E5;
-    padding: 0.5em;
-}
-
-#login p {
-    margin: 0.5em 0 0 0.5em;
-}
-
-/**
  * Show more records button
  */
 .showMoreButton {
@@ -440,10 +364,6 @@ div.sectionHeader div.actions {
 div.sectionHeader div.actions a {
     line-height: 1em;
     padding-left: 1em;
-}
-
-.detailProp {
-    display: none;
 }
 
 /*

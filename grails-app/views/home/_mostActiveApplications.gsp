@@ -32,7 +32,7 @@
         </div>
 
         <g:if test="${(projectIndex + 1) < mostActiveApplications.size()}">
-            <hr class="divider"/>
+            <hr/>
         </g:if>
     </g:each>
 </g:if>

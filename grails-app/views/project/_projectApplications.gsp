@@ -15,7 +15,7 @@
 </div>
 
 <g:if test="${applicationsGrouped?.size()}">
-    <g:each in="${applicationsGrouped}" var="entry">
+    <g:each in="${applicationsGrouped}" var="entry" status="applicationsGroupedIndex">
         <h4>${entry.key}</h4>
 
         <div class="row">
@@ -27,12 +27,16 @@
                 </div>
             </g:each>
         </div>
+
+        <g:if test="${(applicationsGroupedIndex + 1) < applicationsGrouped.size()}">
+            <hr/>
+        </g:if>
     </g:each>
 </g:if>
 <g:else>
-    <p class="emphasis">
-        <g:message code="projectDoesNotHaveAnyApplications.maessage"
-                   default="This project does not have any applications."/>
+    <p>
+        <em><g:message code="projectDoesNotHaveAnyApplications.maessage"
+                       default="This project does not have any applications."/></em>
 
     </p>
 </g:else>

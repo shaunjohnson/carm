@@ -1,18 +1,18 @@
 <g:each in="${applicationReleaseList}" var="applicationReleaseInstance" status="i">
     <g:if test="${addLeadingDivider}">
-        <hr class="divider"/>
+        <hr/>
         <g:set var="addLeadingDivider" value="${false}"/>
     </g:if>
 
     <div class="row">
         <div class="span1">
-            <h4 class="applicationReleaseNumber">
+            <h4>
                 <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
                     ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
                 </g:link>
             </h4>
 
-            <div style="margin: 0.5em 0;">
+            <div>
                 <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
             </div>
 
@@ -49,7 +49,7 @@
         </div>
     </div>
     <g:if test="${(i + 1) < applicationReleaseList.size()}">
-        <hr class="divider"/>
+        <hr/>
     </g:if>
 </g:each>
 <script type="text/javascript">

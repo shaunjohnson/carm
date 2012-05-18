@@ -52,8 +52,8 @@
         </div>
     </g:if>
     <g:else>
-        <p class="emphasis">
-            <g:message code="carmNoProjects.message" default="There are no projects."/>
+        <p>
+            <em><g:message code="carmNoProjects.message" default="There are no projects."/></em>
         </p>
     </g:else>
 </div>

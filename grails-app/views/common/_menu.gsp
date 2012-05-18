@@ -1,4 +1,4 @@
-<div id="topMenu" class="clearing">
+<div id="topMenu">
     <div style="margin: 0 auto; width: 900px;">
         <div>
             <g:link uri="/" style="outline: none; font-size: 1.8em;" class="menuLink">
@@ -56,5 +56,3 @@
         </div>
     </div>
 </div>
-
-<div class="clearing"/>

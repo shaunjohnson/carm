@@ -771,7 +771,7 @@ class CarmTagLib {
     }
 
     def formDividerRow = { attrs ->
-        out << '<tr><td colspan="2"><hr class="divider" style="margin: 1em 0;"/></td></tr>'
+        out << '<tr><td colspan="2"><hr/></td></tr>'
     }
 
     def formatApplicationDeploymentState = { attrs ->
@@ -984,31 +984,6 @@ class CarmTagLib {
                 controller: controller, action: action, params: params) { '&#9650' }
     }
 
-    /**
-     * Creates a "Show/Hide Details" link and hides details by default (on page load).
-     *
-     * attrs.sectionId - Client ID of the section to show/hide details within (optional)
-     * attrs.entityName - Name of the entity being shown (optional)
-     */
-    def showHideDetails = { attrs, body ->
-        def sectionId = attrs.sectionId
-        def entityName = attrs.entityName ?: ''
-
-        out << '<div style="height: 1.5em;">'
-
-        out << '<div style="float: left; width: 50%;">'
-        out << render(template: "/common/showHideDetails", model: [sectionId: sectionId, entityName: entityName])
-        out << '</div>'
-
-        out << '<div style="float: left; text-align: right; width: 50%;">'
-        out << body()
-        out << '</div>'
-
-        out << '<div class="clearning"></div>'
-
-        out << '</div>'
-    }
-
     def label = { attrs, body ->
         out << '<label '
 
@@ -1023,12 +998,6 @@ class CarmTagLib {
         }
 
         out << '</label>'
-    }
-
-    def requiredLabelMessage = { attrs, body ->
-        out << '<p class="requiredFieldsMessage">' << message(code: 'requiredFields.message')
-        out << '<img src="' << resource(dir: 'images', file: 'required_star.gif')
-        out << '" alt="required" /></p>'
     }
 
     /**

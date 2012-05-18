@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
+    <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
     <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
@@ -82,7 +83,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
-                        <table class="tight">
+                        <table>
                             <g:each var="moduleDeployment"
                                     in="${applicationDeploymentInstance.moduleDeployments?.sort { it.moduleRelease.module.name}}">
                                 <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
@@ -136,16 +137,13 @@
                 </tr>
                 </tbody>
 
-                <carm:formFooter>
-                    <div class="buttons">
+                <carm:formButtons>
                     <g:link controller="application" action="show"
                             id="${applicationDeploymentInstance?.applicationRelease?.application?.id}"><g:message
                             code="default.button.cancel.label" default="Cancel"/></g:link>
                     <g:submitButton name="create"
                                     value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-                    </span>
-                    </div>
-                </carm:formFooter>
+                </carm:formButtons>
             </table>
         </div>
     </g:form>

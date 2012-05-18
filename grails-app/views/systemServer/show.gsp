@@ -26,7 +26,7 @@
             </div>
         </td>
     </tr>
-    <tr class="prop detailProp">
+    <tr class="prop">
         <td valign="top" class="name">
             <g:message code="systemServer.sysEnvironment.label" default="System"/>
         </td>
