@@ -428,7 +428,7 @@ span.project-item-icon {
     <r:layoutResources/>
 
     <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-right"><a href="#"><i class="icon-arrow-up"></i>Back to top</a></p>
 
         <p>
             <g:message code="carm.copyright.label" default="Change And Release Management 2011"
@@ -453,6 +453,7 @@ span.project-item-icon {
             <g:message code="default.button.cancel.label" default="Cancel"/>
         </a>
         <a id="delete-dialog-delete" href="#" class="btn btn-danger">
+            <i class="icon-trash icon-white"></i>
             <g:message code="default.button.delete.label" default="Delete"/>
         </a>
     </div>

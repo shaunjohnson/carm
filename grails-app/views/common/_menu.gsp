@@ -41,11 +41,13 @@
                             <carm:userFavoritesMenu/>
                             <li>
                                 <g:link controller="user" action="show" params="[username: sec.username()]" class="menuLink">
+                                    <i class="icon-user"></i>
                                     <g:message code="profile.label" default="Profile"/>
                                 </g:link>
                             </li>
                             <li>
                                 <g:link controller="logout" class="menuLink">
+                                    <i class="icon-off"></i>
                                     <g:message code="logout.label" default="Logout"/>
                                 </g:link>
                             </li>
