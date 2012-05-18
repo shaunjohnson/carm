@@ -728,6 +728,14 @@ class CarmTagLib {
         out << '</div></div>'
     }
 
+    def userFavoritesMenu = { attrs ->
+        def favorites = favoriteService.findAllByCurrentUser()
+
+        if (favorites.size()) {
+            out << render(template: "/common/userFavoritesMenu", model: [favorites: favorites])
+        }
+    }
+
     def favoriteActions = { attrs ->
         def entity = attrs.entity
 

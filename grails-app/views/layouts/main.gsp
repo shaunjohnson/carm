@@ -15,16 +15,8 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
     <g:layoutHead/>
-
     <g:javascript library="application"/>
-    %{--<g:javascript library="jquery" plugin="jquery"/>--}%
-    %{--<jqui:resources themeCss="/carm/jquery-ui/themes/smoothness/jquery-ui-1.8.15.custom.css"/>--}%
-
-    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.cookie.js')}'></script>--}%
-    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.expander.min.js')}'></script>--}%
-    %{--<script type='text/javascript' src='${resource(dir: 'js', file: 'jquery.tipsy.js')}'></script>--}%
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'tipsy.css')}" type="text/css"/>--}%
 
     <style>
     .header-action {
@@ -208,8 +200,8 @@
     }
 
         /*
-         * Autocomplete
-         */
+        * Autocomplete
+        */
     .ui-menu .ui-menu-item-with-icon a {
         padding-left: 20px;
     }
@@ -218,7 +210,6 @@
         display: inline-block;
         height: 20px;
         width: 20px;
-        margin-left: -16px;
     }
 
     span.application-item-icon {
@@ -233,37 +224,8 @@
         background: url("${fam.icon(name: 'building')}") no-repeat left 6px;
     }
     </style>
-    <r:layoutResources/>
-</head>
 
-<body>
-<g:render template="/common/menu"/>
-
-<div class="container">
-    <g:layoutBody/>
-    <r:layoutResources/>
-</div>
-
-<div id="footer">
-    <hr/>
-    <g:message code="carm.copyright.label" default="Change And Release Management 2011"
-               args="[meta(name: 'app.version')]"/>
-</div>
-
-<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
-     style="display: none;">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        <g:message code="deleteThisItemExplanation.message"
-                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
-    </p>
-</div>
-
-<carm:userInfoDropdown/>
-
-</body>
-
-<script type="text/javascript">
+    <r:script>
     jQuery(function () {
         jQuery('.expander').expander({
             expandText:'<g:message code="showMore.label"/>',
@@ -296,6 +258,8 @@
             return false;
         });
 
+        console.log("Before add");
+
         /* Quick search */
         jQuery("#quicksearch").autocomplete({
             source:"${createLink(controller: "home", action: "ajaxQuickSearch")}",
@@ -319,6 +283,8 @@
                     .append('<a><span class="' + item.type + '-item-icon"></span>' + item.label + '</a>')
                     .appendTo(ul);
         };
+
+        console.log("Added");
 
         /* Preload imates */
         new Image().src = "${resource(dir: 'images', file: 'unstarred.png')}";
@@ -434,5 +400,35 @@
             jQuery(this).toggleClass("ui-state-hover");
         });
     });
-<script>
+    </r:script>
+
+    <r:layoutResources/>
+</head>
+
+<body>
+<g:render template="/common/menu"/>
+
+<div class="container">
+    <g:layoutBody/>
+    <r:layoutResources/>
+</div>
+
+<div id="footer">
+    <hr/>
+    <g:message code="carm.copyright.label" default="Change And Release Management 2011"
+               args="[meta(name: 'app.version')]"/>
+</div>
+
+<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
+     style="display: none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <g:message code="deleteThisItemExplanation.message"
+                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
+    </p>
+</div>
+
+<carm:userInfoDropdown/>
+
+</body>
 </html>
