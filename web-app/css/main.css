@@ -42,11 +42,10 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     color: #ACA899;
 }
 
-#footer {
-    color: #999;
-    text-align: center;
-    margin: 2em 0;
-    padding-bottom: 2em;
+.footer {
+    margin-top: 45px;
+    padding: 35px 0 36px;
+    border-top: 1px solid #E5E5E5;
 }
 
 .centered {
@@ -76,7 +75,6 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
 .breadcrumbs * {
     font-size: inherit;
 }
-
 
 /* MESSAGES AND ERRORS */
 
