@@ -64,22 +64,19 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
 /* NAVIGATION MENU */
 
 .breadcrumbs {
-    color: #888;
-    margin-bottom: 10px;
+    font-size: 0.9em;
+    margin: -5px 0 20px 0;
     padding: 0 1em;
 }
 
-.breadcrumbs, .breadcrumbs * {
-    font-size: 11px;
-}
-
-.breadcrumbs a {
+.breadcrumbs *, .breadcrumbs a:hover {
     color: #888;
 }
 
-.breadcrumbs .spacer {
-    color: #BBB;
+.breadcrumbs * {
+    font-size: inherit;
 }
+
 
 /* MESSAGES AND ERRORS */
 
