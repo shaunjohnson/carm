@@ -48,7 +48,7 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     border-top: 1px solid #E5E5E5;
 }
 
-.centered {
+.centered, td.centered {
     text-align: center;
 }
 
