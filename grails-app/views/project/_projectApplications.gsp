@@ -16,7 +16,7 @@
 
 <g:if test="${applicationsGrouped?.size()}">
     <g:each in="${applicationsGrouped}" var="entry" status="applicationsGroupedIndex">
-        <h4>${entry.key}</h4>
+        <h3>${entry.key}</h3>
 
         <div class="row">
             <g:each in="${entry.value}" var="application">

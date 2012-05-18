@@ -15,11 +15,11 @@
         <g:set var="project" value="${projectEntry.key}"/>
         <g:set var="applications" value="${projectEntry.value}"/>
 
-        <h4>
+        <h3>
             <g:link controller="project" action="show" id="${project.id}">
                 ${project.encodeAsHTML()}
             </g:link>
-        </h4>
+        </h3>
 
         <div class="row">
             <g:each in="${applications}" var="application">

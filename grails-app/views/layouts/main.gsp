@@ -22,7 +22,7 @@
 .header-action {
     cursor: pointer;
     float: right;
-    margin-left: 1.5em;
+    margin: 3px 0 0 1.5em;
     padding-left: 1.7em;
 }
 

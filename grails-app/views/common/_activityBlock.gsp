@@ -1,6 +1,6 @@
 <div id="activityBlock">
     <g:each in="${activityList}" var="activity" status="i">
-        <p>
+        <p style="margin-bottom: 1em;">
             <g:link class="activityUsername" controller="user" action="show"
                     params="[username: activity.username]"><carm:formatUser username="${activity.username}"/></g:link>
 

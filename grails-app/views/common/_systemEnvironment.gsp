@@ -1,8 +1,8 @@
-<h4>
+<h3>
     <g:link controller="systemEnvironment" action="show" id="${systemEnvironment.id}">
         ${systemEnvironment.encodeAsHTML()}
     </g:link>
-</h4>
+</h3>
 
 <div class="row">
     <div class="offset1">

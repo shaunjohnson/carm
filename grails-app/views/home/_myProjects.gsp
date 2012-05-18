@@ -12,11 +12,11 @@
 
 <g:if test="${myProjects.size()}">
     <g:each in="${myProjects}" var="project" status="projectIndex">
-        <h4>
+        <h3>
             <g:link controller="project" action="show" id="${project.id}">
                 ${project.name.encodeAsHTML()}
             </g:link>
-        </h4>
+        </h3>
 
         <div class="row">
             <g:each in="${project.applications.sort { it.name }}" var="application">

@@ -2,14 +2,6 @@ body {
     padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
 
-h1 {
-    font-size: 2.5em;
-}
-
-h4 {
-    margin-bottom: 1em;
-}
-
 label {
     font-weight: bold;
 }
@@ -240,14 +232,14 @@ div.sectionHeader {
     border-radius: 5px;
     border-bottom: 1px solid #CACACA;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 1.25em;
-    margin: 1em 0;
+    height: 22px;
+    margin: 1em -10px;
     padding: 0.8em 0.8em 1em 0.8em;
 }
 
 div.sectionHeader div.text {
     float: left;
-    font-size: 1.3em;
+    font-size: 24px;
     font-weight: bold;
     line-height: 1em;
 }
