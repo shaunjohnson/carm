@@ -2,9 +2,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <carm:ifNotInUse domain="${systemDeploymentEnvironmentInstance}">
             <div class="header-action delete-system-dep-env-action">
-                <g:link action="delete" id="${systemDeploymentEnvironmentInstance.id}"><g:message
-                        code="default.button.delete.label"
-                        default="Delete"/></g:link>
+                <carm:deleteLink id="${systemDeploymentEnvironmentInstance.id}"/>
             </div>
         </carm:ifNotInUse>
 

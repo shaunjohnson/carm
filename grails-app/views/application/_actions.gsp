@@ -5,9 +5,7 @@
 
     <carmsec:isProjectOwner project="${applicationInstance.project}">
         <div class="header-action delete-application-action">
-            <g:link action="delete" id="${applicationInstance.id}"><g:message
-                    code="default.button.delete.label"
-                    default="Delete"/></g:link>
+            <carm:deleteLink id="${applicationInstance.id}"/>
         </div>
 
         <div class="header-action edit-application-action">

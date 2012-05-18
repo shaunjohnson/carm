@@ -1,11 +1,7 @@
 <g:if test="${params.action == 'show'}">
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <carm:ifNotInUse domain="${applicationReleaseTestStateInstance}">
-            <div class="header-action delete-action">
-                <g:link action="delete" id="${applicationReleaseTestStateInstance.id}"><g:message
-                        code="default.button.delete.label"
-                        default="Delete"/></g:link>
-            </div>
+            <carm:deleteLink id="${applicationReleaseTestStateInstance.id}"/>
         </carm:ifNotInUse>
 
         <div class="header-action edit-action">

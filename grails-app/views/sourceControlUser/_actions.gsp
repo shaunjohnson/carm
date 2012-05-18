@@ -1,9 +1,7 @@
 <g:if test="${params.action == 'show'}">
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="header-action delete-user-action">
-            <g:link action="delete" id="${sourceControlUserInstance.id}"><g:message
-                    code="default.button.delete.label"
-                    default="Delete"/></g:link>
+            <carm:deleteLink id="${sourceControlUserInstance.id}"/>
         </div>
 
         <div class="header-action edit-user-action">

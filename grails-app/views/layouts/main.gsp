@@ -226,6 +226,12 @@ span.project-item-icon {
 </style>
 
 <r:script>
+    function displayDelete(url) {
+        jQuery("#delete-dialog").modal('show');
+        jQuery('#delete-dialog-delete').data('link', url);
+        return false;
+    }
+
     jQuery(function () {
         jQuery('.expander').expander({
             expandText:'<g:message code="showMore.label"/>',
@@ -236,8 +242,17 @@ span.project-item-icon {
         jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
         jQuery('.body :input:visible:first').focus();
 
+        var deleteDialog = jQuery("#delete-dialog");
+
+        deleteDialog.modal({show: false});
+        jQuery('#delete-dialog-cancel').click(function () { deleteDialog.modal('hide'); });
+        jQuery('#delete-dialog-delete').click(function () {
+            window.location = jQuery(this).data('link');
+            deleteDialog.modal('hide');
+        });
+
         /* Delete confirmation */
-        jQuery("#delete-dialog").dialog({
+        jQuery("#delete-dialog2").dialog({
             autoOpen:false,
             resizable:false,
             height:160,
@@ -422,13 +437,25 @@ span.project-item-icon {
     </footer>
 </div>
 
-<div id="delete-dialog" title="${message(code: 'deleteThisItem.message', default: 'Delete this item?')}"
-     style="display: none;">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        <g:message code="deleteThisItemExplanation.message"
-                   default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
-    </p>
+<div id="delete-dialog" class="modal" style="display: none;">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3><g:message code="deleteThisItem.message" default="Delete this item?"/></h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <g:message code="deleteThisItemExplanation.message"
+                       default="This item will be permanently deleted and cannot be recovered. Are you sure?"/>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a id="delete-dialog-cancel" href="#" class="btn">
+            <g:message code="default.button.cancel.label" default="Cancel"/>
+        </a>
+        <a id="delete-dialog-delete" href="#" class="btn btn-danger">
+            <g:message code="default.button.delete.label" default="Delete"/>
+        </a>
+    </div>
 </div>
 
 </body>

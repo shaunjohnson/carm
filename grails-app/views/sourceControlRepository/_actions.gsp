@@ -2,9 +2,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <carm:ifNotInUse domain="${sourceControlRepositoryInstance}">
             <div class="header-action delete-source-control-repo-action">
-                <g:link action="delete" id="${sourceControlRepositoryInstance.id}"><g:message
-                        code="default.button.delete.label"
-                        default="Delete"/></g:link>
+                <carm:deleteLink id="${sourceControlRepositoryInstance.id}"/>
             </div>
         </carm:ifNotInUse>
 

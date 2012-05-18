@@ -105,6 +105,18 @@ class CarmTagLib {
         }
     }
 
+    def deleteLink = { attrs ->
+        def id = attrs.id
+        def controller = attrs.controller ?: controllerName
+        def action = attrs.action ?: actionName
+
+        out << "<a href=\"#\" onclick=\"return displayDelete('"
+        out << createLink(action: 'delete', id: id)
+        out << "');\">"
+        out << message(code: "default.button.delete.label", default: "Delete")
+        out << "</a>"
+    }
+
     /**
      * Outputs a page header and breadcrumbs.
      *
