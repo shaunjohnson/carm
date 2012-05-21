@@ -98,6 +98,10 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     font-size: inherit;
 }
 
+.table-striped tbody tr.highlight td.highlight {
+    background-color: #FFFFB2;
+}
+
 /* MESSAGES AND ERRORS */
 
 .message {

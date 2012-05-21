@@ -70,6 +70,14 @@
     background: url("${fam.icon(name: 'application_delete')}") no-repeat left;
 }
 
+.delete-application-deployment-action {
+    background: url("${fam.icon(name: 'calendar_delete')}") no-repeat left;
+}
+
+.delete-application-release-action {
+    background: url("${fam.icon(name: 'report_delete')}") no-repeat left;
+}
+
 .delete-module-action {
     background: url("${fam.icon(name: 'brick_delete')}") no-repeat left;
 }
@@ -114,6 +122,14 @@
     background: url("${fam.icon(name: 'application_edit')}") no-repeat left;
 }
 
+.edit-application-deployment-action {
+    background: url("${fam.icon(name: 'calendar_edit')}") no-repeat left;
+}
+
+.edit-application-release-action {
+    background: url("${fam.icon(name: 'report_edit')}") no-repeat left;
+}
+
 .edit-module-action {
     background: url("${fam.icon(name: 'brick_edit')}") no-repeat left;
 }
@@ -156,6 +172,14 @@
 
 .new-application-action {
     background: url("${fam.icon(name: 'application_add')}") no-repeat left;
+}
+
+.new-application-deployment-action {
+    background: url("${fam.icon(name: 'calendar_add')}") no-repeat left;
+}
+
+.new-application-release-action {
+    background: url("${fam.icon(name: 'report_add')}") no-repeat left;
 }
 
 .new-module-action {

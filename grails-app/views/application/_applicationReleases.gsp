@@ -10,15 +10,6 @@
         <g:message code="releases.label" default="Releases"/>
     </div>
 
-    <carmsec:isProjectOwner application="${applicationInstance}">
-        <div class="section-action">
-            <g:link class="create" controller="applicationRelease" action="create"
-                    params="['application.id': applicationInstance?.id]">
-                <g:message code="newRelease.label" default="Make a New Release"/>
-            </g:link>
-        </div>
-    </carmsec:isProjectOwner>
-
     <div class="section-action">
         <g:if test="${applicationReleasesTotal > maxRecordsAllowed}">
             <g:link class="list" controller="application" action="listReleases"
@@ -27,6 +18,15 @@
             </g:link>
         </g:if>
     </div>
+
+    <carmsec:isProjectOwner application="${applicationInstance}">
+        <div class="section-action-icon new-application-release-action">
+            <g:link class="create" controller="applicationRelease" action="create"
+                    params="['application.id': applicationInstance?.id]">
+                <g:message code="newRelease.label" default="Make a New Release"/>
+            </g:link>
+        </div>
+    </carmsec:isProjectOwner>
 </div>
 
 <g:if test="${applicationReleases.size()}">

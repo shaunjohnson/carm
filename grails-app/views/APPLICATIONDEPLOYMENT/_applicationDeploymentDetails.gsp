@@ -2,19 +2,6 @@
     <div class="text">
         <g:message code="details.label" default="Details"/>
     </div>
-    <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
-        <div class="section-action">
-            <g:link class="edit" action="edit" id="${applicationDeploymentInstance?.id}">
-                <g:message code="default.button.edit.label" default="Edit"/>
-            </g:link>
-        </div>
-
-        <div class="section-action">
-            <g:link class="delete" action="delete" id="${applicationDeploymentInstance?.id}">
-                <g:message code="default.button.delete.label" default="Delete"/>
-            </g:link>
-        </div>
-    </carmsec:isProjectOwner>
 </div>
 
 <table class="details">

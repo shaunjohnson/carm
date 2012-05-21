@@ -29,17 +29,17 @@
                 var="deploymentInstance" status="i">
             <g:if test="${applicationDeploymentInstance.id == deploymentInstance.id}">
                 <tr class="highlight ${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>
+                    <td class="highlight">
                         <carm:formatApplicationDeploymentState
                                 deploymentState="${deploymentInstance.deploymentState}"/>
                     </td>
-                    <td>
+                    <td class="highlight">
                         ${deploymentInstance.deploymentEnvironment?.encodeAsHTML()}
                     </td>
-                    <td>
+                    <td class="highlight">
                         <carm:formatDateOnly date="${deploymentInstance.requestedDeploymentDate}"/>
                     </td>
-                    <td>
+                    <td class="highlight">
                         <carm:formatDateOnly date="${deploymentInstance.completedDeploymentDate}"/>
                     </td>
                 </tr>
