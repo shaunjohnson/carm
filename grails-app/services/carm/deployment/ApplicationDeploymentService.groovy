@@ -460,8 +460,8 @@ class ApplicationDeploymentService implements ApplicationContextAware {
             eq("deploymentEnvironment", environment)
             eq("applicationRelease.application", application)
             inList("deploymentState", ApplicationDeploymentState.deployedStates)
-            maxResults(1)
             order("completedDeploymentDate", "desc")
+            maxResults(1)
         }
 
         return results.size() ? results[0] : null

@@ -44,7 +44,9 @@
 <div class="tab-content">
     <div id="summaryTab" class="tab-pane active">
         <div class="row">
-            <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
+            <div class="span12">
+                <g:render template="pendingTasks" model="[pendingTasks: pendingTasks]"/>
+            </div>
         </div>
 
         <div class="row">

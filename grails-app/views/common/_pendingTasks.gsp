@@ -19,10 +19,10 @@
                     was created, but has not been submitted.
                 </g:if>
                 <g:elseif test="${task.deploymentState == ApplicationDeploymentState.SUBMITTED}">
-                    was submitted, but not yet deloyed.
+                    was submitted, but not yet deployed.
                 </g:elseif>
                 <g:elseif test="${task.deploymentState == ApplicationDeploymentState.ASSIGNED}">
-                    is assigned, but not yet deloyed.
+                    is assigned, but not yet deployed.
                 </g:elseif>
                 <g:elseif test="${task.deploymentState == ApplicationDeploymentState.REJECTED}">
                     was rejected.

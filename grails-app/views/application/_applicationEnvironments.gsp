@@ -15,12 +15,12 @@
 <g:if test="${applicationInstance?.sysEnvironment}">
     <table class="table">
         <thead>
-            <tr>
-                <th><g:message code="environment.label"/></th>
-                <th><g:message code="lastRelease.label"/></th>
-                <th><g:message code="releasedOn.label"/></th>
-                <th><g:message code="actions.label"/></th>
-            </tr>
+        <tr>
+            <th><g:message code="environment.label"/></th>
+            <th><g:message code="lastRelease.label"/></th>
+            <th><g:message code="releasedOn.label"/></th>
+            <th><g:message code="actions.label"/></th>
+        </tr>
         </thead>
         <tbody>
         <g:each in="${applicationInstance.sysEnvironment.environments}" var="deploymentEnvironment">
@@ -44,13 +44,14 @@
                         <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
                     </td>
                     <td style="white-space: nowrap;">
-                        <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
-                                title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
-                            <img src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/>
-                        </g:link>
-                        <g:link controller="applicationDeployment" action="show" id="${deployment.id}"
-                                title="${message(code: "promote.label", default: "Promote")}">
-                            <img src="${fam.icon(name: 'page_white_get')}" alt="Promote"/>
+                        <g:link class="environment-action" controller="applicationDeployment" action="show"
+                                id="${deployment.id}"
+                                title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}"><img
+                                src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/></g:link>
+                        <g:link class="environment-action" controller="applicationDeployment" action="show"
+                                id="${deployment.id}"
+                                title="${message(code: "promote.label", default: "Promote")}"><img
+                                src="${fam.icon(name: 'page_white_get')}" alt="Promote"/>
                         </g:link>
                     </td>
                 </g:if>
@@ -63,6 +64,12 @@
         </g:each>
         </tbody>
     </table>
+
+    <r:script>
+        jQuery(function () {
+            jQuery('.environment-action').tooltip()
+        });
+    </r:script>
 </g:if>
 <g:else>
     <p>
