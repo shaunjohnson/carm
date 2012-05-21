@@ -11,9 +11,7 @@
 <body>
 <carm:header domain="${moduleDeploymentTestStateInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <table class="details">
     <tbody>

@@ -11,9 +11,7 @@
 <body>
 <carm:header domain="${sourceControlServerInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="alert alert-info">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 <g:hasErrors bean="${sourceControlServerInstance}">
     <div class="alert alert-error">
         <h4><g:message code="sourceControlServer.error.update"/></h4>

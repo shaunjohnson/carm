@@ -17,6 +17,8 @@
 
     <carm:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
+    <g:render template="/common/messages"/>
+
     <sec:ifLoggedIn>
         <g:render template="myOpenTasks" model="[myPendingTasks: myPendingTasks]"/>
     </sec:ifLoggedIn>

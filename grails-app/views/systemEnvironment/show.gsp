@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${systemEnvironmentInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <ul id="systemTabs" class="nav nav-tabs">
     <li class="active">

@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${systemInstance}" pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <div class="row">
     <div class="well" style="margin-left: auto; margin-right: auto; width: 735px">

@@ -11,9 +11,7 @@
 <carm:header domain="${projectCategoryInstanceList}"
              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <g:if test="${projectCategoryInstanceTotal}">
     <table class="table table-striped">

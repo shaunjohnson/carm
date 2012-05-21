@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${sourceControlServerInstanceList}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <g:if test="${sourceControlServerInstanceTotal}">
     <table class="table table-striped">

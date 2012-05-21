@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${systemServerInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <table id="systemServerDetails" class="details">
     <tbody>

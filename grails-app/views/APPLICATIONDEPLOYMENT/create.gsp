@@ -12,9 +12,7 @@
 <body>
 <carm:header domain="${applicationDeploymentInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="alert alert-info">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 <g:hasErrors bean="${applicationDeploymentInstance}">
     <div class="alert alert-error">
         <h4><g:message code="applicationDeployment.error.create"/></h4>

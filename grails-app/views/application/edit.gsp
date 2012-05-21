@@ -11,9 +11,7 @@
 <body>
 <carm:header domain="${applicationInstance}" pageName="${message(code: 'default.edit.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="alert alert-info">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 <g:hasErrors bean="${applicationInstance}">
     <div class="alert alert-error">
         <h4><g:message code="application.error.create"/></h4>

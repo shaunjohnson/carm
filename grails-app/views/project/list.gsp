@@ -8,52 +8,48 @@
 </head>
 
 <body>
-<div class="body">
-    <carm:header domain="${projectInstanceList}"/>
+<carm:header domain="${projectInstanceList}"/>
 
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
+<g:render template="/common/messages"/>
 
-    <g:if test="${projectInstanceTotal}">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}"/>
-                <th><g:message code="project.category.label" default="Category"/></th>
-                <g:sortableColumn property="description"
-                                  title="${message(code: 'project.description.label', default: 'Description')}"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${projectInstanceList}" status="i" var="projectInstance">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td><g:link action="show" id="${projectInstance.id}">
-                        ${fieldValue(bean: projectInstance, field: "name")}
+<g:if test="${projectInstanceTotal}">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}"/>
+            <th><g:message code="project.category.label" default="Category"/></th>
+            <g:sortableColumn property="description"
+                              title="${message(code: 'project.description.label', default: 'Description')}"/>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each in="${projectInstanceList}" status="i" var="projectInstance">
+            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                <td><g:link action="show" id="${projectInstance.id}">
+                    ${fieldValue(bean: projectInstance, field: "name")}
+                </g:link>
+                </td>
+                <td>
+                    <g:link controller="projectCategory" action="show" id="${projectInstance.category.id}">
+                        ${fieldValue(bean: projectInstance, field: "category")}
                     </g:link>
-                    </td>
-                    <td>
-                        <g:link controller="projectCategory" action="show" id="${projectInstance.category.id}">
-                            ${fieldValue(bean: projectInstance, field: "category")}
-                        </g:link>
-                    </td>
-                    <td>
-                        <div class="expander">
-                            <carm:plainText value="${projectInstance.description}"/>
-                        </div>
-                    </td>
-                </tr>
-            </g:each>
-            </tbody>
-        </table>
+                </td>
+                <td>
+                    <div class="expander">
+                        <carm:plainText value="${projectInstance.description}"/>
+                    </div>
+                </td>
+            </tr>
+        </g:each>
+        </tbody>
+    </table>
 
-        <carm:paginate total="${projectInstanceTotal}" max="${grailsApplication.config.ui.project.listMax}"/>
-    </g:if>
-    <g:else>
-        <p>
-            <em><g:message code="carmNoProjects.message" default="There are no projects."/></em>
-        </p>
-    </g:else>
-</div>
+    <carm:paginate total="${projectInstanceTotal}" max="${grailsApplication.config.ui.project.listMax}"/>
+</g:if>
+<g:else>
+    <p>
+        <em><g:message code="carmNoProjects.message" default="There are no projects."/></em>
+    </p>
+</g:else>
 </body>
 </html>

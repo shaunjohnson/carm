@@ -8,12 +8,9 @@
 </head>
 
 <body>
-
 <carm:header domain="${applicationInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <ul id="applicationTabs" class="nav nav-tabs">
     <li class="active">

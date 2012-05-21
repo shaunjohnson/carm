@@ -23,7 +23,7 @@
         <div class="section-action-icon new-application-release-action">
             <g:link class="create" controller="applicationRelease" action="create"
                     params="['application.id': applicationInstance?.id]">
-                <g:message code="newRelease.label" default="Make a New Release"/>
+                <g:message code="newRelease.label"/>
             </g:link>
         </div>
     </carmsec:isProjectOwner>

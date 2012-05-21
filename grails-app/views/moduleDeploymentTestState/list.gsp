@@ -12,9 +12,7 @@
 <carm:header domain="${moduleDeploymentTestStateInstanceList}"
              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <g:if test="${moduleDeploymentTestStateInstanceTotal}">
     <table class="table table-striped">

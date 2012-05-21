@@ -12,9 +12,7 @@
 <body>
 <carm:header domain="${sourceControlRepositoryInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="alert alert-info">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 <g:hasErrors bean="${sourceControlRepositoryInstance}">
     <div class="alert alert-error">
         <h4><g:message code="sourceControlRepository.error.create"/></h4>

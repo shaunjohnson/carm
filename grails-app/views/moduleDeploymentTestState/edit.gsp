@@ -12,9 +12,7 @@
 <carm:header domain="${moduleDeploymentTestStateInstance}"
              pageName="${message(code: 'default.edit.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="alert alert-info">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 <g:hasErrors bean="${moduleDeploymentTestStateInstance}">
     <div class="alert alert-error">
         <h4><g:message code="moduleDeploymentTestState.error.create"/></h4>

@@ -10,6 +10,8 @@
 <body>
 <carm:header pageName="${message(code: 'administration.label', default: 'Administration')}"/>
 
+<g:render template="/common/messages"/>
+
 <div class="row">
     <div class="span6">
         <div class="sectionHeader">

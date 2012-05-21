@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${applicationDeploymentInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <carmsec:isProjectOwner applicationDeployment="${applicationDeploymentInstance}">
     <div style="margin-bottom: 1em;">

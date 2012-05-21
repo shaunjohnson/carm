@@ -9,6 +9,5 @@
 
 <body>
 <g:render template="/common/listActivity" model="[activityList: activityList]"/>
-</div>
 </body>
 </html>

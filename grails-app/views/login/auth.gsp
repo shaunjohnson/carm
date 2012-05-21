@@ -8,9 +8,7 @@
 <body>
 <carm:header pageName="${message(code: "login.label", default: "Login")}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <div class="row">
     <div class="span5">

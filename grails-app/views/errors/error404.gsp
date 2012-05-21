@@ -8,6 +8,8 @@
 <body>
 <h1><g:message code="pageNotFound.message" default="Page Not Found"/></h1>
 
+<g:render template="/common/messages"/>
+
 <p>
     <em><g:message code="pageNotFoundExplanation.message"
                    default="We're sorry, but the page you are looking for does not exist."/></em>

@@ -11,9 +11,7 @@
 <carm:header domain="${applicationDeploymentInstanceList}"
              pageName="${message(code: 'default.list.label', args: [entityName])}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <table class="table table-striped">
     <thead>

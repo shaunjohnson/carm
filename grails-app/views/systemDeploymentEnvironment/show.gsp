@@ -11,9 +11,7 @@
 <body>
 <carm:header domain="${systemDeploymentEnvironmentInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <ul id="environmentTabs" class="nav nav-tabs">
     <li class="active">

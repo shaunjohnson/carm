@@ -10,9 +10,7 @@
 <body>
 <carm:header domain="${applicationTypeInstance}"/>
 
-<g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
-</g:if>
+<g:render template="/common/messages"/>
 
 <table id="applicationTypeDetails" class="details">
     <tbody>
