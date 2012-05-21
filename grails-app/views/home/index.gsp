@@ -8,6 +8,13 @@
 </head>
 
 <body>
+    <!--[if lt IE 7]>
+    <div class="alert">
+         <strong><g:message code="warning.alert"/></strong>
+         <g:message code="outOfDateBrowser.message"/>
+    </div>
+    <![endif]-->
+
     <carm:header pageName="${message(code: 'home.label', default: 'Home')}"/>
 
     <sec:ifLoggedIn>

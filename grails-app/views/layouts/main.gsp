@@ -415,15 +415,6 @@ span.project-item-icon {
 <g:render template="/common/menu"/>
 
 <div class="container" style="margin-bottom: 75px;">
-    <!--[if lte IE 8]>
-    <div class="alert">
-         <strong>Warning!</strong> CARM runs faster and looks better in a modern browser such as
-         <a href="http://www.opera.com/">Opera</a>,
-         <a href="https://www.google.com/chrome">Google Chrome</a> and
-         <a href="http://www.mozilla.com/firefox">Mozilla Firefox</a>.
-    </div>
-    <![endif]-->
-
     <g:layoutBody/>
     <r:layoutResources/>
 </div>
