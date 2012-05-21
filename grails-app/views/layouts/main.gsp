@@ -259,7 +259,7 @@ span.project-item-icon {
 
         jQuery("button.button, .buttons input").button();
         jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
-        jQuery('.body :input:visible:first').focus();
+        jQuery(':input:not(#quicksearch):visible:first').focus();
 
         var deleteDialog = jQuery("#delete-dialog");
 
