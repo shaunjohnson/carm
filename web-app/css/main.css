@@ -2,6 +2,20 @@ body {
     padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
 
+@media (min-width: 768px) and (max-width: 980px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+}
+
 label {
     font-weight: bold;
 }

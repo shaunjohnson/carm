@@ -29,44 +29,45 @@
                         </g:link>
                     </li>
                 </ul>
+
+                <ul class="nav pull-right">
+                    <sec:ifLoggedIn>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <carm:formatCurrentUser/> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <carm:userFavoritesMenu/>
+                                <li>
+                                    <g:link controller="user" action="show" params="[username: sec.username()]"
+                                            class="menuLink">
+                                        <i class="icon-user"></i>
+                                        <g:message code="profile.label" default="Profile"/>
+                                    </g:link>
+                                </li>
+                                <li>
+                                    <g:link controller="logout" class="menuLink">
+                                        <i class="icon-off"></i>
+                                        <g:message code="logout.label" default="Logout"/>
+                                    </g:link>
+                                </li>
+                            </ul>
+                        </li>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <li>
+                            <g:link controller="login" class="menuLink">
+                                <g:message code="login.label" default="Login"/>
+                            </g:link>
+                        </li>
+                    </sec:ifNotLoggedIn>
+                </ul>
+
+                <form class="navbar-search pull-right" action="">
+                    <input id="quicksearch" type="text" class="search-query span2"
+                           placeholder="${message(code: 'search.label', default: 'Search')}"/>
+                </form>
             </div>
-
-            <ul class="nav pull-right">
-                <sec:ifLoggedIn>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <carm:formatCurrentUser/> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <carm:userFavoritesMenu/>
-                            <li>
-                                <g:link controller="user" action="show" params="[username: sec.username()]" class="menuLink">
-                                    <i class="icon-user"></i>
-                                    <g:message code="profile.label" default="Profile"/>
-                                </g:link>
-                            </li>
-                            <li>
-                                <g:link controller="logout" class="menuLink">
-                                    <i class="icon-off"></i>
-                                    <g:message code="logout.label" default="Logout"/>
-                                </g:link>
-                            </li>
-                        </ul>
-                    </li>
-                </sec:ifLoggedIn>
-                <sec:ifNotLoggedIn>
-                    <li>
-                        <g:link controller="login" class="menuLink">
-                            <g:message code="login.label" default="Login"/>
-                        </g:link>
-                    </li>
-                </sec:ifNotLoggedIn>
-            </ul>
-
-            <form class="navbar-search pull-right" action="">
-                <input id="quicksearch" type="text" class="search-query span2"
-                       placeholder="${message(code: 'search.label', default: 'Search')}"/>
-            </form>
         </div>
     </div>
 </div>
