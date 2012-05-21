@@ -69,6 +69,10 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     clear: both;
 }
 
+.offset-half {
+    margin-left: 60px;
+}
+
 /* NAVIGATION MENU */
 
 .breadcrumbs {

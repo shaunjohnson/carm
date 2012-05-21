@@ -20,7 +20,7 @@
 
         <div class="row">
             <g:each in="${project.applications.sort { it.name }}" var="application">
-                <div class="offset1">
+                <div class="offset-half">
                     <g:link controller="application" action="show" id="${application.id}">
                         ${application.name.encodeAsHTML()}
                     </g:link>

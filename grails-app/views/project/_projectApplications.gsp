@@ -20,7 +20,7 @@
 
         <div class="row">
             <g:each in="${entry.value}" var="application">
-                <div class="offset1">
+                <div class="offset-half">
                     <g:link controller="application" action="show" id="${application.id}">
                         ${application?.encodeAsHTML()}
                     </g:link>

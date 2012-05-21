@@ -5,7 +5,7 @@
 </h3>
 
 <div class="row">
-    <div class="offset1">
+    <div class="offset-half">
         <g:each in="${systemEnvironment.environments}" var="systemDeploymentEnvironment" status="i">
             <g:link controller="systemDeploymentEnvironment" action="show"
                     id="${systemDeploymentEnvironment.id}">${systemDeploymentEnvironment.encodeAsHTML()}</g:link><g:if
@@ -13,7 +13,7 @@
         </g:each>
     </div>
 
-    <div class="offset1">
+    <div class="offset-half">
         <div style="float:left; padding-right: 1em;">
             <g:message code="deployments.label" default="Deployments"/>:
         </div>
