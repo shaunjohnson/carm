@@ -92,7 +92,7 @@
     <carm:formButtons>
         <g:submitButton class="btn btn-primary" name="save"
                         value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-        <g:link class="btn" action="show" id="${applicationReleaseInstance.application.id}"><g:message
+        <g:link class="btn" action="show" id="${applicationReleaseInstance.id}"><g:message
                 code="default.button.cancel.label" default="Cancel"/></g:link>
     </carm:formButtons>
 </g:form>
