@@ -161,7 +161,7 @@ class SystemEnvironmentController {
         }
     }
 
-    def ajaxDeploymentsByDay() {
+    def ajaxCompletedDeployments() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
             def date = new SimpleDateFormat(message(code: 'java.datepicker.format')).parse(params.date)
@@ -174,30 +174,23 @@ class SystemEnvironmentController {
         }
     }
 
-    def completedDeployments() {
+    def ajaxUpcomingDeployments() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
-            def today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH)
+            def applicationDeploymentsGrouped = applicationDeploymentService.findAllUpcomingDeploymentsGroupedByDay(systemEnvironmentInstance)
 
-            [
-                    applicationDeploymentsGrouped: applicationDeploymentService.findAllDeploymentsGroupedByDay(systemEnvironmentInstance, today),
-                    systemInstance: systemEnvironmentInstance,
-                    today: today
-            ]
+            render(template: "upcomingDeployments", model: [applicationDeploymentsGrouped: applicationDeploymentsGrouped])
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
-            redirect(action: "list")
+            render "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
         }
     }
 
-    def upcomingDeployments() {
+    def deployments() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
-            [
-                    applicationDeploymentsGrouped: applicationDeploymentService.findAllUpcomingDeploymentsGroupedByDay(systemEnvironmentInstance),
-                    systemInstance: systemEnvironmentInstance
-            ]
+            def today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH)
+            [systemInstance: systemEnvironmentInstance, today: today]
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"

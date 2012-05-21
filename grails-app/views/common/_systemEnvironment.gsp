@@ -15,18 +15,8 @@
 
     <div class="offset-half">
         <div style="float:left; padding-right: 1em;">
-            <g:message code="deployments.label" default="Deployments"/>:
-        </div>
-
-        <div style="float:left; padding-right: 1em;">
-            <g:link controller="systemEnvironment" action="completedDeployments" id="${systemEnvironment.id}">
-                <g:message code="completed.label" default="Completed"/>
-            </g:link>
-        </div>
-
-        <div style="float:left; padding-right: 1em;">
-            <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemEnvironment.id}">
-                <g:message code="upcoming.label" default="Upcoming"/>
+            <g:link controller="systemEnvironment" action="deployments" id="${systemEnvironment.id}">
+                <g:message code="deployments.label" default="Deployments"/>
             </g:link>
         </div>
 

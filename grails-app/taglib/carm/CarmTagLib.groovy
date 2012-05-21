@@ -590,13 +590,9 @@ class CarmTagLib {
                         out << bc.showSystemEnvironment(systemEnvironment: domain)
                         out << bc.label(code: "allActivity.label", args: [entityName])
                     }
-                    else if (action == 'completedDeployments') {
+                    else if (action == 'deployments') {
                         out << bc.showSystemEnvironment(systemEnvironment: domain)
-                        out << bc.completedDeploymentsLabel(entityName: entityName)
-                    }
-                    else if (action == 'upcomingDeployments') {
-                        out << bc.showSystemEnvironment(systemEnvironment: domain)
-                        out << bc.upcomingDeploymentsLabel(entityName: entityName)
+                        out << bc.deploymentsLabel(entityName: entityName)
                     }
                 }
             }
@@ -683,6 +679,10 @@ class CarmTagLib {
 //        else if (entity instanceof Application && (action == 'create' || action == 'save')) {
 //            out << "Add Application to ${entity.project.name}"
 //        }
+        else if (action == 'deployments' && controllerName == 'systemEnvironment') {
+            def headerText = message(code: "pageHeader.systemEnvironmentDeployments.label", args: [beanName])
+            out << headerText
+        }
         else {
             def headerText = message(code: "default.${action}.label", args: [entityName])
             out << headerText
@@ -1207,7 +1207,7 @@ class CarmTagLib {
         if (params.sort) linkParams.sort = params.sort
         if (params.order) linkParams.order = params.order
 
-        def linkTagAttrs = [action:action]
+        def linkTagAttrs = [action: action]
         if (attrs.controller) {
             linkTagAttrs.controller = attrs.controller
         }
@@ -1290,7 +1290,7 @@ class CarmTagLib {
             // display laststep link when endstep is not laststep
             if (endstep < laststep) {
                 writer << '<li class="disabled"><span>...</span></li>'
-                linkParams.offset = (laststep -1) * max
+                linkParams.offset = (laststep - 1) * max
                 writer << '<li>'
                 writer << link(linkTagAttrs.clone()) { laststep.toString() }
                 writer << '</li>'

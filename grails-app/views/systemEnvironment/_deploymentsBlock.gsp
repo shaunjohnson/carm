@@ -11,10 +11,10 @@
                 <h3>${deploymentEnvironmentEntry.key}</h3>
 
                 <g:each in="${deploymentEnvironmentEntry.value.entrySet()}" var="applicationTypeEntry">
-                    <div class="offset1">
+                    <div class="offset-half">
                         <h4>${applicationTypeEntry.key}</h4>
 
-                        <ul class="offset1">
+                        <ul class="offset-half">
                             <g:each in="${applicationTypeEntry.value}" var="applicationDeployment">
                                 <li>
                                     <g:link controller="application" action="show"
