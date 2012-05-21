@@ -6,6 +6,15 @@ label {
     font-weight: bold;
 }
 
+label.checkbox {
+    font-weight: inherit;
+}
+
+label.disabled {
+    color: #BBB;
+    cursor: not-allowed;
+}
+
 textarea {
     height: 90px;
     width: 682px;
@@ -44,10 +53,6 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
 
 .clearing {
     clear: both;
-}
-
-.disabled {
-    color: #BBB;
 }
 
 /* NAVIGATION MENU */

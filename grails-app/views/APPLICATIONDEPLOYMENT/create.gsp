@@ -10,144 +10,114 @@
 </head>
 
 <body>
-<div class="body">
-    <carm:header domain="${applicationDeploymentInstance}"/>
+<carm:header domain="${applicationDeploymentInstance}"/>
 
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
-    <g:hasErrors bean="${applicationDeploymentInstance}">
-        <div class="errors">
-            <g:renderErrors bean="${applicationDeploymentInstance}" as="list"/>
+<g:if test="${flash.message}">
+    <div class="alert alert-info">${flash.message}</div>
+</g:if>
+<g:hasErrors bean="${applicationDeploymentInstance}">
+    <div class="alert alert-error">
+        <h4><g:message code="applicationDeployment.error.create"/></h4>
+        <g:renderErrors bean="${applicationDeploymentInstance}" as="list"/>
+    </div>
+</g:hasErrors>
+
+<g:form action="save" class="offset1 span8">
+    <carm:formSection legend="${message(code: 'applicationDeploymentDetails.section')}">
+        <div class="control-group">
+            <carm:label class="control-label" for="applicationRelease.id">
+                <g:message code="applicationDeployment.applicationRelease.label" default="Application Release"/>
+            </carm:label>
+            <div class="controls">
+                <g:link controller="applicationRelease" action="show"
+                        id="${applicationDeploymentInstance?.applicationRelease?.id}">
+                    ${message(code: 'pageHeader.applicationRelease.label', args: [
+                            applicationDeploymentInstance?.applicationRelease?.application?.name,
+                            applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
+                </g:link>
+                <g:hiddenField name="applicationRelease.id"
+                               value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
+            </div>
         </div>
-    </g:hasErrors>
 
-    <g:form action="save">
-        <div class="dialog">
-            <table>
-                <tbody>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="applicationRelease.id">
-                            <g:message code="applicationDeployment.applicationRelease.label"
-                                       default="Application Release"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'applicationRelease', 'errors')}">
-                        <g:link controller="applicationRelease" action="show"
-                                id="${applicationDeploymentInstance?.applicationRelease?.id}">
-                            ${message(code: 'pageHeader.applicationRelease.label', args: [
-                                    applicationDeploymentInstance?.applicationRelease?.application?.name,
-                                    applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
-                        </g:link>
-                        <g:hiddenField name="applicationRelease.id"
-                                       value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="deploymentEnvironment.id" required="true">
-                            <g:message code="applicationDeployment.deploymentEnvironment.label" default="Environment"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentEnvironment', 'errors')}">
-                        <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
-                                  from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
-                                  optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
-                        <carm:highlight id="deploymentEnvironmentMessage" display="none"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="requestedDeploymentDate">
-                            <g:message code="applicationDeployment.requestedDeploymentDate.label"
-                                       default="Requested Deployment Date"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'errors')}">
-                        <carm:datePicker name="requestedDeploymentDate"
-                                         value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
-                    </td>
-                </tr>
-
-                <carm:formDividerRow/>
-
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label required="true">
-                            <g:message code="modules.label" default="Modules"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'errors')}">
-                        <table>
-                            <g:each var="moduleDeployment"
-                                    in="${applicationDeploymentInstance.moduleDeployments?.sort { it.moduleRelease.module.name}}">
-                                <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
-                                    <tr>
-                                        <td width="10px">
-                                            <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
-                                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"
-                                                            checked="${true}"/>
-                                            </g:if>
-                                            <g:else>
-                                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"/>
-                                            </g:else>
-                                        </td>
-                                        <td>
-                                            <carm:label for="moduleRelease.${moduleDeployment.moduleRelease.id}">
-                                                ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
-                                            </carm:label>
-                                        </td>
-                                    </tr>
-                                </g:if>
-                                <g:else>
-                                    <tr>
-                                        <td>
-                                            <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"
-                                                        disabled="true"/>
-                                        </td>
-                                        <td class="disabled">
-                                            <g:message code="moduleReleaseCannotBeDeployed.message"
-                                                       args="[moduleDeployment.moduleRelease.module.name]"/>
-                                        </td>
-                                    </tr>
-                                </g:else>
-                            </g:each>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <carm:label for="deploymentInstructions">
-                            <g:message code="applicationDeployment.deploymentInstructions.label"
-                                       default="Deployment Instructions"/>
-                        </carm:label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'errors')}">
-                        <richui:richTextEditor name="deploymentInstructions"
-                                               value="${applicationDeploymentInstance?.deploymentInstructions}"
-                                               height="${grailsApplication.config.ui.richTextEditor.height}"
-                                               width="${grailsApplication.config.ui.richTextEditor.width}"/>
-                    </td>
-                </tr>
-                </tbody>
-
-                <carm:formButtons>
-                    <g:link controller="application" action="show"
-                            id="${applicationDeploymentInstance?.applicationRelease?.application?.id}"><g:message
-                            code="default.button.cancel.label" default="Cancel"/></g:link>
-                    <g:submitButton name="create"
-                                    value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-                </carm:formButtons>
-            </table>
+        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentEnvironment', 'error')}">
+            <carm:label class="control-label" for="deploymentEnvironment.id" required="true">
+                <g:message code="applicationDeployment.deploymentEnvironment.label" default="Environment"/>
+            </carm:label>
+            <div class="controls">
+                <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
+                          from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
+                          optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
+            </div>
         </div>
-    </g:form>
-</div>
+
+        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'error')}">
+            <carm:label class="control-label" for="requestedDeploymentDate">
+                <g:message code="applicationDeployment.requestedDeploymentDate.label"
+                           default="Requested Deployment Date"/>
+            </carm:label>
+            <div class="controls">
+                <carm:datePicker name="requestedDeploymentDate"
+                                 value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
+            </div>
+        </div>
+    </carm:formSection>
+
+    <carm:formSection legend="${message(code: 'deployment.section')}">
+        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'error')}">
+            <carm:label class="control-label" required="true">
+                <g:message code="modules.label" default="Modules"/>
+            </carm:label>
+            <div class="controls">
+                <g:each var="moduleDeployment"
+                        in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module.name}}">
+                    <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
+                        <carm:label class="checkbox" for="moduleDeployment.${moduleDeployment.id}">
+                            <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
+                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"
+                                            checked="${true}"/>
+                            </g:if>
+                            <g:else>
+                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"/>
+                            </g:else>
+                            ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
+                        </carm:label>
+                    </g:if>
+                    <g:else>
+                        <carm:label class="checkbox disabled">
+                            <g:checkBox name="moduleDeployment.${moduleDeployment.id}" disabled="true"/>
+                            <g:message code="moduleReleaseCannotBeDeployed.message"
+                                       args="[moduleDeployment.moduleRelease.module.name]"/>
+                        </carm:label>
+                    </g:else>
+                </g:each>
+            </div>
+        </div>
+
+        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'error')}">
+            <carm:label class="control-label" for="deploymentInstructions">
+                <g:message code="applicationDeployment.deploymentInstructions.label"
+                           default="Deployment Instructions"/>
+            </carm:label>
+            <div class="controls">
+                <richui:richTextEditor name="deploymentInstructions"
+                                       value="${applicationDeploymentInstance?.deploymentInstructions}"
+                                       height="${grailsApplication.config.ui.richTextEditor.height}"
+                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+            </div>
+        </div>
+    </carm:formSection>
+
+    <carm:formButtons>
+        <g:submitButton class="btn btn-primary" name="create"
+                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+        <g:link class="btn" controller="application" action="show"
+                id="${applicationDeploymentInstance?.applicationRelease?.application?.id}">
+            <g:message code="default.button.cancel.label" default="Cancel"/>
+        </g:link>
+
+    </carm:formButtons>
+</g:form>
 
 <g:set var="existingEnvironments" value="${existingDeployments*.deploymentEnvironment?.unique()}"/>
 <g:set var="alreadyDeployedTo" value="${existingEnvironments.collect { it.name }.join(", ")}"/>
