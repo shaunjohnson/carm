@@ -48,6 +48,12 @@
                 <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
                           from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
                           optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
+                <g:if test="${existingDeployments.size()}">
+                    <g:set var="existingEnvironments" value="${existingDeployments*.deploymentEnvironment?.unique()}"/>
+                    <g:set var="alreadyDeployedTo" value="${existingEnvironments.collect { it.name }.join(", ")}"/>
+                    <carm:alertWarning id="deploymentEnvironmentMessage"
+                                       message="${message(code: 'applicationReleaseAlreadyDeployedTo.message', args: [alreadyDeployedTo])}"/>
+                </g:if>
             </div>
         </div>
 
@@ -115,36 +121,8 @@
                 id="${applicationDeploymentInstance?.applicationRelease?.application?.id}">
             <g:message code="default.button.cancel.label" default="Cancel"/>
         </g:link>
-
     </carm:formButtons>
 </g:form>
-
-<g:set var="existingEnvironments" value="${existingDeployments*.deploymentEnvironment?.unique()}"/>
-<g:set var="alreadyDeployedTo" value="${existingEnvironments.collect { it.name }.join(", ")}"/>
-<g:set var="alreadyDeployedToIds" value="${existingEnvironments.collect { it.id }.join(", ")}"/>
-
-<script type="text/javascript">
-    jQuery(function () {
-        var alreadyDeployedTo = [${alreadyDeployedToIds}];
-
-        function deploymentEnvironmentChanged() {
-            var selectedEnvironmentId = jQuery("#deploymentEnvironment\\.id").val();
-
-            if (selectedEnvironmentId && jQuery.inArray(parseInt(selectedEnvironmentId), alreadyDeployedTo) === -1) {
-                jQuery("#deploymentEnvironmentMessage:visible").hide('blind');
-                jQuery("#deploymentEnvironmentMessage_message").html("");
-            }
-            else {
-                jQuery("#deploymentEnvironmentMessage_message").html("This release was already deployed to <strong>${alreadyDeployedTo}</strong>");
-                jQuery("#deploymentEnvironmentMessage:hidden").show('blind');
-            }
-        }
-
-        jQuery("#deploymentEnvironment\\.id").change(deploymentEnvironmentChanged);
-
-        deploymentEnvironmentChanged();
-    });
-</script>
 
 </body>
 </html>

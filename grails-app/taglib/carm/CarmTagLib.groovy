@@ -1072,12 +1072,12 @@ class CarmTagLib {
     /**
      * Renders a highlight widget
      */
-    def highlight = { attrs, body ->
+    def alertWarning = { attrs, body ->
         def message = attrs.message
         def display = attrs.display ?: 'block'
         def id = attrs.id
 
-        out << render(template: '/common/highlightWidget', model: [display: display, id: id, message: message])
+        out << render(template: '/common/alertWarning', model: [display: display, id: id, message: message])
     }
 
     def datePicker = {attrs, body ->
