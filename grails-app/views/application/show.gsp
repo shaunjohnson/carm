@@ -75,7 +75,7 @@
                 <g:message code="application.applicationRoles.label" default="Application Roles"/>
             </div>
             <carmsec:isProjectOwner application="${applicationInstance}">
-                <div class="actions">
+                <div class="section-action">
                     <g:link class="create" controller="applicationRole" action="create"
                             params="['application.id': applicationInstance?.id]">
                         <g:message code="addApplicationRole.label" default="Add Application Role"/>

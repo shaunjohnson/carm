@@ -3,7 +3,7 @@
         <g:message code="systemEnvironment.servers.label" default="Servers"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="header-action new-system-server-action">
+        <div class="section-action-icon new-system-server-action">
             <g:link controller="systemServer" action="create"
                     params="['sysEnvironment.id': systemInstance?.id]">
                 <g:message code="addServer.label" default="Add Server"/>

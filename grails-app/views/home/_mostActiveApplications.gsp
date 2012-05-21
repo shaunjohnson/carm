@@ -3,7 +3,7 @@
         <g:message code="mostActiveApplications.label" default="Most Active Applications"/>
     </div>
 
-    <div class="actions">
+    <div class="section-action">
         <g:link controller="project" action="list">
             <g:message code="allProjects.label" default="All Projects"/>
         </g:link>

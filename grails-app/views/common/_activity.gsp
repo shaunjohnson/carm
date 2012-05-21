@@ -9,7 +9,7 @@
     <g:if test="${activityListSize > grailsApplication.config.ui.activityTrace.maxRecords && listActivityAction}">
         <g:set var="controller" value="${params.controller ==~ /.*home/ ? 'home' : params.controller}"/>
 
-        <div class="actions">
+        <div class="section-action">
             <g:link controller="${controller}" action="${listActivityAction}" id="${domainId}">
                 <g:message code="allActivity.label" default="All Activity"/>
             </g:link>

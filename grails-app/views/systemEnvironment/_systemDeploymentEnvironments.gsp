@@ -3,7 +3,7 @@
         <g:message code="systemEnvironment.environments.label" default="Environments"/>
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
-        <div class="header-action new-system-dep-env-action">
+        <div class="section-action-icon  new-system-dep-env-action">
             <g:link class="create" controller="systemDeploymentEnvironment" action="create"
                     params="['sysEnvironment.id': systemInstance?.id]">
                 <g:message code="addEnvironment.label" default="Add Environment"/>

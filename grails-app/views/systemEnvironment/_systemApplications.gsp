@@ -3,11 +3,13 @@
         <g:message code="applications.label" default="Applications"/>
     </div>
 
-    <div class="actions">
+    <div class="section-action">
         <g:link controller="systemEnvironment" action="completedDeployments" id="${systemInstance.id}">
             <g:message code="completedDeployments.label" default="Completed Deployments"/>
         </g:link>
+    </div>
 
+    <div class="section-action">
         <g:link controller="systemEnvironment" action="upcomingDeployments" id="${systemInstance.id}">
             <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
         </g:link>

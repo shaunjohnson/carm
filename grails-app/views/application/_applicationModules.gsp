@@ -3,7 +3,7 @@
         <g:message code="modules.label" default="Modules"/>
     </div>
     <carmsec:isProjectOwner application="${applicationInstance}">
-        <div class="header-action new-module-action">
+        <div class="section-action-icon new-module-action">
             <g:link controller="module" action="create"
                     params="['application.id': applicationInstance?.id]">
                 <g:message code="addModule.label" default="Add Module"/>

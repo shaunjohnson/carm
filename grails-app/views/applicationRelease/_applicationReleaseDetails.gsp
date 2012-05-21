@@ -3,11 +3,13 @@
         <g:message code="details.label" default="Details"/>
     </div>
     <carmsec:isProjectOwner applicationRelease="${applicationReleaseInstance}">
-        <div class="actions">
+        <div class="section-action">
             <g:link class="edit" action="edit" id="${applicationReleaseInstance?.id}">
                 <g:message code="default.button.edit.label" default="Edit"/>
             </g:link>
+        </div>
 
+        <div class="section-action">
             <carm:ifNotInUse domain="${applicationReleaseInstance}">
                 <g:link class="delete" action="delete" id="${applicationReleaseInstance?.id}">
                     <g:message code="default.button.delete.label" default="Delete"/>

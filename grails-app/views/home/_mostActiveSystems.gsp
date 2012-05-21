@@ -3,7 +3,7 @@
         <g:message code="mostActiveEnvironments.label" default="Most Active Environments"/>
     </div>
 
-    <div class="actions">
+    <div class="section-action">
         <g:link controller="systemEnvironment" action="list">
             <g:message code="allSystems.label" default="All Systems"/>
         </g:link>

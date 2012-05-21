@@ -23,7 +23,6 @@
 }
 
 .header-action, .header-action * {
-    /*font-size: 0.8em;*/
     font-weight: normal;
 }
 

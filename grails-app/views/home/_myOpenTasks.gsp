@@ -4,7 +4,7 @@
             <g:message code="myOpenTasks.label" default="My Open Tasks"/>
         </div>
 
-        <div class="actions">
+        <div class="section-action">
             <g:link controller="requests" action="list">
                 <g:message code="allRequests.label" default="All Requests"/>
             </g:link>

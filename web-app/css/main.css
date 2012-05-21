@@ -234,25 +234,30 @@ div.sectionHeader {
     border-radius: 5px;
     border-bottom: 1px solid #CACACA;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 22px;
+    height: 3.5em;
     margin: 1em -5px;
-    padding: 0.8em 0.8em 1em 0.8em;
 }
 
 div.sectionHeader div.text {
+    height: 1em;
     float: left;
     font-size: 24px;
     font-weight: bold;
     line-height: 1em;
+    margin: 0.4em;
 }
 
-div.sectionHeader div.actions {
+.section-action, .section-action-icon {
     float: right;
+    height: 16px;
+    margin: 12px;
+    padding-left: 1em;
 }
 
-div.sectionHeader div.actions a {
-    line-height: 1em;
-    padding-left: 1em;
+.section-action-icon {
+    cursor: pointer;
+    padding-left: 1.7em;
+
 }
 
 /*

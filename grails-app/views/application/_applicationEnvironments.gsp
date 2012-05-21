@@ -3,7 +3,7 @@
         <g:message code="environments.label" default="Environments"/>
     </div>
 
-    <div class="actions">
+    <div class="section-action">
         <g:link action="showFullHistory" id="${applicationInstance.id}"
                 params="[sort: grailsApplication.config.ui.application.showFullHistorySort,
                         order: grailsApplication.config.ui.application.showFullHistoryOrder]">
