@@ -95,18 +95,19 @@ class ModuleTypeController {
     def delete() {
         def moduleTypeInstance = moduleTypeService.get(params.id)
         if (moduleTypeInstance) {
+            def name = moduleTypeInstance.name
+
             try {
-                def name = moduleTypeInstance.name
                 moduleTypeService.delete(moduleTypeInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleType.label', default: 'ModuleType'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

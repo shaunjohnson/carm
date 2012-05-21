@@ -117,20 +117,21 @@ class ApplicationReleaseController {
     def delete() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (applicationReleaseInstance) {
+            def applicationId = applicationReleaseInstance.application.id
+            def releaseNumber = applicationReleaseInstance.releaseNumber
+            def application = applicationReleaseInstance.application
+
             try {
-                def applicationId = applicationReleaseInstance.application.id
-                def releaseNumber = applicationReleaseInstance.releaseNumber
-                def application = applicationReleaseInstance.application
                 applicationReleaseService.delete(applicationReleaseInstance.application.project, applicationReleaseInstance)
                 flash.message = "${message(code: 'applicationRelease.deleted.message', default: 'Release {0} of {1} deleted', args: [releaseNumber, application])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+                flash.error = "${message(code: 'applicationRelease.not.deleted.message', args: [releaseNumber, application])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+                flash.error = "${message(code: 'applicationRelease.not.deleted.message', args: [releaseNumber, application])}"
                 redirect(action: "show", id: params.id)
             }
         }

@@ -108,18 +108,19 @@ class SystemServerController {
         def systemServerInstance = systemServerService.get(params.id)
         if (systemServerInstance) {
             def systemId = systemServerInstance.sysEnvironment.id
+            def name = systemServerInstance.name
+
             try {
-                def name = systemServerInstance.name
                 systemServerService.delete(systemServerInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), name])}"
                 redirect(controller: "systemEnvironment", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

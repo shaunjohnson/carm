@@ -95,18 +95,19 @@ class ApplicationReleaseTestStateController {
     def delete() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (applicationReleaseTestStateInstance) {
+            def name = applicationReleaseTestStateInstance.name
+
             try {
-                def name = applicationReleaseTestStateInstance.name
                 applicationReleaseTestStateService.delete(applicationReleaseTestStateInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

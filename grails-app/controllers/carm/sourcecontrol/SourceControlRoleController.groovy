@@ -95,18 +95,19 @@ class SourceControlRoleController {
     def delete() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id)
         if (sourceControlRoleInstance) {
+            def name = sourceControlRoleInstance.name
+
             try {
-                def name = sourceControlRoleInstance.name
                 sourceControlRoleService.delete(sourceControlRoleInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

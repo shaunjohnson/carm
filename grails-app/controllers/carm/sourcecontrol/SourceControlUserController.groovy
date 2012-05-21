@@ -109,15 +109,16 @@ class SourceControlUserController {
     def delete() {
         def sourceControlUserInstance = sourceControlUserService.get(params.id)
         if (sourceControlUserInstance) {
+            def name = sourceControlUserInstance.name
+            def sourceControlServerId = sourceControlUserInstance.server.id
+
             try {
-                def name = sourceControlUserInstance.name
-                def sourceControlServerId = sourceControlUserInstance.server.id
                 sourceControlUserService.delete(sourceControlUserInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), name])}"
                 redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

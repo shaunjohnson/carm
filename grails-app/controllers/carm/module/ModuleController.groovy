@@ -136,14 +136,15 @@ class ModuleController {
         def moduleInstance = moduleService.get(params.id)
         if (moduleInstance) {
             def applicationId = moduleInstance.application.id
+            def name = moduleInstance.name
+
             try {
-                def name = moduleInstance.name
                 moduleService.delete(moduleInstance.application.project, moduleInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'module.label', default: 'Module'), name])}"
                 redirect(controller: "application", action: "show", id: applicationId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'module.label', default: 'Module'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'module.label', default: 'Module'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

@@ -95,18 +95,19 @@ class ApplicationTypeController {
     def delete() {
         def applicationTypeInstance = applicationTypeService.get(params.id)
         if (applicationTypeInstance) {
+            def name = applicationTypeInstance.name
+
             try {
-                def name = applicationTypeInstance.name
                 applicationTypeService.delete(applicationTypeInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationType.label', default: 'ApplicationType'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

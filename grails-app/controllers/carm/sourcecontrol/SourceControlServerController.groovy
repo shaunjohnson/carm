@@ -94,18 +94,19 @@ class SourceControlServerController {
     def delete() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (sourceControlServerInstance) {
+            def name = sourceControlServerInstance.name
+
             try {
-                def name = sourceControlServerInstance.name
                 sourceControlServerService.delete(sourceControlServerInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

@@ -115,18 +115,19 @@ class SystemDeploymentEnvironmentController {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (systemDeploymentEnvironmentInstance) {
             def systemId = systemDeploymentEnvironmentInstance.sysEnvironment.id
+            def name = systemDeploymentEnvironmentInstance.name
+
             try {
-                def name = systemDeploymentEnvironmentInstance.name
                 systemDeploymentEnvironmentService.delete(systemDeploymentEnvironmentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
                 redirect(controller: "systemEnvironment", action: "show", id: systemId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

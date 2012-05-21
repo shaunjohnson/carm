@@ -168,18 +168,19 @@ class ApplicationController {
         def applicationInstance = applicationService.get(params.id)
         if (applicationInstance) {
             def projectId = applicationInstance.project.id
+            def name = applicationInstance.name
+
             try {
-                def name = applicationInstance.name
                 applicationService.delete(applicationInstance.project, applicationInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
                 redirect(controller: "project", action: "show", id: projectId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

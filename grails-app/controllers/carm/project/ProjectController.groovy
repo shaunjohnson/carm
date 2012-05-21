@@ -125,14 +125,15 @@ class ProjectController {
     def delete() {
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
+            def name = projectInstance.name
+
             try {
-                def name = projectInstance.name
                 projectService.delete(projectInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'project.label', default: 'Project'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

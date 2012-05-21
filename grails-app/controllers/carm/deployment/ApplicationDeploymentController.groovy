@@ -141,11 +141,11 @@ class ApplicationDeploymentController {
                 redirect(controller: "applicationRelease", action: "show", id: applicationRelease.id)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+                flash.error = "${message(code: 'applicationDeployment.not.deleted.message', args: [application, releaseNumber, environment])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+                flash.error = "${message(code: 'applicationDeployment.not.deleted.message', args: [application, releaseNumber, environment])}"
                 redirect(action: "show", id: params.id)
             }
         }

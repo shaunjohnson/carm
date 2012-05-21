@@ -97,19 +97,20 @@ class SourceControlRepositoryController {
     def delete() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id)
         if (sourceControlRepositoryInstance) {
+            def name = sourceControlRepositoryInstance.name
+            def sourceControlServerId = sourceControlRepositoryInstance.server.id
+
             try {
-                def name = sourceControlRepositoryInstance.name
-                def sourceControlServerId = sourceControlRepositoryInstance.server.id
                 sourceControlRepositoryService.delete(sourceControlRepositoryInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
                 redirect(controller: "sourceControlServer", action: "show", id: sourceControlServerId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

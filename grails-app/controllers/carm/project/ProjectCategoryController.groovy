@@ -94,18 +94,19 @@ class ProjectCategoryController {
     def delete() {
         def projectCategoryInstance = projectCategoryService.get(params.id)
         if (projectCategoryInstance) {
+            def name = projectCategoryInstance.name
+
             try {
-                def name = projectCategoryInstance.name
                 projectCategoryService.delete(projectCategoryInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

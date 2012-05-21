@@ -140,18 +140,19 @@ class SystemEnvironmentController {
     def delete() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (systemEnvironmentInstance) {
+            def name = systemEnvironmentInstance.name
+
             try {
-                def name = systemEnvironmentInstance.name
                 systemEnvironmentService.delete(systemEnvironmentInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }

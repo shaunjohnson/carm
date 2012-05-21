@@ -95,18 +95,19 @@ class ModuleDeploymentTestStateController {
     def delete() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (moduleDeploymentTestStateInstance) {
+            def name = moduleDeploymentTestStateInstance.name
+
             try {
-                def name = moduleDeploymentTestStateInstance.name
                 moduleDeploymentTestStateService.delete(moduleDeploymentTestStateInstance)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), name])}"
                 redirect(action: "list")
             }
             catch (DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }
