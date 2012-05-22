@@ -4,6 +4,7 @@ import org.springframework.security.acls.model.NotFoundException
 import org.springframework.security.acls.model.Permission
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
+import carm.exceptions.CarmRuntimeException
 
 class CarmSecurityService {
 
@@ -29,7 +30,7 @@ class CarmSecurityService {
 
         if (!User.findByUsername(username)) {
             log.error "$prefix user $username does not exist"
-            throw new RuntimeException("User $username does not exist")
+            throw new CarmRuntimeException("User $username does not exist")
         }
 
         aclUtilService.addPermission domainObject, username, permission

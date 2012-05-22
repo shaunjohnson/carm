@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
+import carm.exceptions.CarmRuntimeException
 
 class ProjectService {
     static transactional = false
@@ -39,7 +40,7 @@ class ProjectService {
 
         if (!params.projectOwners) {
             log.error "$prefix At least one project manager must be selected"
-            throw new RuntimeException("At least one project manager must be selected")
+            throw new CarmRuntimeException("At least one project manager must be selected")
         }
 
         Project project = new Project(params)
@@ -119,7 +120,7 @@ class ProjectService {
 
         if (!params.projectOwners) {
             log.error "$prefix At least one project owner must be selected"
-            throw new RuntimeException("At least one project owner must be selected")
+            throw new CarmRuntimeException("At least one project owner must be selected")
         }
 
         project.properties = params
