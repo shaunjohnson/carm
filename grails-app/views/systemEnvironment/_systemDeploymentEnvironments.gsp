@@ -5,7 +5,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="section-action-icon  new-system-dep-env-action">
             <g:link class="create" controller="systemDeploymentEnvironment" action="create"
-                    params="['sysEnvironment.id': systemInstance?.id]">
+                    params="['sysEnvironment.id': systemEnvironmentInstance?.id]">
                 <g:message code="addEnvironment.label" default="Add Environment"/>
             </g:link>
         </div>
@@ -14,11 +14,11 @@
     </sec:ifAllGranted>
 </div>
 
-<g:if test="${systemInstance.environments.size()}">
+<g:if test="${systemEnvironmentInstance.environments.size()}">
     <div>
         <table class="ol">
             <tbody>
-            <g:each in="${systemInstance.environments}" var="environment" status="eindex">
+            <g:each in="${systemEnvironmentInstance.environments}" var="environment" status="eindex">
                 <tr>
                     <td class="olIndex">
                         ${eindex + 1}.
@@ -33,16 +33,16 @@
                             <g:if test="${eindex > 0}">
                                 <carm:moveUp controller="systemEnvironment" action="moveEnvUp"
                                              id="${environment.id}"
-                                             params="[systemId: systemInstance.id, index: eindex]"/>
+                                             params="[systemId: systemEnvironmentInstance.id, index: eindex]"/>
                             </g:if>
                         </sec:ifAllGranted>
                     </td>
                     <td>
                         <sec:ifAllGranted roles="ROLE_ADMIN">
-                            <g:if test="${eindex + 1 < systemInstance.environments.size()}">
+                            <g:if test="${eindex + 1 < systemEnvironmentInstance.environments.size()}">
                                 <carm:moveDown controller="systemEnvironment" action="moveEnvDown"
                                                id="${environment.id}"
-                                               params="[systemId: systemInstance.id, index: eindex]"/>
+                                               params="[systemId: systemEnvironmentInstance.id, index: eindex]"/>
                             </g:if>
                         </sec:ifAllGranted>
                     </td>
@@ -53,8 +53,5 @@
     </div>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="systemEnvironmentDoesNotHaveAnyEnvironments.message"
-                       default="This environment does not have any deployment environments."/></em>
-    </p>
+    <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyEnvironments.message")}"/>
 </g:else>

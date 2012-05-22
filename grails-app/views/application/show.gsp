@@ -26,12 +26,20 @@
     <li>
         <a href="#modulesTab" data-toggle="tab">
             <g:message code="modules.label" default="Modules"/>
-            <span class="badge">${applicationInstance.modules.size()}</span>
+            <g:if test="${applicationInstance.modules.size()}">
+                <span class="badge">${applicationInstance.modules.size()}</span>
+            </g:if>
+            <g:else>
+                <span class="badge badge-warning">!</span>
+            </g:else>
         </a>
     </li>
     <li>
         <a href="#permissionsTab" data-toggle="tab">
             <g:message code="permissions.label" default="Permissions"/>
+            <g:if test="${applicationInstance.applicationRoles.size() == 0}">
+                <span class="badge badge-warning">!</span>
+            </g:if>
         </a>
     </li>
     <li>
@@ -96,10 +104,7 @@
             </ul>
         </g:if>
         <g:else>
-            <p>
-                <em><g:message code="applicationDoesNotHaveAnyAssignedUsers.message"
-                               default="This application does not have any assigned users."/></em>
-            </p>
+            <carm:alertWarning message="${message(code: "applicationDoesNotHaveAnyAssignedUsers.message")}"/>
         </g:else>
     </div>
 

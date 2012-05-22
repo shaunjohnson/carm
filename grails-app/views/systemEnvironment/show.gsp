@@ -16,6 +16,9 @@
     <li class="active">
         <a href="#summaryTab">
             <g:message code="summary.label" default="Summary"/>
+            <g:if test="${systemEnvironmentInstance.servers.size() == 0 || systemEnvironmentInstance.environments.size() == 0}">
+                <span class="badge badge-warning">!</span>
+            </g:if>
         </a>
     </li>
     <li>
@@ -34,12 +37,12 @@
     <div id="summaryTab" class="tab-pane active">
         <div class="row">
             <div class="span6">
-                <g:render template="systemServers" model="['systemInstance': systemEnvironmentInstance]"/>
+                <g:render template="systemServers" model="[systemEnvironmentInstance: systemEnvironmentInstance]"/>
             </div>
 
             <div class="span6">
                 <g:render template="systemDeploymentEnvironments"
-                          model="['systemInstance': systemEnvironmentInstance]"/>
+                          model="[systemEnvironmentInstance: systemEnvironmentInstance]"/>
             </div>
         </div>
 

@@ -17,6 +17,9 @@
     <li class="active">
         <a href="#summaryTab">
             <g:message code="summary.label" default="Summary"/>
+            <g:if test="${applicationsGrouped.size() == 0}">
+                <span class="badge badge-warning">!</span>
+            </g:if>
         </a>
     </li>
     <li>

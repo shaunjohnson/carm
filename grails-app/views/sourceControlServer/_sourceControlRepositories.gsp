@@ -26,8 +26,5 @@
     </ul>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="sourceControlServerDoesNotHaveAnyRepositories.message"
-                       default="This source control server does not have any repositories."/></em>
-    </p>
+    <carm:alertWarning message="${message(code: "sourceControlServerDoesNotHaveAnyRepositories.message")}"/>
 </g:else>

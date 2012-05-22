@@ -41,8 +41,5 @@
     </table>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="applicationDoesNotHaveAnyModules.message"
-                       default="This application does not have any modules."/></em>
-    </p>
+    <carm:alertWarning message="${message(code: "applicationDoesNotHaveAnyModules.message")}"/>
 </g:else>

@@ -5,7 +5,7 @@
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="section-action-icon new-system-server-action">
             <g:link controller="systemServer" action="create"
-                    params="['sysEnvironment.id': systemInstance?.id]">
+                    params="['sysEnvironment.id': systemEnvironmentInstance?.id]">
                 <g:message code="addServer.label" default="Add Server"/>
             </g:link>
         </div>
@@ -14,9 +14,9 @@
     </sec:ifAllGranted>
 </div>
 
-<g:if test="${systemInstance.servers.size()}">
+<g:if test="${systemEnvironmentInstance.servers.size()}">
     <ul>
-        <g:each in="${systemInstance.servers.sort { it.name }}" var="server">
+        <g:each in="${systemEnvironmentInstance.servers.sort { it.name }}" var="server">
             <li>
                 <g:link controller="systemServer" action="show" id="${server.id}">
                     ${server?.encodeAsHTML()}
@@ -26,8 +26,5 @@
     </ul>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="systemEnvironmentDoesNotHaveAnyServers.message"
-                       default="This environment does not have any servers."/></em>
-    </p>
+    <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyServers.message")}"/>
 </g:else>

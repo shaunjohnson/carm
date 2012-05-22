@@ -34,9 +34,5 @@
     </g:each>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="projectDoesNotHaveAnyApplications.maessage"
-                       default="This project does not have any applications."/></em>
-
-    </p>
+    <carm:alertWarning message="${message(code: "projectDoesNotHaveAnyApplications.message")}"/>
 </g:else>

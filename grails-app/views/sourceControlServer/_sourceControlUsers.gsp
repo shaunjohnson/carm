@@ -26,8 +26,5 @@
     </ul>
 </g:if>
 <g:else>
-    <p>
-        <em><g:message code="sourceControlServerDoesNotHaveAnyUsers.message"
-                       default="This source control server does not have any users."/></em>
-    </p>
+    <carm:alertWarning message="${message(code: "sourceControlServerDoesNotHaveAnyUsers.message")}"/>
 </g:else>
