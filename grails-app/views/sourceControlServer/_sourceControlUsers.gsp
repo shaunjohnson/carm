@@ -15,7 +15,7 @@
 </div>
 
 <g:if test="${sourceControlServerInstance?.users?.size()}">
-    <ul class="offset1">
+    <ul>
         <g:each in="${sourceControlServerInstance.users.sort { it.name }}" var="user">
             <li>
                 <g:link controller="sourceControlUser" action="show" id="${user.id}">
