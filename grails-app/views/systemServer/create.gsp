@@ -19,6 +19,8 @@
 </g:hasErrors>
 
 <g:form action="save" class="offset1 span8">
+    <g:hiddenField name="sysEnvironment.id" value="${systemServerInstance?.sysEnvironment?.id}"/>
+
     <div class="control-group ${hasErrors(bean: systemServerInstance, field: 'name', 'error')}">
         <carm:label class="control-label" for="name" required="true">
             <g:message code="systemServer.name.label" default="Name"/>
