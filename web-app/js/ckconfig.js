@@ -19,7 +19,7 @@ CKEDITOR.config.toolbar_Full =
         { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
     ];
 
-CKEDITOR.config.toolbar_Custom =
+CKEDITOR.config.toolbar_Basic =
     [
         { name: 'basicstyles', items: ['Bold', 'Italic','Underline','Strike', '-','TextColor','BGColor'] },
         { name: 'formatting', items: ['NumberedList', 'BulletedList','-','Outdent','Indent', '-', 'Link', 'Unlink'] },
@@ -28,4 +28,13 @@ CKEDITOR.config.toolbar_Custom =
         { name: 'tools', items : [ 'Maximize' ] },
         '/',
         { name: 'styles', items : [ 'Styles','Format','Font','FontSize','Smiley' ] }
+    ];
+
+CKEDITOR.config.toolbar_Custom =
+    [
+        { name: 'basicstyles', items: ['Bold', 'Italic','Underline', '-','TextColor','BGColor'] },
+        { name: 'formatting', items: ['NumberedList', 'BulletedList','-','Outdent','Indent', '-', 'Link', 'Unlink'] },
+        { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord' ] },
+        { name: 'actions', items: ['Undo','Redo','-','RemoveFormat'] },
+        { name: 'tools', items : [ 'Maximize' ] }
     ];
