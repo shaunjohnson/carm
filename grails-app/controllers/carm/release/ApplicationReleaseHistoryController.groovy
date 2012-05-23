@@ -18,7 +18,7 @@ class ApplicationReleaseHistoryController {
     def show() {
         def applicationReleaseHistoryInstance = applicationReleaseHistoryService.get(params.id)
         if (!applicationReleaseHistoryInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseHistory.label', default: 'Application Release History'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseHistory.label', default: 'Application Release History'), params.id])}"
             redirect(action: "list")
         }
         else {

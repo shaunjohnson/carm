@@ -32,7 +32,7 @@ class ApplicationController {
     def create() {
         def projectInstance = projectService.get(params.project?.id)
         if (!projectInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project?.id])}"
             redirect(action: "list")
         }
         else {
@@ -51,7 +51,7 @@ class ApplicationController {
     def save() {
         def projectInstance = projectService.get(params.project?.id)
         if (!projectInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
             redirect(action: "list")
         }
         else {
@@ -74,7 +74,7 @@ class ApplicationController {
     def show() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -113,7 +113,7 @@ class ApplicationController {
     def edit() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -159,7 +159,7 @@ class ApplicationController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -185,7 +185,7 @@ class ApplicationController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -193,7 +193,7 @@ class ApplicationController {
     def listReleases() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -208,7 +208,7 @@ class ApplicationController {
     def listActivity() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -234,7 +234,7 @@ class ApplicationController {
     def showFullHistory() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
             redirect(action: "list")
         }
         else {

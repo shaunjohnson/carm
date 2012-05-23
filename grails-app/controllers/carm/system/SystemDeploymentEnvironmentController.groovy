@@ -29,7 +29,7 @@ class SystemDeploymentEnvironmentController {
     def create() {
         def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.systemEnvironment?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.systemEnvironment?.id])}"
             redirect(action: "list")
         }
         else {
@@ -57,7 +57,7 @@ class SystemDeploymentEnvironmentController {
     def show() {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (!systemDeploymentEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -75,7 +75,7 @@ class SystemDeploymentEnvironmentController {
     def edit() {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (!systemDeploymentEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -105,7 +105,7 @@ class SystemDeploymentEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -132,7 +132,7 @@ class SystemDeploymentEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -140,7 +140,7 @@ class SystemDeploymentEnvironmentController {
     def listActivity() {
         def systemDeploymentEnvironmentInstance = systemDeploymentEnvironmentService.get(params.id)
         if (!systemDeploymentEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemDeploymentEnvironment.label', default: 'SystemDeploymentEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {

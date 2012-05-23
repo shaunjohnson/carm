@@ -43,7 +43,7 @@ class ApplicationReleaseTestStateController {
     def show() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (!applicationReleaseTestStateInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -55,7 +55,7 @@ class ApplicationReleaseTestStateController {
     def edit() {
         def applicationReleaseTestStateInstance = applicationReleaseTestStateService.get(params.id)
         if (!applicationReleaseTestStateInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -86,7 +86,7 @@ class ApplicationReleaseTestStateController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -112,7 +112,7 @@ class ApplicationReleaseTestStateController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationReleaseTestState.label', default: 'ApplicationReleaseTestState'), params.id])}"
             redirect(action: "list")
         }
     }

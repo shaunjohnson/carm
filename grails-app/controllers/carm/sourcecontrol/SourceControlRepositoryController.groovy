@@ -24,7 +24,7 @@ class SourceControlRepositoryController {
     def create() {
         def serverInstance = sourceControlServerService.get(params.server?.id)
         if (!serverInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.server?.id])}"
             redirect(action: "list")
         }
         else {
@@ -48,7 +48,7 @@ class SourceControlRepositoryController {
     def show() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id)
         if (!sourceControlRepositoryInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -59,7 +59,7 @@ class SourceControlRepositoryController {
     def edit() {
         def sourceControlRepositoryInstance = sourceControlRepositoryService.get(params.id)
         if (!sourceControlRepositoryInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -89,7 +89,7 @@ class SourceControlRepositoryController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -115,7 +115,7 @@ class SourceControlRepositoryController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRepository.label', default: 'SourceControlRepository'), params.id])}"
             redirect(action: "list")
         }
     }

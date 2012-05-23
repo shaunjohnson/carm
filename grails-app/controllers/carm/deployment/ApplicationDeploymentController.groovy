@@ -27,7 +27,7 @@ class ApplicationDeploymentController {
     def create() {
         def applicationReleaseInstance = applicationReleaseService.get(params.applicationRelease?.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
             redirect(action: "list")
         }
         else {
@@ -42,7 +42,7 @@ class ApplicationDeploymentController {
     def save() {
         ApplicationRelease applicationReleaseInstance = applicationReleaseService.get(params.applicationRelease?.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.applicationRelease?.id])}"
             redirect(action: "list")
         }
         else {
@@ -68,7 +68,7 @@ class ApplicationDeploymentController {
     def show() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -85,7 +85,7 @@ class ApplicationDeploymentController {
     def edit() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -122,7 +122,7 @@ class ApplicationDeploymentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -150,7 +150,7 @@ class ApplicationDeploymentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'ApplicationDeployment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -158,7 +158,7 @@ class ApplicationDeploymentController {
     def listActivity() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -184,7 +184,7 @@ class ApplicationDeploymentController {
     def redeploy() {
         def applicationDeploymentInstance = applicationDeploymentService.get(params.id)
         if (!applicationDeploymentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationDeployment.label', default: 'Application Deployment'), params.id])}"
             redirect(action: "list")
         }
         else {

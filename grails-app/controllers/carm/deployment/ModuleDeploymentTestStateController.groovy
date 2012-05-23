@@ -43,7 +43,7 @@ class ModuleDeploymentTestStateController {
     def show() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (!moduleDeploymentTestStateInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -55,7 +55,7 @@ class ModuleDeploymentTestStateController {
     def edit() {
         def moduleDeploymentTestStateInstance = moduleDeploymentTestStateService.get(params.id)
         if (!moduleDeploymentTestStateInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -86,7 +86,7 @@ class ModuleDeploymentTestStateController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -112,7 +112,7 @@ class ModuleDeploymentTestStateController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeploymentTestState.label', default: 'ModuleDeploymentTestState'), params.id])}"
             redirect(action: "list")
         }
     }

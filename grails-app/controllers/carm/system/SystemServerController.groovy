@@ -27,7 +27,7 @@ class SystemServerController {
     def create() {
         def systemInstance = systemEnvironmentService.get(params.sysEnvironment?.id)
         if (!systemInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.sysEnvironment?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.sysEnvironment?.id])}"
             redirect(action: "list")
         }
         else {
@@ -52,7 +52,7 @@ class SystemServerController {
     def show() {
         def systemServerInstance = systemServerService.get(params.id)
         if (!systemServerInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -68,7 +68,7 @@ class SystemServerController {
     def edit() {
         def systemServerInstance = systemServerService.get(params.id)
         if (!systemServerInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -98,7 +98,7 @@ class SystemServerController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -125,7 +125,7 @@ class SystemServerController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -133,7 +133,7 @@ class SystemServerController {
     def listActivity() {
         def systemServerInstance = systemServerService.get(params.id)
         if (!systemServerInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {

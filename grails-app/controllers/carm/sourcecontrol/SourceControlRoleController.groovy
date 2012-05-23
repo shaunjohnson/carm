@@ -43,7 +43,7 @@ class SourceControlRoleController {
     def show() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id)
         if (!sourceControlRoleInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -55,7 +55,7 @@ class SourceControlRoleController {
     def edit() {
         def sourceControlRoleInstance = sourceControlRoleService.get(params.id)
         if (!sourceControlRoleInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -86,7 +86,7 @@ class SourceControlRoleController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -112,7 +112,7 @@ class SourceControlRoleController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlRole.label', default: 'SourceControlRole'), params.id])}"
             redirect(action: "list")
         }
     }

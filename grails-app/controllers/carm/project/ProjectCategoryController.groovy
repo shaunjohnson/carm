@@ -43,7 +43,7 @@ class ProjectCategoryController {
     def show() {
         def projectCategoryInstance = projectCategoryService.get(params.id)
         if (!projectCategoryInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -55,7 +55,7 @@ class ProjectCategoryController {
     def edit() {
         def projectCategoryInstance = projectCategoryService.get(params.id)
         if (!projectCategoryInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -85,7 +85,7 @@ class ProjectCategoryController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -111,7 +111,7 @@ class ProjectCategoryController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'projectCategory.label', default: 'ProjectCategory'), params.id])}"
             redirect(action: "list")
         }
     }

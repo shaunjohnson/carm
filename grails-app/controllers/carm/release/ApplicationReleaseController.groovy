@@ -27,7 +27,7 @@ class ApplicationReleaseController {
     def create() {
         def applicationInstance = Application.get(params.application.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application.id])}"
             redirect(action: "list")
         }
         else {
@@ -40,7 +40,7 @@ class ApplicationReleaseController {
     def save() {
         Application applicationInstance = applicationService.get(params.application?.id)
         if (!applicationInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.application?.id])}"
             redirect(action: "list")
         }
         else {
@@ -59,7 +59,7 @@ class ApplicationReleaseController {
     def show() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -78,7 +78,7 @@ class ApplicationReleaseController {
     def edit() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -109,7 +109,7 @@ class ApplicationReleaseController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -136,7 +136,7 @@ class ApplicationReleaseController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -150,7 +150,7 @@ class ApplicationReleaseController {
             redirect(controller: "applicationRelease", action: "show", id: applicationReleaseInstance.id)
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'applicationRelease.label', default: 'Application Release'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -158,7 +158,7 @@ class ApplicationReleaseController {
     def listActivity() {
         def applicationReleaseInstance = applicationReleaseService.get(params.id)
         if (!applicationReleaseInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemServer.label', default: 'SystemServer'), params.id])}"
             redirect(action: "list")
         }
         else {

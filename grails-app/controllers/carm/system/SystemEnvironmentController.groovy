@@ -52,7 +52,7 @@ class SystemEnvironmentController {
     def show() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -70,7 +70,7 @@ class SystemEnvironmentController {
     def moveEnvDown() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.systemId)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -84,7 +84,7 @@ class SystemEnvironmentController {
     def moveEnvUp() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.systemId)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -98,7 +98,7 @@ class SystemEnvironmentController {
     def edit() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -131,7 +131,7 @@ class SystemEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -157,7 +157,7 @@ class SystemEnvironmentController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -194,7 +194,7 @@ class SystemEnvironmentController {
             [systemInstance: systemEnvironmentInstance, today: today]
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -202,7 +202,7 @@ class SystemEnvironmentController {
     def listActivity() {
         def systemEnvironmentInstance = systemEnvironmentService.get(params.id)
         if (!systemEnvironmentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'systemEnvironment.label', default: 'SystemEnvironment'), params.id])}"
             redirect(action: "list")
         }
         else {

@@ -57,7 +57,7 @@ class ProjectController {
     def show() {
         def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -75,7 +75,7 @@ class ProjectController {
     def edit() {
         def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -117,7 +117,7 @@ class ProjectController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -138,7 +138,7 @@ class ProjectController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -146,7 +146,7 @@ class ProjectController {
     def listActivity() {
         def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
         else {

@@ -25,7 +25,7 @@ class UserController {
         if (params.id) {
             userInstance = userService.get(params.id)
             if (!userInstance) {
-                flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+                flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
                 redirect(action: "list")
             }
         }
@@ -33,12 +33,12 @@ class UserController {
             println "load by ${params.username}"
             userInstance = userService.getByUsername(params.username)
             if (!userInstance) {
-                flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.username])}"
+                flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.username])}"
                 redirect(action: "list")
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), null])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), null])}"
             redirect(action: "list")
         }
 
@@ -55,7 +55,7 @@ class UserController {
     def listActivity() {
         def userInstance = userService.get(params.id)
         if (!userInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
             redirect(action: "list")
         }
         else {

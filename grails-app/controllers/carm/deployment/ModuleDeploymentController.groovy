@@ -18,7 +18,7 @@ class ModuleDeploymentController {
     def show() {
         def moduleDeploymentInstance = moduleDeploymentService.get(params.id)
         if (!moduleDeploymentInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeployment.label', default: 'Module Deployment'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'moduleDeployment.label', default: 'Module Deployment'), params.id])}"
             redirect(action: "list")
         }
         else {

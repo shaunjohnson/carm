@@ -43,7 +43,7 @@ class SourceControlServerController {
     def show() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (!sourceControlServerInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -55,7 +55,7 @@ class SourceControlServerController {
     def edit() {
         def sourceControlServerInstance = sourceControlServerService.get(params.id)
         if (!sourceControlServerInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -85,7 +85,7 @@ class SourceControlServerController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -111,7 +111,7 @@ class SourceControlServerController {
             }
         }
         else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'sourceControlServer.label', default: 'SourceControlServer'), params.id])}"
             redirect(action: "list")
         }
     }
