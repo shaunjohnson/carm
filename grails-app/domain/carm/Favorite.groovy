@@ -19,4 +19,16 @@ class Favorite {
     static mapping = {
         version false
     }
+
+    String getName() {
+        if (application) {
+            return application.name
+        }
+        else if (project) {
+            return project.name
+        }
+        else {
+            return null
+        }
+    }
 }

@@ -92,7 +92,7 @@ class FavoriteService {
      * @return List of Favorite objects for the user
      */
     List<Favorite> findAllByUser(User user) {
-        Favorite.executeQuery("from Favorite where user = :user", [user: user]).sort { it.project <=> it.application }
+        Favorite.executeQuery("from Favorite where user = :user", [user: user]).sort { it.name }
     }
 
     /**
