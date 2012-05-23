@@ -44,6 +44,7 @@
     <li>
         <a href="#deploymentsTab">
             <g:message code="deployments.label" default="Deployments"/>
+            <span class="badge">${applicationDeploymentList.size()}</span>
         </a>
     </li>
     <li>
@@ -71,7 +72,7 @@
 
     <div id="deploymentsTab" class="tab-pane">
         <g:render template="applicationReleaseDeployments"
-                  model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
+                  model="[applicationDeploymentList: applicationDeploymentList]"/>
     </div>
 
     <div id="activityTab" class="tab-pane">
