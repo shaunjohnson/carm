@@ -5,7 +5,7 @@
     <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
+    <ckeditor:resources/>
 </head>
 
 <body>
@@ -105,10 +105,11 @@
                 <g:message code="application.buildInstructions.label" default="Build Instructions"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="buildInstructions"
-                                       value="${applicationInstance?.buildInstructions}"
-                                       height="${grailsApplication.config.ui.richTextEditor.height}"
-                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                <ckeditor:editor name="buildInstructions"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                    ${applicationInstance?.buildInstructions}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>
@@ -130,10 +131,11 @@
                 <g:message code="application.deployInstructions.label" default="Deploy Instructions"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="deployInstructions"
-                                       value="${applicationInstance?.deployInstructions}"
-                                       height="150"
-                                       width="690"/>
+                <ckeditor:editor name="deployInstructions"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                    ${applicationInstance?.deployInstructions}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>

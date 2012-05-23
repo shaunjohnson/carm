@@ -5,7 +5,7 @@
     <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'module.label', default: 'Module')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
+    <ckeditor:resources/>
 </head>
 
 <body>
@@ -88,9 +88,11 @@
                 <g:message code="module.deployInstructions.label" default="Deploy Instructions"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="deployInstructions" value="${moduleInstance?.deployInstructions}"
-                                       height="${grailsApplication.config.ui.richTextEditor.height}"
-                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                <ckeditor:editor name="deployInstructions"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                    ${moduleInstance?.deployInstructions}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>

@@ -5,7 +5,7 @@
     <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'applicationRelease.label', default: 'Application Release')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
+    <ckeditor:resources/>
 </head>
 
 <body>
@@ -51,9 +51,11 @@
                 <g:message code="applicationRelease.changeLog.label" default="Change Log"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="changeLog" value="${applicationReleaseInstance?.changeLog}"
-                                       height="${grailsApplication.config.ui.richTextEditor.height}"
-                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                <ckeditor:editor name="changeLog"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                        ${applicationReleaseInstance?.changeLog}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>
@@ -76,10 +78,11 @@
                 <g:message code="applicationRelease.buildInstructions.label" default="Build Instructions"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="buildInstructions"
-                                       value="${applicationReleaseInstance?.buildInstructions}"
-                                       height="${grailsApplication.config.ui.richTextEditor.height}"
-                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                <ckeditor:editor name="buildInstructions"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                    ${applicationReleaseInstance?.buildInstructions}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>

@@ -6,7 +6,7 @@
     <r:require modules="common"/>
     <g:set var="entityName" value="${message(code: 'applicationDeployment.label', default: 'Application Deployment')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
-    <resource:richTextEditor type="${grailsApplication.config.ui.richTextEditor.type}"/>
+    <ckeditor:resources/>
 </head>
 
 <body>
@@ -101,10 +101,11 @@
                            default="Deployment Instructions"/>
             </carm:label>
             <div class="controls">
-                <richui:richTextEditor name="deploymentInstructions"
-                                       value="${applicationDeploymentInstance?.deploymentInstructions}"
-                                       height="${grailsApplication.config.ui.richTextEditor.height}"
-                                       width="${grailsApplication.config.ui.richTextEditor.width}"/>
+                <ckeditor:editor name="deploymentInstructions"
+                                 height="${grailsApplication.config.ui.richTextEditor.height}"
+                                 width="${grailsApplication.config.ui.richTextEditor.width}">
+                    ${applicationDeploymentInstance?.deploymentInstructions}
+                </ckeditor:editor>
             </div>
         </div>
     </carm:formSection>

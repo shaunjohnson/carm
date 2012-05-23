@@ -176,6 +176,9 @@ grails.plugins.springsecurity.secureChannel.definition = [
 
 grails.plugins.twitterbootstrap.fixtaglib = true
 
+grails.resources.adhoc.excludes = ['js/ckconfig.js', 'plugins/ckeditor*/**/*']
+ckeditor.config = 'js/ckconfig.js'
+
 // CARM UI configurable options
 ui {
     activityTrace {
@@ -223,9 +226,8 @@ ui {
         listMax = 25
     }
     richTextEditor {
-        type = "medium" // One of 'simple', 'medium', 'advanced', 'full'
-        height = 175    // Height of editor in pixels
-        width = 690     // Width of editor in pixels
+        height = "175px"    // Height of editor in pixels
+        width = "690px"     // Width of editor in pixels
     }
     search {
         maxResults = 15
