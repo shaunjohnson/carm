@@ -20,6 +20,8 @@
 </g:hasErrors>
 
 <g:form action="save" class="offset1 span8">
+    <g:hiddenField name="application.id" value="${moduleInstance?.application?.id}"/>
+
     <carm:formSection legend="${message(code: 'moduleDetails.section')}">
         <div class="control-group ${hasErrors(bean: moduleInstance, field: 'name', 'errors')}">
             <carm:label class="control-label" for="name" required="true">
