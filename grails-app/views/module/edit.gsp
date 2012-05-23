@@ -22,6 +22,7 @@
 <g:form action="update" method="post" class="offset1 span8">
     <g:hiddenField name="id" value="${moduleInstance?.id}"/>
     <g:hiddenField name="version" value="${moduleInstance?.version}"/>
+    <g:hiddenField name="application.id" value="${moduleInstance?.application?.id}"/>
 
     <carm:formSection legend="${message(code: 'moduleDetails.section')}">
         <div class="control-group ${hasErrors(bean: moduleInstance, field: 'name', 'errors')}">
