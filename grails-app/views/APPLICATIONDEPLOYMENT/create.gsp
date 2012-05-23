@@ -72,20 +72,20 @@ page import="carm.deployment.ModuleDeploymentState" %>
                 <g:each var="moduleDeployment"
                         in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module.name}}">
                     <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
-                        <carm:label class="checkbox" for="moduleDeployment.${moduleDeployment.id}">
+                        <carm:label class="checkbox" for="moduleRelease.${moduleDeployment.moduleRelease.id}">
                             <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
-                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"
+                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"
                                             checked="${true}"/>
                             </g:if>
                             <g:else>
-                                <g:checkBox name="moduleDeployment.${moduleDeployment.id}"/>
+                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"/>
                             </g:else>
                             ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
                         </carm:label>
                     </g:if>
                     <g:else>
                         <carm:label class="checkbox disabled">
-                            <g:checkBox name="moduleDeployment.${moduleDeployment.id}" disabled="true"/>
+                            <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}" disabled="true"/>
                             <g:message code="moduleReleaseCannotBeDeployed.message"
                                        args="[moduleDeployment.moduleRelease.module.name]"/>
                         </carm:label>
