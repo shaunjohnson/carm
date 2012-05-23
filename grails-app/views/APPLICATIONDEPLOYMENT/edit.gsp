@@ -58,7 +58,7 @@
                            default="Requested Deployment Date"/>
             </carm:label>
             <div class="controls">
-                <carm:datePicker name="requestedDeploymentDate"
+                <carm:datePicker name="requestedDeploymentDate" todayLink="true"
                                  value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
             </div>
         </div>

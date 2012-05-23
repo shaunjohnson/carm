@@ -1086,6 +1086,7 @@ class CarmTagLib {
         def id = attrs.id ?: name
         def minDate = attrs.minDate
         def showDay = attrs.showDay
+        def todayLink = attrs.boolean('todayLink')
 
         def dateFormat = message(code: "java.datepicker.format")
         Calendar calendar = Calendar.instance
@@ -1100,6 +1101,10 @@ class CarmTagLib {
         out.println "<input type=\"hidden\" name=\"${name}_day\" id=\"${id}_day\" value=\"${calendar.get(Calendar.DAY_OF_MONTH)}\" />"
         out.println "<input type=\"hidden\" name=\"${name}_month\" id=\"${id}_month\" value=\"${calendar.get(Calendar.MONTH) + 1}\" />"
         out.println "<input type=\"hidden\" name=\"${name}_year\" id=\"${id}_year\" value=\"${calendar.get(Calendar.YEAR)}\" />"
+
+        if (todayLink) {
+            out.println "<a href=\"#\" onclick=\"jQuery('#" << name << "').datepicker('setDate', '+0d'); return false;" << '">(today)</a>'
+        }
 
         //Code to parse selected date into hidden fields required by grails
         out.println "<script type=\"text/javascript\"> \$(document).ready(function(){"
