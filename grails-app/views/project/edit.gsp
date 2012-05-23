@@ -19,6 +19,9 @@
 </g:hasErrors>
 
 <g:form action="update" method="post" class="offset1 span8">
+    <g:hiddenField name="id" value="${projectInstance?.id}"/>
+    <g:hiddenField name="version" value="${projectInstance?.version}"/>
+
     <carm:formSection legend="${message(code: 'projectDetails.section')}">
         <div class="control-group ${hasErrors(bean: projectInstance, field: 'name', 'error')}">
             <carm:label class="control-label" for="name" required="true">
