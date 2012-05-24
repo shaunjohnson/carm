@@ -1,3 +1,7 @@
-// Place your Spring DSL code here
+import carm.security.CarmUserDetailsContextMapper
+
 beans = {
+    ldapUserDetailsMapper(CarmUserDetailsContextMapper) {
+        springSecurityService = ref("springSecurityService")
+    }
 }
