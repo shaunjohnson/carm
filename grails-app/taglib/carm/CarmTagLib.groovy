@@ -742,6 +742,9 @@ class CarmTagLib {
             else if (controllerName == 'systemServer') {
                 out << render(template: "/systemServer/actions", model: [systemServerInstance: entity])
             }
+            else if (controllerName == 'user') {
+                out << render(template: "/user/actions", model: [userInstance: entity])
+            }
         }
 
         out << '</div></div>'

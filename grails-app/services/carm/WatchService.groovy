@@ -60,8 +60,18 @@ class WatchService {
      * Delete all watches for the current user
      */
     void deleteAllFromCurrentUser() {
-        Watch.executeUpdate("delete from Watch where user = :user", [user: carmSecurityService.currentUser])
+        deleteAllFromUser(carmSecurityService.currentUser)
     }
+
+    /**
+     * Delete all watches for the provided user
+     *
+     * @param user User to delete watches for
+     */
+    void deleteAllFromUser(User user) {
+        Watch.executeUpdate("delete from Watch where user = :user", [user: user])
+    }
+
 
     /**
      * Delete a Watch record by ID for the current user.

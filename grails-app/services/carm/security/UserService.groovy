@@ -1,10 +1,15 @@
 package carm.security
 
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.transaction.annotation.Transactional
+
 class UserService {
 
     static transactional = false
 
+    def favoriteService
     def grailsApplication
+    def watchService
 
     /**
      * Returns a count of all User objects.
@@ -13,6 +18,28 @@ class UserService {
      */
     int count() {
         User.count()
+    }
+
+    /**
+     * Deletes the provided User object.
+     *
+     * @param user User object to delete
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void delete(User user) {
+        def prefix = "delete() :"
+
+        log.debug "$prefix entered, user=$user"
+
+        User.withTransaction {
+            favoriteService.deleteAllFromUser(user)
+            watchService.deleteAllFromUser(user)
+            UserRole.executeUpdate("delete UserRole where user = :user", [user: user])
+            user.delete()
+        }
+
+        log.debug "$prefix leaving"
     }
 
     /**

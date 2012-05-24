@@ -61,7 +61,16 @@ class FavoriteService {
      * Delete all favorites for the current user
      */
     void deleteAllFromCurrentUser() {
-        Favorite.executeUpdate("delete from Favorite where user = :user", [user: carmSecurityService.currentUser])
+        deleteAllFromUser(carmSecurityService.currentUser)
+    }
+
+    /**
+     * Delete all favorites for the provided user
+     *
+     * @param user User to delete favorites for
+     */
+    void deleteAllFromUser(User user) {
+        Favorite.executeUpdate("delete from Favorite where user = :user", [user: user])
     }
 
     /**

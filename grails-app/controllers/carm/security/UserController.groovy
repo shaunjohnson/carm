@@ -1,5 +1,8 @@
 package carm.security
 
+import org.springframework.dao.DataIntegrityViolationException
+import carm.exceptions.DomainInUseException
+
 class UserController {
 
     def activityTraceService
@@ -50,6 +53,31 @@ class UserController {
                 isCurrentUser: (carmSecurityService.currentUsername == userInstance.username),
                 watches: watchService.findAllByUser(userInstance),
         ]
+    }
+
+    def delete() {
+        def userInstance = userService.get(params.id)
+        if (userInstance) {
+            def name = userInstance.fullName
+
+            try {
+                userService.delete(userInstance)
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), name])}"
+                redirect(action: "list")
+            }
+            catch (DataIntegrityViolationException e) {
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), name])}"
+                redirect(action: "show", id: params.id)
+            }
+            catch (DomainInUseException e) {
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), name])}"
+                redirect(action: "show", id: params.id)
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
+            redirect(action: "list")
+        }
     }
 
     def listActivity() {
