@@ -102,9 +102,7 @@ class WatchService {
      * @return List of email addresses
      */
     List<String> findAllEmailByApplication(Application application) {
-        List<String> emailAddresses = Watch.findAllByApplication(application)*.user.email
-        emailAddresses.addAll findAllEmailByProject(application.project)
-        return emailAddresses
+        Watch.findAllByApplication(application)*.user.email
     }
 
     /**

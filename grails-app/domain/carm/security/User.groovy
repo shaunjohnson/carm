@@ -23,6 +23,7 @@ class User {
         username(blank: false, unique: true)
         password(blank: false)
         fullName(blank: false, nullable: false)
+        email(maxSize: 255)
     }
 
     static mapping = {

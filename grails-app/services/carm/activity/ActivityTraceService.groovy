@@ -13,6 +13,8 @@ import carm.system.SystemEnvironment
 import carm.system.SystemDeploymentEnvironment
 import carm.deployment.ApplicationDeployment
 import carm.security.User
+import carm.notification.Notification
+import carm.notification.NotificationScheme
 
 class ActivityTraceService {
 
@@ -563,6 +565,14 @@ class ActivityTraceService {
         String oid = generateOid(MODULE_TYPE, module.id)
         insertActivityTrace(oid, MODULE_TYPE, UPDATED, module.id, module.name)
     }
+
+    void notificationCreated(Notification notification) {}
+    void notificationDeleted(Notification notification) {}
+    void notificationUpdated(Notification notification) {}
+
+    void notificationSchemeCreated(NotificationScheme notification) {}
+    void notificationSchemeDeleted(NotificationScheme notification) {}
+    void notificationSchemeUpdated(NotificationScheme notification) {}
 
     /**
      * Project object was created.

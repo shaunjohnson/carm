@@ -89,8 +89,8 @@ log4j = {
         console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     }
 
-    debug  'grails.app',
-            'org.springframework.security'
+    debug  'grails.app'
+            //, ''org.springframework.security'
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP

@@ -1,8 +1,6 @@
 modules = {
     common {
-        dependsOn "jquery, jquery-ui, bootstrap"
-
-        resource url: 'css/main.css'
+        dependsOn "application, jquery, jquery-ui, bootstrap"
 
         resource url: 'js/jquery.cookie.js'
         resource url: 'js/jquery.expander.min.js', exclude: 'minify'
@@ -12,7 +10,8 @@ modules = {
     }
 
     application {
-
+        resource 'js/application.js'
+        resource 'css/main.css'
     }
 
     // Define reference to custom jQuery UI theme

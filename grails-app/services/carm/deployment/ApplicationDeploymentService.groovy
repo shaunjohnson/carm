@@ -9,24 +9,17 @@ import carm.application.Application
 import carm.project.Project
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
-import carm.release.ModuleRelease
 import carm.system.SystemEnvironment
 import org.apache.commons.lang.time.DateUtils
-import carm.security.User
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.ApplicationContext
-import org.springframework.context.MessageSource
 
-class ApplicationDeploymentService implements ApplicationContextAware {
+class ApplicationDeploymentService {
 
     static transactional = false
 
-    ApplicationContext applicationContext
     def carmSecurityService
     def grailsApplication
     def linkGeneratorService
     def notificationService
-    def watchService
 
     /**
      * Returns a count of all ApplicationDeployment objects.
@@ -270,7 +263,7 @@ class ApplicationDeploymentService implements ApplicationContextAware {
         applicationDeployment.save()
 
         if (!applicationDeployment.hasErrors()) {
-            sendNotification(applicationDeployment)
+            notificationService.applicationDeploymentCompleted(applicationDeployment)
         }
 
         log.debug "$prefix returning $applicationDeployment"
@@ -646,35 +639,5 @@ class ApplicationDeploymentService implements ApplicationContextAware {
                         deploymentState not in :deploymentStates
                         and applicationRelease.application.project = :project""",
                 [deploymentStates: ApplicationDeploymentState.pendingStates, project: project])
-    }
-
-    private sendNotification(ApplicationDeployment applicationDeployment) {
-        def currentUser = carmSecurityService.getCurrentUser()
-
-        def projectService = applicationContext.getBean("projectService")
-        def projectOwners = projectService.findAllProjectOwners(applicationDeployment.applicationRelease.application.project)
-
-        // Do not send notification to current user
-        projectOwners.remove(currentUser.username)
-
-        // Send notification only if there is at least one other project owner
-        if (projectOwners.size()) {
-            def args = [
-                    applicationDeployment.applicationRelease.application.name,
-                    applicationDeployment.applicationRelease.releaseNumber,
-                    applicationDeployment.deploymentEnvironment.name,
-                    currentUser.fullName,
-                    linkGeneratorService.createLink(controller: 'applicationDeployment', action: 'show',
-                            id: applicationDeployment.id)
-            ]
-
-            def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)
-            toEmailAddresses.addAll(watchService.findAllEmailByApplication(applicationDeployment.applicationRelease.application))
-
-            notificationService.sendEmail(
-                    currentUser.email,
-                    toEmailAddresses,
-                    'applicationDeployed.notification.subject', 'applicationDeployed.notification.message', args)
-        }
     }
 }

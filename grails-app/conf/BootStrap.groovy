@@ -31,6 +31,10 @@ import carm.project.ProjectCategory
 import carm.system.SystemServer
 import carm.system.SystemDeploymentEnvironment
 import carm.system.SystemEnvironment
+import carm.notification.NotificationScheme
+import carm.notification.Notification
+import carm.notification.NotificationEvent
+import carm.notification.NotificationRecipientType
 
 class BootStrap {
 
@@ -41,7 +45,7 @@ class BootStrap {
 
     def init = { servletContext ->
         def roleAdmin
-        
+
         if (!Role.findByAuthority('ROLE_ADMIN')) {
             roleAdmin = new Role(authority: 'ROLE_ADMIN').save()
         }
@@ -55,6 +59,18 @@ class BootStrap {
             adminUser.save()
 
             new UserRole(user: adminUser, role: roleAdmin).save()
+        }
+
+        if (!NotificationScheme.findByName("Default Notification Scheme")) {
+            defaultNotificationScheme(NotificationScheme, name: 'Default Notification Scheme', description: 'This is the default notification scheme').save()
+
+            applicationDeploymentCompletedNotification(Notification, notificationScheme: defaultNotificationScheme,
+                    notificationEvent: NotificationEvent.APPLICATION_DEPLOYMENT_COMPLETED,
+                    recipientType: NotificationRecipientType.PROJECT_ADMINISTRATORS).save()
+
+            applicationReleaseCompletedNotification(Notification, notificationScheme: defaultNotificationScheme,
+                    notificationEvent: NotificationEvent.APPLICATION_RELEASE_COMPLETED,
+                    recipientType: NotificationRecipientType.PROJECT_ADMINISTRATORS).save()
         }
 
         // Return immediately to disable bootstrapping data
