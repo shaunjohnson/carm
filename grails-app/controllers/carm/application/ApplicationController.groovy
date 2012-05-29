@@ -14,6 +14,7 @@ class ApplicationController {
     def applicationReleaseService
     def applicationService
     def applicationTypeService
+    def notificationSchemeService
     def sourceControlRepositoryService
     def projectService
     def systemEnvironmentService
@@ -42,6 +43,7 @@ class ApplicationController {
             [
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
+                    notificationSchemeList: notificationSchemeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
                     systemEnvironmentList: systemEnvironmentService.list()
             ]
@@ -64,6 +66,7 @@ class ApplicationController {
                 render(view: "create", model: [
                         applicationInstance: applicationInstance,
                         applicationTypeList: applicationTypeService.list(),
+                        notificationSchemeList: notificationSchemeService.list(),
                         sourceControlRepositoryList: sourceControlRepositoryService.list(),
                         systemEnvironmentList: systemEnvironmentService.list()
                 ])
@@ -120,6 +123,7 @@ class ApplicationController {
             [
                     applicationInstance: applicationInstance,
                     applicationTypeList: applicationTypeService.list(),
+                    notificationSchemeList: notificationSchemeService.list(),
                     sourceControlRepositoryList: sourceControlRepositoryService.list(),
                     systemEnvironmentList: systemEnvironmentService.list()
             ]
@@ -137,6 +141,7 @@ class ApplicationController {
                     render(view: "edit", model: [
                             applicationInstance: applicationInstance,
                             applicationTypeList: applicationTypeService.list(),
+                            notificationSchemeList: notificationSchemeService.list(),
                             sourceControlRepositoryList: sourceControlRepositoryService.list(),
                             systemEnvironmentList: systemEnvironmentService.list()
                     ])
@@ -153,6 +158,7 @@ class ApplicationController {
                 render(view: "edit", model: [
                         applicationInstance: applicationInstance,
                         applicationTypeList: applicationTypeService.list(),
+                        notificationSchemeList: notificationSchemeService.list(),
                         sourceControlRepositoryList: sourceControlRepositoryService.list(),
                         systemEnvironmentList: systemEnvironmentService.list()
                 ])

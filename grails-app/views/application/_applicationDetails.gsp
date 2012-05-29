@@ -17,6 +17,18 @@
     </tr>
     <tr class="prop">
         <td valign="top" class="name">
+            <g:message code="application.description.label" default="Description"/>
+        </td>
+        <td valign="top" class="value">
+            <div class="expander">
+                <div class="expander">
+                    <carm:plainText value="${applicationInstance.description}"/>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="prop">
+        <td valign="top" class="name">
             <g:message code="application.type.label" default="Type"/>
         </td>
         <td valign="top" class="value">
@@ -27,14 +39,12 @@
     </tr>
     <tr class="prop">
         <td valign="top" class="name">
-            <g:message code="application.description.label" default="Description"/>
+            <g:message code="application.notificationScheme.label" default="Notification Scheme"/>
         </td>
         <td valign="top" class="value">
-            <div class="expander">
-                <div class="expander">
-                    <carm:plainText value="${applicationInstance.description}"/>
-                </div>
-            </div>
+            <g:link controller="notificationScheme" action="show" id="${applicationInstance.notificationScheme.id}">
+                ${applicationInstance.notificationScheme.encodeAsHTML()}
+            </g:link>
         </td>
     </tr>
 

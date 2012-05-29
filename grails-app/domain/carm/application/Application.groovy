@@ -6,6 +6,7 @@ import carm.system.SystemEnvironment
 import carm.module.Module
 import carm.release.ApplicationRelease
 import org.apache.commons.lang.builder.HashCodeBuilder
+import carm.notification.NotificationScheme
 
 class Application {
     def activityTraceService
@@ -19,6 +20,7 @@ class Application {
     String buildInstructions
     String binariesPath
     String deployInstructions
+    NotificationScheme notificationScheme
 
     Date dateCreated
     Date lastUpdated
@@ -34,6 +36,7 @@ class Application {
         buildInstructions(nullable: true)
         binariesPath(maxSize:  200)
         deployInstructions(nullable: true)
+        notificationScheme(nullable: false)
     }
 
     static belongsTo = [project: Project]

@@ -36,6 +36,18 @@
             </div>
         </div>
 
+        <div class="control-group ${hasErrors(bean: applicationInstance, field: 'description', 'error')}">
+            <carm:label class="control-label" for="description">
+                <g:message code="application.description.label" default="Description"/>
+            </carm:label>
+            <div class="controls">
+                <g:textArea name="description" value="${applicationInstance?.description}"
+                            cols="${grailsApplication.config.ui.textarea.cols}"
+                            rows="${grailsApplication.config.ui.textarea.rows}"
+                            title="${message(code: 'application.description.help')}"/>
+            </div>
+        </div>
+
         <div class="control-group ${hasErrors(bean: applicationInstance, field: 'type', 'error')}">
             <carm:label class="control-label" for="type.id" required="true">
                 <g:message code="application.type.label" default="Type"/>
@@ -48,15 +60,14 @@
             </div>
         </div>
 
-        <div class="control-group ${hasErrors(bean: applicationInstance, field: 'description', 'error')}">
-            <carm:label class="control-label" for="description">
-                <g:message code="application.description.label" default="Description"/>
+        <div class="control-group ${hasErrors(bean: applicationInstance, field: 'notificationScheme', 'error')}">
+            <carm:label class="control-label" for="notificationScheme.id" required="true">
+                <g:message code="application.notificationScheme.label" default="Notification Scheme"/>
             </carm:label>
             <div class="controls">
-                <g:textArea name="description" value="${applicationInstance?.description}"
-                            cols="${grailsApplication.config.ui.textarea.cols}"
-                            rows="${grailsApplication.config.ui.textarea.rows}"
-                            title="${message(code: 'application.description.help')}"/>
+                <g:select name="notificationScheme.id" from="${notificationSchemeList}" optionKey="id"
+                          value="${applicationInstance?.notificationScheme?.id}" required="required"
+                          title="${message(code: 'application.notificationScheme.help')}"/>
             </div>
         </div>
     </carm:formSection>
