@@ -24,10 +24,6 @@ class Notification {
 
     static belongsTo = [notificationScheme: NotificationScheme]
 
-    static mapping = {
-        sort "name"
-    }
-
     public String toString() {
         return notificationEvent.name() + " " + recipientType
     }

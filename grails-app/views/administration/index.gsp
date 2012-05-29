@@ -99,6 +99,11 @@
         </div>
         <ul>
             <li>
+                <g:link controller="notificationScheme">
+                    <g:message code="notificationSchemes.label" default="Notification Schemes"/>
+                </g:link>
+            </li>
+            <li>
                 <g:link uri="/about">
                     <g:message code="about.label" default="About"/>
                 </g:link>

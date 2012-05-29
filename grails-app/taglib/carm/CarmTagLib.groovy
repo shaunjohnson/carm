@@ -24,6 +24,8 @@ import carm.release.ModuleRelease
 
 import java.text.SimpleDateFormat
 import org.springframework.web.servlet.support.RequestContextUtils
+import carm.notification.NotificationRecipientType
+import carm.notification.NotificationScheme
 
 class CarmTagLib {
 
@@ -39,6 +41,7 @@ class CarmTagLib {
     def moduleDeploymentTestStateService
     def moduleReleaseService
     def moduleTypeService
+    def notificationSchemeService
     def projectCategoryService
     def projectService
     def sourceControlRepositoryService
@@ -395,6 +398,27 @@ class CarmTagLib {
                 }
             }
         }
+        else if (controller == 'notificationScheme') {
+            def entityName = message(code: 'notificationScheme.label', default: 'Notification Scheme')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listNotificationSchemes()
+
+                if (action == 'show') {
+                    out << bc.showNotificationScheme(notificationScheme: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showNotificationScheme(notificationScheme: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
         else if (controller == 'project') {
             def entityName = message(code: 'project.label', default: 'Project')
 
@@ -715,6 +739,9 @@ class CarmTagLib {
             else if (controllerName == 'moduleType') {
                 out << render(template: "/moduleType/actions", model: [moduleTypeInstance: entity])
             }
+            else if (controllerName == 'notificationScheme') {
+                out << render(template: "/notificationScheme/actions", model: [notificationSchemeInstance: entity])
+            }
             else if (controllerName == 'project') {
                 out << render(template: "/project/actions", model: [projectInstance: entity])
             }
@@ -867,6 +894,48 @@ class CarmTagLib {
         out << message(code: "carm.deployment.ModuleDeploymentState.${deploymentState}", default: deploymentState.toString())
     }
 
+    def formatNotification = { attrs ->
+        def notification = attrs.notification
+
+        NotificationRecipientType recipientType = notification.recipientType
+
+        switch (recipientType) {
+            case NotificationRecipientType.CURRENT_USER:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                break;
+            case NotificationRecipientType.PROJECT_ADMINISTRATORS:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                break;
+            case NotificationRecipientType.GROUP:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                out << " (" << notification.userGroup << ")"
+                break;
+            case NotificationRecipientType.USER:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                out << " ("
+                out << g.link(controller: "user", action: "show", id: notification.user.id) { notification.user.name }
+                out << ")"
+                break;
+            case NotificationRecipientType.EMAIL_ADDRESS:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                out << " (" << notification.emailAddress << ")"
+                break;
+            case NotificationRecipientType.APPLICATION_WATCHERS:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                break;
+            case NotificationRecipientType.PROJECT_WATCHERS:
+                out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
+                break;
+            default:
+                out << recipientType.name()
+        }
+    }
+
+    def formatNotificationEvent = { attrs ->
+        def notificationEvent = attrs.notificationEvent
+        out << message(code: "carm.notification.NotificationEvent.${notificationEvent}", default: notificationEvent.name())
+    }
+
     /**
      * Formats a SourceControlRepository as a link.
      *
@@ -946,6 +1015,9 @@ class CarmTagLib {
         }
         else if (domain instanceof ModuleType) {
             isInUse = moduleTypeService.isInUse(domain)
+        }
+        else if (domain instanceof NotificationScheme) {
+            isInUse = notificationSchemeService.isInUse(domain)
         }
         else if (domain instanceof ProjectCategory) {
             isInUse = projectCategoryService.isInUse(domain)

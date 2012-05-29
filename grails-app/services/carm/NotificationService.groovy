@@ -269,4 +269,14 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             log.error "Error occurred sending notification for ${notificationEvent}", e
         }
     }
+
+    /**
+     * Find all notifications for a specific scheme, grouped by event type.
+     *
+     * @param notificationSchemeInstance Scheme to filter notifications
+     * @return Map of notifications grouped/keyed by notification event type
+     */
+    def findAllNotificationsBySchemeGroupedByEvent(notificationSchemeInstance) {
+        Notification.findAllByNotificationScheme(notificationSchemeInstance).groupBy { it.notificationEvent }.sort { e1, e2 -> e1.key <=> e2.key }
+    }
 }

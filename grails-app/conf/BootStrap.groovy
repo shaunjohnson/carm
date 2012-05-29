@@ -66,15 +66,41 @@ class BootStrap {
                 defaultNotificationScheme(NotificationScheme, name: 'Default Notification Scheme',
                         description: 'This is the default notification scheme')
 
-                applicationDeploymentCompletedNotification(Notification,
+                //
+                // Application Deployment Completed
+                //
+                applicationDeploymentCompletedNotificationProjectAdmins(Notification,
                         notificationScheme: defaultNotificationScheme,
                         notificationEvent: NotificationEvent.APPLICATION_DEPLOYMENT_COMPLETED,
                         recipientType: NotificationRecipientType.PROJECT_ADMINISTRATORS)
 
-                applicationReleaseCompletedNotification(Notification,
+                applicationDeploymentCompletedNotificationProjectWatchers(Notification,
+                        notificationScheme: defaultNotificationScheme,
+                        notificationEvent: NotificationEvent.APPLICATION_DEPLOYMENT_COMPLETED,
+                        recipientType: NotificationRecipientType.PROJECT_WATCHERS)
+
+                applicationDeploymentCompletedNotificationApplicationWatchers(Notification,
+                        notificationScheme: defaultNotificationScheme,
+                        notificationEvent: NotificationEvent.APPLICATION_DEPLOYMENT_COMPLETED,
+                        recipientType: NotificationRecipientType.APPLICATION_WATCHERS)
+
+                //
+                // Application Release Completed
+                //
+                applicationReleaseCompletedNotificationProjectAdmins(Notification,
                         notificationScheme: defaultNotificationScheme,
                         notificationEvent: NotificationEvent.APPLICATION_RELEASE_COMPLETED,
                         recipientType: NotificationRecipientType.PROJECT_ADMINISTRATORS)
+
+                applicationReleaseCompletedNotificationProjectWatchers(Notification,
+                        notificationScheme: defaultNotificationScheme,
+                        notificationEvent: NotificationEvent.APPLICATION_RELEASE_COMPLETED,
+                        recipientType: NotificationRecipientType.PROJECT_WATCHERS)
+
+                applicationReleaseCompletedNotificationApplicationWatchers(Notification,
+                        notificationScheme: defaultNotificationScheme,
+                        notificationEvent: NotificationEvent.APPLICATION_RELEASE_COMPLETED,
+                        recipientType: NotificationRecipientType.APPLICATION_WATCHERS)
             }
         }
 

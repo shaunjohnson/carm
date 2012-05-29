@@ -170,6 +170,16 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a list module types link.
+     */
+    def listNotificationSchemes = { attrs ->
+        def isFirst = attrs.isFirst
+        out << link(controller: "notificationScheme", action: "list", isFirst: isFirst,
+                title: message(code: "showAllNotificationSchemes.label"),
+                text: message(code: "notificationSchemes.label"))
+    }
+
+    /**
      * Renders a list projects link.
      */
     def listProjects = { attrs ->
@@ -370,6 +380,17 @@ class CarmBreadcrumbTagLib {
         out << link(controller: "moduleType", action: "show",
                 title: message(code: "showModuleType.label"),
                 text: moduleType.name, id: moduleType.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders a show module type link.
+     */
+    def showNotificationScheme = { attrs ->
+        def notificationScheme = attrs.notificationScheme
+        def isFirst = attrs.isFirst
+        out << link(controller: "notificationScheme", action: "show",
+                title: message(code: "showNotificationScheme.label"),
+                text: notificationScheme.name, id: notificationScheme.id, isFirst: isFirst)
     }
 
     /**

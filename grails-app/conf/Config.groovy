@@ -223,6 +223,9 @@ ui {
     moduleType {
         listMax = 25
     }
+    notificationScheme {
+        listMax = 25
+    }
     project {
         listMax = 25
     }
