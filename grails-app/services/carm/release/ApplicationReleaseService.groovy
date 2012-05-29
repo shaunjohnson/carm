@@ -222,7 +222,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
             addToHistories(applicationRelease, "Created", null);
             // TODO application release is marked completed by default. Refer to ApplicationRelease domain.
 
-            sendNotification(applicationRelease)
+            notificationService.applicationReleaseCompleted(applicationRelease)
         }
 
         log.debug "$prefix returning $applicationRelease"
@@ -404,34 +404,5 @@ class ApplicationReleaseService implements ApplicationContextAware {
         activityTraceService.applicationReleaseSubmitted(applicationRelease)
 
         log.debug "$prefix Application release submitted"
-    }
-
-    private sendNotification(ApplicationRelease applicationRelease) {
-        def currentUser = carmSecurityService.getCurrentUser()
-
-        def projectService = applicationContext.getBean("projectService")
-        def projectOwners = projectService.findAllProjectOwners(applicationRelease.application.project)
-
-        // Do not send notification to current user
-        projectOwners.remove(currentUser.username)
-
-        // Send notification only if there is at least one other project owner
-        if (projectOwners.size()) {
-            def args = [
-                    applicationRelease.application.name,
-                    applicationRelease.releaseNumber,
-                    currentUser.fullName,
-                    linkGeneratorService.createLink(controller: 'applicationRelease', action: 'show',
-                            id: applicationRelease.id)
-            ]
-
-            def toEmailAddresses = carmSecurityService.findAllEmailByUsernameInList(projectOwners)
-            toEmailAddresses.addAll(watchService.findAllEmailByApplication(applicationRelease.application))
-
-            notificationService.sendEmail(
-                    currentUser.email,
-                    toEmailAddresses,
-                    'applicationReleased.notification.subject', 'applicationReleased.notification.message', args)
-        }
     }
 }

@@ -232,7 +232,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             sendEmailUsingMail(fromEmailAddress, toEmailAddresses, subject, messageBody)
         }
         else {
-            // Do nothing
+            log.warn "Mail type configured to be $type, which is not supported. Mail will not be sent."
         }
     }
 
