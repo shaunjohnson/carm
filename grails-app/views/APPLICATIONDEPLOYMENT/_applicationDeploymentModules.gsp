@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module }}"
+        <g:each in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module.name }}"
                 var="moduleDeploymentInstance" status="i">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>

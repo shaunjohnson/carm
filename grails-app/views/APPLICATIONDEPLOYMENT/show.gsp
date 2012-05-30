@@ -42,6 +42,11 @@
         </a>
     </li>
     <li>
+        <a href="#deploymentInstructionsTab">
+            <g:message code="deploymentInstructions.label" default="Deployment Instructions"/>
+        </a>
+    </li>
+    <li>
         <a href="#deploymentsTab">
             <g:message code="deployments.label" default="Deployments"/>
             <span class="badge">${applicationDeploymentList.size()}</span>
@@ -67,6 +72,11 @@
 
     <div id="detailsTab" class="tab-pane">
         <g:render template="applicationDeploymentDetails"
+                  model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
+    </div>
+
+    <div id="deploymentInstructionsTab" class="tab-pane">
+        <g:render template="deploymentInstructions"
                   model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
     </div>
 
