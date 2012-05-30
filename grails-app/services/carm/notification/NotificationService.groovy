@@ -56,10 +56,6 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
         sendNotification(applicationDeployment, APPLICATION_DEPLOYMENT_COMPLETED)
     }
 
-    def applicationDeploymentArchived(ApplicationDeployment applicationDeployment) {
-        sendNotification(applicationDeployment, APPLICATION_DEPLOYMENT_ARCHIVED)
-    }
-
     def applicationReleaseSubmitted(ApplicationRelease applicationRelease) {
         sendNotification(applicationRelease, APPLICATION_RELEASE_SUBMITTED)
     }
@@ -78,10 +74,6 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
 
     def applicationReleaseCompleted(ApplicationRelease applicationRelease) {
         sendNotification(applicationRelease, APPLICATION_RELEASE_COMPLETED)
-    }
-
-    def applicationReleaseArchived(ApplicationRelease applicationRelease) {
-        sendNotification(applicationRelease, APPLICATION_RELEASE_ARCHIVED)
     }
 
     private List<String> getProjectAdministratorEmailAddresses(domain) {
