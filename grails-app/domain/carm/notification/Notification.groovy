@@ -21,7 +21,7 @@ class Notification {
         recipientType(nullable: false, validator: { val, obj ->
             if (val == NotificationRecipientType.CURRENT_USER || val == NotificationRecipientType.PROJECT_ADMINISTRATORS ||
                     val == NotificationRecipientType.APPLICATION_WATCHERS || val == NotificationRecipientType.PROJECT_WATCHERS) {
-                return !(obj.notificationScheme.notifications.find { it.recipientType == val })
+                return !(obj.notificationScheme.notifications.find { it.recipientType == val && it.notificationEvent == obj.notificationEvent })
             }
         })
 
