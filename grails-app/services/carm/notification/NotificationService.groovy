@@ -145,6 +145,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             model['applicationReleaseNumber'] = applicationRelease.releaseNumber
             model['applicationReleaseLink'] = linkGeneratorService.createLink(controller: 'applicationRelease',
                     action: 'show', id: applicationRelease.id)
+            model['applicationReleaseChangeLog'] = applicationRelease.changeLog
         }
 
         groovyPageRenderer.render(view: '/email/' + notificationEvent.name(), model: model)
@@ -162,10 +163,25 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
         }
     }
 
+    private List<Notification> getNotifications(Object domain, NotificationEvent notificationEvent) {
+        Notification.findAllByNotificationEvent(notificationEvent)
+
+        NotificationScheme notificationScheme =  null
+
+        if (domain instanceof ApplicationDeployment) {
+            notificationScheme = ((ApplicationDeployment) domain).applicationRelease.application.notificationScheme
+        }
+        else if (domain instanceof ApplicationRelease) {
+            notificationScheme = ((ApplicationRelease) domain).application.notificationScheme
+        }
+
+        Notification.findAllByNotificationSchemeAndNotificationEvent(notificationScheme, notificationEvent)
+    }
+
     private List<String> getRecipients(Object domain, NotificationEvent notificationEvent) {
         List<String> recipients = []
 
-        Notification.findAllByNotificationEvent(notificationEvent).each { Notification notification ->
+        getNotifications(domain, notificationEvent).each { Notification notification ->
             switch (notification.recipientType) {
                 case CURRENT_USER:
                     recipients << carmSecurityService.currentUser.email
