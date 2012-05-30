@@ -37,7 +37,7 @@
             <td class="span6">
                 <g:if test="${notifications?.size()}">
                     <ul>
-                        <g:each in="${notifications}" var="notification">
+                        <g:each in="${ notifications.sort { it.recipientType.name() } }" var="notification">
                             <li>
                                 <carm:formatNotification notification="${notification}"/>
 
