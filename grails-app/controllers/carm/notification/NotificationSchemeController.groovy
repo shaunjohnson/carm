@@ -199,7 +199,10 @@ class NotificationSchemeController {
                     notificationSchemeInstance: notificationInstance.notificationScheme,
                     notificationEventList: generateNotificationEventList(),
                     groupList: [],
-                    userList: userService.listAll()
+                    userList: userService.listAll(),
+                    recipientType: params.recipientType ? NotificationRecipientType.valueOf(params.recipientType) : null,
+                    user: params.user?.id ? userService.get(params.user.id) : null,
+                    emailAddress: params.emailAddress
             ])
         }
     }
