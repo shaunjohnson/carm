@@ -1,9 +1,10 @@
-package carm
+package carm.notification
 
 
 
 import grails.test.mixin.*
-import org.junit.*
+
+import carm.notification.NotificationService
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions

@@ -1,4 +1,4 @@
-package carm
+package carm.notification
 
 import static carm.notification.NotificationEvent.*
 import static carm.notification.NotificationRecipientType.*
