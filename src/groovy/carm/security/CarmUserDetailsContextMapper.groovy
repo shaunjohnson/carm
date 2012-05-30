@@ -15,17 +15,17 @@ class CarmUserDetailsContextMapper implements UserDetailsContextMapper {
     def springSecurityService
 
     @Override
-    public CarmUserDetails mapUserFromContext(DirContextOperations ctx, String username, Collection<GrantedAuthority> authority) {
+    public CarmUserDetails mapUserFromContext(DirContextOperations contextOperations, String username, Collection<GrantedAuthority> authority) {
         User.withTransaction() {
             User user = User.findByUsername(username)
 
             if (!user) {
                 user = new User(
-                        username: ctx.originalAttrs.attrs['uid'].values[0].toString().toLowerCase(),
+                        username: getUserId(contextOperations, username),
+                        fullName: getFullName(contextOperations),
+                        email: getEmail(contextOperations),
                         enabled: true,
-                        fullName: ctx.originalAttrs.attrs['cn'].values[0],
-                        password: "password",
-                        email: ctx.originalAttrs.attrs['mail'].values[0].toString().toLowerCase())
+                        password: "password")
 
                 if (!user.save()) {
                     user.errors.each {
@@ -43,8 +43,8 @@ class CarmUserDetailsContextMapper implements UserDetailsContextMapper {
             }
             else {
                 // Update existing user account with latest full name and email address from LDAP
-                user.fullName = ctx.originalAttrs.attrs['cn'].values[0]
-                user.email = ctx.originalAttrs.attrs['mail'].values[0].toString().toLowerCase()
+                user.fullName = getFullName(contextOperations)
+                user.email = getEmail(contextOperations) ?: user.email
             }
 
             def userDetails = new CarmUserDetails(username, user.password, user.enabled, false, false, false,
@@ -52,6 +52,22 @@ class CarmUserDetailsContextMapper implements UserDetailsContextMapper {
 
             return userDetails
         }
+    }
+
+    private String getUserId(DirContextOperations contextOperations, String username) {
+        def userId = contextOperations.originalAttrs.attrs['uid']?.values[0]?.toString()
+
+        (userId ?: username)?.toLowerCase()
+    }
+
+    private String getFullName(DirContextOperations contextOperations) {
+        def fullName = contextOperations.originalAttrs.attrs['cn']?.values[0]
+
+        fullName ?: "Unknown Name"
+    }
+
+    private String getEmail(DirContextOperations contextOperations) {
+        contextOperations.originalAttrs.attrs['mail']?.values[0]?.toString()?.toLowerCase()
     }
 
     @Override
