@@ -58,23 +58,27 @@ class NotificationSchemeService {
 
         // Create new notification scheme
         NotificationScheme newNotificationScheme = new NotificationScheme()
-        newNotificationScheme.name = generateCopyOfName(notificationScheme)
-        newNotificationScheme.description = notificationScheme.description
-        newNotificationScheme.save()
+        NotificationScheme.withTransaction { status ->
+            newNotificationScheme.name = generateCopyOfName(notificationScheme)
+            newNotificationScheme.description = notificationScheme.description
+            newNotificationScheme.save()
 
-        // Create notifications
-        notificationScheme.notifications.each { notification ->
-            Notification newNotification = new Notification(
-                    notificationScheme: newNotificationScheme,
-                    notificationEvent: notification.notificationEvent,
-                    recipientType: notification.recipientType,
-                    user: notification.user,
-                    emailAddress: notification.emailAddress)
+            // Create notifications
+            notificationScheme.notifications.each { notification ->
+                Notification newNotification = new Notification(
+                        notificationScheme: newNotificationScheme,
+                        notificationEvent: notification.notificationEvent,
+                        recipientType: notification.recipientType,
+                        user: notification.user,
+                        emailAddress: notification.emailAddress)
 
-            newNotificationScheme.addToNotifications(newNotification)
+                newNotificationScheme.addToNotifications(newNotification)
+            }
+
+            if(!newNotificationScheme.save()) {
+                status.setRollbackOnly()
+            }
         }
-
-        newNotificationScheme.save()
 
         log.debug "$prefix returning $newNotificationScheme"
 

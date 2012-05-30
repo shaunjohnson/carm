@@ -212,14 +212,20 @@ class NotificationSchemeController {
         def existingNotificationScheme = notificationSchemeService.get(params.id)
 
         if (existingNotificationScheme) {
-            def notificationSchemeInstance = notificationSchemeService.copy(existingNotificationScheme)
+            try {
+                def notificationSchemeInstance = notificationSchemeService.copy(existingNotificationScheme)
 
-            if (!notificationSchemeInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), notificationSchemeInstance.name])}"
-                redirect(action: "show", id: notificationSchemeInstance.id)
+                if (!notificationSchemeInstance.hasErrors()) {
+                    flash.message = "${message(code: 'default.created.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), notificationSchemeInstance.name])}"
+                    redirect(action: "show", id: notificationSchemeInstance.id)
+                }
+                else {
+                    render(view: "edit", model: [notificationSchemeInstance: notificationSchemeInstance])
+                }
             }
-            else {
-                render(view: "edit", model: [notificationSchemeInstance: notificationSchemeInstance])
+            catch (Exception e) {
+                flash.error = "${message(code: 'default.not.copied.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), existingNotificationScheme.name])}"
+                redirect(action: "show", id: existingNotificationScheme.id)
             }
         }
         else {
