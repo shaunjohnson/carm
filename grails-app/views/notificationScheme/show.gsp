@@ -40,22 +40,27 @@
                         <g:each in="${notifications}" var="notification">
                             <li>
                                 <carm:formatNotification notification="${notification}"/>
-                                <carm:deleteLink action="deleteNotification" id="${notification.id}"
-                                                 showText="false"
-                                                 title="${message(code: 'deleteNotification.label')}">
-                                    <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
-                                </carm:deleteLink>
+
+                                <sec:ifAllGranted roles="ROLE_ADMIN">
+                                    <carm:deleteLink action="deleteNotification" id="${notification.id}"
+                                                     showText="false"
+                                                     title="${message(code: 'deleteNotification.label')}">
+                                        <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
+                                    </carm:deleteLink>
+                                </sec:ifAllGranted>
                             </li>
                         </g:each>
                     </ul>
                 </g:if>
             </td>
             <td class="span2">
-                <img align="top" src='${fam.icon(name: 'add')}' alt="Add"/>
-                <g:link action="addNotification" id="${notificationSchemeInstance.id}"
-                        params="[notificationEvent: notificationEvent]"><g:message
-                        code="addNotification.label"/>
-                </g:link>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <img align="top" src='${fam.icon(name: 'add')}' alt="Add"/>
+                    <g:link action="addNotification" id="${notificationSchemeInstance.id}"
+                            params="[notificationEvent: notificationEvent]"><g:message
+                            code="addNotification.label"/>
+                    </g:link>
+                </sec:ifAllGranted>
             </td>
         </tr>
     </g:each>
