@@ -8,6 +8,7 @@ import carm.security.User
 class NotificationSchemeController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def applicationService
     def notificationService
     def notificationSchemeService
     def userService
@@ -51,7 +52,8 @@ class NotificationSchemeController {
         else {
             [
                     notificationSchemeInstance: notificationSchemeInstance,
-                    notificationsGroupsByEvent: notificationService.findAllNotificationsBySchemeGroupedByEvent(notificationSchemeInstance)
+                    notificationsGroupsByEvent: notificationService.findAllNotificationsBySchemeGroupedByEvent(notificationSchemeInstance),
+                    applicationInstanceList: applicationService.findAllByNotificationScheme(notificationSchemeInstance)
             ]
         }
     }

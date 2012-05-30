@@ -1,4 +1,3 @@
-<%@ page import="carm.notification.NotificationEvent" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -13,59 +12,38 @@
 
 <g:render template="/common/messages"/>
 
-<g:if test="${notificationSchemeInstance?.description}">
-    <carm:plainText value="${notificationSchemeInstance?.description}"/>
-</g:if>
+<ul id="applicationTabs" class="nav nav-tabs">
+    <li class="active">
+        <a href="#summaryTab" data-toggle="tab">
+            <g:message code="summary.label" default="Summary"/>
+        </a>
+    </li>
+    <li>
+        <a href="#applicationsTab" data-toggle="tab">
+            <g:message code="applications.label" default="Applications"/>
+            <span class="badge">${applicationInstanceList.size()}</span>
+        </a>
+    </li>
+</ul>
 
-<table class="table table-striped" style="margin-top: 2em;">
-    <thead>
-    <tr>
-        <th><g:message code="event.label" default="Event"/></th>
-        <th><g:message code="notifications.label" default="Notifications"/></th>
-        <th><g:message code="actions.label" default="Actions"/></th>
-    </tr>
-    </thead>
+<div class="tab-content">
+    <div id="summaryTab" class="tab-pane active">
+        <g:render template="summary" model="[notificationSchemeInstance: notificationSchemeInstance]"/>
+    </div>
 
-    <tbody>
-    <g:each in="${NotificationEvent.values()}" var="notificationEvent">
-        <g:set var="notifications" value="${notificationsGroupsByEvent.get(notificationEvent)}"/>
+    <div id="applicationsTab" class="tab-pane">
+        <g:render template="applications" model="[applicationInstanceList: applicationInstanceList]"/>
+    </div>
+</div>
 
-        <tr>
-            <td class="span4">
-                <strong><carm:formatNotificationEvent notificationEvent="${notificationEvent}"/></strong>
-            </td>
-            <td class="span6">
-                <g:if test="${notifications?.size()}">
-                    <ul>
-                        <g:each in="${ notifications.sort { it.recipientType.name() } }" var="notification">
-                            <li>
-                                <carm:formatNotification notification="${notification}"/>
-
-                                <sec:ifAllGranted roles="ROLE_ADMIN">
-                                    <carm:deleteLink action="deleteNotification" id="${notification.id}"
-                                                     showText="false"
-                                                     title="${message(code: 'deleteNotification.label')}">
-                                        <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
-                                    </carm:deleteLink>
-                                </sec:ifAllGranted>
-                            </li>
-                        </g:each>
-                    </ul>
-                </g:if>
-            </td>
-            <td class="span2">
-                <sec:ifAllGranted roles="ROLE_ADMIN">
-                    <img align="top" src='${fam.icon(name: 'add')}' alt="Add"/>
-                    <g:link action="addNotification" id="${notificationSchemeInstance.id}"
-                            params="[notificationEvent: notificationEvent]"><g:message
-                            code="addNotification.label"/>
-                    </g:link>
-                </sec:ifAllGranted>
-            </td>
-        </tr>
-    </g:each>
-    </tbody>
-</table>
+<r:script>
+    jQuery(function () {
+        jQuery('#applicationTabs a').click(function (e) {
+            e.preventDefault();
+            jQuery(this).tab('show');
+        });
+    });
+</r:script>
 
 </body>
 </html>

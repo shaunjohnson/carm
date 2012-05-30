@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import carm.project.Project
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
+import carm.notification.NotificationScheme
 
 class ApplicationService implements ApplicationContextAware {
 
@@ -177,6 +178,16 @@ class ApplicationService implements ApplicationContextAware {
         }
 
         return applicationsGrouped
+    }
+
+    /**
+     * Finds all Applications filtered by notification scheme
+     *
+     * @param notificationSchemeInstance NotificationScheme used for filtering
+     * @return List of Application objects
+     */
+    List<Application> findAllByNotificationScheme(NotificationScheme notificationSchemeInstance) {
+        Application.findAllByNotificationScheme(notificationSchemeInstance)
     }
 
     /**
