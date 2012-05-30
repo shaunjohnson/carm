@@ -63,7 +63,7 @@ class UserService {
     }
 
     /**
-     * Gets a list of all User objects.
+     * Gets a list of all User objects using provided params.
      *
      * @param params Query parameters
      * @return List of User objects
@@ -75,5 +75,15 @@ class UserService {
                 sort: params?.sort,
                 order: params?.order
         ])
+    }
+
+    /**
+     * Gets a list of all User objects.
+     *
+     * @param params Query parameters
+     * @return List of User objects
+     */
+    List<User> listAll() {
+        User.list()
     }
 }

@@ -10,6 +10,7 @@ class SourceControlUserController {
 
     def sourceControlServerService
     def sourceControlUserService
+    def userService
 
     def index() {
         redirect(action: "list", params: params)
@@ -35,7 +36,7 @@ class SourceControlUserController {
 
             [
                     sourceControlUserInstance: sourceControlUserInstance,
-                    userList: User.list().sort { it.username }
+                    userList: userService.listAll()
             ]
         }
     }
@@ -73,7 +74,7 @@ class SourceControlUserController {
         else {
             [
                     sourceControlUserInstance: sourceControlUserInstance,
-                    userList: User.list().sort { it.username }
+                    userList: userService.listAll()
             ]
         }
     }

@@ -10,6 +10,7 @@ class NotificationSchemeController {
 
     def notificationService
     def notificationSchemeService
+    def userService
 
     def index() {
         redirect(action: "list", params: params)
@@ -174,7 +175,7 @@ class NotificationSchemeController {
                     notificationSchemeInstance: notificationSchemeInstance,
                     notificationEventList: generateNotificationEventList(),
                     groupList: [],
-                    userList: User.list().sort { it.username }
+                    userList: userService.listAll()
             ]
         }
         else {
@@ -198,7 +199,7 @@ class NotificationSchemeController {
                     notificationSchemeInstance: notificationInstance.notificationScheme,
                     notificationEventList: generateNotificationEventList(),
                     groupList: [],
-                    userList: User.list().sort { it.username }
+                    userList: userService.listAll()
             ])
         }
     }

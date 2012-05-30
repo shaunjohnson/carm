@@ -10,6 +10,7 @@ class Role {
 
     static mapping = {
         cache true
+        sort "authority"
     }
 
     static constraints = {

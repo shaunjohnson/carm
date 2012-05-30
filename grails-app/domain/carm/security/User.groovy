@@ -28,6 +28,7 @@ class User {
 
     static mapping = {
         password column: '`password`'
+        sort "fullName"
     }
 
     static hasMany = [sourceControlUsers: SourceControlUser, favorites: Favorite]
@@ -51,7 +52,7 @@ class User {
     }
 
     public String toString() {
-        return username
+        return fullName + " (" + username + ")"
     }
 
     boolean equals(other) {
