@@ -59,8 +59,8 @@ class ApplicationController {
         else {
             def applicationInstance = applicationService.create(projectInstance, params)
             if (!applicationInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
-                redirect(action: "show", id: applicationInstance.id)
+                flash.message = "${message(code: 'application.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
+                redirect(controller: "module", action: "create", params: ['application.id': applicationInstance.id])
             }
             else {
                 render(view: "create", model: [
