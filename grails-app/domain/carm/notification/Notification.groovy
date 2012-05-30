@@ -18,11 +18,16 @@ class Notification {
 
     static constraints = {
         notificationEvent(nullable: false)
-        recipientType(nullable: false)
-        user(nullable: true)
-        emailAddress(maxSize: 255, nullable: true, validator: { val, obj ->
-            if (obj.recipientType == NotificationRecipientType.EMAIL_ADDRESS) {
-                return StringUtils.isNotBlank(val)
+        recipientType(nullable: false, validator: { val, obj ->
+            if (val == NotificationRecipientType.CURRENT_USER || val == NotificationRecipientType.PROJECT_ADMINISTRATORS ||
+                    val == NotificationRecipientType.APPLICATION_WATCHERS || val == NotificationRecipientType.PROJECT_WATCHERS) {
+                return !(obj.notificationScheme.notifications.find { it.recipientType == val })
+            }
+        })
+
+        user(nullable: true, unique: ['notificationScheme', 'notificationEvent'], validator: { val, obj ->
+            if (obj.recipientType == NotificationRecipientType.USER) {
+                return val != null
             }
 
             return true
@@ -36,9 +41,9 @@ class Notification {
 //            return true
 //        })
 
-        user(validator: { val, obj ->
-            if (obj.recipientType == NotificationRecipientType.USER) {
-                return val != null
+        emailAddress(maxSize: 255, nullable: true, unique: ['notificationScheme', 'notificationEvent'], validator: { val, obj ->
+            if (obj.recipientType == NotificationRecipientType.EMAIL_ADDRESS) {
+                return StringUtils.isNotBlank(val)
             }
 
             return true
