@@ -4,12 +4,14 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
 import carm.exceptions.DomainInUseException
 import carm.application.Application
+import org.springframework.context.i18n.LocaleContextHolder
 
 class NotificationSchemeService {
 
     static transactional = false
 
     def grailsApplication
+    def messageSource
 
     /**
      * Determines if the provided test state is in use.
@@ -28,6 +30,55 @@ class NotificationSchemeService {
      */
     int count() {
         NotificationScheme.count()
+    }
+
+    private generateCopyOfName(NotificationScheme notificationScheme) {
+        String copyOfName = messageSource.getMessage("copyOf.label", [notificationScheme.name].toArray(), LocaleContextHolder.locale)
+
+        int index = 1
+        while (NotificationScheme.findByName(copyOfName)) {
+            copyOfName = messageSource.getMessage("copyNOf.label", [index++, notificationScheme.name].toArray(), LocaleContextHolder.locale)
+        }
+
+        copyOfName
+    }
+
+    /**
+     * Creates and saves a copy of an existing NotificationScheme instance.
+     *
+     * @param notificationScheme ID of existing NotificationScheme
+     * @return newly created NotificationScheme object
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    NotificationScheme copy(NotificationScheme notificationScheme) {
+        def prefix = "create() :"
+
+        log.debug "$prefix entered"
+
+        // Create new notification scheme
+        NotificationScheme newNotificationScheme = new NotificationScheme()
+        newNotificationScheme.name = generateCopyOfName(notificationScheme)
+        newNotificationScheme.description = notificationScheme.description
+        newNotificationScheme.save()
+
+        // Create notifications
+        notificationScheme.notifications.each { notification ->
+            Notification newNotification = new Notification(
+                    notificationScheme: newNotificationScheme,
+                    notificationEvent: notification.notificationEvent,
+                    recipientType: notification.recipientType,
+                    user: notification.user,
+                    emailAddress: notification.emailAddress)
+
+            newNotificationScheme.addToNotifications(newNotification)
+        }
+
+        newNotificationScheme.save()
+
+        log.debug "$prefix returning $newNotificationScheme"
+
+        newNotificationScheme
     }
 
     /**

@@ -6,6 +6,12 @@
             </div>
         </carm:ifNotInUse>
 
+        <div class="section-action-icon copy-action">
+            <g:link action="copy" id="${notificationSchemeInstance.id}"><g:message
+                    code="default.button.copy.label"
+                    default="Copy"/></g:link>
+        </div>
+
         <div class="section-action-icon edit-action">
             <g:link action="edit" id="${notificationSchemeInstance.id}"><g:message
                     code="default.button.edit.label"

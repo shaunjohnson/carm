@@ -203,4 +203,25 @@ class NotificationSchemeController {
             ])
         }
     }
+
+    @Secured(['ROLE_ADMIN'])
+    def copy() {
+        def existingNotificationScheme = notificationSchemeService.get(params.id)
+
+        if (existingNotificationScheme) {
+            def notificationSchemeInstance = notificationSchemeService.copy(existingNotificationScheme)
+
+            if (!notificationSchemeInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), notificationSchemeInstance.name])}"
+                redirect(action: "show", id: notificationSchemeInstance.id)
+            }
+            else {
+                render(view: "edit", model: [notificationSchemeInstance: notificationSchemeInstance])
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), params.id])}"
+            redirect(action: "list")
+        }
+    }
 }

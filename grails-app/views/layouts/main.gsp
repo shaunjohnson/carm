@@ -62,6 +62,10 @@
 }
 
     /* Actions */
+.copy-action {
+    background: url("${fam.icon(name: 'page_white_copy')}") no-repeat left;
+}
+
 .delete-action {
     background: url("${fam.icon(name: 'delete')}") no-repeat left;
 }
