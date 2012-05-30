@@ -322,7 +322,8 @@ class CarmTagLib {
                     out << bc.listModules(isFirst: true)
                 }
                 else {
-                    out << bc.showProject(project: domain.application.project, isFirst: true)
+                    out << bc.listProjects(isFirst: true)
+                    out << bc.showProject(project: domain.application.project)
                     out << bc.showApplication(application: domain.application)
 
                     if (action == 'show') {
