@@ -2,6 +2,7 @@ package carm.notification
 
 import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
+import org.apache.commons.lang.StringUtils
 
 class Notification {
     def activityTraceService
@@ -19,7 +20,29 @@ class Notification {
         notificationEvent(nullable: false)
         recipientType(nullable: false)
         user(nullable: true)
-        emailAddress(maxSize: 255, nullable: true)
+        emailAddress(maxSize: 255, nullable: true, validator: { val, obj ->
+            if (obj.recipientType == NotificationRecipientType.EMAIL_ADDRESS) {
+                return StringUtils.isNotBlank(val)
+            }
+
+            return true
+        })
+
+//        userGroup(validator: { val, obj ->
+//            if (obj.recipientType == NotificationRecipientType.GROUP) {
+//                return val != null
+//            }
+//
+//            return true
+//        })
+
+        user(validator: { val, obj ->
+            if (obj.recipientType == NotificationRecipientType.USER) {
+                return val != null
+            }
+
+            return true
+        })
     }
 
     static belongsTo = [notificationScheme: NotificationScheme]

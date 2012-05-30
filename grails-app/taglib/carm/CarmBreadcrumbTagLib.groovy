@@ -64,6 +64,15 @@ class CarmBreadcrumbTagLib {
     /**
      * Renders a create link.
      */
+    def addNotificationLabel = { attrs ->
+        def entityName = attrs.entityName
+        def isFirst = attrs.isFirst
+        out << text(code: "default.addNotification.label", args: [entityName], isFirst: isFirst)
+    }
+
+    /**
+     * Renders a create link.
+     */
     def createLabel = { attrs ->
         def entityName = attrs.entityName
         def isFirst = attrs.isFirst

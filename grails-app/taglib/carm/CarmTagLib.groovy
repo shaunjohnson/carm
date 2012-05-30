@@ -109,15 +109,22 @@ class CarmTagLib {
         }
     }
 
-    def deleteLink = { attrs ->
+    def deleteLink = { attrs, body ->
         def id = attrs.id
+        def title = attrs.title
         def controller = attrs.controller ?: controllerName
-        def action = attrs.action ?: actionName
+        def action = attrs.action ?: "delete"
+        def showText = attrs.showText ? attrs.boolean('showText') : true
 
-        out << "<a href=\"#\" onclick=\"return displayDelete('"
-        out << createLink(action: 'delete', id: id)
+        out << "<a href=\"#\" title=\"" << title << "\" onclick=\"return displayDelete('"
+        out << createLink(action: action, id: id)
         out << "');\">"
-        out << message(code: "default.button.delete.label", default: "Delete")
+        out << body()
+
+        if (showText) {
+            out << message(code: "default.button.delete.label", default: "Delete")
+        }
+
         out << "</a>"
     }
 
@@ -416,6 +423,10 @@ class CarmTagLib {
                 else if (action == 'edit' || action == 'update') {
                     out << bc.showNotificationScheme(notificationScheme: domain)
                     out << bc.editLabel(entityName: entityName)
+                }
+                else if (action == 'addNotification' || action == 'saveNotification') {
+                    out << bc.showNotificationScheme(notificationScheme: domain)
+                    out << bc.addNotificationLabel(entityName: entityName)
                 }
             }
         }
@@ -908,12 +919,13 @@ class CarmTagLib {
                 break;
             case NotificationRecipientType.GROUP:
                 out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
-                out << " (" << notification.userGroup << ")"
+                // out << " (" << notification.userGroup << ")"
+                out << " (User Group Name)"
                 break;
             case NotificationRecipientType.USER:
                 out << message(code: "carm.notification.NotificationRecipientType.${recipientType}", default: recipientType.name())
                 out << " ("
-                out << g.link(controller: "user", action: "show", id: notification.user.id) { notification.user.name }
+                out << g.link(controller: "user", action: "show", id: notification.user.id) { notification.user.fullName }
                 out << ")"
                 break;
             case NotificationRecipientType.EMAIL_ADDRESS:

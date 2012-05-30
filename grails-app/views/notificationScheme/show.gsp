@@ -40,10 +40,11 @@
                         <g:each in="${notifications}" var="notification">
                             <li>
                                 <carm:formatNotification notification="${notification}"/>
-                                <a href="#" onclick="return deleteNotification(${notification.id});"
-                                   title="${message(code: 'deleteNotification.label')}">
+                                <carm:deleteLink action="deleteNotification" id="${notification.id}"
+                                                 showText="false"
+                                                 title="${message(code: 'deleteNotification.label')}">
                                     <img align="top" src='${fam.icon(name: 'delete')}' alt="Delete"/>
-                                </a>
+                                </carm:deleteLink>
                             </li>
                         </g:each>
                     </ul>
@@ -51,7 +52,8 @@
             </td>
             <td class="span2">
                 <img align="top" src='${fam.icon(name: 'add')}' alt="Add"/>
-                <g:link action="addNotification" id="${notificationSchemeInstance.id}"><g:message
+                <g:link action="addNotification" id="${notificationSchemeInstance.id}"
+                        params="[notificationEvent: notificationEvent]"><g:message
                         code="addNotification.label"/>
                 </g:link>
             </td>

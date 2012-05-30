@@ -16,4 +16,8 @@ public enum NotificationEvent {
     APPLICATION_RELEASE_RELEASED,
     APPLICATION_RELEASE_COMPLETED,
     APPLICATION_RELEASE_ARCHIVED
+
+    String getKey() {
+        name()
+    }
 }

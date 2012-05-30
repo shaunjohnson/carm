@@ -3,6 +3,7 @@ package carm.notification
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import carm.exceptions.DomainInUseException
+import carm.security.User
 
 class NotificationSchemeController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
@@ -121,13 +122,60 @@ class NotificationSchemeController {
     }
 
     @Secured(['ROLE_ADMIN'])
+    def deleteNotification() {
+        def notificationInstance = notificationSchemeService.getNotification(params.id)
+        def notificationSchemeId = notificationInstance.notificationScheme.id
+        if (notificationInstance) {
+            NotificationEvent notificationEvent = notificationInstance.notificationEvent
+            NotificationRecipientType recipientType = notificationInstance.recipientType
+
+            try {
+                notificationSchemeService.deleteNotification(notificationInstance)
+                flash.message = message(code: 'notification.deleted.message', args: [
+                        message(code: "carm.notification.NotificationRecipientType.${recipientType.name()}", default: recipientType.name()),
+                        message(code: "carm.notification.NotificationEvent.${notificationEvent.name()}", default: notificationEvent.name())])
+
+                redirect(action: "show", id: notificationSchemeId)
+            }
+            catch (DataIntegrityViolationException e) {
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'notification.label', default: 'Notification'), params.id])}"
+                redirect(action: "show", id: notificationSchemeId)
+            }
+            catch (DomainInUseException e) {
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'notification.label', default: 'Notification'), params.id])}"
+                redirect(action: "show", id: notificationSchemeId)
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'notification.label', default: 'Notification'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    private generateNotificationEventList() {
+        NotificationEvent.values().collect {
+            [
+                    key: it.key,
+                    name: message(code: "carm.notification.NotificationEvent.${it.key}", default: it.name())
+            ]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
     def addNotification() {
         def notificationSchemeInstance = notificationSchemeService.get(params.id)
         if (notificationSchemeInstance) {
             def notificationInstance = new Notification()
             notificationInstance.notificationScheme = notificationSchemeInstance
             notificationInstance.properties = params
-            return [notificationInstance: notificationInstance]
+
+            [
+                    notificationInstance: notificationInstance,
+                    notificationSchemeInstance: notificationSchemeInstance,
+                    notificationEventList: generateNotificationEventList(),
+                    groupList: [],
+                    userList: User.list().sort { it.username }
+            ]
         }
         else {
             flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), params.id])}"
@@ -139,11 +187,19 @@ class NotificationSchemeController {
     def saveNotification() {
         def notificationInstance = notificationSchemeService.createNotification(params)
         if (!notificationInstance.hasErrors()) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'notificationScheme.label', default: 'NotificationScheme'), notificationInstance.id])}"
+            flash.message = message(code: 'notification.created.message', args: [
+                    message(code: "carm.notification.NotificationRecipientType.${notificationInstance.recipientType.name()}", default: notificationInstance.recipientType.name()),
+                    message(code: "carm.notification.NotificationEvent.${notificationInstance.notificationEvent.name()}", default: notificationInstance.notificationEvent.name())])
             redirect(action: "show", id: notificationInstance.notificationScheme.id)
         }
         else {
-            render(view: "addNotification", model: [notificationInstance: notificationInstance])
+            render(view: "addNotification", model: [
+                    notificationInstance: notificationInstance,
+                    notificationSchemeInstance: notificationInstance.notificationScheme,
+                    notificationEventList: generateNotificationEventList(),
+                    groupList: [],
+                    userList: User.list().sort { it.username }
+            ])
         }
     }
 }

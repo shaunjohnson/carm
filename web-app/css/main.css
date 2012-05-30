@@ -20,7 +20,7 @@ label {
     font-weight: bold;
 }
 
-label.checkbox {
+label.checkbox, label.radio {
     font-weight: inherit;
 }
 

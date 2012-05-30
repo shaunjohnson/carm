@@ -52,6 +52,22 @@ class NotificationSchemeService {
         notificationScheme
     }
 
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    Notification createNotification(Map params) {
+        def prefix = "createNotification() :"
+
+        log.debug "$prefix entered"
+
+        Notification notification = new Notification()
+        notification.properties = params
+        notification.save()
+
+        log.debug "$prefix returning $notification"
+
+        notification
+    }
+
     /**
      * Deletes the provided NotificationScheme object.
      *
@@ -74,6 +90,18 @@ class NotificationSchemeService {
         log.debug "$prefix leaving"
     }
 
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void deleteNotification(Notification notification) {
+        def prefix = "deleteNotification() :"
+
+        log.debug "$prefix entered, notification=$notification"
+
+        notification.delete()
+
+        log.debug "$prefix leaving"
+    }
+
     /**
      * Gets the NotificationScheme object with the provided ID.
      *
@@ -82,6 +110,16 @@ class NotificationSchemeService {
      */
     NotificationScheme get(Serializable id) {
         NotificationScheme.get(id)
+    }
+
+    /**
+     * Gets the Notification object with the provided ID.
+     *
+     * @param id ID of Notification object
+     * @return Matching Notification object
+     */
+    Notification getNotification(Serializable id) {
+        Notification.get(id)
     }
 
     /**
