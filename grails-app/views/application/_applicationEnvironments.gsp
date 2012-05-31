@@ -26,9 +26,9 @@
             ${deploymentEnvironment.name.encodeAsHTML()}
         </g:link></h4>
 
-        <div style="position: relative;">
+        <div>
             <g:if test="${maxRecordsAllowed <= deploymentGroup.deploymentListCount}">
-                <div style="float:right; position: absolute; bottom: 0; right: 0;">
+                <div style="float:right;">
                     <carm:showMore controller="${params.controller}" action="ajaxShowMoreDeployments"
                                    id="${applicationInstance.id}_${deploymentEnvironment.id}"
                                    appendId="environmentDeploymentsBlock${deploymentEnvironment.id}"
@@ -40,9 +40,11 @@
             </g:if>
 
             <div style="float:left;">
-                <table id="environmentDeploymentsBlock${deploymentEnvironment.id}" class="offset-half">
+                <table class="offset-half">
+                    <tbody id="environmentDeploymentsBlock${deploymentEnvironment.id}">
                     <g:render template="applicationEnvironmentsBlock"
                               model="[deploymentList: deploymentGroup.deploymentList]"/>
+                    </tbody>
                 </table>
             </div>
 
