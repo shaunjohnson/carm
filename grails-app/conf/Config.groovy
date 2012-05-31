@@ -197,10 +197,11 @@ ui {
     }
     applicationDeployment {
         listMax = 25
+        maxRecords = 5
     }
     applicationRelease {
         listMax = 25
-        maxRecords = 3
+        maxRecords = 5
     }
     applicationReleaseHistory {
         listMax = 25

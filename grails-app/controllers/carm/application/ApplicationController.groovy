@@ -17,6 +17,7 @@ class ApplicationController {
     def notificationSchemeService
     def sourceControlRepositoryService
     def projectService
+    def systemDeploymentEnvironmentService
     def systemEnvironmentService
 
     def index() {
@@ -83,9 +84,10 @@ class ApplicationController {
         else {
             def deployments = [:]
 
-            applicationInstance?.sysEnvironment?.environments?.each { SystemDeploymentEnvironment environment ->
-                deployments[environment] = [
-                        lastDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, environment)
+            applicationInstance?.sysEnvironment?.environments?.each { SystemDeploymentEnvironment deploymentEnvironment ->
+                deployments[deploymentEnvironment] = [
+                        deploymentList: applicationDeploymentService.findLatestDeployment(applicationInstance, deploymentEnvironment),
+                        deploymentListCount: applicationDeploymentService.countByApplicationAndDeploymentEnvironment(applicationInstance, deploymentEnvironment)
                 ]
             }
 
@@ -97,6 +99,19 @@ class ApplicationController {
                     pendingTasks: applicationService.findAllPendingTasks(applicationInstance)
             ]
         }
+    }
+
+    def ajaxShowMoreDeployments() {
+        def id = params.id?.split("_")
+        def applicationInstance = applicationService.get(id[0])
+        def environmentInstance = systemDeploymentEnvironmentService.get(id[1])
+        def deploymentList = []
+
+        if (applicationInstance && environmentInstance) {
+            deploymentList = applicationDeploymentService.findAllCompletedByApplicationAndDeploymentEnvironment(applicationInstance, environmentInstance, params)
+        }
+
+        render(template: "applicationEnvironmentsBlock", model: [deploymentList: deploymentList])
     }
 
     def ajaxShowMoreReleases() {

@@ -12,58 +12,47 @@
     </div>
 </div>
 
-<g:if test="${applicationInstance?.sysEnvironment}">
-    <table class="table">
-        <thead>
-        <tr>
-            <th><g:message code="environment.label"/></th>
-            <th><g:message code="lastRelease.label"/></th>
-            <th><g:message code="releasedOn.label"/></th>
-            <th><g:message code="actions.label"/></th>
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${applicationInstance.sysEnvironment.environments}" var="deploymentEnvironment">
-            <g:set var="deployment" value="${deployments[deploymentEnvironment].lastDeployment}"/>
+<g:set var="maxRecordsAllowed" value="${grailsApplication.config.ui.applicationDeployment.maxRecords}"/>
 
-            <tr>
-                <td>
-                    <g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
-                            title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">
-                        ${deploymentEnvironment.name.encodeAsHTML()}
-                    </g:link>
-                </td>
-                <g:if test="${deployment}">
-                    <td>
-                        <g:link controller="applicationRelease" action="show" id="${deployment.applicationRelease.id}"
-                                title="${message(code: "showApplicationRelease.label", default: "Show Application Release")}">
-                            ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
-                        </g:link>
-                    </td>
-                    <td>
-                        <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
-                    </td>
-                    <td style="white-space: nowrap;">
-                        <g:link class="environment-action" controller="applicationDeployment" action="show"
-                                id="${deployment.id}"
-                                title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}"><img
-                                src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/></g:link>
-                        <g:link class="environment-action" controller="applicationDeployment" action="show"
-                                id="${deployment.id}"
-                                title="${message(code: "promote.label", default: "Promote")}"><img
-                                src="${fam.icon(name: 'page_white_get')}" alt="Promote"/>
-                        </g:link>
-                    </td>
-                </g:if>
-                <g:else>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </g:else>
-            </tr>
-        </g:each>
-        </tbody>
-    </table>
+<g:if test="${applicationInstance?.sysEnvironment}">
+    <g:set var="applicationDeploymentsTotal" value="100"/>
+
+    <g:each in="${applicationInstance.sysEnvironment.environments}" var="deploymentEnvironment"
+            status="environmentIndex">
+        <g:set var="deploymentGroup" value="${deployments[deploymentEnvironment]}"/>
+
+        <h4><g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
+                    title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">
+            ${deploymentEnvironment.name.encodeAsHTML()}
+        </g:link></h4>
+
+        <div style="position: relative;">
+            <g:if test="${maxRecordsAllowed <= deploymentGroup.deploymentListCount}">
+                <div style="float:right; position: absolute; bottom: 0; right: 0;">
+                    <carm:showMore controller="${params.controller}" action="ajaxShowMoreDeployments"
+                                   id="${applicationInstance.id}_${deploymentEnvironment.id}"
+                                   appendId="environmentDeploymentsBlock${deploymentEnvironment.id}"
+                                   offset="1"
+                                   max="${deploymentGroup.deploymentListCount}"
+                                   step="${maxRecordsAllowed}"
+                                   mini="true"/>
+                </div>
+            </g:if>
+
+            <div style="float:left;">
+                <table id="environmentDeploymentsBlock${deploymentEnvironment.id}" class="offset-half">
+                    <g:render template="applicationEnvironmentsBlock"
+                              model="[deploymentList: deploymentGroup.deploymentList]"/>
+                </table>
+            </div>
+
+            <div class="clearing"></div>
+        </div>
+
+        <g:if test="${environmentIndex + 1 < applicationInstance.sysEnvironment.environments.size()}">
+            <hr/>
+        </g:if>
+    </g:each>
 
     <r:script>
         jQuery(function () {

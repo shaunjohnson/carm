@@ -33,12 +33,32 @@ class ApplicationDeploymentService {
     /**
      * Returns a count of all ApplicationDeployment objects filtered by Application.
      *
+     * @param application Application for filtering
      * @return Total number of ApplicationDeployment objects filtered by Application.
      */
     int countByApplication(Application application) {
         ApplicationDeployment.executeQuery(
                 'select count(ad) from ApplicationDeployment ad where ad.applicationRelease.application = ?',
                 [application])[0] as int
+    }
+
+    /**
+     * Returns a count of all ApplicationDeployment objects filter by Application and deployment environment.
+     *
+     * @param application Application for filtering
+     * @param deploymentEnvironment SystemDeploymentEnvironment for filtering
+     * @return Total number of ApplicationDeployment objects filtered by Application and deployment environment.
+     */
+    int countByApplicationAndDeploymentEnvironment(Application application, SystemDeploymentEnvironment deploymentEnvironment) {
+        ApplicationDeployment.executeQuery("""
+                select
+                    count(ad)
+                from
+                    ApplicationDeployment ad
+                where
+                    ad.applicationRelease.application = :application
+                    and ad.deploymentEnvironment = :deploymentEnvironment
+                """, [application: application, deploymentEnvironment: deploymentEnvironment])[0] as int
     }
 
     /**
@@ -447,17 +467,38 @@ class ApplicationDeploymentService {
      * @param environment SystemDeploymentEnvironment for querying
      * @return Matching ApplicationDeployment object
      */
-    ApplicationDeployment findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
-        def results = ApplicationDeployment.createCriteria().list {
-            createAlias("applicationRelease", "applicationRelease")
-            eq("deploymentEnvironment", environment)
-            eq("applicationRelease.application", application)
-            inList("deploymentState", ApplicationDeploymentState.deployedStates)
-            order("completedDeploymentDate", "desc")
-            maxResults(1)
-        }
+    List<ApplicationDeployment> findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
+        ApplicationDeployment.executeQuery("""
+            from
+                ApplicationDeployment ad
+            where
+                ad.deploymentEnvironment = :deploymentEnvironment
+                and ad.applicationRelease.application = :application
+                and ad.deploymentState in (:deployedStates)
+            order by
+                ad.completedDeploymentDate desc
+        """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
+                [max:  1])
+    }
 
-        return results.size() ? results[0] : null
+    List<ApplicationDeployment> findAllCompletedByApplicationAndDeploymentEnvironment(Application application, SystemDeploymentEnvironment environment, Map params) {
+        int offset = params?.offset?.toInteger() ?: 0
+        int max = Math.min(params?.max?.toInteger() ?: 100, grailsApplication.config.ui.applicationDeployment.maxRecords)
+
+        println "offset = " + offset
+        println "max = " + max
+
+        ApplicationDeployment.executeQuery("""
+            from
+                ApplicationDeployment ad
+            where
+                ad.deploymentEnvironment = :deploymentEnvironment
+                and ad.applicationRelease.application = :application
+                and ad.deploymentState in (:deployedStates)
+            order by
+                ad.completedDeploymentDate desc
+        """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
+                [offset: offset, max: max])
     }
 
     /**
