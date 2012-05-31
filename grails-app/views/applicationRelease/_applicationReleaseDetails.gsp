@@ -32,7 +32,7 @@
             <g:message code="applicationRelease.releaseState.label" default="Release State"/>
         </td>
         <td valign="top" class="value">
-            ${fieldValue(bean: applicationReleaseInstance, field: "releaseState")}
+            <carm:formatApplicationReleaseState releaseState="${applicationReleaseInstance.releaseState}"/>
         </td>
     </tr>
     <tr class="prop">

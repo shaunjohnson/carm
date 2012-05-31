@@ -18,7 +18,7 @@
 
             <div>
                 <span class="label label-info">
-                    ${applicationReleaseInstance.releaseState.encodeAsHTML()}
+                    <carm:formatApplicationReleaseState releaseState="${applicationReleaseInstance.releaseState}"/>
                 </span>
             </div>
         </div>

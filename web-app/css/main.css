@@ -211,16 +211,26 @@ table.ol td.olContent {
     border: 1px solid #EAEAEA;
     border-radius: 5px;
     cursor: pointer;
-    padding: 5px 0;
+    padding: 5px;
     text-align: center;
     vertical-align: middle;
 }
 
-.showMoreButton:hover {
+.showMoreButton-mini {
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    padding: 2px 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.showMoreButton:hover, .showMoreButton-mini:hover {
     background-color: #eeeeee;
 }
 
-.showMoreButton, .showMoreButton * {
+.showMoreButton, .showMoreButton-mini, .showMoreButton *, .showMoreButton-mini * {
     color: #a6a6a6;
     font-size: 11px;
 }

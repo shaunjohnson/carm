@@ -42,7 +42,7 @@
                 ${fieldValue(bean: applicationReleaseInstance, field: "releaseNumber")}
             </td>
             <td>
-                ${fieldValue(bean: applicationReleaseInstance, field: "releaseState")}
+                <carm:formatApplicationReleaseState releaseState="${applicationReleaseInstance.releaseState}"/>
             </td>
             <td>
                 <div class="expander">

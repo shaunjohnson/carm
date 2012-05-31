@@ -831,12 +831,16 @@ class CarmTagLib {
         def controller = attrs.controller
         def action = attrs.action
         def id = attrs.id
+        def offset = attrs.offset ?: 0
         def max = attrs.max
         def step = attrs.step
+        boolean mini = attrs.boolean('mini')
         def clientId = "showMore_${controller}_${action}_${id}"
         def appendId = attrs.appendId
 
-        out << render(template: "/common/showMore", model: [clientId: clientId, controller: controller, action: action, id: id, max: max, step: step, appendId: appendId])
+        out << render(template: "/common/showMore", model: [clientId: clientId, controller: controller, action: action,
+                id: id, offset: offset, max: max, step: step, appendId: appendId, styleClass: attrs.styleClass,
+                style: attrs.style, mini: mini])
     }
 
     def formDividerRow = { attrs ->
@@ -848,6 +852,14 @@ class CarmTagLib {
 
         if (deploymentState) {
             out << message(code: "carm.deployment.ApplicationDeploymentState.${deploymentState}", default: deploymentState.toString())
+        }
+    }
+
+    def formatApplicationReleaseState = { attrs ->
+        def releaseState = attrs.releaseState
+
+        if (releaseState) {
+            out << message(code: "carm.release.ApplicationReleaseState.${releaseState}", default: releaseState.toString())
         }
     }
 
