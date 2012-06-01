@@ -24,12 +24,12 @@
         </div>
 
         <div class="span5">
-            <carmsec:isProjectOwner application="${applicationReleaseInstance.application}">
-                <div class="btn-group" style="margin-bottom: 0.5em;">
-                    <g:link class="btn btn-mini" controller="applicationRelease" action="show"
-                            id="${applicationReleaseInstance.id}">
-                        <g:message code="default.button.view.label"/>
-                    </g:link>
+            <div class="btn-group" style="margin-bottom: 0.5em;">
+                <g:link class="btn btn-mini" controller="applicationRelease" action="show"
+                        id="${applicationReleaseInstance.id}">
+                    <g:message code="default.button.view.label"/>
+                </g:link>
+                <carmsec:isProjectOwner application="${applicationReleaseInstance.application}">
                     <g:link class="btn btn-mini" controller="applicationRelease" action="edit"
                             id="${applicationReleaseInstance.id}">
                         <g:message code="default.button.edit.label"/>
@@ -40,8 +40,8 @@
                             <g:message code="deploy.label" default="Deploy"/>
                         </g:link>
                     </carm:isDeployable>
-                </div>
-            </carmsec:isProjectOwner>
+                </carmsec:isProjectOwner>
+            </div>
 
             <div class="expander">
                 ${applicationReleaseInstance.changeLog?.decodeHTML()}

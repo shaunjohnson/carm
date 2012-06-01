@@ -17,14 +17,15 @@
                         title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
                     <g:message code="default.button.view.label"/>
                 </g:link>
-                <g:link class="btn btn-mini" controller="applicationDeployment" action="edit" id="${deployment.id}"
-                        title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
-                    <g:message code="default.button.edit.label"/>
-                </g:link>
-                <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
-                        title="${message(code: "promote.label", default: "Promote")}">
-                    <g:message code="promote.label" default="Promote"/>
-                </g:link>
+                <carmsec:isProjectOwner applicationDeployment="${deployment}">
+                    <g:link class="btn btn-mini" controller="applicationDeployment" action="edit" id="${deployment.id}">
+                        <g:message code="default.button.edit.label"/>
+                    </g:link>
+%{--                    <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
+                            title="${message(code: "promote.label", default: "Promote")}">
+                        <g:message code="promote.label" default="Promote"/>
+                    </g:link>--}%
+                </carmsec:isProjectOwner>
             </div>
         </td>
     </tr>
