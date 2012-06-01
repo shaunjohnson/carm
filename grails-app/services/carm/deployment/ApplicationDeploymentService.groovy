@@ -18,7 +18,6 @@ class ApplicationDeploymentService {
 
     def carmSecurityService
     def grailsApplication
-    def linkGeneratorService
     def notificationService
 
     /**

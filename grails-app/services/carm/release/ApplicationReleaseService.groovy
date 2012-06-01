@@ -21,7 +21,6 @@ class ApplicationReleaseService implements ApplicationContextAware {
     def applicationService
     def carmSecurityService
     def grailsApplication
-    def linkGeneratorService
     def moduleService
     def notificationService
     def springSecurityService
