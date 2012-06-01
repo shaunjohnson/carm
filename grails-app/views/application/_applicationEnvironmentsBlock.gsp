@@ -1,32 +1,31 @@
 <g:each in="${deploymentList}" var="deployment">
     <tr>
-        <td class="span1" style="text-align: left;">
-            <g:if test="${deployment.requestedDeploymentDate > new java.util.Date()}">
-                <span class="label label-important">Upcoming</span>
-            </g:if>
+        <td style="width: 30px;">
+            <carm:upcomingIndicator applicationDeployment="${deployment}"/>
         </td>
-        <td class="span1" style="text-align: center;">
-            <h5>
-                <g:link controller="applicationRelease" action="show"
-                        id="${deployment.applicationRelease.id}"
-                        title="${message(code: "showApplicationRelease.label", default: "Show Application Release")}">
-                    ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
-                </g:link>
-            </h5>
+        <td class="span1">
+            <h4 style="text-align: center;">
+                ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
+            </h4>
         </td>
         <td class="span2" style="text-align: center;">
             <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>
         </td>
-        <td class="span2" style="text-align: center; white-space: nowrap;">
-            <g:link class="environment-action" controller="applicationDeployment" action="show"
-                    id="${deployment.id}"
-                    title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}"><img
-                    src="${fam.icon(name: 'page_white_text')}" alt="Deployment"/></g:link>
-            <g:link class="environment-action" controller="applicationDeployment" action="show"
-                    id="${deployment.id}"
-                    title="${message(code: "promote.label", default: "Promote")}"><img
-                    src="${fam.icon(name: 'page_white_get')}" alt="Promote"/>
-            </g:link>
+        <td class="span3" style="text-align: center; white-space: nowrap;">
+            <div class="btn-group" style="margin-bottom: 0.5em;">
+                <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
+                        title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
+                    <g:message code="default.button.view.label"/>
+                </g:link>
+                <g:link class="btn btn-mini" controller="applicationDeployment" action="edit" id="${deployment.id}"
+                        title="${message(code: "showApplicationDeployment.label", default: "Show Application Deployment")}">
+                    <g:message code="default.button.edit.label"/>
+                </g:link>
+                <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
+                        title="${message(code: "promote.label", default: "Promote")}">
+                    <g:message code="promote.label" default="Promote"/>
+                </g:link>
+            </div>
         </td>
     </tr>
 </g:each>

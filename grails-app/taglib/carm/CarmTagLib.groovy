@@ -1422,4 +1422,14 @@ class CarmTagLib {
 
         writer << '</ul></div>'
     }
+
+    def upcomingIndicator = { attrs ->
+        def applicationDeployment = attrs.applicationDeployment
+
+        if (applicationDeploymentService.isUpcoming(applicationDeployment)) {
+            out << '<span class="label label-important" title="'
+            out << message(code: 'upcoming.label')
+            out << '"><i class="icon-flag icon-white"></i></span>'
+        }
+    }
 }

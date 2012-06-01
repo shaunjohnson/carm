@@ -445,6 +445,28 @@ class ApplicationDeploymentService {
     }
 
     /**
+     * Determines if the provided deployment is upcoming or not.
+     *
+     * @param applicationDeployment ApplicationDeployment to test
+     * @return true if the deployment is upcoming, otherwise false
+     */
+    boolean isUpcoming(ApplicationDeployment applicationDeployment) {
+        if (applicationDeployment) {
+//            if (!ApplicationDeploymentState.deployedStates.contains(applicationDeployment.deploymentState)) {
+//                return true;
+//            }
+
+            // TODO Temporarily change logic so that upcoming deployments are based on completed date
+            // TODO Remove this logic when the workflow is implemented
+            if (applicationDeployment.completedDeploymentDate > new Date()) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    /**
      * Finds the last ApplicationDeployment created for the provided application release.
      *
      * @param applicationRelease ApplicationRelease used for filtering
