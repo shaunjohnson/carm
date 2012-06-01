@@ -10,14 +10,14 @@
         <g:message code="releases.label" default="Releases"/>
     </div>
 
-    <div class="section-action">
-        <g:if test="${applicationReleasesTotal > maxRecordsAllowed}">
+    <g:if test="${applicationReleasesTotal > maxRecordsAllowed}">
+        <div class="section-action">
             <g:link class="list" controller="application" action="listReleases"
                     params="['id': applicationInstance?.id]">
                 <g:message code="allReleases.label" default="All Releases"/>
             </g:link>
-        </g:if>
-    </div>
+        </div>
+    </g:if>
 
     <carmsec:isProjectOwner application="${applicationInstance}">
         <div class="section-action-icon new-application-release-action">
