@@ -52,6 +52,3 @@
         <hr/>
     </g:if>
 </g:each>
-<script type="text/javascript">
-    jQuery("button.button").button();
-</script>

@@ -261,7 +261,6 @@ span.project-item-icon {
             userCollapseText:'<g:message code="showLess.label"/>'
         });
 
-        jQuery("button.button, .buttons input").button();
         jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
         jQuery(':input:not(#quicksearch):visible:first').focus();
 
