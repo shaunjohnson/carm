@@ -17,7 +17,7 @@
             </div>
 
             <div>
-                <span class="label label-info">
+                <span class="label">
                     <carm:formatApplicationReleaseState releaseState="${applicationReleaseInstance.releaseState}"/>
                 </span>
             </div>
