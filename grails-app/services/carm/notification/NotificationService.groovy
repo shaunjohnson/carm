@@ -173,9 +173,12 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
     private List<String> getRecipients(Object domain, NotificationEvent notificationEvent) {
         List<String> recipients = []
 
+        boolean removeCurrentUser = true
+
         getNotifications(domain, notificationEvent).each { Notification notification ->
             switch (notification.recipientType) {
                 case CURRENT_USER:
+                    removeCurrentUser = false
                     recipients << carmSecurityService.currentUser.email
                     break;
 
@@ -205,7 +208,13 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             }
         }
 
-        recipients.flatten().unique()
+        recipients = recipients.flatten().unique()
+
+        if (removeCurrentUser) {
+            recipients.remove(carmSecurityService.currentUser.email)
+        }
+
+        recipients
     }
 
     private String getSubjectText(Object domain, NotificationEvent notificationEvent) {
