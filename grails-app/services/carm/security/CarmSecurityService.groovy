@@ -9,10 +9,9 @@ class CarmSecurityService {
 
     static transactional = false
 
-//    def aclService
-//    def aclUtilService
     def permissionEvaluator
     def springSecurityService
+    def userGroupService
 
     /**
      * Adds a new permission for the provided domain object.

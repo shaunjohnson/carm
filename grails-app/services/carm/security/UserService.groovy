@@ -9,6 +9,7 @@ class UserService {
 
     def favoriteService
     def grailsApplication
+    def userGroupService
     def watchService
 
     /**
@@ -32,9 +33,10 @@ class UserService {
 
         log.debug "$prefix entered, user=$user"
 
-        User.withTransaction {
+        User.withTransaction { status ->
             favoriteService.deleteAllFromUser(user)
             watchService.deleteAllFromUser(user)
+            userGroupService.removeUserFromAllGroups(user)
             UserRole.executeUpdate("delete UserRole where user = :user", [user: user])
             user.delete()
         }

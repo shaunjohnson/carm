@@ -9,7 +9,6 @@ class UserGroupService {
     static transactional = false
 
     def grailsApplication
-    def userService
 
     /**
      * Add a user with the provided ID to the UserGroup.
@@ -20,9 +19,30 @@ class UserGroupService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void addUserToGroup(UserGroup userGroup, Serializable userId) {
-        User user = userService.get(userId)
+        User user = User.get(userId)
         if (user) {
             userGroup.addToUsers(user)
+            userGroup.save()
+        }
+    }
+
+    List<UserGroup> findAllByUser(User user) {
+        UserGroup.createCriteria().list() {
+            createAlias("users", "user")
+            eq("user", user)
+        }
+    }
+
+    /**
+     * Removes a user from user groups
+     *
+     * @param user User to remove from all groups
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void removeUserFromAllGroups(User user) {
+        findAllByUser(user).each { UserGroup userGroup ->
+            userGroup.removeFromUsers(user)
             userGroup.save()
         }
     }
@@ -36,7 +56,7 @@ class UserGroupService {
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void removeUserFromGroup(UserGroup userGroup, Serializable userId) {
-        User user = userService.get(userId)
+        User user = User.get(userId)
         if (user) {
             userGroup.removeFromUsers(user)
             userGroup
