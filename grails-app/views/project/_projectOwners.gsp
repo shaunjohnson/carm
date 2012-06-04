@@ -16,5 +16,8 @@
     </ul>
 </g:if>
 <g:else>
-    <g:message code="projectDoesNotHaveAnyOwners.message" default="This project does not have any owners."/>
+    <p>
+        <em><g:message code="projectDoesNotHaveAnyOwners.message"
+                       default="This project does not have any owners."/></em>
+    </p>
 </g:else>
