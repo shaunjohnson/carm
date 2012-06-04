@@ -17,6 +17,9 @@
     <li class="active">
         <a href="#summaryTab">
             <g:message code="summary.label" default="Summary"/>
+            <g:if test="${!userGroupInstance.users.size()}">
+                <span class="badge badge-warning">!</span>
+            </g:if>
         </a>
     </li>
     <li>

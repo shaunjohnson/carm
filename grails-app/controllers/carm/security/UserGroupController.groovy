@@ -1,18 +1,17 @@
 package carm.security
 
 import carm.exceptions.DomainInUseException
-import carm.system.SystemEnvironment
-import grails.plugins.springsecurity.Secured
-import org.apache.commons.lang.time.DateUtils
-import org.springframework.dao.DataIntegrityViolationException
 
-import java.text.SimpleDateFormat
+import grails.plugins.springsecurity.Secured
+
+import org.springframework.dao.DataIntegrityViolationException
 
 class UserGroupController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def userGroupService
+    def userService
 
     def index() {
         redirect(action: "list", params: params)
@@ -23,6 +22,53 @@ class UserGroupController {
                 userGroupInstanceList: userGroupService.list(params),
                 userGroupInstanceTotal: userGroupService.count()
         ]
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addUser() {
+        def userGroupInstance = userGroupService.get(params.id)
+        if (!userGroupInstance) {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    userGroupInstance: userGroupInstance,
+                    userList: userService.listAll()
+            ]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addUserSave() {
+        def userGroupInstance = userGroupService.get(params.id)
+        if (userGroupInstance) {
+            userGroupService.addUserToGroup(userGroupInstance, params.userId)
+            if (!userGroupInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.addedUser.message', args: [message(code: 'userGroup.label', default: 'User Group'), userGroupInstance.name])}"
+                redirect(action: "show", id: userGroupInstance.id)
+            }
+            else {
+                render(view: "addUser", model: [
+                        userGroupInstance: userGroupInstance,
+                        userList: userService.listAll()
+                ])
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveUser() {
+        def userGroupInstance = userGroupService.get(params.id)
+        if (userGroupInstance) {
+            userGroupService.removeUserFromGroup(userGroupInstance, params.userId)
+        }
+
+        render ""
     }
 
     @Secured(['ROLE_ADMIN'])

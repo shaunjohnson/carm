@@ -88,11 +88,6 @@
                     <g:message code="userGroups.label" default="User Groups"/>
                 </g:link>
             </li>
-            <li>
-                <g:link controller="role">
-                    <g:message code="roles.label" default="Roles"/>
-                </g:link>
-            </li>
         </ul>
     </div>
 

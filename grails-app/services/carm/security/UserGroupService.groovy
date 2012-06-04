@@ -9,6 +9,39 @@ class UserGroupService {
     static transactional = false
 
     def grailsApplication
+    def userService
+
+    /**
+     * Add a user with the provided ID to the UserGroup.
+     *
+     * @param userGroup UserGroup to which to add the user
+     * @param userId ID of user to add
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void addUserToGroup(UserGroup userGroup, Serializable userId) {
+        User user = userService.get(userId)
+        if (user) {
+            userGroup.addToUsers(user)
+            userGroup.save()
+        }
+    }
+
+    /**
+     * Removes a user with the provided ID from the UserGroup.
+     *
+     * @param userGroup UserGroup from which to remove the user
+     * @param userId ID of user to remove
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void removeUserFromGroup(UserGroup userGroup, Serializable userId) {
+        User user = userService.get(userId)
+        if (user) {
+            userGroup.removeFromUsers(user)
+            userGroup
+        }
+    }
 
     /**
      * Returns a count of all UserGroup objects.
@@ -61,7 +94,6 @@ class UserGroupService {
 
         log.debug "$prefix leaving"
     }
-
 
     /**
      * Gets the UserGroup object with the provided ID.
