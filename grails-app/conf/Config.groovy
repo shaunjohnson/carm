@@ -268,4 +268,7 @@ ui {
     user {
         listMax = 25
     }
+    userGroup {
+        listMax = 25
+    }
 }

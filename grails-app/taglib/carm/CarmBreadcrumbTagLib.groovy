@@ -289,6 +289,16 @@ class CarmBreadcrumbTagLib {
     }
 
     /**
+     * Renders a list users link.
+     */
+    def listUserGroups = { attrs ->
+        def isFirst = attrs.isFirst
+        out << link(controller: "userGroup", action: "list", isFirst: isFirst,
+                title: message(code: "showAllUserGroups.label"),
+                text: message(code: "userGroups.label"))
+    }
+
+    /**
      * Renders a show application link.
      */
     def showApplication = { attrs ->
@@ -334,6 +344,18 @@ class CarmBreadcrumbTagLib {
         out << link(controller: "applicationReleaseHistory", action: "show",
                 title: message(code: "showApplicationReleaseHistory.label"),
                 text: text, id: applicationReleaseHistory.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders a show application release link.
+     */
+    def showApplicationReleaseTestState = { attrs ->
+        def applicationReleaseTestState = attrs.applicationReleaseTestState
+        def isFirst = attrs.isFirst
+        def text = formatDate(date: applicationReleaseTestState.dateCreated)
+        out << link(controller: "applicationReleaseTestState", action: "show",
+                title: message(code: "showApplicationReleaseTestState.label"),
+                text: text, id: applicationReleaseTestState.id, isFirst: isFirst)
     }
 
     /**
@@ -511,6 +533,17 @@ class CarmBreadcrumbTagLib {
         out << link(controller: "user", action: "show",
                 title: message(code: "showUser.label"),
                 text: user.fullName, id: user.id, isFirst: isFirst)
+    }
+
+    /**
+     * Renders a show user group link.
+     */
+    def showUserGroup = { attrs ->
+        def userGroup = attrs.userGroup
+        def isFirst = attrs.isFirst
+        out << link(controller: "userGroup", action: "show",
+                title: message(code: "showUserGroup.label"),
+                text: userGroup.name, id: userGroup.id, isFirst: isFirst)
     }
 
     /**

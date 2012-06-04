@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat
 import org.springframework.web.servlet.support.RequestContextUtils
 import carm.notification.NotificationRecipientType
 import carm.notification.NotificationScheme
+import carm.security.UserGroup
 
 class CarmTagLib {
 
@@ -51,6 +52,7 @@ class CarmTagLib {
     def systemServerService
     def systemDeploymentEnvironmentService
     def systemEnvironmentService
+    def userGroupService
     def watchService
 
     /**
@@ -270,15 +272,13 @@ class CarmTagLib {
                 out << bc.listApplicationReleaseTestStates()
 
                 if (action == 'show') {
-                    out << bc.link(controller: "applicationReleaseTestState", action: "show",
-                            title: "Show Application Release Test State", text: domain.name, id: domain.id)
+                    out << bc.showApplicationReleaseTestState(applicationReleaseTestState: domain)
                 }
                 else if (action == 'create' || action == 'save') {
                     out << bc.createLabel(entityName: entityName)
                 }
                 else if (action == 'edit' || action == 'update') {
-                    out << bc.link(controller: "applicationReleaseTestState", action: "show",
-                            title: "Show Application Release Test State", text: domain.name, id: domain.id)
+                    out << bc.showApplicationReleaseTestState(applicationReleaseTestState: domain)
                     out << bc.editLabel(entityName: entityName)
                 }
             }
@@ -681,6 +681,27 @@ class CarmTagLib {
                 }
             }
         }
+        else if (controller == 'userGroup') {
+            def entityName = message(code: 'userGroup.label', default: 'User Group')
+
+            out << carm.pageHeaderLabel(beanName: domain?.name, entityName: entityName, entity: domain)
+
+            out << bc.breadcrumbs(null) {
+                out << bc.administration(isFirst: true)
+                out << bc.listUserGroups()
+
+                if (action == 'show') {
+                    out << bc.showUserGroup(userGroup: domain)
+                }
+                else if (action == 'create' || action == 'save') {
+                    out << bc.createLabel(entityName: entityName)
+                }
+                else if (action == 'edit' || action == 'update') {
+                    out << bc.showUserGroup(userGroup: domain)
+                    out << bc.editLabel(entityName: entityName)
+                }
+            }
+        }
     }
 
     /**
@@ -783,6 +804,9 @@ class CarmTagLib {
             }
             else if (controllerName == 'user') {
                 out << render(template: "/user/actions", model: [userInstance: entity])
+            }
+            else if (controllerName == 'userGroup') {
+                out << render(template: "/userGroup/actions", model: [userGroupInstance: entity])
             }
         }
 
@@ -1064,6 +1088,9 @@ class CarmTagLib {
         }
         else if (domain instanceof SystemDeploymentEnvironment) {
             isInUse = systemDeploymentEnvironmentService.isInUse(domain)
+        }
+        else if (domain instanceof UserGroup) {
+            isInUse = userGroupService.isInUse(domain)
         }
         else {
             out << '<span style="color: red;">Domain is not supported by the ifNotInUse tag!</span>'
