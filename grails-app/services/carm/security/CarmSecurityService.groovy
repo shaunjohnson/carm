@@ -11,7 +11,12 @@ class CarmSecurityService {
 
     def permissionEvaluator
     def springSecurityService
-    def userGroupService
+
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void deleteAllAclsByUser(User user) {
+        AclUserEntry.executeUpdate("delete from AclUserEntry where user = :user", [user: user])
+    }
 
     /**
      * Adds a new permission for the provided domain object.

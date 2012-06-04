@@ -7,6 +7,7 @@ class UserService {
 
     static transactional = false
 
+    def carmSecurityService
     def favoriteService
     def grailsApplication
     def userGroupService
@@ -34,6 +35,7 @@ class UserService {
         log.debug "$prefix entered, user=$user"
 
         User.withTransaction { status ->
+            carmSecurityService.deleteAllAclsByUser(user)
             favoriteService.deleteAllFromUser(user)
             watchService.deleteAllFromUser(user)
             userGroupService.removeUserFromAllGroups(user)
