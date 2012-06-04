@@ -20,7 +20,7 @@ class User {
     Date lastUpdated
 
     static constraints = {
-        username(blank: false, unique: true)
+        username(blank: false, unique: true, index: 'Name_Idx')
         password(blank: false)
         fullName(blank: false, nullable: false)
         email(maxSize: 255)

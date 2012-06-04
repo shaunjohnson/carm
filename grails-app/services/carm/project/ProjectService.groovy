@@ -2,9 +2,9 @@ package carm.project
 
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.acls.domain.BasePermission
 import org.springframework.transaction.annotation.Transactional
 import carm.exceptions.CarmRuntimeException
+import carm.security.CarmPermission
 
 class ProjectService {
     static transactional = false
@@ -49,7 +49,7 @@ class ProjectService {
 
         // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.createPermissions(project, params.projectOwners, BasePermission.ADMINISTRATION)
+            carmSecurityService.createPermissions(project, params.projectOwners, CarmPermission.ADMINISTRATION)
         }
 
         log.debug "$prefix returning $project"
@@ -63,7 +63,7 @@ class ProjectService {
      * @param project Project object to delete
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, delete) or hasPermission(#project, admin)")
+    @PreAuthorize("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
     void delete(Project project) {
         def prefix = "delete() :"
 
@@ -86,6 +86,7 @@ class ProjectService {
      * @param id ID of Project object
      * @return Matching Project object
      */
+    @Transactional
     Project get(Serializable id) {
         Project.get(id)
     }
@@ -112,7 +113,7 @@ class ProjectService {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, write) or hasPermission(#project, admin)")
+    @PreAuthorize("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, Map params) {
         def prefix = "update() :"
 
@@ -128,7 +129,7 @@ class ProjectService {
 
         // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.updatePermissions(project, params.projectOwners, BasePermission.ADMINISTRATION)
+            carmSecurityService.updatePermissions(project, params.projectOwners, CarmPermission.ADMINISTRATION)
         }
 
         log.debug "$prefix leaving"
@@ -155,7 +156,7 @@ class ProjectService {
      * @param params Query parameters
      * @return List of matching Project objects
      */
-    @PostFilter("hasPermission(filterObject, admin)")
+    @PostFilter("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
     List<Project> getAllProjectsWhereOwner(Map params) {
         Project.list params
     }
@@ -200,7 +201,7 @@ class ProjectService {
      * @return List of project owner usernames
      */
     List<String> findAllProjectOwners(Project project) {
-        carmSecurityService.findAllPrincipalsByDomainAndPermission(project, BasePermission.ADMINISTRATION)
+        carmSecurityService.findAllPrincipalsByDomainAndPermission(project, CarmPermission.ADMINISTRATION)
     }
 
     boolean isProjectOwner(Project project) {
@@ -208,6 +209,6 @@ class ProjectService {
             return false
         }
 
-        carmSecurityService.hasPermission(project, BasePermission.ADMINISTRATION)
+        carmSecurityService.hasPermission(project, 'PROJECT_ADMINISTRATOR')
     }
 }

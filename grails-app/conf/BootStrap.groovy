@@ -25,7 +25,6 @@ import carm.sourcecontrol.SourceControlUser
 import carm.sourcecontrol.SourceControlRole
 import carm.application.ApplicationRole
 import carm.release.ApplicationRelease
-import org.springframework.security.acls.domain.BasePermission
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import carm.project.ProjectCategory
 import carm.system.SystemServer
@@ -35,6 +34,9 @@ import carm.notification.NotificationScheme
 import carm.notification.Notification
 import carm.notification.NotificationEvent
 import carm.notification.NotificationRecipientType
+import carm.security.UserGroup
+import carm.security.AclEntity
+import carm.security.AclUserEntry
 
 class BootStrap {
 
@@ -59,6 +61,18 @@ class BootStrap {
             adminUser.save()
 
             new UserRole(user: adminUser, role: roleAdmin).save()
+        }
+
+        if (!AclEntity.findByName("PROJECT_ADMINISTRATOR_40")) {
+            AclEntity aclEntity = new AclEntity(name: 'PROJECT_ADMINISTRATOR_40')
+            aclEntity.save()
+
+            User spjohnson = User.findByUsername("spjohnson")
+            AclUserEntry aclUserEntry = new AclUserEntry(aclEntity: aclEntity, user: spjohnson)
+            aclUserEntry.save()
+
+            aclEntity.addToUserEntries(aclUserEntry)
+            aclEntity.save()
         }
 
         if (!NotificationScheme.findByName("Default Notification Scheme")) {
@@ -648,11 +662,6 @@ class BootStrap {
 //                sourceControlUser = scottScmUser
 //            }
 //        }
-//
-//        aclUtilService.addPermission(dataFixture.standaloneProject, 'shaun', BasePermission.ADMINISTRATION)
-//
-//        aclUtilService.addPermission(dataFixture.myBigProject, 'shaun', BasePermission.ADMINISTRATION)
-//        aclUtilService.addPermission(dataFixture.myBigProject, 'scott', BasePermission.ADMINISTRATION)
     }
 
     def destroy = {

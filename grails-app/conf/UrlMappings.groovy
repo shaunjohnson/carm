@@ -1,5 +1,5 @@
 import org.springframework.security.access.AccessDeniedException
-import org.springframework.security.acls.model.NotFoundException
+import carm.exceptions.NotFoundException
 
 class UrlMappings {
 
