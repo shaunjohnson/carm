@@ -29,7 +29,8 @@ class UserGroupService {
     List<UserGroup> findAllByUser(User user) {
         UserGroup.createCriteria().list() {
             createAlias("users", "user")
-            eq("user", user)
+            eq("user.id", user.id)
+            order("name")
         }
     }
 

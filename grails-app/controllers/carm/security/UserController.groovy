@@ -8,6 +8,7 @@ class UserController {
     def activityTraceService
     def carmSecurityService
     def favoriteService
+    def userGroupService
     def userService
     def watchService
 
@@ -23,7 +24,7 @@ class UserController {
     }
 
     def show() {
-        def userInstance
+        User userInstance
 
         if (params.id) {
             userInstance = userService.get(params.id)
@@ -50,6 +51,7 @@ class UserController {
                 activityList: activityTraceService.listActivityByUser(userInstance, [:]),
                 activityCount: activityTraceService.countActivityByUser(userInstance),
                 favorites: favoriteService.findAllByUser(userInstance),
+                groups: userGroupService.findAllByUser(userInstance),
                 isCurrentUser: (carmSecurityService.currentUsername == userInstance.username),
                 watches: watchService.findAllByUser(userInstance),
         ]
