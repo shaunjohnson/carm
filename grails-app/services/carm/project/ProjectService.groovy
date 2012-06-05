@@ -236,4 +236,16 @@ class ProjectService {
     void addAdministratorUser(Project project, User user) {
         carmSecurityService.addUserPermission(project, user, PROJECT_ADMINISTRATOR)
     }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeAdministratorGroup(Project project, UserGroup userGroup) {
+        carmSecurityService.removeUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeAdministratorUser(Project project, User user) {
+        carmSecurityService.removeUserPermission(project, user, PROJECT_ADMINISTRATOR)
+    }
 }

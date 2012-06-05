@@ -28,12 +28,10 @@ class CarmSecurityService {
 
         log.debug "$prefix entered. domainObject=$domainObject, userGroup=$userGroup, permission=$permission"
 
-        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
-        if (aclEntity) {
-            AclGroupEntry groupEntry = new AclGroupEntry(aclEntity: aclEntity, userGroup: userGroup)
-            aclEntity.addToGroupEntries(groupEntry)
-            aclEntity.save()
-        }
+        AclEntity aclEntity = AclEntity.findOrSaveWhere([name: permission.generateName(domainObject.id)])
+        AclGroupEntry groupEntry = new AclGroupEntry(aclEntity: aclEntity, userGroup: userGroup)
+        aclEntity.addToGroupEntries(groupEntry)
+        aclEntity.save()
 
         log.debug "$prefix permission added. leaving."
     }
@@ -50,14 +48,61 @@ class CarmSecurityService {
 
         log.debug "$prefix entered. domainObject=$domainObject, user=$user, permission=$permission"
 
-        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
-        if (aclEntity) {
-            AclUserEntry userEntry = new AclUserEntry(aclEntity: aclEntity, user: user)
-            aclEntity.addToUserEntries(userEntry)
-            aclEntity.save()
-        }
+        AclEntity aclEntity = AclEntity.findOrSaveWhere([name: permission.generateName(domainObject.id)])
+        AclUserEntry userEntry = new AclUserEntry(aclEntity: aclEntity, user: user)
+        aclEntity.addToUserEntries(userEntry)
+        aclEntity.save()
 
         log.debug "$prefix permission added. leaving."
+    }
+
+
+    /**
+     * Adds a new group permission for the provided domain object.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param userGroup UserGroup to be granted access
+     * @param permission Permission to grant user
+     */
+    void removeUserGroupPermission(domainObject, UserGroup userGroup, CarmPermission permission) {
+        def prefix = "removeUserGroupPermission() :"
+
+        log.debug "$prefix entered. domainObject=$domainObject, userGroup=$userGroup, permission=$permission"
+
+        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
+        AclGroupEntry.executeUpdate("""
+            delete
+                from AclGroupEntry
+            where
+                userGroup = :userGroup
+                and aclEntity = :aclEntity
+            """, [userGroup: userGroup, aclEntity: aclEntity])
+
+        log.debug "$prefix permission removed. leaving."
+    }
+
+    /**
+     * Adds a new user permission for the provided domain object.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param user User to be granted access
+     * @param permission Permission to grant user
+     */
+    void removeUserPermission(domainObject, User user, CarmPermission permission) {
+        def prefix = "removeUserPermission() :"
+
+        log.debug "$prefix entered. domainObject=$domainObject, user=$user, permission=$permission"
+
+        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
+        AclUserEntry.executeUpdate("""
+            delete
+                from AclUserEntry
+            where
+                user = :user
+                and aclEntity = :aclEntity
+            """, [user: user, aclEntity: aclEntity])
+
+        log.debug "$prefix permission removed. leaving."
     }
 
     /**
@@ -231,7 +276,7 @@ class CarmSecurityService {
     User findUserByUsername(String username) {
         User.findByUsername(username)
     }
-    
+
     /**
      * Finds all user email addresses by username in list
      *
@@ -241,16 +286,16 @@ class CarmSecurityService {
     List<String> findAllEmailByUsernameInList(List<String> usernames) {
         findAllUsersByUsernameInList(usernames)*.email
     }
-    
+
     /**
      * Gets the current User.
      *
      * @return Current User object.
      */
     User getCurrentUser() {
-        (User)springSecurityService.currentUser
+        (User) springSecurityService.currentUser
     }
-    
+
     /**
      * Gets the current username (principle).
      *

@@ -4,8 +4,14 @@
     </div>
     <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="section-action-icon new-action">
-            <g:link action="addAdministrator" id="${projectInstance.id}">
-                <g:message code="addAdministrator.label" default="Add Administrator"/>
+            <g:link action="addAdministratorUser" id="${projectInstance.id}">
+                <g:message code="addUser.label" default="Add User"/>
+            </g:link>
+        </div>
+
+        <div class="section-action-icon new-action">
+            <g:link action="addAdministratorGroup" id="${projectInstance.id}">
+                <g:message code="addGroup.label" default="Add Group"/>
             </g:link>
         </div>
 
@@ -76,7 +82,7 @@
                 jQuery.ajax({
                         cache: false,
                         url: '${createLink(controller: "project", action: "ajaxRemoveAdministratorGroup", id: projectInstance.id)}',
-                        data: { userId: groupId }
+                        data: { groupId: groupId }
                     });
                 jQuery("#group_" + groupId).remove();
 

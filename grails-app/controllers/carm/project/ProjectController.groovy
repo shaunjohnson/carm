@@ -152,7 +152,7 @@ class ProjectController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def addAdministrator() {
+    def addAdministratorGroup() {
         def projectInstance = projectService.get(params.id)
         if (!projectInstance) {
             flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
@@ -161,37 +161,68 @@ class ProjectController {
         else {
             [
                     projectInstance: projectInstance,
-                    userGroupList: userGroupService.listAll(),
+                    userGroupList: userGroupService.listAll()
+            ]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addAdministratorUser() {
+        def projectInstance = projectService.get(params.id)
+        if (!projectInstance) {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    projectInstance: projectInstance,
                     userList: userService.listAll()
             ]
         }
     }
 
     @Secured(['ROLE_ADMIN'])
-    def addAdministratorSave() {
+    def addAdministratorGroupSave() {
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
-            if (params.groupId) {
-                projectService.addAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
-            }
-            else if (params.userId) {
-                projectService.addAdministratorUser(projectInstance, userService.get(params.userId))
-            }
+            projectService.addAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
 
             if (!projectInstance.hasErrors()) {
                 flash.message = "${message(code: 'default.addedAdministrator.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
-                render(view: "addAdministrator", model: [
+                render(view: "addAdministratorGroup", model: [
                         projectInstance: projectInstance,
-                        userGroupList: userGroupService.listAll(),
+                        userGroupList: userGroupService.listAll()
+                ])
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addAdministratorUserSave() {
+        def projectInstance = projectService.get(params.id)
+        if (projectInstance) {
+            projectService.addAdministratorUser(projectInstance, userService.get(params.userId))
+
+            if (!projectInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.addedAdministrator.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
+                redirect(action: "show", id: projectInstance.id)
+            }
+            else {
+                render(view: "addAdministratorUser", model: [
+                        projectInstance: projectInstance,
                         userList: userService.listAll()
                 ])
             }
         }
         else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -200,7 +231,7 @@ class ProjectController {
     def ajaxRemoveAdministratorGroup() {
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
-            projectService.removeAdministratorGroup(projectInstance, params.userGroupId)
+            projectService.removeAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
         }
 
         render ""
@@ -210,7 +241,7 @@ class ProjectController {
     def ajaxRemoveAdministratorUser() {
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
-            projectService.removeAdministratorUser(projectInstance, params.userId)
+            projectService.removeAdministratorUser(projectInstance, userService.get(params.userId))
         }
 
         render ""

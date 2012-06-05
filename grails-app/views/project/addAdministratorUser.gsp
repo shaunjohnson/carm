@@ -5,12 +5,12 @@
     <r:require modules="common"/>
     <g:set var="entityName"
            value="${message(code: 'projectAdministrator.label', default: 'Project Administrator')}"/>
-    <title><g:message code="default.addAdministrator.label" args="[entityName]"/></title>
+    <title><g:message code="default.addAdministratorUser.label" args="[entityName]"/></title>
 </head>
 
 <body>
 <carm:header domain="${projectInstance}"
-             pageName="${message(code: 'default.addAdministrator.label', args: [entityName])}"/>
+             pageName="${message(code: 'default.addAdministratorUser.label', args: [entityName])}"/>
 
 <g:render template="/common/messages"/>
 <g:hasErrors bean="${projectInstance}">
@@ -20,19 +20,8 @@
     </div>
 </g:hasErrors>
 
-<g:form action="addAdministratorSave" class="offset1 span8">
+<g:form action="addAdministratorUserSave" class="offset1 span8">
     <g:hiddenField name="id" value="${projectInstance?.id}"/>
-
-    <div class="control-group">
-        <carm:label class="control-label" for="groupId" required="true">
-            <g:message code="project.administrator.group.label" default="Group"/>
-        </carm:label>
-        <div class="controls">
-            <g:select name="groupId" from="${userGroupList}" optionKey="id"
-                      value="${userGroup?.id}" noSelection="['null': '']"
-                      title="${message(code: 'project.administrator.group.help')}"/>
-        </div>
-    </div>
 
     <div class="control-group">
         <carm:label class="control-label" for="userId" required="true">
