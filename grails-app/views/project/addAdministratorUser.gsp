@@ -28,16 +28,18 @@
             <g:message code="project.administrator.user.label" default="User"/>
         </carm:label>
         <div class="controls">
-        <g:select name="userId" from="${userList}" optionKey="id"
-                  value="${user?.id}" noSelection="['null': '']"
-                  title="${message(code: 'project.administrator.user.help')}"/>
+            <g:select name="userId" from="${userList}" optionKey="id"
+                      value="${user?.id}" noSelection="['null': '']"
+                      title="${message(code: 'project.administrator.user.help')}"/>
         </div>
     </div>
 
     <carm:formButtons>
         <g:submitButton class="btn btn-primary" name="create"
                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        <g:link class="btn" action="list"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
+        <g:link class="btn" action="show" id="${projectInstance.id}">
+            <g:message code="default.button.cancel.label" default="Cancel"/>
+        </g:link>
     </carm:formButtons>
 </g:form>
 </body>

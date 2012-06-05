@@ -37,7 +37,9 @@
     <carm:formButtons>
         <g:submitButton class="btn btn-primary" name="create"
                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        <g:link class="btn" action="list"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
+        <g:link class="btn" action="show" id="${userGroupInstance.id}">
+            <g:message code="default.button.cancel.label" default="Cancel"/>
+        </g:link>
     </carm:formButtons>
 </g:form>
 </body>
