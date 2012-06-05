@@ -8,7 +8,7 @@ class WatchService {
 
     static transactional = false
 
-    def carmSecurityService
+    def userService
 
     /**
      * Adds an Application to the current user's watches.
@@ -19,7 +19,7 @@ class WatchService {
         Application application = Application.get(id)
 
         if (application) {
-            new Watch(user: carmSecurityService.currentUser, application: application).save()
+            new Watch(user: userService.currentUser, application: application).save()
             log.debug "Added $application to watches"
         }
     }
@@ -33,7 +33,7 @@ class WatchService {
         Project project = Project.get(id)
 
         if (project) {
-            new Watch(user: carmSecurityService.currentUser, project: project).save()
+            new Watch(user: userService.currentUser, project: project).save()
             log.debug "Added $project to watches"
         }
     }
@@ -60,7 +60,7 @@ class WatchService {
      * Delete all watches for the current user
      */
     void deleteAllFromCurrentUser() {
-        deleteAllFromUser(carmSecurityService.currentUser)
+        deleteAllFromUser(userService.currentUser)
     }
 
     /**
@@ -81,7 +81,7 @@ class WatchService {
     void deleteFromCurrentUserById(Serializable id) {
         Watch watch = Watch.get(id)
 
-        if (watch && watch.user == carmSecurityService.currentUser) {
+        if (watch && watch.user == userService.currentUser) {
             watch.delete()
         }
     }
@@ -124,7 +124,7 @@ class WatchService {
         Application application = Application.get(id)
 
         if (application) {
-            Watch watch = Watch.findByUserAndApplication(carmSecurityService.currentUser, application)
+            Watch watch = Watch.findByUserAndApplication(userService.currentUser, application)
 
             if (watch) {
                 watch.delete()
@@ -142,7 +142,7 @@ class WatchService {
         Project project = Project.get(id)
 
         if (project) {
-            Watch watch = Watch.findByUserAndProject(carmSecurityService.currentUser, project)
+            Watch watch = Watch.findByUserAndProject(userService.currentUser, project)
 
             if (watch) {
                 watch.delete()
@@ -158,7 +158,7 @@ class WatchService {
      * @return True of the Application is on the current users watch list
      */
     boolean isApplicationWatchedByCurrentUser(Application application) {
-        Watch.countByUserAndApplication(carmSecurityService.currentUser, application) > 0
+        Watch.countByUserAndApplication(userService.currentUser, application) > 0
     }
 
     /**
@@ -168,6 +168,6 @@ class WatchService {
      * @return True of the Project is on the current users watch list
      */
     boolean isProjectWatchedByCurrentUser(Project project) {
-        Watch.countByUserAndProject(carmSecurityService.currentUser, project) > 0
+        Watch.countByUserAndProject(userService.currentUser, project) > 0
     }
 }

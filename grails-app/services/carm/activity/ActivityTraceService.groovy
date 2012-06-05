@@ -20,9 +20,8 @@ class ActivityTraceService {
 
     static transactional = false
 
-    def carmSecurityService
     def grailsApplication
-    def springSecurityService
+    def userService
 
     public static final String APPLICATION_DEPLOYMENT_TYPE = ApplicationDeployment.class.name
     public static final String APPLICATION_TYPE = Application.class.name
@@ -751,7 +750,7 @@ class ActivityTraceService {
     private insertActivityTrace(String oid, String objectType, ActivityAction action, Long objectId, String objectName) {
         ActivityTrace.withNewSession {
             ActivityTrace trace = new ActivityTrace(oid: oid, action: action, objectId: objectId, objectName: objectName,
-                    objectType: objectType, dateOccurred: new DateTime(), username: carmSecurityService.currentUsername)
+                    objectType: objectType, dateOccurred: new DateTime(), username: userService.currentUsername)
 
             if (!trace.save()) {
                 println "Error on save" + trace.errors

@@ -8,7 +8,7 @@ class FavoriteService {
 
     static transactional = false
 
-    def carmSecurityService
+    def userService
     def springSecurityService
 
     /**
@@ -20,7 +20,7 @@ class FavoriteService {
         Application application = Application.get(id)
 
         if (application) {
-            new Favorite(user: carmSecurityService.currentUser, application: application).save()
+            new Favorite(user: userService.currentUser, application: application).save()
             log.debug "Added $application to favories"
         }
     }
@@ -34,7 +34,7 @@ class FavoriteService {
         Project project = Project.get(id)
 
         if (project) {
-            new Favorite(user: carmSecurityService.currentUser, project: project).save()
+            new Favorite(user: userService.currentUser, project: project).save()
             log.debug "Added $project to favories"
         }
     }
@@ -61,7 +61,7 @@ class FavoriteService {
      * Delete all favorites for the current user
      */
     void deleteAllFromCurrentUser() {
-        deleteAllFromUser(carmSecurityService.currentUser)
+        deleteAllFromUser(userService.currentUser)
     }
 
     /**
@@ -81,7 +81,7 @@ class FavoriteService {
     void deleteFromCurrentUserById(Serializable id) {
         Favorite favorite = Favorite.get(id)
 
-        if (favorite && favorite.user == carmSecurityService.currentUser) {
+        if (favorite && favorite.user == userService.currentUser) {
             favorite.delete()
         }
     }
@@ -92,7 +92,7 @@ class FavoriteService {
      * @return List of Favorite objects for the current user
      */
     List<Favorite> findAllByCurrentUser() {
-        springSecurityService.isLoggedIn() ? findAllByUser(carmSecurityService.currentUser) : []
+        springSecurityService.isLoggedIn() ? findAllByUser(userService.currentUser) : []
     }
 
     /**
@@ -111,7 +111,7 @@ class FavoriteService {
      * @return True of the application is on the current users favorites list
      */
     boolean isApplicationFavoriteByCurrentUser(Application application) {
-        Favorite.countByUserAndApplication(carmSecurityService.currentUser, application) > 0
+        Favorite.countByUserAndApplication(userService.currentUser, application) > 0
     }
 
     /**
@@ -121,7 +121,7 @@ class FavoriteService {
      * @return True of the project is on the current users favorites list
      */
     boolean isProjectFavoriteByCurrentUser(Project project) {
-        Favorite.countByUserAndProject(carmSecurityService.currentUser, project) > 0
+        Favorite.countByUserAndProject(userService.currentUser, project) > 0
     }
 
     /**
@@ -133,7 +133,7 @@ class FavoriteService {
         Application application = Application.get(id)
 
         if (application) {
-            Favorite favorite = Favorite.findByUserAndApplication(carmSecurityService.currentUser, application)
+            Favorite favorite = Favorite.findByUserAndApplication(userService.currentUser, application)
 
             if (favorite) {
                 favorite.delete()
@@ -151,7 +151,7 @@ class FavoriteService {
         Project project = Project.get(id)
 
         if (project) {
-            Favorite favorite = Favorite.findByUserAndProject(carmSecurityService.currentUser, project)
+            Favorite favorite = Favorite.findByUserAndProject(userService.currentUser, project)
 
             if (favorite) {
                 favorite.delete()

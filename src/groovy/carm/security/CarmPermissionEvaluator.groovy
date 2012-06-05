@@ -7,6 +7,7 @@ import carm.exceptions.PermissionNotDefinedException
 import org.springframework.security.core.userdetails.UserDetails
 
 class CarmPermissionEvaluator implements PermissionEvaluator {
+
     @Override
     @Transactional
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {

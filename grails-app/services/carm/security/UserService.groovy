@@ -7,11 +7,22 @@ class UserService {
 
     static transactional = false
 
-    def carmSecurityService
+    def aclService
     def favoriteService
     def grailsApplication
+    def springSecurityService
     def userGroupService
     def watchService
+
+    /**
+     * Finds all user email addresses by username in list
+     *
+     * @param usernames Username list used for filtering
+     * @return List of email addresses
+     */
+    List<String> collectAllEmailByUsernameInList(List<String> usernames) {
+        User.findAllByUsernameInList(usernames)*.email
+    }
 
     /**
      * Returns a count of all User objects.
@@ -20,6 +31,24 @@ class UserService {
      */
     int count() {
         User.count()
+    }
+
+    /**
+     * Gets the current User.
+     *
+     * @return Current User object.
+     */
+    User getCurrentUser() {
+        (User) springSecurityService.currentUser
+    }
+
+    /**
+     * Gets the current User's username
+     *
+     * @return Username
+     */
+    String getCurrentUsername() {
+        currentUser.username
     }
 
     /**
@@ -35,7 +64,7 @@ class UserService {
         log.debug "$prefix entered, user=$user"
 
         User.withTransaction { status ->
-            carmSecurityService.deleteAllAclsByUser(user)
+            aclService.deleteAllAclsByUser(user)
             favoriteService.deleteAllFromUser(user)
             watchService.deleteAllFromUser(user)
             userGroupService.removeUserFromAllGroups(user)
@@ -47,6 +76,16 @@ class UserService {
     }
 
     /**
+     * Finds a user by username.
+     *
+     * @param username Username for user to find
+     * @return Matching User object
+     */
+    User findByUsername(String username) {
+        User.findByUsername(username)
+    }
+
+    /**
      * Gets the User object with the provided ID.
      *
      * @param id ID of User object
@@ -54,16 +93,6 @@ class UserService {
      */
     User get(Serializable id) {
         User.get(id)
-    }
-
-    /**
-     * Gets the User object with the provided username.
-     *
-     * @param username Username of User object
-     * @return Matching User object
-     */
-    User getByUsername(String username) {
-        User.findByUsername(username)
     }
 
     /**

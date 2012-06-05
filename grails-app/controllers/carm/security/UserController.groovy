@@ -35,7 +35,7 @@ class UserController {
         }
         else if (params.username) {
             println "load by ${params.username}"
-            userInstance = userService.getByUsername(params.username)
+            userInstance = userService.findByUsername(params.username)
             if (!userInstance) {
                 flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.username])}"
                 redirect(action: "list")
@@ -52,7 +52,7 @@ class UserController {
                 activityCount: activityTraceService.countActivityByUser(userInstance),
                 favorites: favoriteService.findAllByUser(userInstance),
                 groups: userGroupService.findAllByUser(userInstance),
-                isCurrentUser: (carmSecurityService.currentUsername == userInstance.username),
+                isCurrentUser: (userService.currentUsername == userInstance.username),
                 watches: watchService.findAllByUser(userInstance),
         ]
     }

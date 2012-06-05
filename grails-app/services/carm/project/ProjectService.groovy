@@ -12,6 +12,7 @@ import carm.security.UserGroup
 class ProjectService {
     static transactional = false
 
+    def aclService
     def applicationDeploymentService
     def applicationReleaseService
     def carmSecurityService
@@ -204,7 +205,7 @@ class ProjectService {
      * @return List of UserGroup objects
      */
     List<UserGroup> findAllProjectAdministratorGroups(Project project) {
-        carmSecurityService.findAllGroupsByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
+        aclService.findAllGroupsByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
     }
 
     /**
@@ -214,7 +215,7 @@ class ProjectService {
      * @return List of User objects
      */
     List<User> findAllProjectAdministratorUsers(Project project) {
-        carmSecurityService.findAllUsersByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
+        aclService.findAllUsersByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
     }
 
     boolean isProjectOwner(Project project) {
@@ -228,24 +229,24 @@ class ProjectService {
     @Transactional
     @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
     void addAdministratorGroup(Project project, UserGroup userGroup) {
-        carmSecurityService.addUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
+        aclService.addUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
     }
 
     @Transactional
     @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
     void addAdministratorUser(Project project, User user) {
-        carmSecurityService.addUserPermission(project, user, PROJECT_ADMINISTRATOR)
+        aclService.addUserPermission(project, user, PROJECT_ADMINISTRATOR)
     }
 
     @Transactional
     @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
     void removeAdministratorGroup(Project project, UserGroup userGroup) {
-        carmSecurityService.removeUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
+        aclService.removeUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
     }
 
     @Transactional
     @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
     void removeAdministratorUser(Project project, User user) {
-        carmSecurityService.removeUserPermission(project, user, PROJECT_ADMINISTRATOR)
+        aclService.removeUserPermission(project, user, PROJECT_ADMINISTRATOR)
     }
 }

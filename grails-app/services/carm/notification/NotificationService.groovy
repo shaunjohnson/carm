@@ -10,10 +10,9 @@ import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
 import grails.util.Environment
 import carm.deployment.ApplicationDeployment
-import carm.notification.NotificationEvent
+
 import carm.release.ApplicationRelease
 
-import carm.notification.Notification
 import grails.gsp.PageRenderer
 import org.springframework.beans.factory.InitializingBean
 
@@ -29,6 +28,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
     def mailService
     private MessageSource messageSource
     private projectService
+    def userService
     def watchService
 
     void afterPropertiesSet() {
@@ -86,7 +86,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             usernames = projectService.findAllProjectAdministratorUsers(((ApplicationRelease) domain).application.project)
         }
 
-        carmSecurityService.findAllEmailByUsernameInList(usernames)
+        userService.collectAllEmailByUsernameInList(usernames)
     }
 
     private List<String> getApplicationWatcherEmailAddresses(domain) {
@@ -102,7 +102,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
     }
 
     private String getMessageBody(Object domain, NotificationEvent notificationEvent) {
-        def user = carmSecurityService.currentUser
+        def user = userService.currentUser
         def model = [:]
 
         model['currentUserFullName'] = user.fullName
@@ -179,7 +179,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             switch (notification.recipientType) {
                 case CURRENT_USER:
                     removeCurrentUser = false
-                    recipients << carmSecurityService.currentUser.email
+                    recipients << userService.currentUser.email
                     break;
 
                 case PROJECT_ADMINISTRATORS:
@@ -211,7 +211,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
         recipients = recipients.flatten().unique()
 
         if (removeCurrentUser) {
-            recipients.remove(carmSecurityService.currentUser.email)
+            recipients.remove(userService.currentUser.email)
         }
 
         recipients
@@ -277,7 +277,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
 
     private sendNotification(Object domain, NotificationEvent notificationEvent) {
         try {
-            sendEmail(carmSecurityService.currentUser.email,
+            sendEmail(userService.currentUser.email,
                     getRecipients(domain, notificationEvent),
                     getSubjectText(domain, notificationEvent),
                     getMessageBody(domain, notificationEvent))

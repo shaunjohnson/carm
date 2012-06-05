@@ -53,6 +53,7 @@ class CarmTagLib {
     def systemDeploymentEnvironmentService
     def systemEnvironmentService
     def userGroupService
+    def userService
     def watchService
 
     /**
@@ -1027,7 +1028,7 @@ class CarmTagLib {
      * Formats the current user fullName.
      */
     def formatCurrentUser = { attrs ->
-        out << carmSecurityService.currentUser.fullName.encodeAsHTML()
+        out << userService.currentUser.fullName.encodeAsHTML()
     }
 
     /**
@@ -1038,7 +1039,7 @@ class CarmTagLib {
     def formatUser = { attrs ->
         def username = attrs.username
 
-        out << (carmSecurityService.findUserByUsername(username)?.fullName ?: username).encodeAsHTML()
+        out << (userService.findByUsername(username)?.fullName ?: username).encodeAsHTML()
     }
 
     /**

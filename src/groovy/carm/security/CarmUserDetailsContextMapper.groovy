@@ -13,6 +13,7 @@ class CarmUserDetailsContextMapper implements UserDetailsContextMapper {
     private static final List NO_ROLES = [new GrantedAuthorityImpl(SpringSecurityUtils.NO_ROLE)]
 
     def springSecurityService
+    def userService
 
     @Override
     public CarmUserDetails mapUserFromContext(DirContextOperations contextOperations, String username, Collection<GrantedAuthority> authority) {

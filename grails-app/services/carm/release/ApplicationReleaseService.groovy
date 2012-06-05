@@ -9,22 +9,18 @@ import carm.project.Project
 import carm.application.Application
 import carm.deployment.ApplicationDeployment
 import carm.exceptions.DomainInUseException
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.ApplicationContext
 
-class ApplicationReleaseService implements ApplicationContextAware {
+class ApplicationReleaseService {
 
     static transactional = false
 
-    ApplicationContext applicationContext
     def activityTraceService
     def applicationService
-    def carmSecurityService
     def grailsApplication
     def moduleService
     def notificationService
     def springSecurityService
-    def watchService
+    def userService
 
     /**
      * Determines if the application release is deployable. A release can be deployed if the release is in a completed
@@ -395,7 +391,7 @@ class ApplicationReleaseService implements ApplicationContextAware {
         log.debug "$prefix entered, applicationRelease=$applicationRelease"
 
         applicationRelease.releaseState = ApplicationReleaseState.SUBMITTED
-        applicationRelease.submittedBy = carmSecurityService.currentUser
+        applicationRelease.submittedBy = userService.currentUser
         applicationRelease.dateSubmitted = new Date()
         applicationRelease.save()
 

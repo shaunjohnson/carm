@@ -8,6 +8,8 @@ import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUserDetailsServic
 
 class CarmUserDetailsService implements GrailsUserDetailsService {
 
+    def userService
+
     /**
      * Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least one role, so
      * we give a user with no granted roles this one which gets past that restriction but
@@ -22,7 +24,7 @@ class CarmUserDetailsService implements GrailsUserDetailsService {
 
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User.withTransaction { status ->
-            User user = User.findByUsername(username)
+            User user = userService.findByUsername(username)
             if (!user) {
                 throw new UsernameNotFoundException('User not found', username)
             }
