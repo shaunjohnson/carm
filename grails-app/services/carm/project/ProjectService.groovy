@@ -18,6 +18,7 @@ class ProjectService {
     def carmSecurityService
     def favoriteService
     def grailsApplication
+    def userService
     def watchService
 
     /**
@@ -42,18 +43,13 @@ class ProjectService {
 
         log.debug "$prefix entered"
 
-        if (!params.projectOwners) {
-            log.error "$prefix At least one project manager must be selected"
-            throw new CarmRuntimeException("At least one project manager must be selected")
-        }
-
         Project project = new Project(params)
         project.description = project.description?.trim()
         project.save()
 
-        // Grant the list of project owners administration permission
+        // Grant the current user project administrator access to the newly created project
         if (!project.hasErrors()) {
-            carmSecurityService.createPermissions(project, params.projectOwners, PROJECT_ADMINISTRATOR)
+            aclService.addUserPermission(project, userService.currentUser, PROJECT_ADMINISTRATOR)
         }
 
         log.debug "$prefix returning $project"
@@ -67,7 +63,7 @@ class ProjectService {
      * @param project Project object to delete
      */
     @Transactional
-    @PreAuthorize("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(project, 'PROJECT_ADMINISTRATOR'))")
     void delete(Project project) {
         def prefix = "delete() :"
 
@@ -75,10 +71,10 @@ class ProjectService {
 
         Project.withTransaction {
             def projectId = project.id
-            project.delete()
-            carmSecurityService.deleteAllPermissions(project)
+            aclService.deleteAllAclsByDomain(project, PROJECT_ADMINISTRATOR)
             favoriteService.deleteAllForProjectId(projectId)
             watchService.deleteAllForProjectId(projectId)
+            project.delete()
         }
 
         log.debug "$prefix leaving"
@@ -123,18 +119,8 @@ class ProjectService {
 
         log.debug "$prefix entered"
 
-        if (!params.projectOwners) {
-            log.error "$prefix At least one project owner must be selected"
-            throw new CarmRuntimeException("At least one project owner must be selected")
-        }
-
         project.properties = params
         project.description = project.description?.trim()
-
-        // Grant the list of project owners administration permission
-        if (!project.hasErrors()) {
-            carmSecurityService.updatePermissions(project, params.projectOwners, PROJECT_ADMINISTRATOR)
-        }
 
         log.debug "$prefix leaving"
     }

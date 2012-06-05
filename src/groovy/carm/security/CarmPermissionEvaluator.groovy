@@ -11,6 +11,7 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
     @Override
     @Transactional
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
+//println "hasPermission authentication=$authentication domain=$targetDomainObject permission=$permission"
         boolean hasPermission = false
         if (canHandle(authentication, targetDomainObject, permission)) {
             hasPermission = checkPermission(authentication, targetDomainObject, (String) permission)
@@ -23,6 +24,7 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
     }
 
     private boolean checkPermission(Authentication authentication, Object targetDomainObject, String permissionKey) {
+//println "checkPermission authentication=$authentication domain=$targetDomainObject permissionKey=$permissionKey"
         CarmPermission permission = CarmPermission.valueOf(permissionKey)
 
         if (permission && authentication?.principal instanceof UserDetails) {
@@ -40,7 +42,7 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
                         e.name = :entityName
                         and userEntry.user.id = :userId
                 """, [entityName: entityName, userId: userId])[0] as int
-
+//println "userCount=" + userCount
             if (userCount) {
                 return true
             }
@@ -57,7 +59,7 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
                         e.name = :entityName
                         and user.id = :userId
                 """, [entityName: entityName, userId: userId])[0] as int
-
+//println "groupCount=" + groupCount
             if (groupCount) {
                 return true
             }

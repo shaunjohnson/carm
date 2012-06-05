@@ -45,6 +45,21 @@ class AclService {
     }
 
     /**
+     * Deletes all ACLs for the provided domain object.
+     *
+     * @param domain Domain object for which ACLs are to be deleted
+     * @param permission ACL permissions to delete
+     */
+    void deleteAllAclsByDomain(domain, CarmPermission permission) {
+        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domain.id))
+        if (aclEntity) {
+            AclGroupEntry.executeUpdate("delete from AclGroupEntry where aclEntity = :aclEntity", [aclEntity: aclEntity])
+            AclUserEntry.executeUpdate("delete from AclUserEntry where aclEntity = :aclEntity", [aclEntity: aclEntity])
+            aclEntity.delete()
+        }
+    }
+
+    /**
      * Delete all ACLs for the provided User.
      *
      * @param user User for which ACLs are deleted
