@@ -2,6 +2,7 @@ package carm.security
 
 class AclGroupEntry {
     Date dateCreated
+    UserGroup userGroup
 
     static constraints = { }
 
@@ -9,5 +10,5 @@ class AclGroupEntry {
         version: false
     }
 
-    static belongsTo = [aclEntity: AclEntity, userGroup: UserGroup]
+    static belongsTo = [aclEntity: AclEntity]
 }

@@ -2,6 +2,7 @@ package carm.security
 
 class AclUserEntry {
     Date dateCreated
+    User user
 
     static constraints = { }
 
@@ -9,5 +10,5 @@ class AclUserEntry {
         version: false
     }
 
-    static belongsTo = [aclEntity: AclEntity, user: User]
+    static belongsTo = [aclEntity: AclEntity]
 }
