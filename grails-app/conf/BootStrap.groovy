@@ -63,18 +63,6 @@ class BootStrap {
             new UserRole(user: adminUser, role: roleAdmin).save()
         }
 
-        if (!AclEntity.findByName("PROJECT_ADMINISTRATOR_40")) {
-            AclEntity aclEntity = new AclEntity(name: 'PROJECT_ADMINISTRATOR_40')
-            aclEntity.save()
-
-            User spjohnson = User.findByUsername("spjohnson")
-            AclUserEntry aclUserEntry = new AclUserEntry(aclEntity: aclEntity, user: spjohnson)
-            aclUserEntry.save()
-
-            aclEntity.addToUserEntries(aclUserEntry)
-            aclEntity.save()
-        }
-
         if (!NotificationScheme.findByName("Default Notification Scheme")) {
             def notificationsFixture = fixtureLoader.load {
                 defaultNotificationScheme(NotificationScheme, name: 'Default Notification Scheme',
