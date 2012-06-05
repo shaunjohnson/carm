@@ -22,9 +22,8 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
     }
 
     private boolean checkPermission(Authentication authentication, Object targetDomainObject, String permissionKey) {
-        String entityName = permissionKey + "_" + targetDomainObject.id
-
         if (authentication?.principal instanceof UserDetails) {
+            String entityName = permissionKey + "_" + targetDomainObject.id
             String username = ((UserDetails) authentication.principal).username
             Serializable userId = User.findByUsername(username)?.id
 
@@ -62,21 +61,6 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
         }
 
         return false
-
-//        UserGroup userGroup = UserGroup.findByName(groupName)
-//
-//        if (userGroup) {
-//            println "User Group found " + groupName
-//
-//            if (authentication?.principal instanceof UserDetails) {
-//                String username = ((UserDetails) authentication.principal).username
-//                User user = User.findByUsername(username)
-//
-//                return userGroup.users.contains(user)
-//            }
-//        }
-//
-//        return false
     }
 
     @Override
