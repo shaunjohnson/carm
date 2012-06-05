@@ -58,21 +58,6 @@
         </div>
     </carm:formSection>
 
-    <carm:formSection legend="${message(code: 'permissions.section')}">
-        <div class="control-group">
-            <carm:label class="control-label" for="projectOwners" required="true">
-                <g:message code="project.projectOwners.label" default="Project Owners"/>
-            </carm:label>
-            <div class="controls">
-                <g:select name="projectOwners" from="${projectOwnerList}"
-                          optionKey="username" optionValue="fullName"
-                          value="${projectOwners}" multiple="true"
-                          required="required"
-                          title="${message(code: 'project.projectOwners.help')}"/>
-            </div>
-        </div>
-    </carm:formSection>
-
     <carm:formButtons>
         <g:submitButton class="btn btn-primary" name="create"
                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>

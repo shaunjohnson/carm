@@ -1,7 +1,7 @@
 package carm.project
 
-import carm.security.User
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
 
 class ProjectController {
 
@@ -14,6 +14,8 @@ class ProjectController {
     def projectService
     def projectCategoryService
     def springSecurityService
+    def userGroupService
+    def userService
 
     def index() {
         redirect(action: "list", params: params)
@@ -29,13 +31,10 @@ class ProjectController {
     def create() {
         def projectInstance = new Project()
         projectInstance.properties = params
-        def projectOwners = [springSecurityService.authentication.name]
 
         [
                 projectCategoryList: projectCategoryService.list(),
-                projectInstance: projectInstance,
-                projectOwners: projectOwners,
-                projectOwnerList: User.listOrderByUsername()
+                projectInstance: projectInstance
         ]
     }
 
@@ -48,9 +47,8 @@ class ProjectController {
         else {
             render(view: "create", model: [
                     projectCategoryList: projectCategoryService.list(),
-                    projectInstance: projectInstance,
-                    projectOwners: params.projectOwners,
-                    projectOwnerList: User.listOrderByUsername()])
+                    projectInstance: projectInstance
+            ])
         }
     }
 
@@ -67,7 +65,8 @@ class ProjectController {
                     activityCount: activityTraceService.countActivityByProject(projectInstance),
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingTasks: projectService.findAllPendingTasks(projectInstance),
-                    projectOwners: projectService.findAllProjectOwners(projectInstance)
+                    projectAdministratorGroups: projectService.findAllProjectAdministratorGroups(projectInstance),
+                    projectAdministratorUsers: projectService.findAllProjectAdministratorUsers(projectInstance)
             ]
         }
     }
@@ -81,9 +80,7 @@ class ProjectController {
         else {
             [
                     projectCategoryList: projectCategoryService.list(),
-                    projectInstance: projectInstance,
-                    projectOwners: projectService.findAllProjectOwners(projectInstance),
-                    projectOwnerList: User.listOrderByUsername()
+                    projectInstance: projectInstance
             ]
         }
     }
@@ -97,9 +94,7 @@ class ProjectController {
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
                     render(view: "edit", model: [
                             projectCategoryList: projectCategoryService.list(),
-                            projectInstance: projectInstance,
-                            projectOwners: projectService.findAllProjectOwners(projectInstance),
-                            projectOwnerList: User.listOrderByUsername()])
+                            projectInstance: projectInstance])
                     return
                 }
             }
@@ -111,9 +106,7 @@ class ProjectController {
             else {
                 render(view: "edit", model: [
                         projectCategoryList: projectCategoryService.list(),
-                        projectInstance: projectInstance,
-                        projectOwners: projectService.findAllProjectOwners(projectInstance),
-                        projectOwnerList: User.listOrderByUsername()])
+                        projectInstance: projectInstance])
             }
         }
         else {
@@ -156,6 +149,71 @@ class ProjectController {
                     activityTotal: activityTraceService.countActivityByProject(projectInstance)
             ]
         }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addAdministrator() {
+        def projectInstance = projectService.get(params.id)
+        if (!projectInstance) {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    projectInstance: projectInstance,
+                    userGroupList: userGroupService.listAll(),
+                    userList: userService.listAll()
+            ]
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def addAdministratorSave() {
+        def projectInstance = projectService.get(params.id)
+        if (projectInstance) {
+            if (params.groupId) {
+                projectService.addAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
+            }
+            else if (params.userId) {
+                projectService.addAdministratorUser(projectInstance, userService.get(params.userId))
+            }
+
+            if (!projectInstance.hasErrors()) {
+                flash.message = "${message(code: 'default.addedAdministrator.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
+                redirect(action: "show", id: projectInstance.id)
+            }
+            else {
+                render(view: "addAdministrator", model: [
+                        projectInstance: projectInstance,
+                        userGroupList: userGroupService.listAll(),
+                        userList: userService.listAll()
+                ])
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveAdministratorGroup() {
+        def projectInstance = projectService.get(params.id)
+        if (projectInstance) {
+            projectService.removeAdministratorGroup(projectInstance, params.userGroupId)
+        }
+
+        render ""
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveAdministratorUser() {
+        def projectInstance = projectService.get(params.id)
+        if (projectInstance) {
+            projectService.removeAdministratorUser(projectInstance, params.userId)
+        }
+
+        render ""
     }
 
     def ajaxShowMoreActivity() {

@@ -1,10 +1,13 @@
 package carm.project
 
+import static carm.security.CarmPermission.PROJECT_ADMINISTRATOR
+
 import org.springframework.security.access.prepost.PostFilter
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.transaction.annotation.Transactional
 import carm.exceptions.CarmRuntimeException
-import carm.security.CarmPermission
+import carm.security.User
+import carm.security.UserGroup
 
 class ProjectService {
     static transactional = false
@@ -49,7 +52,7 @@ class ProjectService {
 
         // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.createPermissions(project, params.projectOwners, CarmPermission.ADMINISTRATION)
+            carmSecurityService.createPermissions(project, params.projectOwners, PROJECT_ADMINISTRATOR)
         }
 
         log.debug "$prefix returning $project"
@@ -129,7 +132,7 @@ class ProjectService {
 
         // Grant the list of project owners administration permission
         if (!project.hasErrors()) {
-            carmSecurityService.updatePermissions(project, params.projectOwners, CarmPermission.ADMINISTRATION)
+            carmSecurityService.updatePermissions(project, params.projectOwners, PROJECT_ADMINISTRATOR)
         }
 
         log.debug "$prefix leaving"
@@ -195,13 +198,23 @@ class ProjectService {
     }
 
     /**
-     * Finds all project owners for the provided Project instance.
+     * Finds all project administrator groups for the provided Project instance.
      *
      * @param project Project used for querying
-     * @return List of project owner usernames
+     * @return List of UserGroup objects
      */
-    List<String> findAllProjectOwners(Project project) {
-        carmSecurityService.findAllPrincipalsByDomainAndPermission(project, CarmPermission.ADMINISTRATION)
+    List<UserGroup> findAllProjectAdministratorGroups(Project project) {
+        carmSecurityService.findAllGroupsByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
+    }
+
+    /**
+     * Finds all project administrator users for the provided Project instance.
+     *
+     * @param project Project used for querying
+     * @return List of User objects
+     */
+    List<User> findAllProjectAdministratorUsers(Project project) {
+        carmSecurityService.findAllUsersByDomainAndPermission(project, PROJECT_ADMINISTRATOR)
     }
 
     boolean isProjectOwner(Project project) {
@@ -209,6 +222,18 @@ class ProjectService {
             return false
         }
 
-        carmSecurityService.hasPermission(project, 'PROJECT_ADMINISTRATOR')
+        carmSecurityService.hasPermission(project, PROJECT_ADMINISTRATOR)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addAdministratorGroup(Project project, UserGroup userGroup) {
+        carmSecurityService.addUserGroupPermission(project, userGroup, PROJECT_ADMINISTRATOR)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addAdministratorUser(Project project, User user) {
+        carmSecurityService.addUserPermission(project, user, PROJECT_ADMINISTRATOR)
     }
 }

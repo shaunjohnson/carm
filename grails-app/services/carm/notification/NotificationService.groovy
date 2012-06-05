@@ -80,10 +80,10 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
         List<String> usernames = []
 
         if (domain instanceof ApplicationDeployment) {
-            usernames = projectService.findAllProjectOwners(((ApplicationDeployment) domain).applicationRelease.application.project)
+            usernames = projectService.findAllProjectAdministratorUsers(((ApplicationDeployment) domain).applicationRelease.application.project)
         }
         else if (domain instanceof ApplicationRelease) {
-            usernames = projectService.findAllProjectOwners(((ApplicationRelease) domain).application.project)
+            usernames = projectService.findAllProjectAdministratorUsers(((ApplicationRelease) domain).application.project)
         }
 
         carmSecurityService.findAllEmailByUsernameInList(usernames)

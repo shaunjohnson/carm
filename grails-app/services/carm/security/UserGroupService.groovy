@@ -152,6 +152,16 @@ class UserGroupService {
     }
 
     /**
+     * Gets a list of all UserGroup objects.
+     *
+     * @param params Query parameters
+     * @return List of UserGroup objects
+     */
+    List<UserGroup> listAll() {
+        UserGroup.list()
+    }
+
+    /**
      * Updates the provided UserGroup object with the new properties.
      *
      * @param system UserGroup to update

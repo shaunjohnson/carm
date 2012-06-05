@@ -12,32 +12,50 @@ class CarmSecurityService {
     def permissionEvaluator
     def springSecurityService
 
-    @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     void deleteAllAclsByUser(User user) {
         AclUserEntry.executeUpdate("delete from AclUserEntry where user = :user", [user: user])
     }
 
     /**
-     * Adds a new permission for the provided domain object.
+     * Adds a new group permission for the provided domain object.
      *
      * @param domainObject Domain object to which to grant access.
-     * @param username User to be granted access
+     * @param userGroup UserGroup to be granted access
      * @param permission Permission to grant user
      */
-    @PreAuthorize("hasPermission(#domainObject, admin)")
-    @Transactional
-    void addPermission(domainObject, String username, CarmPermission permission) {
-        def prefix = "addPermission() :"
+    void addUserGroupPermission(domainObject, UserGroup userGroup, CarmPermission permission) {
+        def prefix = "addUserGroupPermission() :"
 
-        log.debug "$prefix entered. domainObject=$domainObject, username=$username, permission=$permission"
+        log.debug "$prefix entered. domainObject=$domainObject, userGroup=$userGroup, permission=$permission"
 
-        if (!User.findByUsername(username)) {
-            log.error "$prefix user $username does not exist"
-            throw new CarmRuntimeException("User $username does not exist")
+        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
+        if (aclEntity) {
+            AclGroupEntry groupEntry = new AclGroupEntry(aclEntity: aclEntity, userGroup: userGroup)
+            aclEntity.addToGroupEntries(groupEntry)
+            aclEntity.save()
         }
 
-//        aclUtilService.addPermission domainObject, username, permission
+        log.debug "$prefix permission added. leaving."
+    }
+
+    /**
+     * Adds a new user permission for the provided domain object.
+     *
+     * @param domainObject Domain object to which to grant access.
+     * @param user User to be granted access
+     * @param permission Permission to grant user
+     */
+    void addUserPermission(domainObject, User user, CarmPermission permission) {
+        def prefix = "addUserPermission() :"
+
+        log.debug "$prefix entered. domainObject=$domainObject, user=$user, permission=$permission"
+
+        AclEntity aclEntity = AclEntity.findByName(permission.generateName(domainObject.id))
+        if (aclEntity) {
+            AclUserEntry userEntry = new AclUserEntry(aclEntity: aclEntity, user: user)
+            aclEntity.addToUserEntries(userEntry)
+            aclEntity.save()
+        }
 
         log.debug "$prefix permission added. leaving."
     }
@@ -49,8 +67,6 @@ class CarmSecurityService {
      * @param principals Users to be granted access
      * @param permission Permission to grant user
      */
-    @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     void createPermissions(domainObject, principals, CarmPermission permission) {
         def prefix = "createPermissions() :"
 
@@ -75,8 +91,6 @@ class CarmSecurityService {
      *
      * @param domainObject Domain object to delete ACL.
      */
-    @PreAuthorize("hasPermission(#domainObject, admin)")
-    @Transactional
     void deleteAllPermissions(domainObject) {
         def prefix = "deleteAllPermissions() :"
 
@@ -93,8 +107,6 @@ class CarmSecurityService {
      * @param domainObject Domain object to delete ACL
      * @param permission Permission to be deleted
      */
-    @PreAuthorize("hasPermission(#domainObject, admin)")
-    @Transactional
     void deleteAllPermissions(domainObject, CarmPermission permission) {
         def prefix = "deleteAllPermissions() :"
 
@@ -121,8 +133,6 @@ class CarmSecurityService {
      * @param username User to revoke access
      * @param permission Permission to be revoked
      */
-    @Transactional
-    @PreAuthorize("hasPermission(#domainObject, admin)")
     void deletePermission(domainObject, username, CarmPermission permission) {
         def prefix = "deletePermission() :"
 
@@ -143,37 +153,63 @@ class CarmSecurityService {
     }
 
     /**
-     * Find all principals for a specific domain object for the specified permission
+     * Find all users for a specific domain object assigned the specific permission.
      *
      * @param domainObject Domain object for which ACLs are defined.
      * @param permission Permission used to filter ACLs
-     * @return List of
+     * @return List of User objects
      */
-    List<String> findAllPrincipalsByDomainAndPermission(domainObject, CarmPermission permission) {
-        def prefix = "findAllPrincipalsByDomainAndPermission() : "
+    List<UserGroup> findAllGroupsByDomainAndPermission(domainObject, CarmPermission permission) {
+        def prefix = "findAllUsersByDomainAndPermission() : "
 
         log.debug "$prefix entered. domainObject=$domainObject, permission=$permission"
 
-        List<String> principals = []
+        String entityName = permission.generateName(domainObject.id)
 
-//        try {
-//            def acl = aclUtilService.readAcl(domainObject)
-//
-//            log.debug "$prefix found ${acl.entries.size()} ACL entries for $domainObject"
-//
-//            acl.entries.eachWithIndex { entry, i ->
-//                if (entry.permission.equals(permission)) {
-//                    principals.add(entry.sid.principal)
-//                }
-//            }
-//        }
-//        catch (NotFoundException e) {
-//            log.debug "$prefix NotFoundException caught looking up users for domain object"
-//        }
+        List<UserGroup> userGroups = AclGroupEntry.executeQuery("""
+                    select
+                        age.userGroup
+                    from
+                        AclGroupEntry age
+                    where
+                        age.aclEntity.name = :entityName
+                    order by
+                        age.userGroup.name
+                """, [entityName: entityName])
 
-        log.debug "$prefix returning ${principals.size()} principals"
+        log.debug "$prefix returning ${userGroups.size()} users"
 
-        principals.sort()
+        userGroups
+    }
+
+    /**
+     * Find all users for a specific domain object assigned the specific permission.
+     *
+     * @param domainObject Domain object for which ACLs are defined.
+     * @param permission Permission used to filter ACLs
+     * @return List of User objects
+     */
+    List<User> findAllUsersByDomainAndPermission(domainObject, CarmPermission permission) {
+        def prefix = "findAllUsersByDomainAndPermission() : "
+
+        log.debug "$prefix entered. domainObject=$domainObject, permission=$permission"
+
+        String entityName = permission.generateName(domainObject.id)
+
+        List<User> users = AclUserEntry.executeQuery("""
+                    select
+                        aue.user
+                    from
+                        AclUserEntry aue
+                    where
+                        aue.aclEntity.name = :entityName
+                    order by
+                        aue.user.fullName
+                """, [entityName: entityName])
+
+        log.debug "$prefix returning ${users.size()} users"
+
+        users
     }
 
     /**
@@ -231,10 +267,8 @@ class CarmSecurityService {
      * @param permission Permission to test
      * @return True if the current user has the permission on this domain object
      */
-    boolean hasPermission(domainObject, String permission) {
-        // aclUtilService.hasPermission(springSecurityService.authentication, domainObject, permission)
-        permissionEvaluator.hasPermission(springSecurityService.authentication, domainObject, permission)
-
+    boolean hasPermission(domainObject, CarmPermission permission) {
+        permissionEvaluator.hasPermission(springSecurityService.authentication, domainObject, permission.name())
     }
 
     /**
@@ -245,8 +279,6 @@ class CarmSecurityService {
      * @param permission Permission to grant user
      * @return
      */
-    @PreAuthorize("hasPermission(#domainObject, admin)")
-    @Transactional
     def updatePermissions(domainObject, principals, CarmPermission permission) {
         def prefix = "updatePermissions() :"
 

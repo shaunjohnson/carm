@@ -22,8 +22,10 @@ class CarmPermissionEvaluator implements PermissionEvaluator {
     }
 
     private boolean checkPermission(Authentication authentication, Object targetDomainObject, String permissionKey) {
-        if (authentication?.principal instanceof UserDetails) {
-            String entityName = permissionKey + "_" + targetDomainObject.id
+        CarmPermission permission = CarmPermission.valueOf(permissionKey)
+
+        if (permission && authentication?.principal instanceof UserDetails) {
+            String entityName = permission.generateName(targetDomainObject.id)
             String username = ((UserDetails) authentication.principal).username
             Serializable userId = User.findByUsername(username)?.id
 

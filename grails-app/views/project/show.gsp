@@ -29,6 +29,9 @@
     <li>
         <a href="#permissionsTab">
             <g:message code="permissions.label" default="Permissions"/>
+            <g:if test="${projectAdministratorGroups.size() == 0 && projectAdministratorUsers.size() == 0}">
+                <span class="badge badge-warning">!</span>
+            </g:if>
         </a>
     </li>
 </ul>
@@ -41,7 +44,7 @@
 
         <div class="row">
             <div class="span6">
-                <g:render template="projectApplications" model="['projectInstance': projectInstance]"/>
+                <g:render template="projectApplications" model="[projectInstance: projectInstance]"/>
             </div>
 
             <div class="span6">
@@ -56,7 +59,8 @@
     </div>
 
     <div id="permissionsTab" class="tab-pane">
-        <g:render template="projectOwners" model="[projectOwners: projectOwners]"/>
+        <g:render template="permissions"
+                  model="[projectAdministratorGroups: projectAdministratorGroups, projectAdministratorUsers: projectAdministratorUsers, projectInstance: projectInstance]"/>
     </div>
 </div>
 
