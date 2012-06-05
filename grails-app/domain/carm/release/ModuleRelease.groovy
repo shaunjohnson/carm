@@ -11,7 +11,7 @@ class ModuleRelease {
 
     static constraints = {
         applicationRelease(nullable: false)
-        module(nullable: false)
+        module(nullable: true)
     }
 
     static belongsTo = [applicationRelease: ApplicationRelease]
