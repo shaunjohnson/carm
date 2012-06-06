@@ -66,7 +66,9 @@ class ProjectController {
                     applicationsGrouped: applicationService.findAllByProjectGroupedByType(projectInstance),
                     pendingTasks: projectService.findAllPendingTasks(projectInstance),
                     projectAdministratorGroups: projectService.findAllProjectAdministratorGroups(projectInstance),
-                    projectAdministratorUsers: projectService.findAllProjectAdministratorUsers(projectInstance)
+                    projectAdministratorUsers: projectService.findAllProjectAdministratorUsers(projectInstance),
+                    userGroupList: userGroupService.listAll(),
+                    userList: userService.listAll()
             ]
         }
     }
@@ -152,79 +154,29 @@ class ProjectController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def addAdministratorGroup() {
-        def projectInstance = projectService.get(params.id)
-        if (!projectInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [
-                    projectInstance: projectInstance,
-                    userGroupList: userGroupService.listAll()
-            ]
-        }
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def addAdministratorUser() {
-        def projectInstance = projectService.get(params.id)
-        if (!projectInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [
-                    projectInstance: projectInstance,
-                    userList: userService.listAll()
-            ]
-        }
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def addAdministratorGroupSave() {
+    def ajaxAddAdministratorGroup() {
+        println params
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             projectService.addAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
+        }
 
-            if (!projectInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.addedAdministrator.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
-                redirect(action: "show", id: projectInstance.id)
-            }
-            else {
-                render(view: "addAdministratorGroup", model: [
-                        projectInstance: projectInstance,
-                        userGroupList: userGroupService.listAll()
-                ])
-            }
-        }
-        else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
-            redirect(action: "list")
-        }
+        render(template: "projectAdministratorGroups", model: [
+                userGroupList: projectService.findAllProjectAdministratorGroups(projectInstance)
+        ])
     }
 
     @Secured(['ROLE_ADMIN'])
-    def addAdministratorUserSave() {
+    def ajaxAddAdministratorUser() {
+        println params
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             projectService.addAdministratorUser(projectInstance, userService.get(params.userId))
+        }
 
-            if (!projectInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.addedAdministrator.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.name])}"
-                redirect(action: "show", id: projectInstance.id)
-            }
-            else {
-                render(view: "addAdministratorUser", model: [
-                        projectInstance: projectInstance,
-                        userList: userService.listAll()
-                ])
-            }
-        }
-        else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
-            redirect(action: "list")
-        }
+        render(template: "projectAdministratorUsers", model: [
+                userList: projectService.findAllProjectAdministratorUsers(projectInstance)
+        ])
     }
 
     @Secured(['ROLE_ADMIN'])
