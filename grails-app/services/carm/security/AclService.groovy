@@ -17,9 +17,12 @@ class AclService {
         log.debug "$prefix entered. domainObject=$domainObject, userGroup=$userGroup, permission=$permission"
 
         AclEntity aclEntity = AclEntity.findOrSaveWhere([name: permission.generateName(domainObject.id)])
-        AclGroupEntry groupEntry = new AclGroupEntry(aclEntity: aclEntity, userGroup: userGroup)
-        aclEntity.addToGroupEntries(groupEntry)
-        aclEntity.save()
+
+        if (AclGroupEntry.countByAclEntityAndUserGroup(aclEntity, userGroup) == 0) {
+            AclGroupEntry groupEntry = new AclGroupEntry(aclEntity: aclEntity, userGroup: userGroup)
+            aclEntity.addToGroupEntries(groupEntry)
+            aclEntity.save()
+        }
 
         log.debug "$prefix permission added. leaving."
     }
@@ -37,9 +40,12 @@ class AclService {
         log.debug "$prefix entered. domainObject=$domainObject, user=$user, permission=$permission"
 
         AclEntity aclEntity = AclEntity.findOrSaveWhere([name: permission.generateName(domainObject.id)])
-        AclUserEntry userEntry = new AclUserEntry(aclEntity: aclEntity, user: user)
-        aclEntity.addToUserEntries(userEntry)
-        aclEntity.save()
+
+        if (AclUserEntry.countByAclEntityAndUser(aclEntity, user) == 0) {
+            AclUserEntry userEntry = new AclUserEntry(aclEntity: aclEntity, user: user)
+            aclEntity.addToUserEntries(userEntry)
+            aclEntity.save()
+        }
 
         log.debug "$prefix permission added. leaving."
     }
