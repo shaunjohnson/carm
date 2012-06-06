@@ -46,7 +46,7 @@ class SourceControlUserController {
         def sourceControlUserInstance = sourceControlUserService.create(params)
         if (!sourceControlUserInstance.hasErrors()) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'sourceControlUser.label', default: 'SourceControlUser'), sourceControlUserInstance.name])}"
-            redirect(action: "show", id: sourceControlUserInstance.id)
+            redirect(controller: "sourceControlServer", action: "show", id: sourceControlUserInstance.server.id)
         }
         else {
             render(view: "create", model: [sourceControlUserInstance: sourceControlUserInstance])
