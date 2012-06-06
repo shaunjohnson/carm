@@ -53,35 +53,6 @@
             </g:link>
         </td>
     </tr>
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlUser.applicationRoles.label" default="Application Roles"/>
-        </td>
-        <td valign="top" style="text-align: left;" class="value">
-            <g:if test="${sourceControlUserInstance.applicationRoles.size()}">
-                <ul>
-                    <g:each in="${sourceControlUserInstance.applicationRoles.sort { it.application.name }}"
-                            var="applicationRole">
-                        <li>
-                            <g:link controller="applicationRole" action="show" id="${applicationRole.id}">
-                                ${applicationRole?.role?.encodeAsHTML()}
-                            </g:link>
-                            <g:link controller="application" action="show"
-                                    id="${applicationRole?.application?.id}">
-                                (${applicationRole?.application?.encodeAsHTML()})
-                            </g:link>
-                        </li>
-                    </g:each>
-                </ul>
-            </g:if>
-            <g:else>
-                <p>
-                    <em><g:message code="userDoesNotHaveAnyRoles.message"
-                                   default="This user does not have any roles."/></em>
-                </p>
-            </g:else>
-        </td>
-    </tr>
 
     <carm:formDividerRow/>
 

@@ -23,7 +23,6 @@ import carm.module.ModuleType
 import carm.sourcecontrol.SourceControlRepository
 import carm.sourcecontrol.SourceControlUser
 import carm.sourcecontrol.SourceControlRole
-import carm.application.ApplicationRole
 import carm.release.ApplicationRelease
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import carm.project.ProjectCategory
@@ -582,72 +581,6 @@ class BootStrap {
 //                            moduleRelease: ref('userPortletModuleRelease210')
 //                        }
 //                ]
-//            }
-//
-//            //
-//            // Application Roles
-//            //
-//            shaunDataAppDevRole(ApplicationRole) {
-//                application = dataApplication
-//                role = developerScmRole
-//                sourceControlUser = shaunScmUser
-//            }
-//            shaunEarAppDevRole(ApplicationRole) {
-//                application = earApplication
-//                role = developerScmRole
-//                sourceControlUser = shaunScmUser
-//            }
-//            shaunBrokerAppDevRole(ApplicationRole) {
-//                application = brokerApplication
-//                role = developerScmRole
-//                sourceControlUser = shaunScmUser
-//            }
-//            shaunPortalAppDevRole(ApplicationRole) {
-//                application = portalApplication
-//                role = developerScmRole
-//                sourceControlUser = shaunScmUser
-//            }
-//
-//            susanDataAppDevRole(ApplicationRole) {
-//                application = dataApplication
-//                role = developerScmRole
-//                sourceControlUser = susanScmUser
-//            }
-//            susanEarAppDevRole(ApplicationRole) {
-//                application = earApplication
-//                role = developerScmRole
-//                sourceControlUser = susanScmUser
-//            }
-//            susanBrokerAppDevRole(ApplicationRole) {
-//                application = brokerApplication
-//                role = developerScmRole
-//                sourceControlUser = susanScmUser
-//            }
-//            susanPortalAppDevRole(ApplicationRole) {
-//                application = portalApplication
-//                role = developerScmRole
-//                sourceControlUser = susanScmUser
-//            }
-//
-//            scottDataAppManagerRole(ApplicationRole) {
-//                application = dataApplication
-//                role = managerScmRole
-//                sourceControlUser = scottScmUser
-//            }
-//            scottEarAppManagerRole(ApplicationRole) {
-//                application = earApplication
-//                role = managerScmRole
-//                sourceControlUser = scottScmUser
-//            }
-//            scottBrokerAppManagerRole(ApplicationRole) {
-//                application = brokerApplication
-//                role = managerScmRole
-//                sourceControlUser = scottScmUser
-//            }
-//            scottPortalAppManagerRole(ApplicationRole) {
-//                application = portalApplication
-//                role = managerScmRole
-//                sourceControlUser = scottScmUser
 //            }
 //        }
     }

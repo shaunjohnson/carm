@@ -41,7 +41,7 @@ class Application {
 
     static belongsTo = [project: Project]
 
-    static hasMany = [applicationRoles: ApplicationRole, modules: Module, releases: ApplicationRelease]
+    static hasMany = [modules: Module, releases: ApplicationRelease]
 
     static mapping = {
         sort "name"

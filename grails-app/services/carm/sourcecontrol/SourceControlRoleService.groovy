@@ -2,7 +2,6 @@ package carm.sourcecontrol
 
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.transaction.annotation.Transactional
-import carm.application.ApplicationRole
 import carm.exceptions.DomainInUseException
 
 class SourceControlRoleService {
@@ -18,7 +17,7 @@ class SourceControlRoleService {
      * @return True if the role is in use
      */
     boolean isInUse(SourceControlRole role) {
-        ApplicationRole.countByRole(role) > 0
+
     }
 
     /**

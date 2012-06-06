@@ -1,7 +1,6 @@
 package carm.sourcecontrol
 
 import carm.security.User
-import carm.application.ApplicationRole
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 class SourceControlUser {
@@ -19,8 +18,6 @@ class SourceControlUser {
     }
 
     static belongsTo = [server: SourceControlServer, user: User]
-
-    static hasMany = [applicationRoles: ApplicationRole]
 
     static mapping = {
         sort "name"

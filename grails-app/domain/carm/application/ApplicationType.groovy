@@ -27,7 +27,7 @@ class ApplicationType implements Comparable<ApplicationType> {
     }
 
     boolean equals(other) {
-        if (!(other instanceof ApplicationRole)) {
+        if (!(other instanceof ApplicationType)) {
             return false
         }
 
