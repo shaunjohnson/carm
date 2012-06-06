@@ -1,19 +1,24 @@
 package carm.application
 
-import carm.system.SystemEnvironment
+import static carm.security.CarmPermission.APPLICATION_DEVELOPER
+import static carm.security.CarmPermission.APPLICATION_TEAM_LEADER
 
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.access.prepost.PreAuthorize
+import carm.notification.NotificationScheme
 import carm.project.Project
+import carm.security.UserGroup
+import carm.security.User
+import carm.system.SystemEnvironment
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContext
-import carm.notification.NotificationScheme
 
 class ApplicationService implements ApplicationContextAware {
 
     static transactional = false
 
     ApplicationContext applicationContext
+    def aclService
     def activityTraceService
     def applicationDeploymentService
     def favoriteService
@@ -181,6 +186,46 @@ class ApplicationService implements ApplicationContextAware {
     }
 
     /**
+     * Finds all application developer groups for the provided Application instance.
+     *
+     * @param application Application used for querying
+     * @return List of UserGroup objects
+     */
+    List<UserGroup> findAllApplicationDeveloperGroups(Application application) {
+        aclService.findAllGroupsByDomainAndPermission(application, APPLICATION_DEVELOPER)
+    }
+
+    /**
+     * Finds all application developer users for the provided Application instance.
+     *
+     * @param application Application used for querying
+     * @return List of User objects
+     */
+    List<User> findAllApplicationDeveloperUsers(Application application) {
+        aclService.findAllUsersByDomainAndPermission(application, APPLICATION_DEVELOPER)
+    }
+
+    /**
+     * Finds all application team leader groups for the provided Application instance.
+     *
+     * @param application Application used for querying
+     * @return List of UserGroup objects
+     */
+    List<UserGroup> findAllApplicationTeamLeaderGroups(Application application) {
+        aclService.findAllGroupsByDomainAndPermission(application, APPLICATION_TEAM_LEADER)
+    }
+
+    /**
+     * Finds all application team leader users for the provided Application instance.
+     *
+     * @param application Application used for querying
+     * @return List of User objects
+     */
+    List<User> findAllApplicationTeamLeaderUsers(Application application) {
+        aclService.findAllUsersByDomainAndPermission(application, APPLICATION_TEAM_LEADER)
+    }
+
+    /**
      * Finds all Applications filtered by notification scheme
      *
      * @param notificationSchemeInstance NotificationScheme used for filtering
@@ -233,5 +278,53 @@ class ApplicationService implements ApplicationContextAware {
         pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByApplication(application)
         
         pendingTasks.sort { it.dateCreated }
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addApplicationDeveloperGroup(Application application, UserGroup userGroup) {
+        aclService.addUserGroupPermission(application, userGroup, APPLICATION_DEVELOPER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addApplicationDeveloperUser(Application application, User user) {
+        aclService.addUserPermission(application, user, APPLICATION_DEVELOPER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addTeamLeaderGroup(Application application, UserGroup userGroup) {
+        aclService.addUserGroupPermission(application, userGroup, APPLICATION_TEAM_LEADER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void addTeamLeaderUser(Application application, User user) {
+        aclService.addUserPermission(application, user, APPLICATION_TEAM_LEADER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeApplicationDeveloperGroup(Application application, UserGroup userGroup) {
+        aclService.removeUserGroupPermission(application, userGroup, APPLICATION_DEVELOPER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeApplicationDeveloperUser(Application application, User user) {
+        aclService.removeUserPermission(application, user, APPLICATION_DEVELOPER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeTeamLeaderGroup(Application application, UserGroup userGroup) {
+        aclService.removeUserGroupPermission(application, userGroup, APPLICATION_TEAM_LEADER)
+    }
+
+    @Transactional
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(filterObject, 'PROJECT_ADMINISTRATOR') )")
+    void removeTeamLeaderUser(Application application, User user) {
+        aclService.removeUserPermission(application, user, APPLICATION_TEAM_LEADER)
     }
 }

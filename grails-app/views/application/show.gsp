@@ -37,9 +37,6 @@
     <li>
         <a href="#permissionsTab" data-toggle="tab">
             <g:message code="permissions.label" default="Permissions"/>
-            <g:if test="${applicationInstance.applicationRoles.size() == 0}">
-                <span class="badge badge-warning">!</span>
-            </g:if>
         </a>
     </li>
     <li>
@@ -77,35 +74,117 @@
     </div>
 
     <div id="permissionsTab" class="tab-pane">
-        <div class="sectionHeader">
-            <div class="text">
-                <g:message code="application.applicationRoles.label" default="Application Roles"/>
-            </div>
-            <carmsec:isProjectOwner application="${applicationInstance}">
-                <div class="section-action">
-                    <g:link class="create" controller="applicationRole" action="create"
-                            params="['application.id': applicationInstance?.id]">
-                        <g:message code="addApplicationRole.label" default="Add Application Role"/>
-                    </g:link>
-                </div>
-            </carmsec:isProjectOwner>
-        </div>
+        <div class="row">
+            <div class="span6">
 
-        <g:if test="${applicationInstance.applicationRoles}">
-            <ul>
-                <g:each in="${applicationInstance.applicationRoles.sort { it.sourceControlUser.name }}"
-                        var="applicationRole">
-                    <li>
-                        <g:link controller="applicationRole" action="show" id="${applicationRole.id}">
-                            ${applicationRole?.encodeAsHTML()}
-                        </g:link>
-                    </li>
-                </g:each>
-            </ul>
-        </g:if>
-        <g:else>
-            <carm:alertWarning message="${message(code: "applicationDoesNotHaveAnyAssignedUsers.message")}"/>
-        </g:else>
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="teamLeaders.label" default="Team Leaders"/>
+                    </div>
+                    <carmsec:isProjectOwner application="${applicationInstance}">
+                        <div class="section-action-icon new-action">
+                            <a href="#" onclick="return displayAddUserDialog(addTeamLeaderUser)">
+                                <g:message code="addUser.label" default="Add User"/>
+                            </a>
+                        </div>
+
+                        <div class="section-action-icon new-action">
+                            <a href="#"
+                               onclick="return displayAddUserGroupDialog(addTeamLeaderGroup)">
+                                <g:message code="addGroup.label" default="Add Group"/>
+                            </a>
+                        </div>
+
+                        <div class="clearing"></div>
+                    </carmsec:isProjectOwner>
+                </div>
+
+                <div style="margin-bottom: 2em;">
+                    <h3><g:message code="groups.label"/></h3>
+
+                    <div id="team-leader-groups-block">
+                        <g:render template="teamLeaderGroups"
+                                  model="[userGroupList: teamLeaderGroups, applicationInstance: applicationInstance]"/>
+                    </div>
+
+                    <p id="no-team-leader-groups-message"
+                       style="display: ${teamLeaderGroups.size() ? 'none' : 'block'};">
+                        <em><g:message code="applicationDoesNotHaveAnyTeamLeaderGroups.message"
+                                       default="This application does not have any team leader groups."/></em>
+                    </p>
+                </div>
+
+                <div>
+                    <h3><g:message code="users.label"/></h3>
+
+                    <div id="team-leader-users-block">
+                        <g:render template="teamLeaderUsers"
+                                  model="[userList: teamLeaderUsers, applicationInstance: applicationInstance]"/>
+                    </div>
+
+                    <p id="no-team-leader-users-message" style="display: ${teamLeaderUsers.size() ? 'none' : 'block'};">
+                        <em><g:message code="applicationDoesNotHaveAnyTeamLeaderUsers.message"
+                                       default="This application does not have any team leader users."/></em>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="span6">
+
+                <div class="sectionHeader">
+                    <div class="text">
+                        <g:message code="applicationDevelopers.label" default="Developers"/>
+                    </div>
+                    <carmsec:isProjectOwner application="${applicationInstance}">
+                        <div class="section-action-icon new-action">
+                            <a href="#" onclick="return displayAddUserDialog(addApplicationDeveloperUser)">
+                                <g:message code="addUser.label" default="Add User"/>
+                            </a>
+                        </div>
+
+                        <div class="section-action-icon new-action">
+                            <a href="#"
+                               onclick="return displayAddUserGroupDialog(addApplicationDeveloperGroup)">
+                                <g:message code="addGroup.label" default="Add Group"/>
+                            </a>
+                        </div>
+
+                        <div class="clearing"></div>
+                    </carmsec:isProjectOwner>
+                </div>
+
+                <div style="margin-bottom: 2em;">
+                    <h3><g:message code="groups.label"/></h3>
+
+                    <div id="app-developer-groups-block">
+                        <g:render template="applicationDeveloperGroups"
+                                  model="[userGroupList: applicationDeveloperGroups, applicationInstance: applicationInstance]"/>
+                    </div>
+
+                    <p id="no-app-developer-groups-message"
+                       style="display: ${applicationDeveloperGroups.size() ? 'none' : 'block'};">
+                        <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperGroups.message"
+                                       default="This application does not have any team leader groups."/></em>
+                    </p>
+                </div>
+
+                <div>
+                    <h3><g:message code="users.label"/></h3>
+
+                    <div id="app-developer-users-block">
+                        <g:render template="applicationDeveloperUsers"
+                                  model="[userList: applicationDeveloperUsers, applicationInstance: applicationInstance]"/>
+                    </div>
+
+                    <p id="no-app-developer-users-message"
+                       style="display: ${applicationDeveloperUsers.size() ? 'none' : 'block'};">
+                        <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperUsers.message"
+                                       default="This application does not have any team leader users."/></em>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="activityTab" class="tab-pane">
@@ -114,6 +193,9 @@
     </div>
 </div>
 
+<g:render template="/common/addUserGroup" model="[userGroupList: userGroupList]"/>
+<g:render template="/common/addUser" model="[userList: userList]"/>
+
 <r:script>
     jQuery(function () {
         jQuery('#applicationTabs a').click(function (e) {
@@ -121,6 +203,122 @@
             jQuery(this).tab('show');
         });
     });
+
+    function addApplicationDeveloperGroup(groupId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxAddApplicationDeveloperGroup", id: applicationInstance.id)}',
+                data: { groupId: groupId },
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    jQuery("#app-developer-groups-block").html(data).show();
+                    jQuery("#no-app-developer-groups-message").hide();
+                }
+            });
+    }
+
+    function addApplicationDeveloperUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxAddApplicationDeveloperUser", id: applicationInstance.id)}',
+                data: { userId: userId },
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    jQuery("#app-developer-users-block").html(data).show();
+                    jQuery("#no-app-developer-users-message").hide();
+                }
+            });
+    }
+
+    function addTeamLeaderGroup(groupId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxAddTeamLeaderGroup", id: applicationInstance.id)}',
+                data: { groupId: groupId },
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    jQuery("#team-leader-groups-block").html(data).show();
+                    jQuery("#no-team-leader-groups-message").hide();
+                }
+            });
+    }
+
+    function addTeamLeaderUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxAddTeamLeaderUser", id: applicationInstance.id)}',
+                data: { userId: userId },
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    jQuery("#team-leader-users-block").html(data).show();
+                    jQuery("#no-team-leader-users-message").hide();
+                }
+            });
+    }
+
+    function removeApplicationDeveloperGroup(groupId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxRemoveApplicationDeveloperGroup", id: applicationInstance.id)}',
+                data: { groupId: groupId }
+            });
+        jQuery("#app-developer-group_" + groupId).remove();
+
+        if (!jQuery("#app-developer-groups-block li").length) {
+            jQuery("#app-developer-groups-block").hide();
+            jQuery("#no-app-developer-groups-message").show();
+        }
+
+        return false;
+    }
+
+    function removeApplicationDeveloperUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxRemoveApplicationDeveloperUser", id: applicationInstance.id)}',
+                data: { userId: userId }
+            });
+        jQuery("#app-developer-user_" + userId).remove();
+
+        if (!jQuery("#app-developer-users-block li").length) {
+            jQuery("#app-developer-users-block").hide();
+            jQuery("#no-app-developer-users-message").show();
+        }
+
+        return false;
+    }
+
+    function removeTeamLeaderGroup(groupId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxRemoveTeamLeaderGroup", id: applicationInstance.id)}',
+                data: { groupId: groupId }
+            });
+        jQuery("#team-leader-group_" + groupId).remove();
+
+        if (!jQuery("#team-leader-groups-block li").length) {
+            jQuery("#team-leader-groups-block").hide();
+            jQuery("#no-team-leader-groups-message").show();
+        }
+
+        return false;
+    }
+
+    function removeTeamLeaderUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxRemoveTeamLeaderUser", id: applicationInstance.id)}',
+                data: { userId: userId }
+            });
+        jQuery("#team-leader-user_" + userId).remove();
+
+        if (!jQuery("#team-leader-users-block li").length) {
+            jQuery("#team-leader-users-block").hide();
+            jQuery("#no-team-leader-users-message").show();
+        }
+
+        return false;
+    }
 </r:script>
 
 </body>

@@ -24,8 +24,7 @@
                 <g:message code="default.button.cancel.label" default="Cancel"/>
             </a>
 
-            <a href="#" class="btn btn-primary"
-               onclick="${callback}.call(this, jQuery('#addUserGroupId').val()); jQuery('#add-user-group-dialog').modal('hide');">
+            <a href="#" class="btn btn-primary" onclick="return addUserGroupSubmit();">
                 <g:message code="default.button.addGroup.label" default="Add Group"/>
             </a>
         </div>
@@ -33,10 +32,20 @@
 </div>
 
 <r:script>
-    function displayAddUserGroupDialog() {
+    function displayAddUserGroupDialog(callback) {
         var dialog = jQuery("#add-user-group-dialog");
-        dialog.find('form').each(function() { this.reset(); });
+        dialog.data('callback', callback);
+        dialog.find('form').each(function () {
+            this.reset();
+        });
         dialog.modal('show');
+        return false;
+    }
+
+    function addUserGroupSubmit() {
+        var dialog = jQuery("#add-user-group-dialog");
+        dialog.data('callback').call(this, jQuery('#addUserGroupId').val());
+        dialog.modal('hide');
         return false;
     }
 </r:script>

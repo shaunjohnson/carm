@@ -37,7 +37,7 @@
             </div>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div class="section-action-icon new-action">
-                    <a href="#" onclick="return displayAddUserDialog(${userGroupInstance.id})">
+                    <a href="#" onclick="return displayAddUserDialog(addUser)">
                         <g:message code="addUser.label" default="Add User"/>
                     </a>
                 </div>
@@ -92,7 +92,7 @@
     </div>
 </div>
 
-<g:render template="/common/addUser" model="[callback: 'addUser', userList: userList]"/>
+<g:render template="/common/addUser" model="[userList: userList]"/>
 
 <r:script>
     jQuery(function () {

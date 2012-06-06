@@ -65,13 +65,13 @@
             </div>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div class="section-action-icon new-action">
-                    <a href="#" onclick="return displayAddUserDialog(${projectInstance.id})">
+                    <a href="#" onclick="return displayAddUserDialog(addAdministratorUser)">
                         <g:message code="addUser.label" default="Add User"/>
                     </a>
                 </div>
 
                 <div class="section-action-icon new-action">
-                    <a href="#" onclick="return displayAddUserGroupDialog(${projectInstance.id})">
+                    <a href="#" onclick="return displayAddUserGroupDialog(addAdministratorGroup)">
                         <g:message code="addGroup.label" default="Add Group"/>
                     </a>
                 </div>
@@ -111,6 +111,9 @@
     </div>
 </div>
 
+<g:render template="/common/addUserGroup" model="[userGroupList: userGroupList]"/>
+<g:render template="/common/addUser" model="[userList: userList]"/>
+
 <r:script>
     jQuery(function () {
         jQuery('#projectTabs a').click(function (e) {
@@ -148,7 +151,7 @@
     function removeGroup(groupId) {
         jQuery.ajax({
                 cache: false,
-                url: '${createLink(controller: "project", action: "ajaxRemoveAdministratorGroup", id: projectInstance.id)}',
+                url: '${createLink(action: "ajaxRemoveAdministratorGroup", id: projectInstance.id)}',
                 data: { groupId: groupId }
             });
         jQuery("#group_" + groupId).remove();
@@ -164,7 +167,7 @@
     function removeUser(userId) {
         jQuery.ajax({
                 cache: false,
-                url: '${createLink(controller: "project", action: "ajaxRemoveAdministratorUser", id: projectInstance.id)}',
+                url: '${createLink(action: "ajaxRemoveAdministratorUser", id: projectInstance.id)}',
                 data: { userId: userId }
             });
         jQuery("#user_" + userId).remove();
@@ -177,10 +180,6 @@
         return false;
     }
 </r:script>
-
-<g:render template="/common/addUserGroup" model="[callback: 'addAdministratorGroup', userGroupList: userGroupList]"/>
-
-<g:render template="/common/addUser" model="[callback: 'addAdministratorUser', userList: userList]"/>
 
 </body>
 </html>

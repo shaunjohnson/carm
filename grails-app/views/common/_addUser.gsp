@@ -24,8 +24,7 @@
                 <g:message code="default.button.cancel.label" default="Cancel"/>
             </a>
 
-            <a href="#" class="btn btn-primary"
-               onclick="${callback}.call(this, jQuery('#addUserId').val()); jQuery('#add-user-dialog').modal('hide');">
+            <a href="#" class="btn btn-primary" onclick="return addUserSubmit();">
                 <g:message code="default.button.addUser.label" default="Add User"/>
             </a>
         </div>
@@ -33,10 +32,20 @@
 </div>
 
 <r:script>
-    function displayAddUserDialog() {
+    function displayAddUserDialog(callback) {
         var dialog = jQuery("#add-user-dialog");
-        dialog.find('form').each(function() { this.reset(); });
+        dialog.data('callback', callback);
+        dialog.find('form').each(function () {
+            this.reset();
+        });
         dialog.modal('show');
+        return false;
+    }
+
+    function addUserSubmit() {
+        var dialog = jQuery("#add-user-dialog");
+        dialog.data('callback').call(this, jQuery('#addUserId').val());
+        dialog.modal('hide');
         return false;
     }
 </r:script>

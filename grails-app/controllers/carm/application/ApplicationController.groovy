@@ -4,6 +4,7 @@ import carm.exceptions.DomainInUseException
 import org.springframework.dao.DataIntegrityViolationException
 
 import carm.system.SystemDeploymentEnvironment
+import grails.plugins.springsecurity.Secured
 
 class ApplicationController {
 
@@ -19,6 +20,8 @@ class ApplicationController {
     def projectService
     def systemDeploymentEnvironmentService
     def systemEnvironmentService
+    def userGroupService
+    def userService
 
     def index() {
         redirect(action: "list", params: params)
@@ -96,7 +99,16 @@ class ApplicationController {
                     deployments: deployments,
                     activityList: activityTraceService.listActivityByApplication(applicationInstance, [:]),
                     activityCount: activityTraceService.countActivityByApplication(applicationInstance),
-                    pendingTasks: applicationService.findAllPendingTasks(applicationInstance)
+                    pendingTasks: applicationService.findAllPendingTasks(applicationInstance),
+
+                    teamLeaderGroups: applicationService.findAllApplicationTeamLeaderGroups(applicationInstance),
+                    teamLeaderUsers: applicationService.findAllApplicationTeamLeaderUsers(applicationInstance),
+
+                    applicationDeveloperGroups: applicationService.findAllApplicationDeveloperGroups(applicationInstance),
+                    applicationDeveloperUsers: applicationService.findAllApplicationDeveloperUsers(applicationInstance),
+
+                    userGroupList: userGroupService.listAll(),
+                    userList: userService.listAll()
             ]
         }
     }
@@ -265,5 +277,97 @@ class ApplicationController {
                     applicationDeploymentInstanceTotal: applicationDeploymentService.countByApplication(applicationInstance)
             ]
         }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxAddApplicationDeveloperGroup() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.addApplicationDeveloperGroup(applicationInstance, userGroupService.get(params.groupId))
+        }
+
+        render(template: "applicationDeveloperGroups", model: [
+                userGroupList: applicationService.findAllApplicationDeveloperGroups(applicationInstance),
+                applicationInstance: applicationInstance
+        ], contentType: "text/html")
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxAddApplicationDeveloperUser() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.addApplicationDeveloperUser(applicationInstance, userService.get(params.userId))
+        }
+
+        render(template: "applicationDeveloperUsers", model: [
+                userList: applicationService.findAllApplicationDeveloperUsers(applicationInstance),
+                applicationInstance: applicationInstance
+        ], contentType: "text/html")
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxAddTeamLeaderGroup() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.addTeamLeaderGroup(applicationInstance, userGroupService.get(params.groupId))
+        }
+
+        render(template: "teamLeaderGroups", model: [
+                userGroupList: applicationService.findAllApplicationTeamLeaderGroups(applicationInstance),
+                applicationInstance: applicationInstance
+        ], contentType: "text/html")
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxAddTeamLeaderUser() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.addTeamLeaderUser(applicationInstance, userService.get(params.userId))
+        }
+
+        render(template: "teamLeaderUsers", model: [
+                userList: applicationService.findAllApplicationTeamLeaderUsers(applicationInstance),
+                applicationInstance: applicationInstance
+        ], contentType: "text/html")
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveApplicationDeveloperGroup() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.removeApplicationDeveloperGroup(applicationInstance, userGroupService.get(params.groupId))
+        }
+
+        render ""
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveApplicationDeveloperUser() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.removeApplicationDeveloperUser(applicationInstance, userService.get(params.userId))
+        }
+
+        render ""
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveTeamLeaderGroup() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.removeTeamLeaderGroup(applicationInstance, userGroupService.get(params.groupId))
+        }
+
+        render ""
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def ajaxRemoveTeamLeaderUser() {
+        def applicationInstance = applicationService.get(params.id)
+        if (applicationInstance) {
+            applicationService.removeTeamLeaderUser(applicationInstance, userService.get(params.userId))
+        }
+
+        render ""
     }
 }
