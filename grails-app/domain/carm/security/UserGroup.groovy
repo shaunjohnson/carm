@@ -8,7 +8,7 @@ class UserGroup {
     Date lastUpdated
 
     static constraints = {
-        name(maxSize: 50, nullable: false)
+        name(maxSize: 50, nullable: false, unique: true)
         description(maxSize: 4000, nullable: true)
     }
 
