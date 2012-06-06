@@ -31,7 +31,28 @@
 
 <div class="tab-content">
     <div id="summaryTab" class="tab-pane active">
-        <g:render template="users" model="[userGroupInstance: userGroupInstance]"/>
+        <div class="sectionHeader">
+            <div class="text">
+                <g:message code="users.label" default="Users"/>
+            </div>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <div class="section-action-icon new-action">
+                    <a href="#" onclick="return displayAddUserDialog(${userGroupInstance.id})">
+                        <g:message code="addUser.label" default="Add User"/>
+                    </a>
+                </div>
+
+                <div class="clearing"></div>
+            </sec:ifAllGranted>
+        </div>
+
+        <div id="users-block">
+            <g:render template="users" model="[userList: userGroupMemberList]"/>
+        </div>
+
+        <div id="no-users-message" style="display: ${userGroupInstance.users.size() ? 'none' : 'block'};">
+            <carm:alertWarning message="${message(code: "userGroupDoesNotHaveAnyUsers.message")}"/>
+        </div>
     </div>
 
     <div id="detailsTab" class="tab-pane">
@@ -71,6 +92,8 @@
     </div>
 </div>
 
+<g:render template="/common/addUser" model="[callback: 'addUser', userList: userList]"/>
+
 <r:script>
     jQuery(function () {
         jQuery('#userGroupTabs a').click(function (e) {
@@ -78,6 +101,35 @@
             jQuery(this).tab('show');
         });
     });
+
+    function addUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(action: "ajaxAddUser", id: userGroupInstance.id)}',
+                data: { userId: userId },
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    jQuery("#users-block").html(data).show();
+                    jQuery("#no-users-message").hide();
+                }
+            });
+    }
+
+    function removeUser(userId) {
+        jQuery.ajax({
+                cache: false,
+                url: '${createLink(controller: "userGroup", action: "ajaxRemoveUser", id: userGroupInstance.id)}',
+                data: { userId: userId }
+            });
+        jQuery("#user_" + userId).remove();
+
+        if (!jQuery("#users-block li").length) {
+            jQuery("#users-block").hide();
+            jQuery("#no-users-message").show();
+        }
+
+        return false;
+    }
 </r:script>
 
 </body>

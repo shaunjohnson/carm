@@ -25,40 +25,13 @@ class UserGroupController {
     }
 
     @Secured(['ROLE_ADMIN'])
-    def addUser() {
-        def userGroupInstance = userGroupService.get(params.id)
-        if (!userGroupInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [
-                    userGroupInstance: userGroupInstance,
-                    userList: userService.listAll()
-            ]
-        }
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def addUserSave() {
+    def ajaxAddUser() {
         def userGroupInstance = userGroupService.get(params.id)
         if (userGroupInstance) {
-            userGroupService.addUserToGroup(userGroupInstance, params.userId)
-            if (!userGroupInstance.hasErrors()) {
-                flash.message = "${message(code: 'default.addedUser.message', args: [message(code: 'userGroup.label', default: 'User Group'), userGroupInstance.name])}"
-                redirect(action: "show", id: userGroupInstance.id)
-            }
-            else {
-                render(view: "addUser", model: [
-                        userGroupInstance: userGroupInstance,
-                        userList: userService.listAll()
-                ])
-            }
+            userGroupService.addUserToGroup(userGroupInstance, userService.get(params.userId))
         }
-        else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'userGroup.label', default: 'User Group'), params.id])}"
-            redirect(action: "list")
-        }
+
+        render(template: "users", model: [userList: userGroupService.findAllUsersByGroup(userGroupInstance)], contentType: "text/html")
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -101,7 +74,9 @@ class UserGroupController {
         }
         else {
             [
-                    userGroupInstance: userGroupInstance
+                    userGroupInstance: userGroupInstance,
+                    userList: userService.listAll(),
+                    userGroupMemberList: userGroupService.findAllUsersByGroup(userGroupInstance)
             ]
         }
     }

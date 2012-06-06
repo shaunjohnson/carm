@@ -155,7 +155,6 @@ class ProjectController {
 
     @Secured(['ROLE_ADMIN'])
     def ajaxAddAdministratorGroup() {
-        println params
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             projectService.addAdministratorGroup(projectInstance, userGroupService.get(params.groupId))
@@ -163,12 +162,11 @@ class ProjectController {
 
         render(template: "projectAdministratorGroups", model: [
                 userGroupList: projectService.findAllProjectAdministratorGroups(projectInstance)
-        ])
+        ], contentType: "text/html")
     }
 
     @Secured(['ROLE_ADMIN'])
     def ajaxAddAdministratorUser() {
-        println params
         def projectInstance = projectService.get(params.id)
         if (projectInstance) {
             projectService.addAdministratorUser(projectInstance, userService.get(params.userId))
@@ -176,7 +174,7 @@ class ProjectController {
 
         render(template: "projectAdministratorUsers", model: [
                 userList: projectService.findAllProjectAdministratorUsers(projectInstance)
-        ])
+        ], contentType: "text/html")
     }
 
     @Secured(['ROLE_ADMIN'])

@@ -18,8 +18,7 @@ class UserGroupService {
      */
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void addUserToGroup(UserGroup userGroup, Serializable userId) {
-        User user = User.get(userId)
+    void addUserToGroup(UserGroup userGroup, User user) {
         if (user) {
             userGroup.addToUsers(user)
             userGroup.save()
@@ -32,6 +31,20 @@ class UserGroupService {
             eq("user.id", user.id)
             order("name")
         }
+    }
+
+    List<User> findAllUsersByGroup(UserGroup userGroup) {
+        (List<User>)UserGroup.executeQuery("""
+            select
+                user
+            from
+                UserGroup userGroup
+                join userGroup.users user
+            where
+                userGroup.id = :userGroupId
+            order by
+                user.fullName
+        """, [userGroupId: userGroup.id])
     }
 
     /**

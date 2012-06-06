@@ -178,11 +178,9 @@
     }
 </r:script>
 
-<g:render template="/common/addUserGroup"
-          model="[callback: 'addAdministratorGroup', userGroupList: userGroupList]"/>
+<g:render template="/common/addUserGroup" model="[callback: 'addAdministratorGroup', userGroupList: userGroupList]"/>
 
-<g:render template="/common/addUser"
-          model="[callback: 'addAdministratorUser', userList: userList]"/>
+<g:render template="/common/addUser" model="[callback: 'addAdministratorUser', userList: userList]"/>
 
 </body>
 </html>
