@@ -10,7 +10,7 @@ class CarmUserDetails extends GrailsUser {
     CarmUserDetails(String username, String password, boolean enabled, boolean accountNonExpired,
                     boolean credentialsNonExpired, boolean accountNonLocked,
                     Collection<GrantedAuthority> authorities, long id, String fullName) {
-        super(username, password, enabled, accountNonExpired,
+        super(username?.toLowerCase(), password, enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, authorities, id)
 
         this.fullName = fullName
