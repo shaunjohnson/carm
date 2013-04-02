@@ -262,7 +262,7 @@ span.project-item-icon {
         });
 
         jQuery(':input:visible').tipsy({trigger:'focus', gravity:'w'});
-        jQuery(':input:not(#quicksearch):visible:first').focus();
+        jQuery(':input:not(:button):not(#quicksearch):visible:first').focus();
 
         var deleteDialog = jQuery("#delete-dialog");
 
