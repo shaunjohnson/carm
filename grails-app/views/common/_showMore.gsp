@@ -1,5 +1,5 @@
-<p id="${clientId}" class="${mini ? "showMoreButton-mini" : "showMoreButton"} ${styleClass}" style="${style}">
-    <span id="${clientId}_Text">
+<button id="${clientId}" class="btn ${mini ? "btn-mini" : " btn-block"}" type="button">
+    <span id="${clientId}_Text" class="muted">
         <g:if test="${mini}">
             <g:message code="showMoreMini.label" default="More"/>
         </g:if>
@@ -10,7 +10,7 @@
     <img id="${clientId}_Spinner" style="display: none;"
          src="${resource(dir: 'images', file: 'spinner.gif')}"
          alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>
-</p>
+</button>
 
 <script type="text/javascript">
     jQuery(function () {
