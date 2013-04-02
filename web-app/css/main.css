@@ -257,7 +257,8 @@ div.sectionHeader {
     border-bottom: 1px solid #CACACA;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
     height: 3.5em;
-    margin: 1em -5px;
+    /*margin: 1em -5px;*/
+    margin: 5px 0;
 }
 
 div.sectionHeader div.text {
