@@ -32,7 +32,7 @@ CKEDITOR.config.toolbar_Basic =
 
 CKEDITOR.config.toolbar_Custom =
     [
-        { name: 'basicstyles', items: ['Bold', 'Italic','Underline', '-','TextColor','BGColor'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic','Underline', '-','TextColor','BGColor','FontSize'] },
         { name: 'formatting', items: ['NumberedList', 'BulletedList','-','Outdent','Indent', '-', 'Link', 'Unlink'] },
         { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord' ] },
         { name: 'actions', items: ['Undo','Redo','-','RemoveFormat'] },
