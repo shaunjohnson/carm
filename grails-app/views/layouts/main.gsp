@@ -446,18 +446,16 @@ span.project-item-icon {
     <r:layoutResources/>
 </div>
 
-<hr>
-
-<div class="container">
-    <footer class="footer">
+<footer class="footer">
+    <div class="container">
         <p class="pull-right"><a href="#"><i class="icon-arrow-up"></i>Back to top</a></p>
 
         <p>
             <g:message code="carm.copyright.label" default="Change And Release Management 2011"
                        args="[meta(name: 'app.version')]"/>
         </p>
-    </footer>
-</div>
+    </div>
+</footer>
 
 <div id="delete-dialog" class="modal" style="display: none;">
     <div class="modal-header">

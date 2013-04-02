@@ -58,6 +58,9 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 .footer {
+    border-top: 1px solid #E5E5E5;
+    background-color: whiteSmoke;
+    min-height: 5em;
     padding: 20px 0 36px;
 }
 

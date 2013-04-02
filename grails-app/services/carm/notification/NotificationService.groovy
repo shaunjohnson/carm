@@ -268,7 +268,7 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
             }
         }
     }
-    
+
     private sendEmailUsingShell(String fromEmailAddress, List<String> toEmailAddresses, String subject, String message) {
         def shell = grailsApplication.config.carm.mail.shell.command
         def host = grailsApplication.config.grails.mail.host
