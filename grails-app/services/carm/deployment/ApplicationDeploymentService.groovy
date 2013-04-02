@@ -251,7 +251,7 @@ class ApplicationDeploymentService {
      * @return newly created ApplicationRelease object
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     ApplicationDeployment create(Project project, Map params) {
         def prefix = "create() :"
 
@@ -297,7 +297,7 @@ class ApplicationDeploymentService {
      * @param applicationDeployment ApplicationDeployment object to delete
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void delete(Project project, ApplicationDeployment applicationDeployment) {
         def prefix = "delete() :"
 
@@ -320,7 +320,7 @@ class ApplicationDeploymentService {
      * @return Newly created deployment
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     ApplicationDeployment redeploy(Project project, ApplicationDeployment applicationDeployment) {
         ApplicationDeployment newApplicationDeployment = new ApplicationDeployment()
 
@@ -349,7 +349,7 @@ class ApplicationDeploymentService {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, ApplicationDeployment applicationDeployment, Map params) {
         def prefix = "update() :"
 

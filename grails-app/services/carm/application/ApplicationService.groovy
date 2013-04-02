@@ -54,7 +54,7 @@ class ApplicationService implements ApplicationContextAware {
      * @return newly created Module object
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     Application create(Project project, Map params) {
         def prefix = "create() :"
 
@@ -144,7 +144,7 @@ class ApplicationService implements ApplicationContextAware {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, Application application, Map params) {
         def prefix = "update() :"
 

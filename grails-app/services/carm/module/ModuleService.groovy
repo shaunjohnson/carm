@@ -38,7 +38,7 @@ class ModuleService {
      * @return newly created Module object
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     Module create(Project project, Map params) {
         def prefix = "create() :"
 
@@ -60,7 +60,7 @@ class ModuleService {
      * @param module Module object to delete
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void delete(Project project, Module module) {
         def prefix = "delete() :"
 
@@ -104,7 +104,7 @@ class ModuleService {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, Module module, Map params) {
         def prefix = "update() :"
 

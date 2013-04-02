@@ -192,7 +192,7 @@ class ApplicationReleaseService {
      * @return newly created ApplicationRelease object
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     ApplicationRelease create(Project project, Map params) {
         def prefix = "create() :"
 
@@ -232,7 +232,7 @@ class ApplicationReleaseService {
      * @param applicationRelease ApplicationRelease object to delete
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void delete(Project project, ApplicationRelease applicationRelease) {
         def prefix = "delete() :"
 
@@ -309,7 +309,7 @@ class ApplicationReleaseService {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, ApplicationRelease applicationRelease, Map params) {
         def prefix = "update() :"
 
@@ -384,7 +384,7 @@ class ApplicationReleaseService {
      * @param applicationRelease ApplicationRelease to submit
      */
     @Transactional
-    @PreAuthorize("hasPermission(#project, admin)")
+    @PreAuthorize("hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     def submit(Project project, ApplicationRelease applicationRelease) {
         def prefix = "submit() :"
 
