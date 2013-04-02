@@ -76,7 +76,7 @@ class ApplicationRelease {
         activityTraceService?.applicationReleaseCreated(this)
 
         // TODO temporarily mark an application release as completed
-        activityTraceService.applicationReleaseCompleted(this)
+        activityTraceService?.applicationReleaseCompleted(this)
     }
 
     def beforeDelete() {
