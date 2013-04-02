@@ -22,8 +22,8 @@
                 status="environmentIndex">
             <g:set var="deploymentGroup" value="${deployments[deploymentEnvironment]}"/>
 
-            <h3><g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
-                        title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">${deploymentEnvironment.name.encodeAsHTML()}</g:link></h3>
+            <h4><g:link controller="systemDeploymentEnvironment" action="show" id="${deploymentEnvironment.id}"
+                        title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">${deploymentEnvironment.name.encodeAsHTML()}</g:link></h4>
 
             <div>
                 <table class="offset-quarter">

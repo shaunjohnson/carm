@@ -21,10 +21,10 @@
                     <g:link class="btn btn-mini" controller="applicationDeployment" action="edit" id="${deployment.id}">
                         <g:message code="default.button.edit.label"/>
                     </g:link>
-%{--                    <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
-                            title="${message(code: "promote.label", default: "Promote")}">
-                        <g:message code="promote.label" default="Promote"/>
-                    </g:link>--}%
+                %{--                    <g:link class="btn btn-mini" controller="applicationDeployment" action="show" id="${deployment.id}"
+                                            title="${message(code: "promote.label", default: "Promote")}">
+                                        <g:message code="promote.label" default="Promote"/>
+                                    </g:link>--}%
                 </carmsec:isProjectOwner>
             </div>
         </td>
