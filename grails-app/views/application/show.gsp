@@ -99,33 +99,36 @@
                     </carmsec:isProjectOwner>
                 </div>
 
-                <div style="margin-bottom: 2em;">
-                    <h3><g:message code="groups.label"/></h3>
+                <div class="section-content">
+                    <div style="margin-bottom: 2em;">
+                        <h4><g:message code="groups.label"/></h4>
 
-                    <div id="team-leader-groups-block">
-                        <g:render template="teamLeaderGroups"
-                                  model="[userGroupList: teamLeaderGroups, applicationInstance: applicationInstance]"/>
+                        <div id="team-leader-groups-block">
+                            <g:render template="teamLeaderGroups"
+                                      model="[userGroupList: teamLeaderGroups, applicationInstance: applicationInstance]"/>
+                        </div>
+
+                        <p id="no-team-leader-groups-message"
+                           style="display: ${teamLeaderGroups.size() ? 'none' : 'block'};">
+                            <em><g:message code="applicationDoesNotHaveAnyTeamLeaderGroups.message"
+                                           default="This application does not have any team leader groups."/></em>
+                        </p>
                     </div>
 
-                    <p id="no-team-leader-groups-message"
-                       style="display: ${teamLeaderGroups.size() ? 'none' : 'block'};">
-                        <em><g:message code="applicationDoesNotHaveAnyTeamLeaderGroups.message"
-                                       default="This application does not have any team leader groups."/></em>
-                    </p>
-                </div>
+                    <div>
+                        <h4><g:message code="users.label"/></h4>
 
-                <div>
-                    <h3><g:message code="users.label"/></h3>
+                        <div id="team-leader-users-block">
+                            <g:render template="teamLeaderUsers"
+                                      model="[userList: teamLeaderUsers, applicationInstance: applicationInstance]"/>
+                        </div>
 
-                    <div id="team-leader-users-block">
-                        <g:render template="teamLeaderUsers"
-                                  model="[userList: teamLeaderUsers, applicationInstance: applicationInstance]"/>
+                        <p id="no-team-leader-users-message"
+                           style="display: ${teamLeaderUsers.size() ? 'none' : 'block'};">
+                            <em><g:message code="applicationDoesNotHaveAnyTeamLeaderUsers.message"
+                                           default="This application does not have any team leader users."/></em>
+                        </p>
                     </div>
-
-                    <p id="no-team-leader-users-message" style="display: ${teamLeaderUsers.size() ? 'none' : 'block'};">
-                        <em><g:message code="applicationDoesNotHaveAnyTeamLeaderUsers.message"
-                                       default="This application does not have any team leader users."/></em>
-                    </p>
                 </div>
 
             </div>
@@ -154,34 +157,36 @@
                     </carmsec:isProjectOwner>
                 </div>
 
-                <div style="margin-bottom: 2em;">
-                    <h3><g:message code="groups.label"/></h3>
+                <div class="section-content">
+                    <div style="margin-bottom: 2em;">
+                        <h4><g:message code="groups.label"/></h4>
 
-                    <div id="app-developer-groups-block">
-                        <g:render template="applicationDeveloperGroups"
-                                  model="[userGroupList: applicationDeveloperGroups, applicationInstance: applicationInstance]"/>
+                        <div id="app-developer-groups-block">
+                            <g:render template="applicationDeveloperGroups"
+                                      model="[userGroupList: applicationDeveloperGroups, applicationInstance: applicationInstance]"/>
+                        </div>
+
+                        <p id="no-app-developer-groups-message"
+                           style="display: ${applicationDeveloperGroups.size() ? 'none' : 'block'};">
+                            <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperGroups.message"
+                                           default="This application does not have any application developer groups."/></em>
+                        </p>
                     </div>
 
-                    <p id="no-app-developer-groups-message"
-                       style="display: ${applicationDeveloperGroups.size() ? 'none' : 'block'};">
-                        <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperGroups.message"
-                                       default="This application does not have any team leader groups."/></em>
-                    </p>
-                </div>
+                    <div>
+                        <h4><g:message code="users.label"/></h4>
 
-                <div>
-                    <h3><g:message code="users.label"/></h3>
+                        <div id="app-developer-users-block">
+                            <g:render template="applicationDeveloperUsers"
+                                      model="[userList: applicationDeveloperUsers, applicationInstance: applicationInstance]"/>
+                        </div>
 
-                    <div id="app-developer-users-block">
-                        <g:render template="applicationDeveloperUsers"
-                                  model="[userList: applicationDeveloperUsers, applicationInstance: applicationInstance]"/>
+                        <p id="no-app-developer-users-message"
+                           style="display: ${applicationDeveloperUsers.size() ? 'none' : 'block'};">
+                            <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperUsers.message"
+                                           default="This application does not have any application developer users."/></em>
+                        </p>
                     </div>
-
-                    <p id="no-app-developer-users-message"
-                       style="display: ${applicationDeveloperUsers.size() ? 'none' : 'block'};">
-                        <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperUsers.message"
-                                       default="This application does not have any team leader users."/></em>
-                    </p>
                 </div>
             </div>
         </div>
