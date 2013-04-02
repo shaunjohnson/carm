@@ -89,7 +89,7 @@ class ApplicationController {
 
             applicationInstance?.sysEnvironment?.environments?.each { SystemDeploymentEnvironment deploymentEnvironment ->
                 deployments[deploymentEnvironment] = [
-                        deploymentList: applicationDeploymentService.findLatestDeployment(applicationInstance, deploymentEnvironment),
+                        latestDeployment: applicationDeploymentService.findLatestDeployment(applicationInstance, deploymentEnvironment),
                         deploymentListCount: applicationDeploymentService.countByApplicationAndDeploymentEnvironment(applicationInstance, deploymentEnvironment)
                 ]
             }

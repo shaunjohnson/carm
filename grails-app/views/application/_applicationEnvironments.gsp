@@ -29,11 +29,11 @@
                 <table class="offset-quarter">
                     <tbody id="environmentDeploymentsBlock${deploymentEnvironment.id}">
                     <g:render template="applicationEnvironmentsBlock"
-                              model="[deploymentList: deploymentGroup.deploymentList]"/>
+                              model="[deploymentList: deploymentGroup.latestDeployment]"/>
                     </tbody>
                 </table>
 
-                <g:if test="${maxRecordsAllowed <= deploymentGroup.deploymentListCount}">
+                <g:if test="${deploymentGroup.deploymentListCount > 1}">
                     <div style="float: right;">
                         <carm:showMore controller="${params.controller}" action="ajaxShowMoreDeployments"
                                        id="${applicationInstance.id}_${deploymentEnvironment.id}"
