@@ -46,7 +46,8 @@
     </tbody>
 </table>
 
-<carm:paginate total="${applicationReleaseInstanceTotal}" id="${applicationInstance.id}"/>
+<carm:paginate total="${applicationReleaseInstanceTotal}" id="${applicationInstance.id}"
+               max="${grailsApplication.config.ui.applicationRelease.listMax}"/>
 
 </body>
 </html>
