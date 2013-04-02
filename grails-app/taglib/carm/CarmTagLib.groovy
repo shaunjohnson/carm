@@ -1236,11 +1236,22 @@ class CarmTagLib {
 
         //Code to parse selected date into hidden fields required by grails
         out.println "<script type=\"text/javascript\"> \$(document).ready(function(){"
-        out.println "\$(\"#${name}\").datepicker({"
+
+        // Add onchange handler
+        out.println "\$(\"#${id}\").change(function(e) {"
+        out.println "var date = new Date(jQuery(this).val());"
+        out.println "\$(\"#${name}_month\").attr(\"value\", date.getMonth() + 1);"
+        out.println "\$(\"#${name}_day\").attr(\"value\", date.getDate());"
+        out.println "\$(\"#${name}_year\").attr(\"value\", date.getFullYear());"
+        out.println "});"
+
+        // Add date picker
+        out.println "\$(\"#${id}\").datepicker({"
         out.println "onSelect: function(dateText, inst) {"
-        out.println "\$(\"#${name}_month\").attr(\"value\",new Date(dateText).getMonth() + 1);"
-        out.println "\$(\"#${name}_day\").attr(\"value\",new Date(dateText).getDate());"
-        out.println "\$(\"#${name}_year\").attr(\"value\",new Date(dateText).getFullYear());"
+        out.println "var date = new Date(dateText);"
+        out.println "\$(\"#${name}_month\").attr(\"value\", date.getMonth() + 1);"
+        out.println "\$(\"#${name}_day\").attr(\"value\", date.getDate());"
+        out.println "\$(\"#${name}_year\").attr(\"value\", date.getFullYear());"
         out.println "}"
 
         //If you want to customize using the jQuery UI events add an if block an attribute as follows
