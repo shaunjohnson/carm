@@ -32,6 +32,6 @@ grails.project.dependency.resolution = {
         compile "org.jadira.usertype:usertype.jodatime:1.9"
         compile "org.grails.plugins:webxml:1.4.1"
         compile "org.semver:api:0.9.12"
-        runtime "org.springframework.security:org.springframework.security.config:3.0.3.RELEASE"
+        runtime "org.springframework.security:spring-security-config:3.0.7.RELEASE"
     }
 }
