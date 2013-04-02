@@ -5,15 +5,15 @@
         </div>
     </div>
 
-    <g:if test="${pendingTasks?.size()}">
-        <g:render template="/common/pendingTasks" model="[pendingTasks: pendingTasks]"/>
-    </g:if>
-    <g:else>
-        <p>
-            <em><g:message code="projectDoesNotHaveAnyPendingTasks.message"
-                           default="This project does not have any pending tasks."/></em>
-        </p>
-    </g:else>
-
-    <div>&nbsp;</div>
+    <div class="section-content">
+        <g:if test="${pendingTasks?.size()}">
+            <g:render template="/common/pendingTasks" model="[pendingTasks: pendingTasks]"/>
+        </g:if>
+        <g:else>
+            <p>
+                <em><g:message code="projectDoesNotHaveAnyPendingTasks.message"
+                               default="This project does not have any pending tasks."/></em>
+            </p>
+        </g:else>
+    </div>
 </g:if>
