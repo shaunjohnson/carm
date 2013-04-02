@@ -84,11 +84,18 @@ class ApplicationService implements ApplicationContextAware {
 
         Application.withTransaction {
             def applicationId = application.id
+
+            // Delete associated ACLs
+            aclService.deleteAllAclsByDomain(application, APPLICATION_DEVELOPER)
+            aclService.deleteAllAclsByDomain(application, APPLICATION_TEAM_LEADER)
+
             application.delete()
+
+            // Delete favorites and watches
             favoriteService.deleteAllForApplicationId(applicationId)
             watchService.deleteAllForApplicationId(applicationId)
         }
-        
+
         log.debug "$prefix leaving"
     }
 
