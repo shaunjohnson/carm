@@ -76,7 +76,7 @@ class ApplicationService implements ApplicationContextAware {
      * @param application Application object to delete
      */
     @Transactional
-    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(project, 'PROJECT_ADMINISTRATOR'))")
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(#project, 'PROJECT_ADMINISTRATOR'))")
     void delete(Project project, Application application) {
         def prefix = "delete() :"
 

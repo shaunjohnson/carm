@@ -63,7 +63,7 @@ class ProjectService {
      * @param project Project object to delete
      */
     @Transactional
-    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(project, 'PROJECT_ADMINISTRATOR'))")
+    @PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasPermission(#project, 'PROJECT_ADMINISTRATOR'))")
     void delete(Project project) {
         def prefix = "delete() :"
 
