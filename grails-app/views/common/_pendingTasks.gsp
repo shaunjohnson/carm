@@ -1,5 +1,5 @@
 <%@ page import="carm.release.ApplicationReleaseState; carm.deployment.ApplicationDeploymentState; carm.release.ApplicationRelease; carm.deployment.ApplicationDeployment" %>
-<ul>
+<ul class="unstyled" style="margin: 1em 2em 2em;">
     <g:each in="${pendingTasks}" status="i" var="task">
         <li>
             <g:if test="${task instanceof ApplicationDeployment}">
