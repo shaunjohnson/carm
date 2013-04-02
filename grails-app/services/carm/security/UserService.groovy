@@ -48,7 +48,7 @@ class UserService {
      * @return Username
      */
     String getCurrentUsername() {
-        currentUser.username
+        currentUser?.username
     }
 
     /**
