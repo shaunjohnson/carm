@@ -14,17 +14,19 @@
     </sec:ifAllGranted>
 </div>
 
-<g:if test="${sourceControlServerInstance.repositories.size()}">
-    <ul>
-        <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="repository">
-            <li>
-                <g:link controller="sourceControlRepository" action="show" id="${repository.id}">
-                    ${repository?.encodeAsHTML()}
-                </g:link>
-            </li>
-        </g:each>
-    </ul>
-</g:if>
-<g:else>
-    <carm:alertWarning message="${message(code: "sourceControlServerDoesNotHaveAnyRepositories.message")}"/>
-</g:else>
+<div class="section-content">
+    <g:if test="${sourceControlServerInstance.repositories.size()}">
+        <ul>
+            <g:each in="${sourceControlServerInstance.repositories.sort { it.name }}" var="repository">
+                <li>
+                    <g:link controller="sourceControlRepository" action="show" id="${repository.id}">
+                        ${repository?.encodeAsHTML()}
+                    </g:link>
+                </li>
+            </g:each>
+        </ul>
+    </g:if>
+    <g:else>
+        <carm:alertWarning message="${message(code: "sourceControlServerDoesNotHaveAnyRepositories.message")}"/>
+    </g:else>
+</div>

@@ -1,3 +1,7 @@
+html {
+    background-color: whiteSmoke;
+}
+
 body {
     padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
@@ -49,7 +53,7 @@ a:hover {
     text-decoration: underline;
 }
 
-h3 a, h4 a {
+h3 a, h4 a, h5 a {
     color: #111;
 }
 
@@ -284,6 +288,10 @@ div.sectionHeader div.text {
     cursor: pointer;
     padding-left: 1.7em;
 
+}
+
+.section-content {
+    padding: 1em;
 }
 
 /*

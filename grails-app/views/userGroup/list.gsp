@@ -32,9 +32,7 @@
                     </g:link>
                 </td>
                 <td>
-                    <div class="expander">
-                        ${userGroupInstance.users.size()}
-                    </div>
+                    ${userGroupInstance.users.size()}
                 </td>
             </tr>
         </g:each>

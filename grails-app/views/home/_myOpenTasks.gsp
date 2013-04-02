@@ -11,12 +11,14 @@
         </div>
     </div>
 
-    <g:if test="${myPendingTasks?.size()}">
-        <g:render template="/common/pendingTasks" model="[pendingTasks: myPendingTasks]"/>
-    </g:if>
-    <g:else>
-        <p>
-            <em><g:message code="youDontHaveAnyOpenTasks.message" default="You don't have any open tasks."/></em>
-        </p>
-    </g:else>
+    <div class="section-content">
+        <g:if test="${myPendingTasks?.size()}">
+            <g:render template="/common/pendingTasks" model="[pendingTasks: myPendingTasks]"/>
+        </g:if>
+        <g:else>
+            <p>
+                <em><g:message code="youDontHaveAnyOpenTasks.message" default="You don't have any open tasks."/></em>
+            </p>
+        </g:else>
+    </div>
 </g:if>

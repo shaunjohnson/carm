@@ -14,17 +14,19 @@
     </sec:ifAllGranted>
 </div>
 
-<g:if test="${systemEnvironmentInstance.servers.size()}">
-    <ul>
-        <g:each in="${systemEnvironmentInstance.servers.sort { it.name }}" var="server">
-            <li>
-                <g:link controller="systemServer" action="show" id="${server.id}">
-                    ${server?.encodeAsHTML()}
-                </g:link>
-            </li>
-        </g:each>
-    </ul>
-</g:if>
-<g:else>
-    <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyServers.message")}"/>
-</g:else>
+<div class="section-content">
+    <g:if test="${systemEnvironmentInstance.servers.size()}">
+        <ul>
+            <g:each in="${systemEnvironmentInstance.servers.sort { it.name }}" var="server">
+                <li>
+                    <g:link controller="systemServer" action="show" id="${server.id}">
+                        ${server?.encodeAsHTML()}
+                    </g:link>
+                </li>
+            </g:each>
+        </ul>
+    </g:if>
+    <g:else>
+        <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyServers.message")}"/>
+    </g:else>
+</div>

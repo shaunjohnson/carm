@@ -6,11 +6,11 @@
 
     <div class="row">
         <div class="span1">
-            <h4>
+            <h5>
                 <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
                     ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
                 </g:link>
-            </h4>
+            </h5>
 
             <div>
                 <carm:formatDateOnly date="${applicationReleaseInstance.dateCreated}"/>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="span5">
+        <div class="span4">
             <div class="btn-group" style="margin-bottom: 0.5em;">
                 <g:link class="btn btn-mini" controller="applicationRelease" action="show"
                         id="${applicationReleaseInstance.id}">

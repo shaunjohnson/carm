@@ -12,55 +12,61 @@
 
 <g:render template="/common/messages"/>
 
-<table id="sourceControlServerDetails" class="details">
-    <tbody>
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlServer.description.label" default="Description"/>
-        </td>
-        <td valign="top" class="value">
-            <div class="expander">
-                <carm:plainText value="${sourceControlServerInstance?.description}"/>
-            </div>
-        </td>
-    </tr>
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlServer.type.label" default="Type"/>
-        </td>
-        <td valign="top" class="value">
-            ${sourceControlServerInstance?.type?.encodeAsHTML()}
-        </td>
-    </tr>
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlServer.url.label" default="URL"/>
-        </td>
-        <td valign="top" class="value">
-            ${fieldValue(bean: sourceControlServerInstance, field: "url")}
-        </td>
-    </tr>
+<div class="sectionHeader">
+    <div class="text"><g:message code="details.label" default="Details"/></div>
+</div>
 
-    <carm:formDividerRow/>
+<div class="section-content">
+    <table id="sourceControlServerDetails" class="details">
+        <tbody>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="sourceControlServer.description.label" default="Description"/>
+            </td>
+            <td valign="top" class="value">
+                <div class="expander">
+                    <carm:plainText value="${sourceControlServerInstance?.description}"/>
+                </div>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="sourceControlServer.type.label" default="Type"/>
+            </td>
+            <td valign="top" class="value">
+                ${sourceControlServerInstance?.type?.encodeAsHTML()}
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="sourceControlServer.url.label" default="URL"/>
+            </td>
+            <td valign="top" class="value">
+                ${fieldValue(bean: sourceControlServerInstance, field: "url")}
+            </td>
+        </tr>
 
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlServer.dateCreated.label" default="Date Created"/>
-        </td>
-        <td valign="top" class="value">
-            <g:formatDate date="${sourceControlServerInstance?.dateCreated}"/>
-        </td>
-    </tr>
-    <tr class="prop">
-        <td valign="top" class="name">
-            <g:message code="sourceControlServer.lastUpdated.label" default="Last Updated"/>
-        </td>
-        <td valign="top" class="value">
-            <g:formatDate date="${sourceControlServerInstance?.lastUpdated}"/>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        <carm:formDividerRow/>
+
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="sourceControlServer.dateCreated.label" default="Date Created"/>
+            </td>
+            <td valign="top" class="value">
+                <g:formatDate date="${sourceControlServerInstance?.dateCreated}"/>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <g:message code="sourceControlServer.lastUpdated.label" default="Last Updated"/>
+            </td>
+            <td valign="top" class="value">
+                <g:formatDate date="${sourceControlServerInstance?.lastUpdated}"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <div class="row">
     <div class="span6">

@@ -10,18 +10,20 @@
     </div>
 </div>
 
-<g:if test="${mostActiveSystemEnvironments.size()}">
-    <g:each in="${mostActiveSystemEnvironments}" var="systemEnvironment" status="systemIndex">
-        <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
+<div class="section-content">
+    <g:if test="${mostActiveSystemEnvironments.size()}">
+        <g:each in="${mostActiveSystemEnvironments}" var="systemEnvironment" status="systemIndex">
+            <carm:formatSystemEnvironment systemEnvironment="${systemEnvironment}"/>
 
-        <g:if test="${(systemIndex + 1) < mostActiveSystemEnvironments.size()}">
-            <hr/>
-        </g:if>
-    </g:each>
-</g:if>
-<g:else>
-    <p>
-        <em><g:message code="noActiveEnvironments.message"
-                       default="There are no active environments."/></em>
-    </p>
-</g:else>
+            <g:if test="${(systemIndex + 1) < mostActiveSystemEnvironments.size()}">
+                <hr/>
+            </g:if>
+        </g:each>
+    </g:if>
+    <g:else>
+        <p>
+            <em><g:message code="noActiveEnvironments.message"
+                           default="There are no active environments."/></em>
+        </p>
+    </g:else>
+</div>

@@ -13,8 +13,8 @@
 <g:render template="/common/messages"/>
 
 <div class="row">
-    <div class="well" style="margin-left: auto; margin-right: auto; width: 735px">
-        <div class="btn-group" data-toggle="buttons-radio" style="margin-bottom: 2em;">
+    <div class="well" style="margin-left: auto; margin-right: auto; width: 794px">
+        <div class="btn-group" data-toggle="buttons-radio">
             <a id="completed-deployments" href="#" class="btn active">
                 <g:message code="completedDeployments.label" default="Completed Deployments"/>
             </a>
@@ -22,6 +22,8 @@
                 <g:message code="upcomingDeployments.label" default="Upcoming Deployments"/>
             </a>
         </div>
+
+        <div>&nbsp;</div>
 
         <div id="date"></div>
     </div>

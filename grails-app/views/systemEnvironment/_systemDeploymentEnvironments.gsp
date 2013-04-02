@@ -14,8 +14,8 @@
     </sec:ifAllGranted>
 </div>
 
-<g:if test="${systemEnvironmentInstance.environments.size()}">
-    <div>
+<div class="section-content">
+    <g:if test="${systemEnvironmentInstance.environments.size()}">
         <table class="ol">
             <tbody>
             <g:each in="${systemEnvironmentInstance.environments}" var="environment" status="eindex">
@@ -50,8 +50,8 @@
             </g:each>
             </tbody>
         </table>
-    </div>
-</g:if>
-<g:else>
-    <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyEnvironments.message")}"/>
-</g:else>
+    </g:if>
+    <g:else>
+        <carm:alertWarning message="${message(code: "systemEnvironmentDoesNotHaveAnyEnvironments.message")}"/>
+    </g:else>
+</div>

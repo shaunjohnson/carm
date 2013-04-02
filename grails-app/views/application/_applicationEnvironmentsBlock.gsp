@@ -4,9 +4,9 @@
             <carm:upcomingIndicator applicationDeployment="${deployment}"/>
         </td>
         <td class="span1">
-            <h4 style="text-align: center;">
+            <h5 style="text-align: center;">
                 ${deployment.applicationRelease.releaseNumber.encodeAsHTML()}
-            </h4>
+            </h5>
         </td>
         <td class="span2" style="text-align: center;">
             <carm:formatDateOnly date="${deployment.completedDeploymentDate}"/>

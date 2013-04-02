@@ -17,17 +17,19 @@
     </g:if>
 </div>
 
-<g:if test="${activityListSize}">
-    <g:render template="/common/activityBlock" model="[activityList: activitySubList]"/>
+<div class="section-content">
+    <g:if test="${activityListSize}">
+        <g:render template="/common/activityBlock" model="[activityList: activitySubList]"/>
 
-    <g:if test="${maxRecords < activityCount}">
-        <carm:showMore controller="${controller}" action="ajaxShowMoreActivity" id="${domainId}"
-                       appendId="activityBlock" max="${activityCount}"
-                       step="${grailsApplication.config.ui.activityTrace.maxRecords}"/>
+        <g:if test="${maxRecords < activityCount}">
+            <carm:showMore controller="${controller}" action="ajaxShowMoreActivity" id="${domainId}"
+                           appendId="activityBlock" max="${activityCount}"
+                           step="${grailsApplication.config.ui.activityTrace.maxRecords}"/>
+        </g:if>
     </g:if>
-</g:if>
-<g:else>
-    <p>
-        <em><g:message code="noRecordedActivity.message" default="There is no recorded activity."/></em>
-    </p>
-</g:else>
+    <g:else>
+        <p>
+            <em><g:message code="noRecordedActivity.message" default="There is no recorded activity."/></em>
+        </p>
+    </g:else>
+</div>

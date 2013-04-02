@@ -80,9 +80,9 @@
             </sec:ifAllGranted>
         </div>
 
-        <div class="row">
-            <div class="span6">
-                <h3><g:message code="groups.label"/></h3>
+        <div class="section-content">
+            <div class="span5">
+                <h4><g:message code="groups.label"/></h4>
 
                 <div id="groups-block">
                     <g:render template="projectAdministratorGroups"
@@ -95,8 +95,8 @@
                 </p>
             </div>
 
-            <div class="span6">
-                <h3><g:message code="users.label"/></h3>
+            <div class="span5">
+                <h4><g:message code="users.label"/></h4>
 
                 <div id="users-block">
                     <g:render template="projectAdministratorUsers" model="[userList: projectAdministratorUsers]"/>

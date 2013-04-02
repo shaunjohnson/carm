@@ -46,12 +46,14 @@
             </sec:ifAllGranted>
         </div>
 
-        <div id="users-block">
-            <g:render template="users" model="[userList: userGroupMemberList]"/>
-        </div>
+        <div class="section-content">
+            <div id="users-block">
+                <g:render template="users" model="[userList: userGroupMemberList]"/>
+            </div>
 
-        <div id="no-users-message" style="display: ${userGroupInstance.users.size() ? 'none' : 'block'};">
-            <carm:alertWarning message="${message(code: "userGroupDoesNotHaveAnyUsers.message")}"/>
+            <div id="no-users-message" style="display: ${userGroupInstance.users.size() ? 'none' : 'block'};">
+                <carm:alertWarning message="${message(code: "userGroupDoesNotHaveAnyUsers.message")}"/>
+            </div>
         </div>
     </div>
 

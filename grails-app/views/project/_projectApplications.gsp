@@ -14,25 +14,27 @@
     </carmsec:isProjectOwner>
 </div>
 
-<g:if test="${applicationsGrouped?.size()}">
-    <g:each in="${applicationsGrouped}" var="entry" status="applicationsGroupedIndex">
-        <h3>${entry.key}</h3>
+<div class="section-content">
+    <g:if test="${applicationsGrouped?.size()}">
+        <g:each in="${applicationsGrouped}" var="entry" status="applicationsGroupedIndex">
+            <h4>${entry.key}</h4>
 
-        <div class="row">
-            <g:each in="${entry.value}" var="application">
-                <div class="offset-half">
-                    <g:link controller="application" action="show" id="${application.id}">
-                        ${application?.encodeAsHTML()}
-                    </g:link>
-                </div>
-            </g:each>
-        </div>
+            <div class="row">
+                <g:each in="${entry.value}" var="application">
+                    <div class="offset-half">
+                        <g:link controller="application" action="show" id="${application.id}">
+                            ${application?.encodeAsHTML()}
+                        </g:link>
+                    </div>
+                </g:each>
+            </div>
 
-        <g:if test="${(applicationsGroupedIndex + 1) < applicationsGrouped.size()}">
-            <hr/>
-        </g:if>
-    </g:each>
-</g:if>
-<g:else>
-    <carm:alertWarning message="${message(code: "projectDoesNotHaveAnyApplications.message")}"/>
-</g:else>
+            <g:if test="${(applicationsGroupedIndex + 1) < applicationsGrouped.size()}">
+                <hr/>
+            </g:if>
+        </g:each>
+    </g:if>
+    <g:else>
+        <carm:alertWarning message="${message(code: "projectDoesNotHaveAnyApplications.message")}"/>
+    </g:else>
+</div>
