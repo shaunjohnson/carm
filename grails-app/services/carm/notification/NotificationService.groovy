@@ -255,15 +255,20 @@ class NotificationService implements ApplicationContextAware, InitializingBean {
 
     private sendEmailUsingMail(String fromEmailAddress, List<String> toEmailAddresses, String subjectText, String message) {
         toEmailAddresses.each { toEmailAddress ->
-            mailService.sendMail {
-                to toEmailAddress
-                from fromEmailAddress
-                subject subjectText
-                html message
+            try {
+                mailService.sendMail {
+                    to toEmailAddress
+                    from fromEmailAddress
+                    subject subjectText
+                    html message
+                }
+            }
+            catch (Exception e) {
+                log.error "Error sending mail to ${toEmailAddresses}", e
             }
         }
     }
-
+    
     private sendEmailUsingShell(String fromEmailAddress, List<String> toEmailAddresses, String subject, String message) {
         def shell = grailsApplication.config.carm.mail.shell.command
         def host = grailsApplication.config.grails.mail.host
