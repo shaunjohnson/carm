@@ -497,7 +497,8 @@ class ApplicationDeploymentService {
                 and ad.applicationRelease.application = :application
                 and ad.deploymentState in (:deployedStates)
             order by
-                ad.completedDeploymentDate desc
+                ad.completedDeploymentDate desc,
+                ad.dateCreated desc
         """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
                 [max:  1])
     }
@@ -517,7 +518,8 @@ class ApplicationDeploymentService {
                 and ad.applicationRelease.application = :application
                 and ad.deploymentState in (:deployedStates)
             order by
-                ad.completedDeploymentDate desc
+                ad.completedDeploymentDate desc,
+                ad.dateCreated desc
         """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
                 [offset: offset, max: max])
     }
