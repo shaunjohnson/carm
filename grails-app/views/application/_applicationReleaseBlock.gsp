@@ -5,7 +5,7 @@
     </g:if>
 
     <div class="row">
-        <div class="span1">
+        <div class="span1" style="width: 70px;">
             <h5 style="margin: 0;">
                 <g:link controller="applicationRelease" action="show" id="${applicationReleaseInstance.id}">
                     ${applicationReleaseInstance.releaseNumber.encodeAsHTML()}
