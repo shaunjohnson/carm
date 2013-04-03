@@ -488,11 +488,14 @@ class ApplicationDeploymentService {
      * @param environment SystemDeploymentEnvironment for querying
      * @return Matching ApplicationDeployment object
      */
-    List<ApplicationDeployment> findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
-        findCompletedByApplicationAndDeploymentEnvironment(application, environment, [max:  1])
+    ApplicationDeployment findLatestDeployment(Application application, SystemDeploymentEnvironment systemDeploymentEnvironment) {
+        List<ApplicationDeployment> list = findCompletedByApplicationAndDeploymentEnvironment(application, systemDeploymentEnvironment, [max:  1])
+        list.size() == 1 ? list[0] : null
     }
 
-    List<ApplicationDeployment> findCompletedByApplicationAndDeploymentEnvironment(Application application, SystemDeploymentEnvironment environment, Map params) {
+    List<ApplicationDeployment> findCompletedByApplicationAndDeploymentEnvironment(Application application,
+                                                                                   SystemDeploymentEnvironment systemDeploymentEnvironment,
+                                                                                   Map params) {
         int offset = params?.offset?.toInteger() ?: 0
         int max = Math.min(params?.max?.toInteger() ?: 100, grailsApplication.config.ui.applicationDeployment.maxRecords)
 
@@ -506,7 +509,7 @@ class ApplicationDeploymentService {
             order by
                 ad.completedDeploymentDate desc,
                 ad.dateCreated desc
-        """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
+        """, [deploymentEnvironment: systemDeploymentEnvironment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
                 [offset: offset, max: max])
     }
 
@@ -564,32 +567,15 @@ class ApplicationDeploymentService {
         def results = [:]
 
         Application.listOrderByType().each { application ->
-            def deployments = ApplicationDeployment.executeQuery("""
-                select
-                    ad.applicationRelease.id, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate), ad.deploymentState
-                from
-                    ApplicationDeployment ad
-                where
-                    ad.deploymentState = :deploymentState
-                    and ad.deploymentEnvironment = :systemDeploymentEnvironment
-                    and ad.applicationRelease.application = :application
-                group by
-                    ad.deploymentEnvironment
-            """, [deploymentState: ApplicationDeploymentState.COMPLETED, systemDeploymentEnvironment: systemDeploymentEnvironment, application: application])
+            ApplicationDeployment latestDeployment = findLatestDeployment(application, systemDeploymentEnvironment)
 
-            deployments.each {
-                def applicationReleaseId = it[0]
-                def applicationDeploymentId = it[1]
-                def releaseNumber = it[2]
-                def completedDeploymentDate = it[3]
-                def deploymentState = it[4]
-
+            if (latestDeployment) {
                 results[application] = [
-                        "applicationReleaseId": applicationReleaseId,
-                        "applicationDeploymentId": applicationDeploymentId,
-                        "releaseNumber": releaseNumber,
-                        "completedDeploymentDate": completedDeploymentDate,
-                        "deploymentState": deploymentState
+                        "applicationReleaseId": latestDeployment.applicationRelease.id,
+                        "applicationDeploymentId": latestDeployment.id,
+                        "releaseNumber": latestDeployment.applicationRelease.releaseNumber,
+                        "completedDeploymentDate": latestDeployment.completedDeploymentDate,
+                        "deploymentState": latestDeployment.deploymentState
                 ]
             }
         }

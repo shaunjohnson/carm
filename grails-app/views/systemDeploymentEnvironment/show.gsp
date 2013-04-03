@@ -34,7 +34,9 @@
 <div class="tab-content">
     <div id="summaryTab" class="tab-pane active">
         <g:render template="systemEnvironmentApplications"
-                  model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance, 'applicationsGrouped': applicationsGrouped, 'latestDeployments': latestDeployments]"/>
+                  model="['systemDeploymentEnvironmentInstance': systemDeploymentEnvironmentInstance,
+                          'applicationsGrouped': applicationsGrouped,
+                          'latestDeployments': latestDeployments]"/>
     </div>
 
     <div id="detailsTab" class="tab-pane">
@@ -44,7 +46,8 @@
 
     <div id="activityTab" class="tab-pane">
         <g:render template="/common/activity"
-                  model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity', domainId: systemDeploymentEnvironmentInstance.id]"/>
+                  model="[activityList: activityList, activityCount: activityCount, listActivityAction: 'listActivity',
+                          domainId: systemDeploymentEnvironmentInstance.id]"/>
     </div>
 </div>
 
