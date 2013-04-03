@@ -120,7 +120,7 @@ class ApplicationController {
         def deploymentList = []
 
         if (applicationInstance && environmentInstance) {
-            deploymentList = applicationDeploymentService.findAllCompletedByApplicationAndDeploymentEnvironment(applicationInstance, environmentInstance, params)
+            deploymentList = applicationDeploymentService.findCompletedByApplicationAndDeploymentEnvironment(applicationInstance, environmentInstance, params)
         }
 
         render(template: "applicationEnvironmentsBlock", model: [deploymentList: deploymentList])

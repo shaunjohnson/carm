@@ -489,26 +489,12 @@ class ApplicationDeploymentService {
      * @return Matching ApplicationDeployment object
      */
     List<ApplicationDeployment> findLatestDeployment(Application application, SystemDeploymentEnvironment environment) {
-        ApplicationDeployment.executeQuery("""
-            from
-                ApplicationDeployment ad
-            where
-                ad.deploymentEnvironment = :deploymentEnvironment
-                and ad.applicationRelease.application = :application
-                and ad.deploymentState in (:deployedStates)
-            order by
-                ad.completedDeploymentDate desc,
-                ad.dateCreated desc
-        """, [deploymentEnvironment: environment, application: application, deployedStates: ApplicationDeploymentState.deployedStates],
-                [max:  1])
+        findCompletedByApplicationAndDeploymentEnvironment(application, environment, [max:  1])
     }
 
-    List<ApplicationDeployment> findAllCompletedByApplicationAndDeploymentEnvironment(Application application, SystemDeploymentEnvironment environment, Map params) {
+    List<ApplicationDeployment> findCompletedByApplicationAndDeploymentEnvironment(Application application, SystemDeploymentEnvironment environment, Map params) {
         int offset = params?.offset?.toInteger() ?: 0
         int max = Math.min(params?.max?.toInteger() ?: 100, grailsApplication.config.ui.applicationDeployment.maxRecords)
-
-        println "offset = " + offset
-        println "max = " + max
 
         ApplicationDeployment.executeQuery("""
             from
