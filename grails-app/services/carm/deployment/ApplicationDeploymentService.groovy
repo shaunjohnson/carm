@@ -525,30 +525,35 @@ class ApplicationDeploymentService {
         Application.listOrderByType().each { application ->
             def deployments = ApplicationDeployment.executeQuery("""
                 select
-                    ad.deploymentEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, max(ad.completedDeploymentDate)
+                    ad.deploymentEnvironment.name, ad.id, ad.applicationRelease.releaseNumber, ad.completedDeploymentDate
                 from
                     ApplicationDeployment ad
                 where
-                    ad.deploymentState = :deploymentState
-                    and ad.deploymentEnvironment.sysEnvironment = :system
+                    ad.deploymentEnvironment.sysEnvironment = :sysEnvironment
                     and ad.applicationRelease.application = :application
-                group by
-                    ad.deploymentEnvironment
-            """, [deploymentState: ApplicationDeploymentState.COMPLETED, system: systemEnvironment, application: application])
+                    and ad.deploymentState in (:deployedStates)
+                order by
+                    ad.completedDeploymentDate desc,
+                    ad.dateCreated desc
+            """, [sysEnvironment: systemEnvironment, application: application, deployedStates: ApplicationDeploymentState.deployedStates])
+
 
             def applicationDeployments = [:]
 
             deployments.each {
                 def environmentName = it[0]
-                def applicationDeploymentId = it[1]
-                def releaseNumber = it[2]
-                def completedDeploymentDate = it[3]
 
-                applicationDeployments[environmentName] = [
-                        "applicationDeploymentId": applicationDeploymentId,
-                        "releaseNumber": releaseNumber,
-                        "completedDeploymentDate": completedDeploymentDate
-                ]
+                if (!applicationDeployments[environmentName]) {
+                    def applicationDeploymentId = it[1]
+                    def releaseNumber = it[2]
+                    def completedDeploymentDate = it[3]
+                    
+                    applicationDeployments[environmentName] = [
+                            "applicationDeploymentId": applicationDeploymentId,
+                            "releaseNumber": releaseNumber,
+                            "completedDeploymentDate": completedDeploymentDate
+                    ]
+                }
             }
 
             results[application] = applicationDeployments
