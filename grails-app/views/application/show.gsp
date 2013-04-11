@@ -108,7 +108,7 @@
                                       model="[userGroupList: teamLeaderGroups, applicationInstance: applicationInstance]"/>
                         </div>
 
-                        <p id="no-team-leader-groups-message"
+                        <p id="no-team-leader-groups-message" class="muted"
                            style="display: ${teamLeaderGroups.size() ? 'none' : 'block'};">
                             <em><g:message code="applicationDoesNotHaveAnyTeamLeaderGroups.message"
                                            default="This application does not have any team leader groups."/></em>
@@ -123,7 +123,7 @@
                                       model="[userList: teamLeaderUsers, applicationInstance: applicationInstance]"/>
                         </div>
 
-                        <p id="no-team-leader-users-message"
+                        <p id="no-team-leader-users-message" class="muted"
                            style="display: ${teamLeaderUsers.size() ? 'none' : 'block'};">
                             <em><g:message code="applicationDoesNotHaveAnyTeamLeaderUsers.message"
                                            default="This application does not have any team leader users."/></em>
@@ -166,7 +166,7 @@
                                       model="[userGroupList: applicationDeveloperGroups, applicationInstance: applicationInstance]"/>
                         </div>
 
-                        <p id="no-app-developer-groups-message"
+                        <p id="no-app-developer-groups-message" class="muted"
                            style="display: ${applicationDeveloperGroups.size() ? 'none' : 'block'};">
                             <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperGroups.message"
                                            default="This application does not have any application developer groups."/></em>
@@ -181,7 +181,7 @@
                                       model="[userList: applicationDeveloperUsers, applicationInstance: applicationInstance]"/>
                         </div>
 
-                        <p id="no-app-developer-users-message"
+                        <p id="no-app-developer-users-message" class="muted"
                            style="display: ${applicationDeveloperUsers.size() ? 'none' : 'block'};">
                             <em><g:message code="applicationDoesNotHaveAnyApplicationDeveloperUsers.message"
                                            default="This application does not have any application developer users."/></em>

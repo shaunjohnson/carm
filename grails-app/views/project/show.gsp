@@ -89,7 +89,8 @@
                               model="[userGroupList: projectAdministratorGroups]"/>
                 </div>
 
-                <p id="no-groups-message" style="display: ${projectAdministratorGroups.size() ? 'none' : 'block'};">
+                <p id="no-groups-message" class="muted"
+                   style="display: ${projectAdministratorGroups.size() ? 'none' : 'block'};">
                     <em><g:message code="projectDoesNotHaveAnyAdministratorGroups.message"
                                    default="This project does not have any administrator groups."/></em>
                 </p>
@@ -102,7 +103,8 @@
                     <g:render template="projectAdministratorUsers" model="[userList: projectAdministratorUsers]"/>
                 </div>
 
-                <p id="no-users-message" style="display: ${projectAdministratorUsers.size() ? 'none' : 'block'};">
+                <p id="no-users-message" class="muted"
+                   style="display: ${projectAdministratorUsers.size() ? 'none' : 'block'};">
                     <em><g:message code="projectDoesNotHaveAnyAdministratorUsers.message"
                                    default="This project does not have any administrator users."/></em>
                 </p>
