@@ -53,6 +53,10 @@ a:hover {
     text-decoration: underline;
 }
 
+a:active {
+    color: red;
+}
+
 h3 a, h4 a, h5 a {
     color: #111;
 }
