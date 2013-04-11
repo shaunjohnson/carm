@@ -106,7 +106,8 @@
                     <g:message code="application.binariesPath.label" default="Binaries Path"/>
                 </td>
                 <td valign="top" class="value">
-                    <carm:formatBinariesPath applicationRelease="${applicationRelease}"/>
+                    <carm:formatBinariesPath elementId="binariesPath" applicationRelease="${applicationRelease}"/>
+                    <carm:copyToClipboard targetId="binariesPath"/>
                 </td>
             </tr>
         </g:if>

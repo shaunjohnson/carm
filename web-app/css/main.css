@@ -80,6 +80,10 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     clear: both;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .offset-quarter {
     margin-left: 30px;
 }

@@ -5,6 +5,8 @@ modules = {
         resource url: 'js/jquery.cookie.js'
         resource url: 'js/jquery.expander.min.js', exclude: 'minify'
 
+        resource url: 'js/ZeroClipboard.min.js', exclude: 'minify'
+
         resource url: 'css/tipsy.css'
         resource url: 'js/jquery.tipsy.js'
     }

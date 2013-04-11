@@ -888,11 +888,18 @@ class CarmTagLib {
         }
     }
 
+    /**
+     * Renders a copy to clipboard icon that copies the text in the element with client ID of targetId.
+     */
+    def copyToClipboard = { attrs ->
+        out << render(template: "/common/copyToClipboard", model: [targetId: attrs.targetId])
+    }
+
     def formatBinariesPath = { attrs ->
         def applicationRelease = attrs.applicationRelease
         def url = applicationRelease.application.binariesPath.replaceAll(/\$\{releaseNumber\}/, applicationRelease.releaseNumber)
 
-        out << link(url: url, target: "_blank") { url }
+        out << link(elementId: attrs.elementId, url: url, target: "_blank") { url }
     }
 
     /**
