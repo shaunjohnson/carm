@@ -8,7 +8,7 @@
 
             <br>
 
-            <carm:formatDateTimePeriod class="activityDateOccurred" value="${activity.dateOccurred}"/>
+            <carm:formatDateTimePeriod class="muted activityDateOccurred" value="${activity.dateOccurred}"/>
         </p>
     </g:each>
 </div>
