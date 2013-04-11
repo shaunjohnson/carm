@@ -26,24 +26,31 @@
                         title="${message(code: "showSystemDeploymentEnvironment.label", default: "Show Deployment Environment")}">${deploymentEnvironment.name.encodeAsHTML()}</g:link></h4>
 
             <div>
-                <table class="offset-quarter">
-                    <tbody id="environmentDeploymentsBlock${deploymentEnvironment.id}">
-                    <g:render template="applicationEnvironmentsBlock"
-                              model="[deploymentList: deploymentGroup.latestDeployment]"/>
-                    </tbody>
-                </table>
+                <g:if test="${deploymentGroup.deploymentListCount > 0}">
+                    <table class="offset-quarter">
+                        <tbody id="environmentDeploymentsBlock${deploymentEnvironment.id}">
+                        <g:render template="applicationEnvironmentsBlock"
+                                  model="[deploymentList: deploymentGroup.latestDeployment]"/>
+                        </tbody>
+                    </table>
 
-                <g:if test="${deploymentGroup.deploymentListCount > 1}">
-                    <div style="float: right;">
-                        <carm:showMore controller="${params.controller}" action="ajaxShowMoreDeployments"
-                                       id="${applicationInstance.id}_${deploymentEnvironment.id}"
-                                       appendId="environmentDeploymentsBlock${deploymentEnvironment.id}"
-                                       offset="1"
-                                       max="${deploymentGroup.deploymentListCount}"
-                                       step="${maxRecordsAllowed}"
-                                       mini="true"/>
-                    </div>
+                    <g:if test="${deploymentGroup.deploymentListCount > 1}">
+                        <div style="float: right;">
+                            <carm:showMore controller="${params.controller}" action="ajaxShowMoreDeployments"
+                                           id="${applicationInstance.id}_${deploymentEnvironment.id}"
+                                           appendId="environmentDeploymentsBlock${deploymentEnvironment.id}"
+                                           offset="1"
+                                           max="${deploymentGroup.deploymentListCount}"
+                                           step="${maxRecordsAllowed}"
+                                           mini="true"/>
+                        </div>
+                    </g:if>
                 </g:if>
+                <g:else>
+                    <p class="offset-half muted">
+                        <g:message code="noDeploymentsToThisEnvironment.message"/>
+                    </p>
+                </g:else>
 
                 <div class="clearing"></div>
             </div>
