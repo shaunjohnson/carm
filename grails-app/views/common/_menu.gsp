@@ -63,7 +63,7 @@
                     </sec:ifNotLoggedIn>
                 </ul>
 
-                <form class="navbar-search pull-right" action="">
+                <form class="navbar-search pull-right" action="" onsubmit="return false;">
                     <input id="quicksearch" type="text" class="search-query span2"
                            placeholder="${message(code: 'search.label', default: 'Search')}"/>
                 </form>
