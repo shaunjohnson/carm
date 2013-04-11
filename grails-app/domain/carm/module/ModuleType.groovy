@@ -2,6 +2,9 @@ package carm.module
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Configurable type of module.
+ */
 class ModuleType {
     String name
     String description
@@ -10,8 +13,8 @@ class ModuleType {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
     }
 
     static mapping = {

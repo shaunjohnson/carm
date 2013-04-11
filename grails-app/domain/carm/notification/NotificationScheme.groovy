@@ -2,6 +2,10 @@ package carm.notification
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A notification scheme is used to configure which notifications are sent for particular events and to which
+ * receivers. An application may be configured to utilize a notification scheme to notify users of events that occur.
+ */
 class NotificationScheme {
     def activityTraceService
 
@@ -9,8 +13,8 @@ class NotificationScheme {
     String description
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false)
-        description(maxSize: 4000, nullable: true)
+        name minSize: 2, maxSize: 50, blank: false
+        description maxSize: 4000, nullable: true
     }
 
     static hasMany = [notifications: Notification]

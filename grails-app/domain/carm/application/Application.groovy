@@ -8,6 +8,9 @@ import carm.release.ApplicationRelease
 import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.notification.NotificationScheme
 
+/**
+ * Application represents a single application that is tracked within CARM.
+ */
 class Application {
     def activityTraceService
 
@@ -26,17 +29,17 @@ class Application {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, nullable: false, unique: true)
-        description(maxSize: 4000, nullable: true)
-        type(nullable: false)
-        project(nullable: false)
-        sourceControlRepository(nullable: false)
-        sourceControlPath(maxSize: 200, nullable: true, unique: 'sourceControlRepository')
-        sysEnvironment(nullable: true)
-        buildInstructions(nullable: true)
-        binariesPath(maxSize:  200)
-        deployInstructions(nullable: true)
-        notificationScheme(nullable: false)
+        name minSize: 2, maxSize: 50, blank: false, nullable: false, unique: true
+        description maxSize: 4000, nullable: true
+        type nullable: false
+        project nullable: false
+        sourceControlRepository nullable: false
+        sourceControlPath maxSize: 200, nullable: true, unique: 'sourceControlRepository'
+        sysEnvironment nullable: true
+        buildInstructions nullable: true
+        binariesPath maxSize:  200
+        deployInstructions nullable: true
+        notificationScheme nullable: false
     }
 
     static belongsTo = [project: Project]

@@ -2,6 +2,9 @@ package carm.release
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Configurable test state of an application release.
+ */
 class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestState> {
     String name
     String description
@@ -10,8 +13,8 @@ class ApplicationReleaseTestState implements Comparable<ApplicationReleaseTestSt
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
     }
 
     static mapping = {

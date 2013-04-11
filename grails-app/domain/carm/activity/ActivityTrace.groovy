@@ -3,6 +3,9 @@ package carm.activity
 import org.joda.time.DateTime
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * An activity trace represents a single activity record for some object.
+ */
 class ActivityTrace {
     String oid
     String username
@@ -13,18 +16,18 @@ class ActivityTrace {
     DateTime dateOccurred
 
     static constraints = {
-        oid(blank: false, maxSize: 100, minSize: 3, nullable: false)
-        username(blank: false, maxSize: 100, minSize: 1, nullable: false)
-        action(blank: false, maxSize: 100, minSize: 1, nullable: false)
-        objectId(nullable: false)
-        objectName(blank: false, maxSize: 100, minSize: 1, nullable: false)
-        objectType(blank: false, maxSize: 100, minSize: 1, nullable: false)
-        dateOccurred(nullable: false)
+        oid blank: false, maxSize: 100, minSize: 3, nullable: false
+        username blank: false, maxSize: 100, minSize: 1, nullable: false
+        action blank: false, maxSize: 100, minSize: 1, nullable: false
+        objectId nullable: false
+        objectName blank: false, maxSize: 100, minSize: 1, nullable: false
+        objectType blank: false, maxSize: 100, minSize: 1, nullable: false
+        dateOccurred nullable: false
     }
 
     static mapping = {
-        sort "dateOccurred": "desc"
         version false
+        sort "dateOccurred": "desc"
     }
 
     String toString() {

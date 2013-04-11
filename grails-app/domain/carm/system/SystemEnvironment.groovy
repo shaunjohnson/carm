@@ -2,6 +2,9 @@ package carm.system
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A system environment represents all servers and deployment environments into which applications are deployed.
+ */
 class SystemEnvironment {
     def activityTraceService
 
@@ -13,8 +16,8 @@ class SystemEnvironment {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
     }
 
     static hasMany = [servers: SystemServer, environments: SystemDeploymentEnvironment]

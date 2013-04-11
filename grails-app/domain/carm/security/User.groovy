@@ -4,6 +4,9 @@ import carm.sourcecontrol.SourceControlUser
 import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.Favorite
 
+/**
+ * Application level user object.
+ */
 class User {
     transient springSecurityService
 
@@ -20,10 +23,10 @@ class User {
     Date lastUpdated
 
     static constraints = {
-        username(blank: false, unique: true, index: 'Name_Idx')
-        password(blank: false)
-        fullName(blank: false, nullable: false)
-        email(maxSize: 255)
+        username blank: false, unique: true, index: 'Name_Idx'
+        password blank: false
+        fullName blank: false, nullable: false
+        email maxSize: 255
     }
 
     static mapping = {

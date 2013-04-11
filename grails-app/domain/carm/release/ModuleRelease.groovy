@@ -3,6 +3,9 @@ package carm.release
 import carm.module.Module
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A module that is part of an application release.
+ */
 class ModuleRelease {
     Module module
 
@@ -10,8 +13,8 @@ class ModuleRelease {
     Date lastUpdated
 
     static constraints = {
-        applicationRelease(nullable: false)
-        module(nullable: true)
+        applicationRelease nullable: false
+        module nullable: true
     }
 
     static belongsTo = [applicationRelease: ApplicationRelease]

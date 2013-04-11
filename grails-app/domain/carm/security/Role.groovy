@@ -2,6 +2,9 @@ package carm.security
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Application level security role.
+ */
 class Role {
     String authority
     
@@ -14,7 +17,7 @@ class Role {
     }
 
     static constraints = {
-        authority(blank: false, unique: true)
+        authority  blank: false, unique: true
     }
 
     String toString() {

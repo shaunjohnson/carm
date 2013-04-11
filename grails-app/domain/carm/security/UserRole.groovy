@@ -2,6 +2,9 @@ package carm.security
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Linking domain that is used to associate roles with users.
+ */
 class UserRole implements Serializable {
     User user
     Role role

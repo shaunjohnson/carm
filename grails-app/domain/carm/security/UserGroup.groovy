@@ -1,5 +1,8 @@
 package carm.security
 
+/**
+ * Application level user group.
+ */
 class UserGroup {
     String name
     String description
@@ -8,8 +11,8 @@ class UserGroup {
     Date lastUpdated
 
     static constraints = {
-        name(maxSize: 50, nullable: false, unique: true)
-        description(maxSize: 4000, nullable: true)
+        name maxSize: 50, nullable: false, unique: true
+        description maxSize: 4000, nullable: true
     }
 
     static hasMany = [users: User]

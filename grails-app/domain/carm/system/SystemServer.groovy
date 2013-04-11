@@ -2,6 +2,9 @@ package carm.system
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A server which exists within each system deployment environment with a system.
+ */
 class SystemServer {
     def activityTraceService
 
@@ -12,9 +15,9 @@ class SystemServer {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
-        sysEnvironment(nullable: false)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
+        sysEnvironment nullable: false
     }
 
     static belongsTo = [sysEnvironment: SystemEnvironment]

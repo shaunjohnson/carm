@@ -3,6 +3,9 @@ package carm.deployment
 import carm.release.ModuleRelease
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Represents the deployment of a module release.
+ */
 class ModuleDeployment {
     ModuleRelease moduleRelease
     String deploymentInstructions
@@ -13,19 +16,19 @@ class ModuleDeployment {
     Date lastUpdated
 
     static constraints = {
-        applicationDeployment(nullable: false)
-        deploymentInstructions(nullable: true)
-        moduleRelease(nullable: false)
-        deploymentState(maxSize: 50, nullable: false, blank: false)
-        testState(nullable: true)
+        applicationDeployment nullable: false
+        deploymentInstructions nullable: true
+        moduleRelease nullable: false
+        deploymentState maxSize: 50, nullable: false, blank: false
+        testState nullable: true
     }
 
     static belongsTo = [applicationDeployment: ApplicationDeployment]
-    
+
     static mapping = {
         deploymentInstructions type: 'text'
     }
-    
+
     String toString() {
         "Module Deployment : $applicationDeployment - $deploymentState - $testState"
     }

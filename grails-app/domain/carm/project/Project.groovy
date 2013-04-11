@@ -3,22 +3,25 @@ package carm.project
 import carm.application.Application
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Projects are containers that wrap groups of applications together.
+ */
 class Project {
     def activityTraceService
 
     String name
     String description
     ProjectCategory category
-    
+
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
-        category(nullable: false)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
+        category nullable: false
     }
-    
+
     static hasMany = [applications: Application]
 
     static mapping = {

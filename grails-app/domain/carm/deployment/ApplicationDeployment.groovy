@@ -6,6 +6,9 @@ import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.system.SystemDeploymentEnvironment
 
+/**
+ * Represents a deployment of an application release to a system deployment environment.
+ */
 class ApplicationDeployment {
     def activityTraceService
 
@@ -30,18 +33,18 @@ class ApplicationDeployment {
     Date lastUpdated
 
     static constraints = {
-        applicationRelease(nullable: false)
-        deploymentEnvironment(nullable: false)
-        deploymentInstructions(nullable: true)
-        requestedDeploymentDate(nullable: false)
-        completedDeploymentDate(nullable: true)
-        deploymentState(maxSize: 50, nullable: false, blank: false)
-        dateSubmitted(nullable: true)
-        submittedBy(nullable: true)
-        dateAssigned(nullable: true)
-        assignedTo(nullable: true)
-        dateTested(nullable: true)
-        testedBy(nullable: true)
+        applicationRelease nullable: false
+        deploymentEnvironment nullable: false
+        deploymentInstructions nullable: true
+        requestedDeploymentDate nullable: false
+        completedDeploymentDate nullable: true
+        deploymentState maxSize: 50, nullable: false, blank: false
+        dateSubmitted nullable: true
+        submittedBy nullable: true
+        dateAssigned nullable: true
+        assignedTo nullable: true
+        dateTested nullable: true
+        testedBy nullable: true
 
         moduleDeployments(validator: { val, obj ->
             val.size() > 0 && val.find { it.deploymentState == ModuleDeploymentState.DEPLOYED }

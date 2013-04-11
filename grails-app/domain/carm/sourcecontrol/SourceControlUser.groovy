@@ -3,6 +3,9 @@ package carm.sourcecontrol
 import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Source control server user, which is used to link/map CARM users to SCM users.
+ */
 class SourceControlUser {
     String name
     String description
@@ -11,10 +14,10 @@ class SourceControlUser {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
-        server(nullable: true)
-        user(nullable: true)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
+        server nullable: true
+        user nullable: true
     }
 
     static belongsTo = [server: SourceControlServer, user: User]

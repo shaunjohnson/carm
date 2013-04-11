@@ -2,6 +2,9 @@ package carm.sourcecontrol
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A source control server.
+ */
 class SourceControlServer {
     String name
     String description
@@ -12,10 +15,10 @@ class SourceControlServer {
     Date lastUpdated
 
     static constraints = {
-        name(blank: false, minSize: 2, maxSize: 50, nullable: false, unique: true)
-        description(maxSize: 4000, nullable: true)
-        type(null: false)
-        url(maxSize: 200, nullable: false, blank: false)
+        name blank: false, minSize: 2, maxSize: 50, nullable: false, unique: true
+        description maxSize: 4000, nullable: true
+        type null: false
+        url maxSize: 200, nullable: false, blank: false
     }
 
     static hasMany = [repositories: SourceControlRepository, users: SourceControlUser]

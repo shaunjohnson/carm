@@ -2,6 +2,9 @@ package carm.application
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * Configurable type of application.
+ */
 class ApplicationType implements Comparable<ApplicationType> {
     String name
     String description
@@ -10,8 +13,8 @@ class ApplicationType implements Comparable<ApplicationType> {
     Date lastUpdated
 
     static constraints = {
-        name(minSize: 2, maxSize: 50, blank: false, unique: true)
-        description(maxSize: 4000, nullable: true)
+        name minSize: 2, maxSize: 50, blank: false, unique: true
+        description maxSize: 4000, nullable: true
     }
 
     static mapping = {

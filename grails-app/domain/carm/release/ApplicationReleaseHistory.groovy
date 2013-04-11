@@ -2,6 +2,9 @@ package carm.release
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ * A single activity record for an application release object.
+ */
 class ApplicationReleaseHistory {
     String summary
     String comments
@@ -11,10 +14,10 @@ class ApplicationReleaseHistory {
     Date lastUpdated
     
     static constraints = {
-        applicationRelease(nullable: false)
-        summary(maxSize: 255, nullable: false, blank: false)
-        comments(nullable: true)
-        username(maxSize: 255, nullable: false, blank: false)
+        applicationRelease nullable: false
+        summary maxSize: 255, nullable: false, blank: false
+        comments nullable: true
+        username maxSize: 255, nullable: false, blank: false
     }
 
     static belongsTo = [applicationRelease: ApplicationRelease]
