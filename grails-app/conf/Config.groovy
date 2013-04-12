@@ -186,7 +186,7 @@ ckeditor.config = 'js/ckconfig.js'
 // CARM UI configurable options
 ui {
     activityTrace {
-        maxRecords = 5
+        maxRecords = 10
         listMax = 25
     }
     application {
