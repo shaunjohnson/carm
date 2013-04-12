@@ -72,8 +72,8 @@ input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder {
     padding: 20px 0 36px;
 }
 
-.centered, td.centered {
-    text-align: center;
+.centered, td.centered, td.centered {
+    text-align: center !important;
 }
 
 .clearing {

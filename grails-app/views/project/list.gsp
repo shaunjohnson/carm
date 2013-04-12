@@ -16,28 +16,32 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}"/>
-            <th><g:message code="project.category.label" default="Category"/></th>
-            <g:sortableColumn property="description"
-                              title="${message(code: 'project.description.label', default: 'Description')}"/>
+            <g:sortableColumn property="name" title="${message(code: 'project.name.label')}"/>
+            <g:sortableColumn property="category.name" title="${message(code: 'project.category.label')}"/>
+            <g:sortableColumn property="description" title="${message(code: 'project.description.label')}"/>
+            <th class="centered"><g:message code="project.applications.label"/></th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${projectInstanceList}" status="i" var="projectInstance">
-            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                <td><g:link action="show" id="${projectInstance.id}">
-                    ${fieldValue(bean: projectInstance, field: "name")}
-                </g:link>
+            <tr>
+                <td>
+                    <g:link action="show" id="${projectInstance.id}">
+                        <g:fieldValue field="name" bean="${projectInstance}"/>
+                    </g:link>
                 </td>
                 <td>
                     <g:link controller="projectCategory" action="show" id="${projectInstance.category.id}">
-                        ${fieldValue(bean: projectInstance, field: "category")}
+                        <g:fieldValue field="category" bean="${projectInstance}"/>
                     </g:link>
                 </td>
                 <td>
                     <div class="expander">
                         <carm:plainText value="${projectInstance.description}"/>
                     </div>
+                </td>
+                <td class="centered">
+                    <g:formatNumber number="${projectInstance.applications.size()}"/>
                 </td>
             </tr>
         </g:each>
