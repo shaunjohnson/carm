@@ -113,7 +113,7 @@ class ProjectService {
      * @param params New property values
      */
     @Transactional
-    @PreAuthorize("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
+    @PreAuthorize("isAuthenticated() and hasPermission(#project, 'PROJECT_ADMINISTRATOR')")
     void update(Project project, Map params) {
         def prefix = "update() :"
 
