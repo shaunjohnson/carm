@@ -1180,15 +1180,38 @@ class CarmTagLib {
         ApplicationRelease applicationRelease = attrs.applicationRelease
         ModuleRelease moduleRelease = attrs.moduleRelease
 
-        def deployable = false
+        def deployable
         if (applicationRelease) {
             deployable = applicationReleaseService.isDeployable(applicationRelease)
         }
         else if (moduleRelease) {
             deployable = moduleReleaseService.isDeployable(moduleRelease)
         }
+        else {
+            throw new IllegalArgumentException("Only application and module release supported")
+        }
 
         if (deployable) {
+            out << body()
+        }
+    }
+
+    def isNotDeployable = { attrs, body ->
+        ApplicationRelease applicationRelease = attrs.applicationRelease
+        ModuleRelease moduleRelease = attrs.moduleRelease
+
+        def notDeployable
+        if (applicationRelease) {
+            notDeployable = !applicationReleaseService.isDeployable(applicationRelease)
+        }
+        else if (moduleRelease) {
+            notDeployable = !moduleReleaseService.isDeployable(moduleRelease)
+        }
+        else {
+            throw new IllegalArgumentException("Only application and module release supported")
+        }
+
+        if (notDeployable) {
             out << body()
         }
     }
@@ -1232,7 +1255,7 @@ class CarmTagLib {
         def value = new SimpleDateFormat(dateFormat).format(calendar.getTime())
 
         //Create date text field and supporting hidden text fields need by grails
-        out.println "<input type=\"text\" name=\"${name}\" id=\"${id}\" value=\"${value}\" maxlength=\"${dateFormat.length()}\" size=\"${dateFormat.length()}\" />"
+        out.println "<input class=\"span2\" type=\"text\" name=\"${name}\" id=\"${id}\" value=\"${value}\" maxlength=\"${dateFormat.length()}\" size=\"${dateFormat.length()}\" />"
         out.println "<input type=\"hidden\" name=\"${name}_day\" id=\"${id}_day\" value=\"${calendar.get(Calendar.DAY_OF_MONTH)}\" />"
         out.println "<input type=\"hidden\" name=\"${name}_month\" id=\"${id}_month\" value=\"${calendar.get(Calendar.MONTH) + 1}\" />"
         out.println "<input type=\"hidden\" name=\"${name}_year\" id=\"${id}_year\" value=\"${calendar.get(Calendar.YEAR)}\" />"

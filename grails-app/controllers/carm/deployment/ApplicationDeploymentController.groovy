@@ -33,8 +33,7 @@ class ApplicationDeploymentController {
         else {
             [
                     applicationDeploymentInstance: applicationDeploymentService.newApplicationDeployment(applicationReleaseInstance),
-                    existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance),
-                    moduleReleaseService: moduleReleaseService
+                    existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
             ]
         }
     }
@@ -58,8 +57,7 @@ class ApplicationDeploymentController {
             else {
                 render(view: "create", model: [
                         applicationDeploymentInstance: applicationDeploymentInstance,
-                        existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance),
-                        moduleReleaseService: moduleReleaseService
+                        existingDeployments: applicationDeploymentService.findAllByApplicationReleaseOrderByEnvironment(applicationReleaseInstance)
                 ])
             }
         }

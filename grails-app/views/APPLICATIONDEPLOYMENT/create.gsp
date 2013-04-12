@@ -1,5 +1,3 @@
-<%@ page import="carm.deployment.ModuleDeploymentState" %>
-page import="carm.deployment.ModuleDeploymentState" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -22,99 +20,13 @@ page import="carm.deployment.ModuleDeploymentState" %>
 </g:hasErrors>
 
 <g:form action="save" class="offset1 span8">
-    <carm:formSection legend="${message(code: 'applicationDeploymentDetails.section')}">
-        <div class="control-group">
-            <carm:label class="control-label" for="applicationRelease.id">
-                <g:message code="applicationDeployment.applicationRelease.label" default="Application Release"/>
-            </carm:label>
-            <div class="controls">
-                <g:link controller="applicationRelease" action="show"
-                        id="${applicationDeploymentInstance?.applicationRelease?.id}">
-                    ${message(code: 'pageHeader.applicationRelease.label', args: [
-                            applicationDeploymentInstance?.applicationRelease?.application?.name,
-                            applicationDeploymentInstance?.applicationRelease?.releaseNumber])?.encodeAsHTML()}
-                </g:link>
-                <g:hiddenField name="applicationRelease.id"
-                               value="${applicationDeploymentInstance?.applicationRelease?.id}"/>
-            </div>
-        </div>
-
-        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentEnvironment', 'error')}">
-            <carm:label class="control-label" for="deploymentEnvironment.id" required="true">
-                <g:message code="applicationDeployment.deploymentEnvironment.label" default="Environment"/>
-            </carm:label>
-            <div class="controls">
-                <g:select name="deploymentEnvironment.id" noSelection="['null': '']" required="required"
-                          from="${applicationDeploymentInstance?.applicationRelease?.application?.sysEnvironment?.environments}"
-                          optionKey="id" value="${applicationDeploymentInstance?.deploymentEnvironment?.id}"/>
-                <carm:alertWarning id="deploymentEnvironmentMessage" display="none"/>
-            </div>
-        </div>
-
-        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'requestedDeploymentDate', 'error')}">
-            <carm:label class="control-label" for="requestedDeploymentDate">
-                <g:message code="applicationDeployment.requestedDeploymentDate.label"
-                           default="Requested Deployment Date"/>
-            </carm:label>
-            <div class="controls">
-                <carm:datePicker name="requestedDeploymentDate" todayLink="true"
-                                 value="${applicationDeploymentInstance?.requestedDeploymentDate}"/>
-            </div>
-        </div>
-    </carm:formSection>
-
-    <carm:formSection legend="${message(code: 'deployment.section')}">
-        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'moduleDeployments', 'error')}">
-            <carm:label class="control-label" required="true">
-                <g:message code="modules.label" default="Modules"/>
-            </carm:label>
-            <div class="controls">
-                <g:each var="moduleDeployment"
-                        in="${applicationDeploymentInstance.moduleDeployments.sort { it.moduleRelease.module.name}}">
-                    <g:if test="${moduleReleaseService.isDeployable(moduleDeployment.moduleRelease)}">
-                        <carm:label class="checkbox" for="moduleRelease.${moduleDeployment.moduleRelease.id}">
-                            <g:if test="${moduleDeployment.deploymentState == ModuleDeploymentState.DEPLOYED}">
-                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"
-                                            checked="${true}"/>
-                            </g:if>
-                            <g:else>
-                                <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}"/>
-                            </g:else>
-                            ${moduleDeployment.moduleRelease.module.name.encodeAsHTML()}
-                        </carm:label>
-                    </g:if>
-                    <g:else>
-                        <carm:label class="checkbox disabled">
-                            <g:checkBox name="moduleRelease.${moduleDeployment.moduleRelease.id}" disabled="true"/>
-                            <g:message code="moduleReleaseCannotBeDeployed.message"
-                                       args="[moduleDeployment.moduleRelease.module.name]"/>
-                        </carm:label>
-                    </g:else>
-                </g:each>
-            </div>
-        </div>
-
-        <div class="control-group ${hasErrors(bean: applicationDeploymentInstance, field: 'deploymentInstructions', 'error')}">
-            <carm:label class="control-label" for="deploymentInstructions">
-                <g:message code="applicationDeployment.deploymentInstructions.label"
-                           default="Deployment Instructions"/>
-            </carm:label>
-            <div class="controls">
-                <ckeditor:editor name="deploymentInstructions"
-                                 height="${grailsApplication.config.ui.richTextEditor.height}"
-                                 width="${grailsApplication.config.ui.richTextEditor.width}">
-                    ${applicationDeploymentInstance?.deploymentInstructions}
-                </ckeditor:editor>
-            </div>
-        </div>
-    </carm:formSection>
+    <g:render template="form" model="[applicationDeploymentInstance: applicationDeploymentInstance]"/>
 
     <carm:formButtons>
-        <g:submitButton class="btn btn-primary" name="create"
-                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+        <g:submitButton class="btn btn-primary" name="create" value="${message(code: 'default.button.create.label')}"/>
         <g:link class="btn" controller="application" action="show"
                 id="${applicationDeploymentInstance?.applicationRelease?.application?.id}">
-            <g:message code="default.button.cancel.label" default="Cancel"/>
+            <g:message code="default.button.cancel.label"/>
         </g:link>
     </carm:formButtons>
 </g:form>
@@ -125,10 +37,11 @@ page import="carm.deployment.ModuleDeploymentState" %>
 
 <r:script>
     jQuery(function () {
-        var alreadyDeployedTo = [${alreadyDeployedToIds}];
+        var alreadyDeployedTo = [${alreadyDeployedToIds}],
+            deploymentEnvironment = jQuery("#deploymentEnvironment\\.id");
 
         function deploymentEnvironmentChanged() {
-            var selectedEnvironmentId = jQuery("#deploymentEnvironment\\.id").val();
+            var selectedEnvironmentId = deploymentEnvironment.val();
 
             if (selectedEnvironmentId && jQuery.inArray(parseInt(selectedEnvironmentId), alreadyDeployedTo) === -1) {
                 jQuery("#deploymentEnvironmentMessage:visible").hide('blind');
@@ -140,8 +53,7 @@ page import="carm.deployment.ModuleDeploymentState" %>
             }
         }
 
-        jQuery("#deploymentEnvironment\\.id").change(deploymentEnvironmentChanged);
-
+        deploymentEnvironment.change(deploymentEnvironmentChanged);
         deploymentEnvironmentChanged();
     });
 </r:script>
