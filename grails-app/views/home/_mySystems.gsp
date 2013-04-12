@@ -3,6 +3,14 @@
         <g:message code="myEnvironments.label" default="My Environments"/>
     </div>
 
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="section-action-icon new-system-env-action">
+            <g:link controller="systemEnvironment" action="create">
+                <g:message code="default.new.label" args="[message(code: 'systemEnvironment.label')]"/>
+            </g:link>
+        </div>
+    </sec:ifAllGranted>
+
     <div class="section-action">
         <g:link controller="systemEnvironment" action="list">
             <g:message code="allSystems.label" default="All Systems"/>

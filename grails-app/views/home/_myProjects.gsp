@@ -3,6 +3,14 @@
         <g:message code="myProjects.label" default="My Projects"/>
     </div>
 
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+        <div class="section-action-icon new-project-action">
+            <g:link controller="project" action="create">
+                <g:message code="default.new.label" args="[message(code: 'project.label')]"/>
+            </g:link>
+        </div>
+    </sec:ifAllGranted>
+
     <div class="section-action">
         <g:link controller="project" action="list">
             <g:message code="allProjects.label" default="All Projects"/>
