@@ -416,6 +416,10 @@ class ApplicationDeploymentService {
      * @return Next environment that can be used to deploy this release
      */
     SystemDeploymentEnvironment inferNextEnvironment(ApplicationRelease applicationRelease) {
+        if (!applicationRelease.application.sysEnvironment) {
+            return null
+        }
+
         List<SystemDeploymentEnvironment> environments = applicationRelease.application.sysEnvironment.environments
         List<ApplicationDeployment> deployments = ApplicationDeployment.findAllByApplicationRelease(applicationRelease)
 
