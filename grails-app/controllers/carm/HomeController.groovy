@@ -105,9 +105,7 @@ class HomeController {
     }
 
     def ajaxShowMoreActivity() {
-        def activityList = activityTraceService.listActivityByRoot(params)
-
-        render(template: "/common/activityBlock", model: [activityList: activityList])
+        render(template: "/common/activityBlock", model: [activityList: activityTraceService.listActivityByRoot(params)])
     }
 
     def ajaxQuickSearch() {

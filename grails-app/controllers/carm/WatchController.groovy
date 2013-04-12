@@ -1,7 +1,6 @@
 package carm
 
 class WatchController {
-
     def watchService
 
     def index() { }

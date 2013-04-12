@@ -7,7 +7,6 @@ import carm.system.SystemDeploymentEnvironment
 import grails.plugins.springsecurity.Secured
 
 class ApplicationController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def activityTraceService
@@ -37,7 +36,7 @@ class ApplicationController {
     def create() {
         def projectInstance = projectService.get(params.project?.id)
         if (!projectInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project?.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label'), params.project?.id])}"
             redirect(action: "list")
         }
         else {
@@ -57,13 +56,13 @@ class ApplicationController {
     def save() {
         def projectInstance = projectService.get(params.project?.id)
         if (!projectInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.project.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'project.label'), params.project.id])}"
             redirect(action: "list")
         }
         else {
             def applicationInstance = applicationService.create(projectInstance, params)
             if (!applicationInstance.hasErrors()) {
-                flash.message = "${message(code: 'application.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
+                flash.message = "${message(code: 'application.created.message', args: [message(code: 'application.label'), applicationInstance.name])}"
                 redirect(controller: "module", action: "create", params: ['application.id': applicationInstance.id])
             }
             else {
@@ -81,7 +80,7 @@ class ApplicationController {
     def show() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -143,7 +142,7 @@ class ApplicationController {
     def edit() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -164,7 +163,7 @@ class ApplicationController {
                 def version = params.version.toLong()
 
                 if (applicationInstance.version > version) {
-                    applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label', default: 'Application')] as Object[], "Another user has updated this Application while you were editing")
+                    applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label')] as Object[], "Another user has updated this Application while you were editing")
                     render(view: "edit", model: [
                             applicationInstance: applicationInstance,
                             applicationTypeList: applicationTypeService.list(),
@@ -178,7 +177,7 @@ class ApplicationController {
 
             applicationService.update(applicationInstance.project, applicationInstance, params)
             if (!applicationInstance.hasErrors() && applicationInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'application.label'), applicationInstance.name])}"
                 redirect(action: "show", id: applicationInstance.id)
             }
             else {
@@ -192,7 +191,7 @@ class ApplicationController {
             }
         }
         else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -200,7 +199,7 @@ class ApplicationController {
     def move() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -218,7 +217,7 @@ class ApplicationController {
                 def version = params.version.toLong()
 
                 if (applicationInstance.version > version) {
-                    applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label', default: 'Application')] as Object[], "Another user has updated this Application while you were editing")
+                    applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label')] as Object[], "Another user has updated this Application while you were editing")
                     render(view: "move", model: [
                             applicationInstance: applicationInstance,
                             projectList: projectService.list()
@@ -229,7 +228,7 @@ class ApplicationController {
 
             applicationService.move(applicationInstance, projectService.get(params['project.id'] as Long))
             if (!applicationInstance.hasErrors() && applicationInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.moved.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name, applicationInstance.project])}"
+                flash.message = "${message(code: 'default.moved.message', args: [message(code: 'application.label'), applicationInstance.name, applicationInstance.project])}"
                 redirect(action: "show", id: applicationInstance.id)
             }
             else {
@@ -240,7 +239,7 @@ class ApplicationController {
             }
         }
         else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -253,20 +252,20 @@ class ApplicationController {
 
             try {
                 applicationService.delete(applicationInstance.project, applicationInstance)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'application.label'), name])}"
                 redirect(controller: "project", action: "show", id: projectId)
             }
             catch (DataIntegrityViolationException e) {
-                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label'), name])}"
                 redirect(action: "show", id: params.id)
             }
             catch (DomainInUseException e) {
-                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label', default: 'Application'), name])}"
+                flash.error = "${message(code: 'default.not.deleted.message', args: [message(code: 'application.label'), name])}"
                 redirect(action: "show", id: params.id)
             }
         }
         else {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
     }
@@ -274,7 +273,7 @@ class ApplicationController {
     def listReleases() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -289,7 +288,7 @@ class ApplicationController {
     def listActivity() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
@@ -315,7 +314,7 @@ class ApplicationController {
     def showFullHistory() {
         def applicationInstance = applicationService.get(params.id)
         if (!applicationInstance) {
-            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label'), params.id])}"
             redirect(action: "list")
         }
         else {
