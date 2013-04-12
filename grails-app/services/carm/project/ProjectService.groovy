@@ -147,7 +147,7 @@ class ProjectService {
      * @return List of matching Project objects
      */
     @PostFilter("isAuthenticated() and hasPermission(filterObject, 'PROJECT_ADMINISTRATOR')")
-    List<Project> getAllProjectsWhereOwner(Map params) {
+    List<Project> findAllProjectsByCurrentUserIsAdmin(Map params) {
         Project.list params
     }
 
@@ -157,7 +157,7 @@ class ProjectService {
      * @param projects List of projects used for querying
      * @return List of ApplicationDeployment and ApplicationRelease objects
      */
-    List findAllPendingTasks(List<Project> projects) {
+    List findAllPendingTasksByProjects(List<Project> projects) {
         def pendingTasks = []
 
         projects.each { project ->

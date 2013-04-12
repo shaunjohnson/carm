@@ -115,7 +115,7 @@ class ApplicationService implements ApplicationContextAware {
      * @param params Query parameters
      * @return List of Application objects
      */
-    List<Application> getMostActiveApplications(Map params) {
+    List<Application> findMostActiveApplications(Map params) {
         def queryParams = [
                 max: grailsApplication.config.ui.application.listMax,
                 offset: params?.offset,

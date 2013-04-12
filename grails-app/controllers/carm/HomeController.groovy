@@ -14,7 +14,6 @@ class HomeController {
     def applicationDeploymentService
     def applicationReleaseService
     def applicationService
-    def carmSecurityService
     def favoriteService
     def grailsApplication
     def projectService
@@ -31,22 +30,12 @@ class HomeController {
 
         if (springSecurityService.isLoggedIn()) {
             myFavorites = favoriteService.findAllByCurrentUser()
-            myProjects = projectService.getAllProjectsWhereOwner()
-            mySystemEnvironments = systemEnvironmentService.findAllByProject(myProjects)
-            myPendingTasks = projectService.findAllPendingTasks(myProjects)
+            myProjects = projectService.findAllProjectsByCurrentUserIsAdmin()
+            mySystemEnvironments = systemEnvironmentService.findAllByProjects(myProjects)
+            myPendingTasks = projectService.findAllPendingTasksByProjects(myProjects)
         }
         else {
-            def activeApplications = applicationService.getMostActiveApplications().sort { it.project.name }
-
-            activeApplications.each { Application application ->
-                if (mostActiveApplications[application.project]) {
-                    mostActiveApplications[application.project] << application
-                }
-                else {
-                    mostActiveApplications[application.project] = [application]
-                }
-            }
-
+            mostActiveApplications = applicationService.findMostActiveApplications([sort: 'project.name']).groupBy { it.project }
             mostActiveApplications.entrySet().each { it.value.sort { it.name } }
 
             mostActiveSystemEnvironments = systemEnvironmentService.getMostActiveSystems()

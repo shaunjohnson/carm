@@ -197,7 +197,7 @@ class SystemEnvironmentService {
      * @param projects List of Projects used for querying
      * @return List of SystemEnvironment objects
      */
-    List<SystemEnvironment> findAllByProject(List<Project> projects) {
+    List<SystemEnvironment> findAllByProjects(List<Project> projects) {
         if (!projects?.size()) {
             return []
         }

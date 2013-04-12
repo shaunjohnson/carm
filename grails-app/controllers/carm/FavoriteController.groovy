@@ -1,7 +1,6 @@
 package carm
 
 class FavoriteController {
-
     def favoriteService
 
     def index() { }
