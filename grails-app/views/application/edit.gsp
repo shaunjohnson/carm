@@ -28,10 +28,10 @@
                       notificationSchemeList: notificationSchemeList, systemEnvironmentList: systemEnvironmentList]"/>
 
     <carm:formButtons>
-        <g:submitButton class="btn btn-primary" name="save"
-                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-        <g:link class="btn" action="show" id="${applicationInstance.id}"><g:message
-                code="default.button.cancel.label" default="Cancel"/></g:link>
+        <g:submitButton class="btn btn-primary" name="save" value="${message(code: 'default.button.update.label')}"/>
+        <g:link class="btn" action="show" id="${applicationInstance.id}">
+            <g:message code="default.button.cancel.label"/>
+        </g:link>
     </carm:formButtons>
 </g:form>
 </body>
