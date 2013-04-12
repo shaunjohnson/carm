@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <div id="chart_div" style="height: 240px; width: 450px; text-align: center; position:relative">
+            <div id="chart_div" style="height: 250px; width: 500px; text-align: center; position:relative">
                 <img src="${resource(dir: 'images', file: 'ajax-loader.gif')}"
                      style="position:absolute; top:50%; height: 42px; margin-top:-21px; margin-left: -21px;"
                      alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>
@@ -76,7 +76,7 @@
     google.setOnLoadCallback(initialize);
 
     function initialize() {
-        var query = new google.visualization.Query("${createLink(action: 'ajaxActivityData')}");
+        var query = new google.visualization.Query("${createLink(action: 'ajaxGetRecentActivityChartData')}");
         query.send(drawChart);
     }
 
@@ -86,7 +86,7 @@
     function drawChart(response) {
         var data = response.getDataTable();
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, {width:450, height:240,
+        chart.draw(data, {width:500, height:250,
             title:'<g:message code="releaseAndDeploymentActivityByDay.label" default="Releases and Deployments per Day"/>'});
     }
 </r:script>

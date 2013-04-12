@@ -233,6 +233,9 @@ ui {
     projectCategory {
         listMax = 25
     }
+    recentActivityChart {
+        timeSpanInDays = 10
+    }
     richTextEditor {
         height = "175px"    // Height of editor in pixels
         width = "690px"     // Width of editor in pixels

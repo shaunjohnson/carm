@@ -38,7 +38,7 @@ class HomeController {
             mostActiveApplications = applicationService.findMostActiveApplications([sort: 'project.name']).groupBy { it.project }
             mostActiveApplications.entrySet().each { it.value.sort { it.name } }
 
-            mostActiveSystemEnvironments = systemEnvironmentService.getMostActiveSystems()
+            mostActiveSystemEnvironments = systemEnvironmentService.findMostActiveSystems()
         }
 
         [
@@ -62,51 +62,37 @@ class HomeController {
         "${request.contextPath}${config.apf.filterProcessesUrl}"
     }
 
-    def generateData() {
-        DateTime startDate = DateTime.now().minusDays(9)
+    def ajaxGetRecentActivityChartData = {
+        int timeSpanInDays = grailsApplication.config.ui.recentActivityChart.timeSpanInDays
+        DateTime startDate = DateTime.now().minusDays(timeSpanInDays)
 
         def deploymentCounts = applicationDeploymentService.countCompletedDeploymentsGroupByDay(startDate.toDate())
         def releaseCounts = applicationReleaseService.countCompletedReleasesGroupByDay(startDate.toDate())
-        def data = []
-
-        for (i in 0..9) {
+        def rows = []
+        for (i in 0..timeSpanInDays) {
             int dayOfMonth = startDate.getDayOfMonth()
-            def releaseCount = releaseCounts.find { it[0] == dayOfMonth }
-            def deploymentCount = deploymentCounts.find { it[0] == dayOfMonth }
 
-            data << [
-                    releases: releaseCount ? releaseCount[1] : 0,
-                    deployments: deploymentCount ? deploymentCount[1] : 0,
-                    dayName: startDate.toString("EEE")]
+            rows << [c: [
+                    [v: startDate.toString("EEE")],
+                    [v: releaseCounts.find { it[0] == dayOfMonth }?.getAt(1) ?: 0],
+                    [v: deploymentCounts.find { it[0] == dayOfMonth }?.getAt(1) ?: 0]]]
+
             startDate = startDate.plusDays(1)
         }
 
-        return data
-    }
-
-    def ajaxActivityData = {
-        def map = [:]
-        map.version = 0.5
-        map.reqId = '0'
-        map.status = 'ok'
-
-        def columns = []
-        columns << [label: message(code: 'day.label'), type: 'string']
-        columns << [label: message(code: 'releases.label'), type: 'number']
-        columns << [label: message(code: 'deployments.label'), type: 'number']
-
-        def data = generateData()
-
-        def rows = []
-        def cells
-        data.each {
-            cells = []
-            cells << [v: it.dayName] << [v: it.releases] << [v: it.deployments]
-            rows << ['c': cells]
-        }
-
-        def table = [cols: columns, rows: rows]
-        map.table = table
+        def map = [
+                version: 0.5,
+                reqId: '0',
+                status: 'ok',
+                table: [
+                        cols: [
+                                [label: message(code: 'day.label'), type: 'string'],
+                                [label: message(code: 'releases.label'), type: 'number'],
+                                [label: message(code: 'deployments.label'), type: 'number']
+                        ],
+                        rows: rows
+                ]
+        ]
 
         render "google.visualization.Query.setResponse(" + (map as JSON) + ")"
     }

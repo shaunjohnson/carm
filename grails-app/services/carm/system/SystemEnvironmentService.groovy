@@ -106,7 +106,7 @@ class SystemEnvironmentService {
      * @param params Query parameters
      * @return List of SystemEnvironment objects
      */
-    List<SystemEnvironment> getMostActiveSystems(Map params) {
+    List<SystemEnvironment> findMostActiveSystems(Map params) {
         def queryParams = [
                 max: grailsApplication.config.ui.project.listMax,
                 offset: params?.offset,
