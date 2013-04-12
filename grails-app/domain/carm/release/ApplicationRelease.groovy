@@ -5,6 +5,8 @@ import carm.deployment.ApplicationDeployment
 import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+import static carm.utils.CarmStringUtils.removeEmptyParagraphs
+
 /**
  * Represents a single release of an application.
  */
@@ -57,6 +59,14 @@ class ApplicationRelease {
         sort "dateCreated": "desc"
         buildInstructions type: 'text'
         changeLog type: 'text'
+    }
+
+    public void setBuildInstructions(String buildInstructions) {
+        this.buildInstructions = removeEmptyParagraphs(buildInstructions)
+    }
+
+    public void setChangeLog(String changeLog) {
+        this.changeLog = removeEmptyParagraphs(changeLog)
     }
 
     public String toString() {

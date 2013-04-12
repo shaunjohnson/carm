@@ -8,6 +8,8 @@ import carm.release.ApplicationRelease
 import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.notification.NotificationScheme
 
+import static carm.utils.CarmStringUtils.removeEmptyParagraphs
+
 /**
  * Application represents a single application that is tracked within CARM.
  */
@@ -50,6 +52,14 @@ class Application {
         sort "name"
         buildInstructions type: 'text'
         deployInstructions type: 'text'
+    }
+
+    public void setBuildInstructions(String buildInstructions) {
+        this.buildInstructions = removeEmptyParagraphs(buildInstructions)
+    }
+
+    public void setDeployInstructions(String deploymentInstructions) {
+        this.deployInstructions = removeEmptyParagraphs(deploymentInstructions)
     }
 
     public String toString() {

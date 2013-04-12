@@ -6,6 +6,8 @@ import carm.security.User
 import org.apache.commons.lang.builder.HashCodeBuilder
 import carm.system.SystemDeploymentEnvironment
 
+import static carm.utils.CarmStringUtils.removeEmptyParagraphs
+
 /**
  * Represents a deployment of an application release to a system deployment environment.
  */
@@ -57,6 +59,10 @@ class ApplicationDeployment {
 
     static mapping = {
         deploymentInstructions type: 'text'
+    }
+
+    public void setDeploymentInstructions(String deploymentInstructions) {
+        this.deploymentInstructions = removeEmptyParagraphs(deploymentInstructions)
     }
 
     String toString() {
