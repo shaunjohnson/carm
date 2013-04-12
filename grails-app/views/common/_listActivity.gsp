@@ -13,9 +13,9 @@
     </thead>
     <tbody>
     <g:each in="${activityList}" status="i" var="activity">
-        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+        <tr>
             <td>
-                <g:link controller="user" action="show" id="${activity.username}"><carm:formatUser
+                <g:link controller="user" action="show" params="[username: activity.username]"><carm:formatUser
                         username="${activity.username}"/></g:link>
             </td>
             <td>
