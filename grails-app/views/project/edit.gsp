@@ -22,50 +22,12 @@
     <g:hiddenField name="id" value="${projectInstance?.id}"/>
     <g:hiddenField name="version" value="${projectInstance?.version}"/>
 
-    <carm:formSection legend="${message(code: 'projectDetails.section')}">
-        <div class="control-group ${hasErrors(bean: projectInstance, field: 'name', 'error')}">
-            <carm:label class="control-label" for="name" required="true">
-                <g:message code="project.name.label" default="Name"/>
-            </carm:label>
-            <div class="controls">
-                <g:textField name="name" maxlength="50" size="50"
-                             value="${projectInstance?.name}"
-                             required="required"
-                             title="${message(code: 'project.name.help')}"/>
-            </div>
-        </div>
-
-        <div class="control-group ${hasErrors(bean: projectInstance, field: 'category', 'error')}">
-            <carm:label class="control-label" for="category.id" required="true">
-                <g:message code="project.category.label" default="Category"/>
-            </carm:label>
-            <div class="controls">
-                <g:select name="category.id" from="${projectCategoryList}"
-                          optionKey="id" value="${projectInstance?.category?.id}"
-                          required="required"
-                          title="${message(code: 'project.category.help')}"/>
-            </div>
-        </div>
-
-        <div class="control-group ${hasErrors(bean: projectInstance, field: 'description', 'error')}">
-            <carm:label class="control-label" for="description">
-                <g:message code="project.description.label" default="Description"/>
-            </carm:label>
-            <div class="controls">
-                <g:textArea name="description"
-                            cols="${grailsApplication.config.ui.textarea.cols}"
-                            rows="${grailsApplication.config.ui.textarea.rows}"
-                            value="${projectInstance?.description}"
-                            title="${message(code: 'project.description.help')}"/>
-            </div>
-        </div>
-    </carm:formSection>
+    <g:render template="form" model="[projectInstance: projectInstance, projectCategoryList: projectCategoryList]"/>
 
     <carm:formButtons>
-        <g:submitButton class="btn btn-primary" name="save"
-                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-        <g:link class="btn" action="show" id="${projectInstance.id}"><g:message code="default.button.cancel.label"
-                                                                                default="Cancel"/></g:link>
+        <g:submitButton class="btn btn-primary" name="save" value="${message(code: 'default.button.update.label')}"/>
+        <g:link class="btn" action="show" id="${projectInstance.id}"><g:message
+                code="default.button.cancel.label"/></g:link>
     </carm:formButtons>
 </g:form>
 </body>
