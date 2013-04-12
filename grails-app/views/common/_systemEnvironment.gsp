@@ -19,10 +19,17 @@
 
 <div class="row">
     <div class="offset-half">
-        <g:each in="${systemEnvironment.environments}" var="systemDeploymentEnvironment" status="i">
-            <g:link controller="systemDeploymentEnvironment" action="show"
-                    id="${systemDeploymentEnvironment.id}">${systemDeploymentEnvironment.encodeAsHTML()}</g:link><g:if
-                test="${(i + 1) < systemEnvironment.environments.size()}">,</g:if>
-        </g:each>
+        <g:if test="${systemEnvironment.environments.size()}">
+            <g:each in="${systemEnvironment.environments}" var="systemDeploymentEnvironment" status="i">
+                <g:link controller="systemDeploymentEnvironment" action="show"
+                        id="${systemDeploymentEnvironment.id}">${systemDeploymentEnvironment.encodeAsHTML()}</g:link><g:if
+                    test="${(i + 1) < systemEnvironment.environments.size()}">,</g:if>
+            </g:each>
+        </g:if>
+        <g:else>
+            <p>
+                <em><g:message code="systemEnvironmentDoesNotHaveAnyEnvironments.message"/></em>
+            </p>
+        </g:else>
     </div>
 </div>
