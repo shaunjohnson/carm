@@ -197,6 +197,54 @@ class ApplicationController {
         }
     }
 
+    def move() {
+        def applicationInstance = applicationService.get(params.id)
+        if (!applicationInstance) {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [
+                    applicationInstance: applicationInstance,
+                    projectList: projectService.list()
+            ]
+        }
+    }
+
+    def saveMove() {
+        def applicationInstance = applicationService.get(params.id as Long)
+        if (applicationInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+
+                if (applicationInstance.version > version) {
+                    applicationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'application.label', default: 'Application')] as Object[], "Another user has updated this Application while you were editing")
+                    render(view: "move", model: [
+                            applicationInstance: applicationInstance,
+                            projectList: projectService.list()
+                    ])
+                    return
+                }
+            }
+
+            applicationService.move(applicationInstance, projectService.get(params['project.id'] as Long))
+            if (!applicationInstance.hasErrors() && applicationInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.moved.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.name, applicationInstance.project])}"
+                redirect(action: "show", id: applicationInstance.id)
+            }
+            else {
+                render(view: "move", model: [
+                        applicationInstance: applicationInstance,
+                        projectList: projectService.list()
+                ])
+            }
+        }
+        else {
+            flash.error = "${message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
     def delete() {
         def applicationInstance = applicationService.get(params.id)
         if (applicationInstance) {

@@ -170,6 +170,8 @@
     background: url("${fam.icon(name: 'vcard_edit')}") no-repeat left;
 }
 
+.move-application-action { background: url("${fam.icon(name: 'application_go')}") no-repeat left; }
+
 .new-action {
     background: url("${fam.icon(name: 'add')}") no-repeat left;
 }

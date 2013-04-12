@@ -29,7 +29,7 @@ class Project {
     }
 
     public String toString() {
-        return name
+        name
     }
 
     boolean equals(other) {

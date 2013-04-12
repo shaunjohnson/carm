@@ -284,6 +284,25 @@ class ActivityTraceService {
     }
 
     /**
+     * Application object was moved.
+     *
+     * @param application Application that was moved
+     * @param oldProject Project the application used to be in
+     */
+    void applicationMoved(Application application, Project oldProject) {
+        // Log activity in old project
+        String oldProjectOid = generateOid(PROJECT_TYPE, oldProject.id)
+        insertActivityTrace(oldProjectOid, APPLICATION_TYPE, MOVED, application.id, application.name)
+
+        // Log activity in new project
+        String newProjectOid = generateOid(PROJECT_TYPE, application.project.id)
+        insertActivityTrace(newProjectOid, APPLICATION_TYPE, MOVED, application.id, application.name)
+
+        // Log activity for application
+        String oid = generateOid(APPLICATION_TYPE, application.id)
+        insertActivityTrace(oid, APPLICATION_TYPE, MOVED, application.id, application.name)
+    }
+    /**
      * Application object was updated.
      *
      * @param application Application that was updated

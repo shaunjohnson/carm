@@ -4,6 +4,7 @@ public enum ActivityAction {
     COMPLETED,
     CREATED,
     DELETED,
+    MOVED,
     SUBMITTED,
     UPDATED
 

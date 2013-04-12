@@ -123,7 +123,7 @@ class ApplicationService implements ApplicationContextAware {
                 order: params?.order
         ]
 
-        def activeIds = activityTraceService.getMostActiveApplicationIds([ max: queryParams.max ])
+        def activeIds = activityTraceService.getMostActiveApplicationIds([max: queryParams.max])
 
         Application.findAllByIdInList(activeIds, queryParams)
     }
@@ -159,6 +159,35 @@ class ApplicationService implements ApplicationContextAware {
 
         application.properties = params
         application.description = application.description?.trim()
+
+        log.debug "$prefix leaving"
+    }
+
+    /**
+     * Moves the provided Application object with the new properties.
+     *
+     * @param project Parent project used for security
+     * @param application Application to update
+     * @param params New property values
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    void move(Application application, Project project) {
+        def prefix = "move() :"
+
+        log.debug "$prefix entered"
+
+        if (application.project == project) {
+            application.errors.rejectValue("project", "application.error.move.project.cannotbesame")
+        }
+        else {
+            Project oldProject = application.project
+            application.project = project
+
+            if (application.validate()) {
+                activityTraceService.applicationMoved(application, oldProject)
+            }
+        }
 
         log.debug "$prefix leaving"
     }
@@ -283,7 +312,7 @@ class ApplicationService implements ApplicationContextAware {
         def pendingTasks = []
         pendingTasks.addAll applicationDeploymentService.findAllPendingDeploymentsByApplication(application)
         pendingTasks.addAll applicationReleaseService.findAllPendingReleasesByApplication(application)
-        
+
         pendingTasks.sort { it.dateCreated }
     }
 
