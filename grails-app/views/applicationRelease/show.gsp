@@ -13,34 +13,36 @@
 <g:render template="/common/messages"/>
 
 <carmsec:isProjectOwner applicationRelease="${applicationReleaseInstance}">
-    <div style="margin-bottom: 1em;">
-        <g:if test="${nextEnvironment}">
-            <g:link class="btn" controller="applicationDeployment" action="create"
-                    id="${lastApplicationDeploymentInstance?.id}"
-                    params="['deploymentEnvironment.id': nextEnvironment?.id, 'applicationRelease.id': applicationReleaseInstance?.id]">
-                <g:message code="default.button.promote.label" default="Promote to {0}"
-                           args="[nextEnvironment?.name]"/>
-            </g:link>
-        </g:if>
-        <g:else>
-            <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+    <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+        <div style="margin-bottom: 1em;">
+            <g:if test="${nextEnvironment}">
                 <g:link class="btn" controller="applicationDeployment" action="create"
-                        params="['applicationRelease.id': applicationReleaseInstance.id]">
-                    <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                        id="${lastApplicationDeploymentInstance?.id}"
+                        params="['deploymentEnvironment.id': nextEnvironment?.id, 'applicationRelease.id': applicationReleaseInstance?.id]">
+                    <g:message code="default.button.promote.label" default="Promote to {0}"
+                               args="[nextEnvironment?.name]"/>
                 </g:link>
-            </carm:isDeployable>
-        </g:else>
+            </g:if>
+            <g:else>
+                <carm:isDeployable applicationRelease="${applicationReleaseInstance}">
+                    <g:link class="btn" controller="applicationDeployment" action="create"
+                            params="['applicationRelease.id': applicationReleaseInstance.id]">
+                        <g:message code="deployThisRelease.label" default="Deploy this Release"/>
+                    </g:link>
+                </carm:isDeployable>
+            </g:else>
 
-        <%--
-        <carm:isSubmittable applicationRelease="${applicationReleaseInstance}">
-            <g:form action="submit">
-                <g:hiddenField name="id" value="${applicationReleaseInstance?.id}"/>
-                <g:submitButton name="submit" class="submit"
-                                value="${message(code: 'default.button.submit.label', default: 'Submit')}"/>
-            </g:form>
-        </carm:isSubmittable>
-        --%>
-    </div>
+            <%--
+            <carm:isSubmittable applicationRelease="${applicationReleaseInstance}">
+                <g:form action="submit">
+                    <g:hiddenField name="id" value="${applicationReleaseInstance?.id}"/>
+                    <g:submitButton name="submit" class="submit"
+                                    value="${message(code: 'default.button.submit.label', default: 'Submit')}"/>
+                </g:form>
+            </carm:isSubmittable>
+            --%>
+        </div>
+    </carm:isDeployable>
 </carmsec:isProjectOwner>
 
 <ul id="applicationReleaseTabs" class="nav nav-tabs">
