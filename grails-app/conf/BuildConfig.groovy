@@ -33,5 +33,7 @@ grails.project.dependency.resolution = {
         compile "org.grails.plugins:webxml:1.4.1"
         compile "org.semver:api:0.9.12"
         runtime "org.springframework.security:spring-security-config:3.0.7.RELEASE"
+
+        compile "org.grails.plugins:webxml:1.4.1"
     }
 }
