@@ -17,9 +17,9 @@
         </div>
 
         <div class="header-action edit-application-action">
-            <g:link action="edit" id="${applicationInstance.id}"><g:message
-                    code="default.button.edit.label"
-                    default="Edit"/></g:link>
+            <g:link action="edit" id="${applicationInstance.id}">
+                <g:message code="default.button.edit.label"/>
+            </g:link>
         </div>
     </carmsec:isProjectOwner>
 </g:if>

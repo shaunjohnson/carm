@@ -188,15 +188,24 @@ th a:link, th a:visited, th a:hover {
     padding: 5px;
 }
 
+.propName {
+    color: #888;
+    display: block;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
 .prop .name {
     color: #888;
     text-align: left;
+    vertical-align: top;
     width: 15%;
     white-space: nowrap;
 }
 
 .prop .value {
     text-align: left;
+    vertical-align: top;
     width: 85%;
 }
 
